@@ -94,8 +94,26 @@ decoder, such as hexbin."
   "The default disposition of uu parts.
 This can be either \"inline\" or \"attachment\".")
 
+(defun mm-uu-configure-p  (key val)
+  (member (cons key val) mm-uu-configure-list))
+
+(defun mm-uu-configure (&optional symbol value)
+  (if symbol (set-default symbol value))
+  (setq mm-uu-begin-line nil)
+  (mapcar (lambda (type)
+	    (if (mm-uu-configure-p type 'disabled)
+		nil
+	      (setq mm-uu-begin-line
+		    (concat mm-uu-begin-line
+			    (if mm-uu-begin-line "\\|")
+			    (symbol-value
+			     (intern (concat "mm-uu-" (symbol-name type)
+					     "-begin-line")))))))
+	  '(uu postscript binhex shar forward)))
+
+;; Needs to come after mm-uu-configure.
 (defcustom mm-uu-configure-list nil
-  "A list of mm-uu configuration.
+  "Alist of mm-uu configurations to disable.
 To disable dissecting shar codes, for instance, add
 `(shar . disabled)' to this list."
   :type '(repeat (choice (const :tag "postscript" (postscript . disabled))
@@ -105,23 +123,6 @@ To disable dissecting shar codes, for instance, add
 			 (const :tag "forward" (forward . disabled))))
   :group 'gnus-article-mime
   :set 'mm-uu-configure)
-
-(defun mm-uu-configure-p  (key val)
-  (member (cons key val) mm-uu-configure-list))
-
-(defun mm-uu-configure (&optional symbol value)
-  (if symbol (set-default symbol value))
-  (setq mm-uu-begin-line nil)
-  (mapcar '(lambda (type)
-	     (if (mm-uu-configure-p type 'disabled)
-		 nil
-	       (setq mm-uu-begin-line
-		     (concat mm-uu-begin-line
-			     (if mm-uu-begin-line "\\|")
-			     (symbol-value
-			      (intern (concat "mm-uu-" (symbol-name type)
-					      "-begin-line")))))))
-	  '(uu postscript binhex shar forward)))
 
 (mm-uu-configure)
 
