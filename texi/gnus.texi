@@ -15884,7 +15884,7 @@ Use @kbd{G R} from the summary buffer to subscribe to a feed---you
 will be prompted for the location of the feed.
 
 An easy way to get started with @code{nnrss} is to say something like
-the following in the group buffer: @kbd{B nnrss RET y}, then
+the following in the group buffer: @kbd{B nnrss RET RET y}, then
 subscribe to groups.
 
 The following @code{nnrss} variables can be altered:
