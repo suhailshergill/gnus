@@ -1,3 +1,31 @@
+;;; xml2texi.scm --- Convert gnus-faq.xml to gnus-faq.texi
+;; Copyright (C) 2005  Free Software Foundation, Inc.
+
+;; Author:  Karl Pflästerer <sigurd@12move.de>
+;; Keywords: tools
+
+;; This file is not part of GNU Emacs.
+
+;; GNU Emacs is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
+
+;;; Commentary:
+;; 
+
+;;; Code:
+
 (require (lib "ssax.ss" "ssax")
          (lib "sxpath.ss" "ssax")
          (lib "sxml-tree-trans.ss" "ssax")
@@ -382,3 +410,9 @@
             (lambda (port)
               (SRV:send-reply (transform (ssax:xml->sxml port '()))))))
         'replace)))
+
+;; Local Variables:
+;; coding: iso-8859-1
+;; End:
+
+;;; xml2texi.scm ends here
