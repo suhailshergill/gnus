@@ -46,6 +46,7 @@
 (require 'mail-parse)
 (require 'mml)
 (require 'rfc822)
+(require 'parse-time)
 (eval-and-compile
   (autoload 'gnus-find-method-for-group "gnus")
   (autoload 'nnvirtual-find-group-art "nnvirtual")
@@ -4567,7 +4568,6 @@ Otherwise, generate and save a value for `canlock-password' first."
 (defun message-make-date (&optional now)
   "Make a valid data header.
 If NOW, use that time instead."
-  (require 'parse-time)
   (let* ((now (or now (current-time)))
 	 (zone (nth 8 (decode-time now)))
 	 (sign "+"))
