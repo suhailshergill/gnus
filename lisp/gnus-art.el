@@ -2273,8 +2273,9 @@ This format is defined by the `gnus-article-time-format' variable."
 				 gnus-newsgroup-name 'highlight-words t)))
 	     gnus-emphasis-alist)))))
 
-(defvar gnus-summary-article-menu)
-(defvar gnus-summary-post-menu)
+(eval-when-compile
+  (defvar gnus-summary-article-menu)
+  (defvar gnus-summary-post-menu))
 
 ;;; Saving functions.
 
@@ -2479,7 +2480,8 @@ The directory to save in defaults to `gnus-article-save-directory'."
 	(cond ((and (eq command 'default)
 		    gnus-last-shell-command)
 	       gnus-last-shell-command)
-	      (command command)
+	      ((stringp command)
+	       command)
 	      (t (read-string
 		  (format
 		   "Shell command on %s: "
@@ -2490,7 +2492,9 @@ The directory to save in defaults to `gnus-article-save-directory'."
 		     "this article"))
 		  gnus-last-shell-command))))
   (when (string-equal command "")
-    (setq command gnus-last-shell-command))
+    (if gnus-last-shell-command
+	(setq command gnus-last-shell-command)
+      (error "A command is required.")))
   (gnus-eval-in-buffer-window gnus-article-buffer
     (save-restriction
       (widen)
@@ -2645,6 +2649,8 @@ If variable `gnus-use-long-file-name' is non-nil, it is
 (substitute-key-definition
  'undefined 'gnus-article-read-summary-keys gnus-article-mode-map)
 
+(defvar gnus-article-post-menu nil)
+
 (defun gnus-article-make-menu-bar ()
   (gnus-turn-off-edit-menu 'article)
   (unless (boundp 'gnus-article-article-menu)
@@ -2672,10 +2678,17 @@ If variable `gnus-use-long-file-name' is non-nil, it is
        ["Decode HZ" gnus-article-decode-HZ t]))
 
     ;; Note "Commands" menu is defined in gnus-sum.el for consistency
-
+    
     (when (boundp 'gnus-summary-post-menu)
+      (cond 
+       ((not (keymapp gnus-summary-post-menu))
+	(setq gnus-article-post-menu gnus-summary-post-menu))
+       ((not gnus-article-post-menu)
+	;; Don't share post menu.
+	(setq gnus-article-post-menu
+	      (copy-keymap gnus-summary-post-menu))))
       (define-key gnus-article-mode-map [menu-bar post]
-	(cons "Post" gnus-summary-post-menu)))
+	(cons "Post" gnus-article-post-menu)))
 
     (gnus-run-hooks 'gnus-article-menu-hook)))
 
@@ -2695,13 +2708,13 @@ commands:
 \\[gnus-article-describe-briefly]\t Describe the current mode briefly
 \\[gnus-info-find-node]\t Go to the Gnus info node"
   (interactive)
-  (when (gnus-visual-p 'article-menu 'menu)
-    (gnus-article-make-menu-bar))
   (gnus-simplify-mode-line)
   (setq mode-name "Article")
   (setq major-mode 'gnus-article-mode)
   (make-local-variable 'minor-mode-alist)
   (use-local-map gnus-article-mode-map)
+  (when (gnus-visual-p 'article-menu 'menu)
+    (gnus-article-make-menu-bar))
   (gnus-update-format-specifications nil 'article-mode)
   (set (make-local-variable 'page-delimiter) gnus-page-delimiter)
   (make-local-variable 'gnus-page-broken)
