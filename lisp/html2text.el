@@ -192,27 +192,23 @@ formatting, and then moved afterward.")
     (setq next (nth 2 tmp-list))
     (setq index 1)
 
-    (if (not (string-match "=" prev))
-	(progn
-	  (if (not (string= (substring this 0 1) "="))
-	      (setq attr-list (cons (list prev nil) attr-list)))))
-
+    (when (and (not (string-match "=" prev))
+	       (not (string= (substring this 0 1) "=")))
+      (setq attr-list (cons (list prev nil) attr-list)))
     (while (< index (1- (length tmp-list)))
-      (if (not (string-match "=" this))
-	  (if (not (or (string= (substring next 0 1) "=")
-		       (string= (substring prev -1) "=")))
-	      (setq attr-list (cons (list this nil) attr-list))))
+      (when (and (not (string-match "=" this))
+		 (not (or (string= (substring next 0 1) "=")
+			  (string= (substring prev -1) "="))))
+	(setq attr-list (cons (list this nil) attr-list)))
       (setq index (1+ index))
       (setq prev this)
       (setq this next)
       (setq next (nth (1+ index) tmp-list)))
 
-    (if this
-	(progn
-	  (if (not (string-match "=" this))
-	      (progn
-		(if (not (string= (substring prev -1) "="))
-		    (setq attr-list (cons (list this nil) attr-list)))))))
+    (when (and this
+	       (not (string-match "=" this))
+	       (not (string= (substring prev -1) "=")))
+      (setq attr-list (cons (list this nil) attr-list)))
     ;; return - value
     attr-list))
 
@@ -346,30 +342,26 @@ formatting, and then moved afterward.")
   (let ((has-br-line)
 	(refill-start)
 	(refill-stop))
-    (if (re-search-forward "<br>$" p2 t)
-	(setq has-br-line t))
-    (if has-br-line
-	(progn
-	  (goto-char p1)
-	  (if (re-search-forward ".+[^<][^b][^r][^>]$" p2 t)
-	      (progn
-		(beginning-of-line)
-		(setq refill-start (point))
-		(goto-char p2)
-		(re-search-backward ".+[^<][^b][^r][^>]$" refill-start t)
-		(next-line 1)
-		(end-of-line)
-		;; refill-stop should ideally be adjusted to
-		;; accomodate the "<br>" strings which are removed
-		;; between refill-start and refill-stop.  Can simply
-		;; be returned from my-replace-string
-		(setq refill-stop (+ (point)
-				     (html2text-replace-string
-				      "<br>" ""
-				      refill-start (point))))
-		;; (message "Point = %s  refill-stop = %s" (point) refill-stop)
-		;; (sleep-for 4)
-		(fill-region refill-start refill-stop))))))
+    (when (re-search-forward "<br>$" p2 t)
+      (goto-char p1)
+      (when (re-search-forward ".+[^<][^b][^r][^>]$" p2 t)
+	(beginning-of-line)
+	(setq refill-start (point))
+	(goto-char p2)
+	(re-search-backward ".+[^<][^b][^r][^>]$" refill-start t)
+	(next-line 1)
+	(end-of-line)
+	;; refill-stop should ideally be adjusted to
+	;; accomodate the "<br>" strings which are removed
+	;; between refill-start and refill-stop.  Can simply
+	;; be returned from my-replace-string
+	(setq refill-stop (+ (point)
+			     (html2text-replace-string
+			      "<br>" ""
+			      refill-start (point))))
+	;; (message "Point = %s  refill-stop = %s" (point) refill-stop)
+	;; (sleep-for 4)
+	(fill-region refill-start refill-stop))))
   (html2text-replace-string "<br>" "" p1 p2))
 
 ;;

@@ -1,6 +1,7 @@
 2004-11-01  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* html2text.el: Beatify code.  Improve doc strings.
+	(html2text-get-attr, html2text-fix-paragraph): Simplify code.
 
 2004-10-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 
