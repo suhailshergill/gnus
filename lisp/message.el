@@ -3900,6 +3900,7 @@ manual for details."
 (defun message-canlock-generate ()
   "Return a string that is non-trivial to guess.
 Do not use this for anything important, it is cryptographically weak."
+  (require 'sha1-el)
   (let (sha1-maximum-internal-length)
     (sha1 (concat (message-unique-id)
 		  (format "%x%x%x" (random) (random t) (random))

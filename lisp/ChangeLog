@@ -1,3 +1,53 @@
+2004-03-05  Jesper Harder  <harder@ifa.au.dk>
+
+	* sha1-el.el (sha1-maximum-internal-length): Doc fix.
+
+2004-03-04  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* canlock.el: Don't autoload mail-fetch-field.
+
+2004-01-19  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* canlock.el (base64-encode-string): Don't autoload it.
+
+2004-01-14  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* canlock.el: Always require sha1-el.
+	(canlock-sha1): Bind sha1-maximum-internal-length to nil.
+
+2004-01-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* message.el (message-canlock-generate): Require sha1-el.
+
+2004-01-08  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* canlock.el (canlock-insert-header): Remove excessive grouping in
+	regexp.
+
+2004-01-07  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* sha1-el.el (sha1-string-external): Use with-temp-buffer.
+
+2004-01-07  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* canlock.el (canlock-sha1-function): Remove.
+	(canlock-sha1-function-for-verify): Remove.
+	(canlock-openssl-program): Remove.
+	(canlock-openssl-args): Remove.
+	(canlock-ignore-errors): Remove.
+	(canlock-sha1-with-openssl): Remove.
+	(canlock-sha1): Use sha1 instead of to call canlock-sha1-function.
+	(canlock-verify): Don't use canlock-ignore-errors.
+
+	* sha1-el.el (sha1-string-external): Make it can return a string
+	in binary form.
+	(sha1-region-external): Ditto.
+	(sha1-string-internal): Ditto.
+	(sha1-region-internal): Ditto.
+	(sha1-region): Ditto.
+	(sha1-string): Ditto.
+	(sha1): Ditto.
+
 2003-11-15  Simon Josefsson  <jas@extundo.com>
 
 	* pgg-gpg.el (pgg-gpg-lookup-all-secret-keys)
