@@ -157,8 +157,8 @@
       (call-with-values
        (lambda () (find-prev-next-up title up lst-of-nodes lst-of-names))
        (lambda (currn prevn nextn up)
-         (format "~%@node ~A, ~A, ~A, ~A~%~A ~A~%"
-                 (cdr currn) (cdr prevn) (cdr nextn) up
+         (format "~%@node ~A~%~A ~A~%"
+                 (cdr currn) ;; (cdr prevn) (cdr nextn) up
                  section ;; @subsection etc.
                  (if (pair? title)
                    (apply format "~A.~A" (reverse title))
@@ -389,8 +389,10 @@
                   . ,(lambda (at val) val)))
                 . ,(lambda (tag uri name)
                      (if (pregexp-match "^http:|^ftp:" uri)
-                       (format "@uref{~A, ~A}"  uri name)
-                       (format "@email{~A, ~A}" (substring uri 7) name))))
+			 (if (equal? uri name)
+			     (format "@uref{~A}"  uri)
+			     (format "@uref{~A, ~A}"  uri name))
+			 (format "@email{~A, ~A}" (substring uri 7) name))))
                (url
                 . ,(lambda (tag val) val))
 
