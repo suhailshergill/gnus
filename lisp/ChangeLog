@@ -1,3 +1,13 @@
+2001-02-08 18:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-xmas.el (gnus-xmas-article-display-xface): Use binary
+	coding system.
+
+2001-02-07 11:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-uu.el (gnus-uu-grab-articles): Shoot down original article
+	buffer.
+
 2001-02-06 02:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 	
 	* gnus-sum.el (gnus-summary-make-menu-bar): Don't share menu bar
