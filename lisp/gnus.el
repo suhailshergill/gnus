@@ -304,9 +304,9 @@ be set in `.emacs' instead."
 				(setq gnus-mode-line-image-cache
 				      (find-image
 				       '((:type xpm :file "gnus-pointer.xpm"
-						:ascent 100)
+						:ascent 80)
 					 (:type xbm :file "gnus-pointer.xbm"
-						:ascent 100))))
+						:ascent 80))))
 			      gnus-mode-line-image-cache)
 			    'help-echo "This is Gnus")
 		      str)
@@ -1666,10 +1666,9 @@ gnus-newsrc-hashtb should be kept so that both hold the same information.")
 	    (nthcdr 3 package)
 	  (cdr package)))))
    '(("info" :interactive t Info-goto-node)
-     ("pp" pp pp-to-string pp-eval-expression)
+     ("pp" pp-to-string)
      ("qp" quoted-printable-decode-region quoted-printable-decode-string)
      ("ps-print" ps-print-preprint)
-     ("browse-url" :interactive t browse-url)
      ("message" :interactive t
       message-send-and-exit message-yank-original)
      ("babel" babel-as-string)
