@@ -1851,10 +1851,10 @@ Answer:
 @end example
 @noindent
  in ~/.gnus.  If you use Gnus 5.9 or ealier, you can use this
-instead:
+instead (works for newer versions a well):
 @example
 (eval-after-load "message"
-  '(let (myfqdn "yourmachine.yourdomain.tld");; <-- Edit this!
+  '(let ((fqdn "yourmachine.yourdomain.tld"));; <-- Edit this!
      (if (boundp 'message-user-fqdn)
          (setq message-user-fqdn fqdn)
        (gnus-message 1 "Redefining `message-make-fqdn'.")

@@ -1,3 +1,8 @@
+2004-09-23  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-faq.texi ([5.12]): Fix code example for FQDN in Message-Ids
+	again.
+
 2004-09-21  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* texi2latex.el (latexi-translate-file): Support @copying and
