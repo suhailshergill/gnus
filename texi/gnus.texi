@@ -5380,6 +5380,13 @@ to the @code{root} account, you may want to resend it to
 This command understands the process/prefix convention
 (@pxref{Process/Prefix}).
 
+@item S D e
+@kindex S D e (Summary)
+@findex gnus-summary-resend-message-edit
+
+Like the previous command, but will allow you to edit the message as
+if it were a new message before resending.
+
 @item S O m
 @kindex S O m (Summary)
 @findex gnus-uu-digest-mail-forward
@@ -10172,11 +10179,19 @@ the list in one particular group:
 @vindex gnus-newsgroup-variables
 @item gnus-newsgroup-variables
 A list of newsgroup (summary buffer) local variables, or cons of
-variables and their default values (when the default values are not
-@code{nil}), that should be made global while the summary buffer is
-active.  These variables can be used to set variables in the group
-parameters while still allowing them to affect operations done in
-other buffers.  For example:
+variables and their default expressions to be evalled (when the default
+values are not @code{nil}), that should be made global while the summary
+buffer is active.
+
+Note: The default expressions will be evaluated (using function
+@code{eval}) before assignment to the local variable rather than just
+assigned to it.  If the default expression is the symbol @code{global},
+that symbol will not be evaluated but the global value of the local
+variable will be used instead.
+
+These variables can be used to set variables in the group parameters
+while still allowing them to affect operations done in other
+buffers.  For example:
 
 @lisp
 (setq gnus-newsgroup-variables
@@ -10185,6 +10200,7 @@ other buffers.  For example:
  "^From:\\|^Newsgroups:\\|^Subject:\\|^Date:\\|^To:")))
 @end lisp
 
+Also @pxref{Group Parameters}.
 @end table
 
 
@@ -11305,9 +11321,9 @@ no more new text to scroll in.  The default is @code{nil}.
 @vindex gnus-article-mode-line-format
 @item gnus-article-mode-line-format
 This variable is a format string along the same lines as
-@code{gnus-summary-mode-line-format} (@pxref{Mode Line Formatting}).  It
-accepts the same format specifications as that variable, with two
-extensions:
+@code{gnus-summary-mode-line-format} (@pxref{Summary Buffer Mode
+Line}).  It accepts the same format specifications as that variable,
+with two extensions:
 
 @table @samp
 

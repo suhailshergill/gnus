@@ -1,3 +1,17 @@
+2004-09-20  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Summary Mail Commands): S D e.
+
+2004-09-20  Raymond Scholz  <ray-2004@zonix.de>  (tiny change)
+
+	* gnus.texi (Misc Article): Refer to `Summary Buffer Mode Line' in
+	the gnus-article-mode-line-format section.
+
+2004-09-20  Helmut Waitzmann  <Helmut.Waitzmann@web.de>  (tiny change)
+
+	* gnus.texi (Various Summary Stuff): Fix the documentation for
+	gnus-newsgroup-variables.
+
 2004-09-20  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (MIME Commands): Added
