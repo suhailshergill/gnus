@@ -47,7 +47,6 @@
 (require 'mml)
 (require 'rfc822)
 (eval-and-compile
-  (autoload 'sha1 "sha1-el")
   (autoload 'gnus-find-method-for-group "gnus")
   (autoload 'nnvirtual-find-group-art "nnvirtual")
   (autoload 'gnus-group-decoded-name "gnus-group"))
@@ -3900,7 +3899,7 @@ manual for details."
 (defun message-canlock-generate ()
   "Return a string that is non-trivial to guess.
 Do not use this for anything important, it is cryptographically weak."
-  (require 'sha1-el)
+  (require 'sha1)
   (let (sha1-maximum-internal-length)
     (sha1 (concat (message-unique-id)
 		  (format "%x%x%x" (random) (random t) (random))
