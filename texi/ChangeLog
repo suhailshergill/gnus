@@ -1,3 +1,11 @@
+2004-11-22  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Splitting Mail): Clarify bogus group.
+
+2004-11-16  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Filtering Spam Using The Spam ELisp Package): 
+
 2004-11-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* emacs-mime.texi (Encoding Customization): Fix
