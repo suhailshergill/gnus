@@ -1,4 +1,5 @@
 Makefile
+autom4te.cache
 config.cache
 config.log
 config.status
@@ -11,3 +12,4 @@ admin
 oort
 pgg
 smilies
+makepub-beta
