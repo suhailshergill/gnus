@@ -84,7 +84,7 @@ gnus-booklet.pdf: $(REFCARD).tex  $(LOGO).pdf
 	fi
 	mv $(REFCARD).pdf $@ 
 
-gnus-faq-full-update:  gnus-faq-clean gnus-faq.texi
+gnus-faq-full-update:  gnus-faq-clean gnus-faq-texi
 
 gnus-faq.xml:
 	cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gnus \
@@ -93,7 +93,7 @@ gnus-faq.xml:
 	  { echo "Update of $@ failed."; : rm $@.tmp; exit 1; }
 	mv $@.tmp $@
 
-gnus-faq.texi: gnus-faq.xml xml2texi.sh xml2texi.scm
+gnus-faq-texi: gnus-faq.xml xml2texi.sh xml2texi.scm
 	./xml2texi.sh $< $@.tmp
 	@echo
 # FIXME: This should be done in xml2texi.scm or gnus-faq.xml should be
