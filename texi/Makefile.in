@@ -88,12 +88,12 @@ gnus-faq.xml:
 	  { echo "Update of $@ failed."; : rm $@.tmp; exit 1; }
 	mv $@.tmp $@
 
-gnus-faq.texi: gnus-faq.xml
+gnus-faq.texi: gnus-faq.xml xml2texi.sh xml2texi.scm
 	./xml2texi.sh $< $@.tmp
 	@echo
 # FIXME: This should be done in xml2texi.scm or gnus-faq.xml should be
 # changed:
-	sed '/\$$Id:.*\$$/d' < $@.tmp > $@
+	sed '/[$$]Id:.*[$$]/d' < $@.tmp > $@
 
 gnus-faq-clean:
 	rm -f gnus-faq.xml gnus-faq.*.tmp gnus-faq.texi
