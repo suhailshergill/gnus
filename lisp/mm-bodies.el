@@ -27,8 +27,10 @@
 (eval-and-compile
   (or (fboundp  'base64-decode-region)
       (require 'base64)))
+
 (eval-when-compile
-  (require 'mm-uu))
+  (defvar mm-uu-decode-function)
+  (defvar mm-uu-binhex-decode-function))
 
 (require 'mm-util)
 (require 'rfc2047)
