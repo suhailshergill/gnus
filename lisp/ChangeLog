@@ -1,5 +1,8 @@
 2005-02-24  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-sum.el (gnus-summary-caesar-message): Apply
+	`gnus-treat-article' after rotation.
+
 	* gnus-group.el (gnus-group-clear-data): Mention process/prefix in
 	doc string.
 
