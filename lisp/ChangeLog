@@ -1,4 +1,93 @@
+2000-11-12  Dave Love  <fx@gnu.org>
+
+	From Emerick Rogul <emerick@csa.bu.edu>.
+	* message.el (message-setup-fill-variables): New variable.
+	(message-mode): Use it.
+
+2000-11-10 Alexandre Oliva <oliva@lsd.ic.unicamp.br>
+
+	* gnus-mlspl.el: Documentation tweaks.
+	
+2000-11-10  Dave Love  <fx@gnu.org>
+
+	* gnus-agent.el (gnus-agent-confirmation-function): Add :version.
+	(gnus-agent-lib-file, gnus-agent-load-alist)
+	(gnus-agent-save-alist, gnus-agent-article-name): Use
+	expand-file-name.
+
+	* gnus-group.el (gnus-group-name-charset-method-alist): Add
+	:version.
+	(nnkiboze-score-file): Defvar when compiling.
+
+	* gnus-start.el (gnus-read-newsrc-file): Add :version.
+
+	* gnus-art.el (gnus-article-banner-alist) 
+	(gnus-emphasize-whitespace-regexp, gnus-ignored-mime-types) 
+	(gnus-article-date-lapsed-new-header) 
+	(gnus-article-mime-match-handle-function, gnus-mime-action-alist) 
+	(gnus-treat-strip-list-identifiers, gnus-treat-date-iso8601) 
+	(gnus-treat-strip-headers-in-body) 
+	(gnus-treat-capitalize-sentences, gnus-treat-play-sounds) 
+	(gnus-treat-translate): Add :version.
+	(gnus-article-mime-part-function): Fix defcustom.
+
+	* nnmail.el (nnmail-expiry-target) 
+	(nnmail-scan-directory-mail-source-once, nnmail-extra-headers) 
+	(nnmail-split-header-length-limit): Add :version.
+
+	* gnus-sum.el (gnus-auto-expirable-marks) 
+	(gnus-inhibit-user-auto-expire, gnus-list-identifiers) 
+	(gnus-extra-headers, gnus-ignored-from-addresses) 
+	(gnus-newsgroup-ignored-charsets) 
+	(gnus-group-highlight-words-alist) 
+	(gnus-summary-show-article-charset-alist): Add :version.
+
+	* catchup.pbm, describe-group.pbm, exit-gnus.pbm, get-news.pbm:
+	gnntg.pbm, kill-group.pbm, subscribe.pbm, unsubscribe.pbm: New
+	files, converted from the XPMs.
+
+	* gnus-cache.el (gnus-cache-active-file): Don't use
+	file-name-as-directory on directory.
+	(gnus-cache-file-name): Use expand-file-name, not concat.  Don't
+	use file-name-as-directory on directory.
+
+	* time-date.el (timezone-make-date-arpa-standard): Autoload.
+	(date-to-time): Use it.
+
+	* message.el (message-mode) <adaptive-fill-regexp>:
+	<adaptive-fill-first-line-regexp>: Use [:alnum:] in regexp range.
+	(message-newline-and-reformat): Likewise.
+	(message-forward-as-mime, message-forward-ignored-headers) 
+	(message-buffer-naming-style, message-default-charset) 
+	(message-dont-reply-to-names, message-send-mail-partially-limit):
+	Add :version.
+
+	* mm-util.el: Doc fixes.
+	(mm-mime-charset): Don't use the raw result of
+	mm-preferred-coding-system.
+	(mm-with-unibyte-buffer, mm-with-unibyte-current-buffer)
+	(mm-with-unibyte): Simplify.
+
+	* gnus-int.el (gnus-start-news-server): Use expand-file-name, not
+	concat.
+
+	* pop3.el (pop3-version): Deleted.
+	(pop3-make-date): New function, avoiding message-make-date.
+	(pop3-munge-message-separator): Use it.
+
+2000-11-10  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* pop3.el (pop3-munge-message-separator): A message may have an
+	empty body.
+
 2000-11-09  Dave Love  <fx@gnu.org>
+
+	* gnus-group.el (gnus-group-make-directory-group) 
+	(gnus-group-fetch-faq): Use expand-file-name.
+	(gnus-group-fetch-faq): Simplify completing-read form.
+
+	* mm-bodies.el (mm-encode-body): Use mm-multibyte-p, don't just
+	test for Mule.
 
 	* message.el (tool-bar-map): Defvar when compiling.
 
