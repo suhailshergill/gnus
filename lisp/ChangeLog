@@ -1,3 +1,7 @@
+2004-08-16  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mailcap.el (mailcap-mime-data): Mark as risky.
+
 2004-08-05  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* mm-decode.el (mime-display, mime-security): Fix custom-manual
