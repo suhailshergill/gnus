@@ -1,3 +1,24 @@
+2000-09-14  Dave Love  <fx@gnu.org>
+
+	* gnus.el (gnus-charset): 
+	* mm-decode.el (mime-display):
+	* imap.el (imap) <defgroup>: Add :version.
+
+2000-09-13  Gerd Moellmann  <gerd@gnu.org>
+
+	* parse-time.el: Fix author's mail address.
+
+	* earcon.el, flow-fill.el, gnus-cite.el, gnus-gl.el, gnus-ml.el:
+	* gnus-mlspl.el, gnus-nocem.el, gnus-range.el, gnus-salt.el:
+	* gnus-setup.el, gnus-soup.el, gnus-undo.el, gnus-vm.el:
+	* messcompat.el, nnbabyl.el, nndir.el, nneething.el:
+	* nngateway.el, nnheaderxm.el, nnkiboze.el, nnlistserv.el:
+	* nnmbox.el, nnmh.el, nnoo.el, nnsoup.el, nnspool.el, rfc2045.el:
+	* rfc2231.el, uudecode.el: Fix copyright notice.
+
+	* nnweb.el (toplevel): To make the file bootstrap in Emacs,
+	require `w3' at load-time only if not running in batch mode.
+
 2000-09-13  Dave Love  <fx@gnu.org>
 
 	* gnus-ems.el (gnus-ems-redefine): Don't alias
