@@ -2318,10 +2318,8 @@ It should typically alter the sending method in some way or other."
 	  (set-buffer tembuf)
 	  (erase-buffer)
 	  ;; Avoid copying text props.
-	  (insert (format
-		   "%s" (save-excursion
-			  (set-buffer mailbuf)
-			  (buffer-string))))
+	  (insert (with-current-buffer mailbuf
+		    (buffer-substring-no-properties (point-min) (point-max))))
 	  ;; Remove some headers.
 	  (message-encode-message-body)
 	  (save-restriction
@@ -2528,10 +2526,9 @@ to find out how to use this."
 	      (buffer-disable-undo)
 	      (erase-buffer)
 	      ;; Avoid copying text props.
-	      (insert (format
-		       "%s" (save-excursion
-			      (set-buffer messbuf)
-			      (buffer-string))))
+	      (insert (with-current-buffer messbuf
+			(buffer-substring-no-properties (point-min)
+							(point-max))))
 	      (message-encode-message-body)
 	      ;; Remove some headers.
 	      (save-restriction

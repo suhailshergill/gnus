@@ -2,7 +2,6 @@
 ;; Copyright (C) 1996, 1997, 1998, 1999, 2000 Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
-;; Maintainer: bugs@gnu.org
 ;; Keywords: news
 
 ;; This file is part of GNU Emacs.
@@ -227,6 +226,7 @@ asynchronously.	 The compressed face will be piped to this command."
   "Banner alist for stripping.
 For example, 
      ((egroups . \"^[ \\t\\n]*-------------------+\\\\( eGroups Sponsor -+\\\\)?....\\n\\\\(.+\\n\\\\)+\"))"
+  :version "21.1"
   :type '(repeat (cons symbol regexp))
   :group 'gnus-article-washing)
 
@@ -271,6 +271,7 @@ is the face used for highlighting."
 Typical values are \"^[ \\t]+\\\\|[ \\t]*\\n\" and \"[ \\t]+\\\\|[ \\t]*\\n\".
 The former avoids underlining of leading and trailing whitespace,
 and the latter avoids underlining any whitespace at all."
+  :version "21.1"
   :group 'gnus-article-emphasis
   :type 'regexp)
 
@@ -616,11 +617,13 @@ displayed by the first non-nil matching CONTENT face."
 
 (defcustom gnus-ignored-mime-types nil
   "List of MIME types that should be ignored by Gnus."
+  :version "21.1"
   :group 'gnus-article-mime
   :type '(repeat regexp))
 
 (defcustom gnus-unbuttonized-mime-types '(".*/.*")
   "List of MIME types that should not be given buttons when rendered inline."
+  :version "21.1"
   :group 'gnus-article-mime
   :type '(repeat regexp))
 
@@ -632,13 +635,17 @@ on parts -- for instance, adding Vcard info to a database."
   :type 'function)
 
 (defcustom gnus-mime-multipart-functions nil
-  "An alist of MIME types to functions to display them.")
+  "An alist of MIME types to functions to display them."
+  :version "21.1"
+  :group 'gnus-article-mime
+  :type 'alist)
 
 (defcustom gnus-article-date-lapsed-new-header nil
   "Whether the X-Sent and Date headers can coexist.
 When using `gnus-treat-date-lapsed', the \"X-Sent:\" header will
 either replace the old \"Date:\" header (if this variable is nil), or
 be added below it (otherwise)."
+  :version "21.1"
   :group 'gnus-article-headers
   :type 'boolean)
 
@@ -650,6 +657,7 @@ part or alternative part is used.  For `undisplayed', the first
 undisplayed part is used.  For a function, the first part which 
 the function return `t' is used.  For `nil', the first part is
 used."
+  :version "21.1"
   :group 'gnus-article-mime
   :type '(choice 
 	  (item :tag "first" :value nil)
@@ -668,6 +676,7 @@ used."
     ("internalize type" . gnus-mime-internalize-part)
     ("externalize type" . gnus-mime-externalize-part))
   "An alist of actions that run on the MIME attachment."
+  :version "21.1"
   :group 'gnus-article-mime
   :type '(repeat (cons (string :tag "name")
 		       (function))))
@@ -783,6 +792,7 @@ See the manual for details."
   "Strip list identifiers from `gnus-list-identifiers`.
 Valid values are nil, t, `head', `last', an integer or a predicate.
 See the manual for details."
+  :version "21.1"
   :group 'gnus-article-treat
   :type gnus-article-treat-custom)
 
@@ -856,6 +866,7 @@ See the manual for details."
   "Display the date in the ISO8601 format.
 Valid values are nil, t, `head', `last', an integer or a predicate.
 See the manual for details."
+  :version "21.1"
   :group 'gnus-article-treat
   :type gnus-article-treat-head-custom)
 
@@ -871,6 +882,7 @@ See the manual for details."
   "Strip the X-No-Archive header line from the beginning of the body.
 Valid values are nil, t, `head', `last', an integer or a predicate.
 See the manual for details."
+  :version "21.1"
   :group 'gnus-article-treat
   :type gnus-article-treat-custom)
 
@@ -941,6 +953,7 @@ See the manual for details."
   "Capitalize sentence-starting words.
 Valid values are nil, t, `head', `last', an integer or a predicate.
 See the manual for details."
+  :version "21.1"
   :group 'gnus-article-treat
   :type gnus-article-treat-custom)
 
@@ -955,6 +968,7 @@ See the manual for details."
   "Play sounds.
 Valid values are nil, t, `head', `last', an integer or a predicate.
 See the manual for details."
+  :version "21.1"
   :group 'gnus-article-treat
   :type gnus-article-treat-custom)
 
@@ -962,6 +976,7 @@ See the manual for details."
   "Translate articles from one language to another.
 Valid values are nil, t, `head', `last', an integer or a predicate.
 See the manual for details."
+  :version "21.1"
   :group 'gnus-article-treat
   :type gnus-article-treat-custom)
 
@@ -2649,6 +2664,7 @@ If variable `gnus-use-long-file-name' is non-nil, it is
 
     (easy-menu-define
      gnus-article-treatment-menu gnus-article-mode-map ""
+     ;; Fixme: this should use :active (and maybe :visible).
      '("Treatment"
        ["Hide headers" gnus-article-hide-headers t]
        ["Hide signature" gnus-article-hide-signature t]
@@ -2667,6 +2683,9 @@ If variable `gnus-use-long-file-name' is non-nil, it is
 	(cons "Post" gnus-summary-post-menu)))
 
     (gnus-run-hooks 'gnus-article-menu-hook)))
+
+;; Fixme: do something for the Emacs tool bar in Article mode a la
+;; Summary.
 
 (defun gnus-article-mode ()
   "Major mode for displaying an article.
@@ -2934,7 +2953,8 @@ If ALL-HEADERS is non-nil, no headers are hidden."
 
 (defvar gnus-mime-button-map
   (let ((map (make-sparse-keymap)))
-    (set-keymap-parent map gnus-article-mode-map)
+    ;; Not for Emacs 21: fixme better.
+    ;; (set-keymap-parent map gnus-article-mode-map)
     (define-key map gnus-mouse-2 'gnus-article-push-button)
     (define-key map gnus-down-mouse-3 'gnus-mime-button-menu)
     (dolist (c gnus-mime-button-commands)
@@ -2945,17 +2965,15 @@ If ALL-HEADERS is non-nil, no headers are hidden."
   "Construct a context-sensitive menu of MIME commands."
   (interactive "e")
   (save-excursion
-    (let ((pos (event-start event)))
-      (set-buffer (window-buffer (posn-window pos)))
-      (goto-char (posn-point pos))
-      (gnus-article-check-buffer)
-      (let ((response (x-popup-menu
-		       t `("MIME Part"
-			   ("" ,@(mapcar (lambda (c)
-					   (cons (caddr c) (car c)))
-					 gnus-mime-button-commands))))))
-	(if response
-	    (call-interactively response))))))
+    (mouse-set-point event)
+    (gnus-article-check-buffer)
+    (let ((response (x-popup-menu
+		     t `("MIME Part"
+			 ("" ,@(mapcar (lambda (c)
+					 (cons (caddr c) (car c)))
+				       gnus-mime-button-commands))))))
+      (if response
+	  (call-interactively response)))))
 
 (defun gnus-mime-view-all-parts (&optional handles)
   "View all the MIME parts."
@@ -3273,12 +3291,13 @@ In no internal viewer is available, use an external viewer."
     (setq b (point))
     (gnus-eval-format
      gnus-mime-button-line-format gnus-mime-button-line-format-alist
-     `(local-map ,gnus-mime-button-map
-		 keymap ,gnus-mime-button-map
-		 gnus-callback gnus-mm-display-part
-		 gnus-part ,gnus-tmp-id
-		 article-type annotation
-		 gnus-data ,handle))
+     `(keymap ,gnus-mime-button-map
+       ;; Not for Emacs 21: fixme better.
+       ;; local-map ,gnus-mime-button-map
+       gnus-callback gnus-mm-display-part
+       gnus-part ,gnus-tmp-id
+       article-type annotation
+       gnus-data ,handle))
     (setq e (point))
     (widget-convert-button
      'link b e
@@ -3506,7 +3525,8 @@ In no internal viewer is available, use an external viewer."
 		       ',gnus-article-mime-handle-alist))
 	       (gnus-mime-display-alternative
 		',ihandles ',not-pref ',begend ,id))
-	     local-map ,gnus-mime-button-map
+	     ;; Not for Emacs 21: fixme better.
+	     ;; local-map ,gnus-mime-button-map
 	     ,gnus-mouse-face-prop ,gnus-article-mouse-face
 	     face ,gnus-article-button-face
 	     keymap ,gnus-mime-button-map
@@ -3531,7 +3551,8 @@ In no internal viewer is available, use an external viewer."
 			 ',gnus-article-mime-handle-alist))
 		 (gnus-mime-display-alternative
 		  ',ihandles ',handle ',begend ,id))
-	       local-map ,gnus-mime-button-map
+	       ;; Not for Emacs 21: fixme better.
+	       ;; local-map ,gnus-mime-button-map
 	       ,gnus-mouse-face-prop ,gnus-article-mouse-face
 	       face ,gnus-article-button-face
 	       keymap ,gnus-mime-button-map

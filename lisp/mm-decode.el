@@ -3,7 +3,6 @@
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
 ;;	MORIOKA Tomohiko <morioka@jaist.ac.jp>
-;; Maintainer: bugs@gnus.org
 ;; This file is part of GNU Emacs.
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
@@ -31,7 +30,8 @@
 (eval-when-compile (require 'cl))
 
 (eval-and-compile
-  (autoload 'mm-inline-partial "mm-partial"))
+  (autoload 'mm-inline-partial "mm-partial")
+  (autoload 'mm-insert-inline "mm-view"))
 
 (defgroup mime-display ()
   "Display of MIME in mail and news articles."
@@ -372,14 +372,13 @@ external if displayed external."
 	  (let ((cur (current-buffer)))
 	    (if (eq method 'mailcap-save-binary-file)
 		(progn
-		  (set-buffer (generate-new-buffer "*mm*"))
+		  (set-buffer (generate-new-buffer " *mm*"))
 		  (setq method nil))
 	      (mm-insert-part handle)
 	      (let ((win (get-buffer-window cur t)))
 		(when win
 		  (select-window win)))
-	      (switch-to-buffer (generate-new-buffer "*mm*")))
-	    (buffer-disable-undo)
+	      (switch-to-buffer (generate-new-buffer " *mm*")))
 	    (mm-set-buffer-file-coding-system mm-binary-coding-system)
 	    (insert-buffer-substring cur)
 	    (goto-char (point-min))

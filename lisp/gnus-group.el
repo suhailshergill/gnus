@@ -400,6 +400,7 @@ ticked: The number of ticked articles."
 For example:
     (((nntp \"news.com.cn\") . cn-gb-2312))
 "
+  :version "21.1"
   :group 'gnus-charset
   :type '(repeat (cons (sexp :tag "Method") (symbol :tag "Charset"))))
 
@@ -841,9 +842,9 @@ For example:
 				 :help "Unsubscribe from the current group")
 	      (tool-bar-add-item-from-menu
 	       'gnus-group-exit "exit-gnus" gnus-group-mode-map)
-	      tool-bar-map))
-    (if gnus-group-toolbar-map
-	(set (make-local-variable 'tool-bar-map) gnus-group-toolbar-map))))
+	      tool-bar-map)))
+  (if gnus-group-toolbar-map
+      (set (make-local-variable 'tool-bar-map) gnus-group-toolbar-map)))
 
 (defun gnus-group-mode ()
   "Major mode for reading news.
@@ -2350,6 +2351,7 @@ mail messages or news articles in files that have numeric names."
      (gnus-group-real-name group)
      (list 'nndir (gnus-group-real-name group) (list 'nndir-directory dir)))))
 
+(eval-when-compile (defvar nnkiboze-score-file))
 (defun gnus-group-make-kiboze-group (group address scores)
   "Create an nnkiboze group.
 The user will be prompted for a name, a regexp to match groups, and

@@ -31,15 +31,15 @@
 (require 'nnheader)
 (require 'mm-decode)
 (require 'mailcap)
+(require 'uudecode)
 
 (eval-and-compile
   (autoload 'binhex-decode-region "binhex")
-  (autoload 'binhex-decode-region-external "binhex")
-  (autoload 'uudecode-decode-region "uudecode")
-  (autoload 'uudecode-decode-region-external "uudecode"))
+  (autoload 'binhex-decode-region-external "binhex"))
 
 (defun mm-uu-copy-to-buffer (from to)
-  "Copy the contents of the current buffer to a fresh buffer."
+  "Copy the contents of the current buffer to a fresh buffer.
+Return that buffer."
   (save-excursion
     (let ((obuf (current-buffer)))
       (set-buffer (generate-new-buffer " *mm-uu*"))
@@ -56,11 +56,12 @@
 
 (defcustom mm-uu-decode-function 'uudecode-decode-region
   "*Function to uudecode.
-Internal function is done in elisp by default, therefore decoding may
-appear to be horribly slow.  You can make Gnus use the external Unix
+Internal function is done in Lisp by default, therefore decoding may
+appear to be horribly slow.  You can make Gnus use an external
 decoder, such as uudecode."
-  :type '(choice (const :tag "internal" uudecode-decode-region)
-		 (const :tag "external" uudecode-decode-region-external))
+  :type '(choice
+	  (function-item :tag "Internal" uudecode-decode-region)
+	  (function-item :tag "External" uudecode-decode-region-external))
   :group 'gnus-article-mime)
 
 (defconst mm-uu-binhex-begin-line
@@ -69,11 +70,12 @@ decoder, such as uudecode."
 
 (defcustom mm-uu-binhex-decode-function 'binhex-decode-region
   "*Function to binhex decode.
-Internal function is done in elisp by default, therefore decoding may
-appear to be horribly slow.  You can make Gnus use the external Unix
+Internal function is done in Lisp by default, therefore decoding may
+appear to be horribly slow.  You can make Gnus use an external
 decoder, such as hexbin."
-  :type '(choice (const :tag "internal" binhex-decode-region)
-		 (const :tag "external" binhex-decode-region-external))
+  :type '(choice
+	  (function-item :tag "Internal" binhex-decode-region)
+	  (function-item :tag "External" binhex-decode-region-external))
   :group 'gnus-article-mime)
 
 (defconst mm-uu-shar-begin-line "^#! */bin/sh")
