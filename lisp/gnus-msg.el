@@ -102,7 +102,7 @@ the second with the current group name.")
   "*Alist of styles to use when posting.")
 
 (defcustom gnus-group-posting-charset-alist
-  '(("^\\(no\\|fr\\|dk\\)\\.[^,]*\\(,[ \t\n]*\\(no\\|fr\\|dk\\)\\.[^,]*\\)*$" iso-8859-1 (iso-8859-1))
+  '(("^\\(no\\|fr\\)\\.[^,]*\\(,[ \t\n]*\\(no\\|fr\\)\\.[^,]*\\)*$" iso-8859-1 (iso-8859-1))
     ("^\\(fido7\\|relcom\\)\\.[^,]*\\(,[ \t\n]*\\(fido7\\|relcom\\)\\.[^,]*\\)*$" koi8-r (koi8-r))
     (message-this-is-mail nil nil)
     (message-this-is-news nil t))
@@ -202,20 +202,6 @@ Thank you for your help in stamping out bugs.
   ;; "c" gnus-summary-send-draft
   "r" gnus-summary-resend-message)
 
-;;;###autoload
-(defun gnus-msg-mail (&rest args)
-  "Start editing a mail message to be sent.
-Like `message-mail', but with Gnus paraphernalia, particularly the
-the Gcc: header for archiving purposes."
-  (interactive)
-  (gnus-setup-message 'message
-    (apply 'message-mail args)))
-
-;;;###autoload
-(define-mail-user-agent 'gnus-user-agent
-      'gnus-msg-mail 'message-send-and-exit
-      'message-kill-buffer 'message-send-hook)
-
 ;;; Internal functions.
 
 (defvar gnus-article-reply nil)
@@ -246,18 +232,31 @@ the Gcc: header for archiving purposes."
 	 (set (make-local-variable 'gnus-newsgroup-name) ,group)
 	 (gnus-run-hooks 'gnus-message-setup-hook)
 	 (if (eq major-mode 'message-mode)
-	     ;; Make mml-buffer-list local.
-	     ;; Restore global mml-buffer-list value as mbl.
-	     ;; What a hack! -- Shenghuo
-	     (let ((mml-buffer-list mml-buffer-list))
-	       (setq mml-buffer-list mbl)
-	       (make-local-variable 'mml-buffer-list)
+	     (let ((mbl1 mml-buffer-list))
+	       (setq mml-buffer-list mbl)  ;; Global value
+	       (set (make-local-variable 'mml-buffer-list) mbl1);; Local value
 	       (add-hook 'kill-buffer-hook 'mml-destroy-buffers t t))
 	   (mml-destroy-buffers)
 	   (setq mml-buffer-list mbl)))
        (gnus-add-buffer)
        (gnus-configure-windows ,config t)
        (set-buffer-modified-p nil))))
+
+;;;###autoload
+(defun gnus-msg-mail (&rest args)
+  "Start editing a mail message to be sent.
+Like `message-mail', but with Gnus paraphernalia, particularly the
+Gcc: header for archiving purposes."
+  (interactive)
+  (gnus-setup-message 'message
+    (apply 'message-mail args))
+  ;; COMPOSEFUNC should return t if succeed.  Undocumented ???
+  t)
+
+;;;###autoload
+(define-mail-user-agent 'gnus-user-agent
+      'gnus-msg-mail 'message-send-and-exit
+      'message-kill-buffer 'message-send-hook)
 
 (defun gnus-setup-posting-charset (group)
   (let ((alist gnus-group-posting-charset-alist)
@@ -592,7 +591,9 @@ If SILENT, don't prompt the user."
 	(setq method-alist
 	      (mapcar
 	       (lambda (m)
-		 (list (concat (cadr m) " (" (symbol-name (car m)) ")") m))
+		 (if (equal (cadr m) "")
+		     (list (symbol-name (car m)) m)
+		   (list (concat (cadr m) " (" (symbol-name (car m)) ")") m)))
 	       post-methods))
 	;; Query the user.
 	(cadr
@@ -621,8 +622,9 @@ If SILENT, don't prompt the user."
 
 
 ;; Dummies to avoid byte-compile warning.
-(defvar nnspool-rejected-article-hook)
-(defvar xemacs-codename)
+(eval-when-compile
+  (defvar nnspool-rejected-article-hook)
+  (defvar xemacs-codename))
 
 (defun gnus-extended-version ()
   "Stringified Gnus version and Emacs version."
@@ -701,9 +703,9 @@ The original article will be yanked."
   "Forward the current message to another user.  
 If ARG is nil, see `message-forward-as-mime' and `message-forward-show-mml';
 if ARG is 1, decode the message and forward directly inline;
-if ARG is 2, foward message as an rfc822 MIME section;
+if ARG is 2, forward message as an rfc822 MIME section;
 if ARG is 3, decode message and forward as an rfc822 MIME section;
-if ARG is 4, foward message directly inline;
+if ARG is 4, forward message directly inline;
 otherwise, use flipped `message-forward-as-mime'.
 If POST, post instead of mail."
   (interactive "P")

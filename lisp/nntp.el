@@ -181,7 +181,7 @@ server there that you can connect to.  See also
 (defvoo nntp-connection-timeout nil
   "*Number of seconds to wait before an nntp connection times out.
 If this variable is nil, which is the default, no timers are set.
-NOTE: This variable is never seen to work in FSF Emacs 20 and XEmacs 21.")
+NOTE: This variable is never seen to work in Emacs 20 and XEmacs 21.")
 
 ;;; Internal variables.
 
@@ -305,7 +305,7 @@ noticing asynchronous data.")
   (let ((alist nntp-connection-alist)
 	(buffer (if (stringp buffer) (get-buffer buffer) buffer))
 	process entry)
-    (while (setq entry (pop alist))
+    (while (and alist (setq entry (pop alist)))
       (when (eq buffer (cadr entry))
 	(setq process (car entry)
 	      alist nil)))
@@ -518,32 +518,41 @@ noticing asynchronous data.")
 	  (when (or (null groups)	;All requests have been sent.
 		    (zerop (% count nntp-maximum-request)))
 	    (nntp-accept-response)
-	    (while (progn
-		     ;; Search `blue moon' in this file for the
-		     ;; reason why set-buffer here.
-		     (set-buffer buf)
-		     (goto-char last-point)
-		     ;; Count replies.
-		     (while (re-search-forward "^[0-9]" nil t)
-		       (incf received))
-		     (setq last-point (point))
-		     (< received count))
+	    (while (and (gnus-buffer-live-p buf)
+			(progn
+			  ;; Search `blue moon' in this file for the
+			  ;; reason why set-buffer here.
+			  (set-buffer buf)
+			  (goto-char last-point)
+			  ;; Count replies.
+			  (while (re-search-forward "^[0-9]" nil t)
+			    (incf received))
+			  (setq last-point (point))
+			  (< received count)))
 	      (nntp-accept-response))))
 
 	;; Wait for the reply from the final command.
+	(unless (gnus-buffer-live-p buf)
+	  (error 
+	   (nnheader-report 'nntp "Connection to %s is closed." server)))
 	(set-buffer buf)
 	(goto-char (point-max))
 	(re-search-backward "^[0-9]" nil t)
 	(when (looking-at "^[23]")
-	  (while (progn
-		   (set-buffer buf)
-		   (goto-char (point-max))
-		   (if (not nntp-server-list-active-group)
-		       (not (re-search-backward "\r?\n" (- (point) 3) t))
-		     (not (re-search-backward "^\\.\r?\n" (- (point) 4) t))))
-	    (nntp-accept-response)))
+	  (while (and (gnus-buffer-live-p buf)
+		      (progn
+			(set-buffer buf)
+			(goto-char (point-max))
+			(if (not nntp-server-list-active-group)
+			    (not (re-search-backward "\r?\n" (- (point) 3) t))
+			  (not (re-search-backward "^\\.\r?\n" 
+						   (- (point) 4) t)))))
+		      (nntp-accept-response)))
 
 	;; Now all replies are received.  We remove CRs.
+	(unless (gnus-buffer-live-p buf)
+	  (error 
+	   (nnheader-report 'nntp "Connection to %s is closed." server)))
 	(set-buffer buf)
 	(goto-char (point-min))
 	(while (search-forward "\r" nil t)
@@ -885,6 +894,8 @@ password contained in '~/.nntp-authinfo'."
 	     nil))))
     (when timer
       (nnheader-cancel-timer timer))
+    (unless process
+      (nntp-kill-buffer pbuffer))
     (when (and (buffer-name pbuffer)
 	       process)
       (process-kill-without-query process)
@@ -1082,7 +1093,9 @@ password contained in '~/.nntp-authinfo'."
       (delete-char 2))
     ;; Delete status line.
     (goto-char (point-min))
-    (delete-region (point) (progn (forward-line 1) (point)))
+    (while (looking-at "[1-5][0-9][0-9] .*\n")
+      ;; For some unknown reason, there is more than one status line.
+      (delete-region (point) (progn (forward-line 1) (point))))
     ;; Remove "." -> ".." encoding.
     (while (search-forward "\n.." nil t)
       (delete-char -1))))

@@ -14,18 +14,27 @@
 (maybe-fbind '(babel-fetch
 	       babel-wash create-image decode-coding-string display-graphic-p
 	       find-image font-create-object gnus-mule-get-coding-system
+	       font-lock-set-defaults
 	       image-size image-type-available-p insert-image
+	       make-temp-file message-xmas-redefine
 	       mail-aliases-setup mm-copy-tree
 	       mule-write-region-no-coding-system put-image
+	       ring-elements
 	       rmail-select-summary rmail-summary-exists rmail-update-summary
 	       sc-cite-regexp set-font-family set-font-size temp-directory
+	       string-as-multibyte
+	       tool-bar-add-item tool-bar-add-item-from-menu
 	       url-view-url vcard-pretty-print
+	       url-insert-file-contents
 	       w3-coding-system-for-mime-charset w3-prepare-buffer w3-region
 	       widget-make-intangible x-defined-colors))
 
 (maybe-bind '(adaptive-fill-first-line-regexp
 	      adaptive-fill-regexp babel-history babel-translations
+	      default-enable-multibyte-characters
 	      display-time-mail-function imap-password mail-mode-hook
+	      mc-pgp-always-sign
+	      nnoo-definition-alist
 	      url-current-callback-func url-be-asynchronous 
 	      url-current-callback-data url-working-buffer
 	      url-current-mime-headers w3-meta-charset-content-type-regexp
@@ -52,7 +61,8 @@
 		     set-buffer-multibyte set-char-table-range
 		     set-face-stipple set-frame-face-alist track-mouse
 		     url-retrieve w3-form-encode-xwfu window-at
-		     window-edges x-color-values x-popup-menu))
+		     window-edges x-color-values x-popup-menu browse-url
+		     frame-char-height frame-char-width))
       (maybe-bind '(buffer-display-table 
 		    buffer-file-coding-system font-lock-defaults
 		    global-face-data gnus-article-x-face-too-ugly
@@ -75,6 +85,7 @@
 		 events-to-keys face-doc-string find-face frame-device
 		 frame-property get-popup-menu-response glyph-height
 		 glyph-property glyph-width glyphp make-annotation
+		 make-event
 		 make-color-instance make-extent make-glyph make-gui-button
 		 make-image-specifier map-extents next-command-event
 		 pp-to-string read-color set-extent-property

@@ -36,6 +36,7 @@
 (push (or (getenv "lispdir") 
 	  "/usr/share/emacs/site-lisp")
       load-path)
+
 (push (or (getenv "W3DIR") (expand-file-name "../../w3/lisp/" srcdir)) 
       load-path)
 
@@ -83,7 +84,6 @@
 
 (require 'bytecomp)
 
-(push "/usr/share/emacs/site-lisp" load-path)
 (push srcdir load-path)
 (load (expand-file-name "lpath.el" srcdir) nil t)
 
@@ -119,13 +119,15 @@ Modify to suit your needs."))
 	file elc)
     (dolist (file '("dgnushack.el" "lpath.el"))
       (setq files (delete file files)))
-    (if (featurep 'base64)
-	(setq files (delete "base64.el" files)))
-    (condition-case ()
- 	(require 'w3-forms)
+    (when (featurep 'base64)
+      (setq files (delete "base64.el" files)))
+    (condition-case code
+	(require 'w3-forms)
       (error
+       (message "No w3: %s %s" code (locate-library "w3-forms"))
        (dolist (file '("nnweb.el" "nnlistserv.el" "nnultimate.el"
-		       "nnslashdot.el" "nnwarchive.el" "webmail.el"))
+		       "nnslashdot.el" "nnwarchive.el" "webmail.el"
+		       "nnwfm.el"))
 	 (setq files (delete file files)))))
     (dolist (file 
 	     (if (featurep 'xemacs)
@@ -136,13 +138,15 @@ Modify to suit your needs."))
 
     (dolist (file files)
       (setq file (expand-file-name file srcdir))
-      (when (and (file-exists-p (setq elc (concat file "c")))
+      (when (and (file-exists-p 
+		  (setq elc (concat (file-name-nondirectory file) "c")))
 		 (file-newer-than-file-p file elc))
 	(delete-file elc)))
     
     (while (setq file (pop files))
       (setq file (expand-file-name file srcdir))
-      (when (or (not (file-exists-p (setq elc (concat file "c"))))
+      (when (or (not (file-exists-p 
+		      (setq elc (concat (file-name-nondirectory file) "c"))))
 		(file-newer-than-file-p file elc))
 	(ignore-errors
 	  (byte-compile-file file))))))

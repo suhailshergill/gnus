@@ -42,11 +42,13 @@
     (require 'w3)
     (require 'url)
     (require 'w3-forms)))
+
 ;; Report failure to find w3 at load time if appropriate.
-(eval '(progn
-	 (require 'w3)
-	 (require 'url)
-	 (require 'w3-forms)))
+(unless noninteractive
+  (eval '(progn
+	   (require 'w3)
+	   (require 'url)
+	   (require 'w3-forms))))
 
 (nnoo-declare nnweb)
 
@@ -687,7 +689,7 @@ and `altavista'.")
 (defun nnweb-insert-html (parse)
   "Insert HTML based on a w3 parse tree."
   (if (stringp parse)
-      (insert parse)
+      (insert (nnheader-string-as-multibyte parse))
     (insert "<" (symbol-name (car parse)) " ")
     (insert (mapconcat
 	     (lambda (param)
@@ -737,9 +739,9 @@ and `altavista'.")
 	(setq elem (char-to-string elem)))
       (replace-match elem t t))))
 
-(defun nnweb-decode-entities-string (str)
+(defun nnweb-decode-entities-string (string)
   (with-temp-buffer
-    (insert str)
+    (insert string)
     (nnweb-decode-entities)
     (buffer-substring (point-min) (point-max))))
 
@@ -819,6 +821,11 @@ If FOLLOW-REFRESH is non-nil, redirect refresh url in META."
       (when (and (consp element)
 		 (listp (cdr element)))
 	(nnweb-text-1 element)))))
+
+(defun nnweb-replace-in-string (string match newtext)
+  (while (string-match match string)
+    (setq string (replace-match newtext t t string)))
+  string)
 
 (provide 'nnweb)
 

@@ -1,5 +1,7 @@
 ;;; messagexmas.el --- XEmacs extensions to message
-;; Copyright (C) 1996,97,98,99 Free Software Foundation, Inc.
+
+;; Copyright (C) 1996, 1997, 1998, 1999, 2000
+;;      Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
 ;; Keywords: mail, news
@@ -91,9 +93,6 @@ If it is non-nil, it must be a toolbar.  The five valid values are
   "Exchange point and mark, but allow for XEmacs' optional argument."
   (exchange-point-and-mark message-xmas-dont-activate-region))
 
-(defalias 'message-exchange-point-and-mark 
-  'message-xmas-exchange-point-and-mark)
-
 (defun message-xmas-maybe-fontify ()
   (when (featurep 'font-lock)
     (font-lock-set-defaults)))
@@ -115,11 +114,18 @@ If it is non-nil, it must be a toolbar.  The five valid values are
      (substring table a (+ a n))
      (substring table (+ a 26) 255))))
 
-(when (>= emacs-major-version 20)
-  (defalias 'message-make-caesar-translation-table
-    'message-xmas-make-caesar-translation-table))
-
 (add-hook 'message-mode-hook 'message-xmas-maybe-fontify)
+
+(defun message-xmas-redefine ()
+  "Redefine message functions for XEmacs."
+  (defalias 'message-exchange-point-and-mark 
+    'message-xmas-exchange-point-and-mark)
+
+  (when (>= emacs-major-version 20)
+    (defalias 'message-make-caesar-translation-table
+      'message-xmas-make-caesar-translation-table)))
+
+(message-xmas-redefine)
 
 (provide 'messagexmas)
 

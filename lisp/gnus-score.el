@@ -1102,8 +1102,7 @@ EXTRA is the possible non-standard header."
 					gnus-kill-files-directory)))
 			  (expand-file-name file))
 			 file)
-		    (concat (file-name-as-directory gnus-kill-files-directory)
-			    file))))
+		    (expand-file-name file gnus-kill-files-directory))))
 	 (cached (assoc file gnus-score-cache))
 	 (global (member file gnus-internal-global-score-files))
 	 lists alist)
@@ -1777,7 +1776,7 @@ score in GNUS-NEWSGROUP-SCORED by SCORE."
 	    (put-text-property (1- (point)) (point) 'articles alike))
 	  (setq alike (list art)
 		last this)))
-      (when last ; Bwadr, duplicate code.
+      (when last			; Bwadr, duplicate code.
 	(insert last ?\n)
 	(put-text-property (1- (point)) (point) 'articles alike))
 
@@ -1786,7 +1785,7 @@ score in GNUS-NEWSGROUP-SCORED by SCORE."
 	(setq alist (car scores)
 	      scores (cdr scores)
 	      entries (assoc header alist))
-	(while (cdr entries) ;First entry is the header index.
+	(while (cdr entries)		;First entry is the header index.
 	  (let* ((rest (cdr entries))
 		 (kill (car rest))
 		 (match (nth 0 kill))
@@ -2566,7 +2565,7 @@ GROUP using BNews sys file syntax."
 	  ;; If short file names were used, we have to translate slashes.
 	  (goto-char (point-min))
 	  (let ((regexp (concat
-			 "[/:" (if trans (char-to-string trans) "") "]")))
+			 "[/:" (if trans (char-to-string trans)) "]")))
 	    (while (re-search-forward regexp nil t)
 	      (replace-match "." t t)))
 	  ;; Kludge to get rid of "nntp+" problems.

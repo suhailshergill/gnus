@@ -156,7 +156,7 @@ All posts will be sent to the specified group.")
 
     (gcc-self (choice :tag  "GCC"
 		      :value t
-		      (const t)
+		      (const :tag "To current group" t)
 		      (const none)
 		      (string :format "%v" :hide-front-space t)) "\
 Specify default value for GCC header.

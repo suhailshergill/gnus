@@ -33,6 +33,10 @@
 
 (require 'mail-utils)
 (require 'mm-util)
+(eval-and-compile
+  (autoload 'gnus-sorted-intersection "gnus-range")
+  (autoload 'gnus-intersection "gnus-range")
+  (autoload 'gnus-sorted-complement "gnus-range"))
 
 (defvar nnheader-max-head-length 4096
   "*Max length of the head of articles.")
@@ -591,11 +595,14 @@ the line could be found."
     (string-match nnheader-numerical-short-files file)
     (string-to-int (match-string 0 file))))
 
+(defvar nnheader-directory-files-is-safe nil
+  "If non-nil, Gnus believes `directory-files' is safe.
+It has been reported numerous times that `directory-files' fails with
+an alarming frequency on NFS mounted file systems. If it is nil,
+`nnheader-directory-files-safe' is used.")
+
 (defun nnheader-directory-files-safe (&rest args)
-  ;; It has been reported numerous times that `directory-files'
-  ;; fails with an alarming frequency on NFS mounted file systems.
-  ;; This function executes that function twice and returns
-  ;; the longest result.
+  "Execute `directory-files' twice and returns the longer result."
   (let ((first (apply 'directory-files args))
 	(second (apply 'directory-files args)))
     (if (> (length first) (length second))
@@ -605,14 +612,20 @@ the line could be found."
 (defun nnheader-directory-articles (dir)
   "Return a list of all article files in directory DIR."
   (mapcar 'nnheader-file-to-number
-	  (nnheader-directory-files-safe
-	   dir nil nnheader-numerical-short-files t)))
+	  (if nnheader-directory-files-is-safe 
+	      (directory-files
+	       dir nil nnheader-numerical-short-files t)
+	    (nnheader-directory-files-safe
+	     dir nil nnheader-numerical-short-files t))))
 
 (defun nnheader-article-to-file-alist (dir)
   "Return an alist of article/file pairs in DIR."
   (mapcar (lambda (file) (cons (nnheader-file-to-number file) file))
-	  (nnheader-directory-files-safe
-	   dir nil nnheader-numerical-short-files t)))
+	  (if nnheader-directory-files-is-safe 
+	      (directory-files
+	       dir nil nnheader-numerical-short-files t)
+	    (nnheader-directory-files-safe
+	     dir nil nnheader-numerical-short-files t))))
 
 (defun nnheader-fold-continuation-lines ()
   "Fold continuation lines in the current buffer."
@@ -692,20 +705,8 @@ without formatting."
       (apply 'insert format args))
     t))
 
-(if (fboundp 'subst-char-in-string)
-    (defsubst nnheader-replace-chars-in-string (string from to)
-      (subst-char-in-string from to string))
-  (defun nnheader-replace-chars-in-string (string from to)
-    "Replace characters in STRING from FROM to TO."
-    (let ((string (substring string 0))	;Copy string.
-	  (len (length string))
-	  (idx 0))
-      ;; Replace all occurrences of FROM with TO.
-      (while (< idx len)
-	(when (= (aref string idx) from)
-	  (aset string idx to))
-	(setq idx (1+ idx)))
-      string)))
+(defsubst nnheader-replace-chars-in-string (string from to)
+  (mm-subst-char-in-string from to string))
 
 (defun nnheader-replace-duplicate-chars-in-string (string from to)
   "Replace characters in STRING from FROM to TO."
@@ -747,7 +748,7 @@ without formatting."
   (or (not (numberp gnus-verbose-backends))
       (<= level gnus-verbose-backends)))
 
-(defvar nnheader-pathname-coding-system 'binary
+(defvar nnheader-pathname-coding-system 'iso-8859-1
   "*Coding system for pathname.")
 
 (defun nnheader-group-pathname (group dir &optional file)
@@ -808,8 +809,9 @@ If FILE, find the \".../etc/PACKAGE\" file instead."
 	(setq path (cdr path))))
     result))
 
-(defvar ange-ftp-path-format)
-(defvar efs-path-regexp)
+(eval-when-compile
+  (defvar ange-ftp-path-format)
+  (defvar efs-path-regexp))
 (defun nnheader-re-read-dir (path)
   "Re-read directory PATH if PATH is on a remote system."
   (if (and (fboundp 'efs-re-read-dir) (boundp 'efs-path-regexp))
@@ -897,6 +899,7 @@ find-file-hooks, etc.
 (defalias 'nnheader-run-at-time 'run-at-time)
 (defalias 'nnheader-cancel-timer 'cancel-timer)
 (defalias 'nnheader-cancel-function-timers 'cancel-function-timers)
+(defalias 'nnheader-string-as-multibyte 'string-as-multibyte)
 
 (when (featurep 'xemacs)
   (require 'nnheaderxm))

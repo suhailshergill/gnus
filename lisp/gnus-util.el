@@ -34,10 +34,10 @@
 (require 'custom)
 (eval-when-compile (require 'cl))
 (require 'nnheader)
-(require 'message)
 (require 'time-date)
 
 (eval-and-compile
+  (autoload 'message-fetch-field "message")
   (autoload 'rmail-insert-rmail-file-header "rmail")
   (autoload 'rmail-count-new-messages "rmail")
   (autoload 'rmail-show-message "rmail"))
@@ -190,22 +190,17 @@
 	(delete-char 1))
       (goto-char (next-single-property-change (point) prop nil (point-max))))))
 
+(require 'nnheader)
 (defun gnus-newsgroup-directory-form (newsgroup)
   "Make hierarchical directory name from NEWSGROUP name."
-  (let ((newsgroup (gnus-newsgroup-savable-name newsgroup))
-	(len (length newsgroup))
-	idx)
-    ;; If this is a foreign group, we don't want to translate the
-    ;; entire name.
-    (if (setq idx (string-match ":" newsgroup))
-	(aset newsgroup idx ?/)
-      (setq idx 0))
-    ;; Replace all occurrences of `.' with `/'.
-    (while (< idx len)
-      (when (= (aref newsgroup idx) ?.)
-	(aset newsgroup idx ?/))
-      (setq idx (1+ idx)))
-    newsgroup))
+  (let* ((newsgroup (gnus-newsgroup-savable-name newsgroup))
+	 (idx (string-match ":" newsgroup)))
+    (concat
+     (if idx (substring newsgroup 0 idx))
+     (if idx "/")
+     (nnheader-replace-chars-in-string
+      (if idx (substring newsgroup (1+ idx)) newsgroup)
+      ?. ?/))))
 
 (defun gnus-newsgroup-savable-name (group)
   ;; Replace any slashes in a group name (eg. an ange-ftp nndoc group)
@@ -973,6 +968,47 @@ Entries without port tokens default to DEFAULTPORT."
       (goto-char (point-max))
       (while (search-backward "\\." nil t)
 	(delete-char 1)))))
+
+(if (fboundp 'union)
+    (defalias 'gnus-union 'union)
+  (defun gnus-union (l1 l2)
+    "Set union of lists L1 and L2."
+    (cond ((null l1) l2)
+	  ((null l2) l1)
+	  ((equal l1 l2) l1)
+	  (t
+	   (or (>= (length l1) (length l2))
+	       (setq l1 (prog1 l2 (setq l2 l1))))
+	   (while l2
+	     (or (member (car l2) l1)
+		 (push (car l2) l1))
+	     (pop l2))
+	   l1))))
+
+(defun gnus-add-text-properties-when
+  (property value start end properties &optional object)
+  "Like `gnus-add-text-properties', only applied on where PROPERTY is VALUE."
+  (let (point)
+    (while (and start 
+		(< start end) ;; XEmacs will loop for every when start=end.
+		(setq point (text-property-not-all start end property value)))
+      (gnus-add-text-properties start point properties object)
+      (setq start (text-property-any point end property value)))
+    (if start
+	(gnus-add-text-properties start end properties object))))
+
+(defun gnus-remove-text-properties-when
+  (property value start end properties &optional object)
+  "Like `remove-text-properties', only applied on where PROPERTY is VALUE."
+  (let (point)
+    (while (and start 
+		(< start end)
+		(setq point (text-property-not-all start end property value)))
+      (remove-text-properties start point properties object)
+      (setq start (text-property-any point end property value)))
+    (if start
+	(remove-text-properties start end properties object))
+    t))
 
 (provide 'gnus-util)
 

@@ -1,3 +1,499 @@
+2000-12-25 00:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* dgnushack.el (dgnushack-compile): elc is in the current directory.
+
+	* qp.el (quoted-printable-encode-region): Don't check multibyte in
+	XEmacs.
+
+2000-12-25  Simon Josefsson  <simon@josefsson.org>
+
+	* starttls.el: Sync with Emacs 21.
+
+2000-12-22 12:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-vm.el (gnus-summary-save-article-vm): Require gnus-art
+	before binding gnus-default-article-saver.
+
+	* gnus-sum.el (gnus-summary-save-article): 
+	(gnus-summary-pipe-output): 
+	(gnus-summary-save-article-mail): 
+	(gnus-summary-save-article-rmail): 
+	(gnus-summary-save-article-file): 
+	(gnus-summary-write-article-file): 
+	(gnus-summary-save-article-body-file): Ditto.
+
+	* gnus-mh.el (gnus-summary-save-article-folder): Ditto.
+
+2000-12-22 09:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* messagexmas.el (message-xmas-redefine): New function.
+
+	* message.el: Use it.
+
+	* gnus-art.el (gnus-article-check-hidden-text): Return t.
+
+	* gnus-util.el (gnus-remove-text-properties-when): Return t.
+
+2000-12-22 02:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* Makefile.in (install-el): New.
+
+2000-12-21  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (article-treat-dumbquotes): Quote \.
+
+2000-12-21 22:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-treat-emphasize): Don't treat emphasis if
+	Emacs 20 runs on a terminal.
+
+2000-12-21 14:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mml.el (gnus-add-minor-mode): Autoload.
+
+	* message.el (message-forward): Save-restriction.
+
+2000-12-21  Kai Gro,A_(Bjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* gnus-art.el (article-treat-dumbquotes): More doc, provided by
+	Paul Stevenson <p.stevenson@surrey.ac.uk>
+
+2000-12-21 10:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-ml.el (gnus-mailing-list-mode-map): Use C-c C-n prefix.
+
+	* gnus.el (gnus-decode-rfc1522): Removed.
+	(gnus-set-text-properties): Define.
+
+2000-12-21 09:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-mime-*): handle may be nil.
+
+	* gnus-sum.el (gnus-summary-mode): Turn on gnus-mailing-list-mode.
+
+	* gnus.el (gnus-group-remove-excess-properties): Not defined
+	in gnus-xmas.
+
+2000-12-20 21:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* message.el (message-mail-user-agent): Add :version.
+
+2000-12-21  Miles Bader  <miles@gnu.org>
+
+	* message.el (message-mode): Set `comment-start' to the  yank prefix.
+
+2000-12-20 17:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* message.el (message-mail-user-agent): New variable.
+	(message-setup): Renamed to message-setup-1. Support
+	mail-user-agent.
+	(message-mail-user-agent): New function.
+	(message-mail): Use it.
+	(message-reply): Use it.
+	(message-resend): Use it.
+	(message-mail-other-window): Use it.
+	(message-mail-other-frame): Use it.
+
+2000-12-20 15:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* message.el (message-tool-bar-map): Simplify.
+	(message-narrow-to-head-1): New function.
+	(message-narrow-to-head): Use it.
+	(message-reply): Ditto.
+	(message-cancel-news): Ditto.
+	(message-supersede): Ditto.
+	(message-make-forward-subject): Ditto.
+	(message-bounce): Ditto.
+
+2000-12-20 11:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* uudecode.el (uudecode-decode-region-external): make-temp-file
+	may not be defined.
+
+	* binhex.el (defalias): eval-and-compile.
+
+	* message.el (message-tool-bar-map): New function.
+	(message-mode): Use it.
+
+2000-12-20 09:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nntp.el (nntp-find-connection): Remove the entry.
+	(nntp-retrieve-groups): (gnus-buffer-live-p buf).
+
+2000-12-20 04:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* message.el (message-make-forward-subject): Don't widen. Decode.
+	(message-forward): Don't decode subject.
+
+2000-12-20  Christoph Conrad <C.Conrad@cli.de>
+
+	* qp.el (quoted-printable-encode-region): Upcase QP.
+
+2000-12-20 02:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-insert-mime-button): Simplify.
+	(gnus-mime-display-alternative): Ditto.
+	(gnus-insert-mime-security-button): Ditto.
+
+2000-12-20 01:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-util.el (gnus-add-text-properties-when): In XEmacs,
+	text-property-not-all doesn't return nil when start=mark(end).
+	(gnus-remove-text-properties-when): Ditto.
+
+2000-12-19 22:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-insert-mime-button): Emacs20 needs local-map.
+	(gnus-mime-display-alternative): Ditto.
+	(gnus-insert-mime-security-button): Ditto.
+
+2000-12-19 19:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nnmbox.el (nnmbox-file-coding-system): Use binary.
+	(nnmbox-active-file-coding-system): Ditto.
+
+2000-12-19 18:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus.el (gnus-version):
+	(gnus-version-number): Set to Oort Gnus 0.01.
+
+	* gnus-art.el (gnus-mime-security-button-map):
+	(gnus-insert-mime-security-button): Fix for Emacs21.
+
+2000-12-19  Raymond Scholz <ray-2000@zonix.de>
+
+	* gnus-art.el (gnus-article-dumbquotes-map): Add EUR symbol.
+
+2000-12-15 10:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* pop3.el (pop3-movemail): Use binary.
+	(pop3-movemail-file-coding-system): Removed.
+
+2000-12-14 13:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mm-util.el (mm-charset-synonym-alist): Add cn-gb.
+
+2000-12-13 13:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-msg.el (gnus-post-method): Use backend name when the
+	address is "".
+
+2000-12-04 22:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-win.el (gnus-configure-frame): Save selected window.
+
+2000-12-04 14:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-msg.el (gnus-msg-mail): COMPOSEFUNC should return t if
+	succeed.
+
+2000-12-04 13:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-win.el (gnus-configure-windows): Make sure
+	nntp-server-buffer is live.
+	(gnus-remove-some-windows): switch-to-buffer -> set-buffer.
+
+2000-11-21  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* gnus-win.el (gnus-configure-windows): switch-to-buffer -> set-buffer.
+
+2000-12-04  Andreas Jaeger  <aj@suse.de>
+
+	* gnus-msg.el (gnus-summary-mail-forward): Fix typos in description.
+
+2000-12-01  Christopher Splinter <chris@splinter.inka.de>
+
+	* gnus-sum.el (gnus-summary-limit-to-age): Fix typo.
+
+2000-11-30 19:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-util.el (gnus-add-text-properties-when): New function.
+	(gnus-remove-text-properties-when): Ditto.
+
+	* gnus-cite.el (gnus-article-hide-citation): Use them.
+	(gnus-article-toggle-cited-text): Use them.
+	
+	* gnus-art.el (gnus-signature-toggle): Use them.
+	(gnus-article-show-hidden-text): Ditto.
+	(gnus-article-hide-text): Ditto.
+
+2000-11-30 14:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mm-util.el (mm-find-charset-region): Remove eight-bit-*.
+
+2000-11-29 21:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nndraft.el (nndraft-request-restore-buffer): Remove Date field.
+
+2000-11-29 00:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nnmail.el (nnmail-cache-accepted-message-ids): Add doc.
+
+2000-11-28 17:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* message.el (message-shoot-gnksa-feet): New variable.
+	(message-gnksa-enable-p): New function.
+	(message-send): Use it.
+	(message-check-news-body-syntax): Ditto.
+
+2000-11-28  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* message.el (message-make-message-id): Remove the redundancy.
+
+2000-11-22 14:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-ml.el (gnus-mailing-list-insinuate): New function.
+
+2000-11-22 13:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-ml.el (gnus-mailing-list-archive): Find the real url.
+
+2000-11-22 11:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* message.el (message-send-mail): Use buffer-substring-no-properties.
+	(message-send-news): Ditto.
+
+2000-11-22  David Edmondson <dme@dme.org>
+
+	* imap.el (imap-wait-for-tag): Message read info.
+
+2000-11-20 18:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-ml.el (gnus-mailing-list-archive): Use browse-url.
+
+2000-11-20 17:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-article-make-menu-bar): Use easy-menu-add.
+
+2000-11-20 16:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-article-describe-key): Use prompt.
+	(gnus-article-describe-key-briefly): Ditto.
+
+2000-11-20 15:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-agent.el (gnus-agent-expire): Ignore corrupted history.
+
+2000-11-20 10:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-article-describe-key): New function.
+	(gnus-article-describe-key-briefly): New function.
+
+2000-11-19 23:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-article-read-summary-keys): lookup-key may
+	return a number.
+
+2000-11-17  Per Abrahamsen  <abraham@dina.kvl.dk>
+
+	* gnus-msg.el (gnus-group-posting-charset-alist): No longer allow
+	raw 8-bit in headers in dk.* newsgroups.
+
+2000-11-16 23:31  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mml.el (mml-generate-mime-1): Ignore ascii.
+
+2000-11-16 Justin Sheehy <justin@iago.org>
+
+	* gnus-sum.el (gnus-summary-make-menu-bar): Fix menu items.
+
+2000-11-14 10:32:42  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mailcap.el (mailcap-possible-viewers): Match the entire string.
+
+2000-11-14 00:48:52  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-bcklg.el (gnus-backlog-enter-article): Don't enter
+	nnvirtual articles.
+	(gnus-backlog-request-article): Don't request nnvirtual articles.
+
+2000-11-13 09:50:29  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-sum.el (gnus-summary-repair-multipart): Fix Mime-Version
+	anyway.
+
+2000-11-12 21:35:04  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2231.el (rfc2231-encode-string): Insert semi-colon and
+	leading space.
+
+2000-11-12 19:48:30  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-sum.el (gnus-select-newsgroup): Change the error message.
+
+2000-11-12 11:53:18  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-mime-button-menu): Use select-window.
+
+2000-11-12 09:47:54  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-mime-display-part): Display multipart/related
+	as multipart/mixed.
+
+2000-11-11 15:55:35  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mm-uu.el (mm-uu-type-alist): Stricter shar regexp.
+
+2000-11-10 09:01:25  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-mime-display-alternative): Show button if no
+	preferred part.
+
+2000-11-07  Kai Gro,A_(Bjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* gnus-sum.el (gnus-move-split-methods): Say that
+	`gnus-split-methods' uses file names, whereas this uses group
+	names.  (Report from Nevin Kapur)
+
+2000-11-10 01:23:20  ShengHuo ZHU  <zsh@cs.rochester.edu>
+  
+	* mm-partial.el (mm-inline-partial): Insert MIME-Version.
+
+2000-11-09 17:02:50  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nnheader.el (nnheader-directory-files-is-safe): New variable.
+	(nnheader-directory-articles): Use it.
+	(nnheader-article-to-file-alist): Ditto.
+
+2000-11-09 16:20:37  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2047.el (rfc2047-pad-base64): New function.
+	(rfc2047-decode): Use it.
+
+2000-11-08 16:37:02  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-cache.el (gnus-cache-generate-nov-databases): Reopen cache.
+
+2000-11-08 08:38:30  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* pop3.el (pop3-munge-message-separator): A message may have an
+	empty body.
+  
+2000-11-07 08:49:36  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mm-decode.el (mm-display-parts): New function.
+	* gnus-art.el (gnus-mime-view-all-parts): Use it. Remove parts first.
+
+2000-02-02 Alexandre Oliva <oliva@lsd.ic.unicamp.br>
+
+	* gnus-mlspl.el: Documentation tweaks.
+	
+2000-11-06 19:10:14  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2231.el (rfc2231-encode-string): Use us-ascii if charset is nil.
+
+2000-11-05 15:06:05  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nnvirtual.el (nnvirtual-request-expire-articles): Uncompress range.
+
+2000-11-04 20:38:50  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mm-view.el (mm-inline-text): Move point to the end of inserted text.
+
+2000-11-04 10:34:29  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nnheader.el (nnheader-pathname-coding-system): Default iso-8859-1.
+	* nnmail.el (nnmail-pathname-coding-system): Ditto.
+
+2000-09-29  David Edmondson  <dme@thus.net>
+
+	* message.el (message-newline-and-reformat): Typo.
+
+2000-11-04 10:11:05  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2231.el (rfc2231-decode-encoded-string): Test mm-multibyte-p.
+
+2000-11-04 09:53:42  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* nntp.el (nntp-decode-text): Delete bogus status lines.
+
+2000-11-03  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* message.el (message-font-lock-keywords): Match a final newline
+	to help font-lock's multiline support.
+	
+2000-11-04  Simon Josefsson  <sj@extundo.com>
+
+	* nnimap.el (nnimap-split-inbox): Typo.
+
+2000-11-03 10:46:44  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-msg.el (gnus-msg-mail): Move it backwards.
+
+2000-11-03  Simon Josefsson  <sj@extundo.com>
+
+	* rfc2231.el (rfc2231-parse-qp-string): New function.
+	(require): rfc2047.
+
+	* mail-parse.el (mail-header-parse-content-type):
+	(mail-header-parse-content-disposition): Support invalid QP
+	encoded strings, by using `rfc2231-parse-qp-string'.
+
+2000-11-03 08:58:08  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2231.el (rfc2231-parse-string): Decode when there is no number.
+	(rfc2231-decode-encoded-string): Typo "> X 1".
+	(rfc2231-encode-string): Insert the name of charset.
+	* mail-parse.el (mail-header-encode-parameter): Use RFC2231.
+
+2000-11-02 13:27:56  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-uu.el (gnus-uu-post-news): Comment out the redundancy.  
+	* gnus-art.el (gnus-article-edit-done): 
+	* gnus-sum.el (gnus-summary-edit-article-done): Move line 
+	counting code here.
+	* gnus-msg.el (gnus-setup-message): Remove a hack.
+
+2000-11-02  Hrvoje Niksic  <hniksic@arsdigita.com>
+
+	* rfc2047.el (rfc2047-encoded-word-regexp): Allow empty encoded
+	word.
+
+2000-11-01 08:54:11  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mml.el (mml-read-tag): Remove spaces and LF.
+
+2000-11-01 01:12:29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnultimate.el (nnultimate-create-mapping): Use nreverse. 
+
+2000-10-31 23:45:31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnwfm.el: New file.
+
+	* nnweb.el (nnweb-replace-in-string): New function.
+
+2000-10-31 11:44:29  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-sum.el (gnus-summary-show-article): Fix the summary line.
+
+2000-10-31  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-sum.el (gnus-summary-insert-line): Work with quoted
+	double-quote charcters.
+	(gnus-summary-prepare-threads): Ditto.
+
+2000-10-31 08:36:03  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-art.el (gnus-mime-display-single): Forward line -1.
+	* mml.el (mml-read-tag): Don't skip the leading space.
+
+2000-10-16 11:36:52  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnultimate.el (nnultimate-forum-table-p): Be a bit more
+	restrictive. 
+	(nnultimate-table-regexp): New variable.
+	(nnultimate-forum-table-p): Use it.
+
+2000-10-30  Ed L Cashin <ecashin@coe.uga.edu>
+
+	* gnus-sum.el (gnus-summary-expire-articles): Save point.
+
+2000-10-28 03:38:39  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2047.el (rfc2047-encode-message-header): Make sure no
+	unencoded stuff in the header.
+
 2000-10-27  Jason Rumney  <jasonr@gnu.org>
 
 	* gnus-art.el (gnus-signature-face): Use italic on any frame that

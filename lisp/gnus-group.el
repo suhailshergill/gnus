@@ -37,6 +37,7 @@
 (require 'gnus-win)
 (require 'gnus-undo)
 (require 'time-date)
+(require 'gnus-ems)
 
 (defcustom gnus-group-archive-directory
   "*ftp@ftp.hpc.uh.edu:/pub/emacs/ding-list/"
@@ -2308,14 +2309,14 @@ mail messages or news articles in files that have numeric names."
     (while (or (not group) (gnus-gethash group gnus-newsrc-hashtb))
       (setq group
 	    (gnus-group-prefixed-name
-	     (concat (file-name-as-directory (directory-file-name dir))
-		     ext)
+	     (expand-file-name ext dir)
 	     '(nndir "")))
       (setq ext (format "<%d>" (setq i (1+ i)))))
     (gnus-group-make-group
      (gnus-group-real-name group)
      (list 'nndir (gnus-group-real-name group) (list 'nndir-directory dir)))))
 
+(eval-when-compile (defvar nnkiboze-score-file))
 (defun gnus-group-make-kiboze-group (group address scores)
   "Create an nnkiboze group.
 The user will be prompted for a name, a regexp to match groups, and
@@ -3245,7 +3246,7 @@ to use."
     (when current-prefix-arg
       (completing-read
        "Faq dir: " (and (listp gnus-group-faq-directory)
-			(mapcar (lambda (file) (list file))
+			(mapcar #'list
 				gnus-group-faq-directory))))))
   (unless group
     (error "No group name given"))
@@ -3256,7 +3257,7 @@ to use."
     (while (and (not found)
 		(setq dir (pop dirs)))
       (let ((name (gnus-group-real-name group)))
-	(setq file (concat (file-name-as-directory dir) name)))
+	(setq file (expand-file-name name dir)))
       (if (not (file-exists-p file))
 	  (gnus-message 1 "No such file: %s" file)
 	(let ((enable-local-variables nil))

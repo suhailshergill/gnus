@@ -1,5 +1,7 @@
 ;;; gnus-xmas.el --- Gnus functions for XEmacs
-;; Copyright (C) 1995,96,97,98,99 Free Software Foundation, Inc.
+
+;; Copyright (C) 1995, 1996, 1997, 1998, 1999, 2000
+;;      Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
 ;; Keywords: news
@@ -711,7 +713,7 @@ XEmacs compatibility workaround."
 	     (let ((cur (current-buffer)))
 	       (save-excursion
 		 (gnus-set-work-buffer)
-		 (insert (format "%s" (buffer-substring beg end cur)))
+		 (insert-buffer-substring cur beg end)
 		 (gnus-xmas-call-region "uncompface")
 		 (goto-char (point-min))
 		 (insert "/* Width=48, Height=48 */\n")

@@ -26,7 +26,9 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl))
+(eval-when-compile
+  (require 'cl)
+  (require 'ring))
 
 ;;; Function aliases later to be redefined for XEmacs usage.
 
@@ -47,8 +49,7 @@
 
 (if (featurep 'xemacs)
     (autoload 'gnus-smiley-display "smiley")
-  (autoload 'gnus-smiley-display "smiley-ems") ; override XEmacs version
-)
+  (autoload 'gnus-smiley-display "smiley-ems")) ; override XEmacs version
 
 (defun gnus-kill-all-overlays ()
   "Delete all overlays in the current buffer."
@@ -94,6 +95,7 @@
 (defvar gnus-tmp-name)
 (defvar gnus-tmp-closing-bracket)
 (defvar gnus-tmp-subject-or-nil)
+(defvar gnus-check-before-posting)
 
 (defun gnus-ems-redefine ()
   (cond
@@ -276,9 +278,5 @@ for XEmacs."
 	  (insert-image image))))))
 
 (provide 'gnus-ems)
-
-;; Local Variables:
-;; byte-compile-warnings: '(redefine callargs)
-;; End:
 
 ;;; gnus-ems.el ends here

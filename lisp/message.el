@@ -1,4 +1,4 @@
-;;; message.el --- composing mail and news messages
+;;; message.el --- composing mail and news messages  -*- coding: iso-latin-1 -*-
 ;; Copyright (C) 1996, 1997, 1998, 1999, 2000
 ;;        Free Software Foundation, Inc.
 
@@ -259,7 +259,8 @@ should return the new buffer name."
   :group 'message-buffers
   :type 'boolean)
 
-(defvar gnus-local-organization)
+(eval-when-compile
+  (defvar gnus-local-organization))
 (defcustom message-user-organization
   (or (and (boundp 'gnus-local-organization)
 	   (stringp gnus-local-organization)
@@ -420,8 +421,9 @@ might set this variable to '(\"-f\" \"you@some.where\")."
 Folding `References' makes ancient versions of INN create incorrect
 NOV lines.")
 
-(defvar gnus-post-method)
-(defvar gnus-select-method)
+(eval-when-compile
+  (defvar gnus-post-method)
+  (defvar gnus-select-method))
 (defcustom message-post-method
   (cond ((and (boundp 'gnus-post-method)
 	      (listp gnus-post-method)
@@ -651,7 +653,7 @@ The default is `abbrev', which uses mailabbrev.  nil switches
 mail aliases off.")
 
 (defcustom message-auto-save-directory
-  (nnheader-concat message-directory "drafts/")
+  (file-name-as-directory (nnheader-concat message-directory "drafts"))
   "*Directory where Message auto-saves buffers if Gnus isn't running.
 If nil, Message won't auto-save."
   :group 'message-buffers
@@ -678,6 +680,20 @@ A value of nil means exclude your own name only."
   :group 'message
   :type '(choice (const :tag "Yourself" nil)
 		 regexp))
+
+(defvar message-shoot-gnksa-feet nil
+  "*A list of GNKSA feet you are allowed to shoot.  
+Gnus gives you all the opportunity you could possibly want for
+shooting yourself in the foot.  Also, Gnus allows you to shoot the
+feet of Good Net-Keeping Seal of Approval. The following are foot
+candidates:
+`empty-article'     Allow you to post an empty article;
+`quoted-text-only'  Allow you to post quoted text only;
+`multiple-copies'   Allow you to post multiple copies.")
+
+(defsubst message-gnksa-enable-p (feature)
+  (or (not (listp message-shoot-gnksa-feet))
+      (memq feature message-shoot-gnksa-feet)))
 
 ;;; Internal variables.
 ;;; Well, not really internal.
@@ -821,7 +837,7 @@ Defaults to `text-mode-abbrev-table'.")
 (defvar message-font-lock-keywords
   (let* ((cite-prefix "A-Za-z")
 	 (cite-suffix (concat cite-prefix "0-9_.@-"))
-	 (content "[ \t]*\\(.+\\(\n[ \t].*\\)*\\)"))
+	 (content "[ \t]*\\(.+\\(\n[ \t].*\\)*\\)\n?"))
     `((,(concat "^\\([Tt]o:\\)" content)
        (1 'message-header-name-face)
        (2 'message-header-to-face nil t))
@@ -920,8 +936,9 @@ The first matched address (not primary one) is used in the From field."
 (defvar message-posting-charset nil)
 
 ;; Byte-compiler warning
-(defvar gnus-active-hashtb)
-(defvar gnus-read-active-file)
+(eval-when-compile
+  (defvar gnus-active-hashtb)
+  (defvar gnus-read-active-file))
 
 ;;; Regexp matching the delimiter of messages in UNIX mail format
 ;;; (UNIX From lines), minus the initial ^.  It should be a copy
@@ -2129,10 +2146,13 @@ It should typically alter the sending method in some way or other."
       (when (funcall (cadr elem))
 	(when (and (or (not (memq (car elem)
 				  message-sent-message-via))
-		       (y-or-n-p
-			(format
-			 "Already sent message via %s; resend? "
-			 (car elem))))
+		       (if (or (message-gnksa-enable-p 'multiple-copies)
+			       (not (eq (car elem) 'news)))
+			   (y-or-n-p
+			    (format
+			     "Already sent message via %s; resend? "
+			     (car elem)))
+			 (error "Denied posting -- multiple copies.")))
 		   (setq success (funcall (caddr elem) arg)))
 	  (setq sent t))))
     (unless (or sent (not success))
@@ -2300,10 +2320,8 @@ It should typically alter the sending method in some way or other."
 	  (set-buffer tembuf)
 	  (erase-buffer)
 	  ;; Avoid copying text props.
-	  (insert (format
-		   "%s" (save-excursion
-			  (set-buffer mailbuf)
-			  (buffer-string))))
+	  (insert (with-current-buffer mailbuf
+		    (buffer-substring-no-properties (point-min) (point-max))))
 	  ;; Remove some headers.
 	  (message-encode-message-body)
 	  (save-restriction
@@ -2510,10 +2528,9 @@ to find out how to use this."
 	      (buffer-disable-undo)
 	      (erase-buffer)
 	      ;; Avoid copying text props.
-	      (insert (format
-		       "%s" (save-excursion
-			      (set-buffer messbuf)
-			      (buffer-string))))
+	      (insert (with-current-buffer messbuf
+			(buffer-substring-no-properties 
+			 (point-min) (point-max))))
 	      (message-encode-message-body)
 	      ;; Remove some headers.
 	      (save-restriction
@@ -2790,7 +2807,10 @@ to find out how to use this."
        (re-search-backward message-signature-separator nil t)
        (beginning-of-line)
        (or (re-search-backward "[^ \n\t]" b t)
-	   (y-or-n-p "Empty article.  Really post? "))))
+	   (if (message-gnksa-enable-p 'empty-article)
+	       (y-or-n-p "Empty article.  Really post? ")
+	     (message "Denied posting -- Empty article.")
+	     nil))))
    ;; Check for control characters.
    (message-check 'control-chars
      (if (re-search-forward "[\000-\007\013\015-\032\034-\037\200-\237]" nil t)
@@ -2809,8 +2829,11 @@ to find out how to use this."
      (or
       (not message-checksum)
       (not (eq (message-checksum) message-checksum))
-      (y-or-n-p
-       "It looks like no new text has been added.  Really post? ")))
+      (if (message-gnksa-enable-p 'quoted-text-only)
+	  (y-or-n-p
+	   "It looks like no new text has been added.  Really post? ")
+	(message "Denied posting -- no new text has been added.")
+	nil)))
    ;; Check the length of the signature.
    (message-check 'signature
      (goto-char (point-max))
@@ -2824,15 +2847,20 @@ to find out how to use this."
    (message-check 'quoting-style
      (goto-char (point-max))
      (let ((no-problem t))
-       (when (search-backward-regexp "^>[^\n]*\n>" nil t)
-	 (setq no-problem nil)
-	 (while (not (eobp))
-	   (when (and (not (eolp)) (looking-at "[^> \t]"))
-	     (setq no-problem t))
-	   (forward-line)))
+       (when (search-backward-regexp "^>[^\n]*\n" nil t)
+	 (setq no-problem (search-forward-regexp "^[ \t]*[^>\n]" nil t)))
        (if no-problem
 	   t
-	 (y-or-n-p "Your text should follow quoted text.  Really post? "))))))
+	 (if (message-gnksa-enable-p 'quoted-text-only)
+	     (y-or-n-p "Your text should follow quoted text.  Really post? ")
+	   ;; Ensure that
+	   (goto-char (point-min))
+	   (re-search-forward
+	    (concat "^" (regexp-quote mail-header-separator) "$"))
+	   (if (search-forward-regexp "^[ \t]*[^>\n]" nil t)
+	       (y-or-n-p "Your text should follow quoted text.  Really post? ")
+	     (message "Denied posting -- only quoted text.")
+	     nil)))))))
 
 (defun message-checksum ()
   "Return a \"checksum\" for the current buffer."
@@ -2965,7 +2993,6 @@ If NOW, use that time instead."
 		      (mail-header-references message-reply-headers)
 		      (mail-header-subject message-reply-headers)
 		      psubject
-		      (mail-header-subject message-reply-headers)
 		      (not (string=
 			    (message-strip-subject-re
 			     (mail-header-subject message-reply-headers))
@@ -4324,8 +4351,6 @@ which specify the range to operate on."
 (defalias 'message-exchange-point-and-mark 'exchange-point-and-mark)
 
 ;; Support for toolbar
-(when (featurep 'xemacs)
-  (require 'messagexmas))
 
 ;;; Group name completion.
 
@@ -4444,21 +4469,8 @@ regexp varstr."
 
 ;;; Miscellaneous functions
 
-;; stolen (and renamed) from nnheader.el
-(if (fboundp 'subst-char-in-string)
-    (defsubst message-replace-chars-in-string (string from to)
-      (subst-char-in-string from to string))
-  (defun message-replace-chars-in-string (string from to)
-    "Replace characters in STRING from FROM to TO."
-    (let ((string (substring string 0))	;Copy string.
-	  (len (length string))
-	  (idx 0))
-      ;; Replace all occurrences of FROM with TO.
-      (while (< idx len)
-	(when (= (aref string idx) from)
-	  (aset string idx to))
-	(setq idx (1+ idx)))
-      string)))
+(defsubst message-replace-chars-in-string (string from to)
+  (mm-subst-char-in-string from to string))
 
 ;;;
 ;;; MIME functions
@@ -4535,6 +4547,10 @@ regexp varstr."
     (unless (or (not email) (equal email user-mail-address))
       (goto-char (point-max))
       (insert "From: " email "\n"))))
+
+(when (featurep 'xemacs)
+  (require 'messagexmas)
+  (message-xmas-redefine))
 
 (provide 'message)
 

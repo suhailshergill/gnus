@@ -38,6 +38,9 @@
 (require 'mm-decode)
 (autoload 'gnus-summary-limit-include-cached "gnus-cache" nil t)
 (autoload 'gnus-cache-write-active "gnus-cache")
+(autoload 'gnus-mailing-list-insinuate "gnus-ml" nil t)
+(autoload 'turn-on-gnus-mailing-list-mode "gnus-ml" nil t)
+(autoload 'mm-uu-dissect "mm-uu")
 
 (defcustom gnus-kill-summary-on-exit t
   "*If non-nil, kill the summary buffer when you exit from it.
@@ -346,7 +349,9 @@ variable."
 
 (defcustom gnus-move-split-methods nil
   "*Variable used to suggest where articles are to be moved to.
-It uses the same syntax as the `gnus-split-methods' variable."
+It uses the same syntax as the `gnus-split-methods' variable.
+However, whereas `gnus-split-methods' specifies file names as targets,
+this variable specifies group names."
   :group 'gnus-summary-mail
   :type '(repeat (choice (list :value (fun) function)
 			 (cons :value ("" "") regexp (repeat string))
@@ -630,6 +635,7 @@ This variable is local to the summary buffers."
 (defcustom gnus-summary-mode-hook nil
   "*A hook for Gnus summary mode.
 This hook is run before any variables are set in the summary buffer."
+  :options '(turn-on-gnus-mailing-list-mode)
   :group 'gnus-summary-various
   :type 'hook)
 
@@ -1537,6 +1543,7 @@ increase the score of each group you read."
     "g" gnus-summary-show-article
     "s" gnus-summary-isearch-article
     "P" gnus-summary-print-article
+    "M" gnus-mailing-list-insinuate
     "t" gnus-article-babel)
 
   (gnus-define-keys (gnus-summary-wash-map "W" gnus-summary-mode-map)
@@ -1792,6 +1799,7 @@ increase the score of each group you read."
              ["Fetch referenced articles" gnus-summary-refer-references t]
              ["Fetch current thread" gnus-summary-refer-thread t]
              ["Fetch article with id..." gnus-summary-refer-article t]
+             ["Setup Mailing List Params" gnus-mailing-list-insinuate t]
              ["Redisplay" gnus-summary-show-article t])))
       (easy-menu-define
        gnus-summary-article-menu gnus-summary-mode-map ""
@@ -2104,6 +2112,7 @@ The following commands are available:
   (make-local-hook 'pre-command-hook)
   (add-hook 'pre-command-hook 'gnus-set-global-variables nil t)
   (gnus-run-hooks 'gnus-summary-mode-hook)
+  (turn-on-gnus-mailing-list-mode)
   (mm-enable-multibyte-mule4)
   (gnus-update-format-specifications nil 'summary 'summary-mode 'summary-dummy)
   (gnus-update-summary-mark-positions))
@@ -2664,9 +2673,8 @@ buffer that was in action when the last article was fetched."
 	  (cond
 	   ((string-match "<[^>]+> *$" gnus-tmp-from)
 	    (let ((beg (match-beginning 0)))
-	      (or (and (string-match "^\"[^\"]*\"" gnus-tmp-from)
-		       (substring gnus-tmp-from (1+ (match-beginning 0))
-				  (1- (match-end 0))))
+	      (or (and (string-match "^\".+\"" gnus-tmp-from)
+		       (substring gnus-tmp-from 1 (1- (match-end 0))))
 		  (substring gnus-tmp-from 0 beg))))
 	   ((string-match "(.+)" gnus-tmp-from)
 	    (substring gnus-tmp-from
@@ -4033,9 +4041,8 @@ or a straight list of headers."
 	     (cond
 	      ((string-match "<[^>]+> *$" gnus-tmp-from)
 	       (setq beg-match (match-beginning 0))
-	       (or (and (string-match "^\"[^\"]*\"" gnus-tmp-from)
-			(substring gnus-tmp-from (1+ (match-beginning 0))
-				   (1- (match-end 0))))
+	       (or (and (string-match "^\".+\"" gnus-tmp-from)
+			(substring gnus-tmp-from 1 (1- (match-end 0))))
 		   (substring gnus-tmp-from 0 beg-match)))
 	      ((string-match "(.+)" gnus-tmp-from)
 	       (substring gnus-tmp-from
@@ -4140,7 +4147,7 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 	(progn				; Or we bug out.
 	  (when (equal major-mode 'gnus-summary-mode)
 	    (kill-buffer (current-buffer)))
-	  (error "Couldn't request group %s: %s"
+	  (error "Couldn't activate group %s: %s"
 		 group (gnus-status-message group))))
 
     (unless (gnus-request-group group t)
@@ -6330,7 +6337,7 @@ articles that are younger than AGE days."
      (while (not days-got)
        (setq days (if younger
 		      (read-string "Limit to articles within (in days): ")
-		    (read-string "Limit to articles old than (in days): ")))
+		    (read-string "Limit to articles older than (in days): ")))
        (when (> (length days) 0)
 	 (setq days (read days)))
        (if (numberp days)
@@ -7257,7 +7264,26 @@ without any article massaging functions being run."
 	   (or (cdr (assq arg gnus-summary-show-article-charset-alist))
 	       (read-coding-system "Charset: ")))
 	  (gnus-newsgroup-ignored-charsets 'gnus-all))
-      (gnus-summary-select-article nil 'force)))
+      (gnus-summary-select-article nil 'force)
+      (let ((deps gnus-newsgroup-dependencies)
+	    head header)
+	(save-excursion
+	  (set-buffer gnus-original-article-buffer)
+	  (save-restriction
+	    (message-narrow-to-head)
+	    (setq head (buffer-string)))
+	  (with-temp-buffer
+	    (insert (format "211 %d Article retrieved.\n"
+			    (cdr gnus-article-current)))
+	    (insert head)
+	    (insert ".\n")
+	    (let ((nntp-server-buffer (current-buffer)))
+	      (setq header (car (gnus-get-newsgroup-headers deps t))))))
+	(gnus-data-set-header
+	 (gnus-data-find (cdr gnus-article-current))
+	 header)
+	(gnus-summary-update-article-line
+	 (cdr gnus-article-current) header))))
    ((not arg)
     ;; Select the article the normal way.
     (gnus-summary-select-article nil 'force))
@@ -7846,9 +7872,9 @@ groups."
 		 (setq mml-buffer-list nil)
 		 (mime-to-mml)
 		 (make-local-hook 'kill-buffer-hook)
-		 (let ((mml-buffer-list mml-buffer-list))
+		 (let ((mbl1 mml-buffer-list))
 		   (setq mml-buffer-list mbl)
-		   (make-local-variable 'mml-buffer-list))
+		   (set (make-local-variable 'mml-buffer-list) mbl1))
 		 (add-hook 'kill-buffer-hook 'mml-destroy-buffers t t))))
 	 `(lambda (no-highlight)
 	    (let ((mail-parse-charset ',gnus-newsgroup-charset)
@@ -7871,10 +7897,31 @@ groups."
 						 no-highlight)
   "Make edits to the current article permanent."
   (interactive)
+  (save-excursion
+    ;; The buffer restriction contains the entire article if it exists.
+    (when (article-goto-body)
+      (let ((lines (count-lines (point) (point-max)))
+	    (length (- (point-max) (point)))
+	    (case-fold-search t)
+	    (body (copy-marker (point))))
+	(goto-char (point-min))
+	(when (re-search-forward "^content-length:[ \t]\\([0-9]+\\)" body t)
+	  (delete-region (match-beginning 1) (match-end 1))
+	  (insert (number-to-string length)))
+	(goto-char (point-min))
+	(when (re-search-forward
+	       "^x-content-length:[ \t]\\([0-9]+\\)" body t)
+	  (delete-region (match-beginning 1) (match-end 1))
+	  (insert (number-to-string length)))
+	(goto-char (point-min))
+	(when (re-search-forward "^lines:[ \t]\\([0-9]+\\)" body t)
+	  (delete-region (match-beginning 1) (match-end 1))
+	  (insert (number-to-string lines))))))
   ;; Replace the article.
   (let ((buf (current-buffer)))
     (with-temp-buffer
       (insert-buffer-substring buf)
+      
       (if (and (not read-only)
 	       (not (gnus-request-replace-article
 		     (cdr gnus-article-current) (car gnus-article-current)
@@ -9053,6 +9100,7 @@ If N is a negative number, pipe the N previous articles.
 If N is nil and any articles have been marked with the process mark,
 pipe those articles instead."
   (interactive "P")
+  (require 'gnus-art)
   (let ((gnus-default-article-saver 'gnus-summary-save-in-pipe))
     (gnus-summary-save-article arg t))
   (gnus-configure-windows 'pipe))
@@ -9064,6 +9112,7 @@ If N is a negative number, save the N previous articles.
 If N is nil and any articles have been marked with the process mark,
 save those articles instead."
   (interactive "P")
+  (require 'gnus-art)
   (let ((gnus-default-article-saver 'gnus-summary-save-in-mail))
     (gnus-summary-save-article arg)))
 
@@ -9074,6 +9123,7 @@ If N is a negative number, save the N previous articles.
 If N is nil and any articles have been marked with the process mark,
 save those articles instead."
   (interactive "P")
+  (require 'gnus-art)
   (let ((gnus-default-article-saver 'gnus-summary-save-in-rmail))
     (gnus-summary-save-article arg)))
 
@@ -9084,6 +9134,7 @@ If N is a negative number, save the N previous articles.
 If N is nil and any articles have been marked with the process mark,
 save those articles instead."
   (interactive "P")
+  (require 'gnus-art)
   (let ((gnus-default-article-saver 'gnus-summary-save-in-file))
     (gnus-summary-save-article arg)))
 
@@ -9094,6 +9145,7 @@ If N is a negative number, save the N previous articles.
 If N is nil and any articles have been marked with the process mark,
 save those articles instead."
   (interactive "P")
+  (require 'gnus-art)
   (let ((gnus-default-article-saver 'gnus-summary-write-to-file))
     (gnus-summary-save-article arg)))
 
@@ -9104,6 +9156,7 @@ If N is a negative number, save the N previous articles.
 If N is nil and any articles have been marked with the process mark,
 save those articles instead."
   (interactive "P")
+  (require 'gnus-art)
   (let ((gnus-default-article-saver 'gnus-summary-save-body-in-file))
     (gnus-summary-save-article arg)))
 
@@ -9658,17 +9711,17 @@ treated as multipart/mixed."
   (interactive (list (gnus-summary-article-number)))
   (gnus-with-article article
     (message-narrow-to-head)
+    (message-remove-header "Mime-Version")
     (goto-char (point-max))
+    (insert "Mime-Version: 1.0\n")
     (widen)
     (when (search-forward "\n--" nil t)
       (let ((separator (buffer-substring (point) (gnus-point-at-eol))))
 	(message-narrow-to-head)
-	(message-remove-header "Mime-Version")
 	(message-remove-header "Content-Type")
 	(goto-char (point-max))
 	(insert (format "Content-Type: multipart/mixed; boundary=\"%s\"\n"
 			separator))
-	(insert "Mime-Version: 1.0\n")
 	(widen))))
   (let (gnus-mark-article-hook)
     (gnus-summary-select-article t t nil article)))

@@ -32,6 +32,7 @@
 (eval-and-compile
   (autoload 'message-make-message-id "message")
   (autoload 'gnus-setup-posting-charset "gnus-msg")
+  (autoload 'gnus-add-minor-mode "gnus-ems")
   (autoload 'message-fetch-field "message")
   (autoload 'message-posting-charset "message"))
 
@@ -227,7 +228,7 @@ The function is called with one parameter, which is the generated part.")
     (setq name (buffer-substring-no-properties
 		(point) (progn (forward-sexp 1) (point))))
     (skip-chars-forward " \t\n")
-    (while (not (looking-at ">"))
+    (while (not (looking-at ">[ \t]*\n?"))
       (setq elem (buffer-substring-no-properties
 		  (point) (progn (forward-sexp 1) (point))))
       (skip-chars-forward "= \t\n")
@@ -237,8 +238,9 @@ The function is called with one parameter, which is the generated part.")
 	(setq val (match-string 1 val)))
       (push (cons (intern elem) val) contents)
       (skip-chars-forward " \t\n"))
-    (forward-char 1)
-    (skip-chars-forward " \t\n")
+    (goto-char (match-end 0))
+    ;; Don't skip the leading space.
+    ;;(skip-chars-forward " \t\n")
     (cons (intern name) (nreverse contents))))
 
 (defun mml-read-part (&optional mml)
@@ -665,17 +667,12 @@ If MML is non-nil, return the buffer up till the correspondent mml tag."
 
 \\{mml-mode-map}"
   (interactive "P")
-  (if (not (set (make-local-variable 'mml-mode)
-		(if (null arg) (not mml-mode)
-		  (> (prefix-numeric-value arg) 0))))
-      nil
-    (set (make-local-variable 'mml-mode) t)
-    (unless (assq 'mml-mode minor-mode-alist)
-      (push `(mml-mode " MML") minor-mode-alist))
-    (unless (assq 'mml-mode minor-mode-map-alist)
-      (push (cons 'mml-mode mml-mode-map)
-	    minor-mode-map-alist)))
-  (run-hooks 'mml-mode-hook))
+  (when (set (make-local-variable 'mml-mode)
+	     (if (null arg) (not mml-mode)
+	       (> (prefix-numeric-value arg) 0)))
+    (gnus-add-minor-mode 'mml-mode " MML" mml-mode-map)
+    (easy-menu-add mml-menu mml-mode-map)
+    (run-hooks 'mml-mode-hook)))
 
 ;;;
 ;;; Helper functions for reading MIME stuff from the minibuffer and

@@ -170,7 +170,9 @@ If this is `ask' the hook will query the user."
 
 (defun gnus-agent-lib-file (file)
   "The full path of the Gnus agent library FILE."
-  (concat (gnus-agent-directory) "agent.lib/" file))
+  (expand-file-name file
+		    (file-name-as-directory
+		     (expand-file-name "agent.lib" (gnus-agent-directory)))))
 
 ;;; Fetching setup functions.
 
@@ -366,7 +368,7 @@ agent minor mode in all Gnus buffers."
 
 (defun gnus-agent-insert-meta-information (type &optional method)
   "Insert meta-information into the message that says how it's to be posted.
-TYPE can be either `mail' or `news'.  If the latter METHOD can
+TYPE can be either `mail' or `news'.  If the latter, then METHOD can
 be a select method."
   (save-excursion
     (message-remove-header gnus-agent-meta-information-header)
@@ -933,29 +935,13 @@ the actual number of articles toggled is returned."
 	(insert "\n"))
       (pop gnus-agent-group-alist))))
 
-(if (fboundp 'union)
-    (defalias 'gnus-agent-union 'union)
-  (defun gnus-agent-union (l1 l2)
-    "Set union of lists L1 and L2."
-    (cond ((null l1) l2)
-	  ((null l2) l1)
-	  ((equal l1 l2) l1)
-	  (t
-	   (or (>= (length l1) (length l2))
-	       (setq l1 (prog1 l2 (setq l2 l1))))
-	   (while l2
-	     (or (memq (car l2) l1)
-		 (push (car l2) l1))
-	     (pop l2))
-	   l1))))
-
 (defun gnus-agent-fetch-headers (group &optional force)
   (let ((articles (gnus-list-of-unread-articles group))
 	(gnus-decode-encoded-word-function 'identity)
 	(file (gnus-agent-article-name ".overview" group)))
     ;; Add article with marks to list of article headers we want to fetch.
     (dolist (arts (gnus-info-marks (gnus-get-info group)))
-      (setq articles (gnus-agent-union (gnus-uncompress-sequence (cdr arts))
+      (setq articles (gnus-union (gnus-uncompress-sequence (cdr arts))
 			    articles)))
     (setq articles (sort articles '<))
     ;; Remove known articles.
@@ -1042,14 +1028,14 @@ the actual number of articles toggled is returned."
   (setq gnus-agent-article-alist
 	(gnus-agent-read-file
 	 (if dir
-	     (concat dir ".agentview")
+	     (expand-file-name ".agentview" dir)
 	   (gnus-agent-article-name ".agentview" group)))))
 
 (defun gnus-agent-save-alist (group &optional articles state dir)
   "Save the article-state alist for GROUP."
   (let ((file-name-coding-system nnmail-pathname-coding-system))
       (with-temp-file (if dir
-			  (concat dir ".agentview")
+			  (expand-file-name ".agentview" dir)
 			(gnus-agent-article-name ".agentview" group))
 	(princ (setq gnus-agent-article-alist
 		     (nconc gnus-agent-article-alist
@@ -1059,8 +1045,10 @@ the actual number of articles toggled is returned."
 	(insert "\n"))))
 
 (defun gnus-agent-article-name (article group)
-  (concat (gnus-agent-directory) (gnus-agent-group-path group) "/"
-	  (if (stringp article) article (string-to-number article))))
+  (expand-file-name (if (stringp article) article (string-to-number article))
+		    (file-name-as-directory
+		     (expand-file-name (gnus-agent-group-path group)
+				       (gnus-agent-directory)))))
 
 (defun gnus-agent-batch-confirmation (msg)
   "Show error message and return t."
@@ -1540,7 +1528,17 @@ The following commands are available:
 	      (goto-char (point-min))
 	      (while (not (eobp))
 		(skip-chars-forward "^\t")
-		(if (> (read (current-buffer)) day)
+		(if (let ((fetch-date (read (current-buffer))))
+		      (if (numberp fetch-date)
+			  (>  fetch-date day)
+			;; History file is corrupted.
+			(gnus-message 
+			 5 
+			 (format "File %s is corrupted!"
+				 (gnus-agent-lib-file "history")))
+			(sit-for 1)
+			;; Ignore it
+			t))
 		    ;; New article; we don't expire it.
 		    (forward-line 1)
 		  ;; Old article.  Schedule it for possible nuking.

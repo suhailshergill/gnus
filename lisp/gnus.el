@@ -273,6 +273,12 @@ be set in `.emacs' instead."
   :group 'gnus-start
   :type 'boolean)
 
+(unless (fboundp 'gnus-group-remove-excess-properties)
+  (defalias 'gnus-group-remove-excess-properties 'ignore))
+
+(unless (fboundp 'gnus-set-text-properties)
+  (defalias 'gnus-set-text-properties 'set-text-properties))
+
 (unless (featurep 'gnus-xmas)
   (defalias 'gnus-make-overlay 'make-overlay)
   (defalias 'gnus-delete-overlay 'delete-overlay)
@@ -283,8 +289,6 @@ be set in `.emacs' instead."
   (defalias 'gnus-overlay-end 'overlay-end)
   (defalias 'gnus-extent-detached-p 'ignore)
   (defalias 'gnus-extent-start-open 'ignore)
-  (defalias 'gnus-set-text-properties 'set-text-properties)
-  (defalias 'gnus-group-remove-excess-properties 'ignore)
   (defalias 'gnus-appt-select-lowest-window 'appt-select-lowest-window)
   (defalias 'gnus-mail-strip-quoted-names 'mail-strip-quoted-names)
   (defalias 'gnus-character-to-event 'identity)
@@ -303,9 +307,9 @@ be set in `.emacs' instead."
 				(setq gnus-mode-line-image-cache
 				      (find-image
 				       '((:type xpm :file "gnus-pointer.xpm"
-						:ascent 80)
+						:ascent center)
 					 (:type xbm :file "gnus-pointer.xbm"
-						:ascent 80))))
+						:ascent center))))
 			      gnus-mode-line-image-cache)
 			    'help-echo "This is Gnus")
 		      str)
@@ -316,7 +320,8 @@ be set in `.emacs' instead."
   (defalias 'gnus-deactivate-mark 'deactivate-mark)
   (defalias 'gnus-window-edges 'window-edges)
   (defalias 'gnus-key-press-event-p 'numberp)
-  (defalias 'gnus-decode-rfc1522 'ignore))
+  ;;(defalias 'gnus-decode-rfc1522 'ignore)
+  )
 
 ;; We define these group faces here to avoid the display
 ;; update forced when creating new faces.
@@ -774,6 +779,10 @@ be set in `.emacs' instead."
      (display-graphic-p)
      (let ((image (find-image
 		   `((:type xpm :file "gnus.xpm")
+		     (:type pbm :file "gnus.pbm"
+			    ;; Account for the pbm's blackground.
+			    :background ,(face-foreground 'gnus-splash-face)
+			    :foreground ,(face-background 'default))
 		     (:type xbm :file "gnus.xbm"
 			    ;; Account for the xbm's blackground.
 			    :background ,(face-foreground 'gnus-splash-face)
@@ -1285,6 +1294,7 @@ slower."
     ("nnweb" none)
     ("nnslashdot" post)
     ("nnultimate" none)
+    ("nnwfm" none)
     ("nnwarchive" none)
     ("nnlistserv" none)
     ("nnagent" post-mail)
@@ -1327,8 +1337,7 @@ this variable.	I think."
 		    :inline t
 		    (list :format "%v"
 			  variable
-			  (sexp :tag "Value"))))
-    ))
+			  (sexp :tag "Value"))))))
 
 (gnus-redefine-select-method-widget)
 
@@ -1671,10 +1680,9 @@ gnus-newsrc-hashtb should be kept so that both hold the same information.")
 	    (nthcdr 3 package)
 	  (cdr package)))))
    '(("info" :interactive t Info-goto-node)
-     ("pp" pp pp-to-string pp-eval-expression)
+     ("pp" pp-to-string)
      ("qp" quoted-printable-decode-region quoted-printable-decode-string)
      ("ps-print" ps-print-preprint)
-     ("browse-url" :interactive t browse-url)
      ("message" :interactive t
       message-send-and-exit message-yank-original)
      ("babel" babel-as-string)

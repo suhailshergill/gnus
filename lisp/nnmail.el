@@ -181,7 +181,8 @@ The return value should be `delete' or a group name (a string)."
 		   string))
 
 (defcustom nnmail-cache-accepted-message-ids nil
-  "If non-nil, put Message-IDs of Gcc'd articles into the duplicate cache."
+  "If non-nil, put Message-IDs of Gcc'd articles into the duplicate cache.
+If non-nil, also update the cache when copy or move articles."
   :group 'nnmail
   :type 'boolean)
 
@@ -462,7 +463,7 @@ parameter.  It should return nil, `warn' or `delete'."
   mm-text-coding-system
   "Coding system used in reading inbox")
 
-(defvar nnmail-pathname-coding-system 'binary
+(defvar nnmail-pathname-coding-system 'iso-8859-1
   "*Coding system for pathname.")
 
 (defun nnmail-find-file (file)

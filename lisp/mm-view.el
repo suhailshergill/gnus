@@ -119,7 +119,9 @@
 		      (url-standalone-mode t))
 		  (condition-case var
 		      (w3-region (point-min) (point-max))
-		    (error)))))
+		    (error
+		     (message
+		      "Error while rendering html; showing as text/plain"))))))
 	    (mm-handle-set-undisplayer
 	     handle
 	     `(lambda ()
@@ -158,7 +160,10 @@
 		;; This is probably not entirely correct, but
 		;; makes rfc822 parts with embedded multiparts work. 
 		(eq mail-parse-charset 'gnus-decoded))
-	    (mm-insert-part handle)
+	    (save-restriction
+	      (narrow-to-region (point) (point))
+	      (mm-insert-part handle)
+	      (goto-char (point-max)))
 	  (insert (mm-decode-string (mm-get-part handle) charset)))
 	(when (and (equal type "plain")
 		   (equal (cdr (assoc 'format (mm-handle-type handle)))
