@@ -158,6 +158,7 @@
 
 (defgroup imap nil
   "Low-level IMAP issues."
+  :version "21.1"
   :group 'mail)
 
 (defcustom imap-kerberos4-program '("imtest -m kerberos_v4 -u %l -p %p %s"
