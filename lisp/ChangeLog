@@ -1,3 +1,8 @@
+2005-03-15  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* nnmaildir.el (nnmaildir-request-accept-article): Use
+	`nnheader-cancel-timer' for compatibility with current XEmacs.
+
 2005-03-13  Steve Youngs  <steve@sxemacs.org>
 
 	* lisp/gnus.el: Don't try and mark `gnus-agent-save-groups' as an
