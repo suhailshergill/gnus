@@ -83,6 +83,16 @@
 @c %**end of header~%\
 " titel)))
 
+;; Inserted right before the end of the file
+(define +tag-for-gnus-faq-texi+
+    (format "\
+~%\
+@ignore~%\
+arch-\
+tag: 64dc5692-edb4-4848-a965-7aa0181acbb8~%\
+@end ignore~%\
+"))
+
 ;;; Little Helpers
 ;; (a b c) -> (1 2 3)
 (define (number-list start inc lst)
@@ -288,7 +298,8 @@
 ;;; Now to the tags of our FAQ
 ;;; ************************************************************
                (article . ,(lambda (tag . sects)
-                             (cons (boilerplate up1) sects)))
+                             (list (boilerplate up1) sects 
+                                   +tag-for-gnus-faq-texi+)))
 
                (articleinfo
                 ((*default* . ,(lambda _ '()))
