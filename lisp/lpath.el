@@ -31,8 +31,8 @@
 (if (featurep 'xemacs)
     (progn
       (maybe-fbind '(delete-overlay
-		     event-click-count event-end event-start
-		     find-coding-systems-for-charsets
+		     detect-coding-string event-click-count event-end
+		     event-start find-coding-systems-for-charsets
 		     find-coding-systems-region find-coding-systems-string
 		     mail-abbrevs-setup mouse-minibuffer-check
 		     mouse-movement-p mouse-scroll-subr overlay-lists
