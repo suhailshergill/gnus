@@ -22,7 +22,7 @@
 	<irie@t.email.ne.jp>; treat backslash-quoted characters as
 	non-special; check carefully whether to encode special characters;
 	fix some kind of misconfigured headers; signal a real error if
-	debug-on-quit or debug-on-error is non-nil;d on't infloop,
+	debug-on-quit or debug-on-error is non-nil; don't infloop,
 	suggested by Hiroshi Fujishima <pooh@nature.tsukuba.ac.jp>; assume
 	the close parenthesis may be included in the encoded word; encode
 	bogus delimiters.
@@ -84,11 +84,11 @@
 	`gnus-group-read-ephemeral-group'.
 
 	* gnus-group.el (gnus-group-read-ephemeral-group): Add NUMBER
-	argument pass it to `gnus-group-read-group'.
+	argument and pass it to `gnus-group-read-group'.
 
 2005-03-19  Aidan Kehoe  <kehoea@parhasard.net>
 
-	* lisp/mm-util.el (mm-xemacs-find-mime-charset): Only call
+	* mm-util.el (mm-xemacs-find-mime-charset): Only call
 	mm-xemacs-find-mime-charset-1 if we have the mule feature
 	available at runtime.
 
