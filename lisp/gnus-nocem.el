@@ -3,6 +3,7 @@
 ;; Copyright (C) 1995, 1996, 1997, 1998, 1999, 2000 Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
+;; Maintainer: bugs@gnus.org
 ;; Keywords: news
 
 ;; This file is part of GNU Emacs.
@@ -86,7 +87,7 @@ matches an previously scanned and verified nocem message."
   :group 'gnus-nocem
   :type 'boolean)
 
-(defcustom gnus-nocem-check-article-limit nil
+(defcustom gnus-nocem-check-article-limit 500
   "*If non-nil, the maximum number of articles to check in any NoCeM group."
   :group 'gnus-nocem
   :version "21.1"
