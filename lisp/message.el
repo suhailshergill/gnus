@@ -1,9 +1,8 @@
-;;; message.el --- composing mail and news messages
+;;; message.el --- composing mail and news messages  -*- coding: iso-latin-1 -*-
 ;; Copyright (C) 1996, 1997, 1998, 1999, 2000
 ;;        Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
-;; Maintainer: bugs@gnus.org
 ;; Keywords: mail, news
 
 ;; This file is part of GNU Emacs.
@@ -260,7 +259,8 @@ should return the new buffer name."
   :group 'message-buffers
   :type 'boolean)
 
-(defvar gnus-local-organization)
+(eval-when-compile
+  (defvar gnus-local-organization))
 (defcustom message-user-organization
   (or (and (boundp 'gnus-local-organization)
 	   (stringp gnus-local-organization)
@@ -297,6 +297,7 @@ The provided functions are:
 
 (defcustom message-forward-as-mime t
   "*If non-nil, forward messages as an inline/rfc822 MIME section.  Otherwise, directly inline the old message in the forwarded message."
+  :version "21.1"
   :group 'message-forwarding
   :type 'boolean)
 
@@ -322,6 +323,7 @@ The provided functions are:
 
 (defcustom message-forward-ignored-headers "^Content-Transfer-Encoding:\\|^X-Gnus"
   "*All headers that match this regexp will be deleted when forwarding a message."
+  :version "21.1"
   :group 'message-forwarding
   :type '(choice (const :tag "None" nil)
 		 regexp))
@@ -421,8 +423,9 @@ might set this variable to '(\"-f\" \"you@some.where\")."
 Folding `References' makes ancient versions of INN create incorrect
 NOV lines.")
 
-(defvar gnus-post-method)
-(defvar gnus-select-method)
+(eval-when-compile
+  (defvar gnus-post-method)
+  (defvar gnus-select-method))
 (defcustom message-post-method
   (cond ((and (boundp 'gnus-post-method)
 	      (listp gnus-post-method)
@@ -661,6 +664,7 @@ If nil, Message won't auto-save."
 (defcustom message-buffer-naming-style 'unique
   "*The way new message buffers are named.
 Valid valued are `unique' and `unsent'."
+  :version "21.1"
   :group 'message-buffers
   :type '(choice (const :tag "unique" unique)
 		 (const :tag "unsent" unsent)))
@@ -669,6 +673,7 @@ Valid valued are `unique' and `unsent'."
   (and (not (mm-multibyte-p)) 'iso-8859-1)
   "Default charset used in non-MULE Emacsen.
 If nil, you might be asked to input the charset."
+  :version "21.1"
   :group 'message
   :type 'symbol)
 
@@ -676,6 +681,7 @@ If nil, you might be asked to input the charset."
   (and (boundp 'rmail-dont-reply-to-names) rmail-dont-reply-to-names)
   "*A regexp specifying names to prune when doing wide replies.
 A value of nil means exclude your own name only."
+  :version "21.1"
   :group 'message
   :type '(choice (const :tag "Yourself" nil)
 		 regexp))
@@ -820,9 +826,9 @@ Defaults to `text-mode-abbrev-table'.")
   :group 'message-faces)
 
 (defvar message-font-lock-keywords
-  (let* ((cite-prefix "A-Za-z")
+  (let* ((cite-prefix "[:alpha:]")
 	 (cite-suffix (concat cite-prefix "0-9_.@-"))
-	 (content "[ \t]*\\(.+\\(\n[ \t].*\\)*\\)"))
+	 (content "[ \t]*\\(.+\\(\n[ \t].*\\)*\\)\n?"))
     `((,(concat "^\\([Tt]o:\\)" content)
        (1 'message-header-name-face)
        (2 'message-header-to-face nil t))
@@ -899,6 +905,7 @@ The cdr of ech entry is a function for applying the face to a region.")
   "The limitation of messages sent as message/partial.
 The lower bound of message size in characters, beyond which the message 
 should be sent in several parts. If it is nil, the size is unlimited."
+  :version "21.1"
   :group 'message-buffers
   :type '(choice (const :tag "unlimited" nil)
 		 (integer 1000000)))
@@ -921,8 +928,9 @@ The first matched address (not primary one) is used in the From field."
 (defvar message-posting-charset nil)
 
 ;; Byte-compiler warning
-(defvar gnus-active-hashtb)
-(defvar gnus-read-active-file)
+(eval-when-compile
+  (defvar gnus-active-hashtb)
+  (defvar gnus-read-active-file))
 
 ;;; Regexp matching the delimiter of messages in UNIX mail format
 ;;; (UNIX From lines), minus the initial ^.  It should be a copy
@@ -1423,8 +1431,9 @@ Point is left at the beginning of the narrowed-to region."
    ["Body" message-goto-body t]
    ["Signature" message-goto-signature t]))
 
-(defvar facemenu-add-face-function)
-(defvar facemenu-remove-face-function)
+(eval-when-compile
+  (defvar facemenu-add-face-function)
+  (defvar facemenu-remove-face-function))
 
 ;;;###autoload
 (defun message-mode ()
@@ -1479,20 +1488,6 @@ M-RET    message-newline-and-reformat (break the line and reformat)."
 	      (error "Face %s not configured for %s mode" face mode-name)))
 	  "")
 	facemenu-remove-face-function t)
-  (make-local-variable 'paragraph-separate)
-  (make-local-variable 'paragraph-start)
-  ;; `-- ' precedes the signature.  `-----' appears at the start of the
-  ;; lines that delimit forwarded messages.
-  ;; Lines containing just >= 3 dashes, perhaps after whitespace,
-  ;; are also sometimes used and should be separators.
-  (setq paragraph-start
-	(concat (regexp-quote mail-header-separator)
-		"$\\|[ \t]*[a-z0-9A-Z]*>+[ \t]*$\\|[ \t]*$\\|"
-		"-- $\\|---+$\\|"
-		page-delimiter
-		;;!!! Uhm... shurely this can't be right?
-		"[> " (regexp-quote message-yank-prefix) "]+$"))
-  (setq paragraph-separate paragraph-start)
   (make-local-variable 'message-reply-headers)
   (setq message-reply-headers nil)
   (make-local-variable 'message-newsreader)
@@ -1501,6 +1496,7 @@ M-RET    message-newline-and-reformat (break the line and reformat)."
   (set (make-local-variable 'message-sent-message-via) nil)
   (set (make-local-variable 'message-checksum) nil)
   (set (make-local-variable 'message-mime-part) 0)
+  (message-setup-fill-variables)
   ;;(when (fboundp 'mail-hist-define-keys)
   ;;  (mail-hist-define-keys))
   (if (featurep 'xemacs)
@@ -1517,22 +1513,44 @@ M-RET    message-newline-and-reformat (break the line and reformat)."
 	(mail-abbrevs-setup)
       (mail-aliases-setup)))
   (message-set-auto-save-file-name)
-  (make-local-variable 'adaptive-fill-regexp)
-  (setq adaptive-fill-regexp
-	(concat "[ \t]*[-a-z0-9A-Z]*\\(>[ \t]*\\)+[ \t]*\\|" adaptive-fill-regexp))
-  (unless (boundp 'adaptive-fill-first-line-regexp)
-    (setq adaptive-fill-first-line-regexp nil))
-  (make-local-variable 'adaptive-fill-first-line-regexp)
-  (setq adaptive-fill-first-line-regexp
-	(concat "[ \t]*[-a-z0-9A-Z]*\\(>[ \t]*\\)+[ \t]*\\|"
-		adaptive-fill-first-line-regexp))
-  (make-local-variable 'auto-fill-inhibit-regexp)
-  (setq auto-fill-inhibit-regexp "^[A-Z][^: \n\t]+:")
   (mm-enable-multibyte)
   (make-local-variable 'indent-tabs-mode) ;Turn off tabs for indentation.
   (setq indent-tabs-mode nil)
   (mml-mode)
   (run-hooks 'text-mode-hook 'message-mode-hook))
+
+(defun message-setup-fill-variables ()
+  "Setup message fill variables."
+  (make-local-variable 'paragraph-separate)
+  (make-local-variable 'paragraph-start)
+  (make-local-variable 'adaptive-fill-regexp)
+  (unless (boundp 'adaptive-fill-first-line-regexp)
+    (setq adaptive-fill-first-line-regexp nil))
+  (make-local-variable 'adaptive-fill-first-line-regexp)
+  (make-local-variable 'auto-fill-inhibit-regexp)
+  (let ((quote-prefix-regexp
+         (concat
+          "[ \t]*"                      ; possible initial space
+          "\\(\\(" (regexp-quote message-yank-prefix) "\\|" ; user's prefix
+          "\\w+>\\|"                    ; supercite-style prefix
+          "[|:>]"                       ; standard prefix
+          "\\)[ \t]*\\)+")))            ; possible space after each prefix
+    (setq paragraph-start
+          (concat
+           (regexp-quote mail-header-separator) "$\\|"
+           "[ \t]*$\\|"                 ; blank lines
+           "-- $\\|"                    ; signature delimiter
+           "---+$\\|"                   ; delimiters for forwarded messages
+           page-delimiter "$\\|"        ; spoiler warnings
+           ".*wrote:$\\|"               ; attribution lines
+           quote-prefix-regexp "$"))    ; empty lines in quoted text
+    (setq paragraph-separate paragraph-start)
+    (setq adaptive-fill-regexp
+          (concat quote-prefix-regexp "\\|" adaptive-fill-regexp))
+    (setq adaptive-fill-first-line-regexp
+          (concat quote-prefix-regexp "\\|"
+                  adaptive-fill-first-line-regexp))
+    (setq auto-fill-inhibit-regexp "^[A-Z][^: \n\t]+:")))
 
 
 
@@ -1705,8 +1723,9 @@ With the prefix argument FORCE, insert the header anyway."
 (defun message-newline-and-reformat ()
   "Insert four newlines, and then reformat if inside quoted text."
   (interactive)
+  ;; The Latin-1 angle quote looks pretty dubious.  -- fx
   (let ((prefix "[]>»|:}+ \t]*")
-	(supercite-thing "[-._a-zA-Z0-9]*[>]+[ \t]*")
+	(supercite-thing "[-._[:alnum:]]*[>]+[ \t]*")
 	quoted point)
     (unless (bolp)
       (save-excursion
@@ -1977,7 +1996,7 @@ prefix, and don't delete any headers."
 	(insert "\n"))
       (funcall message-citation-line-function))))
 
-(defvar mail-citation-hook)		;Compiler directive
+(eval-when-compile (defvar mail-citation-hook))		;Compiler directive
 (defun message-cite-original ()
   "Cite function in the standard Message manner."
   (if (and (boundp 'mail-citation-hook)
@@ -3538,7 +3557,7 @@ than 988 characters long, and if they are not, trim them until they are."
     (setq message-buffer-list
 	  (nconc message-buffer-list (list (current-buffer))))))
 
-(defvar mc-modes-alist)
+(eval-when-compile (defvar mc-modes-alist))
 (defun message-setup (headers &optional replybuffer actions)
   (when (and (boundp 'mc-modes-alist)
 	     (not (assq 'message-mode mc-modes-alist)))
@@ -4323,6 +4342,7 @@ which specify the range to operate on."
 (defalias 'message-exchange-point-and-mark 'exchange-point-and-mark)
 
 ;; Support for toolbar
+(eval-when-compile (defvar tool-bar-map))
 (if (featurep 'xemacs)
     (require 'messagexmas)
   (when (and (fboundp 'tool-bar-add-item-from-menu)
@@ -4361,7 +4381,6 @@ Do a `tab-to-tab-stop' if not in those headers."
       (message-expand-group)
     (tab-to-tab-stop)))
 
-(defvar gnus-active-hashtb)
 (defun message-expand-group ()
   "Expand the group name under point."
   (let* ((b (save-excursion
