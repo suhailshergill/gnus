@@ -2382,16 +2382,17 @@ If READ-CHARSET, ask for a coding system."
   (mm-setup-w3m)
   (save-restriction
     (narrow-to-region (point) (point-max))
-    (let ((w3m-safe-url-regexp (if mm-inline-text-html-with-images
-				   nil
-				 "\\`cid:"))
+    (let ((w3m-safe-url-regexp mm-w3m-safe-url-regexp)
 	  w3m-force-redisplay)
       (w3m-region (point-min) (point-max)))
-    (when mm-inline-text-html-with-w3m-keymap
+    (when (and mm-inline-text-html-with-w3m-keymap
+	       (boundp 'w3m-minor-mode-map)
+	       w3m-minor-mode-map)
       (add-text-properties
        (point-min) (point-max)
-       (nconc (mm-w3m-local-map-property)
-	      '(mm-inline-text-html-with-w3m t))))))
+       (list 'keymap w3m-minor-mode-map
+	     ;; Put the mark meaning this part was rendered by emacs-w3m.
+	     'mm-inline-text-html-with-w3m t)))))
 
 (defun article-hide-list-identifiers ()
   "Remove list identifies from the Subject header.
@@ -3942,72 +3943,81 @@ General format specifiers can also be used.  See Info node
   "Save the MIME part under point then replace it with an external body."
   (interactive)
   (gnus-article-check-buffer)
-  (let* ((data (get-text-property (point) 'gnus-data))
-	 file param
-	 (handles gnus-article-mime-handles))
-    (if (mm-multiple-handles gnus-article-mime-handles)
-	(error "This function is not implemented"))
-    (setq file (and data (mm-save-part data)))
-    (when file
-      (with-current-buffer (mm-handle-buffer data)
-	(erase-buffer)
-	(insert "Content-Type: " (mm-handle-media-type data))
-	(mml-insert-parameter-string (cdr (mm-handle-type data))
-				     '(charset))
-	(insert "\n")
-	(insert "Content-ID: " (message-make-message-id) "\n")
-	(insert "Content-Transfer-Encoding: binary\n")
-	(insert "\n"))
-      (setcdr data
-	      (cdr (mm-make-handle nil
-				   `("message/external-body"
-				     (access-type . "LOCAL-FILE")
-				     (name . ,file)))))
-      (set-buffer gnus-summary-buffer)
-      (gnus-article-edit-article
-       `(lambda ()
-	   (erase-buffer)
-	   (let ((mail-parse-charset (or gnus-article-charset
-					 ',gnus-newsgroup-charset))
-		 (mail-parse-ignored-charsets
-		  (or gnus-article-ignored-charsets
-		      ',gnus-newsgroup-ignored-charsets))
-		 (mbl mml-buffer-list))
-	     (setq mml-buffer-list nil)
-	     (insert-buffer gnus-original-article-buffer)
-	     (mime-to-mml ',handles)
-	     (setq gnus-article-mime-handles nil)
-	     (let ((mbl1 mml-buffer-list))
-	       (setq mml-buffer-list mbl)
-	       (set (make-local-variable 'mml-buffer-list) mbl1))
-	     (gnus-make-local-hook 'kill-buffer-hook)
-	     (add-hook 'kill-buffer-hook 'mml-destroy-buffers t t)))
-       `(lambda (no-highlight)
-	  (let ((mail-parse-charset (or gnus-article-charset
-					',gnus-newsgroup-charset))
-		(message-options message-options)
-		(message-options-set-recipient)
-		(mail-parse-ignored-charsets
-		 (or gnus-article-ignored-charsets
-		     ',gnus-newsgroup-ignored-charsets)))
-	   (mml-to-mime)
-	   (mml-destroy-buffers)
-	   (remove-hook 'kill-buffer-hook
-			'mml-destroy-buffers t)
-	   (kill-local-variable 'mml-buffer-list))
-	  (gnus-summary-edit-article-done
-	   ,(or (mail-header-references gnus-current-headers) "")
-	   ,(gnus-group-read-only-p)
-	   ,gnus-summary-buffer no-highlight))))))
+  (when (gnus-group-read-only-p)
+    (error "The current group does not support deleting of parts"))
+  (when (mm-complicated-handles gnus-article-mime-handles)
+    (error "\
+The current article has a complicated MIME structure, giving up..."))
+  (when (gnus-yes-or-no-p "\
+Deleting parts may malfunction or destroy the article; continue? ")
+    (let* ((data (get-text-property (point) 'gnus-data))
+	   file param
+	   (handles gnus-article-mime-handles))
+      (setq file (and data (mm-save-part data)))
+      (when file
+	(with-current-buffer (mm-handle-buffer data)
+	  (erase-buffer)
+	  (insert "Content-Type: " (mm-handle-media-type data))
+	  (mml-insert-parameter-string (cdr (mm-handle-type data))
+				       '(charset))
+	  (insert "\n")
+	  (insert "Content-ID: " (message-make-message-id) "\n")
+	  (insert "Content-Transfer-Encoding: binary\n")
+	  (insert "\n"))
+	(setcdr data
+		(cdr (mm-make-handle nil
+				     `("message/external-body"
+				       (access-type . "LOCAL-FILE")
+				       (name . ,file)))))
+	(set-buffer gnus-summary-buffer)
+	(gnus-article-edit-article
+	 `(lambda ()
+	    (erase-buffer)
+	    (let ((mail-parse-charset (or gnus-article-charset
+					  ',gnus-newsgroup-charset))
+		  (mail-parse-ignored-charsets
+		   (or gnus-article-ignored-charsets
+		       ',gnus-newsgroup-ignored-charsets))
+		  (mbl mml-buffer-list))
+	      (setq mml-buffer-list nil)
+	      (insert-buffer gnus-original-article-buffer)
+	      (mime-to-mml ',handles)
+	      (setq gnus-article-mime-handles nil)
+	      (let ((mbl1 mml-buffer-list))
+		(setq mml-buffer-list mbl)
+		(set (make-local-variable 'mml-buffer-list) mbl1))
+	      (gnus-make-local-hook 'kill-buffer-hook)
+	      (add-hook 'kill-buffer-hook 'mml-destroy-buffers t t)))
+	 `(lambda (no-highlight)
+	    (let ((mail-parse-charset (or gnus-article-charset
+					  ',gnus-newsgroup-charset))
+		  (message-options message-options)
+		  (message-options-set-recipient)
+		  (mail-parse-ignored-charsets
+		   (or gnus-article-ignored-charsets
+		       ',gnus-newsgroup-ignored-charsets)))
+	      (mml-to-mime)
+	      (mml-destroy-buffers)
+	      (remove-hook 'kill-buffer-hook
+			   'mml-destroy-buffers t)
+	      (kill-local-variable 'mml-buffer-list))
+	    (gnus-summary-edit-article-done
+	     ,(or (mail-header-references gnus-current-headers) "")
+	     ,(gnus-group-read-only-p)
+	     ,gnus-summary-buffer no-highlight)))))))
 
 (defun gnus-mime-delete-part ()
   "Delete the MIME part under point.
 Replace it with some information about the removed part."
   (interactive)
   (gnus-article-check-buffer)
-  (unless (and gnus-novice-user
-	       (not (gnus-yes-or-no-p
-		     "Really delete attachment forever? ")))
+  (when (gnus-group-read-only-p)
+    (error "The current group does not support deleting of parts"))
+  (when (mm-complicated-handles gnus-article-mime-handles)
+    (error "\
+The current article has a complicated MIME structure, giving up..."))
+  (when (gnus-yes-or-no-p "\
+Deleting parts may malfunction or destroy the article; continue? ")
     (let* ((data (get-text-property (point) 'gnus-data))
 	   (handles gnus-article-mime-handles)
 	   (none "(none)")
@@ -4019,8 +4029,8 @@ Replace it with some information about the removed part."
 	    (or (mail-content-type-get (mm-handle-disposition data) 'filename)
 		none))
 	   (type (mm-handle-media-type data)))
-      (if (mm-multiple-handles gnus-article-mime-handles)
-	  (error "This function is not implemented"))
+      (unless data
+	(error "No MIME part under point"))
       (with-current-buffer (mm-handle-buffer data)
 	(let ((bsize (format "%s" (buffer-size))))
 	  (erase-buffer)

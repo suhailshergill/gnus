@@ -1,3 +1,30 @@
+2004-08-25  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-article-wash-html-with-w3m): Bind
+	w3m-safe-url-regexp as the value for mm-w3m-safe-url-regexp; use
+	w3m-minor-mode-map instead of mm-w3m-local-map-property.
+	(gnus-mime-save-part-and-strip): Use mm-complicated-handles
+	instead of mm-multiple-handles.
+	(gnus-mime-delete-part): Ditto.
+
+	* lpath.el: Fbind w3m-detect-meta-charset; don't fbind
+	w3m-charset-to-coding-system; don't bind
+	w3m-meta-content-type-charset-regexp.
+
+	* mm-decode.el (mm-multiple-handles): Recognize a string as a mime
+	handle, as well as a list.
+	(mm-complicated-handles): Former definition of mm-multiple-handles.
+
+	* mm-view.el (mm-w3m-mode-map): Remove.
+	(mm-w3m-local-map-property): Remove.
+	(mm-w3m-cid-retrieve-1): Call itself recursively.  Suggested by
+	ARISAWA Akihiro <ari@mbf.sphere.ne.jp>.
+	(mm-w3m-cid-retrieve): Simplify.
+	(mm-inline-text-html-render-with-w3m): Decode html source by
+	charset; check META tags only when charsets are not specified in
+	headers; specify charset to w3m-region; use w3m-minor-mode-map
+	instead of mm-w3m-local-map-property.
+
 2004-08-22  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-art.el (article-hide-list-identifiers): Bind

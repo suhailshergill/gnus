@@ -1452,6 +1452,12 @@ If RECURSIVE, search recursively."
     parts))
 
 (defun mm-multiple-handles (handles)
+  (and (listp handles)
+       (> (length handles) 1)
+       (or (listp (car handles))
+	   (stringp (car handles)))))
+
+(defun mm-complicated-handles (handles)
   (and (listp (car handles))
        (> (length handles) 1)))
 
