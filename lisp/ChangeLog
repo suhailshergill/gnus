@@ -1,3 +1,16 @@
+2005-03-13  Steve Youngs  <steve@sxemacs.org>
+
+	* mm-url.el: Require timer-funcs at compile time when in XEmacs
+	for `with-timeout'.
+
+	* mail-source.el: Require timer-funcs at compile time when in
+	XEmacs for `run-with-idle-timer'.  
+
+	* gnus-async.el: Ditto.
+
+	* dgnushack.el: No need to ignore `run-with-idle-timer', XEmacs
+	has this function now. 
+
 2005-03-10  Stefan Monnier  <monnier@iro.umontreal.ca>
 
 	* nnimap.el (nnimap-retrieve-headers-from-server): Fix last change.
