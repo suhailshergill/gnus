@@ -1,3 +1,8 @@
+2005-03-16  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-art.el (gnus-header-button-alist): Use `gnus-msg-mail' for
+	the To/Cc button.
+
 2005-03-15  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* nnmaildir.el (nnmaildir-request-accept-article): Use
