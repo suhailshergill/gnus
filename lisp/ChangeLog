@@ -1,8 +1,10 @@
 2004-11-01  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	* html2text.el: Beatify code.  Improve doc strings.  Some checkdoc
+	* html2text.el: Beautify code.  Improve doc strings.  Some checkdoc
 	cleanup.
 	(html2text-get-attr, html2text-fix-paragraph): Simplify code.
+	(html2text-format-tag-list): Added "strong" and "em".  From
+	"Alfred M. Szmidt" <ams@kemisten.nu> (tiny change).
 
 2004-10-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 

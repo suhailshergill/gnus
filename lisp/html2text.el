@@ -75,8 +75,10 @@ If this list contains the element \"font\".")
 
 (defvar html2text-format-tag-list
   '(("b" 	  . html2text-clean-bold)
+    ("strong"     . html2text-clean-bold)
     ("u" 	  . html2text-clean-underline)
     ("i" 	  . html2text-clean-italic)
+    ("em"         . html2text-clean-italic)
     ("blockquote" . html2text-clean-blockquote)
     ("a"          . html2text-clean-anchor)
     ("ul"         . html2text-clean-ul)
