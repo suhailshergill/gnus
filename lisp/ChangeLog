@@ -1,5 +1,8 @@
 2004-10-15  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* pop3.el (pop3-leave-mail-on-server): Describe possible problems
+	in the doc string.
+
 	* message.el (message-ignored-news-headers)
 	(message-ignored-supersedes-headers)
 	(message-ignored-resent-headers)
