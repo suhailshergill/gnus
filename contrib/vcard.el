@@ -7,8 +7,6 @@
 ;; Keywords: extensions
 ;; Created: 1997-09-27
 
-;; $Id: vcard.el,v 6.1 2001/07/10 21:35:06 zsh Exp $
-
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 2, or (at your option)
