@@ -1,5 +1,7 @@
 2004-11-25  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-util.el (gnus-replace-in-string): Added doc string.
+
 	* nnmail.el (nnmail-split-header-length-limit): Increase to 2048
 	to avoid problems when splitting mails with many recipients.
 
