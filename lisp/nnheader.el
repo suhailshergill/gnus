@@ -34,6 +34,9 @@
 
 (require 'mail-utils)
 (require 'mm-util)
+(eval-and-compile
+  (autoload 'gnus-intersection "gnus-range")
+  (autoload 'gnus-sorted-complement "gnus-range"))
 
 (defvar nnheader-max-head-length 4096
   "*Max length of the head of articles.")
@@ -693,20 +696,21 @@ without formatting."
       (apply 'insert format args))
     t))
 
-(if (fboundp 'subst-char-in-string)
-    (defsubst nnheader-replace-chars-in-string (string from to)
-      (subst-char-in-string from to string))
-  (defun nnheader-replace-chars-in-string (string from to)
-    "Replace characters in STRING from FROM to TO."
-    (let ((string (substring string 0))	;Copy string.
-	  (len (length string))
-	  (idx 0))
-      ;; Replace all occurrences of FROM with TO.
-      (while (< idx len)
-	(when (= (aref string idx) from)
-	  (aset string idx to))
-	(setq idx (1+ idx)))
-      string)))
+(eval-and-compile
+  (if (fboundp 'subst-char-in-string)
+      (defsubst nnheader-replace-chars-in-string (string from to)
+	(subst-char-in-string from to string))
+    (defun nnheader-replace-chars-in-string (string from to)
+      "Replace characters in STRING from FROM to TO."
+      (let ((string (substring string 0)) ;Copy string.
+	    (len (length string))
+	    (idx 0))
+	;; Replace all occurrences of FROM with TO.
+	(while (< idx len)
+	  (when (= (aref string idx) from)
+	    (aset string idx to))
+	  (setq idx (1+ idx)))
+	string))))
 
 (defun nnheader-replace-duplicate-chars-in-string (string from to)
   "Replace characters in STRING from FROM to TO."
@@ -809,8 +813,9 @@ If FILE, find the \".../etc/PACKAGE\" file instead."
 	(setq path (cdr path))))
     result))
 
-(defvar ange-ftp-path-format)
-(defvar efs-path-regexp)
+(eval-when-compile
+  (defvar ange-ftp-path-format)
+  (defvar efs-path-regexp))
 (defun nnheader-re-read-dir (path)
   "Re-read directory PATH if PATH is on a remote system."
   (if (and (fboundp 'efs-re-read-dir) (boundp 'efs-path-regexp))
