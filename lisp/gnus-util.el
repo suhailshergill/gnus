@@ -3,6 +3,7 @@
 ;;        Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
+;; Maintainer: bugs@gnus.org
 ;; Keywords: news
 
 ;; This file is part of GNU Emacs.
@@ -450,14 +451,6 @@ If N, return the Nth ancestor instead."
     (setq to (concat (file-name-as-directory to)
 		     (file-name-nondirectory file))))
   (copy-file file to))
-
-(defun gnus-kill-all-overlays ()
-  "Delete all overlays in the current buffer."
-  (let* ((overlayss (overlay-lists))
-	 (buffer-read-only nil)
-	 (overlays (delq nil (nconc (car overlayss) (cdr overlayss)))))
-    (while overlays
-      (delete-overlay (pop overlays)))))
 
 (defvar gnus-work-buffer " *gnus work*")
 
