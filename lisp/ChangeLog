@@ -1,3 +1,12 @@
+2004-09-03  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-sum.el (gnus-summary-insert-subject): Remove list
+	identifiers.
+
+	From Hiroshi Fujishima <pooh@nature.tsukuba.ac.jp> (tiny change).
+	* spam-stat.el (spam-stat-reduce-size): Set spam-stat-dirty.
+	(spam-stat-save): Accept prefix argument.
+
 2004-09-01  Simon Josefsson  <jas@extundo.com>
 
 	* message.el (message-canlock-generate): Require sha1, not

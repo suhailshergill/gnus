@@ -1,6 +1,6 @@
 ;;; spam-stat.el --- detecting spam based on statistics
 
-;; Copyright (C) 2002, 2003 Free Software Foundation, Inc.
+;; Copyright (C) 2002, 2003, 2004 Free Software Foundation, Inc.
 
 ;; Author: Alex Schroeder <alex@gnu.org>
 ;; Keywords: network
@@ -396,8 +396,9 @@ Use `spam-stat-ngood', `spam-stat-nbad', `spam-stat-good',
 ;; Saving and Loading
 
 (defun spam-stat-save (&optional force)
-  "Save the `spam-stat' hash table as lisp file."
-  (interactive)
+  "Save the `spam-stat' hash table as lisp file.
+With a prefix argument save unconditionally."
+  (interactive "P")
   (when (or force spam-stat-dirty)
     (with-temp-buffer
       (let ((standard-output (current-buffer))
@@ -571,7 +572,8 @@ COUNT defaults to 5"
 			 (spam-stat-bad entry))
 		      count)
 	       (remhash key spam-stat)))
-	   spam-stat))
+	   spam-stat)
+  (setq spam-stat-dirty t))
 
 (defun spam-stat-install-hooks-function ()
   "Install the spam-stat function hooks"
