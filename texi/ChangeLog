@@ -1,3 +1,7 @@
+2004-10-12  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-faq.texi ([5.9]): Improve code for reply-in-news.
+
 2004-09-23  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-faq.texi ([5.12]): Fix code example for FQDN in Message-Ids
