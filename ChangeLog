@@ -1,3 +1,7 @@
+2004-06-16  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* make.bat: Fix line endings around arch-tag.
+
 2004-05-19  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* GNUS-NEWS: Mention new behavior of `F' and `R' when the region
