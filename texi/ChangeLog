@@ -1,5 +1,7 @@
 2004-10-15  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* message.texi (Resending): Remove wrong default value.
+
 	* gnus.texi (Mail Source Specifiers): Describe possible problems
 	of `pop3-leave-mail-on-server'.  Add `pop3-movemail' and
 	`pop3-leave-mail-on-server' to the index.
