@@ -3064,7 +3064,7 @@ If NO-DISPLAY, don't generate a summary buffer."
     result))
 
 (defun gnus-sort-gathered-threads (threads)
-  "Sort subtreads inside each gathered thread by article number."
+  "Sort subtreads inside each gathered thread by `gnus-sort-gathered-threads-function'."
   (let ((result threads))
     (while threads
       (when (stringp (caar threads))
@@ -3639,13 +3639,22 @@ If LINE, insert the rebuilt thread starting on line LINE."
 	      (1+ (gnus-point-at-eol))
 	    (gnus-delete-line)))))))
 
+(defun gnus-sort-threads-1 (threads func)
+  (sort (mapcar (lambda (thread)
+		  (cons (car thread)
+			(and (cdr thread)
+			     (gnus-sort-threads-1 (cdr thread) func))))
+		threads) func))
+
 (defun gnus-sort-threads (threads)
   "Sort THREADS."
   (if (not gnus-thread-sort-functions)
       threads
     (gnus-message 8 "Sorting threads...")
     (prog1
-	(sort threads (gnus-make-sort-function gnus-thread-sort-functions))
+	(gnus-sort-threads-1 
+	 threads 
+	 (gnus-make-sort-function gnus-thread-sort-functions))
       (gnus-message 8 "Sorting threads...done"))))
 
 (defun gnus-sort-articles (articles)
@@ -5379,7 +5388,10 @@ If FORCE (the prefix), also save the .newsrc file(s)."
   (when (gnus-buffer-live-p gnus-article-buffer)
     (save-excursion
       (set-buffer gnus-article-buffer)
-      (mm-destroy-parts gnus-article-mime-handles)))
+      (mm-destroy-parts gnus-article-mime-handles)
+      ;; Set it to nil for safety reason.
+      (setq gnus-article-mime-handle-alist nil)
+      (setq gnus-article-mime-handles nil)))
   (gnus-kill-save-kill-buffer)
   (gnus-async-halt-prefetch)
   (let* ((group gnus-newsgroup-name)
@@ -5477,7 +5489,10 @@ If FORCE (the prefix), also save the .newsrc file(s)."
       (when (gnus-buffer-live-p gnus-article-buffer)
 	(save-excursion
 	  (set-buffer gnus-article-buffer)
-	  (mm-destroy-parts gnus-article-mime-handles)))
+	  (mm-destroy-parts gnus-article-mime-handles)
+	  ;; Set it to nil for safety reason.
+	  (setq gnus-article-mime-handle-alist nil)
+	  (setq gnus-article-mime-handles nil)))
       ;; If we have several article buffers, we kill them at exit.
       (unless gnus-single-article-buffer
 	(gnus-kill-buffer gnus-article-buffer)
@@ -7240,7 +7255,10 @@ without any article massaging functions being run."
       (when (gnus-buffer-live-p gnus-article-buffer)
 	(save-excursion
 	  (set-buffer gnus-article-buffer)
-	  (mm-destroy-parts gnus-article-mime-handles)))
+	  (mm-destroy-parts gnus-article-mime-handles)
+	  ;; Set it to nil for safety reason.
+	  (setq gnus-article-mime-handle-alist nil)
+	  (setq gnus-article-mime-handles nil)))
       (gnus-summary-select-article nil 'force))))
   (gnus-summary-goto-subject gnus-current-article)
   (gnus-summary-position-point))
@@ -8954,6 +8972,8 @@ Argument REVERSE means reverse order."
 	      thread
 	    `(lambda (t1 t2)
 	       (,thread t2 t1))))
+	 (gnus-sort-gathered-threads-function
+	  gnus-thread-sort-functions)
 	 (gnus-article-sort-functions
 	  (if (not reverse)
 	      article
@@ -9184,10 +9204,12 @@ If REVERSE, save parts that do not match TYPE."
       (gnus-summary-select-article))
     (save-excursion
       (set-buffer gnus-article-buffer)
-      (let ((handles (or (mm-dissect-buffer) (mm-uu-dissect))))
+      (let ((handles (or gnus-article-mime-handles
+			 (mm-dissect-buffer) (mm-uu-dissect))))
 	(when handles
 	  (gnus-summary-save-parts-1 type dir handles reverse)
-	  (mm-destroy-parts handles))))))
+	  (unless gnus-article-mime-handles ;; Don't destroy this case.
+	    (mm-destroy-parts handles)))))))
 
 (defun gnus-summary-save-parts-1 (type dir handle reverse)
   (if (stringp (car handle))
