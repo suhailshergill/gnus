@@ -1,5 +1,5 @@
 ;;; message.el --- composing mail and news messages  -*- coding: iso-latin-1 -*-
-;; Copyright (C) 1996, 1997, 1998, 1999, 2000
+;; Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001
 ;;        Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
@@ -682,7 +682,7 @@ A value of nil means exclude your own name only."
 		 regexp))
 
 (defvar message-shoot-gnksa-feet nil
-  "*A list of GNKSA feet you are allowed to shoot.  
+  "*A list of GNKSA feet you are allowed to shoot.
 Gnus gives you all the opportunity you could possibly want for
 shooting yourself in the foot.  Also, Gnus allows you to shoot the
 feet of Good Net-Keeping Seal of Approval. The following are foot
@@ -1942,7 +1942,8 @@ prefix, and don't delete any headers."
 	       message-cite-function)
       (delete-windows-on message-reply-buffer t)
       (insert-buffer message-reply-buffer)
-      (funcall message-cite-function)
+      (unless arg
+	(funcall message-cite-function))
       (message-exchange-point-and-mark)
       (unless (bolp)
 	(insert ?\n))
@@ -1986,7 +1987,10 @@ prefix, and don't delete any headers."
       (while (looking-at "^[ \t]*$")
 	(forward-line -1))
       (forward-line 1)
-      (delete-region (point) end))
+      (delete-region (point) end)
+      (unless (search-backward "\n\n" start t)
+	;; Insert a blank line if it is peeled off.
+	(insert "\n")))
     (goto-char start)
     (while functions
       (funcall (pop functions)))
@@ -2343,10 +2347,13 @@ It should typically alter the sending method in some way or other."
 		(and news
 		     (or (message-fetch-field "cc")
 			 (message-fetch-field "to"))
-		     (string= "text/plain"
-			      (car
-			       (mail-header-parse-content-type
-				(message-fetch-field "content-type"))))))
+		     (let ((content-type (message-fetch-field "content-type")))
+		       (or
+			(not content-type)
+			(string= "text/plain"
+				 (car
+				  (mail-header-parse-content-type
+				   content-type)))))))
 	    (message-insert-courtesy-copy))
 	  (if (or (not message-send-mail-partially-limit)
 		  (< (point-max) message-send-mail-partially-limit)
