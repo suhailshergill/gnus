@@ -1,7 +1,7 @@
 2005-04-03  Katsumi Yamaoka  <yamaoka@jpl.org>
 
-	* gnus-sum.el (gnus-summary-make-menu-bar): Fix an
-	"unrecognised menu descriptor" error.
+	* gnus-sum.el (gnus-summary-make-menu-bar): Avoid the
+	"Unrecognized menu descriptor" error in XEmacs.
 
 2005-03-25  Katsumi Yamaoka  <yamaoka@jpl.org>
 
