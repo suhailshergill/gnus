@@ -1,3 +1,8 @@
+2004-07-28  Simon Josefsson  <jas@extundo.com>
+
+	* pgg-pgp5.el (pgg-pgp5-encrypt-region): Accept sign
+	parameter (but don't use it, for now).
+
 2004-02-03  Jesper Harder  <harder@ifa.au.dk>
 
 	* sieve.el (sieve-deactivate-all): Fix format string mismatch.
