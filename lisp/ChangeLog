@@ -1,3 +1,226 @@
+2000-11-09  Dave Love  <fx@gnu.org>
+
+	* message.el (tool-bar-map): Defvar when compiling.
+
+	* gnus-setup.el (running-xemacs, gnus-use-installed-tm)
+	(gnus-tm-lisp-directory): Deleted.
+	(gnus-use-installed-mailcrypt, gnus-emacs-lisp-directory): Use
+	(featurep 'xemacs).
+	(gnus-gnus-lisp-directory, gnus-mailcrypt-lisp-directory) 
+	(gnus-mailcrypt-lisp-directory, gnus-bbdb-lisp-directory): Remove
+	version numbers from file names.
+
+2000-11-08  John Wiegley  <johnw@gnu.org>
+
+	* gnus-topic.el (gnus-topic-mode): Use `setq' to clear
+	`gnus-group-change-level-function', instead of `remove-hook',
+	because it's not a hook!
+
+2000-11-08  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnweb.el (nnweb-decode-entities): Work for non-character
+	entities. 
+
+	* gnus-start.el (gnus-read-active-file, gnus-activate-group):
+	Issue message on quit.
+
+2000-11-08  Simon Josefsson  <simon@josefsson.org>
+
+	* rfc2104.el: Add SHA-1 example.
+	(rfc2104-hexstring-to-bitstring): New function.
+	(rfc2104-hash): Use it.
+
+2000-11-08  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* gnus-start.el: Remove gnus-xemacs.
+	
+	* nndoc.el (nndoc-dissect-mime-parts-sub): Correctly mark body-begin.
+
+	* gnus-score.el (gnus-score-body): Don't score body when
+	agent-fetching.
+	(gnus-score-followup): Don't score followup either.
+	(gnus-score-use-all-scores): New variable.
+	(gnus-all-score-files): Use it.
+	(gnus-score-find-bnews): Use directory-sep-char.
+
+	* nnweb.el (nnweb-url-retrieve-asynch): url-retrieve is 
+	asynchronous in Exp version.
+
+2000-11-08  Dave Love  <fx@gnu.org>
+
+	* mm-view.el: Use featurep for XEmacs test.
+	(mm-inline-message): Test for `remove-specifier'; don't use
+	condition-case.
+
+	* mm-bodies.el (mm-encode-body): Use mm-multibyte-p.
+
+	* gnus-score.el (gnus-score-load-file): Use expand-file-name.
+	(gnus-score-find-bnews): Don't concat "".
+
+	* cu-exit.xpm, prev-ur.xpm, next-ur.xpm, post.xpm, fuwo.xpm:
+	* followup.xpm, uu-post.xpm, uu-decode.xpm, mail-reply.xpm:
+	* reply.xpm, reply-wo.xpm, rot13.xpm, save-aif.xpm, save-art.xpm:
+	* exit-summ.xpm: New files, renamed from icons by Luis Fernandes.
+
+	* gnus-sum.el: Put some defvars in eval-when-compile.
+	(gnus-summary-mode-hook): Add :options.
+	(gnus-summary-make-menu-bar): Add some :help, used by tool bar.
+	(gnus-summary-tool-bar-map): New variable.
+	(gnus-summary-make-tool-bar): New function.
+	(gnus-summary-mode): Put kill-all-local-variables first.
+
+	* gnus-group.el (gnus-group-toolbar-map): New variable.
+	(gnus-group-make-tool-bar): Rewritten.
+	(gnus-group-mode): Put kill-all-local-variables first.
+
+	* rfc2047.el: Require gnus-util.
+
+	* nnml.el (gnus-sorted-intersection): Autoload.
+
+	* nnheader.el: Wrap subst-char-in-string def in eval-and-compile.
+	Put some defvars in eval-when-compile.
+	(gnus-intersection, gnus-sorted-complement):  Autoload.
+
+	* imap.el (imap-point-at-eol): New, replacing gnus-point-at-eol.
+
+	* mm-encode.el (mm-body-7-or-8): Autoload.
+
+	* mm-decode.el (mm-insert-inline): Autoload.
+
+	* mml.el:
+	* message.el: Put some defvars in eval-when-compile.
+
+	* gnus-msg.el: Put some defvars in eval-when-compile.
+	(gnus-msg-mail): Move after gnus-setup-message.
+
+	* smiley-ems.el (smiley-data-directory, smiley-regexp-alist): Doc fix.
+
+2000-11-07  Dave Love  <fx@gnu.org>
+
+	* gnus-util.el (nnheader): Don't require message (recursive
+	autoload).
+
+	* uudecode.el: Avoid compiler warnings.
+
+	* rfc2047.el: (rfc2047-fold-region): Use gnus-point-at-bol.
+	(rfc2047-charset-encoding-alist): Add iso-8859-1[45].
+
+2000-11-07  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* rfc2047.el: Require cl when compiling.
+	(rfc2047-q-encode-region): Don't break if a QP-word could be
+	fitted in one line.
+	(rfc2047-decode): Use mm-with-unibyte-current-buffer-mule4.
+	(rfc2047-fold-region): "=?=" is not a break point.
+	(rfc2047-encode-message-header): Move fold into encode-region.
+	(rfc2047-dissect-region): Rewrite.
+	(rfc2047-encode-region): Rewrite.
+	(rfc2047-fold-region): Fold
+	(rfc2047-unfold-region): New function.
+	(rfc2047-decode-region): Use it.
+	(rfc2047-q-encode-region): Don't break at bob.
+	(rfc2047-decode): Use unibyte.
+	(rfc2047-q-encode-region): Better calculation of break point.
+	(rfc2047-fold-region): Don't break the first non-LWSP characters.
+	(rfc2047-encode-region): Merge only if regions are adjacent.
+
+2000-11-06  Dave Love  <fx@gnu.org>
+
+	* gnus-salt.el (gnus-binary-mode): Fix call to gnus-add-minor-mode.
+
+	* uudecode.el: Use (featurep 'xemacs).  Require cl when compiling.
+	(uudecode-char-int): New alias, replacing char-int.
+	(uudecode-decode-region): Don't call buffer-disable-undo.
+
+	* mm-uu.el (mm-uu-configure): Unquote lambda.
+	(mm-uu-configure-list): Doc fix.
+
+	* earcon.el (running-xemacs): Don't define.
+
+2000-11-06  John Wiegley  <johnw@gnu.org>
+
+	* gnus-mlspl.el (gnus-group-split-update): Check the value of
+	`nnmail-crosspost', and use it to set the `no-crosspost'
+	argument when calling `gnus-group-split-fancy'.  Otherwise, it
+	assumes that cross-posting is always OK, no matter what
+	`nmail-crosspost' is set to.
+	(gnus-group-split-fancy): The argument order in the
+	second-to-last `push' call was wrong, but since `no-crosspost'
+	was always nil, it was never being triggered.
+
+2000-11-06  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	Don't postpone GCC if none of GCC methods is agent-covered.  This
+	fix presumes that the post-method must be agent-covered if any Gcc
+	method is agent-covered.
+
+	* gnus-msg.el (gnus-inews-group-method): New function.
+	(gnus-inews-do-gcc): Use it.
+	* gnus-agent.el (gnus-agent-any-covered-gcc): New function.
+	(gnus-agent-possibly-save-gcc): Use it.
+	(gnus-agent-possibly-do-gcc): Ditto.
+
+	*gnus-msg.el: (gnus-inews-add-send-actions): Use
+	`gnus-agent-possibly-do-gcc' if Agentized.
+	(gnus-inews-add-send-actions): Add `gnus-agent-possibly-save-gcc'
+	to `message-header-hook'.
+
+	* gnus-mlspl.el: Require cl when compiling.
+
+	* gnus-ml.el: Usage.
+	(gnus-mailing-list-archive, gnus-mailing-list-owner,
+	gnus-mailing-list-post, gnus-mailing-list-unsubscribe,
+	gnus-mailing-list-subscribe, gnus-mailing-list-help): Bind list-*.
+	(gnus-mailing-list-menu): Define it.
+	(turn-on-gnus-mailing-list-mode, gnus-mailing-list-mode): Autoload.
+
+	* gnus-logic.el (gnus-advanced-string): Use "" if nil.
+	
+2000-11-03  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* message.el (message-font-lock-keywords): Match a final newline
+	to help font-lock's multiline support.
+
+2000-11-03  Dave Love  <fx@gnu.org>
+
+	* gnus-nocem.el (gnus-nocem-check-article-limit): Default to 500.
+
+	* mm-partial.el (mm-inline-partial): Space-prefix temp buffer
+	name.
+
+	* gnus-cus.el (gnus-group-parameters) <gcc-self>: Fix custom type.
+	<banner>: Fix custom type, doc.
+
+	* mm-decode.el (mm-display-external): Space-prefix temp buffer
+	name.  Don't disable undo explicitly.
+
+2000-11-02  Dave Love  <fx@gnu.org>
+
+	* message.el (message-font-lock-keywords): Use [:alpha:] for
+	cite-prefix.
+
+2000-11-02  Miles Bader  <miles@lsi.nec.co.jp>
+
+	* mm-uu.el (mm-uu-configure-list): Move back to old location,
+	because defcustom tries to call `mm-uu-configure'.
+
+2000-11-01  Dave Love  <fx@gnu.org>
+
+	* rfc2047.el (base64): Require unconditionally.
+	(message-posting-charset): Defvar when compiling.
+	(rfc2047-encode-message-header, rfc2047-encodable-p): Require
+	message.
+
+	* gnus-sum.el (nnoo): Require.
+	(mm-uu-dissect): Autoload.
+
+	* mml.el (mml-parse-1): Clarify message.
+	(mml-minibuffer-read-type): Use mailcap-mime-types.
+
+2000-11-01  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* mml.el: Fix a typo in the requiring of CL.
+
 2000-11-01 ShengHuo ZHU  <zsh@cs.rochester.edu>
 
 	* rfc2231.el: Require cl when compiling.
@@ -233,7 +456,7 @@
 
 	* catchup.xpm, exit-gnus.xpm, gnntg.xpm, subscribe.xpm:
 	* describe-group.xpm, get-news.xpm, kill-group.xpm:
-	* unsubscribe.xpm: New files.
+	* unsubscribe.xpm: New files.  Renamed icons from Luis Fernandes.
 
 	* mm-decode.el (mm-valid-and-fit-image-p): Don't test
 	display-graphic-p here.
