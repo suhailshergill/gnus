@@ -1,3 +1,8 @@
+2005-03-25  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* emacs-mime.texi (Display Customization): Markup fixes.
+	(rfc2047): Update.
+
 2005-03-23  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* Makefile.in (gnus-faq-full-update, gnus-faq-clean)
