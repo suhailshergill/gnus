@@ -2426,11 +2426,13 @@ This function is intended to be called from `after-change-functions'.
 See also `message-forbidden-properties'."
   (when (and message-strip-special-text-properties
 	     (message-tamago-not-in-use-p begin))
-    (while (not (= begin end))
-      (when (not (get-text-property begin 'message-hidden))
-	(remove-text-properties begin (1+ begin)
-				message-forbidden-properties))
-      (incf begin))))
+    (let ((buffer-read-only nil)
+	  (inhibit-read-only t))
+      (while (not (= begin end))
+	(when (not (get-text-property begin 'message-hidden))
+	  (remove-text-properties begin (1+ begin)
+				  message-forbidden-properties))
+	(incf begin)))))
 
 ;;;###autoload
 (define-derived-mode message-mode text-mode "Message"
