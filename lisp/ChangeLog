@@ -1,4 +1,35 @@
+2000-10-26  Dave Love  <fx@gnu.org>
+
+	* flow-fill.el: Require cl when compiling.
+
+2000-10-26  Dave Love  <fx@gnu.org>
+
+	* mail-source.el: Require imap when compiling and defvar
+	display-time-mail-function.  Require mm-util.
+	(nnheader-cancel-timer): Autoload.
+	(mail-source-imap-authenticators, mail-source-imap-streams): New
+	variables.
+	(mail-sources): Use them.
+
+2000-10-25  Dirk Meyer <dischi@tzi.de>
+
+	* gnus-demon.el (gnus-demon-time-to-step): theHour was set to
+	seconds instead of hour.
+
+2000-10-25  Per Abrahamsen  <abraham@dina.kvl.dk>
+
+	* mail-source.el (mail-sources): Better `:type'.
+
+2000-10-23  Simon Josefsson  <simon@josefsson.org>
+
+	* flow-fill.el (fill-flowed): Don't flow "-- " lines.
+	(fill-flowed): Make "quote-depth wins" rule work when first line
+	is at level 0.
+
 2000-10-18  Dave Love  <fx@gnu.org>
+
+	* mail-source.el (mm-util): Require.
+	(defvar): Use rmail-spool-directory unconditionally.
 
 	* mm-bodies.el (mm-uu-decode-function)
 	(mm-uu-binhex-decode-function): Defvar when compiling.
@@ -17,6 +48,14 @@
 2000-10-15  Dave Love  <fx@gnu.org>
 
 	* qp.el: Require mm-util.
+
+2000-10-13  Kai Gro,A_(Bjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
+
+	* mail-source.el (mail-source-keyword-map): Use
+	`rmail-spool-directory' as a default directory for the `file'
+	source, if the variable is defined.  Fall back to hardcoded
+	"/usr/spool/mail/", as before.  Suggestion by Steven E. Harris
+	<seh@speakeasy.org>.
 
 2000-10-13  Dave Love  <fx@gnu.org>
 
