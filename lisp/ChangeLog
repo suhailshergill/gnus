@@ -1,3 +1,39 @@
+2000-10-18  Dave Love  <fx@gnu.org>
+
+	* mm-bodies.el (mm-uu-decode-function)
+	(mm-uu-binhex-decode-function): Defvar when compiling.
+
+	* gnus-nocem.el (gnus-nocem-issuers): Update.
+	(gnus-nocem-check-from): New option.
+	(gnus-nocem-scan-groups): Use it.
+	(gnus-nocem-check-article): Bind gnus-newsgroup-name.
+	(gnus-nocem-check-article-limit): Add :version.
+
+2000-10-16  Miles Bader  <miles@lsi.nec.co.jp>
+
+	* gnus-nocem.el (gnus-nocem-check-article-limit): New variable.
+	(gnus-nocem-scan-groups): Obey `gnus-nocem-check-article-limit'.
+
+2000-10-15  Dave Love  <fx@gnu.org>
+
+	* qp.el: Require mm-util.
+
+2000-10-13  Dave Love  <fx@gnu.org>
+
+	* qp.el (quoted-printable-decode-region): Avoid invalid
+	coding-systems.
+
+2000-10-12  Gerd Moellmann  <gerd@gnu.org>
+
+	* mm-bodies.el: Don't require `mm-uu' at compile-time; it leads
+	to a recursive load.
+
+2000-10-12  Dave Love  <fx@gnu.org>
+
+	* mm-util.el (mm-charset-synonym-alist): Add windows-1252.
+
+	* gnus.el (gnus-group-startup-message): Check for PBM image.
+
 2000-10-09  Dave Love  <fx@gnu.org>
 
 	* mail-source.el (mail-source-fetch-imap): Bind
