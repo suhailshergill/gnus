@@ -6,6 +6,8 @@
 	* gnus-art.el (article-hide-headers): Refer to the values for
 	gnus-ignored-headers and gnus-visible-headers in the summary
 	buffer since a user may have set them as group parameters.
+	(gnus-article-next-page): Fix the way to find a real end-of-buffer.
+	From YAGI Tatsuya <ynyaaa@ybb.ne.jp>.
 	(gnus-article-read-summary-keys): Restore new window-start and
 	hscroll to summary window.
 	(gnus-prev-page-map): Remove duplicated one.
