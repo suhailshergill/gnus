@@ -142,3 +142,7 @@ fi
    AC_SUBST(W3)
    AC_MSG_RESULT("${W3}")
 ])
+
+ifelse(dnl	Do not change this comment
+   arch-tag: 5c987641-c3ef-4f12-b067-028302282c66
+)dnl

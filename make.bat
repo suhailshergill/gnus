@@ -75,3 +75,7 @@ rem Restore PWD so whoever called this batch file doesn't get confused
 set PWD=%GNUS_PWD_SAVE%
 set GNUS_PWD_SAVE=
 :end
+
+goto skipArchTag
+   arch-tag: 502dd14c-acde-4f69-8e82-43203b12a82c
+:skipArchTag

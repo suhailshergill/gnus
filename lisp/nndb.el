@@ -326,3 +326,5 @@ Optional LAST is ignored."
   (nntp))
 
 (provide 'nndb)
+
+;;; arch-tag: 83bd6fb4-58d9-4fed-a901-c6c625ad5f8a

@@ -806,4 +806,5 @@ buffer.
 
 (provide 'gnus-srvr)
 
-;;; gnus-srvr.el ends here.
+;;; arch-tag: c0117f64-27ca-475d-9406-8da6854c7a25
+;;; gnus-srvr.el ends here

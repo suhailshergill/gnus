@@ -99,4 +99,5 @@
 
 (provide 'gnus-load)
 
+;;; arch-tag: 6ab4194e-0d0f-4815-a0b3-fc26a1452a81
 ;;; gnus-load.el ends here
