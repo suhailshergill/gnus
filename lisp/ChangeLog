@@ -1,6 +1,166 @@
+2000-10-09  Dave Love  <fx@gnu.org>
+
+	* mail-source.el (mail-source-fetch-imap): Bind
+	default-enable-multibyte-characters rather than using
+	mm-disable-multibyte.
+
+2000-10-03  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mail-source.el (mail-source-fetch-maildir): Don't insert
+	newlines.
+
+2000-10-06  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* mm-encode.el: Require CL.  At least, for `incf'.
+
+2000-10-06  Dave Love  <fx@gnu.org>
+
+	* gnus-audio.el: Don't require cl.
+	(gnus-audio): New custom group.
+	(gnus-audio-inline-sound): Change to work with Emacs.
+	(gnus-audio-directory, gnus-audio-directory) 
+	(gnus-audio-au-player):  Customize.
+	(gnus-audio-play): Try external player if play-sound-file fails.
+	Use file-name-extension, not string-match.
+
+2000-10-05  Dave Love  <fx@gnu.org>
+
+	* rfc1843.el: Require cl when compiling.
+
+	* qp.el (mm-decode-coding-region, mm-encode-coding-region):
+	Autoload.
+	(quoted-printable-decode-region):  Rename arg which confused
+	charset with coding-system.  Don't use nonascii-insert-offset.
+	Coding-system encode the region initially.  Don't recognize `=='
+	as valid QP.  Coding-system decode the region finally.
+	(quoted-printable-decode-string): Rename arg which confused
+	charset with coding-system.
+
+	* mm-bodies.el: Require mm-uu, Don't require qp, uudecode.
+	(mm-encode-body): Apply mm-charset-to-coding-system to arg of
+	mm-encode-coding-region.
+	(mm-decode-body, mm-decode-string): Rename variables which
+	confused charset with coding-system.
+	(binhex-decode-region): Don't autoload.
+	(mm-body-encoding): Require message.
+	(mm-decode-content-transfer-encoding): Require mm-uu in relevant
+	cond branches.
+
+	* gnus-art.el (article-de-quoted-unreadable)
+	(article-de-base64-unreadable): Fold search case
+	rather than downcasing string.  Apply mm-charset-to-coding-system
+	to arg of quoted-printable-decode-region.
+
+2000-10-05  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* nnfolder.el (nnfolder-ignore-active-file): Typos.
+
+	* gnus-mh.el (gnus-summary-save-in-folder): Obey mh-lib-progs.
+
+	* gnus-kill.el (gnus-kill): Typo.
+
+2000-10-05  Kenichi Handa  <handa@etl.go.jp>
+
+	* gnus-mule.el: Revived.
+
+2000-10-04  Dave Love  <fx@gnu.org>
+
+	* gnus-ems.el: Don't turn off compiler warnings in local vars.
+	Require ring when compiling.
+	(gnus-x-splash): Bind width, height.
+	(gnus-article-compface-xbm): New variable.
+	(gnus-article-display-xface): Move graphic test.  Use unibyte.
+	Obey gnus-article-compface-xbm.  Use pbm, not xbm.
+
+2000-10-04  Stefan Monnier  <monnier@cs.yale.edu>
+
+	* nnimap.el: require 'cl when compiling.
+
+2000-10-04  Dave Love  <fx@gnu.org>
+
+	* smiley-ems.el (smiley-regexp-alist, smiley-update-cache): Use
+	pbm images.
+
+	* frown.pbm, smile.pbm, wry.pbm: New files.
+
+	* frown.xbm, smile.xbm, wry.xbm: Deleted.
+
+2000-10-03  Dave Love  <fx@gnu.org>
+
+	* mail-source.el (mail-sources): Revert to nil.
+
+	* nnmail (nnmail-spool-file): Revert to `((file))'.
+
+	* qp.el: Don't require mm-util.
+	(quoted-printable-decode-region): Rewritten.
+	(quoted-printable-decode-string, quoted-printable-encode-region):
+	Doc fix.
+	(quoted-printable-encode-region): Barf on multibyte characters.
+	Maybe make the class multibyte.  Upcase chars, not formatted
+	strings.  Allow mm-use-ultra-safe-encoding to be unbound.
+	(quoted-printable-encode-string): Don't use
+	mm-with-unibyte-buffer.
+
+2000-10-03  ShengHuo ZHU  <zsh@cs.rochester.edu>
+
+	* mail-source.el (mail-source-report-new-mail): Use
+	nnheader-cancel-timer.
+
+2000-10-03  Simon Josefsson  <simon@josefsson.org>
+
+	* mail-source.el (mail-source-imap-file-coding-system): New variable.
+	(mail-source-fetch-imap): Use it.
+
+2000-09-29  Gerd Moellmann  <gerd@gnu.org>
+
+	* gnus.el (gnus-mode-line-buffer-identification)[EMACS]: Fix
+	last change.
+
+	* gnus.el (gnus-mode-line-buffer-identification)[EMACS]: Use
+	`:ascent center'.
+
+	* smiley-ems.el (smiley-update-cache):  Use `:ascent center'.
+
+2000-09-28  Gerd Moellmann  <gerd@gnu.org>
+
+	* gnus.el (gnus-mode-line-buffer-identification) [Emacs]: Change
+	image's :ascent to 80.  That gives a mode-line which is approx.
+	as tall as the normal one.
+
+2000-09-21  Dave Love  <fx@gnu.org>
+
+	* smiley-ems.el (smiley-region): Test if display-graphic-p bound
+	(for Emacs 20).  Tidy somewhat.
+
+2000-09-21  Dave Love  <fx@gnu.org>
+
+	* gnus-ems.el (gnus-article-display-xface): Use unibyte for the
+	image processing.  Rationalize logic somewhat.
+
 2000-09-20  Dave Love  <fx@gnu.org>
 
-	* gnus.el (gnus-version-number): Start 5.9 series.
+	* smiley-ems.el, frown.xbm, smile.xbm, wry.xbm: New files.
+
+	* mail-source.el (mail-source-delete-incoming): Set to t, assuming
+	we'll be careful merging development changes.
+
+	* gnus-start.el (gnus-1) <gnus-simple-splash>: Don't test for X
+	specifically.
+
+	* gnus-ems.el (gnus-smiley-display): Autoload from smiley-ems.
+	(mouse-set-point, set-face-foreground)
+	(set-face-background, x-popup-menu) [not window-system]: Don't zap
+	them.
+
+	* mm-decode.el (mm-valid-and-fit-image-p): Use display-graphic-p.
+
+	* gnus.el (gnus-version-number): Start 5.9 series.  Avoid some
+	redundant autoloads.
+
+2000-09-20  Gerd Moellmann  <gerd@gnu.org>
+
+	* gnus-ems.el (gnus-article-display-xface): Don't convert PBM
+	to XBM; we always have PBM support.
 
 2000-09-19  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
@@ -148,7 +308,7 @@
 	* gnus-mlspl.el, gnus-nocem.el, gnus-range.el, gnus-salt.el:
 	* gnus-setup.el, gnus-soup.el, gnus-undo.el, gnus-vm.el:
 	* messcompat.el, nnbabyl.el, nndir.el, nneething.el:
-	* nngateway.el, nnkiboze.el, nnlistserv.el:
+	* nngateway.el, nnheaderxm.el, nnkiboze.el, nnlistserv.el:
 	* nnmbox.el, nnmh.el, nnoo.el, nnsoup.el, nnspool.el, rfc2045.el:
 	* rfc2231.el, uudecode.el: Fix copyright notice.
 
