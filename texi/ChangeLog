@@ -1,5 +1,7 @@
 2004-12-08  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-faq.texi ([5.1]): Added missing bracket.
+
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): Index
 	`spam-initialize'.
 
