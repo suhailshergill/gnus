@@ -49,7 +49,7 @@
 This is an alist were each element is a dotted pair consisting of an
 old string, and a replacement string.  This replacement is done by the
 function `html2text-substitute' which basically performs a
-replace-string operation for every element in the list. This is
+`replace-string' operation for every element in the list.  This is
 completely verbatim - without any use of REGEXP.")
 
 (defvar html2text-remove-tag-list
@@ -406,7 +406,7 @@ See the documentation for that variable."
       (delete-region (match-beginning 0) (match-end 0)))))
 
 (defun html2text-format-tags ()
-  "See the variable `html2text-format-tag-list' for documentation"
+  "See the variable `html2text-format-tag-list' for documentation."
   (interactive)
   (dolist (tag-and-function html2text-format-tag-list)
     (let ((tag      (car tag-and-function))
@@ -428,7 +428,7 @@ See the documentation for that variable."
 	  (goto-char p1))))))
 
 (defun html2text-substitute ()
-  "See the variable `html2text-replace-list' for documentation"
+  "See the variable `html2text-replace-list' for documentation."
   (interactive)
   (dolist (e html2text-replace-list)
     (goto-char (point-min))
@@ -437,7 +437,6 @@ See the documentation for that variable."
       (html2text-replace-string old-string new-string (point-min) (point-max)))))
 
 (defun html2text-format-single-elements ()
-  ""
   (interactive)
   (dolist (tag-and-function html2text-format-single-element-list)
     (let ((tag      (car tag-and-function))
@@ -472,6 +471,6 @@ See the documentation for that variable."
 ;;
 ;; </Interactive functions>
 ;;
-
+(provide 'html2text)
 ;;; arch-tag: e9e57b79-35d4-4de1-a647-e7e01fe56d1e
 ;;; html2text.el ends here
