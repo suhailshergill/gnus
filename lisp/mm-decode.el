@@ -35,6 +35,7 @@
 (defgroup mime-display ()
   "Display of MIME in mail and news articles."
   :link '(custom-manual "(emacs-mime)Customization")
+  :version "21.1"
   :group 'mail
   :group 'news
   :group 'multimedia)
