@@ -42,6 +42,7 @@
 (defgroup gnus-charset nil
   "Group character set issues."
   :link '(custom-manual "(gnus)Charsets")
+  :version "21.1"
   :group 'gnus)
 
 (defgroup gnus-cache nil
