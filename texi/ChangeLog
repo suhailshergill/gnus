@@ -1,3 +1,7 @@
+2005-01-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi: Some edits based on comments from David Abrahams.
+
 2005-01-24  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (RSS): Fix the keystroke.
