@@ -679,7 +679,7 @@ prompt the user for the name of an NNTP server to use."
     (when gnus-simple-splash
       (setq gnus-simple-splash nil)
       (cond
-       (gnus-xemacs
+       ((featurep 'xemacs)
 	(gnus-xmas-splash))
        ((and window-system
 	     (= (frame-height) (1+ (window-height))))
@@ -1385,7 +1385,9 @@ newsgroup."
 	 (condition-case ()
 	     (inline (gnus-request-group group dont-check method))
 	   ;;(error nil)
-	   (quit nil))
+	   (quit
+	    (message "Quit activating %s" group)
+	    nil))
 	 (setq active (gnus-parse-active))
 	 ;; If there are no articles in the group, the GROUP
 	 ;; command may have responded with the `(0 . 0)'.  We
@@ -1738,7 +1740,9 @@ newsgroup."
 	      (gnus-read-active-file-1 method force)
 	    ;; We catch C-g so that we can continue past servers
 	    ;; that do not respond.
-	    (quit nil)))))))
+	    (quit
+	     (message "Quit reading the active file")
+	     nil)))))))
 
 (defun gnus-read-active-file-1 (method force)
   (let (where mesg)
@@ -2628,7 +2632,7 @@ If FORCE is non-nil, the .newsrc file is read."
 	      (let ((str (buffer-substring
 			  (point) (progn (end-of-line) (point))))
 		    (coding
-		     (and (or gnus-xemacs
+		     (and (or (featurep 'xemacs)
 			      (and (boundp 'enable-multibyte-characters)
 				   enable-multibyte-characters))
 			  (fboundp 'gnus-mule-get-coding-system)
