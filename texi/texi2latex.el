@@ -1,5 +1,5 @@
 ;;; texi2latex.el --- convert a texi file into a LaTeX file.
-;; Copyright (C) 1996 Lars Magne Ingebrigtsen
+;; Copyright (C) 1996, 2004 Lars Magne Ingebrigtsen
 
 (require 'cl)
 
@@ -62,7 +62,18 @@
     (erase-buffer)
     (insert-buffer-substring cur)
     (goto-char (point-min))
+    (when (search-forward "@copying" nil t)
+      (latexi-copying))
+    (while (search-forward "@insertcopying" nil t)
+      (delete-region (match-beginning 0) (match-end 0))
+      (latexi-insertcopying))
+    (goto-char (point-min))
     (latexi-strip-line)
+    (latexi-translate-string "@'e" "\\'{e}")
+    (latexi-translate-string "@`a" "\\`{a}")
+    (latexi-translate-string "@,{c}" "\\c{c}")
+    (latexi-translate-string "@aa{}" "{\\aa}")
+    (latexi-translate-string "@\"{@dotless{i}}" "ï")
     (latexi-translate-string "%@{" "\\gnuspercent{}\\gnusbraceleft{}")
     (latexi-translate-string "%@}" "\\gnuspercent{}\\gnusbraceright{}")
     (latexi-translate-string "%1@{" "\\gnuspercent{}1\\gnusbraceright{}")
@@ -101,7 +112,8 @@
 				  "summarycontents" "bye"
 				  "top" "iftex" "cartouche" 
 				  "iflatex" "finalout" "vskip"
-				  "dircategory" "group" "syncodeindex"))
+				  "dircategory" "group" "syncodeindex"
+				  "documentencoding"))
 		(latexi-strip-line))
 	       ((member command '("menu" "tex" "ifinfo" "ignore" 
 				  "ifnottex" "direntry"))
@@ -242,7 +254,7 @@
 		(latexi-begin-command "verse"))
 	       ((equal command "page")
 		(latexi-strip-line)
-		(insert (format "\\newpage\n" arg)))
+		(insert "\\newpage\n"))
 	       ((equal command "'s")
 		(goto-char (match-beginning 0))
 		(delete-char 1))
@@ -384,5 +396,25 @@
 		"\\\\\n"))
       (insert "\\end{tabular}\n")
       (widen))))
-	
+
+(defvar latexi-copying-text ""
+  "Text of the copyright notice and copying permissions.")
+
+(defun latexi-copying ()
+  "Copy the copyright notice and copying permissions from the Texinfo file,
+as indicated by the @copying ... @end copying command;
+insert the text with the @insertcopying command."
+  (let ((beg (progn (beginning-of-line) (point)))
+	(end  (progn (re-search-forward "^@end copying[ \t]*\n") (point))))
+    (setq latexi-copying-text
+	  (buffer-substring-no-properties
+	   (save-excursion (goto-char beg) (forward-line 1) (point))
+	   (save-excursion (goto-char end) (forward-line -1) (point))))
+    (delete-region beg end)))
+
+(defun latexi-insertcopying ()
+  "Insert the copyright notice and copying permissions from the Texinfo file,
+which are indicated by the @copying ... @end copying command."
+  (insert (concat "\n" latexi-copying-text)))
+
 ;;; arch-tag: 31e30f7f-4876-4dd1-ba3a-6f9f7ea0d256
