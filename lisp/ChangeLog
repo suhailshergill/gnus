@@ -1,4 +1,11 @@
-2004-07-28  Reiner Steib  <Reiner.Steib@gmx.de>
+2004-08-05  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mm-decode.el (mime-display, mime-security): Fix custom-manual
+	entries.
+
+	* gnus-art.el (gnus-article): Fix custom-manual entries.
+
+2004-08-02  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.el (gnus-group, gnus-summary, gnus-summary-sort): Fix
 	custom-manual entries.
