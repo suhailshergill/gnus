@@ -1,5 +1,7 @@
 2005-02-16  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* gnus-registry.el (gnus-registry-delete-group): minor bug fix
+
 	* gnus.el (gnus-install-group-spam-parameters): Doc fix.
 
 2005-02-15  Simon Josefsson  <jas@extundo.com>
