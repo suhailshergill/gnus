@@ -1,3 +1,7 @@
+2004-11-01  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* html2text.el: Beatify code.  Improve doc strings.
+
 2004-10-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-msg.el (gnus-configure-posting-styles): Work with empty
