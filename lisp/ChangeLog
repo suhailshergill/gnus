@@ -1,5 +1,8 @@
 2005-03-16  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* nneething.el (nneething-map-file-directory): Derive from
+	`gnus-directory'.
+
 	* gnus-art.el (gnus-header-button-alist): Use `gnus-msg-mail' for
 	the To/Cc button.
 
