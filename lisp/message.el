@@ -1766,7 +1766,7 @@ see `message-narrow-to-headers-or-head'."
 ;;; Start of functions adopted from `message-utils.el'.
 
 (defun message-strip-subject-trailing-was (subject)
-  "Remove trailing \"(Was: <old subject>)\" from SUBJECT lines.
+  "Remove trailing \"(was: <old subject>)\" from SUBJECT lines.
 Leading \"Re: \" is not stripped by this function.  Use the function
 `message-strip-subject-re' for this."
   (let* ((query message-subject-trailing-was-query)
