@@ -2,6 +2,7 @@
 
 	* gnus-faq.texi ([5.12]): Fix code example for FQDN in Message-Ids
 	again.
+	Use 5.10 instead of 5.10.0.
 
 2004-09-21  Katsumi Yamaoka  <yamaoka@jpl.org>
 
