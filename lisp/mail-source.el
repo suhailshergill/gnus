@@ -36,7 +36,7 @@
   :version "21.1"
   :group 'gnus)
 
-(defcustom mail-sources '((file))
+(defcustom mail-sources nil
   "*Where the mail backends will look for incoming mail.
 This variable is a list of mail source specifiers.
 See Info node `(gnus)Mail Source Specifiers'."
@@ -194,7 +194,7 @@ If non-nil, this maildrop will be checked periodically for new mail."
   :group 'mail-source
   :type 'integer)
 
-(defcustom mail-source-delete-incoming nil
+(defcustom mail-source-delete-incoming t
   "*If non-nil, delete incoming files after handling."
   :group 'mail-source
   :type 'boolean)
@@ -688,7 +688,10 @@ If ARGS, PROMPT is used as an argument to `format'."
 (defvar mail-source-report-new-mail-timer nil)
 (defvar mail-source-report-new-mail-idle-timer nil)
 
-(eval-when-compile (require 'timer))
+(eval-when-compile 
+  (if (featurep 'xemacs)
+      (require 'itimer)
+    (require 'timer)))
 
 (defun mail-source-start-idle-timer ()
   ;; Start our idle timer if necessary, so we delay the check until the
@@ -719,9 +722,9 @@ This only works when `display-time' is enabled."
 	      (> (prefix-numeric-value arg) 0))))
     (setq mail-source-report-new-mail on)
     (and mail-source-report-new-mail-timer
-	 (cancel-timer mail-source-report-new-mail-timer))
+	 (nnheader-cancel-timer mail-source-report-new-mail-timer))
     (and mail-source-report-new-mail-idle-timer
-	 (cancel-timer mail-source-report-new-mail-idle-timer))
+	 (nnheader-cancel-timer mail-source-report-new-mail-idle-timer))
     (setq mail-source-report-new-mail-timer nil)
     (setq mail-source-report-new-mail-idle-timer nil)
     (if on
@@ -769,10 +772,10 @@ This only works when `display-time' is enabled."
 ;;; 					    (current-time-string) "\n"))
 ;;; 				  (while (re-search-forward "^From " nil t)
 ;;; 				    (replace-match ">From "))
+;;;                               (goto-char (point-max))
+;;;				  (insert "\n\n")
 				  ;; MMDF mail format
-				  (insert "\001\001\001\001\n")
-				  (goto-char (point-max))
-				  (insert "\n\n"))
+				  (insert "\001\001\001\001\n"))
 				(delete-file file)))))
 	      (incf found (mail-source-callback callback file))))))
       found)))
@@ -789,7 +792,11 @@ This only works when `display-time' is enabled."
   (autoload 'imap-error-text "imap")
   (autoload 'imap-message-flags-add "imap")
   (autoload 'imap-list-to-message-set "imap")
+  (autoload 'imap-range-to-message-set "imap")
   (autoload 'nnheader-ms-strip-cr "nnheader"))
+
+(defvar mail-source-imap-file-coding-system 'binary
+  "Coding system for the crashbox made by `mail-source-fetch-imap'.")
 
 (defun mail-source-fetch-imap (source callback)
   "Fetcher for imap sources."
@@ -804,7 +811,11 @@ This only works when `display-time' is enabled."
 		user (or (cdr (assoc from mail-source-password-cache))
 			 password) buf)
 	       (imap-mailbox-select mailbox nil buf))
-	  (let (str (coding-system-for-write 'binary))
+	  (let ((coding-system-for-write mail-source-imap-file-coding-system) 
+		;; Avoid converting 8-bit chars from inserted strings to
+		;; multibyte.
+		default-enable-multibyte-characters
+		str)
 	    (with-temp-file mail-source-crash-box
 	      ;; In some versions of FSF Emacs, inserting unibyte
 	      ;; string into multibyte buffer may convert 8-bit chars
@@ -829,7 +840,8 @@ This only works when `display-time' is enabled."
 	    (incf found (mail-source-callback callback server))
 	    (when (and remove fetchflag)
 	      (imap-message-flags-add
-	       (imap-list-to-message-set remove) fetchflag nil buf))
+	       (imap-range-to-message-set (gnus-compress-sequence remove))
+	       fetchflag nil buf))
 	    (if dontexpunge
 		(imap-mailbox-unselect buf)
 	      (imap-mailbox-close buf))
