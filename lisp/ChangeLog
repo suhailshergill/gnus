@@ -1,5 +1,11 @@
 2004-08-30  Simon Josefsson  <jas@extundo.com>
 
+	* ietf-drums.el (ietf-drums-syntax-table): Set syntax of ?* ?\;
+	and ?\' to symbol instead of whitespace (tiny patch).  From
+	Andreas Schwab <schwab@suse.de>.
+
+2004-08-30  Simon Josefsson  <jas@extundo.com>
+
 	* message.el, gnus-art.el: Sync IDNA fixes against HEAD, include
 	entries until 2004-08-30 below.
 
