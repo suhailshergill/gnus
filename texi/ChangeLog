@@ -1,8 +1,11 @@
 2005-03-22  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* message.texi, gnus.texi: Update copyright.
+
 	* xml2texi.scm (+tag-for-gnus-faq-texi+): New variable.
 	(transform): Use it.  From Karl Pfl,Ad(Bsterer <sigurd@12move.de> with
 	minor modifications.
+	(boilerplate): Update copyright for the output file.
 
 2005-03-21  Reiner Steib  <Reiner.Steib@gmx.de>
 

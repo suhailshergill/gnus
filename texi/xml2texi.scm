@@ -77,7 +77,7 @@
 @c \\input texinfo @c -*-texinfo-*-~%\
 @c Uncomment 1st line before texing this file alone.~%\
 @c %**start of header~%\
-@c Copyright (C) 1995, 2001, 2003, 2004 Free Software Foundation, Inc.~%\
+@c Copyright (C) 1995, 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.~%\
 @setfilename gnus-faq.info~%\
 @settitle ~A~%\
 @c %**end of header~%\
