@@ -1,3 +1,8 @@
+2004-11-25  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* nnmail.el (nnmail-split-header-length-limit): Increase to 2048
+	to avoid problems when splitting mails with many recipients.
+
 2004-11-23  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* rfc2047.el (rfc2047-header-encoding-alist): Add In-Reply-To to
