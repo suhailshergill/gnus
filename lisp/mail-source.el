@@ -817,10 +817,6 @@ This only works when `display-time' is enabled."
 		default-enable-multibyte-characters
 		str)
 	    (with-temp-file mail-source-crash-box
-	      ;; In some versions of FSF Emacs, inserting unibyte
-	      ;; string into multibyte buffer may convert 8-bit chars
-	      ;; into latin-iso8859-1 chars, which results \201's.
-	      (mm-disable-multibyte)
 	      ;; remember password
 	      (with-current-buffer buf
 		(when (or imap-password
