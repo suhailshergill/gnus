@@ -1,3 +1,8 @@
+2004-11-25  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* message.el (message-forbidden-properties): Fixed typo in doc
+	string.
+
 2004-11-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-strip-forbidden-properties): Bind
