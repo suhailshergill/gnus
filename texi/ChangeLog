@@ -1,3 +1,7 @@
+2005-04-06  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (RSS): Addition.
+
 2005-03-30  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* Makefile.in (gnus-booklet.dvi, gnus-booklet.pdf): Simplify.
