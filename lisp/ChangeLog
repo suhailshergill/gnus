@@ -1,5 +1,8 @@
 2005-03-16  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* nnimap.el (nnimap-open-connection): Print which authinfo file is
+	used.
+
 	* nneething.el (nneething-map-file-directory): Derive from
 	`gnus-directory'.
 
