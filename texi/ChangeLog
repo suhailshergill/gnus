@@ -1,3 +1,7 @@
+2005-03-30  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Makefile.in (gnus-booklet.dvi, gnus-booklet.pdf): Simplify.
+
 2005-03-29  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* Makefile.in (gnus-booklet.dvi, gnus-booklet.pdf)
