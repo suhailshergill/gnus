@@ -1,3 +1,31 @@
+2004-08-30  Simon Josefsson  <jas@extundo.com>
+
+	* message.el, gnus-art.el: Sync IDNA fixes against HEAD, include
+	entries until 2004-08-30 below.
+
+2004-06-23  Jesper Harder  <harder@ifa.au.dk>
+
+	* message.el (message-idna-to-ascii-rhs-1): Don't choke on
+	invalid addresses.
+
+2004-05-18  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* message.el (message-idna-to-ascii-rhs-1): Fix typo.
+
+2004-05-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-idna-to-ascii-rhs-1): Don't use equalp.
+
+2004-05-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (article-decode-idna-rhs): Don't use
+	message-idna-inside-rhs-p.
+
+2004-05-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-idna-inside-rhs-p): Removed.
+	(message-idna-to-ascii-rhs-1): Use proper address parsing.
+
 2004-08-30  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-agent.el (gnus-agent-restore-gcc): Use ^ and regexp-quote.
