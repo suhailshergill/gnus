@@ -29,20 +29,22 @@
 
 ;;; Code:
 
-(autoload 'mm-decode-coding-region "mm-util")
-(autoload 'mm-encode-coding-region "mm-util")
+(require 'mm-util)
+(eval-when-compile (defvar mm-use-ultra-safe-encoding))
 
 (defun quoted-printable-decode-region (from to &optional coding-system)
   "Decode quoted-printable in the region between FROM and TO, per RFC 2045.
 If CODING-SYSTEM is non-nil, decode bytes into characters with that
 coding-system."
   (interactive "r")
+  (unless (mm-coding-system-p coding-system) ; e.g. `ascii' from Gnus
+    (setq coding-system nil))
   (save-excursion
     (save-restriction
-      ;; RFC 2045:  An "=" followed by two hexadecimal digits, one or
-      ;; both of which are lowercase letters in "abcdef", is formally
-      ;; illegal. A robust implementation might choose to recognize
-      ;; them as the corresponding uppercase letters.
+      ;; RFC 2045:  ``An "=" followed by two hexadecimal digits, one
+      ;; or both of which are lowercase letters in "abcdef", is
+      ;; formally illegal. A robust implementation might choose to
+      ;; recognize them as the corresponding uppercase letters.''
       (let ((case-fold-search t))
 	(narrow-to-region from to)
 	;; Do this in case we're called from Gnus, say, in a buffer
