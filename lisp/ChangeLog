@@ -22,7 +22,7 @@
 	* spam.el (spam-check-spamoracle, spam-spamoracle-learn): Fix
 	format string mismatch.
 	* nnml.el (nnml-request-set-mark, nnml-save-marks): do.	
-	* nnfolder.el (nnfolder-request-set-mark, nnfolder-save-marks): do.	
+	* nnfolder.el (nnfolder-request-set-mark, nnfolder-save-marks): do.
 	
 2004-09-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
