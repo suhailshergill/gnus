@@ -1555,25 +1555,35 @@ Initialized from `text-mode-syntax-table.")
   (interactive)
   ;; This function might be inhibited.
   (unless gnus-inhibit-hiding
-    (save-excursion
-      (save-restriction
-	(let ((inhibit-read-only t)
-	      (case-fold-search t)
-	      (max (1+ (length gnus-sorted-header-list)))
-	      (ignored (when (not gnus-visible-headers)
-			 (cond ((stringp gnus-ignored-headers)
-				gnus-ignored-headers)
-			       ((listp gnus-ignored-headers)
-				(mapconcat 'identity gnus-ignored-headers
-					   "\\|")))))
-	      (visible
-	       (cond ((stringp gnus-visible-headers)
-		      gnus-visible-headers)
-		     ((and gnus-visible-headers
-			   (listp gnus-visible-headers))
-		      (mapconcat 'identity gnus-visible-headers "\\|"))))
-	      (inhibit-point-motion-hooks t)
-	      beg)
+    (let ((inhibit-read-only nil)
+	  (case-fold-search t)
+	  (max (1+ (length gnus-sorted-header-list)))
+	  (inhibit-point-motion-hooks t)
+	  (cur (current-buffer))
+	  ignored visible beg)
+      (save-excursion
+	;; `gnus-ignored-headers' and `gnus-visible-headers' may be
+	;; group parameters, so we should go to the summary buffer.
+	(when (prog1
+		  (condition-case nil
+		      (progn (set-buffer gnus-summary-buffer) t)
+		    (error nil))
+		(setq ignored (when (not gnus-visible-headers)
+				(cond ((stringp gnus-ignored-headers)
+				       gnus-ignored-headers)
+				      ((listp gnus-ignored-headers)
+				       (mapconcat 'identity
+						  gnus-ignored-headers
+						  "\\|"))))
+		      visible (cond ((stringp gnus-visible-headers)
+				     gnus-visible-headers)
+				    ((and gnus-visible-headers
+					  (listp gnus-visible-headers))
+				     (mapconcat 'identity
+						gnus-visible-headers
+						"\\|")))))
+	  (set-buffer cur))
+	(save-restriction
 	  ;; First we narrow to just the headers.
 	  (article-narrow-to-head)
 	  ;; Hide any "From " lines at the beginning of (mail) articles.
@@ -5183,11 +5193,13 @@ not have a face in `gnus-article-boring-faces'."
       (let ((obuf (current-buffer))
 	    (owin (current-window-configuration))
 	    (opoint (point))
-	    (summary gnus-article-current-summary)
-	    func in-buffer selected)
-	(if not-restore-window
-	    (pop-to-buffer summary 'norecord)
-	  (switch-to-buffer summary 'norecord))
+	    win func in-buffer selected new-sum-start new-sum-hscroll)
+	(cond (not-restore-window
+	       (pop-to-buffer gnus-article-current-summary 'norecord))
+	      ((setq win (get-buffer-window gnus-article-current-summary))
+	       (select-window win))
+	      (t
+	       (switch-to-buffer gnus-article-current-summary 'norecord)))
 	(setq in-buffer (current-buffer))
 	;; We disable the pick minor mode commands.
 	(if (and (setq func (let (gnus-pick-mode)
@@ -5195,7 +5207,10 @@ not have a face in `gnus-article-boring-faces'."
 		 (functionp func))
 	    (progn
 	      (call-interactively func)
-	      (setq new-sum-point (point))
+	      (when (eq win (selected-window))
+		(setq new-sum-point (point)
+		      new-sum-start (window-start win)
+		      new-sum-hscroll (window-hscroll win))
 	      (when (eq in-buffer (current-buffer))
 		(setq selected (gnus-summary-select-article))
 		(set-buffer obuf)
@@ -5207,10 +5222,12 @@ not have a face in `gnus-article-boring-faces'."
 				    1)
 		  (set-window-point (get-buffer-window (current-buffer))
 				    (point)))
-		(let ((win (get-buffer-window gnus-article-current-summary)))
-		  (when win
-		    (set-window-point win new-sum-point))))    )
-	  (switch-to-buffer gnus-article-buffer)
+		(when (and (not not-restore-window)
+			   new-sum-point)
+		  (set-window-point win new-sum-point)
+		  (set-window-start win new-sum-start)
+		  (set-window-hscroll win new-sum-hscroll)))))
+	  (set-window-configuration owin)
 	  (ding))))))
 
 (defun gnus-article-describe-key (key)
@@ -6688,6 +6705,15 @@ specified by `gnus-button-alist'."
     (define-key map "\r" 'gnus-button-prev-page)
     map))
 
+(defvar gnus-next-page-map
+  (let ((map (make-sparse-keymap)))
+    (unless (>= emacs-major-version 21)
+      ;; XEmacs doesn't care.
+      (set-keymap-parent map gnus-article-mode-map))
+    (define-key map gnus-mouse-2 'gnus-button-next-page)
+    (define-key map "\r" 'gnus-button-next-page)
+    map))
+
 (defun gnus-insert-prev-page-button ()
   (let ((b (point))
 	(inhibit-read-only t))
@@ -6704,24 +6730,6 @@ specified by `gnus-button-alist'."
 	       (point))
      :action 'gnus-button-prev-page
      :button-keymap gnus-prev-page-map)))
-
-(defvar gnus-prev-page-map
-  (let ((map (make-sparse-keymap)))
-    (unless (>= emacs-major-version 21)
-      ;; XEmacs doesn't care.
-      (set-keymap-parent map gnus-article-mode-map))
-    (define-key map gnus-mouse-2 'gnus-button-prev-page)
-    (define-key map "\r" 'gnus-button-prev-page)
-    map))
-
-(defvar gnus-next-page-map
-  (let ((map (make-sparse-keymap)))
-    (unless (>= emacs-major-version 21)
-      ;; XEmacs doesn't care.
-      (set-keymap-parent map gnus-article-mode-map))
-    (define-key map gnus-mouse-2 'gnus-button-next-page)
-    (define-key map "\r" 'gnus-button-next-page)
-    map))
 
 (defun gnus-button-next-page (&optional args more-args)
   "Go to the next page."
