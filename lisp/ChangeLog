@@ -1,3 +1,12 @@
+2004-04-13 Kevin Greiner <kgreiner@xpediantsolutions.com>
+
+	* gnus-agent.el: Merged 7.3 through 7.7 updates into branch.
+	Revision 7.2 changes excluded to maintain compatibility with all
+	targeted emacs versions.
+
+	* gnus-cus.el: Merged revisions 7.2 through 7.5 into branch to support
+	gnus-agent.el update and incorporate bug fixes.
+
 2004-01-04 Lars Magne Ingebrigtsen <lars@ingebrigtsen.no>
 
 	* gnus.el: Gnus v5.10.6 is released.
