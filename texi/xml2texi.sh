@@ -62,4 +62,4 @@ exec mzscheme -mr $0 ${1+"$@"}
 ;; coding: iso-8859-1
 ;; End:
 
-# arch-tag: 582279c5-b7bf-44b0-ba09-d243a7d7f6e0
+;; arch-tag: 582279c5-b7bf-44b0-ba09-d243a7d7f6e0
