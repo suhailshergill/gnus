@@ -1,5 +1,8 @@
 2005-03-29  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-refcard.tex: Merged from refcard.tex and gnusref.tex.
+	Removed refcard.tex gnusref.tex booklet.tex bk-lt.tex bk-a4.tex.
+
 	* gnus-logo.eps: Renamed from gnuslogo-booklet.eps.
 	gnuslogo-refcard.eps: Removed.
 
