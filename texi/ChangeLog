@@ -1,5 +1,9 @@
 2005-03-29  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* Makefile.in (gnus-booklet.dvi, gnus-booklet.pdf)
+	(gnus-refcard.dvi, gnus-refcard.pdf): New targets replacing
+	refcard.* and booklet.*.
+
 	* gnus-refcard.tex: Merged from refcard.tex and gnusref.tex.
 	Removed refcard.tex gnusref.tex booklet.tex bk-lt.tex bk-a4.tex.
 
