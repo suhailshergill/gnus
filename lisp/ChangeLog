@@ -1,3 +1,8 @@
+2004-10-18  David Edmondson  <dme@dme.org>
+
+	* mm-view.el (mm-w3m-cid-retrieve-1): Don't use recursive call
+	excessively.
+
 2004-10-18  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* mml.el (mml-preview): Use `pop-to-buffer'.
