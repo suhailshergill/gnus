@@ -47,7 +47,6 @@
 	default.
 
 2005-03-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
-	Committed by Katsumi Yamaoka.
 
 	* rfc2047.el (rfc2047-encode-encoded-words): New variable.
 	(rfc2047-field-value): Strip props.
@@ -58,7 +57,6 @@
 	(rfc2047-encode-region): Encode =? strings.
 
 2005-03-25  Jesper Harder  <harder@ifa.au.dk>
-	Committed by Katsumi Yamaoka.
 
 	* rfc2047.el (rfc2047-encoded-word-regexp): Support RFC 2231
 	language tags; remove unnecessary '+'.  Reported by Stefan Wiens
@@ -70,7 +68,6 @@
 	mm-replace-chars-in-string.
 
 2005-03-25  TSUCHIYA Masatoshi  <tsuchiya@namazu.org>
-	Committed by Katsumi Yamaoka.
 
 	* rfc2047.el (rfc2047-encode): Use uppercase letters to specify
 	encodings of MIME-encoded words, in order to improve
