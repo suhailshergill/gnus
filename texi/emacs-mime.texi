@@ -851,6 +851,7 @@ used except, e.g., when other requirements force a safer encoding
 (digitally signed messages require 7bit encoding).  Besides the normal
 @acronym{MIME} encodings, @code{qp-or-base64} may be used to indicate that for
 each case the most efficient of quoted-printable and base64 should be
+used.
 
 @code{qp-or-base64} has another effect.  It will fold long lines so that
 MIME parts may not be broken by MTA.  So do @code{quoted-printable} and
