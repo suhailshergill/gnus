@@ -590,4 +590,5 @@ this keymap, add them to `w3m-minor-mode-map' instead of this keymap.")))
 
 (provide 'mm-view)
 
+;;; arch-tag: b60e749a-d05c-47f2-bccd-bdaa59327cb2
 ;;; mm-view.el ends here

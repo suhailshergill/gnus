@@ -123,4 +123,5 @@ server."
 
 (provide 'spam-report)
 
+;;; arch-tag: f6683295-ec89-4ab5-8803-8cc842293022
 ;;; spam-report.el ends here.

@@ -1823,4 +1823,5 @@ REMOVE not nil, remove the ADDRESSES."
 
 (provide 'spam)
 
+;;; arch-tag: 07e6e0ca-ab0a-4412-b445-1f6c72a4f27f
 ;;; spam.el ends here

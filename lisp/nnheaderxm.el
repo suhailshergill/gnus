@@ -96,4 +96,5 @@ or `cancel-timer'."
 
 (provide 'nnheaderxm)
 
+;;; arch-tag: ee2b3387-d3ca-4de6-9b64-304d838706dd
 ;;; nnheaderxm.el ends here

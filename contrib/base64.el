@@ -276,3 +276,5 @@ base64-encoder-program.")
 (defalias 'base64-encode-string 'base64-encode)
 
 (provide 'base64)
+
+;;; arch-tag: cf16aa86-3365-4675-bc57-912d86bdfdb7

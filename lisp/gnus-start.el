@@ -2989,6 +2989,7 @@ Would otherwise be an alias for `display-time-event-handler'." nil))))
 
 (provide 'gnus-start)
 
+;;; arch-tag: f4584a22-b7b7-4853-abfc-a637329af5d2
 ;;; gnus-start.el ends here
 
 

@@ -406,4 +406,5 @@ hash of a portion of OBJECT."
 
 (provide 'md5)
 
+;;; arch-tag: 8e060c7a-abd8-4858-a958-fd2228bca2a3
 ;;; md5.el ends here

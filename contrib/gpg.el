@@ -7,7 +7,7 @@
 ;; Keywords: crypto
 ;; Created: 2000-04-15
 
-;; $Id: gpg.el,v 1.18 2002/01/25 18:00:44 huber Exp $
+;; $Id: gpg.el,v 1.19 2003/05/01 16:03:41 larsi Exp $
 
 ;; This file is NOT (yet?) part of GNU Emacs.
 
@@ -1321,4 +1321,5 @@ before point.")
 
 (provide 'gpg)
 
+;;; arch-tag: c972455d-9bc5-4de1-9dc7-4f494d63053b
 ;;; gpg.el ends here

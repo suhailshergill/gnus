@@ -298,7 +298,7 @@
 
 ;;; Setup Code:
 
-(defconst nnir-version "$Id: nnir.el,v 1.2 2003/09/30 21:30:34 kaig Exp $"
+(defconst nnir-version "$Id: nnir.el,v 1.3 2003/10/24 21:43:57 youngs Exp $"
   "Version of NNIR.")
 
 (require 'cl)
@@ -1557,3 +1557,5 @@ The Gnus backend/server information is added."
 
 ;; The end.
 (provide 'nnir)
+
+;;; arch-tag: 9b3fecf8-4397-4bbb-bf3c-6ac3cbbc6664

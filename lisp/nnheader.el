@@ -1025,4 +1025,5 @@ find-file-hooks, etc.
 
 (provide 'nnheader)
 
+;;; arch-tag: a9c4b7d9-52ae-4ec9-b196-dfd93124d202
 ;;; nnheader.el ends here

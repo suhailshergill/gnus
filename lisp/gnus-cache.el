@@ -729,4 +729,5 @@ If GROUP is non-nil, also cater to `gnus-cacheable-groups' and
 
 (provide 'gnus-cache)
 
+;;; arch-tag: 05a79442-8c58-4e65-bd0a-3cbb1b89a33a
 ;;; gnus-cache.el ends here
