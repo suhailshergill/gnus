@@ -1,3 +1,9 @@
+2004-10-15  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Mail Source Specifiers): Describe possible problems
+	of `pop3-leave-mail-on-server'.  Add `pop3-movemail' and
+	`pop3-leave-mail-on-server' to the index.
+
 2004-10-15  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* message.texi (Canceling News): Add how to set a password.
