@@ -1,5 +1,8 @@
 2005-03-29  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-logo.eps: Renamed from gnuslogo-booklet.eps.
+	gnuslogo-refcard.eps: Removed.
+
 	* Makefile.in (gnus-faq.texi): Depend on xml2texi.*.  Fix sed
 	command.
 
