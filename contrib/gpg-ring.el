@@ -7,8 +7,6 @@
 ;; Keywords: crypto
 ;; Created: 2000-04-28
 
-;; $Id: gpg-ring.el,v 1.2 2001/07/13 19:31:08 zsh Exp $
-
 ;; This file is NOT (yet?) part of GNU Emacs.
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
