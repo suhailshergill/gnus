@@ -1,3 +1,30 @@
+2004-09-20  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (MIME Commands): Added
+	gnus-mime-display-multipart-as-mixed,
+	gnus-mime-display-multipart-alternative-as-mixed,
+	gnus-mime-display-multipart-related-as-mixed.
+	(Mail Source Customization): Clarify `mail-source-directory'.
+	(Splitting Mail): Mention gnus-group-find-new-groups.
+	(SpamOracle): Fixed typo.
+
+	* gnus-faq.texi: Untabify.
+	([6.3]): nnir.el is in contrib directory.  
+
+	* message.texi (News Headers): Clarify how a unique ID is created.
+
+	* gnus.texi (Batching Agents): Fixed typo in example.  Reported
+	by Hiroshi Fujishima <pooh@nature.tsukuba.ac.jp>.
+
+2004-09-20  Andre Srinivasan  <andre@e2open.com>
+
+	* gnus.texi (Group Parameters): Added more on hooks.  (Small
+	change.)
+
+2004-09-20  Florian Weimer  <fw@deneb.enyo.de>
+
+	* gnus.texi (Charsets): Point to relevant section in emacs-mime.
+
 2004-09-10  Simon Josefsson  <jas@extundo.com>
 
 	* gnus.texi (IMAP): Add example.  Suggested and partially written
