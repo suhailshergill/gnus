@@ -29,7 +29,7 @@
 (eval-when-compile (require 'cl))
 
 (if (not (fboundp 'char-int))
-    (fset 'char-int 'identity))
+    (defalias 'char-int 'identity))
 
 (defvar binhex-decoder-program "hexbin"
   "*Non-nil value should be a string that names a uu decoder.
@@ -67,7 +67,7 @@ input and write the converted data to its standard output.")
 	((boundp 'temporary-file-directory) temporary-file-directory)
 	("/tmp/")))
 
-(if (string-match "XEmacs" emacs-version)
+(if (featurep 'xemacs)
     (defalias 'binhex-insert-char 'insert-char)
   (defun binhex-insert-char (char &optional count ignored buffer)
     (if (or (null buffer) (eq buffer (current-buffer)))
@@ -198,15 +198,8 @@ If HEADER-ONLY is non-nil only decode header and return filename."
 	(save-excursion
 	  (goto-char start)
 	  (when (re-search-forward binhex-begin-line end t)
-	    (if (and (not (string-match "XEmacs\\|Lucid" emacs-version))
-		     (boundp 'enable-multibyte-characters))
-		(let ((multibyte
-		       (default-value 'enable-multibyte-characters)))
-		  (setq-default enable-multibyte-characters nil)
-		  (setq work-buffer (generate-new-buffer " *binhex-work*"))
-		  (setq-default enable-multibyte-characters multibyte))
+	    (let (default-enable-multibyte-characters)
 	      (setq work-buffer (generate-new-buffer " *binhex-work*")))
-	    (buffer-disable-undo work-buffer)
 	    (beginning-of-line)
 	    (setq bits 0 counter 0)
 	    (while tmp
@@ -267,9 +260,9 @@ If HEADER-ONLY is non-nil only decode header and return filename."
   "Binhex decode region between START and END using external decoder."
   (interactive "r")
   (let ((cbuf (current-buffer)) firstline work-buffer status
-	(file-name (concat binhex-temporary-file-directory
-			   (binhex-decode-region start end t)
-			   ".data")))
+	(file-name (expand-file-name 
+		    (concat (binhex-decode-region start end t) ".data")
+		    binhex-temporary-file-directory)))
     (save-excursion
       (goto-char start)
       (when (re-search-forward binhex-begin-line nil t)
