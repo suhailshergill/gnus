@@ -1,5 +1,7 @@
 2005-03-22  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-faq.texi: Generated from gnus-faq.xml using xml2texi.*.
+
 	* message.texi, gnus.texi: Update copyright.
 
 	* xml2texi.scm (+tag-for-gnus-faq-texi+): New variable.
