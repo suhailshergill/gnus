@@ -1,5 +1,8 @@
 2004-11-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* html2text.el (html2text-get-attr): Remove unused argument `tag'.
+	(html2text-format-tags): Remove unused variable `attr'.
+
 	* mm-util.el (mm-enrich-utf-8-by-mule-ucs): Fix cleaning of
 	after-load-alist.
 
