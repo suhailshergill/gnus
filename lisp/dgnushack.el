@@ -202,6 +202,7 @@ than subr.el."
     (autoload 'dolist "cl-macs" nil nil 'macro)
     (autoload 'enriched-decode "enriched")
     (autoload 'info "info" nil t)
+    (autoload 'mail-extract-address-components "mail-extr")
     (autoload 'mail-fetch-field "mail-utils")
     (autoload 'make-annotation "annotations")
     (autoload 'make-display-table "disp-table")
