@@ -1,3 +1,17 @@
+2005-05-17  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* hashcash.el (hashcash): New custom group.
+	(hashcash-default-payment): Add :group.
+	(hashcash-payment-alist): Ditto.
+	(hashcash-default-accept-payment): Ditto.
+	(hashcash-accept-resources): Ditto.
+	(hashcash-path): Ditto.
+	(hashcash-extra-generate-parameters): Ditto.
+	(hashcash-double-spend-database): Ditto.
+	(hashcash-in-news): Ditto.
+
+	* nnir.el (nnir): Add :group.
+
 2005-03-13  Steve Youngs  <steve@sxemacs.org>
 
 	* gpg.el: Add timer/itimer compatibility.
