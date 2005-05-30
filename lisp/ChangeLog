@@ -45,7 +45,7 @@
 	* pgg-parse.el (pgg-read-body, pgg-read-bytes)
 	(pgg-format-key-identifier): Ditto.
 	* pop3.el (pop3-last, pop3-stat): Ditto.
-	* qp.el (quoted-printable-decode-region): 
+	* qp.el (quoted-printable-decode-region): Ditto.
 
 	* spam-report.el (spam-report-url-ping-mm-url): Use format instead
 	of concat.
