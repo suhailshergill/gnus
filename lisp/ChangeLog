@@ -5,7 +5,8 @@
 
 	* gnus-group.el: Bind gnus-cache-active-hashtb when compiling.
 
-	* gnus-util.el (gnus-set-process-query-on-exit-flag): New function.
+	* gnus-util.el (gnus-set-process-query-on-exit-flag): Alias to
+	set-process-query-on-exit-flag or process-kill-without-query.
 
 	* html2text.el (html2text-fix-paragraphs): Use `while - re-search'
 	loop instead of replace-regexp.
@@ -36,8 +37,8 @@
 	(pgg-run-at-time-1): New macro.
 	(pgg-run-at-time): Use it.
 
-	* starttls.el (starttls-set-process-query-on-exit-flag): New
-	function.
+	* starttls.el (starttls-set-process-query-on-exit-flag): Alias to
+	set-process-query-on-exit-flag or process-kill-without-query.
 	(starttls-open-stream-gnutls): Use it instead of
 	process-kill-without-query.
 	(starttls-open-stream): Ditto.
