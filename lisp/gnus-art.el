@@ -3732,6 +3732,7 @@ commands:
 \\[gnus-article-describe-briefly]\t Describe the current mode briefly
 \\[gnus-info-find-node]\t Go to the Gnus info node"
   (interactive)
+  (kill-all-local-variables)
   (gnus-simplify-mode-line)
   (setq mode-name "Article")
   (setq major-mode 'gnus-article-mode)
@@ -3754,7 +3755,7 @@ commands:
   (make-local-variable 'gnus-article-charset)
   (make-local-variable 'gnus-article-ignored-charsets)
   ;; Prevent recent Emacsen from displaying non-break space as "\ ".
-  (set (make-local-variable 'show-nonbreak-escape) nil)
+  (set (make-local-variable 'nobreak-char-display) nil)
   (gnus-set-default-directory)
   (buffer-disable-undo)
   (setq buffer-read-only t)
@@ -7069,7 +7070,7 @@ For example:
     current-prefix-arg))
   (let ((func (cdr (assoc protocol gnus-article-encrypt-protocol-alist))))
     (unless func
-      (error (format "Can't find the encrypt protocol %s" protocol)))
+      (error "Can't find the encrypt protocol %s" protocol))
     (if (member gnus-newsgroup-name '("nndraft:delayed"
 				      "nndraft:drafts"
 				      "nndraft:queue"))
