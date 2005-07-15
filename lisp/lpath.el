@@ -46,7 +46,8 @@
 		    enable-multibyte-characters gnus-agent-expire-current-dirs
 		    language-info-alist mark-active mouse-selection-click-count
 		    mouse-selection-click-count-buffer pgg-parse-crc24
-		    temporary-file-directory transient-mark-mode)))
+		    scroll-margin temporary-file-directory
+		    transient-mark-mode)))
   (maybe-fbind '(bbdb-complete-name
 		 delete-annotation delete-extent device-connection dfw-device
 		 events-to-keys font-lock-set-defaults frame-device
