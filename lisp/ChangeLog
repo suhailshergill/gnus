@@ -1,3 +1,19 @@
+2005-07-25  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-article-next-page): Revert.
+	(gnus-article-beginning-of-window): New macro.
+	(gnus-article-next-page-1): Use it.
+	(gnus-article-prev-page): Ditto.
+	(gnus-mime-save-part-and-strip): Use insert-buffer-substring
+	instead of insert-buffer.
+	(gnus-mime-delete-part): Ditto.
+	(gnus-article-edit-exit): Ditto.
+
+	* gnus-util.el (gnus-beginning-of-window): Remove.
+	(gnus-end-of-window): Remove.
+
+	* lpath.el: Don't bind scroll-margin.
+
 2005-07-25  Simon Josefsson  <jas@extundo.com>
 
 	* pgg.el (pgg-insert-url-with-w3): Don't load w3, it is possible
@@ -26,7 +42,7 @@
 	* gnus-util.el (gnus-beginning-of-window): New function.
 	(gnus-end-of-window): New function.
 
-	* lpath.el: Bind header-line-format and scroll-margin for XEmacs.
+	* lpath.el: Bind scroll-margin for XEmacs.
 
 2005-07-13  Katsumi Yamaoka  <yamaoka@jpl.org>
 
