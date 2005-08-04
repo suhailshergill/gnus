@@ -842,7 +842,8 @@ be controlled by `gnus-treat-body-boundary'."
   :type '(choice (item :tag "None" :value nil)
 		 string))
 
-(defcustom gnus-picon-databases '("/usr/lib/picon" "/usr/local/faces")
+(defcustom gnus-picon-databases '("/usr/lib/picon" "/usr/local/faces"
+				  "/usr/share/picons")
   "Defines the location of the faces database.
 For information on obtaining this database of pretty pictures, please
 see http://www.cs.indiana.edu/picons/ftp/index.html"
@@ -2428,7 +2429,7 @@ If READ-CHARSET, ask for a coding system."
     (let ((inhibit-read-only t))
       (goto-char (point-min))
       (while (re-search-forward
-	      "^\\(\\(https?\\|ftp\\)://\\S-+\\) *\n\\(\\S-+\\)" nil t)
+	      "\\(\\(https?\\|ftp\\)://\\S-+\\) *\n\\(\\S-+\\)" nil t)
 	(replace-match "\\1\\3" t)))
     (when (interactive-p)
       (gnus-treat-article nil))))
