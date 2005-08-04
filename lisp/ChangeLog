@@ -13,6 +13,9 @@
 	for news:localpart@domain buttons.
 	(gnus-button-ctan-directory-regexp): Update.
 
+	* message.el (message-kill-buffer): Raise the current frame.
+	(message-bury): Use `window-dedicated-p'.
+
 2005-08-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* sieve-manage.el (sieve-manage-interactive-login): Use
