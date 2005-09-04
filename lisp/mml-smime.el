@@ -79,7 +79,10 @@
   (list 'keyfile
 	(if (= (length smime-keys) 1)
 	    (cadar smime-keys)
-	  (or (let ((from (cadr (funcall gnus-extract-address-components
+	  (or (let ((from (cadr (funcall (if (boundp
+					      'gnus-extract-address-components)
+					     gnus-extract-address-components
+					   'mail-extract-address-components)
 					 (or (save-excursion
 					       (save-restriction
 						 (message-narrow-to-headers)

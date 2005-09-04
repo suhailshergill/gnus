@@ -1,3 +1,9 @@
+2005-09-04  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mml-smime.el (mml-smime-sign-query): Don't depend on Gnus by
+	using mail-extract-address-components if
+	gnus-extract-address-components is not bound.
+
 2005-09-02  Hrvoje Niksic  <hniksic@xemacs.org>
 
 	* mm-encode.el (mm-encode-content-transfer-encoding): Likewise
