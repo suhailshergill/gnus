@@ -1031,17 +1031,18 @@ If SILENT, don't prompt the user."
   "Stringified Gnus version and Emacs version.
 See the variable `gnus-user-agent'."
   (interactive)
-  (let* ((float-output-format nil)
-	 (gnus-v
-	  (concat "Gnus/"
-		  (prin1-to-string (gnus-continuum-version gnus-version) t)
-		  " (" gnus-version ")"))
-	 (emacs-v (gnus-emacs-version)))
-    (if (stringp gnus-user-agent)
-	gnus-user-agent
-      (concat gnus-v
-	      (when emacs-v
-		(concat " " emacs-v))))))
+  (if (stringp gnus-user-agent)
+      gnus-user-agent
+    ;; `gnus-user-agent' is a list:
+    (let* ((float-output-format nil)
+	   (gnus-v
+	    (when (memq 'gnus gnus-user-agent)
+	      (concat "Gnus/"
+		      (prin1-to-string (gnus-continuum-version gnus-version) t)
+		      " (" gnus-version ")")))
+	   (emacs-v (gnus-emacs-version)))
+      (concat gnus-v (when (and gnus-v emacs-v) " ")
+	      emacs-v))))
 
 
 ;;;

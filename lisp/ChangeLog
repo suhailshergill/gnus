@@ -4,6 +4,16 @@
 	using mail-extract-address-components if
 	gnus-extract-address-components is not bound.
 
+	* gnus.el (gnus-user-agent): Use list of symbols instead of
+	symbols.  Display full version number for (S)XEmacs.  Optionally
+	display (S)XEmacs codename.
+
+	* gnus-util.el (gnus-emacs-version): Update for new
+	`gnus-user-agent'.
+
+	* gnus-msg.el (gnus-extended-version): Make it possible to omit
+	Gnus version.
+
 2005-09-02  Hrvoje Niksic  <hniksic@xemacs.org>
 
 	* mm-encode.el (mm-encode-content-transfer-encoding): Likewise
