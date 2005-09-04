@@ -1,7 +1,7 @@
 2005-09-04  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	* mml-smime.el (mml-smime-sign-query): Don't depend on Gnus by
-	using mail-extract-address-components if
+	* mml-smime.el (mml-smime-sign-query, mml-smime-get-dns-cert):
+	Don't depend on Gnus by using mail-extract-address-components if
 	gnus-extract-address-components is not bound.
 
 	* gnus.el (gnus-user-agent): Use list of symbols instead of
