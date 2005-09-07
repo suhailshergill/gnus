@@ -1,3 +1,8 @@
+2005-09-07  TSUCHIYA Masatoshi  <tsuchiya@namazu.org>
+
+	* gnus-art.el (gnus-mime-display-single): Decode text/* parts
+	content before displaying.
+
 2005-09-06  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* mml-smime.el: Remove defvar of gnus-extract-address-components.
