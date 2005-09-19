@@ -1,3 +1,7 @@
+2005-09-19  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mm-url.el (mm-url-decode-entities): Fix regexp.
+
 2005-09-18  D Goel  <deego@gnufans.org>
 
 	* sieve.el (sieve-help): Fix `message' call: first arg should be a
