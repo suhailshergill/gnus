@@ -5,15 +5,6 @@
 	switches to something else, then the function should be fixed not
 	be exceedingly slow.
 
-2005-09-21  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mm-view.el (mm-inline-text-html-render-with-w3m): Revert.
-
-2005-09-21  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mm-view.el (mm-inline-text-html-render-with-w3m): Bind
-	w3m-treat-image-size to avoid inserting excessive newlines.
-
 2005-09-19  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* mm-url.el (mm-url-decode-entities): Fix regexp.
