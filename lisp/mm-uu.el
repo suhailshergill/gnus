@@ -157,7 +157,12 @@ This can be either \"inline\" or \"attachment\".")
      nil
      mm-uu-diff-extract
      nil
-     mm-uu-diff-test)))
+     mm-uu-diff-test))
+  "A list of specifications for non-MIME attachments.
+Each element consist of the following entries: label,
+start-regexp, end-regexp, extract-function, test-function.
+
+After modifying this list you must run \\[mm-uu-configure].")
 
 (defcustom mm-uu-configure-list '((shar . disabled))
   "A list of mm-uu configuration.
@@ -206,6 +211,8 @@ Return that buffer."
   (member (cons key val) mm-uu-configure-list))
 
 (defun mm-uu-configure (&optional symbol value)
+  "Configure detection of non-MIME attachments."
+  (interactive)
   (if symbol (set-default symbol value))
   (setq mm-uu-beginning-regexp nil)
   (mapcar (lambda (entry)
