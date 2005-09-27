@@ -5,6 +5,8 @@
 	(mm-uu-diff-groups-regexp): Change default value.
 	(mm-uu-type-alist): Added doc string.
 	(mm-uu-configure): Added doc string.  Make it interactive.
+	(mm-uu-diff-groups-regexp): Fix missing quotes from previous
+	commit.
 
 2005-09-27  Simon Josefsson  <jas@extundo.com>
 
