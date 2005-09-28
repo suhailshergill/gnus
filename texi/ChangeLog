@@ -1,3 +1,8 @@
+2005-09-28  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (NNTP): Remove nntp-buggy-select, nntp-read-timeout,
+	nntp-server-hook, and nntp-warn-about-losing-connection.
+
 2005-09-26  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (Server Buffer Format): Document the %a format spec.
