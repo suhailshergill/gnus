@@ -1,3 +1,7 @@
+2005-09-28  Simon Josefsson  <jas@extundo.com>
+
+	* GNUS-NEWS: Fix IDNA notes.
+
 2005-02-19  Miles Bader  <miles@gnu.org>
 
 	* etc/Makefile.in (install): Create $(etcdir)/images/gnus dir.
