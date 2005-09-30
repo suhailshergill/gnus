@@ -1,3 +1,7 @@
+2005-09-30  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* time-date.el: Autoload parse-time-string.
+
 2005-09-28  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* message.el: Remove useless autoloads.
