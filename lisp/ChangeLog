@@ -1,3 +1,17 @@
+2005-10-04  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-util.el (gnus-remove-duplicates): Remove.
+
+	* nnmail.el (nnmail-article-group): Use mm-delete-duplicates
+	instead of gnus-remove-duplicates.
+
+	* message.el (message-remove-duplicates): Remove.
+	(message-idna-to-ascii-rhs-1): Use mm-delete-duplicates instead of
+	message-remove-duplicates.
+
+	* mm-util.el (mm-delete-duplicates): Use `delete-dups' if
+	available, else use implementation from `delete-dups'.
+
 2005-10-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* Makefile.in (install-el-elc): New entry.
