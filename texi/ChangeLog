@@ -1,3 +1,7 @@
+2005-10-07  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (Maildir): Clarify expire-age and expire-group.
+
 2005-09-28  Simon Josefsson  <jas@extundo.com>
 
 	* message.texi (IDNA): Fix.
