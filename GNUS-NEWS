@@ -7,6 +7,15 @@ Please send Gnus bug reports to bugs@gnus.org.
 For older news, see Gnus info node "New Features".
 
 
+* Installation Changes
+
+** Lisp files are now installed in .../site-lisp/gnus/ by default.
+It defaulted to .../site-lisp/ formerly.  In addition to this, the new
+installer issues a warning if the other Gnus installations which will
+shadow the latest one are detected.  You can then remove those shadows
+manually or remove them using `make remove-installed-shadows'.
+
+
 * Changes in Oort Gnus
 
 ** `F' (`gnus-article-followup-with-original') and `R'

@@ -1,3 +1,17 @@
+2005-10-07  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* aclocal.m4 (AC_PATH_LISPDIR): Default to .../site-lisp/gnus for
+	Emacs.
+	(AC_PATH_ETCDIR): Don't change the default value for Emacs.
+
+	* configure: Generated.
+
+	* Makefile.in (list-installed-shadows): New entry.
+	(remove-installed-shadows): New entry.
+
+	* GNUS-NEWS: Mention that the Lisp files are now installed in
+	.../site-lisp/gnus/ by default.
+
 2005-09-28  Simon Josefsson  <jas@extundo.com>
 
 	* GNUS-NEWS: Fix IDNA notes.
