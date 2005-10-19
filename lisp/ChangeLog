@@ -1,3 +1,7 @@
+2005-10-19  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* message.el (message-tool-bar-local-item-from-menu): Fix comment.
+
 2005-10-19  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* rfc2047.el (rfc2047-allow-incomplete-encoded-text): New variable.
