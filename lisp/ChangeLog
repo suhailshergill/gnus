@@ -1,4 +1,4 @@
-2005-10-20  Hiroshi Fujishima  <hiroshi.fujishima@gmail.com>
+2005-10-20  Hiroshi Fujishima  <hiroshi.fujishima@gmail.com>  (tiny change)
 
 	* mail-source.el (mail-source-fetch-pop): Require pop3.
 	(mail-source-check-pop): Ditto.
