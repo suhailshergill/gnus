@@ -1,3 +1,9 @@
+2005-10-23  Simon Josefsson  <jas@extundo.com>
+
+	* imap.el (imap-gssapi-program): Align command line parameters
+	with latest GNU SASL.
+	(imap-gssapi-open): Ignore 'Trying ...' messages from GNU SASL.
+
 2005-10-20  Hiroshi Fujishima  <hiroshi.fujishima@gmail.com>  (tiny change)
 
 	* mail-source.el (mail-source-fetch-pop): Require pop3.
