@@ -1,3 +1,7 @@
+2005-11-07  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (X-Face): Fix description.
+
 2005-11-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (Group Parameters): Mention new varable
