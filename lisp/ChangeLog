@@ -1,3 +1,8 @@
+2005-11-09  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* message.el (message-generate-headers): Downcase the argument
+	given to message-check-element.
+
 2005-11-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.el (gnus-parameters-case-fold-search): New variable.
