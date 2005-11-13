@@ -1,5 +1,10 @@
 2005-11-13  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* gnus-start.el (gnus-dribble-read-file): Use make-local-variable
+	rather than make-variable-buffer-local for file-precious-flag.
+
+2005-11-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+
 	* gnus-start.el (gnus-dribble-read-file): Quote file-precious-flag.
 
 2005-11-11  Jan Nieuwenhuizen  <janneke@gnu.org>
