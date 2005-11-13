@@ -1,3 +1,9 @@
+2005-11-11  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* gnus-start.el (gnus-dribble-read-file): Set file-precious-flag,
+	as a buffer-local variable.  This avoids creating truncated
+	dribble files as a result of a hang up, eg.
+
 2005-11-04 Ken Manheimer  <ken.manheimer@gmail.com>
 
 	* pgg-pgp.el (pgg-pgp-encrypt-region, pgg-pgp-decrypt-region)
@@ -94,12 +100,6 @@
 
 	* pgg.el (pgg-encrypt-symmetric, pgg-encrypt-symmetric-region):
 	New user commands for symmetric encryption.
-
-2005-11-11  Jan Nieuwenhuizen  <janneke@gnu.org>
-
-	* gnus-start.el (gnus-dribble-read-file): Set file-precious-flag,
-	as a buffer-local variable.  This avoids creating truncated
-	dribble files as a result of a hang up, eg.
 
 2005-11-10  Katsumi Yamaoka  <yamaoka@jpl.org>
 
