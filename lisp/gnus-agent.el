@@ -869,9 +869,11 @@ be a select method."
 
 ;;;###autoload
 (defun gnus-agent-rename-group (old-group new-group)
-  "Rename fully-qualified OLD-GROUP as NEW-GROUP.  Always updates the agent, even when
-disabled, as the old agent files would corrupt gnus when the agent was
-next enabled. Depends upon the caller to determine whether group renaming is supported."
+  "Rename fully-qualified OLD-GROUP as NEW-GROUP.
+Always updates the agent, even when disabled, as the old agent
+files would corrupt gnus when the agent was next enabled.
+Depends upon the caller to determine whether group renaming is
+supported."
   (let* ((old-command-method (gnus-find-method-for-group old-group))
 	 (old-path           (directory-file-name
 			      (let (gnus-command-method old-command-method)
@@ -899,9 +901,11 @@ next enabled. Depends upon the caller to determine whether group renaming is sup
 
 ;;;###autoload
 (defun gnus-agent-delete-group (group)
-  "Delete fully-qualified GROUP.  Always updates the agent, even when
-disabled, as the old agent files would corrupt gnus when the agent was
-next enabled. Depends upon the caller to determine whether group deletion is supported."
+  "Delete fully-qualified GROUP.
+Always updates the agent, even when disabled, as the old agent
+files would corrupt gnus when the agent was next enabled.
+Depends upon the caller to determine whether group deletion is
+supported."
   (let* ((command-method (gnus-find-method-for-group group))
 	 (path           (directory-file-name
 			  (let (gnus-command-method command-method)
