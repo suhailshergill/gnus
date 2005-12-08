@@ -1,3 +1,8 @@
+2005-12-08  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mm-decode.el (mm-discouraged-alternatives): Fix custom type.
+	Suggest image/.* in the doc string.
+
 2005-12-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-decode.el (mm-display-external): Use nametemplate (defined in
