@@ -1,5 +1,9 @@
 2005-12-09  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus.el (gnus-splash): Change custom group.
+	(gnus-group-get-parameter, gnus-group-parameter-value): Describe
+	allow-list argument.
+
 	* gnus-agent.el (gnus-agent-article-alist-save-format): Format doc
 	string.
 
