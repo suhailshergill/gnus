@@ -1,3 +1,8 @@
+2005-12-09  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-agent.el (gnus-agent-article-alist-save-format): Format doc
+	string.
+
 2005-12-09  ARISAWA Akihiro  <ari@mbf.ocn.ne.jp>  (tiny change)
 
 	* mm-decode.el (mm-display-external): Add lacked cdr.
