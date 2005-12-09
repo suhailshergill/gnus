@@ -805,8 +805,12 @@ prompt the user for the name of an NNTP server to use."
   "Make sure the draft group exists."
   (gnus-request-create-group "drafts" '(nndraft ""))
   (unless (gnus-gethash "nndraft:drafts" gnus-newsrc-hashtb)
+    (gnus-message 3 "Subscribing drafts group")
     (let ((gnus-level-default-subscribed 1))
-      (gnus-subscribe-group "nndraft:drafts" nil '(nndraft "")))
+      (gnus-subscribe-group "nndraft:drafts" nil '(nndraft ""))))
+  (unless (equal (gnus-group-get-parameter "nndraft:drafts" 'gnus-dummy t)
+		 '((gnus-draft-mode)))
+    (gnus-message 3 "Setting up drafts group")
     (gnus-group-set-parameter
      "nndraft:drafts" 'gnus-dummy '((gnus-draft-mode)))))
 

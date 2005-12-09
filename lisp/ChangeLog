@@ -1,5 +1,8 @@
 2005-12-09  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-start.el (gnus-start-draft-setup): Enforce
+	`gnus-draft-mode' for nndraft:drafts at startup.
+
 	* gnus.el (gnus-splash): Change custom group.
 	(gnus-group-get-parameter, gnus-group-parameter-value): Describe
 	allow-list argument.
