@@ -1,3 +1,8 @@
+2005-12-09  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-start.el (gnus-no-server-1): Mention
+	`gnus-level-default-subscribed' in doc string.
+
 2005-11-26  Dave Love  <fx@gnu.org>
 
 	* tls.el (open-tls-stream): Rename arg SERVICE to PORT.
