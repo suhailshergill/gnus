@@ -1,5 +1,14 @@
 2005-12-12  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* gnus-art.el (gnus-buttonized-mime-types): Mention addition of
+	multipart/alternative and add xref to mm-discouraged-alternatives
+	in doc string.
+
+	* mm-decode.el (mm-discouraged-alternatives): Add xref to
+	gnus-buttonized-mime-types in doc string.
+
+2005-12-12  Katsumi Yamaoka  <yamaoka@jpl.org>
+
 	* rfc2047.el (rfc2047-charset-to-coding-system): Recognize
 	us-ascii as a MIME charset.
 
