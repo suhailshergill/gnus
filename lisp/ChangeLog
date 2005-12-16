@@ -1,3 +1,14 @@
+2005-12-16  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-signature-separator): Fix custom type.
+
+	* mm-decode.el (mm-inlined-types): Fix custom type.
+	(mm-keep-viewer-alive-types): Ditto.
+	(mm-automatic-display): Ditto.
+	(mm-attachment-override-types): Ditto.
+	(mm-inline-override-types): Ditto.
+	(mm-automatic-external-display): Ditto.
+
 2005-12-12  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-art.el (gnus-buttonized-mime-types): Mention addition of

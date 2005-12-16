@@ -225,7 +225,9 @@ only of boring text.  Boring text is controlled by
 This can also be a list of regexps.  In that case, it will be checked
 from head to tail looking for a separator.  Searches will be done from
 the end of the buffer."
-  :type '(repeat string)
+  :type '(choice :format "%{%t%}: %[Value Menu%]\n%v"
+		 (regexp)
+		 (repeat :tag "List of regexp" regexp))
   :group 'gnus-article-signature)
 
 (defcustom gnus-signature-limit nil
