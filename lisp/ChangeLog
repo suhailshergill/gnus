@@ -1,3 +1,8 @@
+2005-12-19  Mark Plaksin <happy@mcplaksin.org>  (tiny change)
+
+	* nnrss.el (nnrss-check-group): Put the RSS dc:subject in the
+	article.
+
 2005-12-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* dns.el (query-dns): Make sure we check the buffer size before
