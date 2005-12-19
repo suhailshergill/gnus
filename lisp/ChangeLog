@@ -1,3 +1,13 @@
+2005-12-19  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-article-delete-text-of-type): Enable it to
+	remove MIME buttons associated with multipart/alternative parts.
+	(gnus-mime-display-alternative): Tag buttons using `article-type'
+	text property.
+
+	* gnus-msg.el (gnus-copy-article-buffer): Remove MIME buttons
+	associated with multipart/alternative parts.
+
 2005-12-19  Mark Plaksin <happy@mcplaksin.org>  (tiny change)
 
 	* nnrss.el (nnrss-check-group): Put the RSS dc:subject in the
