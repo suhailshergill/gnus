@@ -6,12 +6,11 @@
 	RFC822 style.  Suggested by Mark Plaksin <happy@mcplaksin.org>.
 	(nnrss-check-group): Use it.
 
-2006-01-03  Steve Youngs  <steve@sxemacs.org>
+2006-01-03  Rodrigo Ventura <yoda@isr.ist.utl.pt>  (tiny change)
 
 	* gnus-xmas.el (gnus-xmas-group-startup-message): Typo
 	gnus-splash-face -> gnus-splash.  Fixes starting from a TTY in
 	XEmacs.
-	From Rodrigo Ventura <yoda@isr.ist.utl.pt>
 
 2006-01-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
