@@ -1,3 +1,8 @@
+2006-01-05  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-group.el (gnus-useful-groups): Use Gmane for ding.  Use
+	nntp for bug archive.
+
 2006-01-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* nnrss.el (nnrss-request-article): Fix the way to fill text/plain
