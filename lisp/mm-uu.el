@@ -534,11 +534,17 @@ value of `mm-uu-text-plain-type'."
 				   encoding type)
 				  (mm-uu-dissect t (mm-handle-type handle)))
 			      (mm-uu-dissect t (mm-handle-type handle))))))
-	       (kill-buffer buffer)
-	       (setcdr handle (cdr children))
-	       (setcar handle (car children)) ;; "multipart/mixed"
-	       (dolist (elem (cdr children))
-		 (mm-uu-dissect-text-parts elem)))))
+	       ;; Ignore it if a given part is dissected into a single
+	       ;; part of which the type is the same as the given one.
+	       (if (and (<= (length children) 2)
+			(string-equal (mm-handle-media-type (cadr children))
+				      type))
+		   (kill-buffer (mm-handle-buffer (cadr children)))
+		 (kill-buffer buffer)
+		 (setcdr handle (cdr children))
+		 (setcar handle (car children)) ;; "multipart/mixed"
+		 (dolist (elem (cdr children))
+		   (mm-uu-dissect-text-parts elem))))))
 	  (t
 	   (dolist (elem handle)
 	     (mm-uu-dissect-text-parts elem))))))
