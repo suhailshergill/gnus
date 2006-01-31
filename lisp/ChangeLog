@@ -1,3 +1,10 @@
+2006-01-31  Kevin Ryde  <user42@zip.com.au>
+
+	* mailcap.el (mailcap-viewer-passes-test): Don't put "(nil t)" into
+	mailcap-viewer-test-cache when there's no 'test clause, since that
+	will invert the meaning of a "nil" test previously determined by
+	mailcap-mailcap-entry-passes-test.
+
 2006-01-30  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* nnweb.el (nnweb-google-parse-1): Clarify some comments.
