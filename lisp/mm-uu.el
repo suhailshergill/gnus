@@ -266,7 +266,7 @@ Return that buffer."
 
 (defun mm-uu-emacs-sources-extract ()
   (mm-make-handle (mm-uu-copy-to-buffer start-point end-point)
-		  '("application/emacs-lisp")
+		  '("application/emacs-lisp" (charset . gnus-decoded))
 		  nil nil
 		  (list mm-dissect-disposition
 			(cons 'filename file-name))))
@@ -282,7 +282,7 @@ Return that buffer."
 
 (defun mm-uu-diff-extract ()
   (mm-make-handle (mm-uu-copy-to-buffer start-point end-point)
-		  '("text/x-patch")))
+		  '("text/x-patch" (charset . gnus-decoded))))
 
 (defun mm-uu-diff-test ()
   (and gnus-newsgroup-name
