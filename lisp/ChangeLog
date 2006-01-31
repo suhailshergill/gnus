@@ -1,3 +1,12 @@
+2006-01-31  Romain Francoise  <romain@orebokech.com>
+
+	* message.el (message-alternative-emails): Improve docstring.
+	(message-setup-1): Call `message-use-alternative-email-as-from'
+	after `message-setup-hook' to give it precedence over posting
+	styles, etc.
+	(message-use-alternative-email-as-from): Add docstring.  Remove
+	the original From header if present.
+
 2006-01-31  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-uu.el (mm-uu-emacs-sources-extract): Say the part has been
