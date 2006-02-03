@@ -1,3 +1,7 @@
+2006-02-03  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-util.el (gnus-error): Describe `args'.
+
 2006-02-03  Andreas Seltenreich <uwi7@stud.uni-karlsruhe.de>
 
 	* nnweb.el (nnweb-request-group): Avoid growing overview files.
