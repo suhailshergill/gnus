@@ -118,7 +118,7 @@
 
 2005-11-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
-	* gnus.texi (Group Parameters): Mention new varable
+	* gnus.texi (Group Parameters): Mention new variable
 	gnus-parameters-case-fold-search.
 	(Home Score File): Addition.
 
