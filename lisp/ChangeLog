@@ -84,7 +84,7 @@
 
 	* gnus-util.el (gnus-error): Describe `args'.
 
-2006-02-03  Andreas Seltenreich <uwi7@stud.uni-karlsruhe.de>
+2006-02-03  Andreas Seltenreich  <uwi7@stud.uni-karlsruhe.de>
 
 	* nnweb.el (nnweb-request-group): Avoid growing overview files.
 
@@ -101,7 +101,7 @@
 	* mml.el (mml-generate-mime-1): Correct the order of inline signed
 	parts.
 
-2006-01-31  Andreas Seltenreich <uwi7@stud.uni-karlsruhe.de>
+2006-01-31  Andreas Seltenreich  <uwi7@stud.uni-karlsruhe.de>
 
 	* nnweb.el (nnweb-group-alist): Use defvar instead of defvoo,
 	there's only one active file for all servers.
@@ -142,7 +142,7 @@
 
 	* nnweb.el (nnweb-google-parse-1): Clarify some comments.
 
-2006-01-30  Andreas Seltenreich <uwi7@stud.uni-karlsruhe.de>
+2006-01-30  Andreas Seltenreich  <uwi7@stud.uni-karlsruhe.de>
 
 	* nnweb.el (nnweb-type-definition, nnweb-google-parse-1)
 	(nnweb-google-create-mapping, nnweb-google-search): Adapt to
@@ -290,7 +290,7 @@
 	RFC822 style.  Suggested by Mark Plaksin <happy@mcplaksin.org>.
 	(nnrss-check-group): Use it.
 
-2006-01-03  Rodrigo Ventura <yoda@isr.ist.utl.pt>  (tiny change)
+2006-01-03  Rodrigo Ventura  <yoda@isr.ist.utl.pt>  (tiny change)
 
 	* gnus-xmas.el (gnus-xmas-group-startup-message): Typo
 	gnus-splash-face -> gnus-splash.  Fixes starting from a TTY in
@@ -586,7 +586,7 @@
 	(pgg-decrypt): Convey provided passphrase in subordinate call to
 	pgg-decrypt-region.
 
-2005-10-20  Ken Manheimer <ken.manheimer+emacs@gmail.com>
+2005-10-20  Ken Manheimer  <ken.manheimer+emacs@gmail.com>
 
 	* pgg.el (pgg-encrypt-region, pgg-encrypt-symmetric-region)
 	(pgg-encrypt-symmetric, pgg-encrypt, pgg-decrypt-region)

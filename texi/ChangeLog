@@ -311,7 +311,7 @@
 
 	* gnus.texi (RSS): Fix the keystroke.
 
-2005-01-16  Xavier Maillard <zedek@gnu-rox.org> (tiny change)
+2005-01-16  Xavier Maillard  <zedek@gnu-rox.org> (tiny change)
 
 	* gnus-faq.texi ([4.1]): Typo.
 
@@ -585,7 +585,7 @@
 
 	* gnus.texi (Group Parameters): Clarify.
 
-2003-12-11  Kevin Greiner <kgreiner@xpediantsolutions.com>
+2003-12-11  Kevin Greiner  <kgreiner@xpediantsolutions.com>
 
 	* gnus.texi (Agent Parameters): Added references in Topic and
 	Group Parameters.  Added gnus-agent-cat-disable-undownloaded-faces
@@ -967,7 +967,7 @@
 	* gnus.texi (IMAP, Agent and IMAP, Oort Gnus): s/a/an/.  Tiny
 	patch from Niklas Morberg <niklas.morberg@axis.com>.
 
-2003-05-12  Kevin Greiner <kgreiner@xpediantsolutions.com>
+2003-05-12  Kevin Greiner  <kgreiner@xpediantsolutions.com>
 
 	* gnus.texi (Agent Visuals): Add.
 
@@ -1222,7 +1222,7 @@
 
 	* message.texi (IDNA): New.
 
-2003-03-18  Kevin Greiner <kgreiner@xpediantsolutions.com>
+2003-03-18  Kevin Greiner  <kgreiner@xpediantsolutions.com>
 
 	* gnus.texi (Gnus Unplugged): Refer to new agent Group/Topic
 	parameters.
@@ -1299,7 +1299,7 @@
 	(Document Server Internals, Score Variables, Adaptive Scoring)
 	(X-Face, Hashcash): do.
 
-2003-02-28  Vasily Korytov <deskpot@myrealbox.com>
+2003-02-28  Vasily Korytov  <deskpot@myrealbox.com>
 
 	* gnus.texi: New values, 'to-list and 'cc-list, for
 	gnus-boring-article-headers.
@@ -2181,7 +2181,7 @@
 	* gnus.texi (Mail Spool): Add cindex for marks.
 	(Mail Folders): Add cindex for marks.
 
-2002-03-24  Raymond Scholz <rscholz@zonix.de>
+2002-03-24  Raymond Scholz  <rscholz@zonix.de>
 
 	* gnus.texi (Summary Buffer Lines): Fix doc.
 
@@ -2189,7 +2189,7 @@
 
 	* Makefile.in (booklet.dvi, booklet.pdf): Support booklet.
 
-2002-03-24  Felix Natter <fnatter@gmx.net>
+2002-03-24  Felix Natter  <fnatter@gmx.net>
 
 	* booklet.tex, bk-at.tex, bk-lt.tex, gnuslog-booklet.eps: New file.
 	* gnusref.tex, refcard.tex: Support booklet.
@@ -2219,7 +2219,7 @@
 	* message.texi (Security): Add mml-unsecure-message.
 	(Mailing Lists): Index message-goto-mail-followup-to.
 
-2002-03-23  Jesper Harder <harder@ifa.au.dk>
+2002-03-23  Jesper Harder  <harder@ifa.au.dk>
 
 	* gnusref.tex, refcard.tex: Addition.
 
@@ -2298,7 +2298,7 @@
 
 	* gnus.texi (Mail Source Specifiers): Use @uref.
 
-2002-02-13  Jesper Harder <harder@ifa.au.dk>
+2002-02-13  Jesper Harder  <harder@ifa.au.dk>
 
 	* message.texi, gnus.texi, emacs-mime.texi: Use small caps
 	consistently.  MIME, NOV, NNTP, HTML, IMAP are written with @sc
@@ -3368,11 +3368,11 @@
 	* gnus.texi (Sorting Groups): Note `C-k' and `C-y' for manually
 	moving groups around.
 
-2001-04-07  Ryan Yeske <rcyeske@vcn.bc.ca>
+2001-04-07  Ryan Yeske  <rcyeske@vcn.bc.ca>
 
 	* gnus.texi (Splitting in IMAP): Fix.
 
-2001-04-07  Jesper Harder <harder@ifa.au.dk>
+2001-04-07  Jesper Harder  <harder@ifa.au.dk>
 
 	* gnus.texi (More Threading): Fix.
 
@@ -3495,7 +3495,7 @@
 
 	* gnus.texi (Top): Add Using GPG.
 
-2001-02-02  David Masterson <dmasters@Rational.Com>
+2001-02-02  David Masterson  <dmasters@Rational.Com>
 
 	* gnus.texi (The Server is Down): Add link to Group Levels.
 
@@ -3514,7 +3514,7 @@
 	* message.texi (message-ignored-news-headers): Add "X-Draft-From:".
 	(message-ignored-mail-headers): Ditto.
 
-2001-01-21  Raymond Scholz <ray-2001@zonix.de>
+2001-01-21  Raymond Scholz  <ray-2001@zonix.de>
 
 	* message.texi: Rename X-Mailer and X-Newsreader to User-Agent.
 
@@ -3530,7 +3530,7 @@
 
 	* emacs-mime.texi: Set dircategory to Emacs.
 
-2001-01-16  Jesper Harder <harder@ifa.au.dk>
+2001-01-16  Jesper Harder  <harder@ifa.au.dk>
 
 	* gnus.texi (Group Line Specification): Add.
 
@@ -3699,7 +3699,7 @@
 	group names as target, where `gnus-split-methods' uses file
 	names.  Suggested by Nevin Kapur.
 
-2000-11-07  Martin Buchholz <martin@xemacs.org>
+2000-11-07  Martin Buchholz  <martin@xemacs.org>
 
 	* gnus.texi: Doc fix.
 
@@ -3712,7 +3712,7 @@
 
 	* gnus.texi (Finding the News): @env is not supported in texinfo 3.12.
 
-2000-10-31  Jorge Godoy <godoy@conectiva.com>
+2000-10-31  Jorge Godoy  <godoy@conectiva.com>
 
 	* gnus.texi: gnus-gpg document.
 
@@ -3851,7 +3851,7 @@
 	Explain interaction between these.  Add Lisp example for setting
 	`nnmail-expiry-target'.
 
-2000-08-04  Andreas Oeldenberger <andreas.oeldenberger@gmx.net>
+2000-08-04  Andreas Oeldenberger  <andreas.oeldenberger@gmx.net>
 
 	* message.texi (Forwarding): Fix.
 
@@ -4008,7 +4008,7 @@
 
 	* gnus.texi (MIME Commands): Fix.
 
-2000-01-03  Karl Kleinpaste <karl@justresearch.com>
+2000-01-03  Karl Kleinpaste  <karl@justresearch.com>
 
 	* gnus.texi (Splitting in IMAP): Add '.' after @xref.
 
