@@ -1,3 +1,7 @@
+2006-02-10  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.el: Remove bogus comment.
+
 2006-02-09  Daiki Ueno  <ueno@unixuser.org>
 
 	* pgg-gpg.el (pgg-gpg-encrypt-region): Don't convert line-endings
