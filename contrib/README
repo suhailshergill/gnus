@@ -30,6 +30,14 @@ md5.el
 
 one-line-cookie.diff
 
+sendmail.el
+smtpmail.el
+
+	Copies of the corresponding files from the Emacs lisp/mail/
+	directory, to provide features (occasionally) needed by Gnus which
+	may not be provided by the versions of these files in older Emacs
+	distributions.
+
 ssl.el
 
 ucs-tables.el
@@ -55,5 +63,6 @@ vcard.el
 
 xml.el
 
-	This is used for parsing RSS feeds.  Part of Emacs 21.3 and
-	later.
+	This is used for parsing RSS feeds.  Part of Emacs 21.3 and later.
+	Note that the version of this file in the Gnus contrib/ directory is
+	out of date with respect to the version in the Emacs tree.
