@@ -1,3 +1,11 @@
+2006-02-14  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-draft.el (gnus-draft-send): Replace message-narrow-to-head
+	with message-narrow-to-headers.
+	(gnus-draft-setup): Narrow to header to run message-fetch-field.
+	(gnus-draft-check-draft-articles articles): New function.
+	(gnus-draft-edit-message, gnus-draft-send-message): Use it.
+
 2006-02-13  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* nnoo.el (nnoo-declare): Don't generate duplicate entries when
