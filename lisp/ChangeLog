@@ -1,9 +1,18 @@
+2006-02-15  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* mm-util.el (mm-make-temp-file): Import the Emacs 22 version of
+	make-temp-file; make it work with Emacs 20 and XEmacs as well.
+
+	* mm-decode.el (mm-display-external): Use the 3rd arg of
+	mm-make-temp-file.
+	(mm-create-image-xemacs): Ditto.
+
 2006-02-14  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-draft.el (gnus-draft-send): Replace message-narrow-to-head
 	with message-narrow-to-headers.
 	(gnus-draft-setup): Narrow to header to run message-fetch-field.
-	(gnus-draft-check-draft-articles articles): New function.
+	(gnus-draft-check-draft-articles): New function.
 	(gnus-draft-edit-message, gnus-draft-send-message): Use it.
 
 2006-02-13  Katsumi Yamaoka  <yamaoka@jpl.org>
