@@ -1,3 +1,8 @@
+2006-02-23  Ralf Angeli  <angeli@iwi.uni-sb.de>
+
+	* mm-view.el (mm-fill-flowed): New variable.
+	(mm-inline-text): Use it.
+
 2006-02-21  Wolfram Fenske  <wolfram.fenske@student.uni-magdeburg.de>
 	(tiny change)
 
