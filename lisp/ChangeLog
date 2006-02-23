@@ -1,3 +1,7 @@
+2006-02-23  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mm-view.el (mm-fill-flowed): Add :version.
+
 2006-02-23  Ralf Angeli  <angeli@iwi.uni-sb.de>
 
 	* mm-view.el (mm-fill-flowed): New variable.
