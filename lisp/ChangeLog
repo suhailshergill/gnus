@@ -1,3 +1,10 @@
+2006-02-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* flow-fill.el (fill-flowed): Bind adaptive-fill-mode to nil.
+	Remove space stuffing, and only do quotes that actually start with
+	">" at the beginning of the lines.
+	Merge of 2005-11-17 and 2004-07-25 from the trunk.
+
 2006-02-23  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* utf7.el (utf7-utf-16-coding-system): Fix comment.  utf-16-be is
