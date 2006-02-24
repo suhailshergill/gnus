@@ -1,3 +1,8 @@
+2006-02-24  Simon Josefsson  <jas@extundo.com>
+
+	* flow-fill.el (fill-flowed): Flow-fill unquoted lines too.
+	Merge of 2005-10-26 change from the trunk.
+
 2006-02-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* flow-fill.el (fill-flowed): Bind adaptive-fill-mode to nil.
