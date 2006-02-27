@@ -1,3 +1,8 @@
+2006-02-27  Michael Schierl <schierlm-public@gmx.de>  (tiny change)
+
+	* make.bat: Fix directory test for Windows 9x/ME.  (Sync
+	2004-03-01 change from the trunk).
+
 2006-01-26  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* Makefile.in (clean): Clean all subdirectories; remove *~.
