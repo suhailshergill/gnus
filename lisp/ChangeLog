@@ -1,3 +1,8 @@
+2006-02-27  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-sum.el (gnus-sequence-of-unread-articles): Return nil if
+	first or last are nil.
+
 2006-02-24  Simon Josefsson  <jas@extundo.com>
 
 	* flow-fill.el (fill-flowed): Flow-fill unquoted lines too.
