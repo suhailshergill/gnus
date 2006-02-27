@@ -1,3 +1,8 @@
+2006-02-27  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* ChangeLog, texi/ChangeLog, lisp/ChangeLog: Fix "From so-and-so"
+	and "(tiny change)" entries.
+
 2006-02-27  Hiroshi Fujishima  <pooh@nature.tsukuba.ac.jp>  (tiny change)
 
 	* etc/gnus-tut.txt: `G m' instead of `G V'.  (Sync 2004-01-07

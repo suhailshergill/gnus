@@ -901,10 +901,9 @@
 	* pgg-parse.el (top-level): Don't require custom, it is
 	autoloaded.  (To sync with No Gnus.)
 
-2005-05-09  Simon Josefsson  <jas@extundo.com>
+2005-05-09  Georg C. F. Greve <greve@gnu.org>  (tiny change)
 
-	* pgg-gpg.el (pgg-gpg-possibly-cache-passphrase): Fix PIN caching,
-	tiny patch from "Georg C. F. Greve" <greve@gnu.org>.
+	* pgg-gpg.el (pgg-gpg-possibly-cache-passphrase): Fix PIN caching.
 
 2005-10-08  Simon Josefsson  <jas@extundo.com>
 
@@ -2669,11 +2668,13 @@
 
 	* deuglify.el (gnus-outlook-deuglify): Add :version.
 
-	* html2text.el: Beautify code.  Improve doc strings.  Some checkdoc
-	cleanup.
+	* html2text.el: Beautify code.  Improve doc strings.  Some
+	checkdoc cleanup.
 	(html2text-get-attr, html2text-fix-paragraph): Simplify code.
-	(html2text-format-tag-list): Add "strong" and "em".
-	From "Alfred M. Szmidt" <ams@kemisten.nu> (tiny change).
+
+2004-11-01  Alfred M. Szmidt <ams@kemisten.nu>  (tiny change)
+
+	* html2text.el (html2text-format-tag-list): Add "strong" and "em".
 
 2004-10-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 
@@ -3556,16 +3557,13 @@
 	* rfc2231.el (rfc2231-parse-string): Restore whitespace syntax for
 	?* and ?\; (tiny patch).  From Andreas Schwab <schwab@suse.de>.
 
-2004-08-30  Simon Josefsson  <jas@extundo.com>
+2004-08-30  Andreas Schwab <schwab@suse.de>
+
+	* rfc2231.el (rfc2231-parse-string): Restore whitespace syntax for
+	?* and ?\;.
 
 	* ietf-drums.el (ietf-drums-syntax-table): Set syntax of ?* ?\;
-	and ?\' to symbol instead of whitespace (tiny patch).
-	From Andreas Schwab <schwab@suse.de>.
-
-2004-08-30  Simon Josefsson  <jas@extundo.com>
-
-	* message.el, gnus-art.el: Sync IDNA fixes against HEAD, include
-	entries until 2004-08-30 below.
+	and ?\' to symbol instead of whitespace.
 
 2004-06-23  Jesper Harder  <harder@ifa.au.dk>
 
