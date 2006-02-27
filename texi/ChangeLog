@@ -837,7 +837,7 @@
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package):
 	mentioned the spam-install-hooks mess
 
-2003-07-11  Matthias Andree <ma@dt.e-technik.uni-dortmund.de>  (tiny change)
+2003-07-11  Matthias Andree  <ma@dt.e-technik.uni-dortmund.de>  (tiny change)
 
 	* gnus.texi (Splitting in IMAP): Typos.
 
@@ -969,7 +969,7 @@
 
 	* message.texi (Insertion Variables): do.
 
-2003-05-13  Niklas Morberg <niklas.morberg@axis.com>  (tiny change)
+2003-05-13  Niklas Morberg  <niklas.morberg@axis.com>  (tiny change)
 
 	* gnus.texi (IMAP, Agent and IMAP, Oort Gnus): s/a/an/.
 

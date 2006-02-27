@@ -906,7 +906,7 @@
 	* pgg-parse.el (top-level): Don't require custom, it is
 	autoloaded.  (To sync with No Gnus.)
 
-2005-05-09  Georg C. F. Greve <greve@gnu.org>  (tiny change)
+2005-05-09  Georg C. F. Greve  <greve@gnu.org>  (tiny change)
 
 	* pgg-gpg.el (pgg-gpg-possibly-cache-passphrase): Fix PIN caching.
 
@@ -2677,7 +2677,7 @@
 	checkdoc cleanup.
 	(html2text-get-attr, html2text-fix-paragraph): Simplify code.
 
-2004-11-01  Alfred M. Szmidt <ams@kemisten.nu>  (tiny change)
+2004-11-01  Alfred M. Szmidt  <ams@kemisten.nu>  (tiny change)
 
 	* html2text.el (html2text-format-tag-list): Add "strong" and "em".
 
@@ -3562,7 +3562,7 @@
 	* rfc2231.el (rfc2231-parse-string): Restore whitespace syntax for
 	?* and ?\; (tiny patch).  From Andreas Schwab <schwab@suse.de>.
 
-2004-08-30  Andreas Schwab <schwab@suse.de>
+2004-08-30  Andreas Schwab  <schwab@suse.de>
 
 	* rfc2231.el (rfc2231-parse-string): Restore whitespace syntax for
 	?* and ?\;.
