@@ -1,3 +1,13 @@
+2006-02-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-int.el (gnus-open-server): Respect gnus-batch-mode.
+	Merge of 2006-02-20 change from the trunk.
+
+2006-02-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* dns.el (query-dns): Protect more against buggy tcp output.
+	Merge of 2006-02-20 change from the trunk.
+
 2006-02-27  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-sum.el (gnus-sequence-of-unread-articles): Return nil if
