@@ -3610,10 +3610,10 @@
 	* nnimap.el (nnimap-authinfo-file, nnimap-prune-cache):
 	Add :group 'nnimap.
 
-2004-08-30  Simon Josefsson  <jas@extundo.com>
+2004-08-30  Andreas Schwab  <schwab@suse.de>
 
 	* rfc2231.el (rfc2231-parse-string): Restore whitespace syntax for
-	?* and ?\; (tiny patch).  From Andreas Schwab <schwab@suse.de>.
+	?* and ?\;.
 
 2004-08-30  Andreas Schwab  <schwab@suse.de>
 
