@@ -1,3 +1,7 @@
+2006-03-03  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Oort Gnus): Add `mm-fill-flowed'.
+
 2006-02-27  Simon Josefsson  <jas@extundo.com>
 
 	* emacs-mime.texi (Flowed text): Add mm-fill-flowed.  (Sync
