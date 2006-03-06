@@ -1,3 +1,7 @@
+2006-03-06  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Makefile.in (release-*): New targets.
+
 2006-03-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* xemacs.mak: Remove outdated file.  Use make.bat instead.
