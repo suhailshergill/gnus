@@ -1,3 +1,8 @@
+2006-03-08  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* nnmail.el (nnmail-split-it): Invert match-partial-words behavior
+	if optional last element is specified in splits (FIELD VALUE...).
+
 2006-03-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-view.el (mm-w3m-cid-retrieve-1): Check carefully whether
