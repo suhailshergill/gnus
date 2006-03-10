@@ -237,11 +237,11 @@ valid issuer, which is much faster if you are selective about the issuers."
       (gnus-request-article-this-buffer (mail-header-number header) group)
       (goto-char (point-min))
       (when (re-search-forward
-	     "-----BEGIN PGP\\(?: SIGNED\\)? MESSAGE-----"
+	     "-----BEGIN PGP\\( SIGNED\\)? MESSAGE-----"
 	     nil t)
 	(delete-region (point-min) (match-beginning 0)))
       (when (re-search-forward
-	     "-----END PGP \\(?:MESSAGE\\|SIGNATURE\\)-----\n?"
+	     "-----END PGP \\(MESSAGE\\|SIGNATURE\\)-----\n?"
 	     nil t)
 	(delete-region (match-end 0) (point-max)))
       (goto-char (point-min))
