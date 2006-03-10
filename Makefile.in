@@ -162,11 +162,13 @@ release-cvs-export gnus-$(TAG):	release-check-settings
 release-make-tar-ball:	gnus-$(TAG) $(TAR_BALL_EXTRA)
 	[ -d gnus-$(TAG) ] && cd gnus-$(TAG) && \
 	  rm $(CVS_IGNORE_FILES) || true
+	cp -p $(TAR_BALL_EXTRA) gnus-$(TAG)/
 	tar zcvf gnus-$(TAG).tar.gz gnus-$(TAG)
 	ls -l gnus-$(TAG).tar.gz
 
 README:
-	cp -p $@ gnus-$(TAG)/$@
+	@echo README is not in CVS.  Get it from Lars.
+	false
 
 # Make a diff between current and previous release.  Example:
 # ftp://quimby.gnus.org/pub/gnus/ding-patches/gnus-5.10.5-5.10.6.diff.gz
