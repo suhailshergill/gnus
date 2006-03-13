@@ -4889,13 +4889,18 @@ If displaying \"text/html\" is discouraged \(see
 	(let ((id (1+ (length gnus-article-mime-handle-alist)))
 	      beg)
 	  (push (cons id handle) gnus-article-mime-handle-alist)
+	  (when (and display
+		     (equal (mm-handle-media-supertype handle) "message"))
+	    (insert-char
+	     ?\n
+	     (cond ((not (bolp)) 2)
+		   ((or (bobp) (eq (char-before (1- (point))) ?\n)) 0)
+		   (t 1))))
 	  (when (or (not display)
 		    (not (gnus-unbuttonized-mime-type-p type)))
-	    ;(gnus-article-insert-newline)
 	    (gnus-insert-mime-button
 	     handle id (list (or display (and not-attachment text))))
 	    (gnus-article-insert-newline)
-	    ;(gnus-article-insert-newline)
 	    ;; Remember modify the number of forward lines.
 	    (setq move t))
 	  (setq beg (point))
