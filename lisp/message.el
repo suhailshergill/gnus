@@ -4673,7 +4673,7 @@ If NOW, use that time instead."
     (concat
      (if (or (memq system-type '(ms-dos emx vax-vms))
 	     ;; message-number-base36 doesn't handle bigints.
-	     (float (user-uid)))
+	     (floatp (user-uid)))
 	 (let ((user (downcase (user-login-name))))
 	   (while (string-match "[^a-z0-9_]" user)
 	     (aset user (match-beginning 0) ?_))
