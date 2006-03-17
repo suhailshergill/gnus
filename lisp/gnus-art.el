@@ -49,6 +49,7 @@
 (autoload 'gnus-button-mailto "gnus-msg")
 (autoload 'gnus-button-reply "gnus-msg" nil t)
 (autoload 'parse-time-string "parse-time" nil nil)
+(autoload 'mm-extern-cache-contents "mm-extern")
 
 (defgroup gnus-article nil
   "Article display."
@@ -4151,6 +4152,9 @@ Deleting parts may malfunction or destroy the article; continue? ")
 	  (insert "Content-Type: " (mm-handle-media-type data))
 	  (mml-insert-parameter-string (cdr (mm-handle-type data))
 				       '(charset))
+	  ;; Add a filename for the sake of saving the part again.
+	  (mml-insert-parameter
+	   (mail-header-encode-parameter "name" (file-name-nondirectory file)))
 	  (insert "\n")
 	  (insert "Content-ID: " (message-make-message-id) "\n")
 	  (insert "Content-Transfer-Encoding: binary\n")
@@ -4330,6 +4334,10 @@ Deleting parts may malfunction or destroy the article; continue? ")
   (gnus-article-check-buffer)
   (let ((handle (get-text-property (point) 'gnus-data)))
     (when handle
+      (when (equal (mm-handle-media-type handle) "message/external-body")
+	(unless (mm-handle-cache handle)
+	  (mm-extern-cache-contents handle))
+	(setq handle (mm-handle-cache handle)))
       (setq handle
 	    (mm-make-handle (mm-handle-buffer handle)
 			    (cons mime-type (cdr (mm-handle-type handle)))
