@@ -100,6 +100,11 @@ spam groups."
   :type 'boolean
   :group 'spam)
 
+(defcustom spam-mark-new-messages-in-spam-group-as-spam t
+  "Whether new messages in a spam group should get the spam-mark."
+  :type 'boolean
+  :group 'spam)
+
 (defcustom spam-log-to-registry nil
   "Whether spam/ham processing should be logged in the registry."
   :type 'boolean
@@ -676,15 +681,17 @@ spam-use-* variable.")
   ;; check the global list of group names spam-junk-mailgroups and the
   ;; group parameters
   (when (spam-group-spam-contents-p gnus-newsgroup-name)
-    (gnus-message 5 "Marking %s articles as spam"
+    (gnus-message 6 "Marking %s articles as spam"
 		  (if spam-mark-only-unseen-as-spam
 		      "unseen"
 		    "unread"))
     (let ((articles (if spam-mark-only-unseen-as-spam
 			gnus-newsgroup-unseen
 		      gnus-newsgroup-unreads)))
-      (dolist (article articles)
-	(gnus-summary-mark-article article gnus-spam-mark)))))
+      (if spam-mark-new-messages-in-spam-group-as-spam
+	  (dolist (article articles)
+	    (gnus-summary-mark-article article gnus-spam-mark))
+	(gnus-message 9 "Did not mark new messages as spam.")))))
 
 (defun spam-mark-spam-as-expired-and-move-routine (&rest groups)
   (if (and (car-safe groups) (listp (car-safe groups)))
@@ -732,7 +739,7 @@ spam-use-* variable.")
 	 (gnus-check-backend-function
 	  'request-move-article gnus-newsgroup-name))
 	(respool-method (gnus-find-method-for-group gnus-newsgroup-name))
-	article mark todo deletep respool)
+	article mark deletep respool)
 
     (when (member 'respool groups)
       (setq respool t)			; boolean for later

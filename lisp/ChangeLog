@@ -1,3 +1,13 @@
+2006-03-20  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* spam.el (spam-mark-junk-as-spam-routine)
+	(spam-mark-new-messages-in-spam-group-as-spam): allow user to
+	disable assigning the spam-mark to new messages
+
+2006-03-20  Adam Sj,Ax(Bgren  <asjo@koldfront.dk>  (tiny change)
+
+	(spam-ham-copy-or-move-routine): todo declared twice
+
 2006-03-20  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* smiley.el: Add missing test smiley.
