@@ -103,6 +103,7 @@ spam groups."
 (defcustom spam-mark-new-messages-in-spam-group-as-spam t
   "Whether new messages in a spam group should get the spam-mark."
   :type 'boolean
+  ;; :version "22.1" ;; Gnus 5.10.8 / No Gnus 0.3
   :group 'spam)
 
 (defcustom spam-log-to-registry nil
