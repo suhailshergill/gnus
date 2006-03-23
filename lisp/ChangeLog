@@ -1,3 +1,9 @@
+2006-03-23  Simon Josefsson  <jas@extundo.com>
+
+	* pgg-gpg.el (pgg-gpg-update-agent): Remove, doesn't work with
+	older emacsen.
+	(pgg-gpg-use-agent-p): Don't use it.
+
 2006-03-22  Sascha Wilde  <wilde@sha-bang.de>
 
 	* pgg-gpg.el (pgg-gpg-use-agent): Disable by default.
