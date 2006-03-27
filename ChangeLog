@@ -1,3 +1,9 @@
+2006-03-27  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Makefile.in (release-revert-files): Replace
+	release-revert-changelog.
+	(release-diff): Remove garbage.
+
 2006-03-11  Miles Bader  <miles@gnu.org>
 
 	* etc/images/mail: New directory.
