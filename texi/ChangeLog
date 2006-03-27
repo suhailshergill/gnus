@@ -1,4 +1,4 @@
-2006-03-25  Karl Berry  <karl@gnu.org>
+2006-03-27  Karl Berry  <karl@gnu.org>
 
 	* gnus.texi, message.texi, emacs-mime.texi, sieve.texi, pgg.texi:
 	Do not indent copyright year list.
