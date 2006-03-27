@@ -1,3 +1,8 @@
+2006-03-25  Karl Berry  <karl@gnu.org>
+
+	* gnus.texi, message.texi, emacs-mime.texi, sieve.texi, pgg.texi:
+	Do not indent copyright year list.
+
 2006-03-27  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-faq.texi: Use .invalid.
