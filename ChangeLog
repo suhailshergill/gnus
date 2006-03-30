@@ -1,5 +1,8 @@
 2006-03-30  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* GNUS-NEWS: Add gnus-group-update-tool-bar.  Update version for
+	mm-fill-flowed.
+
 	* etc/images/separator.xpm: Update from Emacs CVS.
 
 2006-03-29  Reiner Steib  <Reiner.Steib@gmx.de>
