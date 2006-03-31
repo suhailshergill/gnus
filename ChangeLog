@@ -1,5 +1,7 @@
 2006-03-31  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* Makefile.in (CVS_IGNORE_FILES): Additions.
+
 	* etc/images/README, etc/images/cancel.xpm, etc/images/copy.xpm,
 	etc/images/diropen.xpm, etc/images/help.xpm,
 	etc/images/left-arrow.xpm, etc/images/paste.xpm,
