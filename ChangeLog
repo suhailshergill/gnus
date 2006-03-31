@@ -1,3 +1,12 @@
+2006-03-31  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* etc/images/README, etc/images/cancel.xpm, etc/images/copy.xpm,
+	etc/images/diropen.xpm, etc/images/help.xpm,
+	etc/images/left-arrow.xpm, etc/images/paste.xpm,
+	etc/images/print.xpm, etc/images/redo.xpm,
+	etc/images/right-arrow.xpm, etc/images/save.xpm,
+	etc/images/search.xpm: Update from the trunk.
+
 2006-03-30  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* GNUS-NEWS: Add gnus-group-update-tool-bar.  Update version for
