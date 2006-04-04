@@ -15,7 +15,8 @@
 
 	* README: Addition from 5.10.6 tar ball.  Clarify "beta".
 	Simplify Info directory setting.  Update required Emacs and XEmacs
-	version.  Use current Gnus version in examples.
+	version.  Use current Gnus version in examples.  texi isn't draft
+	anymore.
 
 2006-03-31  Reiner Steib  <Reiner.Steib@gmx.de>
 
