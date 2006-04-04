@@ -1,6 +1,6 @@
-This package contains a beta version of Gnus.  The lisp directory
-contains the source lisp files, and the texi directory contains a
-draft of the Gnus info pages.
+This package contains a beta version of Gnus (beta because the final version
+is the one included in Emacs). The lisp directory contains the source lisp
+files, and the texi directory contains a draft of the Gnus info pages.
 
 To use Gnus you first have to unpack the files, which you've obviously
 done, because you are reading this.
@@ -19,7 +19,7 @@ If you are using XEmacs, you *must* say "./configure && make EMACS=xemacs".
 Then you have to tell Emacs where Gnus is. You might put something
 like
 
-   (setq load-path (cons (expand-file-name "~/gnus-5.6.53/lisp") load-path))
+   (setq load-path (cons (expand-file-name "~/gnus-5.10.8/lisp") load-path))
    (require 'gnus-load)
 
 in your .emacs file, or wherever you keep such things.  
@@ -27,24 +27,12 @@ in your .emacs file, or wherever you keep such things.
 To enable reading the Gnus manual, you could say something like:
 
   (require 'info)
-  (setq Info-default-directory-list 
-        (cons "~/gnus-5.6.53/texi" Info-default-directory-list))
+  (if (featurep 'xemacs)
+      (add-to-list 'Info-directory-list "~/gnus-5.10.8/texi/")
+    (add-to-list 'Info-default-directory-list "~/gnus-5.10.8/texi/"))
 
-or
-
-  (require 'info)
-  (setq Info-directory-list 
-        (cons "~/gnus-5.6.53/texi" Info-directory-list))
-
-depending on which version of Emacs or XEmacs you're using.
-
-Note that Gnus and GNUS can't coexist in a single Emacs. They both use
-the same function and variable names.  If you have been running GNUS
-in your Emacs, you should probably exit that Emacs and start a new one
-to fire up Gnus.
-
-Gnus does absolutely not work with anything older than Emacs 20.3 or
-XEmacs 20.0.  You definitely need a relatively current Emacs.
+Gnus 5.10 does absolutely not work with anything older than Emacs 20.7 or
+XEmacs 21.1.
 
 To compile the Gnus manual, you either need a pretty new Emacs, or a
 pretty new version of the texinfo tools.
