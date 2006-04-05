@@ -2836,7 +2836,7 @@
 
 	* mm-util.el (mm-enrich-utf-8-by-mule-ucs): New function run when
 	Mule-UCS is loaded under XEmacs.
-	(mm-mime-mule-charset-alist): Aviod duplicated entries.
+	(mm-mime-mule-charset-alist): Avoid duplicated entries.
 
 	* mm-util.el (mm-coding-system-p): Return a coding-system.
 	(mm-mime-mule-charset-alist): Use shift_jis instead of
