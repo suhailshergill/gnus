@@ -22073,7 +22073,7 @@ readers.
 @end iftex
 @c @anchor{X-Face}
 
-Viewing an @code{X-Face} header requires an Emacs that has
+Viewing an @code{X-Face} header either requires an Emacs that has
 @samp{compface} support (which most XEmacs versions has), or that you
 have suitable conversion or display programs installed.  If your Emacs
 has image support the default action is to display the face before the
@@ -22173,8 +22173,9 @@ The contents of a @code{Face} header must be a base64 encoded PNG image.
 See @uref{http://quimby.gnus.org/circus/face/} for the precise
 specifications.
 
-Viewing an @code{X-Face} header either requires an Emacs that is able to
-display PNG images.
+Viewing an @code{X-Face} header either an Emacs that is able to display
+PNG images.
+@c Maybe add this:
 @c (if (featurep 'xemacs)
 @c     (featurep 'pgn)
 @c   (image-type-available-p 'png))
