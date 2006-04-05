@@ -22073,7 +22073,7 @@ readers.
 @end iftex
 @c @anchor{X-Face}
 
-Viewing an @code{X-Face} header either requires an Emacs that has
+Viewing an @code{X-Face} header requires an Emacs that has
 @samp{compface} support (which most XEmacs versions has), or that you
 have suitable conversion or display programs installed.  If your Emacs
 has image support the default action is to display the face before the
