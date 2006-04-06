@@ -1,5 +1,7 @@
 2006-04-06  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-fun.el (gnus): Require it for gnus-directory.
+
 	* pgg-gpg.el: Revert to revision 7.11 because of unresolved
 	problems caused by adding symmetric encryption support and the
 	asynchronous gpg call.
