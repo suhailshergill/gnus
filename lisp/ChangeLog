@@ -1,3 +1,9 @@
+2006-04-06  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* pgg-gpg.el: Revert to revision 7.11 because of unresolved
+	problems caused by adding symmetric encryption support and the
+	asynchronous gpg call.
+
 2006-04-05  Daiki Ueno  <ueno@unixuser.org>
 
 	* pgg-gpg.el (pgg-gpg-encrypt-region, pgg-gpg-sign-region): Wait
