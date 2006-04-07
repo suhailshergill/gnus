@@ -1,3 +1,8 @@
+2006-04-07  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* pgg-gpg.el: Revert to revision 7.15 to allow the use of
+	gpg-agent.
+
 2006-04-06  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-fun.el (gnus): Require it for gnus-directory.
