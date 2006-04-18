@@ -193,19 +193,39 @@ cd ..\etc
 echo.
 echo * Stand by while copying etc files.
 echo.
+REM
 if not exist %GNUS_ETC_DIR% mkdir %GNUS_ETC_DIR%
 echo ** gnus-tut.txt ...
 xcopy /R /Q /Y gnus-tut.txt %GNUS_ETC_DIR%
 if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-gnus-tut-txt
-if not exist %GNUS_ETC_DIR%\images mkdir %GNUS_ETC_DIR%\images
-if not exist %GNUS_ETC_DIR%\images\gnus mkdir %GNUS_ETC_DIR%\images\gnus
-echo ** .\images\gnus\ ...
-xcopy /R /Q /Y .\images\gnus\* %GNUS_ETC_DIR%\images\gnus\
-if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-images-gnus-*
-if not exist %GNUS_ETC_DIR%\images\smilies mkdir %GNUS_ETC_DIR%\images\smilies
-echo ** .\images\smilies\ ...
-xcopy /R /Q /Y .\images\smilies\* %GNUS_ETC_DIR%\images\smilies\
-if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-images-smilies-*
+REM
+REM FIXME: Instead of C&P, we should use a FOR loop.
+REM
+set i=images
+if not exist %GNUS_ETC_DIR%\%i%\nul mkdir %GNUS_ETC_DIR%\%i%
+echo ** .\%i%\ ...
+xcopy /R /Q /Y .\%i%\*.* %GNUS_ETC_DIR%\%i%\
+if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-%i%
+REM
+set i=images\mail
+if not exist %GNUS_ETC_DIR%\%i%\nul mkdir %GNUS_ETC_DIR%\%i%
+echo ** .\%i%\ ...
+xcopy /R /Q /Y .\%i%\*.* %GNUS_ETC_DIR%\%i%\
+if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-%i%
+REM
+set i=images\gnus
+if not exist %GNUS_ETC_DIR%\%i%\nul mkdir %GNUS_ETC_DIR%\%i%
+echo ** .\%i%\ ...
+xcopy /R /Q /Y .\%i%\*.* %GNUS_ETC_DIR%\%i%\
+if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-%i%
+REM
+set i=images\smilies
+if not exist %GNUS_ETC_DIR%\%i%\nul mkdir %GNUS_ETC_DIR%\%i%
+echo ** .\%i%\ ...
+xcopy /R /Q /Y .\%i%\*.* %GNUS_ETC_DIR%\%i%\
+if ErrorLevel 1 set ERROR=%ERROR%,copy-etc-%i%
+REM
+set i=
 goto warnings
 
 :nocopy

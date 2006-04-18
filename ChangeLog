@@ -1,3 +1,7 @@
+2006-04-19  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* make.bat (:etc): Simplify.
+
 2006-04-18  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* make.bat: Use "echo *" to clarify the output.
