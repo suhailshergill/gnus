@@ -1,6 +1,6 @@
 2006-04-17  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	[ Merge from the trunk. ]
+	[ Merge from Gnus trunk. ]
 
 	* mm-util.el (mm-charset-synonym-alist): Improve doc string.
 	(mm-charset-override-alist): New variable.
