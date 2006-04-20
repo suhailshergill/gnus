@@ -61,8 +61,11 @@
 
 (eval-and-compile
   (cond
-   ((fboundp 'replace-in-string)
-    (defalias 'gnus-replace-in-string 'replace-in-string))
+   ;; Prefer `replace-regexp-in-string' (present in Emacs, XEmacs 21.5,
+   ;; SXEmacs 22.1.4) over `replace-in-string'.  The later leads to inf-loops
+   ;; on empty matches:
+   ;;   (replace-in-string "foo" "/*$" "/")
+   ;;   (replace-in-string "xe" "\\(x\\)?" "")
    ((fboundp 'replace-regexp-in-string)
     (defun gnus-replace-in-string (string regexp newtext &optional literal)
       "Replace all matches for REGEXP with NEWTEXT in STRING.
@@ -71,6 +74,8 @@ string containing the replacements.
 
 This is a compatibility function for different Emacsen."
       (replace-regexp-in-string regexp newtext string nil literal)))
+   ((fboundp 'replace-in-string)
+    (defalias 'gnus-replace-in-string 'replace-in-string))
    (t
     (defun gnus-replace-in-string (string regexp newtext &optional literal)
       "Replace all matches for REGEXP with NEWTEXT in STRING.
