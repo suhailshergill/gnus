@@ -5,7 +5,8 @@
 
 2006-04-20  Chong Yidong <cyd@stupidchicken.com>
 
-	* gnus.texi (Spam Package): Largely revised text.
+	* gnus.texi (Spam Package): Major revision of the text.  Previouly
+	this node was "Filtering Spam Using The Spam ELisp Package".
 
 2006-04-18  Reiner Steib  <Reiner.Steib@gmx.de>
 
