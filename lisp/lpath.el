@@ -28,17 +28,18 @@
 
 (if (featurep 'xemacs)
     (progn
-      (maybe-fbind '(delete-overlay
-		     detect-coding-string event-click-count event-end
-		     event-start find-coding-systems-for-charsets
+      (maybe-fbind '(codepage-setup
+		     delete-overlay detect-coding-string event-click-count
+		     event-end event-start find-coding-systems-for-charsets
 		     find-coding-systems-region find-coding-systems-string
 		     mail-abbrevs-setup mouse-minibuffer-check
 		     mouse-movement-p mouse-scroll-subr overlay-lists
-		     posn-point posn-window read-event set-buffer-multibyte
+		     posn-point posn-window read-event
+		     select-frame-set-input-focus set-buffer-multibyte
 		     track-mouse window-edges))
       (maybe-bind '(adaptive-fill-first-line-regexp
 		    buffer-display-table buffer-file-coding-system
-		    current-language-environment
+		    current-language-environment cursor-in-non-selected-windows
 		    default-enable-multibyte-characters
 		    enable-multibyte-characters gnus-agent-expire-current-dirs
 		    language-info-alist mark-active mouse-selection-click-count

@@ -199,6 +199,7 @@ than subr.el."
     (autoload 'bbdb-complete-name "bbdb-com" nil t)
     (autoload 'browse-url "browse-url" nil t)
     (autoload 'customize-apropos "cus-edit" nil t)
+    (autoload 'customize-group "cus-edit" nil t)
     (autoload 'customize-save-variable "cus-edit" nil t)
     (autoload 'customize-variable "cus-edit" nil t)
     (autoload 'delete-annotation "annotations")

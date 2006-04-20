@@ -1,3 +1,18 @@
+2006-04-20  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-group.el: Bind tool-bar-mode instead of tool-bar-map.
+
+	* gnus-sum.el: Ditto.
+
+	* gnus-util.el (gnus-select-frame-set-input-focus): Use
+	select-frame-set-input-focus if it is available in XEmacs; use
+	definition defined in Emacs 22 for old Emacsen.
+
+	* dgnushack.el: Autoload customize-group for XEmacs.
+
+	* lpath.el: Bind codepage-setup, cursor-in-non-selected-windows
+	and select-frame-set-input-focus for XEmacs.
+
 2006-04-17  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	[ Merge from Gnus trunk. ]
