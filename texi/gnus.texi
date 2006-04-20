@@ -24155,7 +24155,7 @@ than a certain threshold, the mail is considered to be spam.
 
 The Spam Statistics package adds support to Gnus for this kind of
 filtering.  It can be used as one of the back ends of the Spam package
-(@pxref{Spam package}), or by itself.
+(@pxref{Spam Package}), or by itself.
 
 Before using the Spam Statistics package, you need to set it up.
 First, you need two collections of your mail, one with spam, one with
@@ -24244,8 +24244,7 @@ The filename used to store the dictionary.  This defaults to
 @subsubsection Splitting mail using spam-stat
 
 This section describes how to use the Spam statistics
-@emph{independently} of the Spam package.  @xref{Spam Package} for
-information on using it with the Spam package.
+@emph{independently} of the @xref{Spam Package}.
 
 First, add the following to your @file{~/.gnus.el} file:
 
