@@ -1,3 +1,7 @@
+2006-04-20  Chong Yidong <cyd@stupidchicken.com>
+
+	* gnus.texi (Spam Package): Largely revised text.
+
 2006-04-18  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-refcard.tex: Remove duplicate \def's.  Update date.
