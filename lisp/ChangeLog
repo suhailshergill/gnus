@@ -1,3 +1,8 @@
+2006-04-25  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* mm-decode.el (mm-automatic-display): Don't make application/pgp
+	element match to application/pgp-*.
+
 2006-04-20  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-util.el (gnus-replace-in-string): Prefer
