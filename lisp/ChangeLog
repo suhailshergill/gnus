@@ -1,5 +1,11 @@
 2006-04-25  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* mm-uu.el (mm-uu-pgp-signed-test): Erase prompt.
+	(mm-uu-pgp-encrypted-test): Ditto.
+	(mm-uu-pgp-encrypted-extract-1): Make sure there's a blank line
+	between header and body; return application/pgp-encrypted handle
+	if decryption failed; decode decrypted body by charset.
+
 	* mm-decode.el (mm-automatic-display): Don't make application/pgp
 	element match to application/pgp-*.
 
