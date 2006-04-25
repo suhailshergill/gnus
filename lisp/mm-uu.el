@@ -413,7 +413,7 @@ Return that buffer."
   (let ((buf (mm-uu-copy-to-buffer (point-min) (point-max)))
 	(first t)
 	charset)
-    ;; Make sure there's a blank between header and body.
+    ;; Make sure there's a blank line between header and body.
     (with-current-buffer buf
       (goto-char (point-min))
       (while (prog2
