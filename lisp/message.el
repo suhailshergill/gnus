@@ -1586,7 +1586,7 @@ functionality to work."
 (defcustom message-valid-fqdn-regexp
   (concat "[a-z0-9][-.a-z0-9]+\\." ;; [hostname.subdomain.]domain.
 	  ;; valid TLDs:
-	  "\\([a-z][a-z]" ;; two letter country TDLs
+	  "\\([a-z][a-z]\\|" ;; two letter country TDLs
 	  "aero\\|arpa\\|bitnet\\|biz\\|bofh\\|"
 	  "cat\\|com\\|coop\\|edu\\|gov\\|"
 	  "info\\|int\\|jobs\\|"
