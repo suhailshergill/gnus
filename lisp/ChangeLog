@@ -1,3 +1,8 @@
+2006-04-26  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* message.el (message-valid-fqdn-regexp): Add TLDs .cat, jobs,
+	.mobi and .travel.  Remove .nato, .bitnet and .uucp.
+
 2006-04-25  Andreas Seltenreich  <uwi7@rz.uni-karlsruhe.de>
 
 	* nnweb.el (nnweb-google-wash-article): Sync up to new Google
