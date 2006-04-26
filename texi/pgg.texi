@@ -234,6 +234,15 @@ variable to @code{nil}.
 Elapsed time for expiration in seconds.
 @end defvar
 
+@defvar pgg-gpg-use-agent
+When using GnuPG (gpg) as PGP implementation you can use the gpg-agent
+for caching@footnote{Actually the gpg-agent does not cache passphrases
+but privat keys.  On te other hand, from a users point of view this
+technical difference isn't visible.}.  If non-@samp{nil} try to use an
+running gpg-agent.  It defaults to @samp{nil}.  You can customize this
+variable.
+@end defvar
+
 @node Default user identity
 @section Default user identity
 
