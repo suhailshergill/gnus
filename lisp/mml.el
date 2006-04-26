@@ -40,7 +40,8 @@
   (autoload 'message-fetch-field "message")
   (autoload 'message-info "message")
   (autoload 'fill-flowed-encode "flow-fill")
-  (autoload 'message-posting-charset "message"))
+  (autoload 'message-posting-charset "message")
+  (autoload 'dnd-get-local-file-name "dnd"))
 
 (defvar gnus-article-mime-handles)
 (defvar gnus-mouse-2)
@@ -51,6 +52,7 @@
 (defvar message-posting-charset)
 (defvar message-required-mail-headers)
 (defvar message-required-news-headers)
+(defvar dnd-protocol-alist)
 
 (defcustom mml-content-type-parameters
   '(name access-type expiration size permission format)
@@ -915,10 +917,17 @@ If HANDLES is non-nil, use it instead reparsing the buffer."
     ["Attach File..." mml-attach-file
      ,@(if (featurep 'xemacs) '(t)
 	 '(:help "Attach a file at point"))]
-    ["Attach Buffer..." mml-attach-buffer t]
-    ["Attach External..." mml-attach-external t]
-    ["Insert Part..." mml-insert-part t]
-    ["Insert Multipart..." mml-insert-multipart t]
+    ["Attach Buffer..." mml-attach-buffer
+     ,@(if (featurep 'xemacs) '(t)
+	 '(:help "Attach a buffer to the outgoing MIME message"))]
+    ["Attach External..." mml-attach-external
+     ,@(if (featurep 'xemacs) '(t)
+	 '(:help "Attach reference to file"))]
+    ;;
+    ["Insert Part..." mml-insert-part
+     :active (message-in-body-p)]
+    ["Insert Multipart..." mml-insert-multipart
+     :active (message-in-body-p)]
     ["PGP/MIME Sign" mml-secure-message-sign-pgpmime t]
     ["PGP/MIME Encrypt" mml-secure-message-encrypt-pgpmime t]
     ["PGP Sign" mml-secure-message-sign-pgp t]
@@ -958,8 +967,11 @@ See Info node `(emacs-mime)Composing'.
   (when (set (make-local-variable 'mml-mode)
 	     (if (null arg) (not mml-mode)
 	       (> (prefix-numeric-value arg) 0)))
-    (gnus-add-minor-mode 'mml-mode " MML" mml-mode-map)
+    (add-minor-mode 'mml-mode " MML" mml-mode-map)
     (easy-menu-add mml-menu mml-mode-map)
+    (when (boundp 'dnd-protocol-alist)
+      (set (make-local-variable 'dnd-protocol-alist)
+	   (append mml-dnd-protocol-alist dnd-protocol-alist)))
     (run-hooks 'mml-mode-hook)))
 
 ;;;
@@ -1057,6 +1069,36 @@ See Info node `(emacs-mime)Composing'.
 
 ;;; Attachment functions.
 
+(defcustom mml-dnd-protocol-alist
+  '(("^file:///" . mml-dnd-attach-file)
+    ("^file://"  . dnd-open-file)
+    ("^file:"    . mml-dnd-attach-file))
+  "The functions to call when a drop in `mml-mode' is made.
+See `dnd-protocol-alist' for more information.  When nil, behave
+as in other buffers."
+  :type '(choice (repeat (cons (regexp) (function)))
+		 (const :tag "Behave as in other buffers" nil))
+  :version "22.1" ;; Gnus 5.10.9
+  :group 'message)
+
+(defcustom mml-dnd-attach-options nil
+  "Which options should be queried when attaching a file via drag and drop.
+
+If it is a list, valid members are `type', `description' and
+`disposition'.  `disposition' implies `type'.  If it is nil,
+don't ask for options.  If it is t, ask the user whether or not
+to specify options."
+  :type '(choice
+	  (const :tag "Non" nil)
+	  (const :tag "Query" t)
+	  (list :value (type description disposition)
+	   (set :inline t
+		(const type)
+		(const description)
+		(const disposition))))
+  :version "22.1" ;; Gnus 5.10.9
+  :group 'message)
+
 (defun mml-attach-file (file &optional type description disposition)
   "Attach a file to the outgoing MIME message.
 The file is not inserted or encoded until you send the message with
@@ -1074,11 +1116,37 @@ body) or \"attachment\" (separate from the body)."
 	  (description (mml-minibuffer-read-description))
 	  (disposition (mml-minibuffer-read-disposition type)))
      (list file type description disposition)))
-  (mml-insert-empty-tag 'part
-			'type type
-			'filename file
-			'disposition (or disposition "attachment")
-			'description description))
+  (save-excursion
+    (unless (message-in-body-p) (goto-char (point-max)))
+    (mml-insert-empty-tag 'part
+			  'type type
+			  'filename file
+			  'disposition (or disposition "attachment")
+			  'description description)))
+
+(defun mml-dnd-attach-file (uri action)
+  "Attach a drag and drop file.
+
+Ask for type, description or disposition according to
+`mml-dnd-attach-options'."
+  (let ((file (dnd-get-local-file-name uri t)))
+    (when (and file (file-regular-p file))
+      (let ((mml-dnd-attach-options mml-dnd-attach-options)
+	    type description disposition)
+	(setq mml-dnd-attach-options
+	      (when (and (eq mml-dnd-attach-options t)
+			 (not
+			  (y-or-n-p
+			   "Use default type, disposition and description? ")))
+		'(type description disposition)))
+	(when (or (memq 'type mml-dnd-attach-options)
+		  (memq 'disposition mml-dnd-attach-options))
+	  (setq type (mml-minibuffer-read-type file)))
+	(when (memq 'description mml-dnd-attach-options)
+	  (setq description (mml-minibuffer-read-description)))
+	(when (memq 'disposition mml-dnd-attach-options)
+	  (setq disposition (mml-minibuffer-read-disposition type)))
+	(mml-attach-file file type description disposition)))))
 
 (defun mml-attach-buffer (buffer &optional type description)
   "Attach a buffer to the outgoing MIME message.
@@ -1088,8 +1156,11 @@ See `mml-attach-file' for details of operation."
 	  (type (mml-minibuffer-read-type buffer "text/plain"))
 	  (description (mml-minibuffer-read-description)))
      (list buffer type description)))
-  (mml-insert-empty-tag 'part 'type type 'buffer buffer
-			'disposition "attachment" 'description description))
+  (save-excursion
+    (unless (message-in-body-p) (goto-char (point-max)))
+    (mml-insert-empty-tag 'part 'type type 'buffer buffer
+			  'disposition "attachment"
+			  'description description)))
 
 (defun mml-attach-external (file &optional type description)
   "Attach an external file into the buffer.
@@ -1100,8 +1171,10 @@ TYPE is the MIME type to use."
 	  (type (mml-minibuffer-read-type file))
 	  (description (mml-minibuffer-read-description)))
      (list file type description)))
-  (mml-insert-empty-tag 'external 'type type 'name file
-			'disposition "attachment" 'description description))
+  (save-excursion
+    (unless (message-in-body-p) (goto-char (point-max)))
+    (mml-insert-empty-tag 'external 'type type 'name file
+			  'disposition "attachment" 'description description)))
 
 (defun mml-insert-multipart (&optional type)
   (interactive (list (completing-read "Multipart type (default mixed): "

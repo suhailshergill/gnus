@@ -2,6 +2,12 @@
 
 	* message.el (message-valid-fqdn-regexp): Add TLDs .cat, jobs,
 	.mobi and .travel.  Remove .nato, .bitnet and .uucp.
+	(message-in-body-p): New function.  Sync from the trunk.
+
+	* mml.el (mml-mode, mml-dnd-protocol-alist)
+	(mml-dnd-attach-options, mml-dnd-attach-file)
+	(mml-attach-file, mml-attach-buffer, mml-attach-external): Sync
+	DND support and use of message-in-body-p from the trunk.
 
 2006-04-25  Andreas Seltenreich  <uwi7@rz.uni-karlsruhe.de>
 
