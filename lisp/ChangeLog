@@ -1,5 +1,14 @@
 2006-04-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* mml-sec.el (mml-secure-method): New internal variable.
+	(mml-secure-sign, mml-secure-encrypt, mml-secure-message-sign)
+	(mml-secure-message-sign-encrypt, mml-secure-message-encrypt): New
+	functions using mml-secure-method.  Sync from the trunk.
+
+	* mml.el (mml-mode-map): Add key bindings for those functions.
+	(mml-menu): Simplify security menu entries.  Suggested by Jesper
+	Harder <harder@myrealbox.com>.  Sync from the trunk.
+
 	* message.el (message-valid-fqdn-regexp): Add TLDs .cat, jobs,
 	.mobi and .travel.  Remove .nato, .bitnet and .uucp.
 	(message-in-body-p): New function.  Sync from the trunk.
