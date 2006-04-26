@@ -1,5 +1,8 @@
 2006-04-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* deuglify.el (gnus-outlook-deuglify-unwrap-min)
+	(gnus-outlook-deuglify-unwrap-max): Remove autoload.
+
 	* mml-sec.el (mml-secure-method): New internal variable.
 	(mml-secure-sign, mml-secure-encrypt, mml-secure-message-sign)
 	(mml-secure-message-sign-encrypt, mml-secure-message-encrypt): New
