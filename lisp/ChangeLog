@@ -1,5 +1,20 @@
 2006-04-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* lpath.el: Don't fbind string-as-multibyte for XEmacs.
+
+	* pgg-gpg.el (pgg-string-to-multibyte): Remove.
+	(pgg-gpg-process-region): Revert.
+
+	* pgg-pgp.el (pgg-pgp-process-region): Revert.
+	(pgg-pgp-lookup-key): Revert.
+
+	* pgg-pgp5.el (pgg-pgp5-process-region): Revert.
+	(pgg-pgp5-lookup-key): Revert.
+
+	* pgg.el (pgg-fetch-key): Revert.
+
+2006-04-27  Katsumi Yamaoka  <yamaoka@jpl.org>
+
 	* lpath.el: Fbind make-network-process for both Emacs and XEmacs;
 	fbind string-as-multibyte for XEmacs.
 

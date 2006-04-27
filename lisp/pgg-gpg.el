@@ -60,20 +60,6 @@
 (defvar pgg-gpg-user-id nil
   "GnuPG ID of your default identity.")
 
-(eval-and-compile
-  (cond ((and (fboundp 'string-to-multibyte)
-	      (subrp (symbol-function 'string-to-multibyte)))
-	 (defalias 'pgg-string-to-multibyte 'string-to-multibyte))
-	((and (fboundp 'string-as-multibyte)
-	      (subrp (symbol-function 'string-as-multibyte)))
-	 (defun pgg-string-to-multibyte (string) "\
-Return a multibyte string with the same individual chars as string."
-	   (mapconcat
-	    (lambda (ch) (string-as-multibyte (char-to-string ch)))
-	    string "")))
-	(t
-	 (defalias 'pgg-string-to-multibyte 'identity))))
-
 (defun pgg-gpg-process-region (start end passphrase program args)
   (let* ((use-agent (pgg-gpg-use-agent-p)) 
 	 (output-file-name (pgg-make-temp-file "pgg-output"))
@@ -105,27 +91,14 @@ Return a multibyte string with the same individual chars as string."
 	      (setq exit-status
 		    (apply #'call-process-region (point-min) (point-max) program
 			   nil errors-buffer nil args))))
-	  (with-current-buffer (let ((default-enable-multibyte-characters t))
-				 (get-buffer-create output-buffer))
+	  (with-current-buffer (get-buffer-create output-buffer)
 	    (buffer-disable-undo)
 	    (erase-buffer)
-	    (when (file-exists-p output-file-name)
-	      ;; Buffer's multibyteness might be turned off after
-	      ;; inserting file's contents, as the case may be.
-	      (let ((coding-system-for-read (if pgg-text-mode
-						'raw-text
-					      'binary)))
-		(insert-file-contents output-file-name))
-	      (when (and (fboundp 'set-buffer-multibyte)
-			 (subrp (symbol-function 'set-buffer-multibyte))
-			 (not enable-multibyte-characters))
-		(if (zerop (buffer-size))
-		    (set-buffer-multibyte t)
-		  (insert (pgg-string-to-multibyte
-			   (prog1
-			       (buffer-string)
-			     (erase-buffer)
-			     (set-buffer-multibyte t)))))))
+	    (if (file-exists-p output-file-name)
+		(let ((coding-system-for-read (if pgg-text-mode
+						  'raw-text
+						'binary)))
+		  (insert-file-contents output-file-name)))
 	    (set-buffer errors-buffer)
 	    (if (not (equal exit-status 0))
 		(insert (format "\n%s exited abnormally: '%s'\n"
