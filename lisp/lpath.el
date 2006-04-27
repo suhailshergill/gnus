@@ -13,14 +13,14 @@
 	       Info-menu create-image display-graphic-p
 	       display-time-event-handler find-coding-system find-image
 	       image-size image-type-available-p insert-image
-	       make-mode-line-mouse-map make-temp-file propertize put-image
-	       replace-regexp-in-string rmail-msg-is-pruned
-	       rmail-msg-restore-non-pruned-header sort-coding-systems
-	       tool-bar-add-item tool-bar-add-item-from-menu
-	       tool-bar-local-item-from-menu url-generic-parse-url
-	       url-http-file-exists-p url-insert-file-contents
-	       vcard-pretty-print w32-focus-frame w3m-detect-meta-charset
-	       w3m-region x-focus-frame))
+	       make-mode-line-mouse-map make-network-process make-temp-file
+	       propertize put-image replace-regexp-in-string
+	       rmail-msg-is-pruned rmail-msg-restore-non-pruned-header
+	       sort-coding-systems tool-bar-add-item
+	       tool-bar-add-item-from-menu tool-bar-local-item-from-menu
+	       url-generic-parse-url url-http-file-exists-p
+	       url-insert-file-contents vcard-pretty-print w32-focus-frame
+	       w3m-detect-meta-charset w3m-region x-focus-frame))
 (maybe-bind '(filladapt-mode
 	      rmail-insert-mime-forwarded-message-function
 	      w3-meta-charset-content-type-regexp
@@ -36,7 +36,7 @@
 		     mouse-movement-p mouse-scroll-subr overlay-lists
 		     posn-point posn-window read-event
 		     select-frame-set-input-focus set-buffer-multibyte
-		     track-mouse window-edges))
+		     string-as-multibyte track-mouse window-edges))
       (maybe-bind '(adaptive-fill-first-line-regexp
 		    buffer-display-table buffer-file-coding-system
 		    current-language-environment cursor-in-non-selected-windows
@@ -49,10 +49,9 @@
 		 delete-annotation delete-extent device-connection dfw-device
 		 events-to-keys font-lock-set-defaults frame-device
 		 get-char-table glyph-height glyph-width mail-aliases-setup
-		 make-annotation make-event make-glyph make-network-process
-		 map-extents message-xmas-redefine put-char-table
-		 set-extent-property temp-directory
-		 valid-image-instantiator-format-p
+		 make-annotation make-event make-glyph map-extents
+		 message-xmas-redefine put-char-table set-extent-property
+		 temp-directory valid-image-instantiator-format-p
 		 w3-coding-system-for-mime-charset w3-do-setup
 		 w3-prepare-buffer w3-region window-pixel-height
 		 window-pixel-width))
