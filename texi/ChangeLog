@@ -1,6 +1,9 @@
 2006-05-12  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* message.texi (Interface): Add tool bar customization.
+	(MIME): Index and text additions for mml-attach.
+	(MIME): Describe mml-dnd-protocol-alist and
+	mml-dnd-attach-options.
 
 	* gnus.texi (Oort Gnus): Reorder entries in sections.  Fix some
 	entries.
