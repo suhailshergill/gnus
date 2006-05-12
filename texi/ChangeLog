@@ -1,7 +1,14 @@
 2006-05-12  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	* gnus.texi (Oort Gnus): Reorder entries in sections.
-	Fix some entries.
+	* message.texi (Interface): Add tool bar customization.
+
+	* gnus.texi (Oort Gnus): Reorder entries in sections.  Fix some
+	entries.
+	(Starting Up): Add references to "Emacs for Heathens" and to
+	"Finding the News".  Add user-full-name and user-mail-address.
+	(Group Buffer Format): Add tool bar customization and update.
+	(Summary Buffer): Add tool bar customization.
+	(Posting Styles): Add message-alternative-emails.
 
 2006-04-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
