@@ -1,3 +1,7 @@
+2006-05-12  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Oort Gnus): Reorder entries in sections.
+
 2006-04-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* pgg.texi (Caching passphrase): Fix markup and typos.  Simplify.
