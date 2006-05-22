@@ -1,5 +1,8 @@
 2006-05-22  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* uudecode.el (uudecode-decode-region-external): nil isn't a valid
+	coding system in XEmacs, use binary.
+
 	* mail-source.el (mail-sources): Fix custom type.
 
 	* imap.el (Commentary): Fix typo.
