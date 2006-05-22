@@ -1,5 +1,7 @@
 2006-05-22  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* mail-source.el (mail-sources): Fix custom type.
+
 	* imap.el (Commentary): Fix typo.
 
 2006-05-18  Reiner Steib  <Reiner.Steib@gmx.de>
