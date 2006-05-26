@@ -1,3 +1,7 @@
+2006-05-26  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* uudecode.el (uudecode-decode-region-external): Fix previous commit.
+
 2006-05-26  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-util.el (mm-enrich-utf-8-by-mule-ucs): Don't edit

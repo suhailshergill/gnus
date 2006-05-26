@@ -103,7 +103,7 @@ used is specified by `uudecode-decoder-program'."
 	      (default-process-coding-system
 		(if (featurep 'xemacs)
 		    ;; In XEmacs, `nil' is not a valid coding system.
-		    (binary . binary)
+		    '(binary . binary)
 		  nil)))
 	  (unwind-protect
 	      (with-temp-buffer
