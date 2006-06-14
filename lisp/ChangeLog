@@ -1,3 +1,7 @@
+2006-06-14  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-display-mime): Make sure body ends with newline.
+
 2006-06-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-util.el (mm-mime-mule-charset-alist): Use unicode-precedence-list
