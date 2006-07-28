@@ -26079,6 +26079,14 @@ later entry for more information about marks.  Note that downgrading
 isn't save in general.
 
 @item
+Lisp files are now installed in @file{.../site-lisp/gnus/} by default.
+It defaulted to @file{.../site-lisp/} formerly.  In addition to this,
+the new installer issues a warning if other Gnus installations which
+will shadow the latest one are detected.  You can then remove those
+shadows manually or remove them using @code{make
+remove-installed-shadows}.
+
+@item
 New @file{make.bat} for compiling and installing Gnus under MS Windows
 
 Use @file{make.bat} if you want to install Gnus under MS Windows, the
