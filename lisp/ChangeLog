@@ -1,3 +1,9 @@
+2006-09-04  Daiki Ueno  <ueno@unixuser.org>
+
+	* pgg-gpg.el (pgg-gpg-process-region): Revert two patches from Satyaki
+	Das.  http://article.gmane.org/gmane.emacs.gnus.general/49947
+	http://article.gmane.org/gmane.emacs.gnus.general/50457
+
 2006-09-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* rfc2047.el (rfc2047-quote-special-characters-in-quoted-strings):
