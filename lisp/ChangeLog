@@ -6,6 +6,11 @@
 	* pgg-gpg.el (pgg-gpg-process-region): Avoid display blinking with
 	inhibit-redisplay; encode passphrase with locale-coding-system.
 
+2006-09-04  Chong Yidong  <cyd@stupidchicken.com>
+
+	* message.el (message-send-mail-with-sendmail): Look for sendmail in
+	several common directories.
+
 2006-09-04  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-art.el (article-decode-encoded-words): Make it fast.
