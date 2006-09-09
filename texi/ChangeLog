@@ -1,7 +1,7 @@
 2006-09-09  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (Mail Source Specifiers): Mention problem of duplicate
-	mails with pop3-leave-mail-on-server.
+	mails with pop3-leave-mail-on-server.  Fix wording.
 
 2006-07-24  Richard Stallman  <rms@gnu.org>
 
