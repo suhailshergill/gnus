@@ -1,3 +1,17 @@
+2006-10-04  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* pop3.el (pop3-authentication-scheme): Clarify doc.
+	(pop3-movemail): Warn about pop3-leave-mail-on-server.
+
+2006-10-04  Dave Love  <fx@gnu.org>
+
+	* pop3.el (pop3-authentication-scheme): Add custom version.
+
+2006-10-04  Jesper Harder  <harder@ifa.au.dk>
+
+	* pop3.el (pop3-leave-mail-on-server): Don't quote nil in
+	doc string.  Improve doc string.
+
 2006-10-03  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-util.el (gnus-with-local-quit): New macro.
