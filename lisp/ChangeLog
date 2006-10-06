@@ -672,7 +672,7 @@
 	* gnus-sum.el (gnus-map-articles): Don't funcall symbol macro.
 	Reported by Ralf Wachinger <rwachinger@gmx.de>.
 
-2006-03-21  Daniel Pittman <daniel@rimspace.net>
+2006-03-21  Daniel Pittman  <daniel@rimspace.net>
 
 	* nnimap.el (nnimap-request-update-info-internal): Optimize.
 	Don't `gnus-uncompress-range' to avoid excessive memory usage.
@@ -1475,7 +1475,7 @@
 	as a buffer-local variable.  This avoids creating truncated
 	dribble files as a result of a hang up, eg.
 
-2005-11-04 Ken Manheimer  <ken.manheimer@gmail.com>
+2005-11-04  Ken Manheimer  <ken.manheimer@gmail.com>
 
 	* pgg-pgp.el (pgg-pgp-encrypt-region, pgg-pgp-decrypt-region)
 	(pgg-pgp-encrypt-symmetric-region, pgg-pgp-encrypt-symmetric)
@@ -4283,7 +4283,7 @@
 
 	* gnus-sum.el (gnus-summary-insert-subject): Remove list identifiers.
 
-2004-09-03  Hiroshi Fujishima <pooh@nature.tsukuba.ac.jp>  (tiny change)
+2004-09-03  Hiroshi Fujishima  <pooh@nature.tsukuba.ac.jp>  (tiny change)
 
 	* spam-stat.el (spam-stat-reduce-size): Set spam-stat-dirty.
 	(spam-stat-save): Accept prefix argument.
@@ -4456,17 +4456,17 @@
 
 	* gnus-sum.el (gnus-newsgroup-variables): Doc fix.
 
-2004-08-26  YAGI Tatsuya <ynyaaa@ybb.ne.jp>  (tiny change)
+2004-08-26  YAGI Tatsuya  <ynyaaa@ybb.ne.jp>  (tiny change)
 
 	* gnus-art.el (gnus-article-next-page): Fix the way to find a real
 	end-of-buffer.
 
-2004-08-26  Stefan Wiens <s.wi@gmx.net>  (tiny change)
+2004-08-26  Stefan Wiens  <s.wi@gmx.net>  (tiny change)
 
 	* gnus-sum.el (gnus-read-header): Don't remove a header for the
 	parent article of a sparse article in the thread hashtb.
 
-2004-08-26  David Hedbor <dhedbor@real.com>  (tiny change)
+2004-08-26  David Hedbor  <dhedbor@real.com>  (tiny change)
 
 	* nnmail.el (nnmail-split-lowercase-expanded): New user option.
 	(nnmail-expand-newtext): Lowercase expanded entries if
@@ -4632,7 +4632,7 @@
 	* gnus-msg.el (gnus-summary-followup-with-original):
 	Document yanking of region when active.
 
-2004-04-13 Kevin Greiner  <kgreiner@xpediantsolutions.com>
+2004-04-13  Kevin Greiner  <kgreiner@xpediantsolutions.com>
 
 	* gnus-agent.el: Merged 7.3 through 7.7 updates into branch.
 	Revision 7.2 changes excluded to maintain compatibility with all
