@@ -9153,7 +9153,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 	     (gnus-request-article-this-buffer article gnus-newsgroup-name)
 	     (when (consp (setq art-group
 				(gnus-request-accept-article
-				 to-newsgroup select-method (not articles))))
+				 to-newsgroup select-method (not articles) t)))
 	       (setq new-xref (concat new-xref " " (car art-group)
 				      ":"
 				      (number-to-string (cdr art-group))))
@@ -9161,7 +9161,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 	       ;; it and replace the new article.
 	       (nnheader-replace-header "Xref" new-xref)
 	       (gnus-request-replace-article
-		(cdr art-group) to-newsgroup (current-buffer))
+		(cdr art-group) to-newsgroup (current-buffer) t)
 	       art-group))))))
       (cond
        ((not art-group)
@@ -9259,7 +9259,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 	      (gnus-request-article-this-buffer article gnus-newsgroup-name)
 	      (nnheader-replace-header "Xref" new-xref)
 	      (gnus-request-replace-article
-	       article gnus-newsgroup-name (current-buffer))))
+	       article gnus-newsgroup-name (current-buffer) t)))
 
 	  ;; run the move/copy/crosspost/respool hook
 	  (run-hook-with-args 'gnus-summary-article-move-hook
