@@ -1,3 +1,8 @@
+2006-10-28  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-agent.el (gnus-agent-make-mode-line-string): Make it compatible
+	with Emacs 21 and XEmacs.
+
 2006-10-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* mm-view.el: Add interactive arg to html2text autoload.
