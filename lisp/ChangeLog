@@ -1,3 +1,14 @@
+2006-11-09  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* message.el: Merge from the trunk to fix the bug WRT double encoded
+	subjects.
+	(message-replacement-char): New variable.
+	(message-fix-before-sending): Use it.
+	(message-simplify-subject): New function to remove duplicate code.
+	(message-reply, message-followup): Use it.
+	(message-simplify-subject-functions): New variable.
+	(message-strip-subject-encoded-words): New function
+
 2006-11-08  Wolfgang Jenkner  <wjenkner@inode.at>  (tiny change)
 
 	* gnus-sum.el (gnus-summary-catchup): Use gnus-sorted-intersection
