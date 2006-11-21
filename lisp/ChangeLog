@@ -1,3 +1,7 @@
+2006-11-21  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* mm-util.el (mm-string-to-multibyte): Alias to identity in XEmacs.
+
 2006-11-18  Andreas Seltenreich  <uwi7@rz.uni-karlsruhe.de>
 
 	* mm-uu.el (mm-uu-pgp-signed-extract-1): Make last fix more thorough
