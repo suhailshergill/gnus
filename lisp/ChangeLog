@@ -1,3 +1,8 @@
+2006-11-29  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* nneething.el (nneething-decode-file-name): Replace
+	decode-coding-string with mm-decode-coding-string.
+
 2006-11-24  Stefan Monnier  <monnier@iro.umontreal.ca>
 
 	* pgg-pgp.el (pgg-pgp-process-region): Change `args' from a list of
