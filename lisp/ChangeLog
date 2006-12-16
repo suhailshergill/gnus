@@ -2,6 +2,10 @@
 
 	* legacy-gnus-agent.el: Add Copyright notice.
 
+2006-12-12  Chong Yidong  <cyd@stupidchicken.com>
+
+	* gnus-sum.el (gnus-make-thread-indent-array): Fix last change.
+
 2006-12-08  Chong Yidong  <cyd@stupidchicken.com>
 
 	* gnus-sum.el (gnus-make-thread-indent-array): New optional arg
