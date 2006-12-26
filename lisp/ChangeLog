@@ -1,5 +1,8 @@
 2006-12-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* message.el (message-make-fqdn): Fix comment.
+	(message-bogus-system-names): Add ".local".
+
 	* spam.el (spam-ifile-path, spam-ifile-program)
 	(spam-ifile-database-path, spam-ifile-database)
 	(spam-bogofilter-path, spam-bogofilter-program): Rename variables.
