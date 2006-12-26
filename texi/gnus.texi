@@ -23381,9 +23381,6 @@ From Ted Zlatanov <tzz@@lifelogs.com>.
 (gnus-registry-initialize)
 (spam-initialize)
 
-;; @r{I like @kbd{C-s} for marking spam}
-(define-key gnus-summary-mode-map "\C-s" 'gnus-summary-mark-as-spam)
-
 (setq
  spam-log-to-registry t     ; @r{for spam autodetection}
  spam-use-BBDB t
