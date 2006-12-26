@@ -1,3 +1,15 @@
+2006-12-26  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-art.el (gnus-treat-display-x-face, gnus-treat-display-face)
+	(gnus-treat-display-smileys): Simplify using
+	gnus-image-type-available-p.
+
+	* gnus-ems.el (gnus-image-type-available-p): Use display-images-p if
+	available.
+
+	* gnus-xmas.el (gnus-xmas-image-type-available-p): Use
+	`display-images-p' if available.
+
 2006-12-25  Daiki Ueno  <ueno@unixuser.org>
 
 	* pgg-def.el (pgg-passphrase-coding-system): Default to nil instead of
