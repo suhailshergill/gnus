@@ -23952,7 +23952,7 @@ The actual string used is irrelevant, but you probably want to leave
 the default value of @samp{spam}.
 @end defvar
 
-@defvar spam-ifile-database-path
+@defvar spam-ifile-database
 
 This is the filename for the ifile database.  It is not specified by
 default, so ifile will use its own default database name.
