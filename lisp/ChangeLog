@@ -1,3 +1,9 @@
+2006-12-27  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* spam.el (spam-ifile-path, spam-ifile-database-path)
+	(spam-bogofilter-path): Use define-obsolete-variable-alias instead of
+	make-obsolete-variable.
+
 2006-12-26  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* message.el (message-make-fqdn): Fix comment.

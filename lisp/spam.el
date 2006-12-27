@@ -351,21 +351,21 @@ All unmarked article in such group receive the spam mark on group entry."
   "Spam ifile configuration."
   :group 'spam)
 
+(define-obsolete-variable-alias 'spam-ifile-path 'spam-ifile-program)
+;; "22.1" ;; Gnus 5.10.9
 (defcustom spam-ifile-program (executable-find "ifile")
   "Name of the ifile program."
   :type '(choice (file :tag "Location of ifile")
 		 (const :tag "ifile is not installed"))
   :group 'spam-ifile)
-(make-obsolete-variable 'spam-ifile-path 'spam-ifile-program)
-;; "22.1" ;; Gnus 5.10.9
 
+(define-obsolete-variable-alias 'spam-ifile-database-path 'spam-ifile-database)
+;; "22.1" ;; Gnus 5.10.9
 (defcustom spam-ifile-database nil
   "File name of the ifile database."
   :type '(choice (file :tag "Location of the ifile database")
 		 (const :tag "Use the default"))
   :group 'spam-ifile)
-(make-obsolete-variable 'spam-ifile-database-path 'spam-ifile-database)
-;; "22.1" ;; Gnus 5.10.9
 
 (defcustom spam-ifile-spam-category "spam"
   "Name of the spam ifile category."
@@ -390,13 +390,13 @@ your main source of newsgroup names."
   "Spam bogofilter configuration."
   :group 'spam)
 
+(define-obsolete-variable-alias 'spam-bogofilter-path 'spam-bogofilter-program)
+;; "22.1" ;; Gnus 5.10.9
 (defcustom spam-bogofilter-program (executable-find "bogofilter")
   "Name of the Bogofilter program."
   :type '(choice (file :tag "Location of bogofilter")
 		 (const :tag "Bogofilter is not installed"))
   :group 'spam-bogofilter)
-(make-obsolete-variable 'spam-bogofilter-path 'spam-bogofilter-program)
-;; "22.1" ;; Gnus 5.10.9
 
 (defcustom spam-bogofilter-header "X-Bogosity"
   "The header that Bogofilter inserts in messages."
