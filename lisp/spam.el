@@ -351,7 +351,7 @@ All unmarked article in such group receive the spam mark on group entry."
   "Spam ifile configuration."
   :group 'spam)
 
-(define-obsolete-variable-alias 'spam-ifile-path 'spam-ifile-program)
+(make-obsolete-variable 'spam-ifile-path 'spam-ifile-program)
 ;; "22.1" ;; Gnus 5.10.9
 (defcustom spam-ifile-program (executable-find "ifile")
   "Name of the ifile program."
@@ -359,7 +359,7 @@ All unmarked article in such group receive the spam mark on group entry."
 		 (const :tag "ifile is not installed"))
   :group 'spam-ifile)
 
-(define-obsolete-variable-alias 'spam-ifile-database-path 'spam-ifile-database)
+(make-obsolete-variable 'spam-ifile-database-path 'spam-ifile-database)
 ;; "22.1" ;; Gnus 5.10.9
 (defcustom spam-ifile-database nil
   "File name of the ifile database."
@@ -390,7 +390,7 @@ your main source of newsgroup names."
   "Spam bogofilter configuration."
   :group 'spam)
 
-(define-obsolete-variable-alias 'spam-bogofilter-path 'spam-bogofilter-program)
+(make-obsolete-variable 'spam-bogofilter-path 'spam-bogofilter-program)
 ;; "22.1" ;; Gnus 5.10.9
 (defcustom spam-bogofilter-program (executable-find "bogofilter")
   "Name of the Bogofilter program."
