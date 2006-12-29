@@ -1915,7 +1915,7 @@
 	whitespace removed in revision 7.8.  Use concatenated string to
 	protect trailing whitespace.
 
-2005-10-27  Jouni K Seppanen  <jks@iki.fi>
+2005-10-27  Jouni K. Sepp,Ad(Bnen  <jks@iki.fi>
 
 	* nnimap.el (nnimap-search-uids-not-since-is-evil): Add variable.
 	(nnimap-request-expire-articles): Use it to avoid sending 'UID
