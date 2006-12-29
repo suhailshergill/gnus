@@ -16475,8 +16475,8 @@ messages instead of the internal article date.  See section 6.4.4 of
 RFC 2060 for more information on valid strings.
 
 However, if @code{nnimap-search-uids-not-since-is-evil} 
-is true, the command is @code{"UID NOT SINCE @var{date}"},
-regardless of this variable.
+is true, this variable has no effect since the search logic
+is reversed, as described below.
 
 @item nnimap-authinfo-file
 @vindex nnimap-authinfo-file
