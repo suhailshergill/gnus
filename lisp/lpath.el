@@ -10,9 +10,9 @@
   (mapcar (lambda (var) (unless (boundp var) (set var nil))) args))
 
 (maybe-fbind '(Info-directory
-	       Info-menu create-image custom-autoload display-graphic-p
-	       display-time-event-handler find-coding-system find-image
-	       image-size image-type-available-p insert-image
+	       Info-menu cp-supported-codepages create-image custom-autoload
+	       display-graphic-p display-time-event-handler find-coding-system
+	       find-image image-size image-type-available-p insert-image
 	       make-mode-line-mouse-map make-network-process make-temp-file
 	       propertize put-image replace-regexp-in-string
 	       rmail-msg-is-pruned rmail-msg-restore-non-pruned-header
@@ -23,21 +23,22 @@
 	       vcard-pretty-print w32-focus-frame w3m-detect-meta-charset
 	       w3m-region x-focus-frame))
 (maybe-bind '(filladapt-mode
-	      rmail-insert-mime-forwarded-message-function
+	      rmail-insert-mime-forwarded-message-function url-version
 	      w3-meta-charset-content-type-regexp
 	      w3-meta-content-type-charset-regexp))
 
 (if (featurep 'xemacs)
     (progn
       (maybe-fbind '(codepage-setup
-		     delete-overlay detect-coding-string event-click-count
-		     event-end event-start find-coding-systems-for-charsets
+		     delete-overlay detect-coding-string display-images-p
+		     event-click-count event-end event-start
+		     find-coding-systems-for-charsets
 		     find-coding-systems-region find-coding-systems-string
-		     mail-abbrevs-setup mouse-minibuffer-check
-		     mouse-movement-p mouse-scroll-subr overlay-lists
-		     posn-point posn-window read-event
-		     select-frame-set-input-focus select-safe-coding-system
-		     set-buffer-multibyte track-mouse window-edges))
+		     mail-abbrevs-setup mouse-minibuffer-check mouse-movement-p
+		     mouse-scroll-subr overlay-lists posn-point posn-window
+		     read-event select-frame-set-input-focus
+		     select-safe-coding-system set-buffer-multibyte
+		     timer-set-function track-mouse window-edges))
       (maybe-bind '(adaptive-fill-first-line-regexp
 		    buffer-display-table buffer-file-coding-system
 		    current-language-environment cursor-in-non-selected-windows
@@ -45,18 +46,20 @@
 		    enable-multibyte-characters gnus-agent-expire-current-dirs
 		    language-info-alist mark-active mouse-selection-click-count
 		    mouse-selection-click-count-buffer pgg-parse-crc24
-		    temporary-file-directory transient-mark-mode)))
+		    temporary-file-directory timer-list transient-mark-mode)))
   (maybe-fbind '(bbdb-complete-name
 		 delete-annotation delete-extent device-connection dfw-device
-		 events-to-keys font-lock-set-defaults frame-device
+		 events-to-keys find-face font-lock-set-defaults frame-device
 		 get-char-table glyph-height glyph-width mail-aliases-setup
 		 make-annotation make-event make-glyph map-extents
 		 message-xmas-redefine put-char-table set-extent-property
-		 temp-directory valid-image-instantiator-format-p
+		 set-itimer-function temp-directory
+		 valid-image-instantiator-format-p
 		 w3-coding-system-for-mime-charset w3-do-setup
 		 w3-prepare-buffer w3-region window-pixel-height
 		 window-pixel-width))
-  (maybe-bind '(help-echo-owns-message mail-mode-hook mm-w3m-mode-map)))
+  (maybe-bind '(help-echo-owns-message
+		itimer-list mail-mode-hook mm-w3m-mode-map)))
 
 (when (and (featurep 'xemacs)
 	   (not (featurep 'mule)))
@@ -66,9 +69,10 @@
 		 pgg-parse-crc24-string))
   (unless (featurep 'file-coding)
     (maybe-fbind '(coding-system-base
-		   coding-system-list coding-system-p decode-coding-region
-		   decode-coding-string detect-coding-region
-		   encode-coding-region encode-coding-string))))
+		   coding-system-change-eol-conversion coding-system-list
+		   coding-system-p decode-coding-region decode-coding-string
+		   detect-coding-region encode-coding-region
+		   encode-coding-string))))
 
 (defun nnkiboze-score-file (a)
   )

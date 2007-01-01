@@ -1,3 +1,13 @@
+2007-01-01  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* lpath.el: Fbind cp-supported-codepages; bind url-version; fbind
+	display-images-p and timer-set-function for XEmacs; bind timer-list for
+	XEmacs; fbind find-face and set-itimer-function for Emacs; bind
+	itimer-list for Emacs; bind coding-system-change-eol-conversion for
+	XEmacs without the file-coding feature.
+
+	* mm-decode.el (mm-display-external): Use itimer function for XEmacs.
+
 2006-12-30  Andreas Seltenreich  <uwi7@rz.uni-karlsruhe.de>
 
 	* gnus-sum.el (gnus-summary-insert-dormant-articles): Fix typo in
