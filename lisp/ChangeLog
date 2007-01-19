@@ -1,11 +1,13 @@
+2007-01-19  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* nnsoup.el (nnsoup-directory, nnsoup-packer, nnsoup-packet-directory):
+	Use gnus-home-directory instead of "~/" or "$HOME".
+
 2007-01-14  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-sum.el (gnus-auto-select-first): Improve doc string.
 
 2007-01-07  Reiner Steib  <Reiner.Steib@gmx.de>
-
-	* nnsoup.el (nnsoup-directory, nnsoup-packer, nnsoup-packet-directory):
-	Use gnus-home-directory instead of "~/" or "$HOME".
 
 	* gnus-soup.el: Add missing :group in previous change.
 
