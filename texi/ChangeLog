@@ -1,4 +1,18 @@
-2007-03-15  Katsumi Yamaoka  <yamaoka@jpl.org>
+2007-03-26  Richard Stallman  <rms@gnu.org>
+
+	* pgg.texi (Caching passphrase): Clean up previous change.
+
+2007-03-25  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	* gnus.texi (Setting Process Marks): Fix typo.
+
+2007-03-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	* gnus.texi (Splitting Mail): Reword "splitting"-as-adj to be -as-noun.
+
+	* gnus.texi (Mail Source Specifiers): Fix typo.
+
+007-03-15  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* message.texi (Message Buffers): Update documentation for
 	message-generate-new-buffers.
