@@ -1,3 +1,8 @@
+2007-04-06  Chong Yidong  <cyd@stupidchicken.com>
+
+	* sendmail.el (mail-text, mail-mode): Revert extant pieces of
+	1995-05-19 doc changes.
+
 2007-03-24  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* smtpmail.el: Signal an error when used with Emacs 22+ or XEmacs.
