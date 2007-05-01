@@ -2,6 +2,10 @@
 
 	* gnus.texi (Article Highlighting): Clarify gnus-cite-parse-max-size.
 
+2007-04-15  Chong Yidong  <cyd@stupidchicken.com>
+
+	* gnus.texi, message.texi, pgg.texi, sieve.texi: Include GFDL.
+
 2007-03-31  Eli Zaretskii  <eliz@gnu.org>
 
 	* emacs-mime.texi (Non-MIME): Postscript -> PostScript.
