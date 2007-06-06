@@ -11422,8 +11422,8 @@ buffer.
 
 @kindex v (Article)
 @cindex keys, reserved for users (Article)
-The key @kbd{v} is reserved for users.  You can bind it key to some
-function or better use it as a prefix key.
+The key @kbd{v} is reserved for users.  You can bind it to some
+command or better use it as a prefix key.
 
 A few additional keystrokes are available:
 
@@ -12460,8 +12460,8 @@ Also @pxref{Formatting Variables}.
 @item v
 @kindex v (Server)
 @cindex keys, reserved for users (Server)
-The key @kbd{v} is reserved for users.  You can bind it key to some
-function or better use it as a prefix key.
+The key @kbd{v} is reserved for users.  You can bind it to some
+command or better use it as a prefix key.
 
 @item a
 @kindex a (Server)
