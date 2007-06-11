@@ -1,3 +1,9 @@
+2007-06-06  Juanma Barranquero  <lekktu@gmail.com>
+
+	* gnus.texi (Article Buttons, Mail Source Customization)
+	(Sending or Not Sending, Customizing NNDiary):
+	* message.texi (Message Headers): Fix typos.
+
 2007-06-06  Andreas Seltenreich  <andreas@gate450.dyndns.org>
 
 	* gnus.texi (Misc Group Stuff, Summary Buffer)
@@ -9,7 +15,7 @@
 
 2007-05-09  Didier Verna  <didier@xemacs.org>
 
-	* gnus.texi (Email Based Diary): New. Proper documentation for the
+	* gnus.texi (Email Based Diary): New.  Proper documentation for the
 	nndiary back end and the gnus-diary library.
 
 2007-05-02  Reiner Steib  <Reiner.Steib@gmx.de>
