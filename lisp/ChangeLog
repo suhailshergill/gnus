@@ -1,3 +1,9 @@
+2007-06-26  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-article-summary-command-nosave)
+	(gnus-article-read-summary-keys): Don't set the 3rd arg of
+	pop-to-buffer for XEmacs.
+
 2007-06-14  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-agent.el (gnus-agent-fetch-headers)
