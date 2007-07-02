@@ -4,8 +4,6 @@
 	(release-bump-version): Use it.
 	(bump-version, bump-version-commit): New targets.
 
-	* README: Bump version to 5.10.9.
-
 2006-07-28  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* GNUS-NEWS: Regenerate from Oort Gnus node in texi/gnus.texi using
