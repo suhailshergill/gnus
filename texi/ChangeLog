@@ -1,5 +1,8 @@
 2007-07-02  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-faq.texi ([3.2]): Fix locating of environment variables in the
+	Control Panel.
+
 	* gnus.texi (Misc Article): Add index entry for
 	gnus-single-article-buffer.
 
