@@ -7,10 +7,12 @@
 
 	* gnus-srvr.el (gnus-server-font-lock-keywords): Quote faces.
 
-2007-07-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+2007-07-14  David Kastrup  <dak@gnu.org>
 
-	* dgnushack.el: Autoload ad-add-advice for XEmacs.  bbdb-com.el that
-	spam.el loads uses it in the compiled defadvice form.
+	* gnus-art.el (gnus-mime-delete-part): Don't go through article-edit
+	finishing actions if we did not edit the article.
+
+2007-07-13  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-srvr.el (gnus-server-agent-face, gnus-server-opened-face)
 	(gnus-server-closed-face, gnus-server-denied-face)
