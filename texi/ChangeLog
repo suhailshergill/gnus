@@ -1,3 +1,7 @@
+2007-08-10  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (NNTP): Mention nntp-xref-number-is-evil.
+
 2007-07-13  Eli Zaretskii  <eliz@gnu.org>
 
 	* emacs-mime.texi: Add @documentencoding directive.
