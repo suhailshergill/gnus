@@ -11,7 +11,7 @@
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 
 ;; GNU Emacs is distributed in the hope that it will be useful,
@@ -260,15 +260,15 @@ See also the `mml-default-encrypt-method' variable."
 This is done because new users often reply by mistake when reading
 news.
 This can also be a function receiving the group name as the only
-parameter which should return non-nil iff a confirmation is needed, or
-a regexp, in which case a confirmation is asked for iff the group name
+parameter, which should return non-nil if a confirmation is needed; or
+a regexp, in which case a confirmation is asked for if the group name
 matches the regexp."
   :version "22.1"
   :group 'gnus-message
   :type '(choice (const :tag "No" nil)
 		 (const :tag "Yes" t)
-		 (regexp :tag "Iff group matches regexp")
-		 (function :tag "Iff function evaluates to non-nil")))
+		 (regexp :tag "If group matches regexp")
+		 (function :tag "If function evaluates to non-nil")))
 
 (defcustom gnus-confirm-treat-mail-like-news
   nil

@@ -10,7 +10,7 @@
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 
 ;; GNU Emacs is distributed in the hope that it will be useful,
@@ -320,7 +320,7 @@ It should return non-nil if the article is to be prefetched."
 	  (pop alist))))))
 
 (defun gnus-async-prefetched-article-entry (group article)
-  "Return the entry for ARTICLE in GROUP iff it has been prefetched."
+  "Return the entry for ARTICLE in GROUP if it has been prefetched."
   (let ((entry (save-excursion
 		 (gnus-async-set-buffer)
 		 (assq (intern (format "%s-%d" group article)

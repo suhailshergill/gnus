@@ -11,7 +11,7 @@
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
 
 ;; GNU Emacs is distributed in the hope that it will be useful,
@@ -1645,7 +1645,7 @@ be used in a STORE FLAGS command."
       result)))
 
 (defun nnimap-mark-permanent-p (mark &optional group)
-  "Return t iff MARK can be permanently (between IMAP sessions) saved on articles, in GROUP."
+  "Return t if MARK can be permanently (between IMAP sessions) saved on articles, in GROUP."
   (imap-message-flag-permanent-p (nnimap-mark-to-flag mark)))
 
 (when nnimap-debug
