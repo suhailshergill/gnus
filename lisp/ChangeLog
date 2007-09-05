@@ -1,3 +1,9 @@
+2007-09-05  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-cus.el (gnus-score-extra): New widget.
+	(gnus-score-extra-convert): New function.
+	(gnus-score-customize): Use it for Extra.
+
 2007-08-23  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mml.el (mml-generate-mime): Make sure it uses multibyte temp buffer.
