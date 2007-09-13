@@ -67,9 +67,8 @@
 (when (and (featurep 'xemacs)
 	   (not (featurep 'mule)))
   (maybe-fbind '(ccl-execute-on-string
-		 char-charset charsetp coding-system-get define-ccl-program
-		 find-charset-region get-charset-property
-		 pgg-parse-crc24-string))
+		 char-charset charsetp coding-system-get find-charset-region
+		 get-charset-property pgg-parse-crc24-string))
   (unless (featurep 'file-coding)
     (maybe-fbind '(coding-system-base
 		   coding-system-change-eol-conversion coding-system-list

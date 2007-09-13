@@ -1,3 +1,21 @@
+2007-09-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* nnmbox.el (nnmbox-request-article): Don't assume delim regexp matches
+	newline.
+	(nnmbox-request-accept-article): Don't change article in source buffer;
+	narrow to header to use message-fetch-field rather than
+	nnmail-fetch-field; use with-current-buffer instead of save-excursion.
+	(nnmbox-request-replace-article): Quote lines that'll be misidentified
+	as delimiters; make sure article ends with newline.
+	(nnmbox-delete-mail): Correct last position of article to be deleted;
+	ignore X-Gnus-Newsgroup header in article body.
+	(nnmbox-save-mail): Quote lines looking like delimiters at the right
+	positions; make sure article ends with newline.
+
+	* lpath.el: Don't bind define-ccl-program for non-Mule XEmacs.
+
+	* dgnushack.el: Bind or autoload define-ccl-program for XEmacs.
+
 2007-09-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-cus.el (gnus-score-extra): New widget.
