@@ -1,3 +1,8 @@
+2007-09-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (Selecting a Group): Rename gnus-maximum-newsgroup to
+	gnus-newsgroup-maximum-articles.  Suggested by Leo <sdl.web@gmail.com>.
+
 2007-08-24  IRIE Tetsuya  <irie@t.email.ne.jp>  (tiny change)
 
 	* message.texi (MIME): Replace mml-attach with mml-attach-file.
