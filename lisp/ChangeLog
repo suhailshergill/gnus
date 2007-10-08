@@ -1,3 +1,7 @@
+2007-10-08  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* mm-util.el (mm-charset-synonym-alist): Alias gbk to cp936.
+
 2007-10-04  Reiner Steib  <Reiner.Steib@gmx.de>
 
         * Relicense "GPLv2 or later" files to "GPLv3 or later".
