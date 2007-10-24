@@ -244,12 +244,13 @@ If RECURSIVE is t, return groups in its subtopics too."
     (when recursive
       (if (eq recursive t)
 	  (setq recursive (cdr (gnus-topic-find-topology topic))))
-      (dolist (topic-topology (cdr recursive))
-	(setq visible-groups
-	      (nconc visible-groups
-		     (gnus-topic-find-groups
-		      (caar topic-topology)
-		      level all lowest topic-topology)))))
+      (mapcar (lambda (topic-topology)
+		(setq visible-groups
+		      (nconc visible-groups
+			     (gnus-topic-find-groups
+			      (caar topic-topology)
+			      level all lowest topic-topology))))
+	      (cdr recursive)))
     visible-groups))
 
 (defun gnus-topic-goto-previous-topic (n)
@@ -350,7 +351,7 @@ If RECURSIVE is t, return groups in its subtopics too."
     (setq topology gnus-topic-topology
 	  gnus-tmp-topics nil))
   (push (caar topology) gnus-tmp-topics)
-  (mapc 'gnus-topic-list (cdr topology))
+  (mapcar 'gnus-topic-list (cdr topology))
   gnus-tmp-topics)
 
 ;;; Topic parameter jazz
@@ -847,7 +848,8 @@ articles in the topic and its subtopics."
       (pop topics)))
   ;; Go through all living groups and make sure that
   ;; they belong to some topic.
-  (let* ((tgroups (apply 'append (mapcar 'cdr gnus-topic-alist)))
+  (let* ((tgroups (apply 'append (mapcar (lambda (entry) (cdr entry))
+					 gnus-topic-alist)))
 	 (entry (last (assoc (caar gnus-topic-topology) gnus-topic-alist)))
 	 (newsrc (cdr gnus-newsrc-alist))
 	 group)
@@ -1295,13 +1297,15 @@ If COPYP, copy the groups instead."
 	entry)
     (if (and (not groups) (not copyp) start-topic)
 	(gnus-topic-move start-topic topic)
-      (dolist (g groups)
-	(gnus-group-remove-mark g use-marked)
-	(when (and
-	       (setq entry (assoc (gnus-current-topic) gnus-topic-alist))
-	       (not copyp))
-	  (setcdr entry (gnus-delete-first g (cdr entry))))
-	(nconc topicl (list g)))
+      (mapcar
+       (lambda (g)
+	 (gnus-group-remove-mark g use-marked)
+	 (when (and
+		(setq entry (assoc (gnus-current-topic) gnus-topic-alist))
+		(not copyp))
+	   (setcdr entry (gnus-delete-first g (cdr entry))))
+	 (nconc topicl (list g)))
+       groups)
       (gnus-topic-enter-dribble)
       (if start-group
 	  (gnus-group-goto-group start-group)
@@ -1314,7 +1318,7 @@ If COPYP, copy the groups instead."
   (let ((use-marked (and (not n) (not (gnus-region-active-p))
 			 gnus-group-marked t))
 	(groups (gnus-group-process-prefix n)))
-    (mapc
+    (mapcar
      (lambda (group)
        (gnus-group-remove-mark group use-marked)
        (let ((topicl (assoc (gnus-current-topic) gnus-topic-alist))

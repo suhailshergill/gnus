@@ -296,7 +296,9 @@ Return a list of updated types."
 
 (defun gnus-correct-length (string)
   "Return the correct width of STRING."
-  (apply #'+ (mapcar #'char-width string)))
+  (let ((length 0))
+    (mapcar (lambda (char) (incf length (gnus-char-width char))) string)
+    length))
 
 (defun gnus-correct-substring (string start &optional end)
   (let ((wstart 0)
