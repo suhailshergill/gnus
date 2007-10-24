@@ -191,7 +191,7 @@ valid issuer, which is much faster if you are selective about the issuers."
 		       (and gnus-nocem-check-from
 			    (let ((case-fold-search t))
 			      (catch 'ok
-				(mapcar
+				(mapc
 				 (lambda (author)
 				   (if (consp author)
 				       (setq author (car author)))
