@@ -1,3 +1,8 @@
+2007-10-27  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Makefile.in (release-bump-version): Adjust version
+	in (gnus)Troubleshooting.
+
 2007-10-04  Reiner Steib  <Reiner.Steib@gmx.de>
 
         * Relicense "GPLv2 or later" files to "GPLv3 or later".
