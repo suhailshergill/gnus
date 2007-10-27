@@ -1,3 +1,7 @@
+2007-10-27  Alexander Solovyov  <piranha@piranha.org.ua>  (tiny change)
+
+	* make.bat: Initial check didn't work if path contained spaces.
+
 2007-10-27  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* Makefile.in (release-bump-version): Adjust version
