@@ -27926,9 +27926,6 @@ If you just need help, you are better off asking on
 @email{ding-request@@gnus.org} to subscribe.
 
 
-or read it via Gmane (group .
-
-
 @page
 @node Gnus Reference Guide
 @section Gnus Reference Guide
