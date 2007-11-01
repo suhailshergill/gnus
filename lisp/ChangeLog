@@ -1,3 +1,9 @@
+2007-11-01  ARISAWA Akihiro  <ari@mbf.ocn.ne.jp>  (tiny change)
+
+	* message.el (message-use-alternative-email-as-from): Examine the
+	From header as well; use message-make-from in order to include a
+	user's full name.  [ Backported bug fix from No Gnus. ]
+
 2007-10-30  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* qp.el (quoted-printable-decode-string): Fix typo in doc string.
