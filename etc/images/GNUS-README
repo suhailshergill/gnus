@@ -1,3 +1,19 @@
+CONTENTS
+
+This file (GNUS-NEWS) contains some Gnus specific informations or other
+information that not relevant for Emacs.  For information relevant to Emacs,
+see README, smilies/README, mail/README, and gnus/README.  Don't modify these
+files in Gnus' repository unless the change should also be included in the
+Emacs incarnation of the files.
+
+
+COPYRIGHT AND LICENSE INFORMATION FOR IMAGE FILES
+
+See README, smilies/README, mail/README and gnus/README.
+
+
+ORIGIN OF THE IMAGE FILES
+
 The following icons are from GNOME 2.6:
 
     attach.xpm (stock_attach)
@@ -78,6 +94,9 @@ You might want to use the following code to get Gnome icons in Emacs 21:
     (setq tool-bar-map (make-sparse-keymap))
     (clear-image-cache)
     (tool-bar-setup))
+
+
+CONVERSION OF PNG FILES TO XPM
 
 The GNOME's stock_*.png files were converted to XPM using the following GIMP
 script:
