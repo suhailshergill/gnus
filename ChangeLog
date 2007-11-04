@@ -5,8 +5,9 @@
 	(release-bump-version): Add check for CODENAME_TO_STABLE.  Split off
 	release-add-changelog.
 	(release-add-changelog): New target.  Separate some commands from
-	release-bump-version.
+	release-bump-version.  Add etc/ChangeLog.
 	(release-diff-commit-files): New target.
+	(RELEASE_COMMIT_FILES): Reorder files.
 
 2007-11-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
