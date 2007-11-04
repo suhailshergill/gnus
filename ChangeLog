@@ -1,5 +1,9 @@
 2007-11-04  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* README: Bump version to 5.10.9.
+
+2007-11-04  Reiner Steib  <Reiner.Steib@gmx.de>
+
 	* Makefile.in (RELEASE_COMMIT_FILES): Add etc/ChangeLog.
 	(release-check-settings): Add release-add-changelog
 	(release-bump-version): Add check for CODENAME_TO_STABLE.  Split off
