@@ -7492,7 +7492,7 @@ If BACKWARD, the previous article is selected instead of the next."
 	(gnus-summary-article-subject))))
 
 (defun gnus-summary-prev-article (&optional unread subject)
-  "Select the article after the current one.
+  "Select the article before the current one.
 If UNREAD is non-nil, only unread articles are selected."
   (interactive "P")
   (gnus-summary-next-article unread subject t))

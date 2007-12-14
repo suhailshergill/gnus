@@ -1,3 +1,8 @@
+2007-12-14  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-sum.el (gnus-summary-prev-article): Fix doc string.  Reported by
+	Christoph Conrad <christoph.conrad@gmx.de>.
+
 2007-12-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* message.el (message-ignored-supersedes-headers): Add "X-ID".
