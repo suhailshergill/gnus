@@ -1,3 +1,10 @@
+2008-02-11  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-topic.el (gnus-topic-select-group, gnus-topic-read-group):
+	Document negativ prefix.
+
+	* gnus-group.el (gnus-group-read-group): Document negativ prefix.
+
 2008-02-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.el (gnus-group-startup-message): Add `find-image' call before
