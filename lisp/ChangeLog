@@ -1,3 +1,7 @@
+2008-03-01  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Update copyright years.
+
 2008-02-29  Andreas Seltenreich  <andreas@gate450.dyndns.org>
 
 	* nnweb.el (nnweb-google-parse-1): Fix date parsing on articles with
@@ -5473,7 +5477,7 @@
 
 See ChangeLog.2 for earlier changes.
 
-    Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+    Copyright (C) 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 
   This file is part of GNU Emacs.
 

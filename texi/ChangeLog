@@ -1,3 +1,7 @@
+2008-03-01  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Update copyright years.
+
 2007-12-18  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (Group Parameters): Reorder the text and add a note about
@@ -5024,7 +5028,7 @@ Thu Feb 25 00:28:49 1999  Shenghuo ZHU  <zsh@cs.rochester.edu>
 	* gnus.texi (Mail Folders): Addition.
 
     Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
-    2007 Free Software Foundation, Inc.
+    2007 2008 Free Software Foundation, Inc.
 
   This file is part of GNU Emacs.
 
