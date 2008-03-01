@@ -1,5 +1,35 @@
 2008-03-01  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	Sync from EMACS_22_BASE.
+
+	* parse-time.el: Rename elt->parse-time-elt and val->parse-time-val.
+
+	* nnimap.el (nnimap-split-download-body): Fix spelling.
+
+	* netrc.el: Remove eval-and-compile for `netrc-point-at-eol'.
+
+	* gnus-uu.el (gnus-uu-default-view-rules, gnus-uu-decode-save): Fix
+	spelling and typo.
+
+	* gnus-demon.el (gnus-demon): Fix spelling.
+
+	* deuglify.el: Don't use "illegal".
+
+2008-03-01  Glenn Morris  <rgm@gnu.org>
+
+	* calendar/time-date.el (with-decoded-time-value): Doc fix.
+
+2008-03-01  Ari Roponen  <ari.roponen@gmail.com>  (tiny change)
+
+	* calendar/time-date.el (encode-time-value): Doc fix.
+
+2008-03-01  Glenn Morris  <rgm@gnu.org>
+
+	* message.el (message-tool-bar-retro): Update for rename
+	mail_send.xpm->mail-send.xpm.
+
+2008-03-01  Reiner Steib  <Reiner.Steib@gmx.de>
+
 	* Update copyright years.
 
 2008-02-29  Andreas Seltenreich  <andreas@gate450.dyndns.org>

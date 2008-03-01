@@ -53,7 +53,7 @@ the symbols HIGH-SYMBOL, LOW-SYMBOL and MICRO-SYMBOL.
 
 The optional TYPE-SYMBOL is bound to the type of the time value.
 Type 0 is the cons cell (HIGH . LOW), type 1 is the list (HIGH
-LOW), and type 3 is the list (HIGH LOW MICRO)."
+LOW), and type 2 is the list (HIGH LOW MICRO)."
   (declare (indent 1)
 	   (debug ((&rest (symbolp symbolp symbolp &or [symbolp form] form))
 		   body)))
@@ -86,7 +86,7 @@ LOW), and type 3 is the list (HIGH LOW MICRO)."
 (defun encode-time-value (high low micro type)
   "Encode HIGH, LOW, and MICRO into a time value of type TYPE.
 Type 0 is the cons cell (HIGH . LOW), type 1 is the list (HIGH LOW),
-and type 3 is the list (HIGH LOW MICRO)."
+and type 2 is the list (HIGH LOW MICRO)."
   (cond
    ((eq type 0) (cons high low))
    ((eq type 1) (list high low))
@@ -110,6 +110,7 @@ and type 3 is the list (HIGH LOW MICRO)."
 	      (timezone-make-date-arpa-standard date)))
     (error (error "Invalid date: %s" date))))
 
+;;;###autoload
 (defun time-to-seconds (time)
   "Convert time value TIME to a floating point number.
 You can use `float-time' instead."
@@ -213,7 +214,7 @@ DATE1 and DATE2 should be date-time strings."
 
 ;;;###autoload
 (defun time-to-day-in-year (time)
-  "Return the day number within the year of the date month/day/year."
+  "Return the day number within the year corresponding to TIME."
   (let* ((tim (decode-time time))
 	 (month (nth 4 tim))
 	 (day (nth 3 tim))
@@ -234,7 +235,7 @@ The Gregorian date Sunday, December 31, 1bce is imaginary."
 	 (month (nth 4 tim))
 	 (day (nth 3 tim))
 	 (year (nth 5 tim)))
-    (+ (time-to-day-in-year time)	;	Days this year
+    (+ (time-to-day-in-year time)	; 	Days this year
        (* 365 (1- year))		;	+ Days in prior years
        (/ (1- year) 4)			;	+ Julian leap years
        (- (/ (1- year) 100))		;	- century years
