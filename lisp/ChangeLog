@@ -1,3 +1,10 @@
+2008-03-08  Riccardo Murri  <riccardo.murri@gmail.com>
+
+	* net/tls.el: Require rx when compiling.
+	(tls-end-of-info): New variable.
+	(open-tls-stream): Keep reading input until `tls-end-of-info' is
+	matched.  [Sync from EMACS_22_BASE.]
+
 2008-03-08  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* mail-source.el (mail-source-delete-old-incoming-confirm): Change
