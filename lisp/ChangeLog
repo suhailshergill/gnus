@@ -1,3 +1,10 @@
+2008-03-10  Glenn Morris  <rgm@gnu.org>
+
+	Merge from the Emacs trunk to enable it to work with XEmacs.
+	* tls.el: Don't require rx when compiling.
+	(tls-end-of-info): Rewrite without using rx.
+	(open-tls-stream): Use with-current-buffer.
+
 2008-03-10  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* lpath.el: Consider the case without Emacs/W3.
