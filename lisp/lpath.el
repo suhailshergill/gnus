@@ -14,26 +14,29 @@
   (maybe-fbind
    '(Info-menu
      cp-supported-codepages delete-annotation glyph-height make-annotation
-     set-itimer-function w3-do-setup w3-prepare-buffer w3-region
-     w32-focus-frame w3m-detect-meta-charset w3m-region window-pixel-height
-     window-pixel-width))
+     make-glyph map-extents set-extent-property set-itimer-function w3-do-setup
+     w3-prepare-buffer w3-region w32-focus-frame w3m-detect-meta-charset
+     w3m-region window-pixel-height window-pixel-width))
 
   (when (<= emacs-major-version 22)
-    (maybe-fbind '(display-time-event-handler)))
+    (maybe-fbind '(display-time-event-handler frame-device)))
 
   (when (= emacs-major-version 21)
     (defun split-line (&optional arg))
     (maybe-fbind
      '(bbdb-complete-name
-       custom-autoload events-to-keys find-coding-system font-lock-set-defaults
+       custom-autoload delete-extent device-connection dfw-device
+       events-to-keys find-coding-system find-face font-lock-set-defaults
        get-char-table glyph-width mail-aliases-setup make-event
        make-network-process message-xmas-redefine put-char-table temp-directory
-       unicode-precedence-list url-http-file-exists-p
-       valid-image-instantiator-format-p vcard-pretty-print
-       w3-coding-system-for-mime-charset))
+       unicode-precedence-list url-generic-parse-url url-http-file-exists-p
+       url-insert-file-contents valid-image-instantiator-format-p
+       vcard-pretty-print w3-coding-system-for-mime-charset))
     (maybe-bind
      '(filladapt-mode
-       help-echo-owns-message itimer-list ps-print-color-p))))
+       help-echo-owns-message itimer-list ps-print-color-p url-version
+       w3-meta-charset-content-type-regexp
+       w3-meta-content-type-charset-regexp))))
 
 (when (featurep 'xemacs)
   (defun nnkiboze-score-file (a))
@@ -48,8 +51,8 @@
      mouse-movement-p mouse-scroll-subr posn-point posn-window put-image
      read-event rmail-msg-is-pruned rmail-msg-restore-non-pruned-header
      select-safe-coding-system sort-coding-systems track-mouse
-     url-http-file-exists-p vcard-pretty-print w3m-detect-meta-charset
-     window-edges))
+     url-generic-parse-url url-http-file-exists-p url-insert-file-contents
+     vcard-pretty-print w3m-detect-meta-charset window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table cursor-in-non-selected-windows
@@ -58,7 +61,8 @@
      line-spacing mark-active mouse-selection-click-count
      mouse-selection-click-count-buffer
      rmail-insert-mime-forwarded-message-function tool-bar-mode
-     transient-mark-mode))
+     transient-mark-mode url-version w3-meta-charset-content-type-regexp
+     w3-meta-content-type-charset-regexp))
 
   (when (or (and (= emacs-major-version 21) (= emacs-minor-version 4))
 	    (featurep 'sxemacs))
