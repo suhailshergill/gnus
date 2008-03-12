@@ -1,3 +1,9 @@
+2008-03-12  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* nntp.el (nntp-open-telnet-stream, nntp-open-via-rlogin-and-telnet)
+	(nntp-open-via-telnet-and-telnet): Make sure the nntp port to specify
+	is a string.
+
 2008-03-10  Glenn Morris  <rgm@gnu.org>
 
 	Merge from the Emacs trunk to enable it to work with XEmacs.
