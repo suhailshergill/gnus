@@ -1,3 +1,11 @@
+2008-03-18  Nils Ackermann  <nils@ackermath.info>  (tiny change)
+
+	* nnmh.el (nnmh-request-expire-articles): Prefer expiry-target group
+	parameter.
+
+	* message.el (message-disassociate-draft): Specify drafts group name
+	fully.
+
 2008-03-14  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mail-source.el (mail-source-delete-old-incoming) Fix regexp to find
