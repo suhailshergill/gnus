@@ -1,3 +1,8 @@
+2008-03-19  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Oort Gnus): Add version info WRT
+	`mail-source-delete-incoming'.
+
 2008-03-16  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (Top): Add "Other related manuals" and version info in
