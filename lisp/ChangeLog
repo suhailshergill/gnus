@@ -1,3 +1,7 @@
+2008-03-29  Sven Joachim  <svenjoac@gmx.de>
+
+	* gnus-sum.el (gnus-summary-make-menu-bar): Add missing dots.
+
 2008-03-24  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* message.el (message-cite-original-without-signature): Mention
