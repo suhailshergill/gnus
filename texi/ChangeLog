@@ -1,3 +1,11 @@
+2008-03-31  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* Makefile.in (datarootdir): Define.
+	(install, uninstall): Quote directory name that might contain
+	whitespace.
+
+	* ps/Makefile.in (datarootdir): Define.
+
 2008-03-21  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (Gnus Development): Clarify difference between ding and
