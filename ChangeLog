@@ -1,3 +1,17 @@
+2008-03-31  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* GNUS-NEWS (Installation changes): Mention that spaces and tabs are
+	allowed in the installation directory name.
+
+	* Makefile.in (datarootdir): Define.
+
+	* aclocal.m4 (AC_PATH_LISPDIR): Quote directory name that might contain
+	whitespace.
+
+	* configure: Regenerate.
+
+	* mkinstalldirs: Replace it with the 2006-05-11.19 version.
+
 2008-03-22  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* GNUS-NEWS (incoming mail files): Add version.

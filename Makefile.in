@@ -1,4 +1,6 @@
 prefix = @prefix@
+# Avoid "WARNING:  Makefile.in seems to ignore the --datarootdir setting":
+datarootdir = @datarootdir@
 datadir = @datadir@
 lispdir = @lispdir@
 srcdir = @srcdir@

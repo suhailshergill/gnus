@@ -26,6 +26,8 @@ installer issues a warning if other Gnus installations which will shadow
 the latest one are detected.  You can then remove those shadows manually
 or remove them using `make remove-installed-shadows'.
 
+** The installation directory name is allowed to have spaces and/or tabs.
+
 ** New `make.bat' for compiling and installing Gnus under MS Windows
 
 Use `make.bat' if you want to install Gnus under MS Windows, the first
