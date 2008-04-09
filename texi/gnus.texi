@@ -27293,8 +27293,9 @@ message, Message Manual}).
 
 @item
 The tool bars have been updated to use GNOME icons in Group, Summary and
-Message mode.  You can also customize the tool bars.  This is a new
-feature in Gnus 5.10.9.  (Only for Emacs, not in XEmacs.)
+Message mode.  You can also customize the tool bars: @kbd{M-x
+customize-apropos RET -tool-bar$} should get you started.  This is a new
+feature in Gnus 5.10.10.  (Only for Emacs, not in XEmacs.)
 
 @item The tool bar icons are now (de)activated correctly
 in the group buffer, see the variable @code{gnus-group-update-tool-bar}.
