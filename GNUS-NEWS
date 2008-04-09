@@ -475,8 +475,8 @@ renamed to "Gnus".
 stuff, like signing and encryption (*note Security: (message)Security.).
 
 ** The tool bars have been updated to use GNOME icons in Group, Summary and
-Message mode.  You can also customize the tool bars.  This is a new
-feature in Gnus 5.10.9.  (Only for Emacs, not in XEmacs.)
+Message mode.  You can also customize the tool bars: `M-x customize-apropos
+RET -tool-bar$' should get you started.  (Only for Emacs, not in XEmacs.)
 
 ** The tool bar icons are now (de)activated correctly in the group buffer,
 see the variable `gnus-group-update-tool-bar'.  Its default value
