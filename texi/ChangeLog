@@ -1,5 +1,9 @@
 2008-04-10  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus.texi, gnus-faq.texi, message.texi: Gnus v5.10.10 is released.
+
+2008-04-10  Reiner Steib  <Reiner.Steib@gmx.de>
+
 	* gnus.texi (Emacsen): Give recommendations for Emacs 22 and Emacs 23.
 
 2008-04-09  Reiner Steib  <Reiner.Steib@gmx.de>
