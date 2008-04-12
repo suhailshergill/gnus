@@ -1,3 +1,7 @@
+2008-04-12  Adrian Aichner  <adrian@xemacs.org>
+
+	* gnus-sum.el (gnus-summary-goto-subject): Typo fix.
+
 2008-04-12  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus-diary.el (gnus-article-edit-mode-map, message-mode-map): Remove
