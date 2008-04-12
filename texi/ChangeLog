@@ -1,3 +1,8 @@
+2008-04-12  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.texi (Diary Headers Generation): Update key binding for
+	`gnus-diary-check-message'.
+
 2008-04-11  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi, gnus-faq.texi, message.texi: Bump version to 5.10.11.

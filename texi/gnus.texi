@@ -18299,9 +18299,9 @@ needed.
 
   This function is hooked into the @code{nndiary} back end, so that
 moving or copying an article to a diary group will trigger it
-automatically.  It is also bound to @kbd{C-c D c} in @code{message-mode}
-and @code{article-edit-mode} in order to ease the process of converting
-a usual mail to a diary one.
+automatically.  It is also bound to @kbd{C-c C-f d} in
+@code{message-mode} and @code{article-edit-mode} in order to ease the
+process of converting a usual mail to a diary one.
 
   This function takes a prefix argument which will force prompting of
 all diary headers, regardless of their presence or validity.  That way,
