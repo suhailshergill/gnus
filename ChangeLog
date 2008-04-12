@@ -2,6 +2,7 @@
 
 	* Makefile.in (release-check-settings): Clarify codename.
 	(release-help): New target.
+	(release-cvs-export): Add umask.  Suggested by Sven Joachim.
 
 2008-04-11  Reiner Steib  <Reiner.Steib@gmx.de>
 

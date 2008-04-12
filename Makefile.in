@@ -258,7 +258,7 @@ release-sign-files:
 
 release-cvs-export $(CIN)gnus-$(VERSION):	release-check-settings
 	rm -fr $(CIN)gnus-$(VERSION)
-	cvs export -d $(CIN)gnus-$(VERSION) -r $(TAG) gnus
+	umask 0022; cvs export -d $(CIN)gnus-$(VERSION) -r $(TAG) gnus
 
 release-make-tar-ball:	$(CIN)gnus-$(VERSION)
 	[ -d $(CIN)gnus-$(VERSION) ] && cd $(CIN)gnus-$(VERSION) && \
