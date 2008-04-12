@@ -1,3 +1,9 @@
+2008-04-12  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-diary.el (gnus-article-edit-mode-map, message-mode-map): Remove
+	binding for `gnus-diary-version'.  Bind `gnus-diary-check-message' to
+	`C-c C-f d'.
+
 2008-04-11  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.el: Bump version to 5.10.11.
