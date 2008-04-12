@@ -1,3 +1,8 @@
+2008-04-12  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* Makefile.in (release-check-settings): Clarify codename.
+	(release-help): New target.
+
 2008-04-11  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* README: Bump version to 5.10.11.
