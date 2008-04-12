@@ -13959,7 +13959,7 @@ corresponding keywords.
 
 @item :mailbox
 The name of the mailbox to get mail from.  The default is @samp{INBOX}
-which normally is the mailbox which receive incoming mail.
+which normally is the mailbox which receives incoming mail.
 
 @item :predicate
 The predicate used to find articles to fetch.  The default, @samp{UNSEEN
