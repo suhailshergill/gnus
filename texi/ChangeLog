@@ -1,3 +1,11 @@
+2008-04-13  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus-faq.texi ([5.2]): Adjust for message-fill-column.
+
+	* gnus.texi (Oort Gnus): Add message-fill-column.
+
+	* message.texi (Various Message Variables): Add message-fill-column.
+
 2008-04-12  Adrian Aichner  <adrian@xemacs.org>
 
 	* gnus.texi (Mail Source Specifiers): Typo fix.

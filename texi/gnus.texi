@@ -27245,7 +27245,12 @@ controls this.
 @item You can now drag and drop attachments to the Message buffer.
 See @code{mml-dnd-protocol-alist} and @code{mml-dnd-attach-options}.
 @xref{MIME, ,MIME, message, Message Manual}.
-@c New in 5.10.9 / 5.11
+@c New in 5.10.9 / 5.11 (Emacs 21.1)
+
+@item @code{auto-fill-mode} is enabled by default in Message mode.
+See @code{message-fill-column}.  @xref{Various Message Variables, ,
+Message Headers, message, Message Manual}.
+@c New in Gnus 5.10.12 / 5.11 (Emacs 22.3)
 
 @end itemize
 
