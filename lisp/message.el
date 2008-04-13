@@ -828,6 +828,15 @@ will not have a visible effect for those headers."
                  (const :tag "All" t)
                  (repeat (sexp :tag "Header"))))
 
+(defcustom message-fill-column 72
+  "Column beyond which automatic line-wrapping should happen.
+Local value for message buffers.  If non-nil, also turn on
+auto-fill in message buffers."
+  :group 'message-various
+  ;; :link '(custom-manual "(message)Message Headers")
+  :type '(choice (const :tag "Don't turn on auto fill" nil)
+                 (integer)))
+
 (defcustom message-setup-hook nil
   "Normal hook, run each time a new outgoing message is initialized.
 The function `message-setup' runs this hook."
@@ -2640,6 +2649,9 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
   (set (make-local-variable 'message-checksum) nil)
   (set (make-local-variable 'message-mime-part) 0)
   (message-setup-fill-variables)
+  (when message-fill-column
+    (setq fill-column message-fill-column)
+    (turn-on-auto-fill))
   ;; Allow using comment commands to add/remove quoting.
   ;; (set (make-local-variable 'comment-start) message-yank-prefix)
   (when message-yank-prefix

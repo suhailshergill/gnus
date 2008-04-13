@@ -1,5 +1,10 @@
 2008-04-13  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	[Backport GNKSA related changes from the trunk.]
+
+	* message.el (message-fill-column): New variable.
+	(message-mode): Use it.
+
 	* message.el (message-signature-separator): Change default.  Improve
 	custom type.
 	(message-cite-function): Change default to
