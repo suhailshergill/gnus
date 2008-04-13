@@ -438,6 +438,10 @@ The variable `gnus-use-idna' controls this.
 `mml-dnd-protocol-alist' and `mml-dnd-attach-options'.  *Note MIME:
 (message)MIME.
 
+** `auto-fill-mode' is enabled by default in Message mode.  See
+`message-fill-column'.  *Note Message Headers: (message)Various Message
+Variables.  (New in Gnus 5.10.12 / Emacs 22.3)
+
 
 
 * Changes in back ends
