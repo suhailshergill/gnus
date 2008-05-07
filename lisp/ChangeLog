@@ -1,3 +1,7 @@
+2008-05-07  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el: Adjusted copyright dates and added a keyword.
+
 2008-04-24  Luca Capello  <luca@pca.it>  (tiny change)
 
 	* mm-encode.el (mm-safer-encoding): Add optional argument `type'.
