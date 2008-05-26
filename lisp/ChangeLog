@@ -1,3 +1,8 @@
+2008-05-26  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* lpath.el: Fbind w3m-region, bind ps-print-color-p for XEmacs; fbind
+	propertize for XEmacs 21.4.
+
 2008-05-25  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-art.el (gnus-button-alist): Exclude newline in RFC2396-compliant

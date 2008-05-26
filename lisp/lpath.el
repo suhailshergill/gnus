@@ -52,14 +52,14 @@
      read-event rmail-msg-is-pruned rmail-msg-restore-non-pruned-header
      select-safe-coding-system sort-coding-systems track-mouse
      url-generic-parse-url url-http-file-exists-p url-insert-file-contents
-     vcard-pretty-print w3m-detect-meta-charset window-edges))
+     vcard-pretty-print w3m-detect-meta-charset w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table cursor-in-non-selected-windows
      default-enable-multibyte-characters filladapt-mode
      gnus-agent-expire-current-dirs idna-program installation-directory
      line-spacing mark-active mouse-selection-click-count
-     mouse-selection-click-count-buffer
+     mouse-selection-click-count-buffer ps-print-color-p
      rmail-insert-mime-forwarded-message-function tool-bar-mode
      transient-mark-mode url-version w3-meta-charset-content-type-regexp
      w3-meta-content-type-charset-regexp))
@@ -71,6 +71,10 @@
        display-graphic-p display-images-p display-visual-class
        replace-regexp-in-string select-frame-set-input-focus
        unicode-precedence-list w32-focus-frame x-focus-frame)))
+
+  (when (and (= emacs-major-version 21) (= emacs-minor-version 4))
+    (maybe-fbind
+     '(propertize)))
 
   (unless (featurep 'mule)
     (maybe-fbind
