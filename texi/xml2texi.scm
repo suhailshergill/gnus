@@ -145,8 +145,8 @@ tag: 64dc5692-edb4-4848-a965-7aa0181acbb8~%\
 ;;;; Questions
 (define format-q-level
     (lambda (level)
-      (apply format "[~A.~A]" (reverse level))))
-      ;; (apply format "FAQ ~A-~A" (reverse level))))
+      ;; (apply format "[~A.~A]" (reverse level))))
+      (apply format "FAQ ~A-~A" (reverse level))))
 
 (define format-q-description
     (compose trim-ws (make-reg-replacer `((,(format "~%") " ")))))
