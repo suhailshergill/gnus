@@ -1,5 +1,7 @@
 2008-06-15  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* Makefile.in (gnus-faq-clean): Don't remove gnus-faq.texi.
+
 	* xml2texi.scm (boilerplate): Update copyright years.
 	(format-q-level): Change node names to "FAQ N-M", since period in
 	"[N.M]" is invalid, see "(texinfo)Node Line Requirements".

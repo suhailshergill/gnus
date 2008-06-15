@@ -102,7 +102,7 @@ gnus-faq-texi: gnus-faq.xml xml2texi.sh xml2texi.scm
 	sed '/[$$]Id:.*[$$]/d' < $@.tmp > $@
 
 gnus-faq-clean:
-	rm -f gnus-faq.xml gnus-faq.*.tmp gnus-faq.texi
+	rm -f gnus-faq.xml gnus-faq.*.tmp
 
 almost-clean:
 	rm -f *.[cgk]idx *.aux *.cp *.cps *.dvi *.dvi-x *.fn *.ky	\
