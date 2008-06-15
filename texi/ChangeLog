@@ -1,5 +1,7 @@
 2008-06-15  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-faq.texi: Generate.  Change node names to "FAQ N-M".
+
 	* Makefile.in (gnus-faq-clean): Don't remove gnus-faq.texi.
 	(gnus-faq.xml): Update repository host.
 
