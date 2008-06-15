@@ -63,8 +63,12 @@ the archive (BROKEN)}.
 @itemize @bullet
 
 @item
-Updated FAQ to reflect release of Gnus 5.10 and start of
-No Gnus development.
+2008-06-15: Adjust for message-fill-column.  Add x-face-file.
+Clarify difference between ding and gnu.emacs.gnus.  Remove
+reference to discontinued service.
+
+@item
+2006-04-15: Added tip on how to delete sent buffer on exit.
 @end itemize
 
 @node FAQ - Introduction
@@ -129,7 +133,7 @@ What is the latest version of Gnus?
 Jingle please: Gnus 5.10 is released, get it while it's
 hot! As well as the step in version number is rather
 small, Gnus 5.10 has tons of new features which you
-shouldn't miss. The current release (5.10.11) should be at
+shouldn't miss. The current release (5.10.10) should be at
 least as stable as the latest release of the 5.8 series.
 
 @node [1.2]
@@ -176,10 +180,10 @@ Where and how to get Gnus?
 Gnus is released independent from releases of Emacs and XEmacs.
 Therefore, the version bundled with Emacs or the version in XEmacs'
 package system might not be up to date (e.g. Gnus 5.9 bundled with Emacs
-20 is outdated).
-@c
+21 is outdated).
 You can get the latest released version of Gnus from
-@uref{http://www.gnus.org/dist/gnus.tar.gz} or via anonymous FTP from
+@uref{http://www.gnus.org/dist/gnus.tar.gz}
+or via anonymous FTP from 
 @uref{ftp://ftp.gnus.org/pub/gnus/gnus.tar.gz}.
 
 @node [1.4]
@@ -429,10 +433,10 @@ SET HOME=C:\myhome
 @noindent
 
 in your autoexec.bat and reboot.  Under NT, 2000 and XP, hit
-Winkey+Pause/Break to enter system options (if it doesn't work, go to
-Control Panel -> System -> Advanced). There you'll find the possibility
-to set environment variables.  Create a new one with name HOME and value
-C:\myhome.  Rebooting is not necessary.
+Winkey+Pause/Break to enter system options (if it doesn't work, go
+to Control Panel -> System -> Advanced). There you'll find the
+possibility to set environment variables.  Create a new one with
+name HOME and value C:\myhome.  Rebooting is not necessary.
 
 Now to create ~/.gnus.el, say
 @samp{C-x C-f ~/.gnus.el RET C-x C-s}.
@@ -1246,7 +1250,9 @@ from using them):
 * [5.10]::    How to tell Gnus not to generate a sender header?
 * [5.11]::    I want Gnus to locally store copies of my send mail and
               news, how to do it?
-* [5.12]::    People tell me my Message-IDs are not correct, why aren't
+* [5.12]::    I want Gnus to kill the buffer after successful sending
+              instead of keeping it alive as "Sent mail to...", how to do it?
+* [5.13]::    People tell me my Message-IDs are not correct, why aren't
               they and how to fix it?
 @end menu
 
@@ -1303,7 +1309,8 @@ For other versions of Gnus, say
 
 in ~/.gnus.el.
 
-You can reformat a paragraph by hitting @samp{M-q} (as usual).
+You can reformat a paragraph by hitting @samp{M-q}
+(as usual).
 
 @node [5.3]
 @subsubheading Question 5.3
@@ -1643,6 +1650,21 @@ the group to use.
 @node [5.12]
 @subsubheading Question 5.12
 
+I want Gnus to kill the buffer after successful sending instead of keeping
+it alive as "Sent mail to...", how to do it?
+
+@subsubheading Answer
+
+Add this to your ~/.gnus:
+
+@example
+(setq message-kill-buffer-on-exit t)
+@end example
+@noindent
+
+@node [5.13]
+@subsubheading Question 5.13
+
 People tell me my Message-IDs are not correct, why
 aren't they and how to fix it?
 
@@ -1661,7 +1683,7 @@ by saying:
 @noindent
 
 in ~/.gnus.el.  If you use Gnus 5.9 or earlier, you can use this
-instead (works for newer versions a well): 
+instead (works for newer versions as well): 
 
 @example
 (eval-after-load "message"
@@ -2132,15 +2154,15 @@ Which mailing lists and newsgroups are there?
 @subsubheading Answer
 
 There's the newsgroup gnu.emacs.gnus (also available as
-@uref{http://dir.gmane.org/gmane.emacs.gnus.user,
-gmane.emacs.gnus.user}) which deals with general Gnus questions.  If you
-have questions about development versions of Gnus, you should better ask
-on the ding mailing list, see below.
+@uref{http://dir.gmane.org/gmane.emacs.gnus.user, 
+gmane.emacs.gnus.user}) which deals with general Gnus
+questions.  If you have questions about development versions of
+Gnus, you should better ask on the ding mailing list, see below.
 
 If you want to stay in the big8,
 news.software.newssreaders is also read by some Gnus
 users (but chances for qualified help are much better in
-the above groups). If you speak German, there's
+the above groups).  If you speak German, there's
 de.comm.software.gnus.
 
 The ding mailing list (ding@@gnus.org) deals with development of
