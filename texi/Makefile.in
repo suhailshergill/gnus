@@ -88,7 +88,7 @@ gnus-booklet.pdf: $(REFCARD).tex  $(LOGO).pdf
 gnus-faq-full-update: gnus-faq-clean gnus-faq-texi
 
 gnus-faq.xml:
-	cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gnus \
+	cvs -z3 -d:pserver:anonymous@gnus.cvs.sourceforge.net:/cvsroot/gnus \
 	  co -p gnus-faq/src/gnus-faq.xml > $@.tmp
 	head -n 1 $@.tmp | grep '^<.xml version' || \
 	  { echo "Update of $@ failed."; : rm $@.tmp; exit 1; }
