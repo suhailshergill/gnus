@@ -69,8 +69,9 @@
     (maybe-fbind
      '(custom-autoload
        display-graphic-p display-images-p display-visual-class
-       replace-regexp-in-string select-frame-set-input-focus
-       unicode-precedence-list w32-focus-frame x-focus-frame)))
+       get-display-table put-display-table replace-regexp-in-string
+       select-frame-set-input-focus unicode-precedence-list w32-focus-frame
+       x-focus-frame)))
 
   (when (and (= emacs-major-version 21) (= emacs-minor-version 4))
     (maybe-fbind
