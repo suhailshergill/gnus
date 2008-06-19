@@ -20,7 +20,7 @@
 	`gnus-put-display-table', `gnus-get-display-table',
 	`gnus-set-display-table' for the display table.
 
-008-06-05  Katsumi Yamaoka  <yamaoka@jpl.org>
+2008-06-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* message.el (message-disassociate-draft): Revert 2008-03-18 change.
 
