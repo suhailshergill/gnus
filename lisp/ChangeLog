@@ -1,3 +1,8 @@
+2008-10-29  Chong Yidong  <cyd@stupidchicken.com>
+
+	* pgg-gpg.el (pgg-gpg-process-region): Accept any remaining
+	pending output coming after the status change.
+
 2008-06-18  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* dgnushack.el: Autoload get-display-table and put-display-table for
