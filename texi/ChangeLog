@@ -5,6 +5,9 @@
 2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (Emacsen): Sync text with README.
+	(Oort Gnus): Fix message-fill-column.  Add message-cite-function.
+
+	* message.texi (Insertion Variables): Update message-cite-function.
 
 2008-06-15  Reiner Steib  <Reiner.Steib@gmx.de>
 

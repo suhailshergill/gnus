@@ -8,7 +8,7 @@
 
 @copying
 Copyright @copyright{} 1995, 1996, 1997, 1998, 1999, 2000, 2001,
-2002, 2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -27249,7 +27249,14 @@ See @code{mml-dnd-protocol-alist} and @code{mml-dnd-attach-options}.
 
 @item @code{auto-fill-mode} is enabled by default in Message mode.
 See @code{message-fill-column}.  @xref{Various Message Variables, ,
-Message Headers, message, Message Manual}.
+Various Message Variables, message, Message Manual}.
+@c New in Gnus 5.10.12 / 5.11 (Emacs 22.3)
+
+@item Signatures are stripped when replying by default.
+I.e. the default of @code{message-cite-function} has been changed to
+@code{message-cite-original-without-signature}.  @xref{Insertion
+Variables, , Insertion Variables, message, Message Manual}.
+
 @c New in Gnus 5.10.12 / 5.11 (Emacs 22.3)
 
 @end itemize
