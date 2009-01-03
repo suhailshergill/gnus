@@ -1,3 +1,7 @@
+2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* README:  Add outline.  Fix and clarify Emacs versions.
+
 2008-04-13  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* GNUS-NEWS: Add message-fill-column.

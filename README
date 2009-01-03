@@ -1,6 +1,21 @@
-This package contains a beta version of Gnus (beta because the final version
-is the one included in Emacs). The lisp directory contains the source lisp
+* Content
+
+This package contains a beta version of Gnus ("beta" because the final version
+is the one included in Emacs).  The lisp directory contains the source lisp
 files, and the texi directory contains the Gnus info pages.
+
+* Emacsen
+
+Gnus 5.10.11 does absolutely not work with anything older than Emacs 21 or
+XEmacs 21.4.
+
+While this version of Gnus works on Emacs 22, it is more reasonable to use the
+most recent version of Emacs 22 and the Gnus version bundled therein.  Users
+of the Emacs development version (Emacs 23) are strongly encouraged to also
+use the version bundled with Emacs, which corresponds to the development
+version of Gnus (No Gnus).
+
+* Setup
 
 To use Gnus you first have to unpack the files, which you've obviously
 done, because you are reading this.
@@ -31,9 +46,6 @@ To enable reading the Gnus manual, you could say something like:
       (add-to-list 'Info-directory-list "~/gnus-5.10.11/texi/")
     (add-to-list 'Info-default-directory-list "~/gnus-5.10.11/texi/"))
 
-Gnus 5.10 does absolutely not work with anything older than Emacs 20.7 or
-XEmacs 21.1.
-
 To compile the Gnus manual, you either need a pretty new Emacs, or a
 pretty new version of the texinfo tools.
 
@@ -55,3 +67,8 @@ There are four main things I want your help and input on:
 
 Send any comments and all your bug fixes/complaints to
 `bugs@gnus.org'.
+
+
+Local variables:
+mode: outline
+End:
