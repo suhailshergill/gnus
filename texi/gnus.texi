@@ -25589,9 +25589,9 @@ Emacs versions.  Particularly, Gnus 5.10.8 should also work on Emacs
 
 While this version of Gnus works on Emacs 22, it is more reasonable to
 use the most recent Emacs 22 version and the Gnus version bundled
-therein.  Users of the Emacs development version (to be Emacs 23) are
-strongly encouraged to also use the version bundled with Emacs, which
-corresponds to the development version of Gnus.
+therein.  Users of the Emacs development version (Emacs 23) are strongly
+encouraged to also use the version bundled with Emacs, which corresponds
+to the development version of Gnus.
 
 @node Gnus Development
 @subsection Gnus Development
