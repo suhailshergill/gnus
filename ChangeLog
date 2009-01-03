@@ -4,6 +4,8 @@
 
 2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* Makefile.in (release-sign-files): Don't use bash brace expansion.
+
 	* README:  Add outline.  Fix and clarify Emacs versions.
 
 2008-04-13  Reiner Steib  <Reiner.Steib@gmx.de>

@@ -251,9 +251,9 @@ release-sign-files:
 	   rm -f $$i.sig; \
 	   echo "$$phrase" | gpg --detach-sign $$gpg_opt $$i; \
 	done; true
-	@ls -l $(CIN)gnus-$(VERSION).tar.gz{.sig,}
+	@ls -l $(CIN)gnus-$(VERSION).tar.gz $(CIN)gnus-$(VERSION).tar.gz.sig
 	@ls -l $(CIN)gnus-`echo $(OLD_TAG)%$(TAG)|tr - .|tr -d v|tr % -`.diff.gz{.sig,}
-	@gpg --verify $(CIN)gnus-$(VERSION).tar.gz{.sig,}
+	@gpg --verify $(CIN)gnus-$(VERSION).tar.gz $(CIN)gnus-$(VERSION).tar.gz.sig
 	@gpg --verify $(CIN)gnus-`echo $(OLD_TAG)%$(TAG)|tr - .|tr -d v|tr % -`.diff.gz{.sig,}
 
 release-cvs-export $(CIN)gnus-$(VERSION):	release-check-settings
