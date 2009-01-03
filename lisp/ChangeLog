@@ -2,6 +2,9 @@
 
 	* gnus.el: Gnus v5.10.12 is released.
 
+	* message.el (message-check-news-body-syntax): Fix signature check if
+	there's an attachment.
+
 2008-10-29  Chong Yidong  <cyd@stupidchicken.com>
 
 	* pgg-gpg.el (pgg-gpg-process-region): Accept any remaining
