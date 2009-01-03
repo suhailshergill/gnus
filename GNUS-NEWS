@@ -1,7 +1,7 @@
 GNUS NEWS -- history of user-visible changes.
 
 Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2008 Free Software Foundation, Inc.
+   2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 See the end of the file for license conditions.
 
 Please send Gnus bug reports to bugs@gnus.org.
@@ -439,8 +439,13 @@ The variable `gnus-use-idna' controls this.
 (message)MIME.
 
 ** `auto-fill-mode' is enabled by default in Message mode.  See
-`message-fill-column'.  *Note Message Headers: (message)Various Message
-Variables.  (New in Gnus 5.10.12 / Emacs 22.3)
+`message-fill-column'.  *Note Various Message Variables: (message)Various
+Message Variables.  (New in Gnus 5.10.12 / Emacs 22.3)
+
+** Signatures are stripped when replying by default.  I.e. the default of
+`message-cite-function' has been changed to
+`message-cite-original-without-signature'.  *Note Insertion Variables:
+(message)Insertion Variables.  (New in Gnus 5.10.12 / Emacs 22.3)
 
 
 

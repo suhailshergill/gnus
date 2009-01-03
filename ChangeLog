@@ -4,6 +4,8 @@
 
 2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* GNUS-NEWS: Fix message-fill-column.  Add message-cite-function.
+
 	* Makefile.in (release-sign-files): Don't use bash brace expansion.
 
 	* README:  Add outline.  Fix and clarify Emacs versions.
