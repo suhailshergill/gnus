@@ -1,5 +1,9 @@
 2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus.texi, gnus-faq.texi, message.texi: Gnus v5.10.12 is released.
+
+2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
+
 	* gnus.texi (Emacsen): Sync text with README.
 
 2008-06-15  Reiner Steib  <Reiner.Steib@gmx.de>

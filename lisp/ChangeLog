@@ -1,3 +1,7 @@
+2009-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* gnus.el: Gnus v5.10.12 is released.
+
 2008-10-29  Chong Yidong  <cyd@stupidchicken.com>
 
 	* pgg-gpg.el (pgg-gpg-process-region): Accept any remaining

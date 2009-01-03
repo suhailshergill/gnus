@@ -34,7 +34,7 @@ If you are using XEmacs, you *must* say "./configure && make EMACS=xemacs".
 Then you have to tell Emacs where Gnus is.  You might put something
 like
 
-   (setq load-path (cons (expand-file-name "~/gnus-5.10.11/lisp") load-path))
+   (setq load-path (cons (expand-file-name "~/gnus-5.10.12/lisp") load-path))
    (require 'gnus-load)
 
 in your .emacs file, or wherever you keep such things.  
@@ -43,8 +43,8 @@ To enable reading the Gnus manual, you could say something like:
 
   (require 'info)
   (if (featurep 'xemacs)
-      (add-to-list 'Info-directory-list "~/gnus-5.10.11/texi/")
-    (add-to-list 'Info-default-directory-list "~/gnus-5.10.11/texi/"))
+      (add-to-list 'Info-directory-list "~/gnus-5.10.12/texi/")
+    (add-to-list 'Info-default-directory-list "~/gnus-5.10.12/texi/"))
 
 To compile the Gnus manual, you either need a pretty new Emacs, or a
 pretty new version of the texinfo tools.
