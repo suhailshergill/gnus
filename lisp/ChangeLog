@@ -1,3 +1,8 @@
+2010-05-25  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* gnus-uu.el, imap.el, nndoc.el, nnrss.el, rfc2047.el, utf7.el: Replace
+	Lisp calls to delete-backward-char by calls to delete-char.
+
 2010-05-20  Kevin Ryde  <user42@zip.com.au>
 
 	* gnus-start.el (gnus-level-unsubscribed): Doc fix.  (Bug#6206)
