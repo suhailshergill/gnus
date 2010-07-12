@@ -1,3 +1,13 @@
+2010-06-24  Glenn Morris  <rgm@gnu.org>
+
+	* auth.texi, emacs-mime.texi, gnus.texi, message.texi, pgg.texi:
+	* sasl.texi: Start direntry descriptions in column 32, per Texinfo
+	convention.  Make them end with a period.
+
+2010-06-23  Glenn Morris  <rgm@gnu.org>
+
+	* gnus-faq.texi, pgg.texi, sasl.texi, sieve.texi: Untabify.
+
 2010-06-07  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Interactive): Explain effect of gnus-expert-user better.
