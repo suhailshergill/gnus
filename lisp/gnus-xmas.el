@@ -341,7 +341,7 @@ call it with the value of the `gnus-data' text property."
 (defun gnus-xmas-read-event-char (&optional prompt)
   "Get the next event."
   (when prompt
-    (message "%s" prompt))
+    (display-message 'no-log (format "%s" prompt)))
   (let ((event (next-command-event)))
     (sit-for 0)
     ;; We junk all non-key events.  Is this naughty?

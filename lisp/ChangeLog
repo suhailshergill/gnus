@@ -1,3 +1,8 @@
+2010-07-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-xmas.el (gnus-xmas-read-event-char): Use display-message with
+	`no-log' instead of message not to log prompt string.
+
 2010-06-22  Mark A. Hershberger  <mah@everybody.org>
 
 	* mm-url.el (mm-url-encode-multipart-form-data): New function to handle
