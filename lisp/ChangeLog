@@ -1,5 +1,10 @@
 2010-07-15  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* gnus-sum.el (gnus-summary-bookmark-make-record): Make it work for
+	Emacs 23 as well.
+
+2010-07-15  Katsumi Yamaoka  <yamaoka@jpl.org>
+
 	* lpath.el: Bind bookmark-current-buffer, bookmark-yank-point for all
 	Emacs versions; bind bookmark-make-record-function for Emacs >=22.
 
