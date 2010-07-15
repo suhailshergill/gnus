@@ -11,9 +11,13 @@
 
 (unless (featurep 'xemacs)
   (maybe-fbind '(pgg-display-output-buffer url-generic-parse-url))
-  (maybe-bind '(help-xref-stack-item
-		url-version w3-meta-charset-content-type-regexp
+  (maybe-bind '(bookmark-current-buffer
+		bookmark-yank-point help-xref-stack-item url-version
+		w3-meta-charset-content-type-regexp
 		w3-meta-content-type-charset-regexp))
+
+  (when (>= emacs-major-version 22)
+    (maybe-bind '(bookmark-make-record-function)))
 
   (when (<= emacs-major-version 22)
     (defun ecomplete-add-item (type key text))
@@ -96,17 +100,17 @@
      w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
-     buffer-display-table cursor-in-non-selected-windows
-     default-enable-multibyte-characters default-file-name-coding-system
-     eudc-protocol filladapt-mode gnus-agent-expire-current-dirs
-     help-xref-stack-item idna-program installation-directory
-     line-spacing mark-active mouse-selection-click-count
-     mouse-selection-click-count-buffer ps-print-color-p rmail-default-file
-     rmail-default-rmail-file rmail-insert-mime-forwarded-message-function
-     show-trailing-whitespace smtpmail-default-smtp-server
-     temporary-file-directory tool-bar-mode transient-mark-mode url-version
-     w3-meta-charset-content-type-regexp w3m-link-map
-     w3-meta-content-type-charset-regexp))
+     bookmark-current-buffer bookmark-yank-point buffer-display-table
+     cursor-in-non-selected-windows default-enable-multibyte-characters
+     default-file-name-coding-system eudc-protocol filladapt-mode
+     gnus-agent-expire-current-dirs help-xref-stack-item idna-program
+     installation-directory line-spacing mark-active
+     mouse-selection-click-count mouse-selection-click-count-buffer
+     ps-print-color-p rmail-default-file rmail-default-rmail-file
+     rmail-insert-mime-forwarded-message-function show-trailing-whitespace
+     smtpmail-default-smtp-server temporary-file-directory tool-bar-mode
+     transient-mark-mode url-version w3-meta-charset-content-type-regexp
+     w3m-link-map w3-meta-content-type-charset-regexp))
 
   (when (or (and (= emacs-major-version 21) (= emacs-minor-version 4))
 	    (featurep 'sxemacs))
