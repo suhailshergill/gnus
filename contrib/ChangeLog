@@ -1,4 +1,4 @@
-p2009-04-09  Richard M Stallman  <rms@gnu.org>
+2009-04-09  Richard M Stallman  <rms@gnu.org>
 
 	* sendmail.el (sendmail-send-it): Replace any
 	pre-existing Content-type header if we insert one.
