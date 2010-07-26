@@ -716,11 +716,11 @@
 	(gnus-agent-regenerate): Uses new gnus-agent-covered-methods
 	function as gnus-agent-covered-methods variable no longer provides
 	methods.
-	(gnus-agent-covered-methods): New function
+	(gnus-agent-covered-methods): New function.
 	(gnus-agent-expire-group, gnus-agent-expire): Final message will,
 	if gnus-verbose is greater than 4, report statistics of NOV
 	entries and files deleted as well as total bytes recovered.
-	(gnus-agent-expire-done-message): New function
+	(gnus-agent-expire-done-message): New function.
 	(gnus-agent-unread-articles): Bug fix.  No longer drops last
 	unread article onto read list.
 	(gnus-agent-regenerate-group): Changed prompt to use typical
@@ -922,7 +922,7 @@
 
 	* spam.el
 	(spam-log-processing-to-registry): Improved message and comments.
-	(spam-log-unregistration-needed-p): New function
+	(spam-log-unregistration-needed-p): New function.
 	(spam-ifile-register-spam-routine)
 	(spam-ifile-register-ham-routine, spam-stat-register-spam-routine)
 	(spam-stat-register-ham-routine)
@@ -1163,7 +1163,7 @@
 
 	* message.el (message-mode-field-menu): Added
 	message-generate-unsubscribed-mail-followup-to.
-	(message-forward-subject-fwd): Avoid double "Fwd: "
+	(message-forward-subject-fwd): Avoid double "Fwd: ".
 	(message-change-subject): Added comment.
 
 2003-10-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
@@ -1631,7 +1631,7 @@
 
 	* gnus-art.el (gnus-treat-display-face): Fix typo.
 	(gnus-treat-display-xface): Rename to gnus-treat-display-x-face
-	(reported by Jochen K,A|(Bpper <jochen@jochen-kuepper.de>)
+	(reported by Jochen K,A|(Bpper <jochen@jochen-kuepper.de>).
 
 2003-08-24  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2127,7 +2127,7 @@
 	(spam-spamoracle-learn-ham, spam-spamoracle-learn-spam): New functions.
 
 	* gnus.el (gnus-group-spam-exit-processor-spamoracle)
-	(gnus-group-ham-exit-processor-spamoracle): New variables for SpamOracle
+	(gnus-group-ham-exit-processor-spamoracle): New variables for SpamOracle.
 	(spam-process, ham-process): Added spamoracle spam/ham processors.
 
 2003-06-08  Jesper Harder  <harder@ifa.au.dk>
@@ -2859,7 +2859,7 @@
 	* gnus-registry.el (gnus-registry-split-fancy-with-parent): Added
 	diagnostic message.
 	(gnus-registry-grep-in-list): Don't run when word is nil.
-	(gnus-registry-fetch-message-id-fast): New function
+	(gnus-registry-fetch-message-id-fast): New function.
 	(gnus-registry-delete-group, gnus-registry-add-group): Make sure
 	the id and group are not nil.
 	(gnus-registry-register-message-ids): New function.
@@ -3679,7 +3679,7 @@
 	`message-valid-fqdn-regexp' for initialization.
 	(gnus-button-handle-info-url): Renamed and extended version of
 	`gnus-button-handle-info'.
-	(gnus-button-message-level): Renamed from `gnus-button-mail-level'
+	(gnus-button-message-level): Renamed from `gnus-button-mail-level'.
 	(gnus-button-handle-symbol, gnus-button-handle-library)
 	(gnus-button-handle-info-keystrokes): New functions.
 	(gnus-button-browse-level): New variable.
@@ -5652,11 +5652,6 @@
 
 	* gnus-ems.el (gnus-mark-active-p): Do.
 
-2003-01-15  Kevin Ryde  <user42@zip.com.au>
-
-	* gnus.texi (Using MIME): Mention auto-compression-mode with
-	gnus-mime-copy-part.
-
 2003-01-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-send): Don't warn about duplicates when
@@ -6440,8 +6435,8 @@
 
 2003-01-02  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	* gnus-art.el (gnus-button-url-regexp,
-	(gnus-button-mid-or-mail-regexp, gnus-button-alist,
+	* gnus-art.el (gnus-button-url-regexp)
+	(gnus-button-mid-or-mail-regexp, gnus-button-alist)
 	(gnus-header-button-alist): Regexps are case insensitive here.
 
 2003-01-02  Simon Josefsson  <jas@extundo.com>
@@ -6671,12 +6666,6 @@
 2002-07-21  Jesper Harder  <harder@ifa.au.dk>
 
 	* gnus-group.el: Add key bindings for
-	gnus-group-sort-groups-by-real-name and
-	gnus-group-sort-selected-groups-by-real-name.
-
-2002-07-21  Jesper Harder  <harder@ifa.au.dk>
-
-	* gnus.texi (Sorting Groups): Add key bindings for
 	gnus-group-sort-groups-by-real-name and
 	gnus-group-sort-selected-groups-by-real-name.
 
@@ -7341,7 +7330,7 @@
 
 2002-10-31  Alex Schroeder  <alex@emacswiki.org>
 
-	* spam-stat.el (spam-stat-process-directory): Add dir to message
+	* spam-stat.el (spam-stat-process-directory): Add dir to message.
 	(spam-stat-reduce-size): No longer remove words
 	with values close to 0.5, because the default value is 0.2.
 
@@ -8795,7 +8784,8 @@
 
 2002-06-11  Josh Huber  <huber@alum.wpi.edu>
 
-	* gnus-start.el (gnus-dribble-enter): Don't call set-window-point anymore
+	* gnus-start.el (gnus-dribble-enter): Don't call set-window-point
+	anymore.
 	* mml2015.el (mml2015-mailcrypt-encrypt): Accept optional argument
 	to sign while encrypting.
 
@@ -9204,10 +9194,10 @@
 2002-04-22  Bj,Av(Brn Torkelsson  <torkel@acc.umu.se>
 
 	* gnus-srvr.el (gnus-server-browse-in-group-buffer): It is a
-	boolean not a string
-	* gnus-group.el (gnus-group-line-format): Add description of %C
+	boolean not a string.
+	* gnus-group.el (gnus-group-line-format): Add description of %C.
 	* gnus-group.el (gnus-group-line-format-alist): Add gnus-tmp-comment
-	as %C
+	as %C.
 	* gnus-group.el (gnus-group-insert-group-line): Add gnus-tmp-comment.
 
 2002-04-22  Paul Jarc  <prj@po.cwru.edu>
@@ -9938,7 +9928,7 @@
 	(gnus-article-edit-mode): mml-mode.
 
 	* gnus-util.el (gnus-byte-compile): Work around a bug in XEmacs
-	21.4.  Suggested by Russ Allbery <rra@stanford.edu> .
+	21.4.  Suggested by Russ Allbery <rra@stanford.edu>.
 
 	* message-utils.el: Adopt the file.
 
@@ -12178,17 +12168,17 @@
 
 2001-12-18 01:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
-	* ChangeLog,  ChangeLog.1, nnwfm.el,  gnus-smiley.el:
+	* ChangeLog, ChangeLog.1, nnwfm.el, gnus-smiley.el:
 	* gnus-cite.el, gnus-delay.el, gnus-spec.el, message.el:
 	* mml1991.el, nnultimate.el: Add `coding'.
 
 2001-12-17  Josh Huber  <huber@alum.wpi.edu>
 
-	* ChangeLog: Changed coding to buffer-file-coding-system
+	* ChangeLog: Changed coding to buffer-file-coding-system.
 	* ChangeLog.1: Same.
 	* nnwfm.el: Same.
 	* gnus-smiley.el: Same.
-	* gnus-cite.el: Moved -*- magic cookie -*- to Local Variables
+	* gnus-cite.el: Moved -*- magic cookie -*- to Local Variables.
 	* gnus-delay.el: Same.
 	* gnus-spec.el: Same.
 	* message.el: Same.
@@ -12220,7 +12210,7 @@
 2001-12-13  Josh Huber  <huber@alum.wpi.edu>
 
 	* gnus-cus.el (gnus-extra-topic-parameters): Added topic parameter
-	subscribe-level
+	subscribe-level.
 	* gnus-topic.el (gnus-subscribe-topics): Use it.
 
 2001-12-13 22:00:00  Sean Neakums  <sneakums@zork.net>  (tiny change)
@@ -12373,7 +12363,7 @@
 2001-12-05 12:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
 	* gnus-group.el (gnus-group-find-new-groups): Fix doc.
-	From:  Stefan Monnier  <monnier@cs.yale.edu>
+	From: Stefan Monnier <monnier@cs.yale.edu>
 
 2001-12-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
@@ -12419,7 +12409,7 @@
 
 	* message.el (message-tab-body-function): Set to nil.
 	(message-tab): Use text-mode-map or global-map.
-	Suggested by Kai Gro,b_(Bjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>.
+	Suggested by Kai Gro,b_(Bjohann <Kai.Grossjohann@CS.Uni-Dortmund.DE>.
 
 2001-11-30  Simon Josefsson  <jas@extundo.com>
 
@@ -12611,7 +12601,7 @@
 	Support "Importance:" header in Message.
 
 	* message.el (message-mode-map): Bind C-c C-p to
-	`message-insert-or-toggle-importance'
+	`message-insert-or-toggle-importance'.
 	(message-mode-menu): Add message-insert-importance-{high,low}.
 	(message-insert-importance-high, message-insert-importance-low)
 	(message-insert-or-toggle-importance): New functions.
@@ -13084,9 +13074,9 @@
 
 2001-10-21  Simon Josefsson  <jas@extundo.com>
 
-	* nnimap.el (nnimap): Defgroup
+	* nnimap.el (nnimap): Defgroup.
 	(nnimap-strict-function, nnimap-strict-function-match): New
-	widget, from Per Abrahamsen  <abraham@dina.kvl.dk>.
+	widget, from Per Abrahamsen <abraham@dina.kvl.dk>.
 	(nnimap-split-crosspost, nnimap-split-inbox)
 	(nnimap-split-rule, nnimap-split-predicate)
 	(nnimap-split-predicate): Defcustom.
@@ -14646,7 +14636,7 @@
 
 2001-07-27 18:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
-	* gnus.el (gnus-large-newsgroup): Add doc, "If it is nil, ..."
+	* gnus.el (gnus-large-newsgroup): Add doc, "If it is nil, ...".
 
 	* gnus-art.el (gnus-mime-view-all-parts): buffer-read-only covers
 	mm-display-parts too.
@@ -16104,7 +16094,7 @@
 
 2001-02-19 19:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
-	* gnus-draft.el (gnus-draft-reminder): "Confirm to exit?"
+	* gnus-draft.el (gnus-draft-reminder): "Confirm to exit?".
 
 2001-02-19  Kai Gro,b_(Bjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
@@ -16969,7 +16959,7 @@
 	* gnus-cus.el (gnus-group-customize): Use it.
 
 	* gnus.el (gnus-define-group-parameter): New macro.
-	(auto-expire): Use it
+	(auto-expire): Use it.
 	(total-expire): Use it.
 	* gnus-art.el (banner): Use it.
 

@@ -339,7 +339,7 @@
 
 2008-06-05  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	* gnus.texi (Group Parameters): Change ~/.gnus to ~/.gnus.el
+	* gnus.texi (Group Parameters): Change ~/.gnus to ~/.gnus.el.
 	(Searching, nnir, nnmairix): New stub nodes.
 
 2008-05-24  Reiner Steib  <Reiner.Steib@gmx.de>
@@ -352,7 +352,7 @@
 
 2008-05-01  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
 
-	* gnus.texi, gnus-faq.texi, message.texi: Bump version to 0.11
+	* gnus.texi, gnus-faq.texi, message.texi: Bump version to 0.11.
 
 2008-05-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -579,7 +579,7 @@
 
 2007-10-04  Reiner Steib  <Reiner.Steib@gmx.de>
 
-        * Relicense "GPLv2 or later" files to "GPLv3 or later".
+	* Relicense "GPLv2 or later" files to "GPLv3 or later".
 
 2007-10-03  Holger Schauer  <Holger.Schauer@gmx.de>
 
@@ -1400,7 +1400,7 @@
 	(Agent and flags): New section providing a generalized discussion
 	of flag handling.
 	(Agent and IMAP): Removed flag discussion.
-	(Agent Variables): Added 'gnus-agent-synchronize-flags'
+	(Agent Variables): Added 'gnus-agent-synchronize-flags'.
 
 2005-11-08  Romain Francoise  <romain@orebokech.com>
 
@@ -1417,7 +1417,7 @@
 	(XVarious): Remove gnus-xmas-logo-color-alist and
 	gnus-xmas-logo-color-style; fix description of gnus-use-toolbar.
 
-2005-11-04 Ken Manheimer  <ken.manheimer@gmail.com>
+2005-11-04  Ken Manheimer  <ken.manheimer@gmail.com>
 
 	* pgg.texi (User Commands): Document additional passphrase
 	argument for pgg-encrypt-*, pgg-decrypt-*, and pgg-sign-* functions.
@@ -1726,7 +1726,7 @@
 2005-02-08  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Spam ELisp Package Configuration Examples):
-	"training.ham" should be "training.spam"
+	"training.ham" should be "training.spam".
 
 2005-02-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
@@ -1836,7 +1836,7 @@
 	(Spam ELisp Package Filtering of Incoming Mail)
 	(Spam ELisp Package Sorting and Score Display in Summary Buffer):
 	replace @code{spam.el} with @file{spam.el} where the file spam.el
-	is intended as the subject
+	is intended as the subject.
 
 2004-12-06  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -1885,9 +1885,9 @@
 	(Spam ELisp Package Filtering of Incoming Mail): mention
 	statistical filters.  Remove old TODO.
 	(Spam ELisp Package Sorting and Score Display in Summary Buffer):
-	new section on sorting and displaying the spam score
+	new section on sorting and displaying the spam score.
 	(BBDB Whitelists): mention spam-use-BBDB-exclusive is not a
-	backend but an alias to spam-use-BBDB
+	backend but an alias to spam-use-BBDB.
 	(Extending the Spam ELisp package): rewrite the example using the
 	new backend functionality.
 
@@ -1964,7 +1964,7 @@
 
 	* gnus.texi (Hashcash): changed location of library, also mention
 	that payments can be verified and fix the name of the
-	hashcash-path variable
+	hashcash-path variable.
 
 2004-09-23  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -2148,12 +2148,12 @@
 
 	* gnus.texi (Blacklists and Whitelists, BBDB Whitelists)
 	(Bogofilter, spam-stat spam filtering, SpamOracle): old incorrect
-	warning about ham processors in spam groups removed
+	warning about ham processors in spam groups removed.
 
 2004-04-02  Teodor Zlatanov  <tzz@lifelogs.com>
 	From Hubert Chan <hubert@uhoreg.ca>
 
-	* gnus.texi (SpamAssassin backend): added new node about SpamAssassin
+	* gnus.texi (SpamAssassin backend): added new node about SpamAssassin.
 
 2004-03-29  Teodor Zlatanov  <tzz@lifelogs.com>
 
@@ -2291,7 +2291,7 @@
 	Suggested by Gaute Strokkenes <gs234@srcf.ucam.org>
 
 	* gnus.texi (agent-disable-undownloaded-faces): Replaced with
-	agent-enable-undownloaded-faces
+	agent-enable-undownloaded-faces.
 
 2004-01-17  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2374,11 +2374,11 @@
 
 	* gnus.texi (Spam ELisp Package Sequence of Events): explain more
 	about the sequence of events and what happens with read-only
-	backends
+	backends.
 	(Spam ELisp Package Global Variables): explain what happens with
-	read-only backends
+	read-only backends.
 	(Spam ELisp Package Configuration Examples): added Reiner Steib
-	and Ted Zlatanov's setups
+	and Ted Zlatanov's setups.
 
 2004-01-03  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -2402,25 +2402,25 @@
 
 2004-01-02  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* gnus.texi (Top): updated menu with new manual nodes
-	(The problem of spam): more ranting
-	(Anti-Spam Basics): "spammers are wise to [filtering on From:]"
-	(SpamAssassin): mention spam.el
+	* gnus.texi (Top): updated menu with new manual nodes.
+	(The problem of spam): more ranting.
+	(Anti-Spam Basics): "spammers are wise to [filtering on From:]".
+	(SpamAssassin): mention spam.el.
 	(Hashcash): do not a sentence end proposition with
 	(Filtering Spam Using The Spam ELisp Package): more and better
-	explanation, took lots of information out into subsections
+	explanation, took lots of information out into subsections.
 	(Spam ELisp Package Sequence of Events)
 	(Spam ELisp Package Filtering of Incoming Mail)
 	(Spam ELisp Package Global Variables): new or updated content all
-	around
+	around.
 	(Spam ELisp Package Configuration Examples): promised new
-	section, empty for now
+	section, empty for now.
 	(Blacklists and Whitelists, BBDB Whitelists)
 	(Gmane Spam Reporting, Bogofilter, spam-stat spam filtering)
 	(SpamOracle): mention that spam/ham processor variables are being
-	obsoleted
+	obsoleted.
 	(Extending the Spam ELisp package): add some new documentation
-	for adding a new backend to spam.el
+	for adding a new backend to spam.el.
 
 2004-01-02  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -2517,7 +2517,7 @@
 
 2003-11-20  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* gnus.texi (Debugging IMAP): minor corrections
+	* gnus.texi (Debugging IMAP): minor corrections.
 
 2003-11-20  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -2539,12 +2539,12 @@
 2003-11-03  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): added
-	some clarifications
+	some clarifications.
 
 2003-10-30  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Fancy Mail Splitting): added mention of
-	nnmail-split-fancy-match-partial-words
+	nnmail-split-fancy-match-partial-words.
 
 2003-10-30  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2557,7 +2557,7 @@
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): added
 	example of using a string as a parameter to spam-split in order
-	to override the default spam-split-group value
+	to override the default spam-split-group value.
 
 2003-10-27  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2580,7 +2580,7 @@
 2003-10-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package):
-	changed to use the new spam-initialize function
+	changed to use the new spam-initialize function.
 
 2003-10-19  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -2618,7 +2618,7 @@
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): added
 	spam-process-ham-in-spam-groups and
-	spam-process-ham-in-nonham-groups variable descriptions
+	spam-process-ham-in-nonham-groups variable descriptions.
 
 2003-10-01  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2636,7 +2636,7 @@
 
 	* gnus.texi (Fancy Mail Splitting, SpamAssassin): corrected fancy
 	split example to use current buffer, mentioned
-	nnimap-split-download-body
+	nnimap-split-download-body.
 
 2003-09-22  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2671,7 +2671,7 @@
 2003-08-29  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Gmane Spam Reporting): added explanation of
-	spam-report-gmane-use-article-number
+	spam-report-gmane-use-article-number.
 
 2003-08-25  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2714,9 +2714,9 @@
 2003-07-14  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package):
-	mentioned the spam-install-hooks mess
+	mentioned the spam-install-hooks mess.
 
-2003-07-11  Matthias Andree <ma@dt.e-technik.uni-dortmund.de>  (tiny change)
+2003-07-11  Matthias Andree  <ma@dt.e-technik.uni-dortmund.de>  (tiny change)
 
 	* gnus.texi (Splitting in IMAP): Typos.
 
@@ -2787,7 +2787,7 @@
 2003-06-11  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Bogofilter): revise docs to mention threshold is now
-	user-controllable
+	user-controllable.
 
 2003-06-10  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2800,8 +2800,8 @@
 2003-06-09  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): new
-	SpamOracle node
-	(SpamOracle): document new SpamOracle code
+	SpamOracle node.
+	(SpamOracle): document new SpamOracle code.
 
 2003-06-07  Jesper Harder  <harder@ifa.au.dk>
 
@@ -2848,7 +2848,7 @@
 
 	* message.texi (Insertion Variables): do.
 
-2003-05-13  Niklas Morberg <niklas.morberg@axis.com>  (tiny change)
+2003-05-13  Niklas Morberg  <niklas.morberg@axis.com>  (tiny change)
 
 	* gnus.texi (IMAP, Agent and IMAP, Oort Gnus): s/a/an/.
 
@@ -2918,8 +2918,8 @@
 2003-04-30  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): revised
-	documentation
-	(Gmane Spam Reporting, Anti-spam Hashcash Payments): new sections
+	documentation.
+	(Gmane Spam Reporting, Anti-spam Hashcash Payments): new sections.
 
 2003-04-30  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -3038,7 +3038,7 @@
 
 2003-04-06  Reiner Steib  <Reiner.Steib@gmx.de>
 
-	* gnus.texi: Change ~/.gnus and .gnus.el to ~/.gnus.el
+	* gnus.texi: Change ~/.gnus and .gnus.el to ~/.gnus.el.
 
 2003-04-02  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -3048,7 +3048,7 @@
 2003-04-01  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* gnus.texi (Article Button Levels): Added
-	`gnus-button-ctan-directory-regexp'
+	`gnus-button-ctan-directory-regexp'.
 
 2003-04-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
@@ -3145,7 +3145,7 @@
 
 	* gnus.texi (Required Back End Functions): Add.
 
-2003-03-17  Frank Haun	<pille3003@fhaun.de>  (tiny change)
+2003-03-17  Frank Haun  <pille3003@fhaun.de>  (tiny change)
 
 	* pgg.texi: Fix setfilename.
 
@@ -3191,7 +3191,7 @@
 2003-02-28  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Extending the spam elisp package): added mention of
-	spam-list-of-statistical-checks
+	spam-list-of-statistical-checks.
 
 2003-02-27  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
@@ -3261,7 +3261,7 @@
 
 	* gnus.texi (BBDB Whitelists, Blacklists and Whitelists):
 	corrected existing docs, added spam-use-whitelist-exclusive and
-	spam-use-BBDB-exclusive to list of variables
+	spam-use-BBDB-exclusive to list of variables.
 
 2003-02-07  Jesper Harder  <harder@ifa.au.dk>
 
@@ -3275,7 +3275,7 @@
 2003-02-04  Reiner Steib  <Reiner.Steib@gmx.de>
 
 	* message.texi (Mail Variables): Added index entry for
-	`message-send-mail-partially-limit'
+	`message-send-mail-partially-limit'.
 
 2003-01-30  Jesper Harder  <harder@ifa.au.dk>
 
@@ -3298,8 +3298,8 @@
 
 2003-01-27  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* gnus.texi: replace `H' mark with `$' mark
-	(Blackholes): add spam-blackhole-good-server-regex variable
+	* gnus.texi: replace `H' mark with `$' mark.
+	(Blackholes): add spam-blackhole-good-server-regex variable.
 
 2003-01-26  Simon Josefsson  <jas@extundo.com>
 
@@ -3316,7 +3316,7 @@
 2003-01-23  Teodor Zlatanov  <tzz@bwh.harvard.edu>
 
 	* gnus.texi (Regular Expressions Header Matching): documentation
-	for new spam splitting functionality
+	for new spam splitting functionality.
 
 2003-01-23  Jesper Harder  <harder@ifa.au.dk>
 
@@ -3366,7 +3366,7 @@
 	* gnus.texi (Various Summary Stuff): Add
 	gnus-summary-display-while-building.
 	(Group Parameters): Index gnus-parameters.
-	(Startup Files): Index gnus-site-init-file
+	(Startup Files): Index gnus-site-init-file.
 
 2003-01-20  Jesper Harder  <harder@ifa.au.dk>
 
@@ -3383,9 +3383,10 @@
 
 	* dir (File): Add pgg.
 
-	* gnus.texi (Selecting a Group): Index gnus-auto-select-subject
+	* gnus.texi (Selecting a Group): Index gnus-auto-select-subject.
 
-	* emacs-mime.texi (Display Customization): Add mm-keep-viewer-alive-types
+	* emacs-mime.texi (Display Customization):
+	Add mm-keep-viewer-alive-types.
 
 2003-01-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -3395,11 +3396,11 @@
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package):
 	clarified syntax of gnus-spam-process-destinations and
-	gnus-ham-process-destinations variables
-	(Extending the spam elisp package): fixed typo in node name
-	(Bogofilter): new functionality and variables noted
+	gnus-ham-process-destinations variables.
+	(Extending the spam elisp package): fixed typo in node name.
+	(Bogofilter): new functionality and variables noted.
 	(Filtering Spam Using The Spam ELisp Package): added mention of
-	nnimap-split-download-body
+	nnimap-split-download-body.
 
 2003-01-15  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
@@ -3417,6 +3418,11 @@
 
 	* gnus.texi (X-Face): Revert substantial part of last fix.
 	(Splitting in IMAP): Add.
+
+2003-01-15  Kevin Ryde  <user42@zip.com.au>
+
+	* gnus.texi (Using MIME): Mention auto-compression-mode with
+	gnus-mime-copy-part.
 
 2003-01-13  Reiner Steib  <Reiner.Steib@gmx.de>
 
@@ -3440,7 +3446,7 @@
 
 	* gnus.texi (Filtering Spam Using The Spam ELisp Package): removed
 	spam.el and spam-stat.el from the node and section names wherever
-	possible, since info indexing doesn't like `.' in the name
+	possible, since info indexing doesn't like `.' in the name.
 
 2003-01-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -3535,7 +3541,7 @@
 	* gnus.texi (Filtering Spam Using spam.el)
 	(Blacklists and Whitelists, BBDB Whitelists, Blackholes)
 	(Bogofilter, Ifile spam filtering, Extending spam.el): updated
-	documentation for the new spam.el functionality
+	documentation for the new spam.el functionality.
 
 2003-01-05  Jesper Harder  <harder@ifa.au.dk>
 
@@ -3591,7 +3597,7 @@
 2002-12-30  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Blackholes): added information on query-dig and
-	dig.el; users are told that using blackhole checks is OK now
+	dig.el; users are told that using blackhole checks is OK now.
 
 2002-12-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -3647,14 +3653,14 @@
 
 2002-11-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* gnus.texi (Extending spam.el): fixed typos and wrong @items
+	* gnus.texi (Extending spam.el): fixed typos and wrong @items.
 
 2002-11-21  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi:
-	added new keyboard commands
+	added new keyboard commands.
 
-	* gnus.texi: added extended section on spam
+	* gnus.texi: added extended section on spam.
 
 2002-11-18  jas
 
@@ -3811,7 +3817,7 @@
 2002-09-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Browse Foreign Server): Addition.
-	(Limiting): Addition.articles
+	(Limiting): Addition.articles.
 
 2002-09-04  Simon Josefsson  <jas@extundo.com>
 
@@ -3848,7 +3854,7 @@
 	* gnus.texi (Summary Mail Commands): Add
 	gnus-summary-reply-broken-reply-to and
 	gnus-summary-reply-broken-reply-to-with-original.
-	(Setting Process Marks): Add gnus-uu-unmark-region
+	(Setting Process Marks): Add gnus-uu-unmark-region.
 	(Article Header): Fix typo.
 	(MIME Commands): Fix typo.
 	(MIME Commands): Index gnus-article-decode-mime-words,
@@ -3882,6 +3888,12 @@
 	* gnus.texi (Web Searches): Added gmane and removed old
 	non-functioning search engines.  From Niklas Morberg
 	<niklas.morberg@axis.com>.
+
+2002-07-21  Jesper Harder  <harder@ifa.au.dk>
+
+	* gnus.texi (Sorting Groups): Add key bindings for
+	gnus-group-sort-groups-by-real-name and
+	gnus-group-sort-selected-groups-by-real-name.
 
 2002-05-14  Jesper Harder  <harder@ifa.au.dk>
 
@@ -3974,7 +3986,7 @@
 2002-05-08  Josh Huber  <huber@alum.wpi.edu>
 
 	* message.texi (Security): Added a note about the signencrypt
-	style, and how to change it using `mml-signencrypt-style.'
+	style, and how to change it using `mml-signencrypt-style.'.
 
 2002-05-04  Simon Josefsson  <jas@extundo.com>
 
@@ -4025,7 +4037,7 @@
 
 2002-04-09  Paul Jarc  <prj@po.cwru.edu>
 
-	* .cvsignore: added message-[0-9]*
+	* .cvsignore: added message-[0-9]*.
 
 2002-04-08  Paul Jarc  <prj@po.cwru.edu>
 
@@ -4245,7 +4257,7 @@
 
 	* gnus.texi (Summary Score Commands): Added detail on "extra"
 	header scoring.
-	(Score File Format): ditto
+	(Score File Format): ditto.
 
 2002-02-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
@@ -4329,11 +4341,11 @@
 	* gnus.texi (Agent Commands): Use gnus-agent-batch instead of
 	gnus-agent-batch-fetch.
 
-2002-01-15 Tue  Jari Aalto  <jari.aalto@poboxes.com>
+2002-01-15  Jari Aalto  <jari.aalto@poboxes.com>
 
 	* gnus.texi (Really Various Summary Commands): Added commands how
 	to create nnvirtual group and and how to modify the nnvirtual
-	regexp
+	regexp.
 
 2002-01-12  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
@@ -4483,7 +4495,7 @@
 2001-12-18  Josh Huber  <huber@alum.wpi.edu>
 
 	* ChangeLog, gnus.texi, emacs-mime.texi: (oops) removed
-	buffer-file-coding-system
+	buffer-file-coding-system.
 
 2001-12-18 00:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
@@ -4492,11 +4504,11 @@
 
 2001-12-17  Josh Huber  <huber@alum.wpi.edu>
 
-	* ChangeLog: changed coding to buffer-file-coding-system
-	* emacs-mime.texi: changed -*- magic cookie -*- to Local Variables
-	* gnus.texi: same
-	* gnus-ref.tex: same
-	* refcard.tex: same
+	* ChangeLog: changed coding to buffer-file-coding-system.
+	* emacs-mime.texi: changed -*- magic cookie -*- to Local Variables.
+	* gnus.texi: same.
+	* gnus-ref.tex: same.
+	* refcard.tex: same.
 
 2001-12-16  Simon Josefsson  <jas@extundo.com>
 
@@ -5007,7 +5019,7 @@
 	* gnus.texi (September Gnus): Typo.
 
 2001-08-12  Simon Josefsson  <jas@extundo.com>
-	Suggested by Kai.Grossjohann@CS.Uni-Dortmund.DE
+	Suggested by Kai.Grossjohann@CS.Uni-Dortmund.DE.
 
 	* gnus.texi (Other Marks): Add recent.
 	(Optional Backend Functions): Add forward and recent.
@@ -5072,7 +5084,7 @@
 2001-07-25 22:22:22  Raymond Scholz  <rscholz@zonix.de>
 
 	* gnus.texi (Fancy Mail Splitting): New variable
-	nnmail-split-fancy-with-parent-ignore-groups
+	nnmail-split-fancy-with-parent-ignore-groups.
 
 2001-07-24  Kai Großjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
@@ -5429,7 +5441,7 @@
 2001-01-13  Kai Großjohann  <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
 	* gnus.texi (Mail): Move explanation of
-	`message-send-mail-partially-limit' to message.texi
+	`message-send-mail-partially-limit' to message.texi.
 
 	* message.texi (Mail Variables): Ditto.
 
@@ -5551,7 +5563,7 @@
 
 	* gnus.texi (Archived Messages): Add.
 
-2000-11-20 Jochen Küpper <jochen@pc1.uni-duesseldorf.de>
+2000-11-20  Jochen Küpper  <jochen@pc1.uni-duesseldorf.de>
 
 	* gnus.texi (Security): Fix typo.
 
@@ -5676,7 +5688,7 @@
 
 	* message.texi, gnus.texi, emacs-mime.texi: Convert to GFDL.
 
-2000-09-20 John H. Palmieri  <palmieri@math.washington.edu>
+2000-09-20  John H. Palmieri  <palmieri@math.washington.edu>
 
 	* gnus.texi (Mail Source Customization): Document of
 	mail-source-incoming-file-prefix.
@@ -5690,7 +5702,7 @@
 	* gnus.texi (IMAP): Add pointer to description of ~/.authinfo file
 	format.
 
-2000-09-17 Felix Natter  <f.natter@ndh.net>
+2000-09-17  Felix Natter  <f.natter@ndh.net>
 
 	* gnusref.tex: New version.
 
@@ -5701,11 +5713,11 @@
 	* gnus.texi (Article Hiding): Doc fix as suggested by Felix Natter
 	<fnatter@gmx.net>.
 
-2000-06-22 Michael Totschnig <michaelt@supernet.ca>
+2000-06-22  Michael Totschnig  <michaelt@supernet.ca>
 
 	* gnus.texi (Agent Basics): Doc fix.
 
-2000-09-14 Jason R. Mastaler <jason@mastaler.com>
+2000-09-14  Jason R. Mastaler  <jason@mastaler.com>
 
 	* gnus.texi (Mail Source Specifiers): Use $HOME.
 
@@ -5766,7 +5778,7 @@
 
 	* gnus.texi (Splitting in IMAP): Update.
 
-2000-05-19 15:18:32  Dmitry Yaitskov <dimas@home.com>
+2000-05-19 15:18:32  Dmitry Yaitskov  <dimas@home.com>
 
 	* message.texi (Reply): Doc fix.
 
@@ -6061,6 +6073,10 @@
 
 	* gnus.texi (Posting Styles): Addition.
 
+1999-10-29  David S. Goldberg  <dsg@mitre.org>
+
+	* emacs-mime.texi (Customization): Document mm-inline-override-types.
+
 1999-10-23  Simon Josefsson  <jas@pdc.kth.se>
 
 	* gnus.texi (Mail Source Specifiers): Add imap mail-source.
@@ -6073,7 +6089,7 @@
 
 1999-10-29  David S. Goldberg  <dsg@mitre.org>
 
-	* emacs-mime.texi (Customization): Document mm-inline-override-types
+	* emacs-mime.texi (Customization): Document mm-inline-override-types.
 
 1999-09-25 10:58:17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -6193,7 +6209,7 @@
 
 1999-03-25  Erik Toubro Nielsen  <erik@ifad.dk>
 
-	* gnus.texi (gnus-thread-sort-functions). 'reverse' => 'not'
+	* gnus.texi (gnus-thread-sort-functions). 'reverse' => 'not'.
 
 1999-04-17 10:21:01  Jack Twilley  <jmt+usenet@nycap.rr.com>
 
@@ -6218,7 +6234,7 @@
 1999-02-26 20:54:34  Jason R. Mastaler  <jason@4b.org>
 
 	* gnus.texi (Article Date): Added joke by Colin Rafferty
-	(colin@xemacs.org).
+	<colin@xemacs.org>.
 
 1999-02-26 08:26:10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -6227,6 +6243,11 @@
 Thu Feb 25 00:28:49 1999  Shenghuo ZHU  <zsh@cs.rochester.edu>
 
 	* gnus.texi (Category Syntax): Typo fix.
+
+1999-02-25  Didier Verna  <verna@inf.enst.fr>
+
+	* gnus.texi (Fancy Mail Splitting): update the doc about the new syntax
+	`(! FUNC SPLIT)'.
 
 1999-02-21 11:42:54  Vladimir Volovich  <vvv@vvv.vsu.ru>
 
@@ -6345,6 +6366,10 @@ Thu Feb 25 00:28:49 1999  Shenghuo ZHU  <zsh@cs.rochester.edu>
 	* gnus.texi (MIME Commands): Addition.
 	(Expiring Mail): Addition.
 
+1998-11-08 03:37:42  Simon Josefsson  <jas@pdc.kth.se>
+
+	* gnus.texi (Topic Commands): New expiry command.  Reordered.
+
 1998-11-07 17:18:07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Gnus Reference Guide): Renamed.
@@ -6388,6 +6413,11 @@ Thu Feb 25 00:28:49 1999  Shenghuo ZHU  <zsh@cs.rochester.edu>
 1998-09-30 05:54:45  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Selecting a Group): Addition.
+
+1998-09-26 19:33:58  Simon Josefsson  <jas@pdc.kth.se>
+
+	* gnus.texi (Optional Backend Functions): New item,
+	nnchoke-request-set-mark.
 
 1998-09-13 08:58:56  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
