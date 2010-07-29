@@ -548,7 +548,7 @@
 
 2001-10-30  Katsumi Yamaoka  <yamaoka@jpl.org>
 
-	* canlock.el: (canlock-base64-encode-function): Removed.
+	* canlock.el (canlock-base64-encode-function): Removed.
 	(canlock-mmencode-program): Removed.
 	(canlock-mmencode-args-for-encoding): Removed.
 	(canlock-openssl-program): Renamed from `canlock-ssleay-program'.
@@ -629,7 +629,7 @@
 
 2000-11-30 22:00:00  ShengHuo ZHU  <zsh@cs.rochester.edu>
 
-	* gpg.el: (gpg-make-temp-file): Use expand-file-name.
+	* gpg.el (gpg-make-temp-file): Use expand-file-name.
 	(gpg-point-at-eol): New function.
 	(gpg-call-process): Use it.
 	(gpg-key-list-keys-parse-line): Ditto.

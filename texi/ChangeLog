@@ -4104,7 +4104,7 @@
 	(Limiting): Fix.
 	(Article Washing): Fix gnus-article-strip-headers-in-body, add
 	gnus-article-outlook-deuglify-article.
-	(Article Header):  Add gnus-article-remove-leading-whitespace.
+	(Article Header): Add gnus-article-remove-leading-whitespace.
 	(Customizing Articles): Add gnus-treat-leading-whitespace.
 	(Summary Score Commands): Add gnus-score-find-favourite-words.
 	(Mailing List): Index gnus-mailing-list-insinuate.
