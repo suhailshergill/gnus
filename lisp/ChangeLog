@@ -1,3 +1,8 @@
+2010-08-17  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* lpath.el: No need to bind bookmark-yank-point and
+	bookmark-make-record-function.
+
 2010-08-17  Glenn Morris  <rgm@gnu.org>
 
 	* gnus-sync.el: Require gnus components whose functions are used.

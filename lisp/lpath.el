@@ -12,12 +12,9 @@
 (unless (featurep 'xemacs)
   (maybe-fbind '(pgg-display-output-buffer url-generic-parse-url))
   (maybe-bind '(bookmark-current-buffer
-		bookmark-yank-point help-xref-stack-item url-version
+		help-xref-stack-item url-version
 		w3-meta-charset-content-type-regexp
 		w3-meta-content-type-charset-regexp))
-
-  (when (>= emacs-major-version 22)
-    (maybe-bind '(bookmark-make-record-function)))
 
   (when (<= emacs-major-version 22)
     (defun ecomplete-add-item (type key text))
@@ -100,7 +97,7 @@
      w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
-     bookmark-current-buffer bookmark-yank-point buffer-display-table
+     bookmark-current-buffer buffer-display-table
      cursor-in-non-selected-windows default-enable-multibyte-characters
      default-file-name-coding-system eudc-protocol filladapt-mode
      gnus-agent-expire-current-dirs help-xref-stack-item idna-program
