@@ -1,3 +1,7 @@
+2010-08-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nntp.el (nntp-async-kluge): Remove the Emacs 20.3-related kluge. 
+
 2010-08-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-sum.el (gnus-summary-move-article, gnus-summary-delete-article):
