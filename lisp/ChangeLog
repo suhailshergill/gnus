@@ -1,5 +1,8 @@
 2010-08-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-valid-select-methods): Remove reference to nngoogle,
+	which doesn't exist.
+
 	* message.el (message-inhibit-ecomplete): New variable to allow some
 	function to inhibit ecomplete address storage.
 	(message-resend): Disable ecomplete message storage when resending
