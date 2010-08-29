@@ -1,5 +1,8 @@
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-send-mail-partially-limit): Change the default to
+	nil, since most people don't want this.
+
 	* mm-url.el (mm-url-decode-entities): Also decode entities like
 	&#x3212.
 
