@@ -105,7 +105,8 @@
 	(when (string-match "href=\"\\([^\"]+\\)" parameters)
 	  (setq parameters (match-string 1 parameters))
 	  (gnus-article-add-button start end
-				   'browse-url parameters)
+				   'browse-url parameters
+				   parameters)
 	  (let ((overlay (gnus-make-overlay start end)))
 	    (gnus-overlay-put overlay 'evaporate t)
 	    (gnus-overlay-put overlay 'gnus-button-url parameters)
