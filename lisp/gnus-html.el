@@ -56,11 +56,13 @@
 			     "-halfdump"
 			     "-t" (format "%s" tab-width)
 			     "-cols" (format "%s" gnus-html-frame-width)
+			     "-o" "display_image=off"
 			     "-T" "text/html"))
       (gnus-html-wash-tags))))
 
 (defun gnus-html-wash-tags ()
   (let (tag parameters string start end images)
+    (mm-url-decode-entities)
     (goto-char (point-min))
     (while (re-search-forward "<\\([^ />]+\\)\\([^>]*\\)>" nil t)
       (setq tag (match-string 1)
