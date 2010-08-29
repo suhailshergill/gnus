@@ -49,21 +49,21 @@
     (save-restriction
       (narrow-to-region (point) (point))
       (save-excursion
-	(set-buffer (car handle))
-	(let* ((coding-system-for-read 'utf-8)
-	       (coding-system-for-write 'utf-8)
-	       (default-process-coding-system
-		 (cons coding-system-for-read coding-system-for-write)))
-	  (call-process-region (point-min) (point-max)
-			       "w3m" 
-			       nil article-buffer nil
-			       "-halfdump"
-			       "-O" "UTF-8"
-			       "-o" "ext_halfdump=1"
-			       "-t" (format "%s" tab-width)
-			       "-cols" (format "%s" gnus-html-frame-width)
-			       "-o" "display_image=off"
-			       "-T" "text/html")))
+	(mm-with-part handle
+	  (let* ((coding-system-for-read 'utf-8)
+		 (coding-system-for-write 'utf-8)
+		 (default-process-coding-system
+		   (cons coding-system-for-read coding-system-for-write)))
+	    (call-process-region (point-min) (point-max)
+				 "w3m" 
+				 nil article-buffer nil
+				 "-halfdump"
+				 "-O" "UTF-8"
+				 "-o" "ext_halfdump=1"
+				 "-t" (format "%s" tab-width)
+				 "-cols" (format "%s" gnus-html-frame-width)
+				 "-o" "display_image=off"
+				 "-T" "text/html"))))
       (gnus-html-wash-tags))))
 
 (defun gnus-html-wash-tags ()
