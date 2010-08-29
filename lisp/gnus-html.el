@@ -38,6 +38,11 @@
   :group 'gnus-art
   :type 'integer)
 
+(defcustom gnus-html-frame-width 70
+  "What width to use when rendering HTML."
+  :group 'gnus-art
+  :type 'integer)
+
 ;;;###autoload
 (defun gnus-article-html (handle)
   (let ((article-buffer (current-buffer)))
@@ -49,12 +54,13 @@
 			     "w3m" 
 			     nil article-buffer nil
 			     "-halfdump"
+			     "-t" (format "%s" tab-width)
+			     "-cols" (format "%s" gnus-html-frame-width)
 			     "-T" "text/html"))
       (gnus-html-wash-tags))))
 
 (defun gnus-html-wash-tags ()
   (let (tag parameters string start end images)
-    ;;(subst-char-in-region (point-min) (point-max) ?_ ? )
     (goto-char (point-min))
     (while (re-search-forward "<\\([^ />]+\\)\\([^>]*\\)>" nil t)
       (setq tag (match-string 1)
@@ -101,7 +107,8 @@
       (goto-char start))
     ;; Delete any excessive space at the start.
     (goto-char (point-min))
-    (when (re-search-forward "[^ \t\n]" nil t)
+    (when (and (re-search-forward "[^ \t\n]" nil t)
+	       (> (match-beginning 0) (point-min)))
       (delete-region (point-min) (1- (match-beginning 0))))
     (when images
       (gnus-html-schedule-image-fetching (current-buffer) images))))
