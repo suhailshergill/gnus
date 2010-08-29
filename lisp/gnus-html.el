@@ -130,8 +130,10 @@
 		   "images" nil "curl"
 		   "-s" "--create-dirs"
 		   "--location"
+		   "--max-time" "60"
 		   "-o" (gnus-html-image-id url)
 		   url)))
+    (process-kill-without-query process)
     (set-process-sentinel process 'gnus-html-curl-sentinel)
     (set-process-plist process (list 'images images
 				     'buffer buffer))))
@@ -208,10 +210,13 @@
 		(push url urls)
 		(push (gnus-html-image-id url) urls)
 		(push "-o" urls)))))
-	(apply 'start-process 
-	       "images" nil "curl"
-	       "-s" "--create-dirs"
-	       "--location"
-	       urls)))))
+	(let ((process
+	       (apply 'start-process 
+		      "images" nil "curl"
+		      "-s" "--create-dirs"
+		      "--location"
+		      "--max-time" "60"
+		      urls)))
+	  (process-kill-without-query process))))))
 
 ;;; gnus-html.el ends here
