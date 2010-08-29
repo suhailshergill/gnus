@@ -2,6 +2,8 @@
 
 	* gnus-art.el (gnus-article-beginning-of-window): Make into defun for
 	easier debugging.
+	(gnus-article-beginning-of-window): Add kludge to allow spacing past
+	big pictures in the article buffer.
 
 	* mm-decode.el (mm-text-html-renderer): Default the html renderer to
 	gnus-article-html.

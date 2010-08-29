@@ -6289,12 +6289,16 @@ In Emacs, the point is placed at the line number which `scroll-margin'
 specifies."
   (if (featurep 'xemacs)
       (move-to-window-line 0)
-    (move-to-window-line
-     (min (max 0 scroll-margin)
-	  (max 1 (- (window-height)
-		    (if mode-line-format 1 0)
-		    (if header-line-format 1 0)
-		    2))))))
+    ;; There is an obscure bug in Emacs that makes it impossible to
+    ;; scroll past big pictures in the article buffer.  Try to fix
+    ;; this by adding a sanity check by counting the lines visible.
+    (when (> (count-lines (window-start) (window-end)) 30)
+      (move-to-window-line
+       (min (max 0 scroll-margin)
+	    (max 1 (- (window-height)
+		      (if mode-line-format 1 0)
+		      (if header-line-format 1 0)
+		      2)))))))
 
 (defun gnus-article-next-page-1 (lines)
   (unless (featurep 'xemacs)
