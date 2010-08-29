@@ -111,7 +111,7 @@
 	       (> (match-beginning 0) (point-min)))
       (delete-region (point-min) (1- (match-beginning 0))))
     (when images
-      (gnus-html-schedule-image-fetching (current-buffer) images))))
+      (gnus-html-schedule-image-fetching (current-buffer) (nreverse images)))))
 
 (defun gnus-html-schedule-image-fetching (buffer images)
   (let* ((url (caar images))
