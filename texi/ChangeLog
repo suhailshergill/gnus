@@ -2,6 +2,7 @@
 
 	* gnus.texi (Asynchronous Fetching): Document
 	gnus-async-post-fetch-function. 
+	(HTML): Made into its own section.
 
 2010-06-24  Glenn Morris  <rgm@gnu.org>
 
