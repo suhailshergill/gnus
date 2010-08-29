@@ -1,5 +1,8 @@
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-beginning-of-window): Make into defun for
+	easier debugging.
+
 	* mm-decode.el (mm-text-html-renderer): Default the html renderer to
 	gnus-article-html.
 	(mm-text-html-renderer): gnus-article-html needs curl in addition to

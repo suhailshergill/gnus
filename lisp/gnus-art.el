@@ -6283,18 +6283,18 @@ Argument LINES specifies lines to be scrolled up."
     (gnus-article-next-page-1 lines)
     nil))
 
-(defmacro gnus-article-beginning-of-window ()
+(defun gnus-article-beginning-of-window ()
   "Move point to the beginning of the window.
 In Emacs, the point is placed at the line number which `scroll-margin'
 specifies."
   (if (featurep 'xemacs)
-      '(move-to-window-line 0)
-    '(move-to-window-line
-      (min (max 0 scroll-margin)
-	   (max 1 (- (window-height)
-		     (if mode-line-format 1 0)
-		     (if header-line-format 1 0)
-		     2))))))
+      (move-to-window-line 0)
+    (move-to-window-line
+     (min (max 0 scroll-margin)
+	  (max 1 (- (window-height)
+		    (if mode-line-format 1 0)
+		    (if header-line-format 1 0)
+		    2))))))
 
 (defun gnus-article-next-page-1 (lines)
   (unless (featurep 'xemacs)
