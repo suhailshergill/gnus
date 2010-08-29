@@ -137,7 +137,8 @@
 	   (buffer (getf (process-plist process) 'buffer))
 	   (spec (pop images))
 	   (file (gnus-html-image-id (car spec))))
-      (when (file-exists-p file)
+      (when (and (file-exists-p file)
+		 (buffer-live-p buffer))
 	(save-excursion
 	  (set-buffer buffer)
 	  (let ((buffer-read-only nil))
