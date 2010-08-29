@@ -1,5 +1,8 @@
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-add-button): Take an optional parameter to
+	say what the mouseover text should be.
+
 	* gnus-html.el (gnus-html-prefetch-images): Use the summary-local
 	version of the mm-w3m-safe-url-regexp variable to only download images
 	in the groups where we want that to happen.

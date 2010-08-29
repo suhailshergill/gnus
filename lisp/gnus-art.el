@@ -7903,7 +7903,7 @@ url is put as the `gnus-button-url' overlay property on the button."
 
 ;;; External functions:
 
-(defun gnus-article-add-button (from to fun &optional data)
+(defun gnus-article-add-button (from to fun &optional data text)
   "Create a button between FROM and TO with callback FUN and data DATA."
   (when gnus-article-button-face
     (gnus-overlay-put (gnus-make-overlay from to nil t)
@@ -7915,6 +7915,7 @@ url is put as the `gnus-button-url' overlay property on the button."
 	  (list 'gnus-callback fun)
 	  (and data (list 'gnus-data data))))
   (widget-convert-button 'link from to :action 'gnus-widget-press-button
+			 :help-echo (or text "Follow the link")
 			 :button-keymap gnus-widget-button-keymap))
 
 ;;; Internal functions:
