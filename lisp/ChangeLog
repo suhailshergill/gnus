@@ -2,6 +2,8 @@
 
 	* mm-decode.el (mm-text-html-renderer): Default the html renderer to
 	gnus-article-html.
+	(mm-text-html-renderer): gnus-article-html needs curl in addition to
+	w3m. 
 
 	* gnus-html.el: Start a new super-simple HTML renderer based on w3m. 
 
