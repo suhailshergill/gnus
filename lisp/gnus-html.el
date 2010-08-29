@@ -143,7 +143,12 @@
 	   (buffer (getf (process-plist process) 'buffer))
 	   (spec (pop images))
 	   (file (gnus-html-image-id (car spec))))
-      (when (buffer-live-p buffer)
+      (when (and (buffer-live-p buffer)
+		 ;; If the position of the marker is 1, then that
+		 ;; means that the text is was in has been deleted;
+		 ;; i.e., that the user has selected a different
+		 ;; article before the image arrived.
+		 (not (= (marker-position (cadr spec)) 1)))
 	(save-excursion
 	  (set-buffer buffer)
 	  (let ((buffer-read-only nil))
