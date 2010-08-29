@@ -121,6 +121,7 @@
 	 (process (start-process
 		   "images" nil "curl"
 		   "-s" "--create-dirs"
+		   "--location"
 		   "-o" (gnus-html-image-id url)
 		   url)))
     (set-process-sentinel process 'gnus-html-curl-sentinel)
@@ -136,8 +137,7 @@
 	   (buffer (getf (process-plist process) 'buffer))
 	   (spec (pop images))
 	   (file (gnus-html-image-id (car spec))))
-      (when (and (file-exists-p file)
-		 (buffer-live-p buffer))
+      (when (buffer-live-p buffer)
 	(save-excursion
 	  (set-buffer buffer)
 	  (let ((buffer-read-only nil))
@@ -189,6 +189,7 @@
       (apply 'start-process 
 	     "images" nil "curl"
 	     "-s" "--create-dirs"
+	     "--location"
 	     urls))))
 
 ;;; gnus-html.el ends here
