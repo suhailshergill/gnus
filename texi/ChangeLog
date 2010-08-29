@@ -1,3 +1,8 @@
+2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Asynchronous Fetching): Document
+	gnus-async-post-fetch-function. 
+
 2010-06-24  Glenn Morris  <rgm@gnu.org>
 
 	* auth.texi, emacs-mime.texi, gnus.texi, message.texi, pgg.texi:

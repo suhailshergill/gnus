@@ -8271,6 +8271,16 @@ These functions will be called many, many times, so they should
 preferably be short and sweet to avoid slowing down Gnus too much.
 It's probably a good idea to byte-compile things like this.
 
+@vindex gnus-async-post-fetch-function
+@findex gnus-html-prefetch-images
+After an article has been prefetched, this
+@code{gnus-async-post-fetch-function} will be called.  The buffer will
+be narrowed to the region of the article that was fetched.  A useful
+value would be @code{gnus-html-prefetch-images}, which will prefetch
+and store images referenced in the article, so that you don't have to
+wait for them to be fetched when you read the article.  This is useful
+for @acronym{HTML} messages that have external images.
+
 @vindex gnus-prefetched-article-deletion-strategy
 Articles have to be removed from the asynch buffer sooner or later.  The
 @code{gnus-prefetched-article-deletion-strategy} says when to remove
