@@ -42,7 +42,7 @@
 (defun gnus-article-html (handle)
   (let ((article-buffer (current-buffer)))
     (save-restriction
-      (narrow-to-region (1- (point)) (point))
+      (narrow-to-region (point) (point))
       (save-excursion
 	(set-buffer (car handle))
 	(call-process-region (point-min) (point-max)
@@ -99,6 +99,10 @@
        (t
 	))
       (goto-char start))
+    ;; Delete any excessive space at the start.
+    (goto-char (point-min))
+    (when (re-search-forward "[^ \t\n]" nil t)
+      (delete-region (point-min) (1- (match-beginning 0))))
     (when images
       (gnus-html-schedule-image-fetching (current-buffer) images))))
 
