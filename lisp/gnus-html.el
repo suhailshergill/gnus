@@ -149,9 +149,13 @@
 (defun gnus-html-put-image (file point)
   (let ((image (ignore-errors
 		 (create-image file))))
-    (when image
-      (put-image image point)
-      t)))
+    (if image
+	(progn
+	  (put-image image point)
+	  t)
+      (put-image (find-image '((:type xpm :file "lock-broken.xpm")))
+		 point)
+      nil)))
 
 (defun gnus-html-prune-cache ()
   (let ((total-size 0)
