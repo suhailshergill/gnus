@@ -365,7 +365,7 @@ If FOLLOW-REFRESH is non-nil, redirect refresh url in META."
 (defun mm-url-decode-entities ()
   "Decode all HTML entities."
   (goto-char (point-min))
-  (while (re-search-forward "&\\(#x?[0-9]+\\|[a-z]+[0-9]*\\);" nil t)
+  (while (re-search-forward "&\\(#[0-9]+\\|#x[0-9a-f]+\\|[a-z]+[0-9]*\\);" nil t)
     (let* ((entity (match-string 1))
 	   (elem (if (eq (aref entity 0) ?\#)
 		     (let ((c (mm-ucs-to-char
