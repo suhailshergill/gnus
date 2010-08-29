@@ -69,7 +69,7 @@
 	    parameters (match-string 2)
 	    start (match-beginning 0))
       (delete-region start (point))
-      (when (search-forward (concat "</" tag ">"))
+      (when (search-forward (concat "</" tag ">") nil t)
 	(delete-region (match-beginning 0) (match-end 0)))
       (setq end (point))
       (cond
