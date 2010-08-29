@@ -1,3 +1,8 @@
+2010-08-29  Adam Sjøgren  <asjo@koldfront.dk>
+
+	* gnus-html.el (gnus-html-put-image): Use XEmacs-compatible image
+	functions. 
+
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-art.el (gnus-article-add-button): Take an optional parameter to
