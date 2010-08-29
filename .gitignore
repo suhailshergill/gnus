@@ -71,3 +71,5 @@ texi/gnus-coding
 texi/ps/*.ps
 texi/ps/*.pdf
 texi/ps/Makefile
+lisp/*.orig
+texi/*.orig
