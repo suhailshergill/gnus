@@ -167,7 +167,7 @@
 (defun gnus-html-prefetch-images ()
   (save-match-data
     (let (urls)
-      (while (re-search-forward "<img.*src=\"\\([^\"]+\\)" nil t)
+      (while (re-search-forward "<img.*src=[\"']\\([^\"']+\\)" nil t)
 	(let ((url (match-string 1)))
 	  (when (or (null mm-w3m-safe-url-regexp)
 		    (string-match mm-w3m-safe-url-regexp url))
