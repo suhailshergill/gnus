@@ -196,6 +196,7 @@
 	  (decf total-size (cadr file))
 	  (delete-file (nth 2 file)))))))
 
+;;;###autoload
 (defun gnus-html-prefetch-images (summary)
   (let (safe-url-regexp urls)
     (when (buffer-live-p summary)
@@ -219,5 +220,7 @@
 		      "--max-time" "60"
 		      urls)))
 	  (process-kill-without-query process))))))
+
+(provide 'gnus-html)
 
 ;;; gnus-html.el ends here
