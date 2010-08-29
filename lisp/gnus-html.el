@@ -84,8 +84,7 @@
 	    (let ((file (gnus-html-image-id parameters)))
 	      (if (file-exists-p file)
 		  ;; It's already cached, so just insert it.
-		  (progn
-		    (put-image (create-image file) (point))
+		  (when (gnus-html-put-image file (point))
 		    ;; Delete the ALT text.
 		    (delete-region start end))
 		;; We don't have it, so schedule it for fetching
@@ -142,10 +141,17 @@
 	(save-excursion
 	  (set-buffer buffer)
 	  (let ((buffer-read-only nil))
-	    (delete-region (cadr spec) (caddr spec))
-	    (put-image (create-image file) (cadr spec)))))
+	    (when (gnus-html-put-image file (cadr spec))
+	      (delete-region (cadr spec) (caddr spec))))))
       (when images
 	(gnus-html-schedule-image-fetching buffer images)))))
+
+(defun gnus-html-put-image (file point)
+  (let ((image (ignore-errors
+		 (create-image file))))
+    (when image
+      (put-image image point)
+      t)))
 
 (defun gnus-html-prune-cache ()
   (let ((total-size 0)
