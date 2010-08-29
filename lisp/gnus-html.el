@@ -58,6 +58,7 @@
 				 "w3m" 
 				 nil article-buffer nil
 				 "-halfdump"
+				 "-no-cookie"
 				 "-O" "UTF-8"
 				 "-o" "ext_halfdump=1"
 				 "-t" (format "%s" tab-width)
