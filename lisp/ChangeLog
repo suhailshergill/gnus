@@ -1,3 +1,10 @@
+2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* mm-decode.el (mm-text-html-renderer): Default the html renderer to
+	gnus-article-html.
+
+	* gnus-html.el: Start a new super-simple HTML renderer based on w3m. 
+
 2010-08-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.el (gnus-valid-select-methods): Remove reference to nngoogle,
