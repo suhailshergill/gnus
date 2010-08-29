@@ -6043,6 +6043,11 @@ threads.
 This variable can also be a number.  In that case, center the window at
 the given number of lines from the top.
 
+@item gnus-summary-stop-at-end-of-message
+@vindex gnus-summary-stop-at-end-of-message
+If non-@code{nil}, don't go to the next article when hitting
+@kbd{SPC}, and you're at the end of the article.
+
 @end table
 
 

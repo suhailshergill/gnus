@@ -1,5 +1,7 @@
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-stop-at-end-of-message): New variable.
+
 	* gnus-art.el (gnus-article-beginning-of-window): Make into defun for
 	easier debugging.
 	(gnus-article-beginning-of-window): Add kludge to allow spacing past
