@@ -12494,7 +12494,7 @@ directory, the oldest files will be deleted.  The default is 500MB.
 @vindex gnus-html-frame-width
 The width to use when rendering HTML.  The default is 70.
 
-@table
+@end table
 
 
 Gnus will display some @acronym{MIME} objects automatically.  The way Gnus
