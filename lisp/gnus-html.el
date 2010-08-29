@@ -68,6 +68,8 @@
       (setq tag (match-string 1)
 	    parameters (match-string 2)
 	    start (match-beginning 0))
+      (when (plusp (length parameters))
+	(set-text-properties 0 (1- (length parameters)) nil parameters))
       (delete-region start (point))
       (when (search-forward (concat "</" tag ">") nil t)
 	(delete-region (match-beginning 0) (match-end 0)))
