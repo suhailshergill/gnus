@@ -107,11 +107,6 @@
        (t
 	))
       (goto-char start))
-    ;; Delete any excessive space at the start.
-    (goto-char (point-min))
-    (when (and (re-search-forward "[^ \t\n]" nil t)
-	       (> (match-beginning 0) (point-min)))
-      (delete-region (point-min) (1- (match-beginning 0))))
     (when images
       (gnus-html-schedule-image-fetching (current-buffer) (nreverse images)))))
 
