@@ -192,21 +192,25 @@
 	  (decf total-size (cadr file))
 	  (delete-file (nth 2 file)))))))
 
-(defun gnus-html-prefetch-images ()
-  (save-match-data
-    (let (urls)
-      (while (re-search-forward "<img.*src=[\"']\\([^\"']+\\)" nil t)
-	(let ((url (match-string 1)))
-	  (when (or (null mm-w3m-safe-url-regexp)
-		    (string-match mm-w3m-safe-url-regexp url))
-	    (unless (file-exists-p (gnus-html-image-id url))
-	      (push url urls)
-	      (push (gnus-html-image-id url) urls)
-	      (push "-o" urls)))))
-      (apply 'start-process 
-	     "images" nil "curl"
-	     "-s" "--create-dirs"
-	     "--location"
-	     urls))))
+(defun gnus-html-prefetch-images (summary)
+  (let (safe-url-regexp urls)
+    (when (buffer-live-p summary)
+      (save-excursion
+	(set-buffer summary)
+	(setq safe-url-regexp mm-w3m-safe-url-regexp))
+      (save-match-data
+	(while (re-search-forward "<img.*src=[\"']\\([^\"']+\\)" nil t)
+	  (let ((url (match-string 1)))
+	    (when (or (null safe-url-regexp)
+		      (string-match safe-url-regexp url))
+	      (unless (file-exists-p (gnus-html-image-id url))
+		(push url urls)
+		(push (gnus-html-image-id url) urls)
+		(push "-o" urls)))))
+	(apply 'start-process 
+	       "images" nil "curl"
+	       "-s" "--create-dirs"
+	       "--location"
+	       urls)))))
 
 ;;; gnus-html.el ends here

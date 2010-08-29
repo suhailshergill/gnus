@@ -238,7 +238,7 @@ that was fetched."
 	(save-excursion
 	  (save-restriction
 	    (narrow-to-region mark (point-max))
-	    (funcall gnus-async-post-fetch-function))))
+	    (funcall gnus-async-post-fetch-function summary))))
       (gnus-async-with-semaphore
 	(setq
 	 gnus-async-article-alist
