@@ -32,7 +32,7 @@
 (defun gnus-article-html (handle)
   (let ((article-buffer (current-buffer)))
     (save-restriction
-      (narrow-to-region (point) (point))
+      (narrow-to-region (1- (point)) (point))
       (save-excursion
 	(set-buffer (car handle))
 	(call-process-region (point-min) (point-max)
@@ -46,13 +46,14 @@
   (let (tag parameters string start end)
     ;;(subst-char-in-region (point-min) (point-max) ?_ ? )
     (goto-char (point-min))
-    (while (re-search-forward "<\\([^ ]+\\)\\([^>]*\\)>\\([^<]*\\)<[^>]*>" nil t)
+    (while (re-search-forward "<\\([^ />]+\\)\\([^>]*\\)>" nil t)
       (setq tag (match-string 1)
 	    parameters (match-string 2)
-	    string (match-string 3)
-	    start (match-beginning 0)
-	    end (+ start (length string)))
-      (replace-match string)
+	    start (match-beginning 0))
+      (delete-region start (point))
+      (when (search-forward (concat "</" tag ">"))
+	(delete-region (match-beginning 0) (match-end 0)))
+      (setq end (point))
       (cond
        ;; Fetch and insert a picture.
        ((equal tag "img_alt")
@@ -71,6 +72,7 @@
 	      (gnus-overlay-put overlay 'mouse-face gnus-article-mouse-face)))))
        ;; Whatever.  Just ignore the tag.
        (t
-	(replace-match string))))))
+	))
+      (goto-char start))))
 
 ;;; gnus-html.el ends here
