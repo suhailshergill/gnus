@@ -109,6 +109,11 @@
        (t
 	))
       (goto-char start))
+    (goto-char (point-min))
+    ;; The output from -halfdump isn't totally regular, so strip
+    ;; off any </pre_int>s that were left over.
+    (while (re-search-forward "</pre_int>" nil t)
+      (replace-match "" t t))
     (when images
       (gnus-html-schedule-image-fetching (current-buffer) (nreverse images)))))
 
