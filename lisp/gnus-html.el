@@ -28,6 +28,16 @@
 
 ;;; Code:
 
+(defcustom gnus-html-cache-directory (nnheader-concat gnus-directory "html-cache/")
+  "Where Gnus will cache images it downloads from the web."
+  :group 'gnus-art
+  :type 'directory)
+
+(defcustom gnus-html-cache-size 500000000
+  "The size of the Gnus image cache."
+  :group 'gnus-art
+  :type 'integer)
+
 ;;;###autoload
 (defun gnus-article-html (handle)
   (let ((article-buffer (current-buffer)))
@@ -59,19 +69,21 @@
        ((equal tag "img_alt")
 	(when (string-match "src=\"\\([^\"]+\\)" parameters)
 	  (setq parameters (match-string 1 parameters))
-	  (let ((file (gnus-html-image-id parameters)))
-	    (if (file-exists-p file)
-		;; It's already cached, so just insert it.
-		(progn
-		  (put-image (create-image file) (point))
-		  ;; Delete the ALT text.
-		  (delete-region start end))
-	      ;; We don't have it, so schedule it for fetching
-	      ;; asynchronously.
-	      (push (list parameters
-			  (set-marker (make-marker) start)
-			  (point-marker))
-		    images)))))
+	  (when (or (null mm-w3m-safe-url-regexp)
+		    (string-match mm-w3m-safe-url-regexp parameters))
+	    (let ((file (gnus-html-image-id parameters)))
+	      (if (file-exists-p file)
+		  ;; It's already cached, so just insert it.
+		  (progn
+		    (put-image (create-image file) (point))
+		    ;; Delete the ALT text.
+		    (delete-region start end))
+		;; We don't have it, so schedule it for fetching
+		;; asynchronously.
+		(push (list parameters
+			    (set-marker (make-marker) start)
+			    (point-marker))
+		      images))))))
        ;; Add a link.
        ((equal tag "a")
 	(when (string-match "href=\"\\([^\"]+\\)" parameters)
@@ -102,7 +114,7 @@
 				     'buffer buffer))))
 
 (defun gnus-html-image-id (url)
-  (expand-file-name (sha1 url) "~/News/html-cache/"))
+  (expand-file-name (sha1 url) gnus-html-cache-directory))
 
 (defun gnus-html-curl-sentinel (process event)
   (when (string-match "finished" event)
@@ -118,5 +130,23 @@
 	    (put-image (create-image file) (cadr spec)))))
       (when images
 	(gnus-html-schedule-image-fetching buffer images)))))
+
+(defun gnus-html-prune-cache ()
+  (let ((total-size 0)
+	files)
+    (dolist (file (directory-files gnus-html-cache-directory t nil t))
+      (let ((attributes (file-attributes file)))
+	(unless (nth 0 attributes)
+	  (incf total-size (nth 7 attributes))
+	  (push (list (time-to-seconds (nth 5 attributes))
+		      (nth 7 attributes) file)
+		files))))
+    (when (> total-size gnus-html-cache-size)
+      (setq files (sort files (lambda (f1 f2)
+				(< (car f1) (car f2)))))
+      (dolist (file files)
+	(when (> total-size gnus-html-cache-size)
+	  (decf total-size (cadr file))
+	  (delete-file (nth 2 file)))))))
 
 ;;; gnus-html.el ends here
