@@ -1,13 +1,13 @@
 2009-07-16  Kevin Ryde  <user42@zip.com.au>  (tiny change)
 
-	* gnus-sum.el (gnus-summary-idna-message): 
-	* nnrss.el (nnrss-normalize-date, nnrss-discover-feed): 
+	* gnus-sum.el (gnus-summary-idna-message):
+	* nnrss.el (nnrss-normalize-date, nnrss-discover-feed):
 	Hyperlink urls in docstrings with URL `...'.
 
 2010-08-29  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* gnus-html.el (gnus-html-put-image): Use XEmacs-compatible image
-	functions. 
+	functions.
 
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -28,9 +28,9 @@
 	* mm-decode.el (mm-text-html-renderer): Default the html renderer to
 	gnus-article-html.
 	(mm-text-html-renderer): gnus-article-html needs curl in addition to
-	w3m. 
+	w3m.
 
-	* gnus-html.el: Start a new super-simple HTML renderer based on w3m. 
+	* gnus-html.el: Start a new super-simple HTML renderer based on w3m.
 
 2010-08-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -42,7 +42,7 @@
 	(message-resend): Disable ecomplete message storage when resending
 	messages.
 
-	* nntp.el (nntp-async-kluge): Remove the Emacs 20.3-related kluge. 
+	* nntp.el (nntp-async-kluge): Remove the Emacs 20.3-related kluge.
 
 2010-08-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
