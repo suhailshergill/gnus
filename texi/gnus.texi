@@ -12475,7 +12475,7 @@ Interactively run an action on the @acronym{MIME} object
 
 @cindex HTML
 If you have @code{w3m} installed on your system, Gnus can display
-@acronum{HTML} articles in the article buffer.  The following
+@acronym{HTML} articles in the article buffer.  The following
 variables are relevant:
 
 @table @code
