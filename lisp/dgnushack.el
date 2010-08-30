@@ -62,7 +62,7 @@
   (setq filename (byte-compiler-base-file-name filename))
   (setq filename (file-name-sans-versions filename))
   (setq filename (file-name-nondirectory filename))
-  (if (memq system-type '(win32 w32 mswindows windows-nt))
+  (if (eq system-type 'windows-nt)
       (setq filename (downcase filename)))
   (cond ((eq system-type 'vax-vms)
 	 (concat (substring filename 0 (string-match ";" filename)) "c"))

@@ -916,8 +916,6 @@ XEmacs compatibility workaround."
 		  (list
 		   (cons 'x
 			 (expand-file-name pixmap gnus-xmas-glyph-directory))
-		   (cons 'mswindows
-			 (expand-file-name pixmap gnus-xmas-glyph-directory))
 		   (cons 'tty substring)))))
      (setq gnus-group-icon-cache
 	   (cons (cons pixmap glyph) gnus-group-icon-cache))
