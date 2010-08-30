@@ -933,9 +933,11 @@ XEmacs compatibility workaround."
        (featurep (if (eq type 'pbm) 'xbm type))))
 
 (defun gnus-xmas-create-image (file &optional type data-p &rest props)
-  (let ((type (if type
-		  (symbol-name type)
-		(car (last (split-string file "[.]")))))
+  (let ((type (cond
+	       (type
+		(symbol-name type))
+	       ((string-match "[.]" file)
+		(car (last (split-string file "[.]"))))))
 	(face (plist-get props :face))
 	glyph)
     (when (equal type "pbm")
@@ -957,8 +959,9 @@ XEmacs compatibility workaround."
 		(insert-file-contents-literally file))
 	      (make-glyph
 	       (vector
-		(or (intern type)
-		    (mm-image-type-from-buffer))
+		(if type
+		    (intern type)
+		  (mm-image-type-from-buffer))
 		:data (buffer-string))))))
     (when face
       (set-glyph-face glyph face))

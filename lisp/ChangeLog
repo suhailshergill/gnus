@@ -1,5 +1,8 @@
 2010-08-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-xmas.el (gnus-xmas-create-image): Make this work on files that
+	don't have dots in their names.
+
 	* gnus-art.el (gnus-article-view-part): Doc fix.
 
 	* gnus-html.el (gnus-html-put-image): Use gnus-create-image to be
