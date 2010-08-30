@@ -163,7 +163,7 @@
 
 (defun gnus-html-put-image (file point)
   (let ((image (ignore-errors
-		 (create-image file))))
+		 (gnus-create-image file))))
     (save-excursion
       (goto-char point)
       (if (and image
