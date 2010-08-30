@@ -2,6 +2,7 @@
 
 	* gnus-undo.el (gnus-undo-register-1): Limit the undo actions to 100
 	actions. 
+	(gnus-undo-register-1): Revert last change.
 
 	* gnus-group.el (gnus-group-completing-read): Protect against not
 	having completion-styles bound.
