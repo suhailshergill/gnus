@@ -19,7 +19,6 @@ contrib/request-assign.future
 etc/Makefile
 lisp/*.elc
 lisp/Makefile
-lisp/TAGS
 lisp/auto-autoloads.el
 lisp/custom-load.el
 lisp/gnus-load.el
