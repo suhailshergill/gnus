@@ -964,22 +964,24 @@ XEmacs compatibility workaround."
       (set-glyph-face glyph face))
     glyph))
 
-(defun gnus-xmas-put-image (glyph &optional string category)
+(defun gnus-xmas-put-image (glyph &optional string category point)
   "Insert STRING, but display GLYPH.
 Warning: Don't insert text immediately after the image."
-  (let ((begin (point))
+  (let ((begin (or point (point)))
 	extent)
-    (if (and (bobp) (not string))
-	(setq string " "))
-    (if string
-	(insert string)
-      (setq begin (1- begin)))
-    (setq extent (make-extent begin (point)))
-    (set-extent-property extent 'gnus-image category)
-    (set-extent-property extent 'duplicable t)
-    (if string
-	(set-extent-property extent 'invisible t))
-    (set-extent-property extent 'end-glyph glyph))
+    (save-excursion
+      (goto-char begin)
+      (if (and (bobp) (not string))
+	  (setq string " "))
+      (if string
+	  (insert string)
+	(setq begin (1- begin)))
+      (setq extent (make-extent begin (point)))
+      (set-extent-property extent 'gnus-image category)
+      (set-extent-property extent 'duplicable t)
+      (if string
+	  (set-extent-property extent 'invisible t))
+      (set-extent-property extent 'end-glyph glyph)))
   glyph)
 
 (defun gnus-xmas-remove-image (image &optional category)
