@@ -1,3 +1,7 @@
+2010-08-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-html.el: require mm-url.
+
 2010-08-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el: As per discussion 3 years, 8 weeks, 3 days, 9 hours, 57
