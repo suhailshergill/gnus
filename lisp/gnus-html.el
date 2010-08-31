@@ -28,6 +28,8 @@
 
 ;;; Code:
 
+(eval-when-compile (require 'cl))
+(eval-when-compile (require 'mm-decode))
 (require 'mm-url)
 
 (defcustom gnus-html-cache-directory (nnheader-concat gnus-directory "html-cache/")
@@ -75,6 +77,8 @@
 				 "-o" "display_image=off"
 				 "-T" "text/html"))))
       (gnus-html-wash-tags))))
+
+(defvar gnus-article-mouse-face)
 
 (defun gnus-html-wash-tags ()
   (let (tag parameters string start end images url)
@@ -167,19 +171,18 @@
 
 (defun gnus-html-curl-sentinel (process event)
   (when (string-match "finished" event)
-    (let* ((images (getf (gnus-process-plist process) 'images))
-	   (buffer (getf (gnus-process-plist process) 'buffer))
+    (let* ((images (process-get process 'images))
+	   (buffer (process-get process 'buffer))
 	   (spec (pop images))
 	   (file (gnus-html-image-id (car spec))))
       (when (and (buffer-live-p buffer)
 		 ;; If the position of the marker is 1, then that
-		 ;; means that the text is was in has been deleted;
+		 ;; means that the text it was in has been deleted;
 		 ;; i.e., that the user has selected a different
 		 ;; article before the image arrived.
-		 (not (= (marker-position (cadr spec)) 1)))
-	(save-excursion
-	  (set-buffer buffer)
-	  (let ((buffer-read-only nil))
+		 (not (= (marker-position (cadr spec)) (point-min))))
+	(with-current-buffer buffer
+	  (let ((inhibit-read-only t))
 	    (when (gnus-html-put-image file (cadr spec))
 	      (delete-region (1+ (cadr spec)) (caddr spec))))))
       (when images
@@ -195,7 +198,7 @@
 		 ;; Kludge to avoid displaying 30x30 gif images, which
 		 ;; seems to be a signal of a broken image.
 		 (not (and (listp image)
-			   (eq (getf (cdr image) :type) 'gif)
+			   (eq (plist-get (cdr image) :type) 'gif)
 			   (= (car (image-size image t)) 30)
 			   (= (cdr (image-size image t)) 30))))
 	    (progn
@@ -228,8 +231,7 @@
 (defun gnus-html-prefetch-images (summary)
   (let (blocked-images urls)
     (when (buffer-live-p summary)
-      (save-excursion
-	(set-buffer summary)
+      (with-current-buffer summary
 	(setq blocked-images gnus-blocked-images))
       (save-match-data
 	(while (re-search-forward "<img.*src=[\"']\\([^\"']+\\)" nil t)
