@@ -1,5 +1,8 @@
 2010-08-31  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* lpath.el: Bind completion-styles for Emacs 21 and XEmacs; bind
+	header-line-format for XEmacs 21.4.
+
 	* gnus-sum.el (gnus-summary-stop-at-end-of-message)
 	* gnus.el (gnus-valid-select-methods)
 	* message.el (message-send-mail-partially-limit)
