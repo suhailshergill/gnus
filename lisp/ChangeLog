@@ -1,5 +1,8 @@
 2010-08-31  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* gnus-ems.el: Provide compatibility functions for
+	gnus-set-process-plist.
+
 	* lpath.el: Bind completion-styles for Emacs 21 and XEmacs; bind
 	header-line-format for XEmacs 21.4.
 
