@@ -1,6 +1,8 @@
 2010-08-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* message.texi (Wide Reply): Document message-prune-recipient-rules. 
+	* gnus.texi (HTML): Document gnus-blocked-images.
+
+	* message.texi (Wide Reply): Document message-prune-recipient-rules.
 
 2010-08-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -21,7 +23,7 @@
 2010-08-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Asynchronous Fetching): Document
-	gnus-async-post-fetch-function. 
+	gnus-async-post-fetch-function.
 	(HTML): Made into its own section.
 
 2010-06-24  Glenn Morris  <rgm@gnu.org>
