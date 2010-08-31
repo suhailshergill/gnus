@@ -1,5 +1,8 @@
 2010-08-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-cite.el (gnus-article-natural-long-line-p): New function to
+	guess whether a long line is natural text or not.
+
 	* gnus-html.el (gnus-html-schedule-image-fetching): Use
 	gnus-process-plist and friends for compatibility.
 
