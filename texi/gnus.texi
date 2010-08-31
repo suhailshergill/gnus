@@ -27602,8 +27602,7 @@ news batches, ClariNet briefs collections, and just about everything
 else (@pxref{Document Groups}).
 
 @item
-Gnus has a new back end (@code{nnsoup}) to create/read SOUP packets
-(@pxref{SOUP}).
+Gnus has a new back end (@code{nnsoup}) to create/read SOUP packets.
 
 @item
 The Gnus cache is much faster.
