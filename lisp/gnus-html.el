@@ -72,7 +72,7 @@
       (gnus-html-wash-tags))))
 
 (defun gnus-html-wash-tags ()
-  (let (tag parameters string start end images)
+  (let (tag parameters string start end images url)
     (mm-url-decode-entities)
     (goto-char (point-min))
     (while (re-search-forward "<\\([^ />]+\\)\\([^>]*\\)>" nil t)
@@ -89,10 +89,10 @@
        ;; Fetch and insert a picture.
        ((equal tag "img_alt")
 	(when (string-match "src=\"\\([^\"]+\\)" parameters)
-	  (setq parameters (match-string 1 parameters))
+	  (setq url (match-string 1 parameters))
 	  (when (or (null mm-w3m-safe-url-regexp)
-		    (string-match mm-w3m-safe-url-regexp parameters))
-	    (let ((file (gnus-html-image-id parameters)))
+		    (string-match mm-w3m-safe-url-regexp url))
+	    (let ((file (gnus-html-image-id url)))
 	      (if (file-exists-p file)
 		  ;; It's already cached, so just insert it.
 		  (when (gnus-html-put-image file (point))
@@ -100,20 +100,20 @@
 		    (delete-region start end))
 		;; We don't have it, so schedule it for fetching
 		;; asynchronously.
-		(push (list parameters
+		(push (list url
 			    (set-marker (make-marker) start)
 			    (point-marker))
 		      images))))))
        ;; Add a link.
        ((equal tag "a")
 	(when (string-match "href=\"\\([^\"]+\\)" parameters)
-	  (setq parameters (match-string 1 parameters))
+	  (setq url (match-string 1 parameters))
 	  (gnus-article-add-button start end
-				   'browse-url parameters
-				   parameters)
+				   'browse-url url
+				   url)
 	  (let ((overlay (gnus-make-overlay start end)))
 	    (gnus-overlay-put overlay 'evaporate t)
-	    (gnus-overlay-put overlay 'gnus-button-url parameters)
+	    (gnus-overlay-put overlay 'gnus-button-url url)
 	    (when gnus-article-mouse-face
 	      (gnus-overlay-put overlay 'mouse-face gnus-article-mouse-face)))))
        ;; Whatever.  Just ignore the tag.
