@@ -324,7 +324,7 @@ dgnushack-compile."
 	(require 'w3-parse)
       (error
        (message "No w3: %s %s" (cadr code) (or (locate-library "w3-parse") ""))
-       (dolist (file '("nnultimate.el" "webmail.el" "nnwfm.el"))
+       (dolist (file '("webmail.el" "nnwfm.el"))
 	 (setq files (delete file files)))))
     (condition-case code
 	(require 'mh-e)

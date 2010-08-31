@@ -1,5 +1,7 @@
 2010-08-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnultimate.el: Removed.
+
 	* gnus-html.el (gnus-blocked-images): New variable.
 
 	* message.el (message-prune-recipients): New function.

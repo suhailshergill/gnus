@@ -1258,7 +1258,7 @@ type of files to save."
   "Whether Gnus should parse all headers made available to it.
 This is mostly relevant for slow back ends where the user may
 wish to widen the summary buffer to include all headers
-that were fetched.  Say, for nnultimate groups."
+that were fetched."
   :version "22.1"
   :group 'gnus-summary
   :type '(choice boolean regexp))
