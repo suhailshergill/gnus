@@ -1746,7 +1746,6 @@ slower."
     ("nnweb" none)
     ("nnrss" none)
     ("nnwfm" none)
-    ("nnwarchive" none)
     ("nnlistserv" none)
     ("nnagent" post-mail)
     ("nnimap" post-mail address prompt-address physical-address)
