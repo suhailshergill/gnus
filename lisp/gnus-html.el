@@ -92,18 +92,33 @@
 	  (setq url (match-string 1 parameters))
 	  (when (or (null mm-w3m-safe-url-regexp)
 		    (string-match mm-w3m-safe-url-regexp url))
-	    (let ((file (gnus-html-image-id url)))
-	      (if (file-exists-p file)
-		  ;; It's already cached, so just insert it.
-		  (when (gnus-html-put-image file (point))
-		    ;; Delete the ALT text.
-		    (delete-region start end))
-		;; We don't have it, so schedule it for fetching
-		;; asynchronously.
-		(push (list url
-			    (set-marker (make-marker) start)
-			    (point-marker))
-		      images))))))
+	    (if (string-match "^cid:\\(.*\\)" url)
+		;; URLs with cid: have their content stashed in other
+		;; parts of the MIME structure, so just insert them
+		;; immediately.
+		(let ((handle (mm-get-content-id
+			       (setq url (match-string 1 url))))
+		      image)
+		  (when handle
+		    (mm-with-part handle
+		      (setq image (gnus-create-image (buffer-string)
+						     nil t))))
+		  (when image
+		    (delete-region start end)
+		    (gnus-put-image image)))
+	      ;; Normal, external URL.
+	      (let ((file (gnus-html-image-id url)))
+		(if (file-exists-p file)
+		    ;; It's already cached, so just insert it.
+		    (when (gnus-html-put-image file (point))
+		      ;; Delete the ALT text.
+		      (delete-region start end))
+		  ;; We don't have it, so schedule it for fetching
+		  ;; asynchronously.
+		  (push (list url
+			      (set-marker (make-marker) start)
+			      (point-marker))
+			images)))))))
        ;; Add a link.
        ((equal tag "a")
 	(when (string-match "href=\"\\([^\"]+\\)" parameters)
