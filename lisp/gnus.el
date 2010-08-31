@@ -1772,7 +1772,8 @@ this variable.  I think."
 				   (const :format "%v " prompt-address)
 				   (const :format "%v " physical-address)
 				   (const :format "%v " virtual)
-				   (const respool)))))
+				   (const respool))))
+  :version "24.1")
 
 (defun gnus-redefine-select-method-widget ()
   "Recomputes the select-method widget based on the value of

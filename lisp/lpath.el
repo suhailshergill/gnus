@@ -56,9 +56,10 @@
        vcard-pretty-print w3-coding-system-for-mime-charset window-pixel-height
        window-pixel-width))
     (maybe-bind
-     '(eudc-protocol
-       filladapt-mode help-echo-owns-message itimer-list ps-print-color-p
-       smtpmail-default-smtp-server w3-meta-charset-content-type-regexp
+     '(completion-styles
+       eudc-protocol filladapt-mode help-echo-owns-message itimer-list
+       ps-print-color-p smtpmail-default-smtp-server
+       w3-meta-charset-content-type-regexp
        w3-meta-content-type-charset-regexp))))
 
 (when (featurep 'xemacs)
