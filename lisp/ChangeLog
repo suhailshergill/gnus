@@ -1,3 +1,8 @@
+2010-08-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-html.el (gnus-html-schedule-image-fetching): Use
+	gnus-process-plist and friends for compatibility.
+
 2010-08-31  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-ems.el: Provide compatibility functions for

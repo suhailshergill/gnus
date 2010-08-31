@@ -154,16 +154,16 @@
 		   url)))
     (process-kill-without-query process)
     (set-process-sentinel process 'gnus-html-curl-sentinel)
-    (set-process-plist process (list 'images images
-				     'buffer buffer))))
+    (gnus-set-process-plist process (list 'images images
+					  'buffer buffer))))
 
 (defun gnus-html-image-id (url)
   (expand-file-name (sha1 url) gnus-html-cache-directory))
 
 (defun gnus-html-curl-sentinel (process event)
   (when (string-match "finished" event)
-    (let* ((images (getf (process-plist process) 'images))
-	   (buffer (getf (process-plist process) 'buffer))
+    (let* ((images (getf (gnus-process-plist process) 'images))
+	   (buffer (getf (gnus-process-plist process) 'buffer))
 	   (spec (pop images))
 	   (file (gnus-html-image-id (car spec))))
       (when (and (buffer-live-p buffer)
