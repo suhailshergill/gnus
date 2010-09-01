@@ -1745,7 +1745,6 @@ slower."
     ("nnweb" none)
     ("nnrss" none)
     ("nnwfm" none)
-    ("nnlistserv" none)
     ("nnagent" post-mail)
     ("nnimap" post-mail address prompt-address physical-address)
     ("nnmaildir" mail respool address)
