@@ -3,6 +3,8 @@
 	* gnus-html.el (gnus-html-wash-tags): Don't show images that are really
 	small. They're probably tracking images.
 	(gnus-html-wash-tags): Remove all <pre_int> place holders.
+	(gnus-html-rescale-image): Yet another try at getting the image sizing
+	right.
 
 	* nntp.el (nntp-request-set-mark): Refuse to do marks if
 	nntp-marks-file-name is nil.
@@ -15,7 +17,7 @@
 
 2010-09-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* nndoc.el (nndoc-type-alist): Added a new type for Google digests. 
+	* nndoc.el (nndoc-type-alist): Added a new type for Google digests.
 
 	* gnus-html.el (gnus-html-wash-tags): Check the value of
 	gnus-blocked-images in the summary buffer.
