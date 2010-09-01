@@ -1,6 +1,6 @@
 2010-09-01  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* post-receive: Add modified post-receive hook for Git.
+	* post-receive: Add modified post-receive hook for Git.  Comment.
 
 2010-03-22  Teodor Zlatanov  <tzz@lifelogs.com>
 

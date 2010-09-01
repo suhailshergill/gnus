@@ -8,8 +8,8 @@ export USER_NAME=$(git log -1 --format=format:%an HEAD)
 
 # the remainder is the standard git-core post-receive-email with some changes:
 
-# - USER_EMAIL is used in the header
-# - USER_NAME is used in the header
+# - USER_EMAIL and USER_NAME are used in the header
+# - without annotations, we use `git log -1 --format=oneline' to generate the change summary (which could miss multiple changes)
 
 # Copyright (c) 2007 Andy Parkins
 #
