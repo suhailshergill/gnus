@@ -1739,7 +1739,6 @@ slower."
     ("nneething" none address prompt-address physical-address)
     ("nndoc" none address prompt-address)
     ("nnbabyl" mail address respool)
-    ("nnkiboze" post virtual)
     ("nndraft" post-mail)
     ("nnfolder" mail respool address)
     ("nngateway" post-mail address prompt-address physical-address)

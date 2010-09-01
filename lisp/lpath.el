@@ -26,7 +26,6 @@
     (defun netrc-machine-user-or-password (mode authinfo-file-or-list machines
 						ports defaults))
     (defun netrc-parse (file))
-    (defun nnkiboze-score-file (a))
     (maybe-fbind
      '(Info-index
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
@@ -74,7 +73,6 @@
   (defun netrc-machine-user-or-password (mode authinfo-file-or-list machines
 					      ports defaults))
   (defun netrc-parse (file))
-  (defun nnkiboze-score-file (a))
   (defun split-line (&optional arg))
   (eval-after-load "rmail"
     '(defun rmail-toggle-header (&optional arg)))
