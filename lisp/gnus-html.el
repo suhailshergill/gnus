@@ -117,8 +117,9 @@ fit these criteria."
       (cond
        ;; Fetch and insert a picture.
        ((equal tag "img_alt")
-	(when (string-match "src=\"\\([^\"]+\\)" parameters)
+        (when (string-match "src=\"\\([^\"]+\\)" parameters)
 	  (setq url (match-string 1 parameters))
+          (gnus-message 8 "Fetching image URL %s" url)
 	  (if (string-match "^cid:\\(.*\\)" url)
 	      ;; URLs with cid: have their content stashed in other
 	      ;; parts of the MIME structure, so just insert them
@@ -152,6 +153,7 @@ fit these criteria."
        ((equal tag "a")
 	(when (string-match "href=\"\\([^\"]+\\)" parameters)
 	  (setq url (match-string 1 parameters))
+          (gnus-message 8 "Fetching link URL %s" url)
 	  (gnus-article-add-button start end
 				   'browse-url url
 				   url)
@@ -177,6 +179,7 @@ fit these criteria."
       (gnus-html-schedule-image-fetching (current-buffer) (nreverse images)))))
 
 (defun gnus-html-schedule-image-fetching (buffer images)
+  (gnus-message 8 "Scheduling image fetching in buffer %s, images %s" buffer images)
   (let* ((url (caar images))
 	 (process (start-process
 		   "images" nil "curl"
@@ -280,12 +283,13 @@ fit these criteria."
       (save-match-data
 	(while (re-search-forward "<img.*src=[\"']\\([^\"']+\\)" nil t)
 	  (let ((url (match-string 1)))
-	    (when (or (null blocked-images)
-		      (not (string-match blocked-images url)))
-	      (unless (file-exists-p (gnus-html-image-id url))
-		(push url urls)
-		(push (gnus-html-image-id url) urls)
-		(push "-o" urls)))))
+	    (if (or (null blocked-images)
+                    (not (string-match blocked-images url)))
+                (unless (file-exists-p (gnus-html-image-id url))
+                  (push url urls)
+                  (push (gnus-html-image-id url) urls)
+                  (push "-o" urls))
+              (gnus-message 8 "Image URL %s is blocked" url))))
 	(let ((process
 	       (apply 'start-process 
 		      "images" nil "curl"
