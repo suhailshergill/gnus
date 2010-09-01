@@ -202,6 +202,3 @@ See also the variable gnus-convert-loads."
 	  (gnus-convert-one-kill-file
 	   (expand-file-name (car all-kill-files) kill-directory)))
       (setq all-kill-files (cdr all-kill-files)))))
-
-
-;; arch-tag: 9e64880a-9d8d-4e6f-b565-b4c76a5f9218

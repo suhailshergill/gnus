@@ -343,6 +343,5 @@ Format example:
     exit-data))
 
 (provide 'encrypt)
-;;; encrypt.el ends here
 
-;; arch-tag: d907e4f1-71b5-42b1-a180-fc7b84ff0648
+;;; encrypt.el ends here

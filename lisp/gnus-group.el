@@ -4728,5 +4728,4 @@ Compacting group %s... (this may take a long time)"
 
 (provide 'gnus-group)
 
-;; arch-tag: 2eb5440f-0bca-4091-814c-e37817536af6
 ;;; gnus-group.el ends here

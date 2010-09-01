@@ -194,5 +194,4 @@ If NOW, use that time instead."
 
 (provide 'messagexmas)
 
-;;; arch-tag: 0ece0484-8757-4641-b2d4-17147dd5c5b5
 ;;; messagexmas.el ends here

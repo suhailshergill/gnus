@@ -702,5 +702,4 @@ presentation buffer."
 
 (provide 'vcard)
 
-;;; arch-tag: 64df032f-e54c-4cfb-9e8c-8bead284f61b
 ;;; vcard.el ends here

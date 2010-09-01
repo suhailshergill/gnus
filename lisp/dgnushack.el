@@ -550,5 +550,3 @@ or remove them using `make remove-installed-shadows'.\n\n"))))))))
 	(setq path (cdr path))))))
 
 ;;; dgnushack.el ends here
-
-;;; arch-tag: 579f585a-24eb-4e1c-8d34-4808e11b68f2

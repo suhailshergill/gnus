@@ -146,5 +146,3 @@
        enable-multibyte-characters file-name-coding-system))))
 
 (provide 'lpath)
-
-;;; arch-tag: d1ad864f-dca6-4d21-aa3f-be3248e66dba

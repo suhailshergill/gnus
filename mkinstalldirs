@@ -151,5 +151,4 @@ done
 
 exit $errstatus
 
-# arch-tag: 40090a56-c506-4e64-a963-224cca4a7524
 # mkinstalldirs ends here

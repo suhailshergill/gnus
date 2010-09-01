@@ -478,5 +478,4 @@ used."
 
 (provide 'gpg-ring)
 
-;;; arch-tag: a4c5b2d1-aff0-4ab6-96e9-267727226c2d
 ;;; gpg-ring.el ends here

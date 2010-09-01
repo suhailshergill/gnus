@@ -435,5 +435,4 @@ tag: 64dc5692-edb4-4848-a965-7aa0181acbb8~%\
 ;; coding: iso-8859-1
 ;; End:
 
-;; arch-tag: cdd948f7-def9-4ea1-b5ae-b57c308097d7
 ;;; xml2texi.scm ends here

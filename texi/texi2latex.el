@@ -418,5 +418,3 @@ insert the text with the @insertcopying command."
   "Insert the copyright notice and copying permissions from the Texinfo file,
 which are indicated by the @copying ... @end copying command."
   (insert (concat "\n" latexi-copying-text)))
-
-;;; arch-tag: 31e30f7f-4876-4dd1-ba3a-6f9f7ea0d256
