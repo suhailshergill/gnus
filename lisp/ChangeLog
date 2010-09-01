@@ -1,3 +1,8 @@
+2010-09-01  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-html.el (gnus-html-image-url-blocked-p): New function.
+	(gnus-html-prefetch-images, gnus-html-wash-tags): Use it.
+
 2010-09-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-html.el (gnus-html-put-image): Use the deleted text as the image
@@ -16,7 +21,7 @@
 
 2010-09-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* gnus-html.el (gnus-html-wash-tags): Delete the IMG_ALT region. 
+	* gnus-html.el (gnus-html-wash-tags): Delete the IMG_ALT region.
 	(gnus-max-image-proportion): New variable.
 	(gnus-html-rescale-image): New function.
 	(gnus-html-put-image): Rescale images.
