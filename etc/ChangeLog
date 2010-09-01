@@ -1,3 +1,7 @@
+2010-09-01  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: Add modified post-receive hook for Git.
+
 2010-03-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus/gnus-setup.ast: Add finish links to the top nodes.
