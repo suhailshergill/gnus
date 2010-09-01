@@ -186,7 +186,6 @@ fixed in Emacs 22."
 
 (defalias 'device-sound-enabled-p 'ignore)
 (defalias 'play-sound-file 'ignore)
-(defalias 'nndb-request-article 'ignore)
 (defalias 'efs-re-read-dir 'ignore)
 (defalias 'ange-ftp-re-read-dir 'ignore)
 (defalias 'define-mail-user-agent 'ignore)

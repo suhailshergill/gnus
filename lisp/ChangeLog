@@ -1,5 +1,7 @@
 2010-09-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nndb.el: Removed.
+
 	* gnus-html.el (gnus-html-put-image): Use the deleted text as the image
 	alt text.
 	(gnus-html-rescale-image): Try to get the rescaling logic right for
