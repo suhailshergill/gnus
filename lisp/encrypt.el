@@ -46,7 +46,7 @@
 ;;; 2) write the new authinfo.enc
 ;;; M-x encrypt-write-file-contents RET ~/.authinfo.enc
 
-;;; 3) verify the new authinfo is correct 
+;;; 3) verify the new authinfo is correct
 ;;;   (this will insert the contents in the current buffer)
 
 ;;; M-: (encrypt-insert-file-contents "~/.authinfo.enc")
@@ -156,9 +156,9 @@ Format example:
     (if outdata
 	(progn
 	  (message "%s was decrypted with %s"
-		   file 
+		   file
 		   (encrypt-message-method-and-cipher method cipher))
-	  (when erase 
+	  (when erase
 	    (delete-region (point-min) (point-max)))
 	  (insert outdata))
       ;; the decryption failed, alas
@@ -187,7 +187,7 @@ Format example:
   (if model
       (let* ((method (nth 0 model))
 	     (cipher (nth 1 model))
-	     (passphrase 
+	     (passphrase
 	      (encrypt-get-passphrase-if-needed file method cipher))
 	     (outdata
 	      (cond
@@ -212,8 +212,8 @@ Format example:
 	  (gnus-error 5 "%s was NOT encrypted with %s"
 		      file
 		      (encrypt-message-method-and-cipher method cipher))))
-    (gnus-error 
-     1 
+    (gnus-error
+     1
      "%s has no associated encryption model!  See encrypt-file-alist."
      file)))
 
@@ -224,17 +224,17 @@ Format example:
   "Read the passphrase for FILE, METHOD, CIPHER if necessary."
   (when (not (eq method 'pgg))
     (let ((password-key (encrypt-password-key file method cipher))
-	  (password-question 
+	  (password-question
 	   (format "password for %s (file %s)? "
 		   (encrypt-message-method-and-cipher method cipher)
-		   file)))      
+		   file)))
       (if add
 	  (password-read-and-add password-question password-key)
 	  (password-read password-question password-key)))))
 
 
 (defun encrypt-message-method-and-cipher (method cipher)
-  (format "method %s%s" 
+  (format "method %s%s"
 	  (symbol-name method)
 	  (if cipher (format " (cipher %s)" cipher) "")))
 
@@ -277,14 +277,14 @@ Format example:
 (defun encrypt-gpg-decode-buffer (passphrase cipher)
   (encrypt-gpg-process-buffer passphrase cipher nil))
 
-(defun encrypt-gpg-process-buffer (passphrase 
-					cipher 
+(defun encrypt-gpg-process-buffer (passphrase
+					cipher
 					&optional encode)
   "With PASSPHRASE, use GPG to encode or decode the current buffer."
   (let* ((program encrypt-gpg-path)
 	 (input (buffer-substring-no-properties (point-min) (point-max)))
-	 (temp-maker (if (fboundp 'make-temp-file) 
-			 'make-temp-file 
+	 (temp-maker (if (fboundp 'make-temp-file)
+			 'make-temp-file
 		       'make-temp-name))
 	 (temp-file (funcall temp-maker encrypt-temp-prefix))
 	 (default-enable-multibyte-characters nil)
@@ -294,7 +294,7 @@ Format example:
 		 "--passphrase-fd" "0"
 		 "--no-tty"))
 	 exit-status exit-data)
-    
+
     (when encode
       (setq args
 	    (append args

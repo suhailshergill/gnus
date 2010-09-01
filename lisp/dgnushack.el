@@ -365,7 +365,7 @@ dgnushack-compile."
       (expand-file-name "auto-autoloads.el")
     (expand-file-name "gnus-load.el")))
 
-(defvar	dgnushack-cus-load-file 
+(defvar	dgnushack-cus-load-file
   (if (featurep 'xemacs)
       (expand-file-name "custom-load.el")
     (expand-file-name "cus-load.el")))

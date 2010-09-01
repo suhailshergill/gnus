@@ -210,7 +210,7 @@
 	  (setq result (if raw (nth 3 elem)
 			 (format "%s" (nth 3 elem)))))))
     result))
-    
+
 (defun assistant-set-variable (node variable value)
   (let ((variables (assistant-get-list node "variable"))
 	elem)
@@ -218,11 +218,11 @@
       (setq elem (cadr elem))
       (when (eq (intern variable) (car elem))
 	(setcar (nthcdr 3 elem) value)))))
-    
+
 (defun assistant-render-text (text node)
   (unless (and text node)
-    (gnus-error 
-     5 
+    (gnus-error
+     5
      "The assistant was asked to render invalid text or node data"))
   (dolist (elem text)
     (if (stringp elem)
@@ -272,7 +272,7 @@
 	    (cadr type))
 	   assistant-widgets))
 	 (t
-	  (push 
+	  (push
 	   (widget-create
 	    'editable-field
 	    :value-face 'assistant-field
@@ -362,7 +362,7 @@
     (setq variable (cadr variable))
     (let ((type (nth 1 variable))
 	  (value (nth 3 variable)))
-      (when 
+      (when
 	  (cond
 	   ((eq type :number)
 	    (string-match "[^0-9]" value))
@@ -412,7 +412,7 @@
 	(setq applicable (cons elem applicable))))
 
     ;; return the first thing we can
-    
+
     (while (setq elem (pop applicable))
       (push (cadr (cadr elem)) return))
 
@@ -425,12 +425,12 @@
 	    (append (assistant-get-list node "variable")
 		    variables)))
     variables))
-  
+
 (defun assistant-eval (form)
   (let ((bindings nil))
     (dolist (variable (assistant-get-all-variables))
       (setq variable (cadr variable))
-      (push (list (car variable) 
+      (push (list (car variable)
 		  (if (eq (nth 3 variable) 'default)
 		      nil
 		    (if (listp (nth 3 variable))
