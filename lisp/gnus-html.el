@@ -151,7 +151,8 @@ fit these criteria."
 			      (point-marker))
 			images)))))))
        ;; Add a link.
-       ((equal tag "a")
+       ((or (equal tag "a")
+	    (equal tag "A"))
 	(when (string-match "href=\"\\([^\"]+\\)" parameters)
 	  (setq url (match-string 1 parameters))
           (gnus-message 8 "Fetching link URL %s" url)

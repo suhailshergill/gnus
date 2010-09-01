@@ -1,5 +1,8 @@
 2010-09-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-wash-tags): "A" is also used for links, just
+	like "a", it seems like.
+
 	* nnwfm.el: Removed.
 
 	* nnlistserv.el: Removed.
