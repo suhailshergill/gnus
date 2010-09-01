@@ -97,7 +97,7 @@
      w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
-     buffer-display-table cursor-in-non-selected-windows
+     buffer-display-table completion-styles cursor-in-non-selected-windows
      default-enable-multibyte-characters default-file-name-coding-system
      eudc-protocol filladapt-mode gnus-agent-expire-current-dirs
      help-xref-stack-item idna-program installation-directory line-spacing
@@ -118,8 +118,8 @@
        string-as-multibyte timer-set-function unicode-precedence-list
        unicode-to-char w32-focus-frame x-focus-frame))
     (maybe-bind
-     '(scroll-margin
-       timer-list)))
+     '(header-line-format
+       scroll-margin timer-list)))
 
   (when (and (= emacs-major-version 21) (= emacs-minor-version 4))
     (maybe-fbind
