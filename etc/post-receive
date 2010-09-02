@@ -11,6 +11,7 @@ export USER_NAME=$(git log -1 --format=format:%an HEAD)
 # - USER_EMAIL and USER_NAME are used in the header
 # - the update message is after the diff
 # - without annotations, we use `git log --format=oneline' to generate the change summary (joining multiples with semicolons)
+# - the subject is shorter and prefixed with [gnus git] always
 
 # Copyright (c) 2007 Andy Parkins
 #
@@ -182,7 +183,7 @@ generate_email()
 	# that we can build from the parameters
 	describe=$(git describe $rev 2>/dev/null)
 	if [ -z "$describe" ]; then
-		describe=$((git log --format=oneline $oldrev...$newrev | perl -e'@p = <>; chomp @p; print join " ; ", @p') 2>/dev/null)
+		describe=$((git log --format="%s" $oldrev...$newrev | perl -e'@p = <>; chomp @p; print join " ; ", @p') 2>/dev/null)
 	fi
 
 	if [ -z "$describe" ]; then
@@ -213,7 +214,7 @@ generate_email_header()
 	cat <<-EOF
 	From: ${USER_NAME} <${USER_EMAIL}>
 	To: $recipients
-	Subject: ${emailprefix}$projectdesc $refname_type, $short_refname, ${change_type}d. $describe
+	Subject: [gnus git] $refname_type $short_refname ${change_type}d: $describe
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev

@@ -1,3 +1,7 @@
+2010-09-02  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: More subject formatting.
+
 2010-09-01  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* post-receive: Add modified post-receive hook for Git.  Comment.  Put
