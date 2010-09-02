@@ -9,7 +9,8 @@ export USER_NAME=$(git log -1 --format=format:%an HEAD)
 # the remainder is the standard git-core post-receive-email with some changes:
 
 # - USER_EMAIL and USER_NAME are used in the header
-# - without annotations, we use `git log -1 --format=oneline' to generate the change summary (which could miss multiple changes)
+# - the update message is after the diff
+# - without annotations, we use `git log --format=oneline' to generate the change summary (joining multiples with semicolons)
 
 # Copyright (c) 2007 Andy Parkins
 #
@@ -181,7 +182,7 @@ generate_email()
 	# that we can build from the parameters
 	describe=$(git describe $rev 2>/dev/null)
 	if [ -z "$describe" ]; then
-		describe=$(git log -1 --format=oneline $rev 2>/dev/null)
+		describe=$((git log --format=oneline $oldrev...$newrev | perl -e'@p = <>; chomp @p; print join " ; ", @p') 2>/dev/null)
 	fi
 
 	if [ -z "$describe" ]; then
@@ -405,10 +406,6 @@ generate_update_branch_email()
 
 	echo ""
 	if [ -z "$rewind_only" ]; then
-		echo "Those revisions listed above that are new to this repository have"
-		echo "not appeared on any other notification email; so we list those"
-		echo "revisions in full, below."
-
 		echo ""
 		echo $LOGBEGIN
 		show_new_revisions
@@ -418,6 +415,11 @@ generate_update_branch_email()
 		# revisions added by this update" message
 
 		echo $LOGEND
+
+		echo "Those revisions listed above that are new to this repository have"
+		echo "not appeared on any other notification email; so we listed those"
+		echo "revisions in full, above."
+
 	else
 		echo "No new revisions were added by this update."
 	fi

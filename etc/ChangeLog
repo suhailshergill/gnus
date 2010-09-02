@@ -1,6 +1,8 @@
 2010-09-01  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* post-receive: Add modified post-receive hook for Git.  Comment.
+	* post-receive: Add modified post-receive hook for Git.  Comment.  Put
+	the update message after the diff.  Join multiple oneline logs into one
+	long subject.
 
 2010-03-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
