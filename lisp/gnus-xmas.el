@@ -936,7 +936,8 @@ XEmacs compatibility workaround."
   (let ((type (cond
 	       (type
 		(symbol-name type))
-	       ((string-match "[.]" file)
+	       ((and (not data-p)
+		     (string-match "[.]" file))
 		(car (last (split-string file "[.]"))))))
 	(face (plist-get props :face))
 	glyph)

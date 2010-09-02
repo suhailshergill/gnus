@@ -1,5 +1,8 @@
 2010-09-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* gnus-xmas.el (gnus-xmas-create-image): Don't try to examine image
+	type on data, not a file name.
+
 	* lpath.el: Fbind w3-parse-buffer for Emacs <=22 and XEmacs; fbind
 	window-pixel-edges for Emacs 21.
 
