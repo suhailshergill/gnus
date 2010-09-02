@@ -1,3 +1,7 @@
+2010-09-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-html.el (gnus-html-rescale-image): Fix up typo in rescaling.
+
 2010-09-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-xmas.el (gnus-xmas-create-image): Don't try to examine image
