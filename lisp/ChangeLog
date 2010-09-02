@@ -1,3 +1,10 @@
+2010-09-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-generate-new-buffers): Change default to
+	`unsent', so that all new message buffers start their names with the
+	string "*unsent", and it's easier to find the buffers if you move from
+	them.
+
 2010-09-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-html.el (gnus-html-wash-tags): Don't show images that are really
