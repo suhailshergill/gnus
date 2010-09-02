@@ -1803,12 +1803,11 @@ If this variable is nil, screen refresh may be quicker."
 	      (const summary)
 	      (const tree)))
 
-;; Added by Keinonen Kari <kk85613@cs.tut.fi>.
-(defcustom gnus-mode-non-string-length nil
+(defcustom gnus-mode-non-string-length 30
   "*Max length of mode-line non-string contents.
 If this is nil, Gnus will take space as is needed, leaving the rest
-of the mode line intact.  Note that the default of nil is unlikely
-to be desirable; see the manual for further details."
+of the mode line intact."
+  :version "24.1"
   :group 'gnus-various
   :type '(choice (const nil)
 		 integer))
