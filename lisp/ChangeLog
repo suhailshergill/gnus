@@ -1,5 +1,11 @@
 2010-09-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-refer-article-method): Change default to 'current.
+	When referring an article, the common behaviour is to refer it from the
+	current select method, not the native select method.  The chances of
+	the native select method having the message in question is rather slim
+	these days.
+
 	* gnus-sum.el (gnus-auto-select-subject): Change default to
 	`unseen-or-unread'.  I think it's likely that most people want to
 	select an unseen article over a previously seen, but unread one.
