@@ -32,8 +32,8 @@
        bookmark-get-bookmark-record bookmark-make-record-default
        bookmark-prop-get display-time-event-handler epg-check-configuration
        find-coding-system frame-device recenter-top-bottom
-       rmail-swap-buffers-maybe w3-do-setup w3-prepare-buffer w3-region
-       w32-focus-frame w3m-detect-meta-charset w3m-region))
+       rmail-swap-buffers-maybe w3-do-setup w3-parse-buffer w3-prepare-buffer
+       w3-region w32-focus-frame w3m-detect-meta-charset w3m-region))
     (maybe-bind
      '(w3m-link-map)))
 
@@ -52,8 +52,8 @@
        set-keymap-default-binding temp-directory time-to-seconds ucs-to-char
        unicode-precedence-list unicode-to-char url-generic-parse-url
        url-http-file-exists-p valid-image-instantiator-format-p
-       vcard-pretty-print w3-coding-system-for-mime-charset window-pixel-height
-       window-pixel-width))
+       vcard-pretty-print w3-coding-system-for-mime-charset window-pixel-edges
+       window-pixel-height window-pixel-width))
     (maybe-bind
      '(completion-styles
        eudc-protocol filladapt-mode help-echo-owns-message itimer-list
@@ -91,8 +91,8 @@
      recenter-top-bottom rmail-msg-restore-non-pruned-header
      rmail-swap-buffers-maybe select-safe-coding-system sort-coding-systems
      track-mouse ucs-to-char url-generic-parse-url url-http-file-exists-p
-     url-insert-file-contents vcard-pretty-print w3m-detect-meta-charset
-     w3m-region window-edges))
+     url-insert-file-contents vcard-pretty-print w3-parse-buffer
+     w3m-detect-meta-charset w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table completion-styles cursor-in-non-selected-windows

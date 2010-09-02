@@ -1,5 +1,8 @@
 2010-09-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* lpath.el: Fbind w3-parse-buffer for Emacs <=22 and XEmacs; fbind
+	window-pixel-edges for Emacs 21.
+
 	* gnus-html.el (gnus-article-html): Make work buffer multibyte for
 	decoded contents.
 	(gnus-html-put-image, gnus-html-rescale-image): Pass `file' argument.
