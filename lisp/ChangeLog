@@ -4,6 +4,9 @@
 	that commands like `d' (and the like) go to the next line in the
 	buffer, instead of the next unread article.  I think this is the
 	behaviour that is most natural for most users.
+	(gnus-single-article-buffer): Change default to nil, so that people can
+	have as many article buffers open as they have summary buffer.  I think
+	this is the most natural way for the groups to behave.
 
 	* message.el (message-generate-new-buffers): Change default to
 	`unsent', so that all new message buffers start their names with the

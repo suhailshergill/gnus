@@ -465,9 +465,10 @@ and non-`vertical', do both horizontal and vertical recentering."
   :group 'gnus-summary
   :type 'boolean)
 
-(defcustom gnus-single-article-buffer t
+(defcustom gnus-single-article-buffer nil
   "*If non-nil, display all articles in the same buffer.
 If nil, each group will get its own article buffer."
+  :version "24.1"
   :group 'gnus-article-various
   :type 'boolean)
 
