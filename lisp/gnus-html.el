@@ -161,11 +161,15 @@ fit these criteria."
 		   :help-echo url
 		   :keymap gnus-html-image-map
 		   :button-keymap gnus-html-image-map)
-		  (gnus-put-text-property
-		   start end
-		   'gnus-image (list url
-				     (set-marker (make-marker) start)
-				     (set-marker (make-marker) end))))
+		  (let ((overlay (gnus-make-overlay start end))
+			(spec (list url
+				    (set-marker (make-marker) start)
+				    (set-marker (make-marker) end))))
+		    (gnus-overlay-put overlay 'local-map gnus-html-image-map)
+		    (gnus-overlay-put overlay 'gnus-image spec)
+		    (gnus-put-text-property
+		     start end
+		     'gnus-image spec)))
 	      (let ((file (gnus-html-image-id url))
 		    width height)
 		(when (string-match "height=\"?\\([0-9]+\\)" parameters)
