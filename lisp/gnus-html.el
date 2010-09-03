@@ -292,7 +292,8 @@ fit these criteria."
 			   (= (car size) 30)
 			   (= (cdr size) 30))))
 	    (progn
-	      (gnus-put-image (gnus-html-rescale-image image file size)
+	      (setq image (gnus-html-rescale-image image file size))
+	      (gnus-put-image image
 			      (gnus-string-or string "*")
 			      'external)
 	      (gnus-add-image 'external image)
