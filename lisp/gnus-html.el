@@ -184,6 +184,7 @@ fit these criteria."
 	  (let ((overlay (gnus-make-overlay start end)))
 	    (gnus-overlay-put overlay 'evaporate t)
 	    (gnus-overlay-put overlay 'gnus-button-url url)
+	    (gnus-put-text-property start end 'gnus-string url)
 	    (when gnus-article-mouse-face
 	      (gnus-overlay-put overlay 'mouse-face gnus-article-mouse-face)))))
        ;; The upper-case IMG_ALT is apparently just an artifact that
