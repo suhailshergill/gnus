@@ -1431,14 +1431,14 @@ If SUFFIX is non-nil, add that at the end of the file name."
 
 (defun mm-image-load-path (&optional package)
   (let (dir result)
-    (dolist (path load-path (nreverse result))
+    (dolist (path load-path)
       (when (and path
 		 (file-directory-p
 		  (setq dir (concat (file-name-directory
 				     (directory-file-name path))
 				    "etc/images/" (or package "gnus/")))))
-	(push dir result))
-      (push path result))))
+	(push dir result)))
+    (nreverse result)))
 
 ;; Fixme: This doesn't look useful where it's used.
 (if (fboundp 'detect-coding-region)
