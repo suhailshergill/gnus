@@ -1,5 +1,9 @@
 2010-09-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-agent.el (gnus-agent-auto-agentize-methods): Change the default
+	so that nnimap methods aren't agentized by default.  There's apparently
+	many problems related to agent/imap behaviour.
+
 	* gnus-art.el (gnus-article-copy-string): New command and key binding.
 
 	* gnus-html.el: Doc fix.
