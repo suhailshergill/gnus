@@ -45,11 +45,12 @@
        coding-system-aliasee coding-system-from-name custom-autoload
        delete-annotation delete-extent device-connection
        device-on-window-system-p dfw-device events-to-keys find-face
-       font-lock-set-defaults get-char-table glyph-height glyph-width
-       help-buffer int-to-char ldap-search-entries mail-aliases-setup
-       make-annotation make-event make-glyph make-network-process map-extents
-       message-xmas-redefine put-char-table run-mode-hooks set-extent-property
-       set-itimer-function set-keymap-default-binding temp-directory
+       font-lock-set-defaults get-char-table glyph-height glyph-image
+       glyph-width glyphp help-buffer int-to-char ldap-search-entries
+       mail-aliases-setup make-annotation make-event make-glyph
+       make-network-process map-extents message-xmas-redefine put-char-table
+       run-mode-hooks set-extent-property set-itimer-function
+       set-keymap-default-binding specifier-spec-list temp-directory
        time-to-seconds ucs-to-char unicode-precedence-list unicode-to-char
        url-generic-parse-url url-http-file-exists-p
        valid-image-instantiator-format-p vcard-pretty-print

@@ -1,10 +1,11 @@
 2010-09-03  Katsumi Yamaoka  <yamaoka@jpl.org>
 
-	* lpath.el: Fbind device-on-window-system-p for Emacs 21.
+	* lpath.el: Fbind device-on-window-system-p, glyph-image, glyphp, and
+	specifier-spec-list for Emacs 21.
 
 	* gnus-html.el (gnus-html-put-image): Use gnus-graphic-display-p,
 	glyph-width and glyph-height instead of display-graphic-p and
-	image-size for XEmacs.
+	image-size; make avoidance of displaying small images work for XEmacs.
 
 	* gnus-util.el (gnus-graphic-display-p): Use device-on-window-system-p
 	for XEmacs.
