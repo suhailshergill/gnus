@@ -1,5 +1,7 @@
 2010-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-copy-string): Say what data we copied.
+
 	* nnmh.el (nnmh-request-list-1): Optimize for speed.
 
 2010-09-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
