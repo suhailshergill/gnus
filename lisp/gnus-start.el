@@ -1684,7 +1684,7 @@ If SCAN, request a scan of that group as well."
 	   alevel))
 	 (methods-cache nil)
 	 (type-cache nil)
-	 scanned-methods info group active method retrieve-groups cmethod
+	 infos info group active method cmethod
 	 method-type method-group-list)
     (gnus-message 6 "Checking new news...")
 
@@ -1749,15 +1749,15 @@ If SCAN, request a scan of that group as well."
       ;; See if any of the groups from this method require updating.
       (when (block nil
 	      (dolist (info infos)
-		(when (< (gnus-info-level info)
-			 (if (eq method-type 'foreign)
-			     foreign-level
-			   alevel))
+		(when (<= (gnus-info-level info)
+			  (if (eq method-type 'foreign)
+			      foreign-level
+			    alevel))
 		  (return t))))
 	(gnus-read-active-for-groups method infos)
 	(dolist (info infos)
 	  (inline (gnus-get-unread-articles-in-group
-		   info (gnus-active (gnus-info-group info)) t)))))
+		   info (gnus-active (gnus-info-group info)))))))
     (gnus-message 6 "Checking new news...done")))
 
 (defun gnus-method-rank (type method)
@@ -1784,13 +1784,14 @@ If SCAN, request a scan of that group as well."
      ((gnus-check-backend-function 'retrieve-groups (car method))
       (gnus-read-active-file-2
        (mapcar (lambda (info)
-		 (gnus-info-group info))
+		 (gnus-group-real-name (gnus-info-group info)))
 	       infos)
        method))
      ((gnus-check-backend-function 'request-list (car method))
       (gnus-read-active-file-1 method nil))
      (t
-      (error "No method for %S" method)))))
+      (dolist (info infos)
+	(gnus-activate-group (gnus-info-group info) nil nil method))))))
 
 ;; Create a hash table out of the newsrc alist.  The `car's of the
 ;; alist elements are used as keys.

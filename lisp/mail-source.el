@@ -546,7 +546,7 @@ Return the number of files that were found."
 	(save-excursion
 	  (nnheader-message 4 "%sReading incoming mail from %s..."
 			    (if method
-				(format "%s: ")
+				(format "%s: " method)
 			      "")
 			    (car source))
 	  (let ((function (cadr (assq (car source) mail-source-fetcher-alist)))
