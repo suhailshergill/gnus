@@ -34,7 +34,7 @@
   (require 'cl)
   (require 'imap))
 (autoload 'auth-source-user-or-password "auth-source")
-(autoload 'pop3-movemail "pop3")
+(autoload 'pop3-streaming-movemail "pop3")
 (autoload 'pop3-get-message-count "pop3")
 (autoload 'nnheader-cancel-timer "nnheader")
 (require 'mm-util)

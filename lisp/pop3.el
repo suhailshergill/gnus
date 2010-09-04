@@ -133,7 +133,7 @@ Shorter values mean quicker response, but are more CPU intensive.")
 Use streaming commands."
   (let* ((process (pop3-open-server pop3-mailhost pop3-port))
 	 message-count message-total-size)
-    (pop3-logon)
+    (pop3-logon process)
     (with-current-buffer (process-buffer process)
       (let ((size (pop3-stat process)))
 	(setq message-count (car size)
@@ -210,7 +210,7 @@ Use streaming commands."
 	(incf responses)))
     responses))
 
-(defun pop3-logon ()
+(defun pop3-logon (process)
   (let ((pop3-password pop3-password))
     ;; for debugging only
     (if pop3-debug (switch-to-buffer (process-buffer process)))
@@ -233,10 +233,9 @@ Use streaming commands."
 	 (n 1)
 	 message-count
 	 message-sizes)
-    (pop3-logon)
+    (pop3-logon process)
     (setq message-count (car (pop3-stat process)))
-    (when (and pop3-display-message-size-flag
-	       (> message-count 0))
+    (when (> message-count 0)
       (setq message-sizes (pop3-list process)))
     (unwind-protect
 	(while (<= n message-count)
