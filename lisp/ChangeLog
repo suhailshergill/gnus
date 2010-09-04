@@ -1,5 +1,9 @@
 2010-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmh.el (nnmh-request-list-1): Fix up the recursion behavior so that
+	we actually do recurse down into the tree, but don't stat all leaf
+	nodes. 
+
 	* gnus-html.el (gnus-html-show-images): If there are no images to show,
 	then say so instead of bugging out.
 
