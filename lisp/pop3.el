@@ -142,8 +142,9 @@ Use streaming commands."
 	(pop3-send-streaming-command
 	 process "RETR" message-count message-total-size)
 	(pop3-write-to-file file)
-	(pop3-send-streaming-command
-	 process "DELE" message-count nil)
+	(unless pop3-leave-mail-on-server
+	  (pop3-send-streaming-command
+	   process "DELE" message-count nil))
 	(pop3-quit process)))))
 
 (defun pop3-send-streaming-command (process command count total-size)
