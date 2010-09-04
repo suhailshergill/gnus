@@ -1,5 +1,14 @@
 2010-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mail-source.el (mail-source-fetch-pop): Use streaming pop3
+	retrieval.
+
+	* pop3.el (pop3-process-filter): Removed unused function.
+	(pop3-streaming-movemail, pop3-send-streaming-command)
+	(pop3-wait-for-messages, pop3-write-to-file)
+	(pop3-number-of-responses): New functions for streaming pop3
+	retrieval.
+
 	* gnus-start.el (gnus-get-unread-articles): Protect against groups that
 	come from no known methods.
 	(gnus-make-hashtable-from-newsrc-alist): Remove duplicates from .newsrc

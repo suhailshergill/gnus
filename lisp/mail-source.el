@@ -825,9 +825,11 @@ Deleting old (> %s day(s)) incoming mail file `%s'." diff bfile)
 		     (if (eq authentication 'apop) 'apop 'pass))
 		    (pop3-stream-type stream))
 		(if (or debug-on-quit debug-on-error)
-		    (save-excursion (pop3-movemail mail-source-crash-box))
+		    (save-excursion (pop3-streaming-movemail
+				     mail-source-crash-box))
 		  (condition-case err
-		      (save-excursion (pop3-movemail mail-source-crash-box))
+		      (save-excursion (pop3-streaming-movemail
+				       mail-source-crash-box))
 		    (error
 		     ;; We nix out the password in case the error
 		     ;; was because of a wrong password being given.
