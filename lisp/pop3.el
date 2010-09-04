@@ -197,7 +197,7 @@ Use streaming commands."
 	;; delete it.
 	(when (eolp)
 	  (delete-char 1))
-	(write-region (point-min) (point-max) file)))))
+	(write-region (point-min) (point-max) file nil 'nomesg)))))
 
 (defun pop3-number-of-responses (endp)
   (let ((responses 0))
