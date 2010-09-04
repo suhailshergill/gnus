@@ -150,7 +150,7 @@ Use streaming commands."
 (defun pop3-send-streaming-command (process command count total-size)
   (erase-buffer)
   (let ((i 1))
-    (while (>= (1+ count) i)
+    (while (>= count i)
       (process-send-string process (format "%s %d\r\n" command i))
       ;; Only do 100 messages at a time to avoid pipe stalls.
       (when (zerop (% i 100))
