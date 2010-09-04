@@ -624,11 +624,20 @@ Deleting old (> %s day(s)) incoming mail file `%s'." diff bfile)
 	0)
     (funcall callback mail-source-crash-box info)))
 
+(defvar mail-source-incoming-last-checked-time nil)
+
 (defun mail-source-delete-crash-box ()
   (when (file-exists-p mail-source-crash-box)
     ;; Delete or move the incoming mail out of the way.
     (if (eq mail-source-delete-incoming t)
 	(delete-file mail-source-crash-box)
+      ;; Don't check for old incoming files more than once per day to
+      ;; save a lot of file accesses.
+      (when (or (null mail-source-incoming-last-checked-time)
+		(> (time-to-seconds
+		    (time-since mail-source-incoming-last-checked-time))
+		   (* 24 60 60)))
+	(setq mail-source-incoming-last-checked-time (current-time)))
       (let ((incoming
 	     (mm-make-temp-file
 	      (expand-file-name

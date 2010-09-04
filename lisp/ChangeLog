@@ -1,5 +1,9 @@
 2010-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mail-source.el (mail-source-delete-crash-box): Only check the
+	incoming files for deletion once per day to save a lot of file
+	accesses.
+
 	* pop3.el (pop3-logon): Fix up unbound variable typo.
 
 	* mail-source.el (pop3-streaming-movemail): Autoload.
