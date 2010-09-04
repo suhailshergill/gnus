@@ -1,5 +1,8 @@
 2010-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-get-unread-articles): Protect against groups that
+	come from no known methods.
+
 	* pop3.el (pop3-display-message-size-flag): Removed -- everybody wants
 	message sizes.
 	(pop3-movemail): Use erase-buffer instead of looping and deleting
