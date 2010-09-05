@@ -7,6 +7,7 @@
 	(imap-mailbox-map): Ditto.
 	(imap-mailbox-put): Ditto.
 	(imap-mailbox-get): Ditto.
+	(imap-mailbox-get): Revert last change for this function.
 
 	* nnimap.el (nnimap-request-list): Servers may return \NoSelect
 	case-insensitively.
