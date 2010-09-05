@@ -589,10 +589,11 @@ If EXAMINE is non-nil the group is selected read-only."
 	(let (minuid maxuid)
 	  (when (> (imap-mailbox-get 'exists) 0)
 	    (imap-fetch "1:*" "UID" nil 'nouidfetch)
-	    (imap-message-map (lambda (uid Uid)
-				(setq minuid (if minuid (min minuid uid) uid)
-				      maxuid (if maxuid (max maxuid uid) uid)))
-			      'UID))
+	    (imap-message-map
+	     (lambda (uid Uid)
+	       (setq minuid (if minuid (min minuid uid) uid)
+		     maxuid (if maxuid (max maxuid uid) uid)))
+	     'UID))
 	  (list (imap-mailbox-get 'exists) minuid maxuid))))))
 
 (defun nnimap-possibly-change-group (group &optional server)

@@ -1,5 +1,13 @@
 2010-09-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* imap.el (imap-message-map): Removed optional buffer parameter, since
+	no callers use it.
+	(imap-message-get): Ditto.
+	(imap-message-put): Ditto.
+	(imap-mailbox-map): Ditto.
+	(imap-mailbox-put): Ditto.
+	(imap-mailbox-get): Ditto.
+
 	* nnimap.el (nnimap-request-list): Servers may return \NoSelect
 	case-insensitively.
 	(nnimap-debug): Removed.
