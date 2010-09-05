@@ -1,5 +1,10 @@
 2010-09-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* imap.el (imap-fetch-safe): Removed function, and altered all callers
+	to use `imap-fetch' instead.  According to the comments, this should be
+	safe, since all other IMAP clients use the 1:* syntax.
+	(imap-enable-exchange-bug-workaround): Removed.
+
 	* mail-source.el (mail-source-fetch): Don't message if we're fetching
 	mail from a file, and the file doesn't exist.
 
