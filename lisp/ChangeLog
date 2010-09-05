@@ -1,5 +1,9 @@
 2010-09-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-activate-group): Take an optional parameter to
+	say that you don't want to call gnus-request-group with don-check, but
+	do check the reponse.  This is for virtual groups only.
+
 	* imap.el (imap-message-map): Removed optional buffer parameter, since
 	no callers use it.
 	(imap-message-get): Ditto.
