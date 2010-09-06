@@ -308,7 +308,8 @@ dgnushack-compile."
   (unless warn
     (setq byte-compile-warnings
 	  '(free-vars unresolved callargs redefine)))
-  (let ((files (directory-files srcdir nil "^[^=].*\\.el$"))
+  (let ((files (delete ".dir-locals.el"
+		       (directory-files srcdir nil "^[^=].*\\.el$")))
 	;;(byte-compile-generate-call-tree t)
 	file elc)
     ;; Avoid barfing (from gnus-xmas) because the etc directory is not yet
@@ -373,9 +374,16 @@ dgnushack-compile."
 (defun dgnushack-make-cus-load ()
   (load "cus-dep")
   (let ((cusload-base-file dgnushack-cus-load-file))
-    (if (fboundp 'custom-make-dependencies)
-	(custom-make-dependencies)
-      (Custom-make-dependencies))
+    (defadvice directory-files (after exclude-dir-locals activate)
+      "Exclude .dir-locals.el file."
+      (dolist (file ad-return-value)
+	(if (string-match "/?\\.dir-locals\\.el\\'" file)
+	    (setq ad-return-value (delete file ad-return-value)))))
+    (unwind-protect
+	(if (fboundp 'custom-make-dependencies)
+	    (custom-make-dependencies)
+	  (Custom-make-dependencies))
+      (ad-unadvise 'directory-files))
     (when (featurep 'xemacs)
       (message "Compiling %s..." dgnushack-cus-load-file)
       (byte-compile-file dgnushack-cus-load-file))))
@@ -404,7 +412,14 @@ dgnushack-compile."
 	    (delete-file generated-autoload-file))
       (with-temp-file generated-autoload-file
 	(insert ?\014)))
-    (batch-update-autoloads)))
+    (defadvice directory-files (after exclude-dir-locals activate)
+      "Exclude .dir-locals.el file."
+      (dolist (file ad-return-value)
+	(if (string-match "/?\\.dir-locals\\.el\\'" file)
+	    (setq ad-return-value (delete file ad-return-value)))))
+    (unwind-protect
+	(batch-update-autoloads)
+      (ad-unadvise 'directory-files))))
 
 (defun dgnushack-make-load ()
   (unless (featurep 'xemacs)

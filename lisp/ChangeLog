@@ -1,5 +1,8 @@
 2010-09-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* dgnushack.el (dgnushack-compile, dgnushack-make-cus-load)
+	(dgnushack-make-auto-load): Exclude .dir-locals.el file.
+
 	* pop3.el: Require cl when compiling.
 	(pop3-number-of-responses): Search for "+OK", not "+OK ".
 
