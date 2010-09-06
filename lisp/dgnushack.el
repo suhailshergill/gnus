@@ -377,7 +377,7 @@ dgnushack-compile."
     (defadvice directory-files (after exclude-dir-locals activate)
       "Exclude .dir-locals.el file."
       (dolist (file ad-return-value)
-	(if (string-match "/?\\.dir-locals\\.el\\'" file)
+	(if (string-match "\\(?:\\`\\|/\\)\\.dir-locals\\.el\\'" file)
 	    (setq ad-return-value (delete file ad-return-value)))))
     (unwind-protect
 	(if (fboundp 'custom-make-dependencies)
@@ -415,7 +415,7 @@ dgnushack-compile."
     (defadvice directory-files (after exclude-dir-locals activate)
       "Exclude .dir-locals.el file."
       (dolist (file ad-return-value)
-	(if (string-match "/?\\.dir-locals\\.el\\'" file)
+	(if (string-match "\\(?:\\`\\|/\\)\\.dir-locals\\.el\\'" file)
 	    (setq ad-return-value (delete file ad-return-value)))))
     (unwind-protect
 	(batch-update-autoloads)
