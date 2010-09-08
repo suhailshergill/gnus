@@ -328,9 +328,9 @@ fit these criteria."
 	      (let ((overlay (gnus-make-overlay start (point))))
 		(gnus-overlay-put overlay 'local-map
 				  gnus-html-displayed-image-map)
-		(gnus-put-text-property start end 'gnus-alt-text alt-text)
+		(gnus-put-text-property start (point) 'gnus-alt-text alt-text)
 		(when url
-		  (gnus-put-text-property start end 'gnus-image url)))
+		  (gnus-put-text-property start (point) 'gnus-image url)))
 	      (gnus-add-image 'external image)
 	      t)
 	  (insert string)
