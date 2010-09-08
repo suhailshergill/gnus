@@ -360,7 +360,7 @@ fit these criteria."
 	  (delete-file (nth 2 file)))))))
 
 (defun gnus-html-image-url-blocked-p (url blocked-images)
-"Find out if URL is blocked by BLOCKED-IMAGES."
+  "Find out if URL is blocked by BLOCKED-IMAGES."
   (let ((ret (and blocked-images
                   (string-match blocked-images url))))
     (if ret
