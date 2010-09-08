@@ -76,6 +76,9 @@ fit these criteria."
   (let ((map (make-sparse-keymap)))
     (define-key map "a" 'gnus-html-show-alt-text)
     (define-key map "i" 'gnus-html-browse-image)
+    (define-key map "\r" 'gnus-html-browse-url)
+    (define-key map "u" 'gnus-article-copy-string)
+    (define-key map [tab] 'widget-forward)
     map))
 
 ;;;###autoload
@@ -270,6 +273,14 @@ fit these criteria."
   "Browse the image under point."
   (interactive)
   (browse-url (get-text-property (point) 'gnus-image)))
+
+(defun gnus-html-browse-url ()
+  "Browse the image under point."
+  (interactive)
+  (let ((url (get-text-property (point) 'gnus-string)))
+    (if (not url)
+	(message "No URL at point")
+      (browse-url url))))
 
 (defun gnus-html-schedule-image-fetching (buffer images)
   (gnus-message 8 "gnus-html-schedule-image-fetching: buffer %s, images %s"
