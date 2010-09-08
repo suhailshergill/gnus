@@ -395,7 +395,7 @@ This only works if the article in question is HTML."
 	  (let ((url (match-string 1)))
 	    (unless (gnus-html-image-url-blocked-p url blocked-images)
               (unless (file-exists-p (gnus-html-image-id url))
-                (push (mm-url-decode-entities url) urls)
+                (push (mm-url-decode-entities-string url) urls)
                 (push (gnus-html-image-id url) urls)
                 (push "-o" urls)))))
 	(let ((process
