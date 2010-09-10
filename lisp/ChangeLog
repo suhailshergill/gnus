@@ -1,5 +1,7 @@
 2010-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* netrc.el (netrc-credentials): New conveniency function.
+
 	* gnus-sum.el (gnus-summary-update-hook): Change default to nil, to
 	avoid running a hook per line, since this takes a lot of time,
 	profiling shows.
