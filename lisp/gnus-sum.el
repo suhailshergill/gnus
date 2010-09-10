@@ -985,8 +985,7 @@ This hook is not called from the non-updating exit commands like `Q'."
   :group 'gnus-various
   :type 'hook)
 
-(defcustom gnus-summary-update-hook
-  (list 'gnus-summary-highlight-line)
+(defcustom gnus-summary-update-hook nil
   "*A hook called when a summary line is changed.
 The hook will not be called if `gnus-visual' is nil.
 
@@ -5363,7 +5362,9 @@ or a straight list of headers."
                'gnus-number number)
 	      (when gnus-visual-p
 		(forward-line -1)
-		(gnus-run-hooks 'gnus-summary-update-hook)
+		(gnus-summary-highlight-line)
+		(when gnus-summary-update-hook
+		  (gnus-run-hooks 'gnus-summary-update-hook))
 		(forward-line 1))
 
 	      (setq gnus-tmp-prev-subject simp-subject)))
