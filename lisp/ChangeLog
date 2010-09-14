@@ -14,6 +14,10 @@
 
 	* nnrss.el (nnrss-retrieve-groups): New function.
 
+2010-09-14  Juanma Barranquero  <lekktu@gmail.com>
+
+	* .dir-locals.el: Add no-byte-compile cookie.
+
 2010-09-14  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* time-date.el (format-seconds): Comment fix.
