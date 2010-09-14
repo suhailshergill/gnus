@@ -1,5 +1,7 @@
 2010-09-14  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* time-date.el (format-seconds): Comment fix.
+
 	* gnus-start.el (gnus-read-active-for-groups): Run gnus-activate-group
 	for back end that doesn't support request-scan.
 
