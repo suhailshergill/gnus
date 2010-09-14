@@ -1,5 +1,9 @@
 2010-09-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* imap.el: Revert back to version
+	cb950ed8ff3e0f40dac437a51b269166f9ffb60d, since some of the changes
+	seem problematic.
+
 	* gnus-start.el (gnus-read-active-for-groups): Reverted the previous
 	change.
 
