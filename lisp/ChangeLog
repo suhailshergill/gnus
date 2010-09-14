@@ -13,6 +13,13 @@
 	cb950ed8ff3e0f40dac437a51b269166f9ffb60d, since some of the changes
 	seem problematic.
 
+2010-09-14  Juanma Barranquero  <lekktu@gmail.com>
+
+	* gnus-registry.el (gnus-registry-install-shortcuts):
+	Explicitly pass `obarray' to `unintern' to avoid a warning.
+
+2010-09-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
 	* gnus-start.el (gnus-read-active-for-groups): Reverted the previous
 	change.
 
