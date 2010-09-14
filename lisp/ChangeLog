@@ -1,5 +1,8 @@
 2010-09-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-registry.el (gnus-registry-install-shortcuts): The second
+	parameter to unintern is mandatory-ish in Emacs 24.
+
 	* gnus-html.el (gnus-html-schedule-image-fetching)
 	(gnus-html-prefetch-images): Check for curl before using it.
 
