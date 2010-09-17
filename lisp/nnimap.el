@@ -29,6 +29,9 @@
 (eval-and-compile
   (require 'nnheader))
 
+(eval-when-compile
+  (require 'cl))
+
 (nnoo-declare nnimap)
 
 (defvoo nnimap-address nil
