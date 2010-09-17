@@ -101,7 +101,7 @@ not done by default on servers that doesn't support that command.")
 	 (nnimap-send-command
 	  "UID FETCH %s %s"
 	  (nnimap-article-ranges (gnus-compress-sequence articles))
-	  (format "(UID RFC822.SIZE %s)"
+	  (format "(UID RFC822.SIZE BODYSTRUCTURE %s)"
 		  (format
 		   (if (member "IMAP4rev1"
 			       (nnimap-capabilities nnimap-object))
@@ -118,7 +118,7 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-transform-headers ()
   (goto-char (point-min))
-  (let (article bytes)
+  (let (article bytes lines)
     (block nil
       (while (not (eobp))
 	(while (not (looking-at "^\\* [0-9]+ FETCH.*UID \\([0-9]+\\)"))
@@ -126,11 +126,21 @@ not done by default on servers that doesn't support that command.")
 	  (when (eobp)
 	    (return)))
 	(setq article (match-string 1)
-	      bytes (nnimap-get-length))
+	      bytes (nnimap-get-length)
+	      lines nil)
+	(beginning-of-line)
+	(when (search-forward "BODYSTRUCTURE" (line-end-position) t)
+	  (let ((structure (ignore-errors (read (current-buffer)))))
+	    (while (and (consp structure)
+			(not (stringp (car structure))))
+	      (setq structure (car structure)))
+	    (setq lines (nth 7 structure))))
 	(delete-region (line-beginning-position) (line-end-position))
 	(insert (format "211 %s Article retrieved." article))
 	(forward-line 1)
 	(insert (format "Bytes: %d\n" bytes))
+	(when lines
+	  (insert (format "Lines: %s\n" lines)))
 	(re-search-forward "^\r$")
 	(delete-region (line-beginning-position) (line-end-position))
 	(insert ".")

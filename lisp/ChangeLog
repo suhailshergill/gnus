@@ -2,6 +2,9 @@
 
 	* nnimap.el (nnimap-open-shell-stream): New function.
 	(nnimap-open-connection): Use it.
+	(nnimap-transform-headers): Get the number of lines in each message.
+	(nnimap-retrieve-headers): Query for BODYSTRUCTURE so that we get the
+	number of lines.
 
 	* utf7.el (utf7-encode): Autoload.
 
