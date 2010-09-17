@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Upcase all capabilities, and use
+	only upcased checks.
+
 	* nnmail.el (nnmail-article-group): Fix typo in "bogus" section.
 
 	* nnimap.el (nnimap-open-shell-stream): New function.

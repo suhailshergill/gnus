@@ -103,7 +103,7 @@ not done by default on servers that doesn't support that command.")
 	  (nnimap-article-ranges (gnus-compress-sequence articles))
 	  (format "(UID RFC822.SIZE BODYSTRUCTURE %s)"
 		  (format
-		   (if (member "IMAP4rev1"
+		   (if (member "IMAP4REV1"
 			       (nnimap-capabilities nnimap-object))
 		       "BODY.PEEK[HEADER.FIELDS %s]"
 		     "RFC822.HEADER.LINES %s")
@@ -233,9 +233,11 @@ not done by default on servers that doesn't support that command.")
 	    (error "Unable to login to the server: %s"
 		   (mapconcat #'identity (cadr result) " ")))
 	  (setf (nnimap-capabilities nnimap-object)
-		(or (nnimap-find-parameter "CAPABILITY" (cdr result))
-		    (nnimap-find-parameter
-		     "CAPABILITY" (cdr (nnimap-command "CAPABILITY")))))
+		(mapcar
+		 #'upcase
+		 (or (nnimap-find-parameter "CAPABILITY" (cdr result))
+		     (nnimap-find-parameter
+		      "CAPABILITY" (cdr (nnimap-command "CAPABILITY"))))))
 	  (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
 	    (nnimap-command "ENABLE QRESYNC"))
 	  t)))))
@@ -279,7 +281,7 @@ not done by default on servers that doesn't support that command.")
 	 (erase-buffer)
 	 (setq result
 	       (nnimap-command
-		(if (member "IMAP4rev1" (nnimap-capabilities nnimap-object))
+		(if (member "IMAP4REV1" (nnimap-capabilities nnimap-object))
 		    "UID FETCH %d BODY.PEEK[]"
 		  "UID FETCH %d RFC822.PEEK")
 		article)))
@@ -805,7 +807,7 @@ not done by default on servers that doesn't support that command.")
     (nnimap-article-ranges articles)
     (format "(UID %s%s)"
 	    (format
-	     (if (member "IMAP4rev1"
+	     (if (member "IMAP4REV1"
 			 (nnimap-capabilities nnimap-object))
 		 "BODY.PEEK[HEADER] BODY.PEEK"
 	       "RFC822.PEEK"))
