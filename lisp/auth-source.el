@@ -107,7 +107,8 @@ Only relevant if `auth-source-debug' is not nil."
   :version "23.2" ;; No Gnus
   :type `boolean)
 
-(defcustom auth-sources '((:source "~/.authinfo.gpg"))
+(defcustom auth-sources '((:source "~/.authinfo.gpg")
+			  (:source "~/.authinfo"))
   "List of authentication sources.
 
 The default will get login and password information from a .gpg
