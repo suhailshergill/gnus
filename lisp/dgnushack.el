@@ -194,6 +194,7 @@ fixed in Emacs 22."
   (unless (featurep 'xemacs)
     (defalias 'get-popup-menu-response 'ignore)
     (defalias 'event-object 'ignore)
+    (autoload 'netrc-credentials "netrc")
     (defalias 'x-defined-colors 'ignore)
     (defalias 'read-color 'ignore)))
 

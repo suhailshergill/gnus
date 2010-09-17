@@ -1,3 +1,7 @@
+2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* dgnushack.el: Define netrc-credentials.
+
 2010-09-17  Julien Danjou  <julien@danjou.info>  (tiny fix)
 
 	* mm-decode.el (mm-text-html-renderer): Document gnus-article-html.
