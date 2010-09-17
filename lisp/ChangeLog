@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-shell-stream): New function.
+	(nnimap-open-connection): Use it.
+
 	* utf7.el (utf7-encode): Autoload.
 
 	* nnmail.el (nnmail-inhibit-default-split-group): New internal variable

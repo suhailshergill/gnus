@@ -43,6 +43,12 @@ it will default to `imap'.")
   "How nnimap will talk to the IMAP server.
 Values are `ssl' and `network'.")
 
+(defvoo nnimap-shell-program (if (boundp 'imap-shell-program)
+				 (if (listp imap-shell-program)
+				     (car imap-shell-program)
+				   imap-shell-program)
+			       "ssh %s imapd"))
+
 (defvoo nnimap-inbox nil
   "The mail box where incoming mail arrives and should be split out of.")
 
@@ -172,18 +178,35 @@ not done by default on servers that doesn't support that command.")
     (push (list buffer (current-buffer)) nnimap-connection-alist)
     (current-buffer)))
 
+(defun nnimap-open-shell-stream (name buffer host port)
+  (let ((process (start-process name buffer shell-file-name
+				shell-command-switch
+				(format-spec
+				 nnimap-shell-program
+				 (format-spec-make
+				  ?s host
+				  ?p port)))))
+    process))
+
 (defun nnimap-open-connection (buffer)
   (with-current-buffer (nnimap-make-process-buffer buffer)
-    (let ((credentials
-	   (cond
-	    ((eq nnimap-stream 'network)
-	     (open-network-stream "*nnimap*" (current-buffer) nnimap-address
-				  (or nnimap-server-port "imap"))
-	     (netrc-credentials nnimap-address "imap"))
-	    ((eq nnimap-stream 'ssl)
-	     (open-tls-stream "*nnimap*" (current-buffer) nnimap-address
-			      (or nnimap-server-port "imaps"))
-	     (netrc-credentials nnimap-address "imaps" "imap")))))
+    (let* ((coding-system-for-read 'binary)
+	   (coding-system-for-write 'binary)
+	   (credentials
+	    (cond
+	     ((eq nnimap-stream 'network)
+	      (open-network-stream "*nnimap*" (current-buffer) nnimap-address
+				   (or nnimap-server-port "imap"))
+	      (netrc-credentials nnimap-address "imap"))
+	     ((eq nnimap-stream 'stream)
+	      (nnimap-open-shell-stream
+	       "*nnimap*" (current-buffer) nnimap-address
+	       (or nnimap-server-port "imap"))
+	      (netrc-credentials nnimap-address "imap"))
+	     ((eq nnimap-stream 'ssl)
+	      (open-tls-stream "*nnimap*" (current-buffer) nnimap-address
+			       (or nnimap-server-port "imaps"))
+	      (netrc-credentials nnimap-address "imaps" "imap")))))
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))
       (unless credentials
@@ -904,3 +927,6 @@ not done by default on servers that doesn't support that command.")
 (provide 'nnimap)
 
 ;;; nnimap.el ends here
+bash: imapd: command not found
+
+Process name exited abnormally with code 127
