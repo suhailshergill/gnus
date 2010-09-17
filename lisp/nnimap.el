@@ -32,6 +32,8 @@
 (eval-when-compile
   (require 'cl))
 
+(require 'netrc)
+
 (nnoo-declare nnimap)
 
 (defvoo nnimap-address nil
@@ -209,7 +211,10 @@ not done by default on servers that doesn't support that command.")
 	    (cond
 	     ((eq nnimap-stream 'network)
 	      (open-network-stream "*nnimap*" (current-buffer) nnimap-address
-				   (or nnimap-server-port "imap"))
+				   (or nnimap-server-port
+				       (if (netrc-find-service-number "imap")
+					   "imap"
+					 "143")))
 	      (netrc-credentials nnimap-address "imap"))
 	     ((eq nnimap-stream 'stream)
 	      (nnimap-open-shell-stream
@@ -218,7 +223,10 @@ not done by default on servers that doesn't support that command.")
 	      (netrc-credentials nnimap-address "imap"))
 	     ((eq nnimap-stream 'ssl)
 	      (open-tls-stream "*nnimap*" (current-buffer) nnimap-address
-			       (or nnimap-server-port "imaps"))
+			       (or nnimap-server-port
+				   (if (netrc-find-service-number "imaps")
+				       "imaps"
+				     "993")))
 	      (netrc-credentials nnimap-address "imaps" "imap")))))
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))

@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): If the user doesn't have a
+	/etc/services, supply some sensible port defaults.
+
 	* dgnushack.el: Define netrc-credentials.
 
 2010-09-17  Julien Danjou  <julien@danjou.info>  (tiny fix)
