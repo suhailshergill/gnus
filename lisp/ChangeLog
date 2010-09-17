@@ -1,3 +1,7 @@
+2010-09-17  Julien Danjou  <julien@danjou.info>  (tiny fix)
+
+	* mm-decode.el (mm-text-html-renderer): Document gnus-article-html.
+
 2010-09-17  Knut Anders Hatlen  <kahatlen@gmail.com>  (tiny change)
 
 	* nnimap.el (nnimap-get-groups): Don't bug out if the LIST command
