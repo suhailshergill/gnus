@@ -1156,7 +1156,7 @@ FUNC will be called with the group name to determine the article number."
 		       ;; result.
 		       (or (funcall nnmail-split-methods)
 			   (and (not nnmail-inhibit-default-split-group)
-				("bogus")))
+				'("bogus")))
 		     (error
 		      (nnheader-message
 		       5 "Error in `nnmail-split-methods'; using `bogus' mail group: %S" error-info)

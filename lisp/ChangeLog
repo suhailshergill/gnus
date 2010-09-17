@@ -1,5 +1,7 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmail.el (nnmail-article-group): Fix typo in "bogus" section.
+
 	* nnimap.el (nnimap-open-shell-stream): New function.
 	(nnimap-open-connection): Use it.
 	(nnimap-transform-headers): Get the number of lines in each message.
