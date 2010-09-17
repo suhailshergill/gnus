@@ -941,6 +941,3 @@ not done by default on servers that doesn't support that command.")
 (provide 'nnimap)
 
 ;;; nnimap.el ends here
-bash: imapd: command not found
-
-Process name exited abnormally with code 127
