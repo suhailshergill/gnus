@@ -1,5 +1,8 @@
 2010-09-17  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* pop3.el (pop3-wait-for-messages): Use pop3-accept-process-output
+	instead of nnheader-accept-process-output.
+
 	* dgnushack.el (dgnushack-compile): Add comment.
 
 	* lpath.el: No need to fbind propertize for XEmacs 21.4.
