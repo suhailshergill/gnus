@@ -179,7 +179,7 @@ If it is down, start it up (again)."
 			(format " on %s" (nth 1 method)))))
       (gnus-run-hooks 'gnus-open-server-hook)
       (prog1
-	  (progn (gnus-open-server method))
+	  (gnus-open-server method)
 	(unless silent
 	  (gnus-message 5 "Opening %s server%s...%s" (car method)
 			(if (equal (nth 1 method) "") ""
