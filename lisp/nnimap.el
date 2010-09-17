@@ -483,13 +483,17 @@ not done by default on servers that doesn't support that command.")
 		    (setq exists (string-to-number (car elem)))))
 		(when uidnext
 		  (setq highest (1- (string-to-number (car uidnext)))))
-		(if (zerop exists)
-		    ;; Empty group.
-		    (insert (format "%S %d %d y\n"
-				    (utf7-decode group t) highest (1+ highest)))
+		(cond
+		 ((null highest)
+		  (insert (format "%S 0 1 y\n" (utf7-decode group t))))
+		 ((zerop exists)
+		  ;; Empty group.
+		  (insert (format "%S %d %d y\n"
+				  (utf7-decode group t) highest (1+ highest))))
+		 (t
 		  ;; Return the widest possible range.
 		  (insert (format "%S %d 1 y\n" (utf7-decode group t)
-				  (or highest exists))))))))
+				  (or highest exists)))))))))
 	t))))
 
 (defun nnimap-retrieve-group-data-early (server infos)

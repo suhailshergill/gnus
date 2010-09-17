@@ -5,6 +5,8 @@
 	(nnimap-transform-headers): Get the number of lines in each message.
 	(nnimap-retrieve-headers): Query for BODYSTRUCTURE so that we get the
 	number of lines.
+	(nnimap-request-list): Not all servers return UIDNEXT.  Work past this
+	problem.
 
 	* utf7.el (utf7-encode): Autoload.
 
