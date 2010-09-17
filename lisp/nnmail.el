@@ -675,8 +675,7 @@ using different case (i.e. mailing-list@domain vs Mailing-List@Domain)."
   "Returns an assoc of group names and active ranges.
 nn*-request-list should have been called before calling this function."
   ;; Go through all groups from the active list.
-  (save-excursion
-    (set-buffer nntp-server-buffer)
+  (with-current-buffer nntp-server-buffer
     (nnmail-parse-active)))
 
 (defun nnmail-parse-active ()
@@ -1069,9 +1068,8 @@ will be copied over from that buffer."
 				  (list (list group ""))
 				nnmail-split-methods))
 	(nnmail-group-names-not-encoded-p t))
-    (save-excursion
-      ;; Insert the incoming file.
-      (set-buffer (get-buffer-create nnmail-article-buffer))
+    ;; Insert the incoming file.
+    (with-current-buffer (get-buffer-create nnmail-article-buffer)
       (erase-buffer)
       (if (bufferp incoming)
 	  (insert-buffer-substring incoming)
@@ -1112,9 +1110,8 @@ FUNC will be called with the group name to determine the article number."
 	(setq group-art
 	      (list (cons (caar methods) (funcall func (caar methods)))))
       ;; We do actual comparison.
-      (save-excursion
-	;; Copy the article into the work buffer.
-	(set-buffer nntp-server-buffer)
+      ;; Copy the article into the work buffer.
+      (with-current-buffer nntp-server-buffer
 	(erase-buffer)
 	(insert-buffer-substring obuf)
 	;; Narrow to headers.
@@ -1581,10 +1578,9 @@ See the documentation for the variable `nnmail-split-fancy' for details."
 	  (and nnmail-cache-buffer
 	       (buffer-name nnmail-cache-buffer)))
       ()				; The buffer is open.
-    (save-excursion
-      (set-buffer
+    (with-current-buffer
        (setq nnmail-cache-buffer
-	     (get-buffer-create " *nnmail message-id cache*")))
+	     (get-buffer-create " *nnmail message-id cache*"))
       (gnus-add-buffer)
       (when (file-exists-p nnmail-message-id-cache-file)
 	(nnheader-insert-file-contents nnmail-message-id-cache-file))
@@ -1596,8 +1592,7 @@ See the documentation for the variable `nnmail-split-fancy' for details."
 	     nnmail-treat-duplicates
 	     (buffer-name nnmail-cache-buffer)
 	     (buffer-modified-p nnmail-cache-buffer))
-    (save-excursion
-      (set-buffer nnmail-cache-buffer)
+    (with-current-buffer nnmail-cache-buffer
       ;; Weed out the excess number of Message-IDs.
       (goto-char (point-max))
       (when (search-backward "\n" nil t nnmail-message-id-cache-length)
@@ -1632,8 +1627,7 @@ See the documentation for the variable `nnmail-split-fancy' for details."
       ;; pass the first (of possibly >1) group which matches. -Josh
       (unless (gnus-buffer-live-p nnmail-cache-buffer)
 	(nnmail-cache-open))
-      (save-excursion
-	(set-buffer nnmail-cache-buffer)
+      (with-current-buffer nnmail-cache-buffer
 	(goto-char (point-max))
 	(if (and grp (not (string= "" grp))
 		 (gnus-methods-equal-p gnus-command-method
@@ -1666,8 +1660,7 @@ See the documentation for the variable `nnmail-split-fancy' for details."
 ;; cache.
 (defun nnmail-cache-fetch-group (id)
   (when (and nnmail-treat-duplicates nnmail-cache-buffer)
-    (save-excursion
-      (set-buffer nnmail-cache-buffer)
+    (with-current-buffer nnmail-cache-buffer
       (goto-char (point-max))
       (when (search-backward id nil t)
 	(beginning-of-line)
@@ -1711,8 +1704,7 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
 
 (defun nnmail-cache-id-exists-p (id)
   (when nnmail-treat-duplicates
-    (save-excursion
-      (set-buffer nnmail-cache-buffer)
+    (with-current-buffer nnmail-cache-buffer
       (goto-char (point-max))
       (search-backward id nil t))))
 

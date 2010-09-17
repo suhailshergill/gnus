@@ -308,7 +308,7 @@ dgnushack-compile."
   ;;(setq byte-compile-dynamic t)
   (unless warn
     (setq byte-compile-warnings
-	  '(free-vars unresolved callargs redefine)))
+	  '(free-vars unresolved callargs redefine suspicious)))
   (let ((files (directory-files srcdir nil "^[^=].*\\.el$"))
 	;;(byte-compile-generate-call-tree t)
 	file elc)

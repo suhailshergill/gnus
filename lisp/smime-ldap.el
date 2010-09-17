@@ -120,8 +120,7 @@ an alist of attribute/value pairs."
 	    (equal "" filter))
 	(error "No search filter"))
     (setq filter (cons filter attributes))
-    (save-excursion
-      (set-buffer buf)
+    (with-current-buffer buf
       (erase-buffer)
       (if (and host
 	       (not (equal "" host)))
@@ -181,8 +180,7 @@ an alist of attribute/value pairs."
 				     "\\(<[\t ]*file://\\)?\\(.*\\)$"))
 	    (setq name (match-string 1)
 		  value (match-string 4))
-	    (save-excursion
-	      (set-buffer bufval)
+	    (with-current-buffer bufval
 	      (erase-buffer)
 	      (insert-file-contents-literally value)
 	      (delete-file value)

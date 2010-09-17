@@ -503,8 +503,7 @@ If BUFFER, insert the article in that group."
       (setq res (gnus-request-article article group)
 	    clean-up t)))
     (when clean-up
-      (save-excursion
-	(set-buffer nntp-server-buffer)
+      (with-current-buffer nntp-server-buffer
 	(goto-char (point-min))
 	(when (search-forward "\n\n" nil t)
 	  (delete-region (1- (point)) (point-max)))
@@ -536,8 +535,7 @@ If BUFFER, insert the article in that group."
       (setq res (gnus-request-article article group)
 	    clean-up t)))
     (when clean-up
-      (save-excursion
-	(set-buffer nntp-server-buffer)
+      (with-current-buffer nntp-server-buffer
 	(goto-char (point-min))
 	(when (search-forward "\n\n" nil t)
 	  (delete-region (point-min) (1- (point))))))

@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el: Throughout all files, replace (save-excursion (set-buffer
+	...)) with (with-current-buffer ... ).
+
 	* nntp.el (nntp-open-server): Return whether the open was successful or
 	not.
 
