@@ -575,7 +575,8 @@ not done by default on servers that doesn't support that command.")
 	    (completep (and start-article
 			    (= start-article 1))))
 	;; First set the active ranges based on high/low.
-	(if completep
+	(if (or completep
+		(not (gnus-active group)))
 	    (gnus-set-active group
 			     (if high
 				 (cons low high)

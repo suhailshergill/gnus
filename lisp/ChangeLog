@@ -1,5 +1,10 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-read-active-for-groups): Don't use the "finish"
+	method when we're reading from the agent.
+
+	* nnagent.el (nnagent-retrieve-group-data-early): New dummy method.
+
 	* auth-source.el (auth-sources): Add ~/.authinfo to the default, since
 	that's probably most useful for users.
 

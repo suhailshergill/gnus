@@ -1800,7 +1800,10 @@ If SCAN, request a scan of that group as well."
 (defun gnus-read-active-for-groups (method infos early-data)
   (with-current-buffer nntp-server-buffer
     (cond
-     ((gnus-check-backend-function 'finish-retrieve-group-infos (car method))
+     ((and
+       (gnus-check-backend-function 'finish-retrieve-group-infos (car method))
+       (or (not (gnus-agent-method-p method))
+	   (gnus-online method)))
       (gnus-finish-retrieve-group-infos method infos early-data))
      ((gnus-check-backend-function 'retrieve-groups (car method))
       (when (gnus-check-backend-function 'request-scan (car method))
