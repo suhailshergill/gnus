@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-check-server): Save result so that it doesn't say
+	"failed" all the time.
+
 	* gnus.el: Throughout all files, replace (save-excursion (set-buffer
 	...)) with (with-current-buffer ... ).
 
