@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-open-server): Return whether the open was successful or
+	not.
+
 	* gnus-sum.el (gnus-summary-first-subject): Have `unseen-or-unread'
 	select an unread unseen article first.
 
