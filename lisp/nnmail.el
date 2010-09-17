@@ -614,6 +614,7 @@ using different case (i.e. mailing-list@domain vs Mailing-List@Domain)."
 
 (defvar nnmail-split-tracing nil)
 (defvar nnmail-split-trace nil)
+(defvar nnmail-inhibit-default-split-group nil)
 
 
 
@@ -1058,7 +1059,9 @@ If SOURCE is a directory spec, try to return the group name component."
 (defun nnmail-split-incoming (incoming func &optional exit-func
 				       group artnum-func)
   "Go through the entire INCOMING file and pick out each individual mail.
-FUNC will be called with the buffer narrowed to each mail."
+FUNC will be called with the buffer narrowed to each mail.
+INCOMING can also be a buffer object.  In that case, the mail
+will be copied over from that buffer."
   (let ( ;; If this is a group-specific split, we bind the split
 	;; methods to just this group.
 	(nnmail-split-methods (if (and group
@@ -1070,8 +1073,10 @@ FUNC will be called with the buffer narrowed to each mail."
       ;; Insert the incoming file.
       (set-buffer (get-buffer-create nnmail-article-buffer))
       (erase-buffer)
-      (let ((coding-system-for-read nnmail-incoming-coding-system))
-	(mm-insert-file-contents incoming))
+      (if (bufferp incoming)
+	  (insert-buffer-substring incoming)
+	(let ((coding-system-for-read nnmail-incoming-coding-system))
+	  (mm-insert-file-contents incoming)))
       (prog1
 	  (if (zerop (buffer-size))
 	      0
@@ -1100,7 +1105,8 @@ FUNC will be called with the group name to determine the article number."
 	(obuf (current-buffer))
 	group-art method grp)
     (if (and (sequencep methods)
-	     (= (length methods) 1))
+	     (= (length methods) 1)
+	     (not nnmail-inhibit-default-split-group))
 	;; If there is only just one group to put everything in, we
 	;; just return a list with just this one method in.
 	(setq group-art
@@ -1149,7 +1155,8 @@ FUNC will be called with the group name to determine the article number."
 		       ;; just call this function here and use the
 		       ;; result.
 		       (or (funcall nnmail-split-methods)
-			   '("bogus"))
+			   (and (not nnmail-inhibit-default-split-group)
+				("bogus")))
 		     (error
 		      (nnheader-message
 		       5 "Error in `nnmail-split-methods'; using `bogus' mail group: %S" error-info)
@@ -1194,12 +1201,14 @@ FUNC will be called with the group name to determine the article number."
 			group-art))
 	      ;; This is the final group, which is used as a
 	      ;; catch-all.
-	      (unless group-art
+	      (when (and (not group-art)
+			 (not nnmail-inhibit-default-split-group))
 		(setq group-art
 		      (list (cons (car method)
 				  (funcall func (car method))))))))
 	  ;; Fall back on "bogus" if all else fails.
-	  (unless group-art
+	  (when (and (not group-art)
+		     (not nnmail-inhibit-default-split-group))
 	    (setq group-art (list (cons "bogus" (funcall func "bogus"))))))
 	;; Produce a trace if non-empty.
 	(when (and trace nnmail-split-trace)

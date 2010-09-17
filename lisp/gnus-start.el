@@ -1734,7 +1734,7 @@ If SCAN, request a scan of that group as well."
 		'primary)
 	       (t
 		'foreign)))
-	(push (setq method-group-list (list method method-type nil))
+	(push (setq method-group-list (list method method-type nil nil))
 	      type-cache))
       ;; Only add groups that need updating.
       (if (<= (gnus-info-level info)
@@ -1760,19 +1760,27 @@ If SCAN, request a scan of that group as well."
 		  (< (gnus-method-rank (cadr c1) (car c1))
 		     (gnus-method-rank (cadr c2) (car c2))))))
 
-    (while type-cache
-      (setq method (nth 0 (car type-cache))
-	    method-type (nth 1 (car type-cache))
-	    infos (nth 2 (car type-cache)))
-      (pop type-cache)
+    ;; Start early async retrieval of data.
+    (dolist (elem type-cache)
+      (destructuring-bind (method method-type infos dummy) elem
+	(when (and method infos
+		   (gnus-check-backend-function
+		    'retrieve-group-data-early (car method)))
+	  (when (gnus-check-backend-function 'request-scan (car method))
+	    (dolist (info infos)
+	      (gnus-request-scan (gnus-info-group info) method)))
+	  (setcar (nthcdr 3 elem)
+		  (gnus-retrieve-group-data-early method infos)))))
 
-      (when (and method
-		 infos)
-	;; See if any of the groups from this method require updating.
-	(gnus-read-active-for-groups method infos)
-	(dolist (info infos)
-	  (inline (gnus-get-unread-articles-in-group
-		   info (gnus-active (gnus-info-group info)))))))
+    ;; Do the rest of the retrieval.
+    (dolist (elem type-cache)
+      (destructuring-bind (method method-type infos early-data) elem
+	(when (and method infos)
+	  ;; See if any of the groups from this method require updating.
+	  (gnus-read-active-for-groups method infos early-data)
+	  (dolist (info infos)
+	    (inline (gnus-get-unread-articles-in-group
+		     info (gnus-active (gnus-info-group info))))))))
     (gnus-message 6 "Checking new news...done")))
 
 (defun gnus-method-rank (type method)
@@ -1796,9 +1804,11 @@ If SCAN, request a scan of that group as well."
    (t
     100)))
 
-(defun gnus-read-active-for-groups (method infos)
+(defun gnus-read-active-for-groups (method infos early-data)
   (with-current-buffer nntp-server-buffer
     (cond
+     ((gnus-check-backend-function 'finish-retrieve-group-infos (car method))
+      (gnus-finish-retrieve-group-infos method infos early-data))
      ((gnus-check-backend-function 'retrieve-groups (car method))
       (when (gnus-check-backend-function 'request-scan (car method))
 	(dolist (info infos)

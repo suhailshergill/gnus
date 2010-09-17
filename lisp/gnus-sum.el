@@ -9690,7 +9690,8 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 		  to-newsgroup (list 'quote select-method)
 		  (not articles) t)	; Accept form
 	    (not articles)		; Only save nov last time
-	    move-is-internal)))		; is this move internal?
+	    (and move-is-internal
+		 (gnus-group-real-name to-newsgroup))))) ; is this move internal?
 	;; Copy the article.
 	((eq action 'copy)
 	 (with-current-buffer copy-buf
@@ -9821,8 +9822,9 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 		  (gnus-add-marked-articles
 		   to-group 'expire (list to-article) info))
 
-		(gnus-request-set-mark
-		 to-group (list (list (list to-article) 'add to-marks))))
+		(when to-marks
+		  (gnus-request-set-mark
+		   to-group (list (list (list to-article) 'add to-marks)))))
 
 	      (gnus-dribble-enter
 	       (concat "(gnus-group-set-info '"
