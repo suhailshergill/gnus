@@ -308,15 +308,14 @@ dgnushack-compile."
   (unless warn
     (setq byte-compile-warnings
 	  '(free-vars unresolved callargs redefine)))
-  (let ((files (delete ".dir-locals.el"
-		       (directory-files srcdir nil "^[^=].*\\.el$")))
+  (let ((files (directory-files srcdir nil "^[^=].*\\.el$"))
 	;;(byte-compile-generate-call-tree t)
 	file elc)
     ;; Avoid barfing (from gnus-xmas) because the etc directory is not yet
     ;; installed.
     (when (featurep 'xemacs)
       (setq gnus-xmas-glyph-directory "dummy"))
-    (dolist (file '("dgnushack.el" "lpath.el"))
+    (dolist (file '(".dir-locals.el" "dgnushack.el" "lpath.el"))
       (setq files (delete file files)))
     (when (featurep 'base64)
       (setq files (delete "base64.el" files)))
@@ -327,6 +326,8 @@ dgnushack-compile."
        (dolist (file '("webmail.el" "nnwfm.el"))
 	 (setq files (delete file files)))))
     (condition-case code
+	;; Under XEmacs 21.4 this loads easy-mmode.elc that provides
+	;; the Emacs functions `propertize' and `replace-regexp-in-string'.
 	(require 'mh-e)
       (error
        (message "No mh-e: %s %s" (cadr code) (or (locate-library "mh-e") ""))

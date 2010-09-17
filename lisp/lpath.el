@@ -121,10 +121,6 @@
      '(header-line-format
        scroll-margin timer-list)))
 
-  (when (and (= emacs-major-version 21) (= emacs-minor-version 4))
-    (maybe-fbind
-     '(propertize)))
-
   (unless (featurep 'mule)
     (maybe-fbind
      '(ccl-execute-on-string
