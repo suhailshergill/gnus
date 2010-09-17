@@ -7394,7 +7394,7 @@ If prefix argument NO-ARTICLE is non-nil, no article is selected initially."
   "Go to the first subject satisfying any non-nil constraint.
 If UNREAD is non-nil, the article should be unread.
 If UNDOWNLOADED is non-nil, the article should be undownloaded.
-If UNSEEN is non-nil, the article should be unseen.
+If UNSEEN is non-nil, the article should be unseen as well as unread.
 Returns the article selected or nil if there are no matching articles."
   (interactive "P")
   (cond
@@ -7417,7 +7417,8 @@ Returns the article selected or nil if there are no matching articles."
                                  (and undownloaded
                                       (memq num gnus-newsgroup-undownloaded))
                                  (and unseen
-                                      (memq num gnus-newsgroup-unseen)))))))
+                                      (memq num gnus-newsgroup-unseen)
+				      (memq num gnus-newsgroup-unreads)))))))
         (setq data (cdr data)))
       (prog1
           (if data
@@ -7908,8 +7909,8 @@ Return nil if there are no unseen articles."
     (gnus-summary-position-point)))
 
 (defun gnus-summary-first-unseen-or-unread-subject ()
-  "Place the point on the subject line of the first unseen article or,
-if all article have been seen, on the subject line of the first unread
+  "Place the point on the subject line of the first unseen and unread article.
+If all article have been seen, on the subject line of the first unread
 article."
   (interactive)
   (prog1

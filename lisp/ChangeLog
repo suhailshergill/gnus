@@ -1,5 +1,8 @@
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-first-subject): Have `unseen-or-unread'
+	select an unread unseen article first.
+
 	* nnimap.el (nnimap-open-connection): If the user doesn't have a
 	/etc/services, supply some sensible port defaults.
 
