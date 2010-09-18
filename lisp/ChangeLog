@@ -1,5 +1,9 @@
 2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-request-group): Take an optional `info' parameter
+	to allow backends to alter the info on group selection.  Also alter all
+	the backend -request-group functions to take the parameter.
+
 	* nnimap.el (nnimap-store-info): New function.
 	(nnimap-update-info): Store the info for later usage.
 	(nnimap-request-group): Use the stored info for the dont-check case, so

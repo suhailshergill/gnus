@@ -313,7 +313,7 @@ not done by default on servers that doesn't support that command.")
 		(nnheader-ms-strip-cr))
 	      t)))))))
 
-(deffoo nnimap-request-group (group &optional server dont-check)
+(deffoo nnimap-request-group (group &optional server dont-check info)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server))
 	  articles active)
