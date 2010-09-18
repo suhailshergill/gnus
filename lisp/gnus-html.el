@@ -297,34 +297,32 @@ fit these criteria."
 (defun gnus-html-schedule-image-fetching (buffer images)
   (gnus-message 8 "gnus-html-schedule-image-fetching: buffer %s, images %s"
                 buffer images)
-  (url-retrieve (caar images)
-                'gnus-html-image-fetched
-                (list buffer images)))
+  (dolist (image images)
+    (url-retrieve (car image)
+                  'gnus-html-image-fetched
+                  (list buffer image))))
 
 (defun gnus-html-image-id (url)
   (expand-file-name (sha1 url) gnus-html-cache-directory))
 
-(defun gnus-html-image-fetched (status buffer images)
-  (let ((spec (pop images)))
-    (when (and (buffer-live-p buffer)
-               ;; If the position of the marker is 1, then that
-               ;; means that the text it was in has been deleted;
-               ;; i.e., that the user has selected a different
-               ;; article before the image arrived.
-               (not (= (marker-position (cadr spec)) (point-min))))
-      (let ((file (gnus-html-image-id (car spec))))
-        ;; Search the start of the image data
-        (search-forward "\n\n")
-        ;; Write region (image) silently
-        (write-region (point) (point-max) file nil 1)
-        (kill-buffer)
-        (with-current-buffer buffer
-          (let ((inhibit-read-only t)
-                (string (buffer-substring (cadr spec) (caddr spec))))
-            (delete-region (cadr spec) (caddr spec))
-            (gnus-html-put-image file (cadr spec) string))))
-      (when images
-        (gnus-html-schedule-image-fetching buffer images)))))
+(defun gnus-html-image-fetched (status buffer image)
+  (when (and (buffer-live-p buffer)
+             ;; If the position of the marker is 1, then that
+             ;; means that the text it was in has been deleted;
+             ;; i.e., that the user has selected a different
+             ;; article before the image arrived.
+             (not (= (marker-position (cadr image)) (point-min))))
+    (let ((file (gnus-html-image-id (car image))))
+      ;; Search the start of the image data
+      (search-forward "\n\n")
+      ;; Write region (image) silently
+      (write-region (point) (point-max) file nil 1)
+      (kill-buffer)
+      (with-current-buffer buffer
+        (let ((inhibit-read-only t)
+              (string (buffer-substring (cadr image) (caddr image))))
+          (delete-region (cadr image) (caddr image))
+          (gnus-html-put-image file (cadr image) string))))))
 
 (defun gnus-html-put-image (file point string &optional url alt-text)
   (when (gnus-graphic-display-p)
