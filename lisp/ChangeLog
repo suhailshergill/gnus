@@ -2,6 +2,7 @@
 
 	* nnimap.el (nnimap-update-info): Extend the info so that we can set
 	the marks.
+	(nnimap-open-connection): Fix typo -- should be 'shell, not 'stream.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 

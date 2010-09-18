@@ -226,7 +226,7 @@ not done by default on servers that doesn't support that command.")
 					   "imap"
 					 "143")))
 	      (nnimap-credentials nnimap-address "143" "imap"))
-	     ((eq nnimap-stream 'stream)
+	     ((eq nnimap-stream 'shell)
 	      (nnimap-open-shell-stream
 	       "*nnimap*" (current-buffer) nnimap-address
 	       (or nnimap-server-port "imap"))
