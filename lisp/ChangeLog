@@ -5,6 +5,8 @@
 	(nnimap-request-group): Use the stored info for the dont-check case, so
 	that we don't retrieve all marks when we enter a group.
 
+	* nnimap.el: Use deffoo instead of defun for interface functions.
+
 	* gnus-start.el (gnus-get-unread-articles): Allow the backends to
 	update the group info.  This makes the nndraft groups, for instance, go
 	back to their old behaviour.

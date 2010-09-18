@@ -94,7 +94,7 @@ not done by default on servers that doesn't support that command.")
 (defun nnimap-buffer ()
   (nnimap-find-process-buffer nntp-server-buffer))
 
-(defun nnimap-retrieve-headers (articles &optional group server fetch-old)
+(deffoo nnimap-retrieve-headers (articles &optional group server fetch-old)
   (with-current-buffer nntp-server-buffer
     (erase-buffer)
     (when (nnimap-possibly-change-group group server)
@@ -170,7 +170,7 @@ not done by default on servers that doesn't support that command.")
 	 result))
       (mapconcat #'identity (nreverse result) ",")))))
 
-(defun nnimap-open-server (server &optional defs)
+(deffoo nnimap-open-server (server &optional defs)
   (if (nnimap-server-opened server)
       t
     (unless (assq 'nnimap-address defs)
@@ -269,22 +269,22 @@ not done by default on servers that doesn't support that command.")
 	(setq result (cdr (cadr elem))))))
     result))
 
-(defun nnimap-close-server (&optional server)
+(deffoo nnimap-close-server (&optional server)
   t)
 
-(defun nnimap-request-close ()
+(deffoo nnimap-request-close ()
   t)
 
-(defun nnimap-server-opened (&optional server)
+(deffoo nnimap-server-opened (&optional server)
   (and (nnoo-current-server-p 'nnimap server)
        nntp-server-buffer
        (gnus-buffer-live-p nntp-server-buffer)
        (nnimap-find-connection nntp-server-buffer)))
 
-(defun nnimap-status-message (&optional server)
+(deffoo nnimap-status-message (&optional server)
   nnimap-status-string)
 
-(defun nnimap-request-article (article &optional group server to-buffer)
+(deffoo nnimap-request-article (article &optional group server to-buffer)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server)))
       (when (stringp article)
@@ -313,7 +313,7 @@ not done by default on servers that doesn't support that command.")
 		(nnheader-ms-strip-cr))
 	      t)))))))
 
-(defun nnimap-request-group (group &optional server dont-check)
+(deffoo nnimap-request-group (group &optional server dont-check)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server))
 	  articles active)
@@ -351,7 +351,7 @@ not done by default on servers that doesn't support that command.")
 	      articles)))
     (nreverse articles)))
 
-(defun nnimap-close-group (group &optional server)
+(deffoo nnimap-close-group (group &optional server)
   t)
 
 (deffoo nnimap-request-move-article (article group server accept-form
@@ -423,7 +423,7 @@ not done by default on servers that doesn't support that command.")
 	(push flag flags)))
     flags))
 
-(defun nnimap-request-set-mark (group actions &optional server)
+(deffoo nnimap-request-set-mark (group actions &optional server)
   (when (nnimap-possibly-change-group group server)
     (let (sequence)
       (with-current-buffer (nnimap-buffer)
@@ -477,7 +477,7 @@ not done by default on servers that doesn't support that command.")
 	  (push (car (last line)) groups)))
       (nreverse groups))))
 
-(defun nnimap-request-list (&optional server)
+(deffoo nnimap-request-list (&optional server)
   (nnimap-possibly-change-group nil server)
   (with-current-buffer nntp-server-buffer
     (erase-buffer)
@@ -520,7 +520,7 @@ not done by default on servers that doesn't support that command.")
 				  (or highest exists)))))))))
 	t))))
 
-(defun nnimap-retrieve-group-data-early (server infos)
+(deffoo nnimap-retrieve-group-data-early (server infos)
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer (nnimap-buffer)
       ;; QRESYNC handling isn't implemented.
@@ -560,7 +560,7 @@ not done by default on servers that doesn't support that command.")
 		    sequences))))
 	sequences))))
 
-(defun nnimap-finish-retrieve-group-infos (server infos sequences)
+(deffoo nnimap-finish-retrieve-group-infos (server infos sequences)
   (when (and sequences
 	     (nnimap-possibly-change-group nil server))
     (with-current-buffer (nnimap-buffer)
@@ -695,7 +695,7 @@ not done by default on servers that doesn't support that command.")
 (defun nnimap-find-process-buffer (buffer)
   (cadr (assoc buffer nnimap-connection-alist)))
 
-(defun nnimap-request-post (&optional server)
+(deffoo nnimap-request-post (&optional server)
   (setq nnimap-status-string "Read-only server")
   nil)
 
