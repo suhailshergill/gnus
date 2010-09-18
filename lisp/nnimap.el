@@ -200,7 +200,7 @@ not done by default on servers that doesn't support that command.")
     process))
 
 (defun nnimap-open-connection (buffer)
-  (with-current-buffer (nnimap-buffer)
+  (with-current-buffer (nnimap-make-process-buffer buffer)
     (let* ((coding-system-for-read 'binary)
 	   (coding-system-for-write 'binary)
 	   (credentials
