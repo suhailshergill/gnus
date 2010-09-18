@@ -211,19 +211,25 @@ not done by default on servers that doesn't support that command.")
 				       (if (netrc-find-service-number "imap")
 					   "imap"
 					 "143")))
-	      (netrc-credentials nnimap-address "imap"))
+	      (auth-source-user-or-password
+	       '("login" "password") nnimap-address "imap" nil t))
 	     ((eq nnimap-stream 'stream)
 	      (nnimap-open-shell-stream
 	       "*nnimap*" (current-buffer) nnimap-address
 	       (or nnimap-server-port "imap"))
-	      (netrc-credentials nnimap-address "imap"))
+	      (auth-source-user-or-password
+	       '("login" "password") nnimap-address "imap" nil t))
 	     ((eq nnimap-stream 'ssl)
 	      (open-tls-stream "*nnimap*" (current-buffer) nnimap-address
 			       (or nnimap-server-port
 				   (if (netrc-find-service-number "imaps")
 				       "imaps"
 				     "993")))
-	      (netrc-credentials nnimap-address "imaps" "imap")))))
+	      (or
+	       (auth-source-user-or-password
+		'("login" "password") nnimap-address "imap")
+	       (auth-source-user-or-password
+		'("login" "password") nnimap-address "imaps" nil t))))))
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))
       (unless credentials
