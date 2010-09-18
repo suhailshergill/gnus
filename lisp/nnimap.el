@@ -202,6 +202,17 @@ not done by default on servers that doesn't support that command.")
 				  ?p port)))))
     process))
 
+(defun nnimap-credentials (address &rest ports)
+  (let (port credentials)
+    ;; Request the credentials from all ports, but only query on the
+    ;; last port if all the previous ones have failed.
+    (while (and (null credentials)
+		(setq port (pop ports)))
+      (setq credentials
+	    (auth-source-user-or-password
+	     '("login" "password") address port nil (null ports))))
+    credentials))
+
 (defun nnimap-open-connection (buffer)
   (with-current-buffer (nnimap-make-process-buffer buffer)
     (let* ((coding-system-for-read 'binary)
@@ -214,25 +225,19 @@ not done by default on servers that doesn't support that command.")
 				       (if (netrc-find-service-number "imap")
 					   "imap"
 					 "143")))
-	      (auth-source-user-or-password
-	       '("login" "password") nnimap-address "imap" nil t))
+	      (nnimap-credentials nnimap-address "143" "imap"))
 	     ((eq nnimap-stream 'stream)
 	      (nnimap-open-shell-stream
 	       "*nnimap*" (current-buffer) nnimap-address
 	       (or nnimap-server-port "imap"))
-	      (auth-source-user-or-password
-	       '("login" "password") nnimap-address "imap" nil t))
+	      (nnimap-credentials nnimap-address "imap"))
 	     ((eq nnimap-stream 'ssl)
 	      (open-tls-stream "*nnimap*" (current-buffer) nnimap-address
 			       (or nnimap-server-port
 				   (if (netrc-find-service-number "imaps")
 				       "imaps"
 				     "993")))
-	      (or
-	       (auth-source-user-or-password
-		'("login" "password") nnimap-address "imap")
-	       (auth-source-user-or-password
-		'("login" "password") nnimap-address "imaps" nil t))))))
+	      (nnimap-credentials nnimap-address "143" "993" "imap" "imaps")))))
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))
       (unless credentials

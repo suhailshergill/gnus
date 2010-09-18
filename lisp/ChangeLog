@@ -1,5 +1,9 @@
 2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-credentials): New function.
+	(nnimap-open-connection): Use the new function to look for credentials
+	also on the numeric equivalents of "imap" and "imaps".
+
 	* gnus-start.el (gnus-activate-group): Send the info to
 	gnus-request-group.
 
