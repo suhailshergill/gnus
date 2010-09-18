@@ -4,6 +4,7 @@
 	the range update right.
 	(nnimap-request-group): Don't make `M-g' bug out on group with no
 	marks.
+	(nnoo): Required, so that other packages can require nnimap.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
