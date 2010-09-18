@@ -1,5 +1,12 @@
 2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-activate-group): Send the info to
+	gnus-request-group.
+
+	* nnimap.el (nnimap-request-group): Have the "check" version of the
+	function parse flags and update the info, so that a `M-g' get a total
+	resync of all flags from the group.
+
 	* gnus-int.el (gnus-request-group): Take an optional `info' parameter
 	to allow backends to alter the info on group selection.  Also alter all
 	the backend -request-group functions to take the parameter.

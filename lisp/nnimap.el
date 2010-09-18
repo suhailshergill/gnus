@@ -74,7 +74,7 @@ not done by default on servers that doesn't support that command.")
   "Internal variable with default value for `nnimap-split-download-body'.")
 
 (defstruct nnimap
-  group process commands capabilities)
+  group process commands capabilities select-result)
 
 (defvar nnimap-object nil)
 
@@ -316,7 +316,7 @@ not done by default on servers that doesn't support that command.")
 (deffoo nnimap-request-group (group &optional server dont-check info)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server))
-	  articles active)
+	  articles active marks)
       (when result
 	(if (and dont-check
 		 (setq active (nth 2 (assoc group nnimap-current-infos))))
@@ -325,15 +325,27 @@ not done by default on servers that doesn't support that command.")
 			    (car active)
 			    (cdr active)
 			    group))
-	  (setq articles (nnimap-get-flags "1:*"))
+	  (with-current-buffer (nnimap-buffer)
+	    (erase-buffer)
+	    (let ((group-sequence
+		   (nnimap-send-command "SELECT %S" (utf7-encode group)))
+		  (flag-sequence
+		   (nnimap-send-command "UID FETCH 1:* FLAGS")))
+	      (nnimap-wait-for-response flag-sequence)
+	      (setq marks
+		    (nnimap-flags-to-marks
+		     (nnimap-parse-flags
+		      (list (list group-sequence flag-sequence 1 group)))))
+	      (when info
+		(nnimap-update-infos marks (list info)))))
 	  (erase-buffer)
-	  (insert
-	   (format
-	    "211 %d %d %d %S\n"
-	    (length articles)
-	    (or (caar articles) 0)
-	    (or (caar (last articles)) 0)
-	    group)))
+	  (let ((high (nth 3 (car marks)))
+		(low (nth 4 (car marks))))
+	    (insert
+	     (format
+	      "211 %d %d %d %S\n"
+	      (1+ (- high low))
+	      low high group))))
 	t))))
 
 (defun nnimap-get-flags (spec)
@@ -715,7 +727,8 @@ not done by default on servers that doesn't support that command.")
 	    t
 	  (let ((result (nnimap-command "SELECT %S" (utf7-encode group t))))
 	    (when (car result)
-	      (setf (nnimap-group nnimap-object) group)
+	      (setf (nnimap-group nnimap-object) group
+		    (nnimap-select-result nnimap-object) result)
 	      result))))))))
 
 (defun nnimap-find-connection (buffer)
