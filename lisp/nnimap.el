@@ -78,7 +78,7 @@ not done by default on servers that doesn't support that command.")
   "Internal variable with default value for `nnimap-split-download-body'.")
 
 (defstruct nnimap
-  group process commands capabilities select-result)
+  group process commands capabilities select-result newlinep)
 
 (defvar nnimap-object nil)
 
@@ -263,6 +263,8 @@ not done by default on servers that doesn't support that command.")
 		(delete-process (nnimap-process nnimap-object))
 		(setq nnimap-object nil))))
 	  (when nnimap-object
+	    (when (eq nnimap-stream 'shell)
+	      (setf (nnimap-newlinep nnimap-object) t))
 	    (setf (nnimap-capabilities nnimap-object)
 		  (mapcar
 		   #'upcase
@@ -489,7 +491,10 @@ not done by default on servers that doesn't support that command.")
 			"APPEND %S {%d}" (utf7-encode group t)
 			(length message)))
 	(process-send-string (get-buffer-process (current-buffer)) message)
-	(process-send-string (get-buffer-process (current-buffer)) "\r\n")
+	(process-send-string (get-buffer-process (current-buffer))
+			     (if (nnimap-newlinep nnimap-object)
+				 "\n"
+			       "\r\n"))
 	(let ((result (nnimap-get-response sequence)))
 	  (when result
 	    (cons group
@@ -773,9 +778,12 @@ not done by default on servers that doesn't support that command.")
   (process-send-string
    (get-buffer-process (current-buffer))
    (nnimap-log-command
-    (format "%d %s\r\n"
+    (format "%d %s%s\n"
 	    (incf nnimap-sequence)
-	    (apply #'format args))))
+	    (apply #'format args)
+	    (if (nnimap-newlinep nnimap-object)
+		""
+	      "\r"))))
   nnimap-sequence)
 
 (defun nnimap-log-command (command)

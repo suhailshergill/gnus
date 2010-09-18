@@ -8,6 +8,10 @@
 	(nnimap-wait-for-response): Be a bit more lax in finding the end of the
 	command we're looking for.  This helps when the server sends more
 	responses after we've gotten everything we expected.
+	(nnimap): Add a `newlinep' field to keep track of end-of-line
+	conventions.
+	Don't send CRLF to things that don't want it.
+	(nnimap-request-accept-article): Ditto.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
