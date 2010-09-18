@@ -63,6 +63,9 @@ This is always done if the server supports UID EXPUNGE, but it's
 not done by default on servers that doesn't support that command.")
 
 (defvoo nnimap-connection-alist nil)
+
+(defvoo nnimap-current-infos nil)
+
 (defvar nnimap-process nil)
 
 (defvar nnimap-status-string "")
@@ -313,17 +316,24 @@ not done by default on servers that doesn't support that command.")
 (defun nnimap-request-group (group &optional server dont-check)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server))
-	  articles)
+	  articles active)
       (when result
-	(setq articles (nnimap-get-flags "1:*"))
-	(erase-buffer)
-	(insert
-	 (format
-	  "211 %d %d %d %S\n"
-	  (length articles)
-	  (or (caar articles) 0)
-	  (or (caar (last articles)) 0)
-	  group))
+	(if (and dont-check
+		 (setq active (nth 2 (assoc group nnimap-current-infos))))
+	    (insert (format "211 %d %d %d %S\n"
+			    (- (cdr active) (car active))
+			    (car active)
+			    (cdr active)
+			    group))
+	  (setq articles (nnimap-get-flags "1:*"))
+	  (erase-buffer)
+	  (insert
+	   (format
+	    "211 %d %d %d %S\n"
+	    (length articles)
+	    (or (caar articles) 0)
+	    (or (caar (last articles)) 0)
+	    group)))
 	t))))
 
 (defun nnimap-get-flags (spec)
@@ -623,7 +633,15 @@ not done by default on servers that doesn't support that command.")
 		(setq new-marks (gnus-range-nconcat old-marks new-marks)))
 	      (when new-marks
 		(push (cons (car type) new-marks) marks)))
-	    (gnus-info-set-marks info marks)))))))
+	    (gnus-info-set-marks info marks)
+	    (nnimap-store-info info (gnus-active group))))))))
+
+(defun nnimap-store-info (info active)
+  (let* ((group (gnus-group-real-name (gnus-info-group info)))
+	 (entry (assoc group nnimap-current-infos)))
+    (if entry
+	(setcdr entry (list info active))
+      (push (list group info active) nnimap-current-infos))))
 
 (defun nnimap-flags-to-marks (groups)
   (let (data group totalp uidnext articles start-article mark)

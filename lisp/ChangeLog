@@ -1,5 +1,10 @@
 2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-store-info): New function.
+	(nnimap-update-info): Store the info for later usage.
+	(nnimap-request-group): Use the stored info for the dont-check case, so
+	that we don't retrieve all marks when we enter a group.
+
 	* gnus-start.el (gnus-get-unread-articles): Allow the backends to
 	update the group info.  This makes the nndraft groups, for instance, go
 	back to their old behaviour.
