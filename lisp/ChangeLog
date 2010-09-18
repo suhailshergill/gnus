@@ -1,3 +1,8 @@
+2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-update-info): When doing partial marks update, get
+	the range update right.
+
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-schedule-image-fetching): Use `url' rather

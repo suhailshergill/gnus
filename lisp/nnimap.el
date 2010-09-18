@@ -654,8 +654,8 @@ not done by default on servers that doesn't support that command.")
 	      (when (and old-marks
 			 (> start-article 1))
 		(setq old-marks (gnus-range-difference
-				 (cons start-article high)
-				 old-marks))
+				 old-marks
+				 (cons start-article high)))
 		(setq new-marks (gnus-range-nconcat old-marks new-marks)))
 	      (when new-marks
 		(push (cons (car type) new-marks) marks)))
