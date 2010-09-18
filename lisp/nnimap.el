@@ -650,7 +650,7 @@ not done by default on servers that doesn't support that command.")
 		(setq new-marks (gnus-range-nconcat old-marks new-marks)))
 	      (when new-marks
 		(push (cons (car type) new-marks) marks)))
-	    (gnus-info-set-marks info marks)
+	    (gnus-info-set-marks info marks t)
 	    (nnimap-store-info info (gnus-active group))))))))
 
 (defun nnimap-store-info (info active)

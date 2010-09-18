@@ -1,3 +1,8 @@
+2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-update-info): Extend the info so that we can set
+	the marks.
+
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-wash-tags): Add support for i, b and u HTML
