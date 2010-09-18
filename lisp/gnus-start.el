@@ -1757,6 +1757,7 @@ If SCAN, request a scan of that group as well."
     (dolist (elem type-cache)
       (destructuring-bind (method method-type infos dummy) elem
 	(when (and method infos
+		   (not (gnus-method-denied-p method))
 		   (gnus-check-backend-function
 		    'retrieve-group-data-early (car method)))
 	  (when (gnus-check-backend-function 'request-scan (car method))

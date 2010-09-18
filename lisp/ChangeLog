@@ -1,5 +1,17 @@
 2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-select-newsgroup): Indent.
+
+	* nnimap.el (nnimap-possibly-change-group): Return nil if we can't log
+	in.
+	(nnimap-finish-retrieve-group-infos): Make sure we're not waiting for
+	nothing.
+
+	* gnus-start.el (gnus-get-unread-articles): Don't try to scan groups
+	from methods that are denied.
+
+	* gnus-int.el (gnus-method-denied-p): New function.
+
 	* nnimap.el (nnimap-open-connection): Use auth-sources to query and
 	store the password instead of netrc.
 	(nnimap-open-connection): Don't error out when we can't make a

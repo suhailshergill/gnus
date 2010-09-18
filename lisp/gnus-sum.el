@@ -5504,11 +5504,11 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 	   (mm-decode-coding-string (gnus-status-message group) charset))))
 
     (unless (gnus-request-group group t)
-	(when (equal major-mode 'gnus-summary-mode)
-	  (gnus-kill-buffer (current-buffer)))
-	(error "Couldn't request group %s: %s"
-	       (mm-decode-coding-string group charset)
-	       (mm-decode-coding-string (gnus-status-message group) charset)))
+      (when (equal major-mode 'gnus-summary-mode)
+	(gnus-kill-buffer (current-buffer)))
+      (error "Couldn't request group %s: %s"
+	     (mm-decode-coding-string group charset)
+	     (mm-decode-coding-string (gnus-status-message group) charset)))
 
     (when gnus-agent
       (gnus-agent-possibly-alter-active group (gnus-active group) info)

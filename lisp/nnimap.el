@@ -551,7 +551,8 @@ not done by default on servers that doesn't support that command.")
 	sequences))))
 
 (defun nnimap-finish-retrieve-group-infos (server infos sequences)
-  (when (nnimap-possibly-change-group nil server)
+  (when (and sequences
+	     (nnimap-possibly-change-group nil server))
     (with-current-buffer (nnimap-buffer)
       ;; Wait for the final data to trickle in.
       (nnimap-wait-for-response (cadar sequences))
@@ -681,18 +682,23 @@ not done by default on servers that doesn't support that command.")
   nil)
 
 (defun nnimap-possibly-change-group (group server)
-  (when (and server
-	     (not (nnimap-server-opened server)))
-    (nnimap-open-server server))
-  (if (not group)
-      t
-    (with-current-buffer (nnimap-buffer)
-      (if (equal group (nnimap-group nnimap-object))
-	  t
-	(let ((result (nnimap-command "SELECT %S" (utf7-encode group t))))
-	  (when (car result)
-	    (setf (nnimap-group nnimap-object) group)
-	    result))))))
+  (let ((open-result t))
+    (when (and server
+	       (not (nnimap-server-opened server)))
+      (setq open-result (nnimap-open-server server)))
+    (cond
+     ((not open-result)
+      nil)
+     ((not group)
+      t)
+     (t
+      (with-current-buffer (nnimap-buffer)
+	(if (equal group (nnimap-group nnimap-object))
+	    t
+	  (let ((result (nnimap-command "SELECT %S" (utf7-encode group t))))
+	    (when (car result)
+	      (setf (nnimap-group nnimap-object) group)
+	      result))))))))
 
 (defun nnimap-find-connection (buffer)
   "Find the connection delivering to BUFFER."

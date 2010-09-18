@@ -222,6 +222,10 @@ If it is down, start it up (again)."
 ;;; Interface functions to the backends.
 ;;;
 
+(defun gnus-method-denied-p (method)
+  (eq (nth 1 (assoc method gnus-opened-servers))
+      'denied))
+
 (defun gnus-open-server (gnus-command-method)
   "Open a connection to GNUS-COMMAND-METHOD."
   (when (stringp gnus-command-method)
