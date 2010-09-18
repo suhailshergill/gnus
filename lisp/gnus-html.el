@@ -253,6 +253,12 @@ fit these criteria."
        ((equal tag "IMG_ALT")
 	(delete-region start end))
        ;; Whatever.  Just ignore the tag.
+       ((equal tag "b")
+        (gnus-overlay-put (gnus-make-overlay start end) 'face 'bold))
+       ((equal tag "U")
+        (gnus-overlay-put (gnus-make-overlay start end) 'face 'underline))
+       ((equal tag "i")
+        (gnus-overlay-put (gnus-make-overlay start end) 'face 'italic))
        (t
 	))
       (goto-char start))
