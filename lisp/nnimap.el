@@ -328,7 +328,7 @@ not done by default on servers that doesn't support that command.")
 (deffoo nnimap-request-group (group &optional server dont-check info)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server))
-	  articles active marks)
+	  articles active marks high low)
       (when result
 	(if (and dont-check
 		 (setq active (nth 2 (assoc group nnimap-current-infos))))
@@ -364,7 +364,7 @@ not done by default on servers that doesn't support that command.")
 	    "211 %d %d %d %S\n"
 	    (1+ (- high low))
 	    low high group))))
-	t))))
+      t)))
 
 (defun nnimap-get-flags (spec)
   (let ((articles nil)
