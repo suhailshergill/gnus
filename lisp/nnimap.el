@@ -91,10 +91,6 @@ not done by default on servers that doesn't support that command.")
 (defun nnimap-buffer ()
   (nnimap-find-process-buffer nntp-server-buffer))
 
-(defmacro nnimap-with-process-buffer (&rest body)
-  `(with-current-buffer (nnimap-find-process-buffer (current-buffer))
-     ,@body))
-
 (defun nnimap-retrieve-headers (articles &optional group server fetch-old)
   (with-current-buffer nntp-server-buffer
     (erase-buffer)
@@ -204,7 +200,7 @@ not done by default on servers that doesn't support that command.")
     process))
 
 (defun nnimap-open-connection (buffer)
-  (with-current-buffer (nnimap-make-process-buffer buffer)
+  (with-current-buffer (nnimap-buffer)
     (let* ((coding-system-for-read 'binary)
 	   (coding-system-for-write 'binary)
 	   (credentials
@@ -288,14 +284,14 @@ not done by default on servers that doesn't support that command.")
       (when (and result
 		 article)
 	(erase-buffer)
-	(nnimap-with-process-buffer
-	 (erase-buffer)
-	 (setq result
-	       (nnimap-command
-		(if (member "IMAP4REV1" (nnimap-capabilities nnimap-object))
-		    "UID FETCH %d BODY.PEEK[]"
-		  "UID FETCH %d RFC822.PEEK")
-		article)))
+	(with-current-buffer (nnimap-buffer)
+	  (erase-buffer)
+	  (setq result
+		(nnimap-command
+		 (if (member "IMAP4REV1" (nnimap-capabilities nnimap-object))
+		     "UID FETCH %d BODY.PEEK[]"
+		   "UID FETCH %d RFC822.PEEK")
+		 article)))
 	(let ((buffer (nnimap-find-process-buffer (current-buffer))))
 	  (when (car result)
 	    (with-current-buffer to-buffer
@@ -415,7 +411,7 @@ not done by default on servers that doesn't support that command.")
 (defun nnimap-request-set-mark (group actions &optional server)
   (when (nnimap-possibly-change-group group server)
     (let (sequence)
-      (with-current-buffer (nnimap-find-process-buffer nntp-server-buffer)
+      (with-current-buffer (nnimap-buffer)
 	;; Just send all the STORE commands without waiting for
 	;; response.  If they're successful, they're successful.
 	(dolist (action actions)
@@ -439,17 +435,16 @@ not done by default on servers that doesn't support that command.")
     (let ((message (buffer-string))
 	  (message-id (message-field-value "message-id"))
 	  sequence)
-      (with-current-buffer nntp-server-buffer
-	(nnimap-with-process-buffer
-	 (setq sequence (nnimap-send-command
-			 "APPEND %S {%d}" (utf7-encode group t)
-			 (length message)))
-	 (process-send-string (get-buffer-process (current-buffer)) message)
-	 (process-send-string (get-buffer-process (current-buffer)) "\r\n")
-	 (let ((result (nnimap-get-response sequence)))
-	   (when result
-	     (cons group
-		   (nnimap-find-article-by-message-id group message-id)))))))))
+      (with-current-buffer (nnimap-buffer)
+	(setq sequence (nnimap-send-command
+			"APPEND %S {%d}" (utf7-encode group t)
+			(length message)))
+	(process-send-string (get-buffer-process (current-buffer)) message)
+	(process-send-string (get-buffer-process (current-buffer)) "\r\n")
+	(let ((result (nnimap-get-response sequence)))
+	  (when result
+	    (cons group
+		  (nnimap-find-article-by-message-id group message-id))))))))
 
 (defun nnimap-add-cr ()
   (goto-char (point-min))
@@ -472,18 +467,18 @@ not done by default on servers that doesn't support that command.")
   (with-current-buffer nntp-server-buffer
     (erase-buffer)
     (let ((groups
-	   (nnimap-with-process-buffer
-	    (nnimap-get-groups)))
+	   (with-current-buffer (nnimap-buffer)
+	     (nnimap-get-groups)))
 	  sequences responses)
       (when groups
-	(nnimap-with-process-buffer
-	 (dolist (group groups)
-	   (push (list (nnimap-send-command "EXAMINE %S" (utf7-encode group t))
-		       group)
-		 sequences))
-	 (nnimap-wait-for-response (caar sequences))
-	 (setq responses
-	       (nnimap-get-responses (mapcar #'car sequences))))
+	(with-current-buffer (nnimap-buffer)
+	  (dolist (group groups)
+	    (push (list (nnimap-send-command "EXAMINE %S" (utf7-encode group t))
+			group)
+		  sequences))
+	  (nnimap-wait-for-response (caar sequences))
+	  (setq responses
+		(nnimap-get-responses (mapcar #'car sequences))))
 	(dolist (response responses)
 	  (let* ((sequence (car response))
 		 (response (cadr response))

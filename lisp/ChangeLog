@@ -1,3 +1,7 @@
+2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-with-process-buffer): Removed.
+
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-start.el (gnus-read-active-for-groups): Don't use the "finish"
