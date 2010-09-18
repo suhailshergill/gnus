@@ -202,7 +202,7 @@ not done by default on servers that doesn't support that command.")
 				  ?p port)))))
     process))
 
-(defun nnimap-credentials (address &rest ports)
+(defun nnimap-credentials (address ports)
   (let (port credentials)
     ;; Request the credentials from all ports, but only query on the
     ;; last port if all the previous ones have failed.
@@ -217,45 +217,52 @@ not done by default on servers that doesn't support that command.")
   (with-current-buffer (nnimap-make-process-buffer buffer)
     (let* ((coding-system-for-read 'binary)
 	   (coding-system-for-write 'binary)
-	   (credentials
+	   (ports
 	    (cond
 	     ((eq nnimap-stream 'network)
-	      (open-network-stream "*nnimap*" (current-buffer) nnimap-address
-				   (or nnimap-server-port
-				       (if (netrc-find-service-number "imap")
-					   "imap"
-					 "143")))
-	      (nnimap-credentials nnimap-address "143" "imap"))
+	      (open-network-stream
+	       "*nnimap*" (current-buffer) nnimap-address
+	       (or nnimap-server-port
+		   (if (netrc-find-service-number "imap")
+		       "imap"
+		     "143")))
+	      '("143" "imap"))
 	     ((eq nnimap-stream 'shell)
 	      (nnimap-open-shell-stream
 	       "*nnimap*" (current-buffer) nnimap-address
 	       (or nnimap-server-port "imap"))
-	      (nnimap-credentials nnimap-address "imap"))
+	      '("imap"))
 	     ((eq nnimap-stream 'ssl)
-	      (open-tls-stream "*nnimap*" (current-buffer) nnimap-address
-			       (or nnimap-server-port
-				   (if (netrc-find-service-number "imaps")
-				       "imaps"
-				     "993")))
-	      (nnimap-credentials nnimap-address "143" "993" "imap" "imaps")))))
+	      (open-tls-stream
+	       "*nnimap*" (current-buffer) nnimap-address
+	       (or nnimap-server-port
+		   (if (netrc-find-service-number "imaps")
+		       "imaps"
+		     "993")))
+	      '("143" "993" "imap" "imaps"))))
+	   connection-result login-result credentials)
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))
-      (unless credentials
-	(delete-process (nnimap-process nnimap-object)))
       (when (and (nnimap-process nnimap-object)
 		 (memq (process-status (nnimap-process nnimap-object))
 		       '(open run)))
 	(gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
-	(let ((result (nnimap-command "LOGIN %S %S"
-				      (car credentials) (cadr credentials))))
-	  (if (not (car result))
-	      (progn
+	(when (setq connection-result (nnimap-wait-for-connection))
+	  (unless (equal connection-result "PREAUTH")
+	    (if (not (setq credentials
+			   (nnimap-credentials nnimap-address ports)))
+		(setq nnimap-object nil)
+	      (setq login-result (nnimap-command "LOGIN %S %S"
+						 (car credentials)
+						 (cadr credentials)))
+	      (unless (car login-result)
 		(delete-process (nnimap-process nnimap-object))
-		nil)
+		(setq nnimap-object nil))))
+	  (when nnimap-object
 	    (setf (nnimap-capabilities nnimap-object)
 		  (mapcar
 		   #'upcase
-		   (or (nnimap-find-parameter "CAPABILITY" (cdr result))
+		   (or (nnimap-find-parameter "CAPABILITY" (cdr login-result))
 		       (nnimap-find-parameter
 			"CAPABILITY" (cdr (nnimap-command "CAPABILITY"))))))
 	    (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
@@ -778,6 +785,17 @@ not done by default on servers that doesn't support that command.")
 (defun nnimap-get-response (sequence)
   (nnimap-wait-for-response sequence)
   (nnimap-parse-response))
+
+(defun nnimap-wait-for-connection ()
+  (let ((process (get-buffer-process (current-buffer))))
+    (goto-char (point-min))
+    (while (and (memq (process-status process)
+		      '(open run))
+		(not (re-search-forward "^\\* " nil t)))
+      (nnheader-accept-process-output process)
+      (goto-char (point-min)))
+    (and (looking-at "[A-Z0-9]+")
+	 (match-string 0))))
 
 (defun nnimap-wait-for-response (sequence &optional messagep)
   (goto-char (point-max))

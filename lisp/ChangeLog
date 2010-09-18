@@ -3,6 +3,9 @@
 	* nnimap.el (nnimap-update-info): Extend the info so that we can set
 	the marks.
 	(nnimap-open-connection): Fix typo -- should be 'shell, not 'stream.
+	(nnimap-wait-for-connection): New function.
+	(nnimap-open-connection): If we have PREAUTH, don't query for login
+	credentials.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
