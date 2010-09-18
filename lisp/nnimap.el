@@ -631,9 +631,11 @@ not done by default on servers that doesn't support that command.")
 	  (when (> start-article 1)
 	    (setq read
 		  (gnus-range-nconcat
-		   (gnus-sorted-range-intersection
-		    (cons 1 start-article)
-		    (gnus-info-read info))
+		   (if (> start-article 1)
+		       (gnus-sorted-range-intersection
+			(cons 1 (1- start-article))
+			(gnus-info-read info))
+		     (gnus-info-read info))
 		   read)))
 	  (gnus-info-set-read info read)
 	  ;; Update the marks.

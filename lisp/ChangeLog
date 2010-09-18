@@ -6,6 +6,8 @@
 	(nnimap-wait-for-connection): New function.
 	(nnimap-open-connection): If we have PREAUTH, don't query for login
 	credentials.
+	(nnimap-update-info): Fix off-by-one error when concatenating ranges
+	when doing a partial update.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
