@@ -1,5 +1,9 @@
 2010-09-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (auth-source-create): In the password prompt, say what
+	we're querying for.  Also prompt for user name if that hasn't been
+	given.
+
 	* nnimap.el (nnimap-with-process-buffer): Removed.
 
 2010-09-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
