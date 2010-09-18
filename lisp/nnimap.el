@@ -811,10 +811,9 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-wait-for-response (sequence &optional messagep)
   (goto-char (point-max))
-  (while (or (bobp)
-	     (progn
-	       (forward-line -1)
-	       (not (looking-at (format "^%d .*\n" sequence)))))
+  (while (not (re-search-backward (format "^%d .*\n" sequence)
+				  (max (point-min) (- (point) 500))
+				  t))
     (when messagep
       (message "Read %dKB" (/ (buffer-size) 1000)))
     (nnheader-accept-process-output (get-buffer-process (current-buffer)))

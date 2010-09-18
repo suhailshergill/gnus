@@ -5,6 +5,9 @@
 	(nnimap-request-group): Don't make `M-g' bug out on group with no
 	marks.
 	(nnoo): Required, so that other packages can require nnimap.
+	(nnimap-wait-for-response): Be a bit more lax in finding the end of the
+	command we're looking for.  This helps when the server sends more
+	responses after we've gotten everything we expected.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
