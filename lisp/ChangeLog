@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-update-info): When doing partial marks update, get
 	the range update right.
+	(nnimap-request-group): Don't make `M-g' bug out on group with no
+	marks.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 

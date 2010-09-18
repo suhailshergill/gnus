@@ -349,15 +349,21 @@ not done by default on servers that doesn't support that command.")
 		     (nnimap-parse-flags
 		      (list (list group-sequence flag-sequence 1 group)))))
 	      (when info
-		(nnimap-update-infos marks (list info)))))
+		(nnimap-update-infos marks (list info)))
+	      (goto-char (point-max))
+	      (cond
+	       (marks
+		(setq high (nth 3 (car marks))
+		      low (nth 4 (car marks))))
+	       ((re-search-backward "UIDNEXT \\([0-9]+\\)" nil t)
+		(setq high (string-to-number (match-string 1))
+		      low 1)))))
 	  (erase-buffer)
-	  (let ((high (nth 3 (car marks)))
-		(low (nth 4 (car marks))))
-	    (insert
-	     (format
-	      "211 %d %d %d %S\n"
-	      (1+ (- high low))
-	      low high group))))
+	  (insert
+	   (format
+	    "211 %d %d %d %S\n"
+	    (1+ (- high low))
+	    low high group))))
 	t))))
 
 (defun nnimap-get-flags (spec)
