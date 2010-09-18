@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-open-connection): Use auth-sources to query and
 	store the password instead of netrc.
+	(nnimap-open-connection): Don't error out when we can't make a
+	connections.
 
 	* auth-source.el (auth-source-create): In the password prompt, say what
 	we're querying for.  Also prompt for user name if that hasn't been

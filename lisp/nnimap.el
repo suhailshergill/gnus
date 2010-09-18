@@ -233,27 +233,26 @@ not done by default on servers that doesn't support that command.")
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))
       (unless credentials
-	(delete-process (nnimap-process nnimap-object))
-	(error "Can't find user name/password for %s" nnimap-address))
+	(delete-process (nnimap-process nnimap-object)))
       (when (and (nnimap-process nnimap-object)
 		 (memq (process-status (nnimap-process nnimap-object))
 		       '(open run)))
 	(gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
 	(let ((result (nnimap-command "LOGIN %S %S"
 				      (car credentials) (cadr credentials))))
-	  (unless (car result)
-	    (delete-process (nnimap-process nnimap-object))
-	    (error "Unable to login to the server: %s"
-		   (mapconcat #'identity (cadr result) " ")))
-	  (setf (nnimap-capabilities nnimap-object)
-		(mapcar
-		 #'upcase
-		 (or (nnimap-find-parameter "CAPABILITY" (cdr result))
-		     (nnimap-find-parameter
-		      "CAPABILITY" (cdr (nnimap-command "CAPABILITY"))))))
-	  (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
-	    (nnimap-command "ENABLE QRESYNC"))
-	  t)))))
+	  (if (not (car result))
+	      (progn
+		(delete-process (nnimap-process nnimap-object))
+		nil)
+	    (setf (nnimap-capabilities nnimap-object)
+		  (mapcar
+		   #'upcase
+		   (or (nnimap-find-parameter "CAPABILITY" (cdr result))
+		       (nnimap-find-parameter
+			"CAPABILITY" (cdr (nnimap-command "CAPABILITY"))))))
+	    (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
+	      (nnimap-command "ENABLE QRESYNC"))
+	    t))))))
 
 (defun nnimap-find-parameter (parameter elems)
   (let (result)
