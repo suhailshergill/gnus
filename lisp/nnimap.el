@@ -197,14 +197,14 @@ not done by default on servers that doesn't support that command.")
     (current-buffer)))
 
 (defun nnimap-open-shell-stream (name buffer host port)
-  (let ((process (start-process name buffer shell-file-name
-				shell-command-switch
-				(format-spec
-				 nnimap-shell-program
-				 (format-spec-make
-				  ?s host
-				  ?p port)))))
-    process))
+  (let ((process-connection-type nil))
+    (start-process name buffer shell-file-name
+		   shell-command-switch
+		   (format-spec
+		    nnimap-shell-program
+		    (format-spec-make
+		     ?s host
+		     ?p port)))))
 
 (defun nnimap-credentials (address ports)
   (let (port credentials)
@@ -263,8 +263,6 @@ not done by default on servers that doesn't support that command.")
 		(delete-process (nnimap-process nnimap-object))
 		(setq nnimap-object nil))))
 	  (when nnimap-object
-	    (when (eq nnimap-stream 'shell)
-	      (setf (nnimap-newlinep nnimap-object) t))
 	    (setf (nnimap-capabilities nnimap-object)
 		  (mapcar
 		   #'upcase

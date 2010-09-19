@@ -2,6 +2,9 @@
 
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Return data in the
 	nntp buffer so the agent can save it.
+	(nnimap-open-shell-stream): Bind `process-connection-type' to nil, so
+	that CRLF doesn't get translated to \n.
+	(nnimap-open-connection): Don't make 'shell commands only send \n.
 
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
