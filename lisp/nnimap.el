@@ -315,7 +315,11 @@ not done by default on servers that doesn't support that command.")
 		 (if (member "IMAP4REV1" (nnimap-capabilities nnimap-object))
 		     "UID FETCH %d BODY.PEEK[]"
 		   "UID FETCH %d RFC822.PEEK")
-		 article)))
+		 article))
+	  ;; Check that we really got an article.
+	  (goto-char (point-min))
+	  (unless (looking-at "\\* [0-9]+ FETCH")
+	    (setq result nil)))
 	(let ((buffer (nnimap-find-process-buffer (current-buffer))))
 	  (when (car result)
 	    (with-current-buffer (or to-buffer nntp-server-buffer)

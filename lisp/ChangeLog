@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Protect against
 	groups that have no articles.
+	(nnimap-request-article): Check that we really got an article when we
+	requested one.
 
 	* gnus-agent.el (gnus-agent-load-alist): Nix out the alist if the file
 	doesn't exist.
