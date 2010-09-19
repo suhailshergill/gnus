@@ -33,6 +33,10 @@
 
 2010-09-19  Julien Danjou  <julien@danjou.info>
 
+	* gnus-sum.el (gnus-summary-update-mark): Use `subst-char-in-string'
+	rather than `subst-char-in-region' in order to be able to replace ASCII
+	char by UTF-8 ones.
+
 	* gnus-html.el (gnus-html-prefetch-images): Use `url-retrieve' rather
 	than curl.
 	(gnus-html-image-fetched): Fix `gnus-html-put-image' call not setting
