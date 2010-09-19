@@ -1,5 +1,11 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-finish-retrieve-group-infos): Protect against
+	groups that have no articles.
+
+	* gnus-agent.el (gnus-agent-load-alist): Nix out the alist if the file
+	doesn't exist.
+
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Return data in the
 	nntp buffer so the agent can save it.
 	(nnimap-open-shell-stream): Bind `process-connection-type' to nil, so

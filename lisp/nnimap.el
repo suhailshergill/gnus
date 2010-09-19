@@ -617,10 +617,11 @@ not done by default on servers that doesn't support that command.")
 	(dolist (info infos)
 	  (let* ((group (gnus-info-group info))
 		 (active (gnus-active group)))
-	    (insert (format "%S %d %d y\n"
-			    (gnus-group-real-name group)
-			    (cdr active)
-			    (car active)))))))))
+	    (when active
+	      (insert (format "%S %d %d y\n"
+			      (gnus-group-real-name group)
+			      (cdr active)
+			      (car active))))))))))
 
 (defun nnimap-update-infos (flags infos)
   (dolist (info infos)
