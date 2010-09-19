@@ -1759,14 +1759,15 @@ If SCAN, request a scan of that group as well."
     (dolist (elem type-cache)
       (destructuring-bind (method method-type infos dummy) elem
 	(when (and method infos
-		   (not (gnus-method-denied-p method))
-		   (gnus-check-backend-function
-		    'retrieve-group-data-early (car method)))
-	  (when (gnus-check-backend-function 'request-scan (car method))
-	    (dolist (info infos)
-	      (gnus-request-scan (gnus-info-group info) method)))
-	  (setcar (nthcdr 3 elem)
-		  (gnus-retrieve-group-data-early method infos)))))
+		   (not (gnus-method-denied-p method)))
+	  (gnus-open-server method)
+	  (when (gnus-check-backend-function
+		 'retrieve-group-data-early (car method))
+	    (when (gnus-check-backend-function 'request-scan (car method))
+	      (dolist (info infos)
+		(gnus-request-scan (gnus-info-group info) method)))
+	    (setcar (nthcdr 3 elem)
+		    (gnus-retrieve-group-data-early method infos))))))
 
     ;; Do the rest of the retrieval.
     (dolist (elem type-cache)

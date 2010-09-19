@@ -1,5 +1,9 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-get-unread-articles): Make sure that we call
+	`gnus-open-server' on each method before trying to scan them etc.  This
+	ensures that all the backend parameters are set correctly.
+
 	* nnimap.el (nnimap-authenticator): New variable.
 	(nnimap-open-connection): Allow anonymous login.
 	(nnimap-transform-headers): The chars header is called Chars not
