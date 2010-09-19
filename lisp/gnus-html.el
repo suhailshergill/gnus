@@ -336,23 +336,23 @@ fit these criteria."
 (defun gnus-html-image-fetched (status buffer image)
   (let ((file (gnus-html-image-id (car image))))
     ;; Search the start of the image data
-    (search-forward "\n\n")
-    ;; Write region (image data) silently
-    (write-region (point) (point-max) file nil 1)
-    (kill-buffer)
-    (when (and (buffer-live-p buffer)
-               ;; If the `image' has no marker, do not replace anything
-               (cadr image)
-               ;; If the position of the marker is 1, then that
-               ;; means that the text it was in has been deleted;
-               ;; i.e., that the user has selected a different
-               ;; article before the image arrived.
-               (not (= (marker-position (cadr image)) (point-min))))
-      (with-current-buffer buffer
-        (let ((inhibit-read-only t)
-              (string (buffer-substring (cadr image) (caddr image))))
-          (delete-region (cadr image) (caddr image))
-          (gnus-html-put-image file (cadr image) (car image) string))))))
+    (when (search-forward "\n\n" nil t)
+      ;; Write region (image data) silently
+      (write-region (point) (point-max) file nil 1)
+      (kill-buffer)
+      (when (and (buffer-live-p buffer)
+		 ;; If the `image' has no marker, do not replace anything
+		 (cadr image)
+		 ;; If the position of the marker is 1, then that
+		 ;; means that the text it was in has been deleted;
+		 ;; i.e., that the user has selected a different
+		 ;; article before the image arrived.
+		 (not (= (marker-position (cadr image)) (point-min))))
+	(with-current-buffer buffer
+	  (let ((inhibit-read-only t)
+		(string (buffer-substring (cadr image) (caddr image))))
+	    (delete-region (cadr image) (caddr image))
+	    (gnus-html-put-image file (cadr image) (car image) string)))))))
 
 (defun gnus-html-put-image (file point string &optional url alt-text)
   (when (gnus-graphic-display-p)

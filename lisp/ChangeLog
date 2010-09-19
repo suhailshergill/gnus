@@ -1,5 +1,8 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-image-fetched): Protect against the data not
+	arriving.
+
 	* gnus-start.el (gnus-ignored-newsgroups): Remove [] from the list of
 	bogus characters.  This allows selecting certain Gmail groups.
 
