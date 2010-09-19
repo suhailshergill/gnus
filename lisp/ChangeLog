@@ -1,3 +1,8 @@
+2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-finish-retrieve-group-infos): Return data in the
+	nntp buffer so the agent can save it.
+
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-schedule-image-fetching): Fetch all images in

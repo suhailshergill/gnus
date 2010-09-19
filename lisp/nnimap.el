@@ -320,7 +320,7 @@ not done by default on servers that doesn't support that command.")
 		 article)))
 	(let ((buffer (nnimap-find-process-buffer (current-buffer))))
 	  (when (car result)
-	    (with-current-buffer to-buffer
+	    (with-current-buffer (or to-buffer nntp-server-buffer)
 	      (insert-buffer-substring buffer)
 	      (goto-char (point-min))
 	      (let ((bytes (nnimap-get-length)))
@@ -611,7 +611,18 @@ not done by default on servers that doesn't support that command.")
       (nnimap-update-infos (nnimap-flags-to-marks
 			    (nnimap-parse-flags
 			     (nreverse sequences)))
-			   infos))))
+			   infos)
+      ;; Finally, just return something resembling an active file in
+      ;; the nntp buffer, so that the agent can save the info, too.
+      (with-current-buffer nntp-server-buffer
+	(erase-buffer)
+	(dolist (info infos)
+	  (let* ((group (gnus-info-group info))
+		 (active (gnus-active group)))
+	    (insert (format "%S %d %d y\n"
+			    (gnus-group-real-name group)
+			    (cdr active)
+			    (car active)))))))))
 
 (defun nnimap-update-infos (flags infos)
   (dolist (info infos)
