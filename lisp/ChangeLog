@@ -3,6 +3,8 @@
 	* gnus.el (gnus-similar-server-opened): Refactor a bit and add
 	comments.
 	(gnus-methods-sloppily-equal): New function.
+	(gnus): When using the development version of Gnus, load the gnus-load
+	file.
 
 	* gnus-start.el (gnus-get-unread-articles): Make sure that we call
 	`gnus-open-server' on each method before trying to scan them etc.  This

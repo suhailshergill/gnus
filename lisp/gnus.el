@@ -4437,6 +4437,10 @@ If ARG is non-nil and a positive number, Gnus will use that as the
 startup level.  If ARG is non-nil and not a positive number, Gnus will
 prompt the user for the name of an NNTP server to use."
   (interactive "P")
+  ;; When using the development version of Gnus, load the gnus-load
+  ;; file.
+  (unless (string-match "^Gnus" gnus-version)
+    (load "gnus-load"))
   (unless (byte-code-function-p (symbol-function 'gnus))
     (message "You should byte-compile Gnus")
     (sit-for 2))
