@@ -21,6 +21,15 @@
 	that CRLF doesn't get translated to \n.
 	(nnimap-open-connection): Don't make 'shell commands only send \n.
 
+2010-09-19  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* nnml.el (nnml-files): Add prefix to dynamic var `files'.
+	(nnml-generate-nov-databases-directory, nnml-generate-active-info):
+	Update var name.
+	(nnml-generate-nov-file): Use dolist.
+	(nnml-directory-articles, nnml-current-group-article-to-file-alist):
+	Use with-current-buffer.
+
 2010-09-18  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-schedule-image-fetching): Fetch all images in
