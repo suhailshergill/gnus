@@ -1,5 +1,8 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-similar-server-opened): Refactor a bit and add
+	comments.
+
 	* gnus-start.el (gnus-get-unread-articles): Make sure that we call
 	`gnus-open-server' on each method before trying to scan them etc.  This
 	ensures that all the backend parameters are set correctly.

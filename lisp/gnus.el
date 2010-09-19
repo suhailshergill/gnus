@@ -4141,13 +4141,19 @@ If NEWSGROUP is nil, return the global kill file name instead."
 		      gnus-valid-select-methods)))
 
 (defun gnus-similar-server-opened (method)
-  (let ((opened gnus-opened-servers))
+  "Return non-nil if we have a similar server opened.
+This is defined as a server with the same name, but different
+parameters."
+  (let ((opened gnus-opened-servers)
+	open)
     (while (and method opened)
-      (when (and (equal (cadr method) (cadaar opened))
-		 (equal (car method) (caaar opened))
-		 (not (equal method (caar opened))))
-	(setq method nil))
-      (pop opened))
+      (setq open (car (pop opened)))
+      ;; Type and name are the same...
+      (when (and (equal (car method) (car open))
+		 (equal (cadr method) (cadr open))
+		 ;; ... but the rest of the parameters differ.
+		 (not (equal method open)))
+	(setq method nil)))
     (not method)))
 
 (defun gnus-server-extend-method (group method)
