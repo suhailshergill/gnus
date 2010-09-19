@@ -1,5 +1,26 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-describe-briefly): Fix up typo in last
+	patch, found by Knut Anders Hatlen.
+
+2010-09-19  Andreas Schwab  <schwab@linux-m68k.org>
+
+	* gnus-agent.el (gnus-agent-batch-confirmation)
+	(gnus-agent-expire-group, gnus-agent-expire): Pass proper format string
+	to gnus-message.
+	* gnus-art.el (gnus-article-describe-briefly): Likewise.
+	* gnus-group.el (gnus-group-list-groups, gnus-group-describe-group)
+	(gnus-group-edit-global-kill, gnus-group-describe-briefly): Likewise.
+	* gnus-int.el (gnus-open-server): Likewise.
+	* gnus-score.el (gnus-score-edit-current-scores, gnus-score-edit-file)
+	(gnus-score-check-syntax): Likewise.
+	* gnus-srvr.el (gnus-browse-describe-briefly): Likewise.
+	* gnus-start.el (gnus-read-active-file-1, gnus-read-active-file-1):
+	Likewise.
+	* gnus-sum.el (gnus-summary-describe-briefly): Likewise.
+
+2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
 	* gnus-html.el (gnus-html-prefetch-images): Fix up the url-retrieve
 	calling conventions so that prefetch doesn't bug out.
 

@@ -2054,7 +2054,7 @@ If SCAN, request a scan of that group as well."
 		       (if (and where (not (zerop (length where))))
 			   (concat " from " where) "")
 		       (car method)))
-    (gnus-message 5 mesg)
+    (gnus-message 5 "%s" mesg)
     (when (gnus-check-server method)
       ;; Request that the backend scan its incoming messages.
       (when (and (or (and gnus-agent
@@ -2089,7 +2089,7 @@ If SCAN, request a scan of that group as well."
 	    (unless (equal method gnus-message-archive-method)
 	      (gnus-error 1 "Cannot read active file from %s server"
 			  (car method)))
-	  (gnus-message 5 mesg)
+	  (gnus-message 5 "%s" mesg)
 	  (gnus-active-to-gnus-format method gnus-active-hashtb nil t)
 	  ;; We mark this active file as read.
 	  (push method gnus-have-read-active-file)
