@@ -1,5 +1,10 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mail-parse.el (mail-header-encode-parameter): Define as
+	rfc2045-encode-string instead of as rfc2231-encode-string, since some
+	(or most, perhaps?) mail readers don't understand the latter, but do
+	understand the former.
+
 	* gnus-agent.el (gnus-agent-auto-agentize-methods): Switch the default
 	to nil, so that no methods are automatically agentized.  I think this
 	is probably what most users want.
