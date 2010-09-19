@@ -1,5 +1,9 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-agent.el (gnus-agent-auto-agentize-methods): Switch the default
+	to nil, so that no methods are automatically agentized.  I think this
+	is probably what most users want.
+
 	* gnus-html.el (gnus-html-schedule-image-fetching): Ignore all errors
 	from url-retrieve, for instance about invalid URLs.
 
