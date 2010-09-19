@@ -70,6 +70,13 @@ not done by default on servers that doesn't support that command.")
   "How nnimap authenticate itself to the server.
 Possible choices are nil (use default methods) or `anonymous'.")
 
+(defvoo nnimap-fetch-partial-articles nil
+  "If non-nil, nnimap will fetch partial articles.
+If t, nnimap will fetch only the first part.  If a string, it
+will fetch all parts that have types that match that string.  A
+likely value would be \"text/\" to automatically fetch all
+textual parts.")
+
 (defvoo nnimap-connection-alist nil)
 
 (defvoo nnimap-current-infos nil)
@@ -309,7 +316,8 @@ Possible choices are nil (use default methods) or `anonymous'.")
 
 (deffoo nnimap-request-article (article &optional group server to-buffer)
   (with-current-buffer nntp-server-buffer
-    (let ((result (nnimap-possibly-change-group group server)))
+    (let ((result (nnimap-possibly-change-group group server))
+	  parts)
       (when (stringp article)
 	(setq article (nnimap-find-article-by-message-id group article)))
       (when (and result
@@ -317,6 +325,14 @@ Possible choices are nil (use default methods) or `anonymous'.")
 	(erase-buffer)
 	(with-current-buffer (nnimap-buffer)
 	  (erase-buffer)
+	  (when nnimap-fetch-partial-articles
+	    (if (eq nnimap-fetch-partial-articles t)
+		(setq parts '(1))
+	      (nnimap-command "UID FETCH %d (BODYSTRUCTURE)" article)
+	      (goto-char (point-min))
+	      (when (re-search-forward "FETCH.*BODYSTRUCTURE" nil t)
+		(let ((structure (ignore-errors (read (current-buffer)))))
+		  (setq parts (nnimap-find-wanted-parts structure))))))
 	  (setq result
 		(nnimap-command
 		 (if (member "IMAP4REV1" (nnimap-capabilities nnimap-object))
@@ -339,6 +355,22 @@ Possible choices are nil (use default methods) or `anonymous'.")
 		(delete-region (point) (point-max))
 		(nnheader-ms-strip-cr))
 	      t)))))))
+
+(defun nnimap-find-wanted-parts (structure)
+  (let ((nnimap-level 1))
+    (message-flatten-list (nnimap-find-wanted-parts-1 structure))))
+
+(defun nnimap-find-wanted-parts-1 (structure)
+  (let (levels)
+    (while (consp (car structure))
+      (let ((sub (pop structure)))
+	(if (consp (car sub))
+	    (push (nnimap-find-wanted-parts-1 sub) levels)
+	  (let ((type (format "%s/%s" (nth 0 sub) (nth 1 sub))))
+	    (when (string-match nnimap-fetch-partial-articles type)
+	      (push nnimap-level levels)))
+	  (incf nnimap-level))))
+    (nreverse levels)))
 
 (deffoo nnimap-request-group (group &optional server dont-check info)
   (with-current-buffer nntp-server-buffer

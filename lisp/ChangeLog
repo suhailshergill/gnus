@@ -1,5 +1,8 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-find-wanted-parts-1): New function.
+	(nnimap-fetch-partial-articles): New variable.
+
 	* gnus.el (gnus-similar-server-opened): Refactor a bit and add
 	comments.
 	(gnus-methods-sloppily-equal): New function.
