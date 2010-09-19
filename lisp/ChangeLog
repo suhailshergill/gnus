@@ -1,5 +1,8 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-wait-for-connection): Avoid a race condition while
+	waiting for the connection string.
+
 	* gnus-html.el (gnus-html-image-fetched): Protect against the data not
 	arriving.
 
