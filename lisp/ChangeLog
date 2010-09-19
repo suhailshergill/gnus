@@ -1,5 +1,8 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-ignored-newsgroups): Remove [] from the list of
+	bogus characters.  This allows selecting certain Gmail groups.
+
 	* nnimap.el (nnimap-find-wanted-parts-1): New function.
 	(nnimap-fetch-partial-articles): New variable.
 	(nnimap-open-connection): When looking for credentials, also use the
