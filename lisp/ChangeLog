@@ -1,5 +1,8 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-authenticator): New variable.
+	(nnimap-open-connection): Allow anonymous login.
+
 	* gnus-art.el (gnus-article-describe-briefly): Fix up typo in last
 	patch, found by Knut Anders Hatlen.
 

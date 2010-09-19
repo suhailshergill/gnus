@@ -66,6 +66,10 @@ Values are `ssl' and `network'.")
 This is always done if the server supports UID EXPUNGE, but it's
 not done by default on servers that doesn't support that command.")
 
+(defvoo nnimap-authenticator nil
+  "How nnimap authenticate itself to the server.
+Possible choices are nil (use default methods) or `anonymous'.")
+
 (defvoo nnimap-connection-alist nil)
 
 (defvoo nnimap-current-infos nil)
@@ -254,7 +258,10 @@ not done by default on servers that doesn't support that command.")
 	(when (setq connection-result (nnimap-wait-for-connection))
 	  (unless (equal connection-result "PREAUTH")
 	    (if (not (setq credentials
-			   (nnimap-credentials nnimap-address ports)))
+			   (if (eq nnimap-authenticator 'anonymous)
+			       (list "anonymous"
+				     (message-make-address))
+			     (nnimap-credentials nnimap-address ports))))
 		(setq nnimap-object nil)
 	      (setq login-result (nnimap-command "LOGIN %S %S"
 						 (car credentials)
