@@ -358,7 +358,7 @@ textual parts.")
 		(goto-char (+ (point) bytes))
 		(delete-region (point) (point-max))
 		(nnheader-ms-strip-cr))
-	      t)))))))
+	      (cons group article))))))))
 
 (defun nnimap-find-wanted-parts (structure)
   (let ((nnimap-level 1))

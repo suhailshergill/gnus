@@ -4,6 +4,8 @@
 	(nnimap-fetch-partial-articles): New variable.
 	(nnimap-open-connection): When looking for credentials, also use the
 	nnimap-server-port.
+	(nnimap-request-article): Return the group/article number, so that Gnus
+	`^' works as expected.
 
 	* gnus.el (gnus-similar-server-opened): Refactor a bit and add
 	comments.
