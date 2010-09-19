@@ -4,6 +4,8 @@
 	(nnimap-open-connection): Allow anonymous login.
 	(nnimap-transform-headers): The chars header is called Chars not
 	Bytes.
+	(nnimap-wait-for-response): Don't infloop if the IMAP connection
+	drops.
 
 	* gnus-art.el (gnus-article-describe-briefly): Fix up typo in last
 	patch, found by Knut Anders Hatlen.
