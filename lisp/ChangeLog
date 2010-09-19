@@ -1,5 +1,9 @@
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnheader.el (nnheader-insert-nov): Protect against junk appearing in
+	the extra mail headers, which sometimes seem to happen for unknown
+	reasons.
+
 	* mail-parse.el (mail-header-encode-parameter): Define as
 	rfc2045-encode-string instead of as rfc2231-encode-string, since some
 	(or most, perhaps?) mail readers don't understand the latter, but do
