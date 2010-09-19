@@ -6,6 +6,8 @@
 	nnimap-server-port.
 	(nnimap-request-article): Return the group/article number, so that Gnus
 	`^' works as expected.
+	(nnimap-find-wanted-parts-1): Return the MIME parts as IMAP wants
+	them.
 
 	* gnus.el (gnus-similar-server-opened): Refactor a bit and add
 	comments.
