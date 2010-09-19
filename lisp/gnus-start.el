@@ -1760,7 +1760,8 @@ If SCAN, request a scan of that group as well."
       (destructuring-bind (method method-type infos dummy) elem
 	(when (and method infos
 		   (not (gnus-method-denied-p method)))
-	  (gnus-open-server method)
+	  (unless (gnus-server-opened method)
+	    (gnus-open-server method))
 	  (when (gnus-check-backend-function
 		 'retrieve-group-data-early (car method))
 	    (when (gnus-check-backend-function 'request-scan (car method))

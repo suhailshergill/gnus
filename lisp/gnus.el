@@ -3677,6 +3677,41 @@ that that variable is buffer-local to the summary buffers."
 					    gnus-valid-select-methods)))
 		 (equal (nth 1 m1) (nth 1 m2)))))))
 
+(defun gnus-methods-sloppily-equal (m1 m2)
+  ;; Same method.
+  (or
+   (eq m1 m2)
+   ;; Type and name are equal.
+   (and
+    (eq (car m1) (car m2))
+    (equal (cadr m1) (cadr m2))
+    ;; Check parameters for sloppy equalness.
+    (let ((p1 (copy-list (cddr m1)))
+	  (p2 (copy-list (cddr m2)))
+	  e1 e2)
+      (block nil
+	(while (setq e1 (pop p1))
+	  (unless (setq e2 (assq (car e1) p2))
+	    ;; The parameter doesn't exist in p2.
+	    (return nil))
+	  (setq p2 (delq e2 p2))
+	  (unless (equalp e1 e2)
+	    (if (not (and (stringp (cadr e1))
+			  (stringp (cadr e2))))
+		(return nil)
+	      ;; Special-case string parameter comparison so that we
+	      ;; can uniquify them.
+	      (let ((s1 (cadr e1))
+		    (s2 (cadr e2)))
+		(when (string-match "/$" s1)
+		  (setq s1 (directory-file-name s1)))
+		(when (string-match "/$" s2)
+		  (setq s2 (directory-file-name s2)))
+		(unless (equal s1 s2)
+		  (return nil))))))
+	;; If p2 now is empty, they were equal.
+	(null p2))))))
+
 (defun gnus-server-equal (m1 m2)
   "Say whether two methods are equal."
   (let ((m1 (cond ((null m1) gnus-select-method)
@@ -4152,7 +4187,7 @@ parameters."
       (when (and (equal (car method) (car open))
 		 (equal (cadr method) (cadr open))
 		 ;; ... but the rest of the parameters differ.
-		 (not (equal method open)))
+		 (not (gnus-methods-sloppily-equal method open)))
 	(setq method nil)))
     (not method)))
 
