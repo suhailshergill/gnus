@@ -480,7 +480,8 @@ This only works if the article in question is HTML."
               (unless (file-exists-p (gnus-html-image-id url))
                 (ignore-errors
                   (url-retrieve (mm-url-decode-entities-string url)
-                                'gnus-html-image-fetched))))))))))
+                                'gnus-html-image-fetched
+				(list nil (list url))))))))))))
 
 (provide 'gnus-html)
 

@@ -1,3 +1,8 @@
+2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-html.el (gnus-html-prefetch-images): Fix up the url-retrieve
+	calling conventions so that prefetch doesn't bug out.
+
 2010-09-19  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-prefetch-images): Use `url-retrieve' rather
