@@ -150,7 +150,7 @@ Possible choices are nil (use default methods) or `anonymous'.")
 	(delete-region (line-beginning-position) (line-end-position))
 	(insert (format "211 %s Article retrieved." article))
 	(forward-line 1)
-	(insert (format "Bytes: %d\n" bytes))
+	(insert (format "Chars: %d\n" bytes))
 	(when lines
 	  (insert (format "Lines: %s\n" lines)))
 	(re-search-forward "^\r$")
