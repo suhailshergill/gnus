@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-find-wanted-parts-1): New function.
 	(nnimap-fetch-partial-articles): New variable.
+	(nnimap-open-connection): When looking for credentials, also use the
+	nnimap-server-port.
 
 	* gnus.el (gnus-similar-server-opened): Refactor a bit and add
 	comments.

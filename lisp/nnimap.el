@@ -268,7 +268,11 @@ textual parts.")
 			   (if (eq nnimap-authenticator 'anonymous)
 			       (list "anonymous"
 				     (message-make-address))
-			     (nnimap-credentials nnimap-address ports))))
+			     (nnimap-credentials
+			      nnimap-address
+			      (if nnimap-server-port
+				  (cons (format "%s" nnimap-server-port) ports)
+				ports)))))
 		(setq nnimap-object nil)
 	      (setq login-result (nnimap-command "LOGIN %S %S"
 						 (car credentials)
