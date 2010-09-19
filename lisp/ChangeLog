@@ -1,3 +1,14 @@
+2010-09-19  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-prefetch-images): Use `url-retrieve' rather
+	than curl.
+	(gnus-html-image-fetched): Fix `gnus-html-put-image' call not setting
+	the right URL and ALT text on images.
+	(gnus-html-wash-tags): Fix tag case.
+	Add support for `s' and `ins' tags. Use gnus-emphasis-* faces.
+	(gnus-article-html): Add -o display_ins_del=2 option.
+	(gnus-html-wash-tags): Add better support for <ul> tags symbols.
+
 2010-09-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnheader.el (nnheader-insert-nov): Protect against junk appearing in
