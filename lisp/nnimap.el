@@ -878,7 +878,7 @@ textual parts.")
 	(cons t response)
       (nnheader-report 'nnimap "%s"
 		       (mapconcat (lambda (a)
-				    (format "%s"))
+				    (format "%s" a))
 				  (car response) " "))
       nil)))
 
