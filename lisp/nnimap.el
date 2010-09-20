@@ -972,7 +972,7 @@ textual parts.")
 		 "BODY.PEEK[HEADER] BODY.PEEK"
 	       "RFC822.PEEK"))
 	    (if nnimap-split-download-body-default
-		""
+		"[]"
 	      "[1]")))
    t))
 
