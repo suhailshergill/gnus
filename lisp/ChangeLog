@@ -1,5 +1,8 @@
 2010-09-20  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-line-format-alist): Have the ?U (unseen)
+	spec inser "*" if the group isn't active instead of 0.
+
 	* nnimap.el (nnimap-request-group): Don't select the imap buffer before
 	opening the server.
 	(nnimap-request-delete-group): Implement group deletion.
