@@ -41,6 +41,17 @@ to @code{emacs-mule}.
 @c FIXME: Untested.  (Or did anyone test it?)
 @c Cf. http://thread.gmane.org/gmane.emacs.gnus.general/66251/focus=66344
 
+@item Supported Emacs version
+The following Emacs versions are supported by No Gnus:
+@itemize @bullet
+
+@item Emacs 22 and up
+@item XEmacs 21.4
+@item XEmacs 21.5
+@SXEmacs
+
+@end itemize
+
 @item Lisp files are now installed in @file{.../site-lisp/gnus/} by default.
 It defaulted to @file{.../site-lisp/} formerly.  In addition to this,
 the new installer issues a warning if other Gnus installations which
