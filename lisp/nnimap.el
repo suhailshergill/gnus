@@ -384,9 +384,9 @@ textual parts.")
     (nreverse parts)))
 
 (deffoo nnimap-request-group (group &optional server dont-check info)
-  (with-current-buffer nntp-server-buffer
-    (let ((result (nnimap-possibly-change-group group server))
-	  articles active marks high low)
+  (let ((result (nnimap-possibly-change-group group server))
+	articles active marks high low)
+    (with-current-buffer nntp-server-buffer
       (when result
 	(if (and dont-check
 		 (setq active (nth 2 (assoc group nnimap-current-infos))))
@@ -423,6 +423,11 @@ textual parts.")
 	    (1+ (- high low))
 	    low high group))))
       t)))
+
+(deffoo nnimap-request-delete-group (group &optional force server)
+  (when (nnimap-possibly-change-group nil server)
+    (with-current-buffer (nnimap-buffer)
+      (car (nnimap-command "DELETE %S" (utf7-encode group))))))
 
 (defun nnimap-get-flags (spec)
   (let ((articles nil)
