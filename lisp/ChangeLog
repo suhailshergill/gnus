@@ -254,7 +254,7 @@
 
 	* dgnushack.el: Define netrc-credentials.
 
-2010-09-17  Julien Danjou  <julien@danjou.info>  (tiny fix)
+2010-09-17  Julien Danjou  <julien@danjou.info>
 
 	* mm-decode.el (mm-text-html-renderer): Document gnus-article-html.
 
