@@ -530,7 +530,8 @@ textual parts.")
 				(mapconcat #'identity flags " ")))))))
 	;; Wait for the last command to complete to avoid later
 	;; syncronisation problems with the stream.
-	(nnimap-wait-for-response sequence)))))
+	(when sequence
+	  (nnimap-wait-for-response sequence))))))
 
 (deffoo nnimap-request-accept-article (group &optional server last)
   (when (nnimap-possibly-change-group nil server)
