@@ -137,7 +137,7 @@ textual parts.")
 
 (defun nnimap-transform-headers ()
   (goto-char (point-min))
-  (let (article bytes lines)
+  (let (article bytes lines size)
     (block nil
       (while (not (eobp))
 	(while (not (looking-at "^\\* [0-9]+ FETCH.*UID \\([0-9]+\\)"))
@@ -148,6 +148,12 @@ textual parts.")
 	      bytes (nnimap-get-length)
 	      lines nil)
 	(beginning-of-line)
+	(setq size
+	      (and (re-search-forward "RFC822.SIZE \\([0-9]+\\)"
+				      (line-end-position)
+				      t)
+		   (match-string 1)))
+	(beginning-of-line)
 	(when (search-forward "BODYSTRUCTURE" (line-end-position) t)
 	  (let ((structure (ignore-errors (read (current-buffer)))))
 	    (while (and (consp structure)
@@ -157,7 +163,8 @@ textual parts.")
 	(delete-region (line-beginning-position) (line-end-position))
 	(insert (format "211 %s Article retrieved." article))
 	(forward-line 1)
-	(insert (format "Chars: %d\n" bytes))
+	(when size
+	  (insert (format "Chars: %s\n" size)))
 	(when lines
 	  (insert (format "Lines: %s\n" lines)))
 	(re-search-forward "^\r$")

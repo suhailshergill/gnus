@@ -3,6 +3,8 @@
 	* nnimap.el (nnimap-request-group): Don't select the imap buffer before
 	opening the server.
 	(nnimap-request-delete-group): Implement group deletion.
+	(nnimap-transform-headers): Return the size of the entire message in
+	the Bytes header, not just the size of the first part.
 
 2010-09-20  David Edmondson  <dme@dme.org>  (tiny change)
 
