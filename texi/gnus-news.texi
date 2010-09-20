@@ -48,7 +48,7 @@ The following Emacs versions are supported by No Gnus:
 @item Emacs 22 and up
 @item XEmacs 21.4
 @item XEmacs 21.5
-@SXEmacs
+@item SXEmacs
 
 @end itemize
 
