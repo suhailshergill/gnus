@@ -877,7 +877,9 @@ textual parts.")
     (if (equal (caar response) "OK")
 	(cons t response)
       (nnheader-report 'nnimap "%s"
-		       (mapconcat #'identity (car response) " "))
+		       (mapconcat (lambda (a)
+				    (format "%s"))
+				  (car response) " "))
       nil)))
 
 (defun nnimap-get-response (sequence)
