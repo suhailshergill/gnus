@@ -472,10 +472,11 @@ textual parts.")
 		    (nnimap-find-article-by-message-id
 		     internal-move-group message-id))))
 	(with-temp-buffer
-	  (let ((result (eval accept-form)))
-	    (when result
-	      (nnimap-delete-article article)
-	      result)))))))
+	  (when (nnimap-request-article article group server (current-buffer))
+	    (let ((result (eval accept-form)))
+	      (when result
+		(nnimap-delete-article article)
+		result))))))))
 
 (deffoo nnimap-request-expire-articles (articles group &optional server force)
   (cond

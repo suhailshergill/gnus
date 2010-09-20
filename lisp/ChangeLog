@@ -5,6 +5,9 @@
 	(nnimap-request-delete-group): Implement group deletion.
 	(nnimap-transform-headers): Return the size of the entire message in
 	the Bytes header, not just the size of the first part.
+	(nnimap-request-move-article): When moving an article from nnimap,
+	request the article first so the accepting form has an article to
+	accept.  Reported by Dan Christensen.
 
 2010-09-20  David Edmondson  <dme@dme.org>  (tiny change)
 
