@@ -431,6 +431,11 @@ textual parts.")
 	    low high group))))
       t)))
 
+(deffoo nnimap-request-create-group (group &optional server args)
+  (when (nnimap-possibly-change-group nil server)
+    (with-current-buffer (nnimap-buffer)
+      (car (nnimap-command "CREATE %S" (utf7-encode group t))))))
+
 (deffoo nnimap-request-delete-group (group &optional force server)
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer (nnimap-buffer)

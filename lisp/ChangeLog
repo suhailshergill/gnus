@@ -1,3 +1,7 @@
+2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-create-group): Implement.
+
 2010-09-21  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-image-cache-ttl): Add new variable.
