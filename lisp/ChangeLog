@@ -1,5 +1,11 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-update-marks): Add sanity check to not delete marks
+	outside the active range.  Suggested by Dan Christensen.
+
+	* gnus-start.el (gnus-get-unread-articles): Get the extended method
+	slightly later to avoid double-getting it.
+
 	* nnml.el (nnml-generate-nov-file): Fix variable name clobbering from
 	previous patch.
 
