@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-open-server): Give a better error message in the
+	"go offline" case.
+
 	* gnus-sum.el (gnus-adjust-marked-articles): Hack to avoid adjusting
 	marks for nnimap, which is seldom the right thing to do.
 

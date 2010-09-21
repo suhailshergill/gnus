@@ -275,8 +275,10 @@ If it is down, start it up (again)."
 			       (not gnus-batch-mode)
 			       (gnus-y-or-n-p
 				(format
-				 "Unable to open server %s, go offline? "
-				 server)))
+				 "Unable to open server %s (%s), go offline? "
+				 server
+				 (nnheader-get-report
+				  (car gnus-command-method)))))
                               (setq open-offline t)
                               'offline)
                              (t
