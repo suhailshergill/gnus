@@ -1712,6 +1712,9 @@ If SCAN, request a scan of that group as well."
       ;; method.
       (if (not (setq method (gnus-info-method info)))
 	  (setq method gnus-select-method)
+	;; There may be several similar methods.  Possibly extend the
+	;; method.
+	(setq method (gnus-find-method-for-group (gnus-info-group info) info))
 	(if (setq cmethod (assoc method methods-cache))
 	    (setq method (cdr cmethod))
 	  (setq cmethod (inline (gnus-server-get-method nil method)))
