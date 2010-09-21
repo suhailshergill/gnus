@@ -5850,6 +5850,9 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 	 (types gnus-article-mark-lists)
 	 marks var articles article mark mark-type
          bgn end)
+    ;; Hack to avoid adjusting marks for imap.
+    (when (eq (car (gnus-find-method-for-group group)) 'nnimap)
+      (setq min 1)
 
     (dolist (marks marked-lists)
       (setq mark (car marks)
