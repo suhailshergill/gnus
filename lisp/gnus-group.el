@@ -3175,6 +3175,9 @@ mail messages or news articles in files that have numeric names."
 	(error "%s does not support expunging" (car method))
       (gnus-request-expunge-group group method))))
 
+(autoload 'nnimap-acl-get "nnimap")
+(autoload 'nnimap-acl-edit "nnimap")
+
 (defun gnus-group-nnimap-edit-acl (group)
   "Edit the Access Control List of current nnimap GROUP."
   (interactive (list (gnus-group-group-name)))
