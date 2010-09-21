@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-group): When we have zero articles, return
+	the right data to Gnus.
+
 	* gnus-sum.el (gnus-summary-move-article): When respooling to the same
 	method, this would bug out.
 

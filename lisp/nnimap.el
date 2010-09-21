@@ -421,14 +421,12 @@ textual parts.")
 		(setq high (nth 3 (car marks))
 		      low (nth 4 (car marks))))
 	       ((re-search-backward "UIDNEXT \\([0-9]+\\)" nil t)
-		(setq high (string-to-number (match-string 1))
+		(setq high (1- (string-to-number (match-string 1)))
 		      low 1)))))
 	  (erase-buffer)
 	  (insert
 	   (format
-	    "211 %d %d %d %S\n"
-	    (1+ (- high low))
-	    low high group))))
+	    "211 %d %d %d %S\n" (1+ (- high low)) low high group))))
       t)))
 
 (deffoo nnimap-request-create-group (group &optional server args)
