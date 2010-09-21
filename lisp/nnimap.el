@@ -1124,7 +1124,7 @@ textual parts.")
        ;; user has configured it.
        (nnimap-expunge-inbox
 	(setq sequence (nnimap-send-command "EXPUNGE"))))
-      (nnimap-wait-for-sequence sequence))))
+      (nnimap-wait-for-response sequence))))
 
 (defun nnimap-parse-copied-articles (sequences)
   (let (sequence copied range)
