@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-move-article): When respooling to the same
+	method, this would bug out.
+
 	* gnus-group.el (gnus-group-expunge-group): Renamed from
 	gnus-group-nnimap-expunge, and implemented as a normal interface
 	function.
