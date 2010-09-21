@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnml.el (nnml-generate-nov-file): Fix variable name clobbering from
+	previous patch.
+
 	* gnus-sum.el (gnus-adjust-marked-articles): Fix another typo.
 
 2010-09-21  Adam Sjøgren  <asjo@koldfront.dk>
