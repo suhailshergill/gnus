@@ -405,7 +405,7 @@ textual parts.")
 	  (with-current-buffer (nnimap-buffer)
 	    (erase-buffer)
 	    (let ((group-sequence
-		   (nnimap-send-command "SELECT %S" (utf7-encode group)))
+		   (nnimap-send-command "SELECT %S" (utf7-encode group t)))
 		  (flag-sequence
 		   (nnimap-send-command "UID FETCH 1:* FLAGS")))
 	      (nnimap-wait-for-response flag-sequence)
@@ -439,7 +439,7 @@ textual parts.")
 (deffoo nnimap-request-delete-group (group &optional force server)
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer (nnimap-buffer)
-      (car (nnimap-command "DELETE %S" (utf7-encode group))))))
+      (car (nnimap-command "DELETE %S" (utf7-encode group t))))))
 
 (defun nnimap-get-flags (spec)
   (let ((articles nil)
