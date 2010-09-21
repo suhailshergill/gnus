@@ -1112,17 +1112,19 @@ textual parts.")
 (defun nnimap-mark-and-expunge-incoming (range)
   (when range
     (setq range (nnimap-article-ranges range))
-    (nnimap-send-command
-     "UID STORE %s +FLAGS.SILENT (\\Deleted)" range)
-    (cond
-     ;; If the server supports it, we now delete the message we have
-     ;; just copied over.
-     ((member "UIDPLUS" (nnimap-capabilities nnimap-object))
-      (nnimap-send-command "UID EXPUNGE %s" range))
-     ;; If it doesn't support UID EXPUNGE, then we only expunge if the
-     ;; user has configured it.
-     (nnimap-expunge-inbox
-      (nnimap-send-command "EXPUNGE")))))
+    (let ((sequence
+	   (nnimap-send-command
+	    "UID STORE %s +FLAGS.SILENT (\\Deleted)" range)))
+      (cond
+       ;; If the server supports it, we now delete the message we have
+       ;; just copied over.
+       ((member "UIDPLUS" (nnimap-capabilities nnimap-object))
+	(setq sequence (nnimap-send-command "UID EXPUNGE %s" range)))
+       ;; If it doesn't support UID EXPUNGE, then we only expunge if the
+       ;; user has configured it.
+       (nnimap-expunge-inbox
+	(setq sequence (nnimap-send-command "EXPUNGE"))))
+      (nnimap-wait-for-sequence sequence))))
 
 (defun nnimap-parse-copied-articles (sequences)
   (let (sequence copied range)
