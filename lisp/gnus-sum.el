@@ -9681,7 +9681,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 			      gnus-newsgroup-name))
 		(to-method (or select-method
 			       (gnus-find-method-for-group to-newsgroup)))
-		(move-is-internal (gnus-method-equal from-method to-method)))
+		(move-is-internal (gnus-server-equal from-method to-method)))
 	   (gnus-request-move-article
 	    article			; Article to move
 	    gnus-newsgroup-name		; From newsgroup

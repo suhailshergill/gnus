@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-move-article): Use gnus-server-equal to
+	find out whether methods are equal.
+
 	* nnimap.el (nnimap-find-expired-articles): New function.
 	(nnimap-process-expiry-targets): New function.
 	(nnimap-request-move-article): Request the article before looking at
