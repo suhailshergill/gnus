@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmail.el (nnmail-expired-article-p): Allow returning the cutoff time
+	for oldness in addition to being a predicate.
+
 	* nnimap.el (nnimap-request-group): When we have zero articles, return
 	the right data to Gnus.
 	(nnimap-request-expire-articles): Only delete articles immediately if
