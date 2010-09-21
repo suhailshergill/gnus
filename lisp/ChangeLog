@@ -1,5 +1,10 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-sloppily-equal-method-parameters): Refactor out.
+	(gnus-same-method-different-name): New function.
+
+	* nnimap.el (parse-time): Require.
+
 	* gnus-start.el (gnus-get-unread-articles): Fix the prefixed select
 	method in the presence of many similar methods.
 
