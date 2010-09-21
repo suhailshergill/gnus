@@ -1,3 +1,7 @@
+2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-adjust-marked-articles): Fix another typo.
+
 2010-09-21  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* gnus-sum.el (gnus-adjust-marked-articles): Fix typo.
