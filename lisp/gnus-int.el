@@ -552,6 +552,14 @@ If BUFFER, insert the article in that group."
   (funcall (gnus-get-function gnus-command-method 'request-post)
 	   (nth 1 gnus-command-method)))
 
+(defun gnus-request-expunge-group (group gnus-command-method)
+  "Expunge GROUP, which is removing articles that have been marked as deleted."
+  (when (stringp gnus-command-method)
+    (setq gnus-command-method (gnus-server-to-method gnus-command-method)))
+  (funcall (gnus-get-function gnus-command-method 'request-expunge-group)
+	   (gnus-group-real-name group)
+	   (nth 1 gnus-command-method)))
+
 (defun gnus-request-scan (group gnus-command-method)
   "Request a SCAN being performed in GROUP from GNUS-COMMAND-METHOD.
 If GROUP is nil, all groups on GNUS-COMMAND-METHOD are scanned."

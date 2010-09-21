@@ -441,6 +441,11 @@ textual parts.")
     (with-current-buffer (nnimap-buffer)
       (car (nnimap-command "DELETE %S" (utf7-encode group t))))))
 
+(deffoo nnimap-request-expunge-group (group &optional server)
+  (when (nnimap-possibly-change-group group server)
+    (with-current-buffer (nnimap-buffer)
+      (car (nnimap-command "EXPUNGE")))))
+
 (defun nnimap-get-flags (spec)
   (let ((articles nil)
 	elems)

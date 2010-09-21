@@ -1,6 +1,13 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-expunge-group): Renamed from
+	gnus-group-nnimap-expunge, and implemented as a normal interface
+	function.
+
+	* gnus-int.el (gnus-request-expunge-group): New function.
+
 	* nnimap.el (nnimap-request-create-group): Implement.
+	(nnimap-request-expunge-group): New function.
 
 2010-09-21  Julien Danjou  <julien@danjou.info>
 
