@@ -20,6 +20,7 @@
 	push into a temporary list.
 	(gnus-html-prefetch-images): Only fetch image if they have expired.
 	(gnus-html-browse-image): Fix, use 'gnus-image-url.
+	(gnus-html-image-map): Add "v" to browse-url on undisplayed image.
 
 2010-09-20  Katsumi Yamaoka  <yamaoka@jpl.org>
 

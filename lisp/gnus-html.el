@@ -68,6 +68,7 @@ fit these criteria."
   (let ((map (make-sparse-keymap)))
     (define-key map "u" 'gnus-article-copy-string)
     (define-key map "i" 'gnus-html-insert-image)
+    (define-key map "v" 'gnus-html-browse-url)
     map))
 
 (defvar gnus-html-displayed-image-map
@@ -195,6 +196,7 @@ fit these criteria."
                                     alt-text)))
                     (gnus-overlay-put overlay 'local-map gnus-html-image-map)
                     (gnus-overlay-put overlay 'gnus-image spec)
+                    (gnus-put-text-property start end 'gnus-image-url url)
                     (gnus-put-text-property
                      start end
                      'gnus-image spec)))
