@@ -466,27 +466,27 @@ textual parts.")
 
 (deffoo nnimap-request-move-article (article group server accept-form
 					     &optional last internal-move-group)
-  (when (nnimap-possibly-change-group group server)
-    ;; If the move is internal (on the same server), just do it the easy
-    ;; way.
-    (let ((message-id (message-field-value "message-id")))
-      (if internal-move-group
-	  (let ((result
-		 (with-current-buffer (nnimap-buffer)
-		   (nnimap-command "UID COPY %d %S"
-				   article
-				   (utf7-encode internal-move-group t)))))
-	    (when (car result)
-	      (nnimap-delete-article article)
-	      (cons internal-move-group
-		    (nnimap-find-article-by-message-id
-		     internal-move-group message-id))))
-	(with-temp-buffer
-	  (when (nnimap-request-article article group server (current-buffer))
-	    (let ((result (eval accept-form)))
-	      (when result
+  (with-temp-buffer
+    (when (nnimap-request-article article group server (current-buffer))
+      ;; If the move is internal (on the same server), just do it the easy
+      ;; way.
+      (let ((message-id (message-field-value "message-id")))
+	(if internal-move-group
+	    (let ((result
+		   (with-current-buffer (nnimap-buffer)
+		     (nnimap-command "UID COPY %d %S"
+				     article
+				     (utf7-encode internal-move-group t)))))
+	      (when (car result)
 		(nnimap-delete-article article)
-		result))))))))
+		(cons internal-move-group
+		      (nnimap-find-article-by-message-id
+		       internal-move-group message-id))))
+	  ;; Move the article to a different method.
+	  (let ((result (eval accept-form)))
+	    (when result
+	      (nnimap-delete-article article)
+	      result)))))))
 
 (deffoo nnimap-request-expire-articles (articles group &optional server force)
   (cond
