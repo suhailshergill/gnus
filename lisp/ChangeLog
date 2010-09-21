@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-find-expired-articles): Don't refer to
+	nnml-inhibit-expiry.
+
 	* gnus-sum.el (gnus-summary-move-article): Use gnus-server-equal to
 	find out whether methods are equal.
 

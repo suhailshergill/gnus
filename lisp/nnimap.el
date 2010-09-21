@@ -540,8 +540,7 @@ textual parts.")
     deleted-articles))
 
 (defun nnimap-find-expired-articles (group)
-  (let ((cutoff (nnmail-expired-article-p
-		 group nil nil nnml-inhibit-expiry)))
+  (let ((cutoff (nnmail-expired-article-p group nil nil)))
     (with-current-buffer (nnimap-buffer)
       (let ((result
 	     (nnimap-command
