@@ -77,6 +77,8 @@ will fetch all parts that have types that match that string.  A
 likely value would be \"text/\" to automatically fetch all
 textual parts.")
 
+(defvoo nnimap-expunge nil)
+
 (defvoo nnimap-connection-alist nil)
 
 (defvoo nnimap-current-infos nil)
@@ -426,8 +428,8 @@ textual parts.")
 	  (erase-buffer)
 	  (insert
 	   (format
-	    "211 %d %d %d %S\n" (1+ (- high low)) low high group))))
-      t)))
+	    "211 %d %d %d %S\n" (1+ (- high low)) low high group)))
+	t))))
 
 (deffoo nnimap-request-create-group (group &optional server args)
   (when (nnimap-possibly-change-group nil server)
@@ -488,6 +490,8 @@ textual parts.")
 
 (deffoo nnimap-request-expire-articles (articles group &optional server force)
   (cond
+   ((null articles)
+    nil)
    ((not (nnimap-possibly-change-group group server))
     articles)
    ((and force
@@ -496,7 +500,62 @@ textual parts.")
       (message "Article marked for deletion, but not expunged."))
     nil)
    (t
-    articles)))
+    (let ((deletable-articles
+	   (if force
+	       articles
+	     (gnus-sorted-intersection
+	      articles
+	      (nnimap-find-expired-articles group)))))
+      (if (null deletable-articles)
+	  articles
+	(if (eq nnmail-expiry-target 'delete)
+	    (nnimap-delete-article deletable-articles)
+	  (setq deletable-articles
+		(nnimap-process-expiry-targets
+		 deletable-articles group server)))
+	;; Return the articles we didn't delete.
+	(gnus-sorted-complement articles deletable-articles))))))
+
+(defun nnimap-process-expiry-targets (articles group server)
+  (let ((deleted-articles nil))
+    (dolist (article articles)
+      (let ((target nnmail-expiry-target))
+	(with-temp-buffer
+	  (when (nnimap-request-article article group server (current-buffer))
+	    (message "Expiring article %s:%d" group article)
+	    (when (functionp target)
+	      (setq target (funcall target group)))
+	    (when (and target
+		       (not (eq target 'delete)))
+	      (if (or (gnus-request-group target t)
+		      (gnus-request-create-group target))
+		  (nnmail-expiry-target-group target group)
+		(setq target nil)))
+	    (when target
+	      (push article deleted-articles))))))
+    ;; Change back to the current group again.
+    (nnimap-possibly-change-group group server)
+    (setq deleted-articles (nreverse deleted-articles))
+    (nnimap-delete-article deleted-articles)
+    deleted-articles))
+
+(defun nnimap-find-expired-articles (group)
+  (let ((cutoff (nnmail-expired-article-p
+		 group nil nil nnml-inhibit-expiry)))
+    (with-current-buffer (nnimap-buffer)
+      (let ((result
+	     (nnimap-command
+	      "UID SEARCH SENTBEFORE %s"
+	      (format-time-string
+	       (format "%%d-%s-%%Y"
+		       (upcase
+			(car (rassoc (nth 4 (decode-time cutoff))
+				     parse-time-months))))
+	       cutoff))))
+	(and (car result)
+	     (delete 0 (mapcar #'string-to-number
+			       (cdr (assoc "SEARCH" (cdr result))))))))))
+
 
 (defun nnimap-find-article-by-message-id (group message-id)
   (when (nnimap-possibly-change-group group nil)
@@ -514,10 +573,14 @@ textual parts.")
   (with-current-buffer (nnimap-buffer)
     (nnimap-command "UID STORE %s +FLAGS.SILENT (\\Deleted)"
 		    (nnimap-article-ranges articles))
-    (when (member "UIDPLUS" (nnimap-capabilities nnimap-object))
-      (nnimap-send-command "UID EXPUNGE %s"
-			   (nnimap-article-ranges articles))
-      t)))
+    (cond
+     ((member "UIDPLUS" (nnimap-capabilities nnimap-object))
+      (nnimap-command "UID EXPUNGE %s"
+		      (nnimap-article-ranges articles))
+      t)
+     (nnimap-expunge
+      (nnimap-command "EXPUNGE")
+      t))))
 
 (deffoo nnimap-request-scan (&optional group server)
   (when (and (nnimap-possibly-change-group nil server)

@@ -1,5 +1,8 @@
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-find-expired-articles): New function.
+	(nnimap-process-expiry-targets): New function.
+
 	* nnmail.el (nnmail-expired-article-p): Allow returning the cutoff time
 	for oldness in addition to being a predicate.
 
