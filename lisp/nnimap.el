@@ -490,7 +490,8 @@ textual parts.")
   (cond
    ((not (nnimap-possibly-change-group group server))
     articles)
-   (force
+   ((and force
+	 (eq nnmail-expiry-target 'delete))
     (unless (nnimap-delete-article articles)
       (message "Article marked for deletion, but not expunged."))
     nil)
