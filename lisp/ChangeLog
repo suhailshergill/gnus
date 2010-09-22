@@ -1,3 +1,8 @@
+2010-09-22  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-wash-images): Use xml-substitute-special on
+	images alt-text.
+
 2010-09-22  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mailcap.el (mailcap-parse-mailcap, mailcap-parse-mimetypes)

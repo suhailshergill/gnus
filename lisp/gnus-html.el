@@ -35,6 +35,7 @@
 (require 'mm-url)
 (require 'url)
 (require 'url-cache)
+(require 'xml)
 
 (defcustom gnus-html-image-cache-ttl (days-to-time 7)
   "Time in seconds used to cache the image on disk."
@@ -175,7 +176,7 @@ fit these criteria."
 	  ;; Normal, external URL.
           (let ((alt-text (when (string-match "\\(alt\\|title\\)=\"\\([^\"]+\\)"
                                               parameters)
-                            (match-string 2 parameters))))
+                            (xml-substitute-special (match-string 2 parameters)))))
             (if (gnus-html-image-url-blocked-p
                  url
                  (if (buffer-live-p gnus-summary-buffer)
