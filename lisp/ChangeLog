@@ -1,3 +1,24 @@
+2010-09-22  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-wash-images): Use xml-substitute-special on
+	images alt-text.
+	(gnus-html-put-image): Put alt-text as help-echo.
+
+2010-09-22  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* mailcap.el (mailcap-parse-mailcap, mailcap-parse-mimetypes)
+	* mm-util.el (mm-decompress-buffer)
+	* nnir.el (nnir-run-find-grep)
+	* pop3.el (pop3-list): Use 3rd arg of split-string.
+
+	* time-date.el (format-seconds): Comment fix.
+
+	* dgnushack.el (toplevel): Don't advise byte-optimize-form-code-walker
+	and byte-optimize-form-code-walker.
+	(dgnushack-make-auto-load): Don't advise make-autoload.
+
+	* lpath.el: Remove Emacs 21 stuff.
+
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-update-marks): Add sanity check to not delete marks

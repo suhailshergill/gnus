@@ -80,69 +80,6 @@
 ;  (cons 'progn (cdr form)))
 ;(defalias 'byte-compile-file-form-defsubst 'byte-compile-file-form-defun)
 
-(when (and (not (featurep 'xemacs))
-	   (= emacs-major-version 21)
-	   (>= emacs-minor-version 3)
-	   (condition-case code
-	       (let ((byte-compile-error-on-warn t))
-		 (byte-optimize-form (quote (pop x)) t)
-		 nil)
-	     (error (string-match "called for effect"
-				  (error-message-string code)))))
-  (defadvice byte-optimize-form-code-walker (around silence-warn-for-pop
-						    (form for-effect)
-						    activate)
-    "Silence the warning \"...called for effect\" for the `pop' form.
-It is effective only when the `pop' macro is defined by cl.el rather
-than subr.el."
-    (let (tmp)
-      (if (and (eq (car-safe form) 'car)
-	       for-effect
-	       (setq tmp (get 'car 'side-effect-free))
-	       (not byte-compile-delete-errors)
-	       (not (eq tmp 'error-free))
-	       (eq (car-safe (cadr form)) 'prog1)
-	       (let ((var (cadr (cadr form)))
-		     (last (nth 2 (cadr form))))
-		 (and (symbolp var)
-		      (null (nthcdr 3 (cadr form)))
-		      (eq (car-safe last) 'setq)
-		      (eq (cadr last) var)
-		      (eq (car-safe (nth 2 last)) 'cdr)
-		      (eq (cadr (nth 2 last)) var))))
-	  (progn
-	    (put 'car 'side-effect-free 'error-free)
-	    (unwind-protect
-		ad-do-it
-	      (put 'car 'side-effect-free tmp)))
-	ad-do-it))))
-
-(when (and (not (featurep 'xemacs))
-	   (byte-optimize-form
-	    '(and (> 0 1)
-		  (message "This should not appear in the byte-code."))
-	    t))
-  (defadvice byte-optimize-form-code-walker
-    (around fix-bug-in-and/or-forms (form for-effect) activate)
-    "Optimize the rest of the and/or forms.
-It has been fixed in XEmacs before releasing 21.4 and also has been
-fixed in Emacs 22."
-    (if (and for-effect (memq (car-safe form) '(and or)))
-	(let ((fn (car form))
-	      (backwards (reverse (cdr form))))
-	  (while (and backwards
-		      (null (setcar backwards
-				    (byte-optimize-form (car backwards) t))))
-	    (setq backwards (cdr backwards)))
-	  (if (and (cdr form) (null backwards))
-	      (byte-compile-log
-	       "  all subforms of %s called for effect; deleted" form))
-	  (when backwards
-	    (setcdr backwards
-		    (mapcar 'byte-optimize-form (cdr backwards))))
-	  (setq ad-return-value (cons fn (nreverse backwards))))
-      ad-do-it)))
-
 ;; Work around for an incompatibility (XEmacs 21.4 vs. 21.5), see the
 ;; following threads:
 ;;
@@ -169,7 +106,7 @@ fixed in Emacs 22."
 		 (forward-sexp 1)
 		 (eolp)))))
   ;; The original `with-syntax-table' uses `copy-syntax-table' which
-  ;; doesn't seem to copy modified syntax entries in XEmacs 21.5.
+  ;; doesn't seem to copy modified syntax entries in old XEmacs 21.5.
   (defmacro with-syntax-table (syntab &rest body)
     "Evaluate BODY with the SYNTAB as the current syntax table."
     `(let ((stab (syntax-table)))
@@ -392,20 +329,6 @@ dgnushack-compile."
 
 (defun dgnushack-make-auto-load ()
   (require 'autoload)
-  (unless (make-autoload '(define-derived-mode child parent name
-			    "docstring" body)
-			 "file")
-    (defadvice make-autoload (around handle-define-derived-mode activate)
-      "Handle `define-derived-mode'."
-      (if (eq (car-safe (ad-get-arg 0)) 'define-derived-mode)
-	  (setq ad-return-value
-		(list 'autoload
-		      (list 'quote (nth 1 (ad-get-arg 0)))
-		      (ad-get-arg 1)
-		      (nth 4 (ad-get-arg 0))
-		      t nil))
-	ad-do-it))
-    (put 'define-derived-mode 'doc-string-elt 3))
   (let ((generated-autoload-file dgnushack-gnus-load-file)
 	(make-backup-files nil)
 	(autoload-package-name "gnus"))
