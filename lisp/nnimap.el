@@ -96,9 +96,9 @@ not done by default on servers that doesn't support that command.")
 (defvar nnimap-object nil)
 
 (defvar nnimap-mark-alist
-  '((read "\\Seen")
-    (tick "\\Flagged")
-    (reply "\\Answered")
+  '((read "\\Seen" %Seen)
+    (tick "\\Flagged" %Flagged)
+    (reply "\\Answered" %Answered)
     (expire "gnus-expire")
     (dormant "gnus-dormant")
     (score "gnus-score")
@@ -794,8 +794,8 @@ not done by default on servers that doesn't support that command.")
 		 (gnus-set-difference
 		  (gnus-set-difference
 		   existing
-		   (cdr (assoc "\\Seen" flags)))
-		  (cdr (assoc "\\Flagged" flags)))))
+		   (cdr (assoc '%Seen flags)))
+		  (cdr (assoc '%Flagged flags)))))
 	       (read (gnus-range-difference
 		      (cons start-article high) unread)))
 	  (when (> start-article 1)
@@ -817,8 +817,10 @@ not done by default on servers that doesn't support that command.")
 	      (push (cons 'active (gnus-active group)) marks)))
 	  (dolist (type (cdr nnimap-mark-alist))
 	    (let ((old-marks (assoc (car type) marks))
-		  (new-marks (gnus-compress-sequence
-			      (cdr (assoc (cadr type) flags)))))
+		  (new-marks
+		   (gnus-compress-sequence
+		    (cdr (or (assoc (caddr type) flags)	    ; %Flagged
+			     (assoc (cadr type) flags)))))) ; "\Flagged"
 	      (setq marks (delq old-marks marks))
 	      (pop old-marks)
 	      (when (and old-marks
@@ -843,9 +845,10 @@ not done by default on servers that doesn't support that command.")
   (let (data group totalp uidnext articles start-article mark)
     (dolist (elem groups)
       (setq group (car elem)
-	    uidnext (cadr elem)
-	    start-article (caddr elem)
-	    articles (cdddr elem))
+	    uidnext (nth 1 elem)
+	    start-article (nth 2 elem)
+	    permanent-flags (nth 3 elem)
+	    articles (nthcdr 4 elem))
       (let ((high (caar articles))
 	    marks low existing)
 	(dolist (article articles)
@@ -862,29 +865,39 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-parse-flags (sequences)
   (goto-char (point-min))
-  (let (start end articles groups uidnext elems)
+  ;; Change \Delete etc to %Delete, so that the reader can read it.
+  (subst-char-in-region (point-min) (point-max)
+			?\\ ?% t)
+  (let (start end articles groups uidnext elems permanent-flags)
     (dolist (elem sequences)
       (destructuring-bind (group-sequence flag-sequence totalp group) elem
+	(setq start (point))
 	;; The EXAMINE was successful.
 	(when (and (search-forward (format "\n%d OK " group-sequence) nil t)
 		   (progn
 		     (forward-line 1)
-		     (setq start (point))
-		     (if (re-search-backward "UIDNEXT \\([0-9]+\\)"
-					       (or end (point-min)) t)
-			 (setq uidnext (string-to-number (match-string 1)))
-		       (setq uidnext nil))
-		     (goto-char start))
+		     (setq end (point))
+		     (goto-char start)
+		     (setq permanent-forward
+			   (and (search-forward "PERMANENTFLAGS "
+						 (or end (point-min)) t)
+				(read (current-buffer))))
+		     (setq uidnext
+			   (and (search-forward "UIDNEXT "
+						 (or end (point-min)) t)
+				(read (current-buffer))))
+		     (goto-char end))
 		   ;; The UID FETCH FLAGS was successful.
 		   (search-forward (format "\n%d OK " flag-sequence) nil t))
-	  (setq end (point))
-	  (goto-char start)
-	  (while (re-search-forward "^\\* [0-9]+ FETCH (\\(.*\\))" end t)
-	    (setq elems (nnimap-parse-line (match-string 1)))
-	    (push (cons (string-to-number (cadr (member "UID" elems)))
-			(cadr (member "FLAGS" elems)))
+	  (setq start (point))
+	  (goto-char end)
+	  (while (search-forward " FETCH " start t)
+	    (setq elems (read (current-buffer)))
+	    (push (cons (cadr (memq 'UID elems))
+			(cadr (memq 'FLAGS elems)))
 		  articles))
-	  (push (nconc (list group uidnext totalp) articles) groups)
+	  (push (nconc (list group uidnext totalp permanent-flags) articles)
+		groups)
 	  (setq articles nil))))
     groups))
 
@@ -1150,8 +1163,8 @@ not done by default on servers that doesn't support that command.")
   (let (new)
     (dolist (elem flags)
       (when (or (null (cdr elem))
-		(and (not (member "\\Deleted" (cdr elem)))
-		     (not (member "\\Seen" (cdr elem)))))
+		(and (not (memq '%Deleted (cdr elem)))
+		     (not (memq '%Seen (cdr elem)))))
 	(push (car elem) new)))
     (gnus-compress-sequence (nreverse new))))
 

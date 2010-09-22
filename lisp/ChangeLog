@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-split-incoming-mail): Delete 'junk.
 	(nnimap-request-list): Nix out group in the correct buffer.
+	(nnimap-parse-flags): Implement by using `read' instead of
+	hand-parsing.
 
 	* nnmail.el (nnmail-split-incoming): Take an optional junk-func
 	parameter, and propagate this downwards.
