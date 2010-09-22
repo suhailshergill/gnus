@@ -1769,8 +1769,7 @@ If SCAN, request a scan of that group as well."
 	  (gnus-read-active-for-groups method infos early-data)
 	  (dolist (info infos)
 	    (inline (gnus-get-unread-articles-in-group
-		     info (gnus-active (gnus-info-group info))
-		     t))))))
+		     info (gnus-active (gnus-info-group info))))))))
     (gnus-message 6 "Checking new news...done")))
 
 (defun gnus-method-rank (type method)
