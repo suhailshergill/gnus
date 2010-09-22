@@ -3565,7 +3565,7 @@ that that variable is buffer-local to the summary buffers."
 				   (nth 1 method))))
       method)))
 
-(defsubst gnus-method-to-server (method &optional nocache)
+(defsubst gnus-method-to-server (method &optional nocache no-enter-cache)
   (catch 'server-name
     (setq method (or method gnus-select-method))
 
@@ -3591,7 +3591,9 @@ that that variable is buffer-local to the summary buffers."
 		     (format "%s" (car method))
 		   (format "%s:%s" (car method) (cadr method))))
 	   (name-method (cons name method)))
-      (unless (member name-method gnus-server-method-cache)
+      (when (and (not (member name-method gnus-server-method-cache))
+		 (not no-enter-cache)
+		 (not (assoc (car name-method) gnus-server-method-cache)))
 	(push name-method gnus-server-method-cache))
       name)))
 
@@ -3633,11 +3635,13 @@ that that variable is buffer-local to the summary buffers."
 		(while alist
 		  (setq method (gnus-info-method (pop alist)))
 		  (when (and (not (stringp method))
-			     (equal server (gnus-method-to-server method)))
+			     (equal server
+				    (gnus-method-to-server method nil t)))
 		    (setq match method
 			  alist nil)))
 		match))))
-	(when result
+	(when (and result
+		   (not (assoc server gnus-server-method-cache)))
 	  (push (cons server result) gnus-server-method-cache))
 	result)))
 

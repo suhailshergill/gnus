@@ -1,3 +1,9 @@
+2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el (gnus-method-to-server): Don't push things to the cache
+	unless it's unique.
+	(gnus-server-to-method): Ditto.
+
 2010-09-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* nnimap.el (nnimap-delete-article): Tell user if expunge won't happen.
