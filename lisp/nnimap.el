@@ -91,7 +91,7 @@ not done by default on servers that doesn't support that command.")
   "Internal variable with default value for `nnimap-split-download-body'.")
 
 (defstruct nnimap
-  group process commands capabilities select-result newlinep)
+  group process commands capabilities select-result newlinep server)
 
 (defvar nnimap-object nil)
 
@@ -212,7 +212,8 @@ not done by default on servers that doesn't support that command.")
     (buffer-disable-undo)
     (gnus-add-buffer)
     (set (make-local-variable 'after-change-functions) nil)
-    (set (make-local-variable 'nnimap-object) (make-nnimap))
+    (set (make-local-variable 'nnimap-object)
+	 (make-nnimap :server (nnoo-current-server 'nnimap)))
     (push (list buffer (current-buffer)) nnimap-connection-alist)
     (current-buffer)))
 
@@ -775,7 +776,8 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-update-info (info marks)
   (when marks
-    (destructuring-bind (existing flags high low uidnext start-article) marks
+    (destructuring-bind (existing flags high low uidnext start-article
+				  permanent-flags) marks
       (let ((group (gnus-info-group info))
 	    (completep (and start-article
 			    (= start-article 1))))
@@ -859,7 +861,8 @@ not done by default on servers that doesn't support that command.")
 	    (if (not mark)
 		(push (list flag (car article)) marks)
 	      (setcdr mark (cons (car article) (cdr mark)))))
-	  (push (list group existing marks high low uidnext start-article)
+	  (push (list group existing marks high low uidnext start-article
+		      permanent-flags)
 		data))))
     data))
 
