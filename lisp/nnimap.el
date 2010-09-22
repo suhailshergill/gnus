@@ -62,11 +62,6 @@ Values are `ssl' and `network'.")
 (defvoo nnimap-inbox nil
   "The mail box where incoming mail arrives and should be split out of.")
 
-(defvoo nnimap-expunge-inbox nil
-  "If non-nil, expunge the inbox after fetching mail.
-This is always done if the server supports UID EXPUNGE, but it's
-not done by default on servers that doesn't support that command.")
-
 (defvoo nnimap-authenticator nil
   "How nnimap authenticate itself to the server.
 Possible choices are nil (use default methods) or `anonymous'.")
@@ -78,7 +73,11 @@ will fetch all parts that have types that match that string.  A
 likely value would be \"text/\" to automatically fetch all
 textual parts.")
 
-(defvoo nnimap-expunge nil)
+(defvoo nnimap-expunge t
+  "If non-nil, expunge articles after deleting them.
+This is always done if the server supports UID EXPUNGE, but it's
+not done by default on servers that doesn't support that command.")
+
 
 (defvoo nnimap-connection-alist nil)
 
@@ -1125,7 +1124,7 @@ textual parts.")
 	(setq sequence (nnimap-send-command "UID EXPUNGE %s" range)))
        ;; If it doesn't support UID EXPUNGE, then we only expunge if the
        ;; user has configured it.
-       (nnimap-expunge-inbox
+       (nnimap-expunge
 	(setq sequence (nnimap-send-command "EXPUNGE"))))
       (nnimap-wait-for-response sequence))))
 

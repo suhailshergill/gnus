@@ -1,5 +1,9 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-expunge-inbox): Removed.
+	(nnimap-mark-and-expunge-incoming): Use nnimap-expunge instead.
+	(nnimap-expunge): Flip default to t.
+
 	* gnus.el (gnus-method-to-server): Don't push things to the cache
 	unless it's unique.
 	(gnus-server-to-method): Ditto.
