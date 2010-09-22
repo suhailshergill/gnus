@@ -601,6 +601,7 @@ If GROUP is nil, all groups on GNUS-COMMAND-METHOD are scanned."
 
 (defun gnus-request-expire-articles (articles group &optional force)
   (let* ((gnus-command-method (gnus-find-method-for-group group))
+	 (gnus-inhibit-demon t)
 	 (not-deleted
 	  (funcall
 	   (gnus-get-function gnus-command-method 'request-expire-articles)
