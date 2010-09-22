@@ -1,5 +1,8 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-list): Set the current nnimap group to nil,
+	since EXAMINE changes it on the server.
+
 	* gnus-int.el (gnus-request-expire-articles): Inhibit the daemon, since
 	this command might take a while.
 

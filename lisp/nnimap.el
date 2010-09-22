@@ -665,6 +665,7 @@ not done by default on servers that doesn't support that command.")
 	     (nnimap-get-groups)))
 	  sequences responses)
       (when groups
+	(setf (nnimap-group nnimap-object) nil)
 	(with-current-buffer (nnimap-buffer)
 	  (dolist (group groups)
 	    (push (list (nnimap-send-command "EXAMINE %S" (utf7-encode group t))
@@ -715,6 +716,7 @@ not done by default on servers that doesn't support that command.")
 		groups))
 	;; Then request the data.
 	(erase-buffer)
+	(setf (nnimap-group nnimap-object) nil)
 	(dolist (elem groups)
 	  (if (and qresyncp
 		   (nth 2 elem))
