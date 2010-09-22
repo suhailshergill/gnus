@@ -844,7 +844,7 @@ not done by default on servers that doesn't support that command.")
       (push (list group info active) nnimap-current-infos))))
 
 (defun nnimap-flags-to-marks (groups)
-  (let (data group totalp uidnext articles start-article mark)
+  (let (data group totalp uidnext articles start-article mark permanent-flags)
     (dolist (elem groups)
       (setq group (car elem)
 	    uidnext (nth 1 elem)
@@ -881,7 +881,7 @@ not done by default on servers that doesn't support that command.")
 		     (forward-line 1)
 		     (setq end (point))
 		     (goto-char start)
-		     (setq permanent-forward
+		     (setq permanent-flags
 			   (and (search-forward "PERMANENTFLAGS "
 						 (or end (point-min)) t)
 				(read (current-buffer))))

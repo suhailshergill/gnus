@@ -6,6 +6,7 @@
 	hand-parsing.
 	(nnimap-flags-to-marks): Pass on permanent-flags.
 	(nnimap-make-process-buffer): Record the server name.
+	(nnimap-parse-flags): Fix typo.
 
 	* nnmail.el (nnmail-split-incoming): Take an optional junk-func
 	parameter, and propagate this downwards.
