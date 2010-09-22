@@ -1,5 +1,7 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-highlight-line): Typo fix: beg, not start.
+
 	* gnus-start.el (gnus-get-unread-articles): Don't have
 	`gnus-get-unread-articles-in-group' update info, since that can be
 	really slow and doesn't seem to be needed?

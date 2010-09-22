@@ -1671,7 +1671,7 @@ Some value are bound so the form can use them."
         (setq list (cdr list)))
       list)))
 
-(defun gnus-group-highlight-line (group start end)
+(defun gnus-group-highlight-line (group beg end)
   "Highlight the current line according to `gnus-group-highlight'.
 GROUP is current group, and the line to highlight starts at START
 and ends at END."
@@ -1681,9 +1681,9 @@ and ends at END."
     (unless (eq face (get-text-property beg 'face))
       (let ((inhibit-read-only t))
         (gnus-put-text-property-excluding-characters-with-faces
-         start end 'face
+         beg end 'face
          (if (boundp face) (symbol-value face) face)))
-      (gnus-extent-start-open start))))
+      (gnus-extent-start-open beg))))
 
 (defun gnus-group-get-icon (group)
   "Return an icon for GROUP according to `gnus-group-icon-list'."
