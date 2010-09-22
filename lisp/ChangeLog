@@ -1,3 +1,13 @@
+2010-09-22  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* time-date.el (format-seconds): Comment fix.
+
+	* dgnushack.el (toplevel): Don't advise byte-optimize-form-code-walker
+	and byte-optimize-form-code-walker.
+	(dgnushack-make-auto-load): Don't advise make-autoload.
+
+	* lpath.el: Remove Emacs 21 stuff.
+
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnml.el (nnml-generate-nov-file): Fix variable name clobbering from

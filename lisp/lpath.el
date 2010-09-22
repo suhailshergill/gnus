@@ -35,33 +35,7 @@
        rmail-swap-buffers-maybe w3-do-setup w3-parse-buffer w3-prepare-buffer
        w3-region w32-focus-frame w3m-detect-meta-charset w3m-region))
     (maybe-bind
-     '(w3m-link-map)))
-
-  (when (= emacs-major-version 21)
-    (defun canlock-insert-header (&optional id-for-key id-for-lock password))
-    (defun split-line (&optional arg))
-    (maybe-fbind
-     '(clear-string
-       coding-system-aliasee coding-system-from-name custom-autoload
-       delete-annotation delete-extent device-connection
-       device-on-window-system-p dfw-device events-to-keys find-face
-       font-lock-set-defaults get-char-table glyph-height glyph-image
-       glyph-width glyphp help-buffer int-to-char ldap-search-entries
-       mail-aliases-setup make-annotation make-event make-glyph
-       make-network-process map-extents message-xmas-redefine put-char-table
-       run-mode-hooks set-extent-property set-itimer-function
-       set-keymap-default-binding specifier-spec-list temp-directory
-       time-to-seconds ucs-to-char unicode-precedence-list unicode-to-char
-       url-generic-parse-url url-http-file-exists-p
-       valid-image-instantiator-format-p vcard-pretty-print
-       w3-coding-system-for-mime-charset window-pixel-edges window-pixel-height
-       window-pixel-width))
-    (maybe-bind
-     '(completion-styles
-       eudc-protocol filladapt-mode help-echo-owns-message itimer-list
-       ps-print-color-p smtpmail-default-smtp-server
-       w3-meta-charset-content-type-regexp
-       w3-meta-content-type-charset-regexp))))
+     '(w3m-link-map))))
 
 (when (featurep 'xemacs)
   (defun canlock-insert-header (&optional id-for-key id-for-lock password))
