@@ -5,6 +5,10 @@
 
 2010-09-22  Julien Danjou  <julien@danjou.info>
 
+	* gnus-group.el (gnus-group-get-icon): Renamed gnus-group-add-icon that
+	Only return an icon.
+	(gnus-group-insert-group-line): Compute icon to return.
+
 	* gnus-html.el (gnus-html-image-automatic-caching): Add custom
 	variable.
 	(gnus-html-image-fetched): Only cache if
