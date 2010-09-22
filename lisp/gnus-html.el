@@ -36,6 +36,7 @@
 (require 'url)
 (require 'url-cache)
 (require 'xml)
+(require 'browse-url)
 
 (defcustom gnus-html-image-cache-ttl (days-to-time 7)
   "Time in seconds used to cache the image on disk."
@@ -80,6 +81,10 @@ fit these criteria."
     (define-key map "u" 'gnus-article-copy-string)
     (define-key map [tab] 'widget-forward)
     map))
+
+(defun gnus-html-encode-url (url)
+  "Encode URL."
+  (browse-url-url-encode-chars url "[)$ ]"))
 
 (defun gnus-html-cache-expired (url ttl)
   "Check if URL is cached for more than TTL."
@@ -155,7 +160,7 @@ fit these criteria."
 	(delete-region (match-beginning 0) (match-end 0)))
       (setq end (point))
       (when (string-match "src=\"\\([^\"]+\\)" parameters)
-	(setq url (match-string 1 parameters))
+	(setq url (gnus-html-encode-url (match-string 1 parameters)))
 	(gnus-message 8 "gnus-html-wash-tags: fetching image URL %s" url)
 	(if (string-match "^cid:\\(.*\\)" url)
 	    ;; URLs with cid: have their content stashed in other
@@ -473,7 +478,7 @@ This only works if the article in question is HTML."
                             gnus-blocked-images)))
       (save-match-data
 	(while (re-search-forward "<img.*src=[\"']\\([^\"']+\\)" nil t)
-	  (let ((url (match-string 1)))
+	  (let ((url (gnus-html-encode-url (match-string 1))))
 	    (unless (gnus-html-image-url-blocked-p url blocked-images)
               (when (gnus-html-cache-expired url gnus-html-image-cache-ttl)
                 (gnus-html-schedule-image-fetching nil
