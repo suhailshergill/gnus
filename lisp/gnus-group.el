@@ -427,7 +427,6 @@ group: The name of the group.
 unread: The number of unread articles in the group.
 method: The select method used.
 mailp: Whether it's a mail group or not.
-newsp: Whether it's a news group or not
 level: The level of the group.
 score: The score of the group.
 ticked: The number of ticked articles."
