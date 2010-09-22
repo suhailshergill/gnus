@@ -9,6 +9,16 @@
 	* time-date.el (date-to-time): Try using parse-time-string first before
 	using the slower timezone-make-date-arpa-standard.
 
+2010-09-22  Julien Danjou  <julien@danjou.info>
+
+	* gnus-group.el (gnus-group-insert-group-line): Call
+	gnus-group-highlight-line.
+	(gnus-group-update-hook): Remove gnus-group-highlight-line from the
+	default hook list.
+	(gnus-group-update-eval-form): Add new function.
+	(gnus-group-highlight-line): Use gnus-group-update-eval-form.
+	(gnus-group-get-icon): Use gnus-group-update-eval-form.
+
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-request-expire-articles): If nnmail-expiry-wait is
