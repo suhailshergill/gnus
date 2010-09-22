@@ -39,10 +39,16 @@
 (require 'browse-url)
 
 (defcustom gnus-html-image-cache-ttl (days-to-time 7)
-  "Time in seconds used to cache the image on disk."
+  "Time used to determine if we should use images from the cache."
   :version "24.1"
   :group 'gnus-art
   :type 'integer)
+
+(defcustom gnus-html-image-automatic-caching t
+  "Whether automatically cache retrieve images."
+  :version "24.1"
+  :group 'gnus-art
+  :type 'boolean)
 
 (defcustom gnus-html-frame-width 70
   "What width to use when rendering HTML."
@@ -345,7 +351,9 @@ Use ALT-TEXT for the image string."
                   (list buffer image))))
 
 (defun gnus-html-image-fetched (status buffer image)
-  (url-store-in-cache (current-buffer))
+  "Callback function called when image has been fetched."
+  (when gnus-html-image-automatic-caching
+    (url-store-in-cache (current-buffer)))
   (when (and (or (search-forward "\n\n" nil t)
                  (search-forward "\r\n\r\n" nil t))
              (buffer-live-p buffer))

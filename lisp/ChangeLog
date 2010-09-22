@@ -1,3 +1,10 @@
+2010-09-22  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-image-automatic-caching): Add custom
+	variable.
+	(gnus-html-image-fetched): Only cache if
+	gnus-html-image-automatic-caching is set.
+
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-split-incoming-mail): Delete 'junk.
