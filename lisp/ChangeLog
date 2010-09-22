@@ -2,6 +2,9 @@
 
 	* gnus-html.el (gnus-html-rescale-image): Use window-inside-pixel-edges
 	rather than window-pixel-edges.
+	(gnus-html-put-image): Stop using markers. They are harmful if you have
+	2 images side-by-side, they can't be properly update on text deletion.
+	Using text-property is safer here.
 
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
