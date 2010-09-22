@@ -1619,7 +1619,7 @@ if it is a string, only list groups matching REGEXP."
 			      'gnus-tool-bar-update))
     (forward-line -1)
     (when (inline (gnus-visual-p 'group-highlight 'highlight))
-      (gnus-group-highlight-line gnus-tmp-qualified-group beg end))
+      (gnus-group-highlight-line gnus-tmp-group beg end))
     (gnus-run-hooks 'gnus-group-update-hook)
     (forward-line)
     ;; Allow XEmacs to remove front-sticky text properties.

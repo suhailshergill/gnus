@@ -1,6 +1,8 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-group.el (gnus-group-highlight-line): Typo fix: beg, not start.
+	(gnus-group-insert-group-line): Pass the real group name so that it
+	gets the right data.
 
 	* gnus-start.el (gnus-get-unread-articles): Don't have
 	`gnus-get-unread-articles-in-group' update info, since that can be
