@@ -1,5 +1,9 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-read-active-for-groups): Only run -request-scan
+	once per method on `g'.  This ensures that backends like nnfolder don't
+	open all their folders.
+
 	* nnimap.el (nnimap-split-incoming-mail): Delete 'junk.
 	(nnimap-request-list): Nix out group in the correct buffer.
 	(nnimap-parse-flags): Implement by using `read' instead of
@@ -7,6 +11,8 @@
 	(nnimap-flags-to-marks): Pass on permanent-flags.
 	(nnimap-make-process-buffer): Record the server name.
 	(nnimap-parse-flags): Fix typo.
+	(nnimap-request-scan): Run split on the server in general, not just a
+	single group.
 
 	* nnmail.el (nnmail-split-incoming): Take an optional junk-func
 	parameter, and propagate this downwards.

@@ -587,7 +587,6 @@ not done by default on servers that doesn't support that command.")
 
 (deffoo nnimap-request-scan (&optional group server)
   (when (and (nnimap-possibly-change-group nil server)
-	     (equal group nnimap-inbox)
 	     nnimap-inbox
 	     nnimap-split-methods)
     (message "nnimap %s splitting mail..." server)
