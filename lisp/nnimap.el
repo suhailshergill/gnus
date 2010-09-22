@@ -502,7 +502,8 @@ not done by default on servers that doesn't support that command.")
     nil)
    (t
     (let ((deletable-articles
-	   (if force
+	   (if (or force
+		   (eq nnmail-expiry-wait 'immediate))
 	       articles
 	     (gnus-sorted-intersection
 	      articles
