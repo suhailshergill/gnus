@@ -346,7 +346,8 @@ Use ALT-TEXT for the image string."
 
 (defun gnus-html-image-fetched (status buffer image)
   (url-store-in-cache (current-buffer))
-  (when (and (search-forward "\n\n" nil t)
+  (when (and (or (search-forward "\n\n" nil t)
+                 (search-forward "\r\n\r\n" nil t))
              (buffer-live-p buffer))
     (let ((data (buffer-substring (point) (point-max))))
       (with-current-buffer buffer
