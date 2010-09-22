@@ -421,8 +421,9 @@ not done by default on servers that doesn't support that command.")
 	      (goto-char (point-max))
 	      (cond
 	       (marks
-		(setq high (nth 3 (car marks))
-		      low (nth 4 (car marks))))
+		(let ((uidnext (nth 5 (car marks))))
+		  (setq high (or (nth 3 (car marks)) (1- uidnext))
+			low (or (nth 4 (car marks)) uidnext))))
 	       ((re-search-backward "UIDNEXT \\([0-9]+\\)" nil t)
 		(setq high (1- (string-to-number (match-string 1)))
 		      low 1)))))
@@ -788,8 +789,10 @@ not done by default on servers that doesn't support that command.")
 			     (if high
 				 (cons low high)
 			       ;; No articles in this group.
-			       (cons (1- uidnext) uidnext)))
-	  (setcdr (gnus-active group) high))
+			       (cons uidnext (1- uidnext))))
+	  (setcdr (gnus-active group) (or high (1- uidnext))))
+	(unless high
+	  (setq high (or high (1- uidnext))))
 	;; Then update the list of read articles.
 	(let* ((unread
 		(gnus-compress-sequence
@@ -860,10 +863,10 @@ not done by default on servers that doesn't support that command.")
 	    (setq mark (assoc flag marks))
 	    (if (not mark)
 		(push (list flag (car article)) marks)
-	      (setcdr mark (cons (car article) (cdr mark)))))
-	  (push (list group existing marks high low uidnext start-article
-		      permanent-flags)
-		data))))
+	      (setcdr mark (cons (car article) (cdr mark))))))
+	(push (list group existing marks high low uidnext start-article
+		    permanent-flags)
+	      data)))
     data))
 
 (defun nnimap-parse-flags (sequences)
@@ -889,7 +892,8 @@ not done by default on servers that doesn't support that command.")
 			   (and (search-forward "UIDNEXT "
 						 (or end (point-min)) t)
 				(read (current-buffer))))
-		     (goto-char end))
+		     (goto-char end)
+		     (forward-line -1))
 		   ;; The UID FETCH FLAGS was successful.
 		   (search-forward (format "\n%d OK " flag-sequence) nil t))
 	  (setq start (point))

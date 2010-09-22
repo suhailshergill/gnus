@@ -2,6 +2,9 @@
 
 	* nnimap.el (nnimap-request-expire-articles): If nnmail-expiry-wait is
 	immediate, then expire all articles.
+	(nnimap-update-info): Fix off-by-one errors.
+	(nnimap-flags-to-marks): Would return no marks lists for group with no
+	flags.  Instead return the other data.
 
 2010-09-22  Julien Danjou  <julien@danjou.info>
 
