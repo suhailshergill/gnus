@@ -404,6 +404,7 @@ Return a string with image data."
               (let ((image (gnus-html-rescale-image image data size)))
                 (delete-region start end)
                 (gnus-put-image image alt-text 'external)
+                (gnus-put-text-property start (point) 'help-echo alt-text)
                 (gnus-overlay-put (gnus-make-overlay start (point)) 'local-map
                                   gnus-html-displayed-image-map)
                 (gnus-put-text-property start (point) 'gnus-alt-text alt-text)
