@@ -371,7 +371,8 @@ Return a string with image data."
   (with-temp-buffer
     (mm-disable-multibyte)
     (url-cache-extract (url-cache-create-filename url))
-    (when (search-forward "\n\n" nil t)
+    (when (or (search-forward "\n\n" nil t)
+              (search-forward "\r\n\r\n" nil t))
       (buffer-substring (point) (point-max)))))
 
 (defun gnus-html-put-image (data start end &optional url alt-text)

@@ -4,6 +4,9 @@
 
 2010-09-22  Julien Danjou  <julien@danjou.info>
 
+	* gnus-html.el (gnus-html-get-image-data): Search also for \r\n\r\n to
+	get the start of data.
+
 	* gnus-group.el (gnus-group-update-hook): Call gnus-group-add-icon by
 	default.
 	(gnus-group-add-icon): Move to gnus-group.el, and rewrite so it works.
