@@ -226,10 +226,18 @@ If it is down, start it up (again)."
   (eq (nth 1 (assoc method gnus-opened-servers))
       'denied))
 
+(defvar gnus-backend-trace t)
+
 (defun gnus-open-server (gnus-command-method)
   "Open a connection to GNUS-COMMAND-METHOD."
   (when (stringp gnus-command-method)
     (setq gnus-command-method (gnus-server-to-method gnus-command-method)))
+  (when gnus-backend-trace
+    (with-current-buffer (get-buffer-create "*gnus trace*")
+      (buffer-disable-undo)
+      (goto-char (point-max))
+      (insert (format-time-string "%H:%M:%S")
+	      (format " %S\n" gnus-command-method))))
   (let ((elem (assoc gnus-command-method gnus-opened-servers))
 	(server (gnus-method-to-server-name gnus-command-method)))
     ;; If this method was previously denied, we just return nil.
