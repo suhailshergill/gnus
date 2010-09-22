@@ -1,5 +1,11 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-split-incoming-mail): Delete 'junk.
+	(nnimap-request-list): Nix out group in the correct buffer.
+
+	* nnmail.el (nnmail-split-incoming): Take an optional junk-func
+	parameter, and propagate this downwards.
+
 	* nnimap.el (nnimap-request-list): Set the current nnimap group to nil,
 	since EXAMINE changes it on the server.
 

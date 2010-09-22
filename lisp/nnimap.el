@@ -589,6 +589,7 @@ not done by default on servers that doesn't support that command.")
 	     (equal group nnimap-inbox)
 	     nnimap-inbox
 	     nnimap-split-methods)
+    (message "nnimap %s splitting mail..." server)
     (nnimap-split-incoming-mail)))
 
 (defun nnimap-marks-to-flags (marks)
@@ -665,8 +666,8 @@ not done by default on servers that doesn't support that command.")
 	     (nnimap-get-groups)))
 	  sequences responses)
       (when groups
-	(setf (nnimap-group nnimap-object) nil)
 	(with-current-buffer (nnimap-buffer)
+	  (setf (nnimap-group nnimap-object) nil)
 	  (dolist (group groups)
 	    (push (list (nnimap-send-command "EXAMINE %S" (utf7-encode group t))
 			group)
@@ -1086,32 +1087,38 @@ not done by default on servers that doesn't support that command.")
 	(nnmail-split-incoming (current-buffer)
 			       #'nnimap-save-mail-spec
 			       nil nil
-			       #'nnimap-dummy-active-number)
+			       #'nnimap-dummy-active-number
+			       #'nnimap-save-mail-spec)
 	(when nnimap-incoming-split-list
 	  (let ((specs (nnimap-make-split-specs nnimap-incoming-split-list))
-		sequences)
+		sequences junk-articles)
 	    ;; Create any groups that doesn't already exist on the
 	    ;; server first.
 	    (dolist (spec specs)
-	      (unless (member (car spec) groups)
+	      (when (and (not (member (car spec) groups))
+			 (not (eq (car spec) 'junk)))
 		(nnimap-command "CREATE %S" (utf7-encode (car spec) t))))
 	    ;; Then copy over all the messages.
 	    (erase-buffer)
 	    (dolist (spec specs)
 	      (let ((group (car spec))
 		    (ranges (cdr spec)))
-		(push (list (nnimap-send-command "UID COPY %s %S"
-						 (nnimap-article-ranges ranges)
-						 (utf7-encode group t))
-			    ranges)
-		      sequences)))
+		(if (eq group 'junk)
+		    (setq junk-articles ranges)
+		  (push (list (nnimap-send-command
+			       "UID COPY %s %S"
+			       (nnimap-article-ranges ranges)
+			       (utf7-encode group t))
+			      ranges)
+			sequences))))
 	    ;; Wait for the last COPY response...
 	    (when sequences
 	      (nnimap-wait-for-response (caar sequences))
 	      ;; And then mark the successful copy actions as deleted,
 	      ;; and possibly expunge them.
 	      (nnimap-mark-and-expunge-incoming
-	       (nnimap-parse-copied-articles sequences)))))))))
+	       (nnimap-parse-copied-articles sequences))
+	      (nnimap-mark-and-expunge-incoming junk-articles))))))))
 
 (defun nnimap-mark-and-expunge-incoming (range)
   (when range
@@ -1191,7 +1198,10 @@ not done by default on servers that doesn't support that command.")
     (if (not (re-search-forward "X-nnimap-article: \\([0-9]+\\)" nil t))
 	(error "Invalid nnimap mail")
       (setq article (string-to-number (match-string 1))))
-    (push (list article group-art)
+    (push (list article
+		(if (eq group-art 'junk)
+		    (list (cons 'junk 1))
+		  group-art))
 	  nnimap-incoming-split-list)))
 
 (provide 'nnimap)
