@@ -888,6 +888,7 @@ not done by default on servers that doesn't support that command.")
 			   (and (search-forward "PERMANENTFLAGS "
 						 (or end (point-min)) t)
 				(read (current-buffer))))
+		     (goto-char start)
 		     (setq uidnext
 			   (and (search-forward "UIDNEXT "
 						 (or end (point-min)) t)
