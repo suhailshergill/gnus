@@ -792,7 +792,7 @@ not done by default on servers that doesn't support that command.")
 			       (cons uidnext (1- uidnext))))
 	  (setcdr (gnus-active group) (or high (1- uidnext))))
 	(unless high
-	  (setq high (or high (1- uidnext))))
+	  (setq high (1- uidnext)))
 	;; Then update the list of read articles.
 	(let* ((unread
 		(gnus-compress-sequence

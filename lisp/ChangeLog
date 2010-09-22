@@ -1,6 +1,7 @@
 2010-09-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-parse-flags): Parse the data in any order.
+	(nnimap-update-info): Fix up code slightly.
 
 	* gnus-int.el (gnus-open-server): Add tracing for performance
 	debugging.
