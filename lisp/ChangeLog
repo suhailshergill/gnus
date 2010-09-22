@@ -1,4 +1,19 @@
+2010-09-22  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* nnimap.el (nnimap-delete-article): Tell user if expunge won't happen.
+
 2010-09-22  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-get-image-data): Search also for \r\n\r\n to
+	get the start of data.
+	(gnus-html-encode-url): Add this function to encode special chars in
+	URL.
+	(gnus-html-wash-images): Use gnus-html-encode-url to encode URL.
+	(gnus-html-prefetch-images): Use gnus-html-encode-url to encode URL.
+
+	* gnus-group.el (gnus-group-update-hook): Call gnus-group-add-icon by
+	default.
+	(gnus-group-add-icon): Move to gnus-group.el, and rewrite so it works.
 
 	* gnus-html.el (gnus-html-wash-images): Use xml-substitute-special on
 	images alt-text.
