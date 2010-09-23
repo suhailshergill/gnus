@@ -1,3 +1,8 @@
+2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-update-info): When UIDNEXT is present, use that for
+	the active instead of the high number, which is usually too low.
+
 2010-09-23  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* netrc.el (netrc-parse): Remove encrypt.el mentions.

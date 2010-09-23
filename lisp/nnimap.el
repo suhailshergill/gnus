@@ -419,14 +419,11 @@ not done by default on servers that doesn't support that command.")
 	      (when info
 		(nnimap-update-infos marks (list info)))
 	      (goto-char (point-max))
-	      (cond
-	       (marks
-		(let ((uidnext (nth 5 (car marks))))
-		  (setq high (or (nth 3 (car marks)) (1- uidnext))
-			low (or (nth 4 (car marks)) uidnext))))
-	       ((re-search-backward "UIDNEXT \\([0-9]+\\)" nil t)
-		(setq high (1- (string-to-number (match-string 1)))
-		      low 1)))))
+	      (let ((uidnext (nth 5 (car marks))))
+		(setq high (if uidnext
+			       (1- uidnext)
+			     (nth 3 (car marks)))
+		      low (or (nth 4 (car marks)) uidnext)))))
 	  (erase-buffer)
 	  (insert
 	   (format
@@ -782,11 +779,13 @@ not done by default on servers that doesn't support that command.")
       (let ((group (gnus-info-group info))
 	    (completep (and start-article
 			    (= start-article 1))))
+	(when uidnext
+	  (setq high (1- uidnext)))
 	;; First set the active ranges based on high/low.
 	(if (or completep
 		(not (gnus-active group)))
 	    (gnus-set-active group
-			     (if high
+			     (if (and low high)
 				 (cons low high)
 			       ;; No articles in this group.
 			       (cons uidnext (1- uidnext))))
