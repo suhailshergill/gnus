@@ -295,6 +295,7 @@ If you want to modify the group buffer, you can use this hook."
 (defcustom gnus-group-update-hook nil
   "Hook called when a group line is changed."
   :group 'gnus-group-visual
+  :version "24.1"
   :type 'hook)
 
 (defcustom gnus-useful-groups
