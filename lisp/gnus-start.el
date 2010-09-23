@@ -1765,11 +1765,14 @@ If SCAN, request a scan of that group as well."
     (dolist (elem type-cache)
       (destructuring-bind (method method-type infos early-data) elem
 	(when (and method infos)
-	  ;; See if any of the groups from this method require updating.
-	  (gnus-read-active-for-groups method infos early-data)
-	  (dolist (info infos)
-	    (inline (gnus-get-unread-articles-in-group
-		     info (gnus-active (gnus-info-group info))))))))
+	  (let ((updatep (gnus-check-backend-function
+			  'request-update-info (car method))))
+	    ;; See if any of the groups from this method require updating.
+	    (gnus-read-active-for-groups method infos early-data)
+	    (dolist (info infos)
+	      (inline (gnus-get-unread-articles-in-group
+		       info (gnus-active (gnus-info-group info))
+		       updatep)))))))
     (gnus-message 6 "Checking new news...done")))
 
 (defun gnus-method-rank (type method)

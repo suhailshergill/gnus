@@ -584,7 +584,14 @@ If GROUP is nil, all groups on GNUS-COMMAND-METHOD are scanned."
 	       (and group (gnus-group-real-name group))
 	       (nth 1 gnus-command-method)))))
 
-(defsubst gnus-request-update-info (info gnus-command-method)
+(defun gnus-request-update-info (info gnus-command-method)
+  (when (stringp gnus-command-method)
+    (setq gnus-command-method (gnus-server-to-method gnus-command-method)))
+  (funcall (gnus-get-function gnus-command-method 'request-update-info)
+	   (gnus-group-real-name (gnus-info-group info)) info
+	   (nth 1 gnus-command-method)))
+
+(defsubst gnus-request-marks (info gnus-command-method)
   "Request that GNUS-COMMAND-METHOD update INFO."
   (when (stringp gnus-command-method)
     (setq gnus-command-method (gnus-server-to-method gnus-command-method)))

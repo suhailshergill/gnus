@@ -1,5 +1,20 @@
 2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-get-unread-articles): Allow backends to update
+	the info.
+	(gnus-get-unread-articles): Only call updatep on backends that support
+	it.
+
+	* nnweb.el (nnweb-request-update-info): NOOP.
+
+	* nnmaildir.el (nnmaildir-request-marks): Renamed from -update-info.
+
+	* nnfolder.el (nnfolder-request-marks): Renamed from -update-info,
+	since it only deals with marks.
+
+	* gnus-int.el (gnus-request-marks): Renamed gnus-request-update-info to
+	gnus-request-marks, and make a new gnus-request-update-info.
+
 	* nnimap.el (nnimap-update-info): When UIDNEXT is present, use that for
 	the active instead of the high number, which is usually too low.
 
