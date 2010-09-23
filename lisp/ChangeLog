@@ -1,3 +1,8 @@
+2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-summary-local-variables): Prepare for list/range
+	makeover.
+
 2010-09-23  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnimap.el (nnimap-retrieve-headers): Return 'headers.
