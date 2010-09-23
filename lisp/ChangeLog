@@ -1,3 +1,7 @@
+2010-09-23  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnimap.el (nnimap-retrieve-headers): Return 'headers.
+
 2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-start.el (gnus-fixup-nnimap-unread-after-getting-new-news):

@@ -135,7 +135,7 @@ not done by default on servers that doesn't support that command.")
 	(nnimap-transform-headers))
       (insert-buffer-substring
        (nnimap-find-process-buffer (current-buffer))))
-    t))
+    'headers))
 
 (defun nnimap-transform-headers ()
   (goto-char (point-min))
