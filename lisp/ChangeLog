@@ -1,3 +1,8 @@
+2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-stream): Mention starttls.
+	(nnimap-open-connection): Add starttls support.
+
 2010-09-23  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-run-imap): Fix up nnir to work with the new nnimap.

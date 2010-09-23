@@ -51,7 +51,7 @@ it will default to `imap'.")
 
 (defvoo nnimap-stream 'ssl
   "How nnimap will talk to the IMAP server.
-Values are `ssl', `network' or `shell'.")
+Values are `ssl', `network', `starttls' or `shell'.")
 
 (defvoo nnimap-shell-program (if (boundp 'imap-shell-program)
 				 (if (listp imap-shell-program)
@@ -265,6 +265,11 @@ not done by default on servers that doesn't support that command.")
 	       "*nnimap*" (current-buffer) nnimap-address
 	       (or nnimap-server-port "imap"))
 	      '("imap"))
+	     ((eq nnimap-stream 'starttls)
+	      (starttls-open-stream
+	       "*nnimap*" (current-buffer) nnimap-address
+	       (or nnimap-server-port "imap"))
+	      '("imap"))
 	     ((eq nnimap-stream 'ssl)
 	      (open-tls-stream
 	       "*nnimap*" (current-buffer) nnimap-address
@@ -281,6 +286,9 @@ not done by default on servers that doesn't support that command.")
 		       '(open run)))
 	(gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
 	(when (setq connection-result (nnimap-wait-for-connection))
+	  (when (eq nnimap-stream 'starttls)
+	    (nnimap-send-command "STARTTLS")
+	    (starttls-negotiate (nnimap-process nnimap-object)))
 	  (unless (equal connection-result "PREAUTH")
 	    (if (not (setq credentials
 			   (if (eq nnimap-authenticator 'anonymous)
