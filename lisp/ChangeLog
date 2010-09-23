@@ -1,5 +1,8 @@
 2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-request-update-info): Protect against backends not
+	having the function.
+
 	* nnimap.el (nnimap-stream): Mention starttls.
 	(nnimap-open-connection): Add starttls support.
 
