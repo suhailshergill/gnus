@@ -1,5 +1,8 @@
 2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-use-backend-marks): New variable.
+	(gnus-get-unread-articles-in-group): Use it.
+
 	* gnus-sum.el (gnus-summary-local-variables): Prepare for list/range
 	makeover.
 

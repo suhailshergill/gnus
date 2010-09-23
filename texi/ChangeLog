@@ -1,3 +1,7 @@
+2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Startup Variables): Mention gnus-use-backend-marks.
+
 2010-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Expunging mailboxes): Update name of the expunging
