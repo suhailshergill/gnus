@@ -139,15 +139,22 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-transform-headers ()
   (goto-char (point-min))
-  (let (article bytes lines size)
+  (let (article bytes lines size string)
     (block nil
       (while (not (eobp))
 	(while (not (looking-at "^\\* [0-9]+ FETCH.*UID \\([0-9]+\\)"))
 	  (delete-region (point) (progn (forward-line 1) (point)))
 	  (when (eobp)
 	    (return)))
-	(setq article (match-string 1)
-	      bytes (nnimap-get-length)
+	(setq article (match-string 1))
+	;; Unfold quoted {number} strings.
+	(while (re-search-forward "[^]] {\\([0-9]+\\)}\r\n"
+				  (1+ (line-end-position)) t)
+	  (setq size (string-to-number (match-string 1)))
+	  (delete-region (+ (match-beginning 0) 2) (point))
+	  (setq string (delete-region (point) (+ (point) size)))
+	  (insert (format "%S" string)))
+	(setq bytes (nnimap-get-length)
 	      lines nil)
 	(beginning-of-line)
 	(setq size
@@ -158,10 +165,7 @@ not done by default on servers that doesn't support that command.")
 	(beginning-of-line)
 	(when (search-forward "BODYSTRUCTURE" (line-end-position) t)
 	  (let ((structure (ignore-errors
-			     (save-restriction
-			       (narrow-to-region
-				(point) (line-end-position))
-			       (read (current-buffer))))))
+			     (read (current-buffer)))))
 	    (while (and (consp structure)
 			(not (stringp (car structure))))
 	      (setq structure (car structure)))

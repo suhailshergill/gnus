@@ -2,6 +2,7 @@
 
 	* nnimap.el (nnimap-transform-headers): Don't bug out on invalid
 	BODYSTRUCTUREs.
+	(nnimap-transform-headers): Unfold quoted {42} headers.
 
 	* gnus-start.el (gnus-get-unread-articles): Allow backends to update
 	the info.
