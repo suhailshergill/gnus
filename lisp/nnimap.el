@@ -157,7 +157,11 @@ not done by default on servers that doesn't support that command.")
 		   (match-string 1)))
 	(beginning-of-line)
 	(when (search-forward "BODYSTRUCTURE" (line-end-position) t)
-	  (let ((structure (ignore-errors (read (current-buffer)))))
+	  (let ((structure (ignore-errors
+			     (save-restriction
+			       (narrow-to-region
+				(point) (line-end-position))
+			       (read (current-buffer))))))
 	    (while (and (consp structure)
 			(not (stringp (car structure))))
 	      (setq structure (car structure)))

@@ -1,5 +1,8 @@
 2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-transform-headers): Don't bug out on invalid
+	BODYSTRUCTUREs.
+
 	* gnus-start.el (gnus-get-unread-articles): Allow backends to update
 	the info.
 	(gnus-get-unread-articles): Only call updatep on backends that support
