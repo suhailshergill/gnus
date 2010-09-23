@@ -1,3 +1,7 @@
+2010-09-23  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: Add log count to header.
+
 2010-09-02  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* post-receive: More subject formatting.
