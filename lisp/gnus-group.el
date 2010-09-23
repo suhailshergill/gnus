@@ -1673,7 +1673,7 @@ Some value are bound so the form can use them."
 
 (defun gnus-group-highlight-line (group beg end)
   "Highlight the current line according to `gnus-group-highlight'.
-GROUP is current group, and the line to highlight starts at START
+GROUP is current group, and the line to highlight starts at BEG
 and ends at END."
   (let ((face (cdar (gnus-group-update-eval-form
                       group
