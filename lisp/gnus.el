@@ -3694,8 +3694,8 @@ that that variable is buffer-local to the summary buffers."
 
 (defsubst gnus-sloppily-equal-method-parameters (m1 m2)
   ;; Check parameters for sloppy equalness.
-  (let ((p1 (copy-list (cddr m1)))
-	(p2 (copy-list (cddr m2)))
+  (let ((p1 (copy-sequence (cddr m1)))
+	(p2 (copy-sequence (cddr m2)))
 	e1 e2)
     (block nil
       (while (setq e1 (pop p1))
@@ -3703,7 +3703,7 @@ that that variable is buffer-local to the summary buffers."
 	  ;; The parameter doesn't exist in p2.
 	  (return nil))
 	(setq p2 (delq e2 p2))
-	(unless (equalp e1 e2)
+	(unless (equal e1 e2)
 	  (if (not (and (stringp (cadr e1))
 			(stringp (cadr e2))))
 	      (return nil)

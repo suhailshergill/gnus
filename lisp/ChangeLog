@@ -1,3 +1,10 @@
+2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el (gnus-sloppily-equal-method-parameters): Use copy-sequence
+	instead of the cl.el copy-list.
+	(gnus-sloppily-equal-method-parameters): Use equal instead of the cl
+	equalp.
+
 2010-09-24  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gmm-utils.el (gmm-tool-bar-from-list): Always use tool-bar-local-item
