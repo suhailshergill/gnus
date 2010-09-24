@@ -1,5 +1,11 @@
 2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-fetch-faq): Removed.
+
+	* gnus-group.el (gnus-group-fetch-faq): Removed.
+
+	* gnus.el (gnus-group-faq-directory): Removed.
+
 	* gnus-group.el (gnus-group-fetch-charter): Removed.
 
 	* gnus.el (gnus-group-charter-alist): Removed.

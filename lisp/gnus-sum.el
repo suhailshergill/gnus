@@ -2154,11 +2154,9 @@ increase the score of each group you read."
 
 (gnus-define-keys (gnus-summary-help-map "H" gnus-summary-mode-map)
   "v" gnus-version
-  "f" gnus-summary-fetch-faq
   "d" gnus-summary-describe-group
   "h" gnus-summary-describe-briefly
   "i" gnus-info-find-node
-  "c" gnus-group-fetch-charter
   "C" gnus-group-fetch-control)
 
 (gnus-define-keys (gnus-summary-backend-map "B" gnus-summary-mode-map)
@@ -2733,11 +2731,7 @@ gnus-summary-show-article-from-menu-as-charset-%s" cs))))
 	 ["Randomize" gnus-summary-sort-by-random t]
 	 ["Original sort" gnus-summary-sort-by-original t])
 	("Help"
-	 ["Fetch group FAQ" gnus-summary-fetch-faq t]
 	 ["Describe group" gnus-summary-describe-group t]
-	 ["Fetch charter" gnus-group-fetch-charter
-	  ,@(if (featurep 'xemacs) nil
-	      '(:help "Display the charter of the current group"))]
 	 ["Fetch control message" gnus-group-fetch-control
 	  ,@(if (featurep 'xemacs) nil
 	      '(:help "Display the archived control message for the current group"))]
@@ -7323,23 +7317,6 @@ The state which existed when entering the ephemeral is reset."
 	       (substring name (match-end 0)))
        t)))
   (gnus-message 3 "This dead summary is now alive again"))
-
-;; Suggested by Andrew Eskilsson <pi92ae@pt.hk-r.se>.
-(defun gnus-summary-fetch-faq (&optional faq-dir)
-  "Fetch the FAQ for the current group.
-If FAQ-DIR (the prefix), prompt for a directory to search for the faq
-in."
-  (interactive
-   (list
-    (when current-prefix-arg
-      (completing-read
-       "FAQ dir: " (and (listp gnus-group-faq-directory)
-			(mapcar 'list
-				gnus-group-faq-directory))))))
-  (let (gnus-faq-buffer)
-    (when (setq gnus-faq-buffer
-		(gnus-group-fetch-faq gnus-newsgroup-name faq-dir))
-      (gnus-configure-windows 'summary-faq))))
 
 ;; Suggested by Per Abrahamsen <amanda@iesd.auc.dk>.
 (defun gnus-summary-describe-group (&optional force)

@@ -741,7 +741,6 @@ simple manner.")
 (gnus-define-keys (gnus-group-help-map "H" gnus-group-mode-map)
   "C" gnus-group-fetch-control
   "d" gnus-group-describe-group
-  "f" gnus-group-fetch-faq
   "v" gnus-version)
 
 (gnus-define-keys (gnus-group-sub-map "S" gnus-group-mode-map)
@@ -807,11 +806,6 @@ simple manner.")
        ["Describe" gnus-group-describe-group :active (gnus-group-group-name)
 	,@(if (featurep 'xemacs) nil
 	    '(:help "Display description of the current group"))]
-       ["Fetch FAQ" gnus-group-fetch-faq (gnus-group-group-name)]
-       ["Fetch charter" gnus-group-fetch-charter
-	:active (gnus-group-group-name)
-	,@(if (featurep 'xemacs) nil
-	    '(:help "Display the charter of the current group"))]
        ["Fetch control message" gnus-group-fetch-control
 	:active (gnus-group-group-name)
 	,@(if (featurep 'xemacs) nil
@@ -4017,34 +4011,6 @@ If DONT-SCAN is non-nil, scan non-activated groups as well."
       (gnus-group-next-unread-group 1 t))
     (gnus-summary-position-point)
     ret))
-
-(defun gnus-group-fetch-faq (group &optional faq-dir)
-  "Fetch the FAQ for the current group.
-If given a prefix argument, prompt for the FAQ dir
-to use."
-  (interactive
-   (list
-    (gnus-group-group-name)
-    (when current-prefix-arg
-      (completing-read
-       "FAQ dir: " (and (listp gnus-group-faq-directory)
-			(mapcar #'list
-				gnus-group-faq-directory))))))
-  (unless group
-    (error "No group name given"))
-  (let ((dirs (or faq-dir gnus-group-faq-directory))
-	dir found file)
-    (unless (listp dirs)
-      (setq dirs (list dirs)))
-    (while (and (not found)
-		(setq dir (pop dirs)))
-      (let ((name (gnus-group-real-name group)))
-	(setq file (expand-file-name name dir)))
-      (if (not (file-exists-p file))
-	  (gnus-message 1 "No such file: %s" file)
-	(let ((enable-local-variables nil))
-	  (find-file file)
-	  (setq found t))))))
 
 (defun gnus-group-fetch-control (group)
   "Fetch the archived control messages for the current group.

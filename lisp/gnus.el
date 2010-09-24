@@ -1469,46 +1469,6 @@ list, Gnus will try all the methods in the list until it finds a match."
 					(nnweb "refer" (nnweb-type google)))
 				 gnus-select-method))))
 
-(defcustom gnus-group-faq-directory
-  '("/ftp@mirrors.aol.com:/pub/rtfm/usenet/"
-    "/ftp@sunsite.doc.ic.ac.uk:/pub/usenet/news-faqs/"
-    "/ftp@src.doc.ic.ac.uk:/usenet/news-FAQS/"
-    "/ftp@ftp.seas.gwu.edu:/pub/rtfm/"
-    "/ftp@ftp.pasteur.fr:/pub/FAQ/"
-    "/ftp@rtfm.mit.edu:/pub/usenet/"
-    "/ftp@ftp.uni-paderborn.de:/pub/FAQ/"
-    "/ftp@ftp.sunet.se:/pub/usenet/"
-    "/ftp@nctuccca.nctu.edu.tw:/pub/Documents/rtfm/usenet-by-group/"
-    "/ftp@hwarang.postech.ac.kr:/pub/usenet/"
-    "/ftp@ftp.hk.super.net:/mirror/faqs/")
-  "*Directory where the group FAQs are stored.
-This will most commonly be on a remote machine, and the file will be
-fetched by ange-ftp.
-
-This variable can also be a list of directories.  In that case, the
-first element in the list will be used by default.  The others can
-be used when being prompted for a site.
-
-Note that Gnus uses an aol machine as the default directory.  If this
-feels fundamentally unclean, just think of it as a way to finally get
-something of value back from them.
-
-If the default site is too slow, try one of these:
-
-   North America: mirrors.aol.com		 /pub/rtfm/usenet
-		  ftp.seas.gwu.edu		 /pub/rtfm
-		  rtfm.mit.edu			 /pub/usenet
-   Europe:	  ftp.uni-paderborn.de		 /pub/FAQ
-		  src.doc.ic.ac.uk               /usenet/news-FAQS
-		  ftp.sunet.se			 /pub/usenet
-		  ftp.pasteur.fr                 /pub/FAQ
-   Asia:	  nctuccca.nctu.edu.tw		 /pub/Documents/rtfm/usenet-by-group/
-		  hwarang.postech.ac.kr		 /pub/usenet
-		  ftp.hk.super.net		 /mirror/faqs"
-  :group 'gnus-group-various
-  :type '(choice directory
-		 (repeat directory)))
-
 (defcustom gnus-group-fetch-control-use-browse-url nil
   "*Non-nil means that control messages are displayed using `browse-url'.
 Otherwise they are fetched with ange-ftp and displayed in an ephemeral
