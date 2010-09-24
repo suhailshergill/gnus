@@ -1,4 +1,4 @@
-2010-09-24  Michael Welsh Duggan  <md5i@md5i.com>
+2010-09-24  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)
 
 	* nnimap.el (nnimap-split-incoming-mail): Fix paren typo in the 'junk
 	handling.
