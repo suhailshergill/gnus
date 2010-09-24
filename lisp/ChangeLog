@@ -1,5 +1,9 @@
 2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-fetch-charter): Removed.
+
+	* gnus.el (gnus-group-charter-alist): Removed.
+
 	* gnus-group.el (gnus-group-archive-directory): Removed.
 	(gnus-group-recent-archive-directory): Ditto.
 	(gnus-group-make-archive-group): Removed.

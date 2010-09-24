@@ -739,7 +739,6 @@ simple manner.")
   "e" gnus-score-edit-all-score)
 
 (gnus-define-keys (gnus-group-help-map "H" gnus-group-mode-map)
-  "c" gnus-group-fetch-charter
   "C" gnus-group-fetch-control
   "d" gnus-group-describe-group
   "f" gnus-group-fetch-faq
@@ -4046,34 +4045,6 @@ to use."
 	(let ((enable-local-variables nil))
 	  (find-file file)
 	  (setq found t))))))
-
-(defun gnus-group-fetch-charter (group)
-  "Fetch the charter for the current group.
-If given a prefix argument, prompt for a group."
-  (interactive
-   (list (or (when current-prefix-arg
-	       (gnus-group-completing-read "Group: "))
-	     (gnus-group-group-name)
-	     gnus-newsgroup-name)))
-  (unless group
-    (error "No group name given"))
-  (require 'mm-url)
-  (condition-case nil (require 'url-http) (error nil))
-  (let ((name (mm-url-form-encode-xwfu (gnus-group-real-name group)))
-	url hierarchy)
-    (when (string-match "\\(^[^\\.]+\\)\\..*" name)
-      (setq hierarchy (match-string 1 name))
-      (if (and (setq url (cdr (assoc hierarchy gnus-group-charter-alist)))
-	       (if (fboundp 'url-http-file-exists-p)
-		   (url-http-file-exists-p (eval url))
-		 t))
-	  (browse-url (eval url))
-	(setq url (concat "http://" hierarchy
-			  ".news-admin.org/charters/" name))
-	(if (and (fboundp 'url-http-file-exists-p)
-		 (url-http-file-exists-p url))
-	    (browse-url url)
-	  (gnus-group-fetch-control group))))))
 
 (defun gnus-group-fetch-control (group)
   "Fetch the archived control messages for the current group.
