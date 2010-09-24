@@ -5370,18 +5370,18 @@ or a straight list of headers."
 	    (if (= gnus-tmp-lines -1)
 		(setq gnus-tmp-lines "?")
 	      (setq gnus-tmp-lines (number-to-string gnus-tmp-lines)))
-              (gnus-put-text-property
-	       (point)
-	       (progn (eval gnus-summary-line-format-spec) (point))
-               'gnus-number number)
-	      (when gnus-visual-p
-		(forward-line -1)
-		(gnus-summary-highlight-line)
-		(when gnus-summary-update-hook
-		  (gnus-run-hooks 'gnus-summary-update-hook))
-		(forward-line 1))
+	    (gnus-put-text-property
+	     (point)
+	     (progn (eval gnus-summary-line-format-spec) (point))
+	     'gnus-number number)
+	    (when gnus-visual-p
+	      (forward-line -1)
+	      (gnus-summary-highlight-line)
+	      (when gnus-summary-update-hook
+		(gnus-run-hooks 'gnus-summary-update-hook))
+	      (forward-line 1))
 
-	      (setq gnus-tmp-prev-subject simp-subject)))
+	    (setq gnus-tmp-prev-subject simp-subject)))
 
 	(when (nth 1 thread)
 	  (push (list (max 0 gnus-tmp-level)
