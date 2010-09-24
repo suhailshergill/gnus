@@ -987,7 +987,7 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-command (&rest args)
   (erase-buffer)
-  (setf (nnimap-last-command-time) (current-time))
+  (setf (nnimap-last-command-time nnimap-object) (current-time))
   (let* ((sequence (apply #'nnimap-send-command args))
 	 (response (nnimap-get-response sequence)))
     (if (equal (caar response) "OK")
