@@ -1,5 +1,8 @@
 2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-command): Register the last command time so
+	that we can use it for idling NOOPs.
+
 	* starttls.el: (starttls-open-stream): Add autoload cookie.
 
 2010-09-24  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)

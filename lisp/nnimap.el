@@ -91,7 +91,8 @@ not done by default on servers that doesn't support that command.")
   "Internal variable with default value for `nnimap-split-download-body'.")
 
 (defstruct nnimap
-  group process commands capabilities select-result newlinep server)
+  group process commands capabilities select-result newlinep server
+  last-command-time)
 
 (defvar nnimap-object nil)
 
@@ -986,6 +987,7 @@ not done by default on servers that doesn't support that command.")
 
 (defun nnimap-command (&rest args)
   (erase-buffer)
+  (setf (nnimap-last-command-time) (current-time))
   (let* ((sequence (apply #'nnimap-send-command args))
 	 (response (nnimap-get-response sequence)))
     (if (equal (caar response) "OK")
