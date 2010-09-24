@@ -1,5 +1,7 @@
 2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-update-info): Protect against nil uidnexts.
+
 	* gnus-cache.el (gnus-cache-braid-heads): When braiding heads, don't
 	use the same article number for all the cached articles.
 

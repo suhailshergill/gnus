@@ -824,12 +824,20 @@ not done by default on servers that doesn't support that command.")
 	(if (or completep
 		(not (gnus-active group)))
 	    (gnus-set-active group
-			     (if (and low high)
-				 (cons low high)
+			     (cond
+			      ((and low high)
+			       (cons low high))
+			      (uidnext
 			       ;; No articles in this group.
-			       (cons uidnext (1- uidnext))))
+			       (cons uidnext (1- uidnext)))
+			      (start-article
+			       (cons start-article (1- start-article)))
+			      (t
+			       ;; No articles and no uidnext.
+			       nil)))
 	  (setcdr (gnus-active group) (or high (1- uidnext))))
-	(unless high
+	(when (and (not high)
+		   uidnext)
 	  (setq high (1- uidnext)))
 	;; Then update the list of read articles.
 	(let* ((unread
