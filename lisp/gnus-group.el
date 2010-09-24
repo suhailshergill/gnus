@@ -55,18 +55,6 @@
 (autoload 'gnus-agent-total-fetched-for "gnus-agent")
 (autoload 'gnus-cache-total-fetched-for "gnus-cache")
 
-(defcustom gnus-group-archive-directory
-  "/ftp@ftp.hpc.uh.edu:/pub/emacs/ding-list/"
-  "*The address of the (ding) archives."
-  :group 'gnus-group-foreign
-  :type 'directory)
-
-(defcustom gnus-group-recent-archive-directory
-  "/ftp@ftp.hpc.uh.edu:/pub/emacs/ding-list-recent/"
-  "*The address of the most recent (ding) articles."
-  :group 'gnus-group-foreign
-  :type 'directory)
-
 (defcustom gnus-no-groups-message "No Gnus is good news"
   "*Message displayed by Gnus when no groups are available."
   :group 'gnus-start
@@ -657,7 +645,6 @@ simple manner.")
   "d" gnus-group-make-directory-group
   "h" gnus-group-make-help-group
   "u" gnus-group-make-useful-group
-  "a" gnus-group-make-archive-group
   "l" gnus-group-nnimap-edit-acl
   "m" gnus-group-make-group
   "E" gnus-group-edit-group
@@ -925,7 +912,6 @@ simple manner.")
 	["Make a foreign group..." gnus-group-make-group t]
 	["Add a directory group..." gnus-group-make-directory-group t]
 	["Add the help group" gnus-group-make-help-group t]
-	["Add the archive group" gnus-group-make-archive-group t]
 	["Make a doc group..." gnus-group-make-doc-group t]
 	["Make a web group..." gnus-group-make-web-group t]
 	["Make a virtual group..." gnus-group-make-empty-virtual t]
@@ -3088,22 +3074,6 @@ If there is, use Gnus to create an nnrss group"
 	  (push (list title href desc) nnrss-group-alist)
 	  (nnrss-save-server-data nil))
       (error "No feeds found for %s" url))))
-
-(defun gnus-group-make-archive-group (&optional all)
-  "Create the (ding) Gnus archive group of the most recent articles.
-Given a prefix, create a full group."
-  (interactive "P")
-  (let ((group (gnus-group-prefixed-name
-		(if all "ding.archives" "ding.recent") '(nndir ""))))
-    (when (gnus-group-entry group)
-      (error "Archive group already exists"))
-    (gnus-group-make-group
-     (gnus-group-real-name group)
-     (list 'nndir (if all "hpc" "edu")
-	   (list 'nndir-directory
-		 (if all gnus-group-archive-directory
-		   gnus-group-recent-archive-directory))))
-    (gnus-group-add-parameter group (cons 'to-address "ding@gnus.org"))))
 
 (defun gnus-group-make-directory-group (dir)
   "Create an nndir group.

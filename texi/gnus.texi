@@ -2616,18 +2616,6 @@ for a directory name (@code{gnus-group-make-directory-group}).
 @findex gnus-group-make-help-group
 Make the Gnus help group (@code{gnus-group-make-help-group}).
 
-@item G a
-@kindex G a (Group)
-@cindex (ding) archive
-@cindex archive group
-@findex gnus-group-make-archive-group
-@vindex gnus-group-archive-directory
-@vindex gnus-group-recent-archive-directory
-Make a Gnus archive group (@code{gnus-group-make-archive-group}).  By
-default a group pointing to the most recent articles will be created
-(@code{gnus-group-recent-archive-directory}), but given a prefix, a full
-group will be created from @code{gnus-group-archive-directory}.
-
 @item G D
 @kindex G D (Group)
 @findex gnus-group-enter-directory
