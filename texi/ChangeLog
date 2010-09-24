@@ -1,3 +1,7 @@
+2010-09-24  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi: Add Gravatars.
+
 2010-09-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Startup Variables): Mention gnus-use-backend-marks.

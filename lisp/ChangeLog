@@ -1,3 +1,13 @@
+2010-09-24  Julien Danjou  <julien@danjou.info>
+
+	* gnus-sum.el: Add support for Gravatars.
+
+	* gnus-art.el: Add support for Gravatars.
+
+	* gnus-gravatar.el: Add this file.
+
+	* gravatar.el: Add this file.
+
 2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-fetch-faq): Removed.

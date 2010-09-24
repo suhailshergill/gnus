@@ -2124,7 +2124,9 @@ increase the score of each group you read."
   "W" gnus-html-show-images
   "f" gnus-treat-from-picon
   "m" gnus-treat-mail-picon
-  "n" gnus-treat-newsgroups-picon)
+  "n" gnus-treat-newsgroups-picon
+  "g" gnus-treat-from-gravatar
+  "h" gnus-treat-mail-gravatar)
 
 (gnus-define-keys (gnus-summary-wash-mime-map "M" gnus-summary-wash-map)
   "w" gnus-article-decode-mime-words
@@ -2372,6 +2374,8 @@ increase the score of each group you read."
 	      ["Show picons in From" gnus-treat-from-picon t]
 	      ["Show picons in mail headers" gnus-treat-mail-picon t]
 	      ["Show picons in news headers" gnus-treat-newsgroups-picon t]
+              ["Show Gravatars in From" gnus-treat-from-gravatar t]
+	      ["Show Gravatars in mail headers" gnus-treat-mail-gravatar t]
 	      ("View as different encoding"
 	       ,@(gnus-summary-menu-split
 		  (mapcar
