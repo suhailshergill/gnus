@@ -90,6 +90,9 @@ not done by default on servers that doesn't support that command.")
 (defvar nnimap-split-download-body-default nil
   "Internal variable with default value for `nnimap-split-download-body'.")
 
+(defvar nnimap-keepalive-timer nil)
+(defvar nnimap-process-buffers nil)
+
 (defstruct nnimap
   group process commands capabilities select-result newlinep server
   last-command-time)
@@ -224,6 +227,7 @@ not done by default on servers that doesn't support that command.")
     (set (make-local-variable 'nnimap-object)
 	 (make-nnimap :server (nnoo-current-server 'nnimap)))
     (push (list buffer (current-buffer)) nnimap-connection-alist)
+    (push (current-buffer) nnimap-process-buffers)
     (current-buffer)))
 
 (defun nnimap-open-shell-stream (name buffer host port)
@@ -247,7 +251,25 @@ not done by default on servers that doesn't support that command.")
 	     '("login" "password") address port nil (null ports))))
     credentials))
 
+(defun nnimap-keepalive ()
+  (let ((now (current-time)))
+    (dolist (buffer nnimap-process-buffers)
+      (when (buffer-name buffer)
+	(with-current-buffer buffer
+	  (when (and nnimap-object
+		     (nnimap-last-command-time nnimap-object)
+		     (> (time-to-seconds
+			 (time-subtract
+			  now
+			  (nnimap-last-command-time nnimap-object)))
+			;; More than five minutes since the last command.
+			(* 5 60)))
+	    (nnimap-send-command "NOOP")))))))
+
 (defun nnimap-open-connection (buffer)
+  (unless nnimap-keepalive-timer
+    (setq nnimap-keepalive-timer (run-at-time (* 60 15) (* 60 15)
+					      'nnimap-keepalive)))
   (with-current-buffer (nnimap-make-process-buffer buffer)
     (let* ((coding-system-for-read 'binary)
 	   (coding-system-for-write 'binary)

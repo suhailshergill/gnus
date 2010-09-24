@@ -2,6 +2,9 @@
 
 	* nnimap.el (nnimap-command): Register the last command time so
 	that we can use it for idling NOOPs.
+	(nnimap-open-connection): Start the keeplive timer.
+	(nnimap-make-process-buffer): Store all the process buffers.
+	(nnimap-keepalive): New function.
 
 	* starttls.el: (starttls-open-stream): Add autoload cookie.
 
