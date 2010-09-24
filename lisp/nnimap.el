@@ -1154,8 +1154,8 @@ not done by default on servers that doesn't support that command.")
 	      ;; And then mark the successful copy actions as deleted,
 	      ;; and possibly expunge them.
 	      (nnimap-mark-and-expunge-incoming
-	       (nnimap-parse-copied-articles sequences))
-	      (nnimap-mark-and-expunge-incoming junk-articles))))))))
+	       (nnimap-parse-copied-articles sequences)))
+            (nnimap-mark-and-expunge-incoming junk-articles)))))))
 
 (defun nnimap-mark-and-expunge-incoming (range)
   (when range
