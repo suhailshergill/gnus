@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# 2010-09-01 tzz@lifelogs.com
+# modified: 2010-09-01 and on by tzz@lifelogs.com
 
 # Use the email address of the author of the last commit.
 export USER_EMAIL=$(git log -1 --format=format:%ae HEAD)
@@ -11,7 +11,7 @@ export USER_NAME=$(git log -1 --format=format:%an HEAD)
 # - USER_EMAIL and USER_NAME are used in the header
 # - the update message is after the diff
 # - without annotations, we use `git log --format=oneline' to generate the change summary (joining multiples with semicolons)
-# - the subject is shorter and prefixed with [gnus git] always
+# - the subject is shorter
 
 # Copyright (c) 2007 Andy Parkins
 #
@@ -214,7 +214,7 @@ generate_email_header()
 	cat <<-EOF
 	From: ${USER_NAME} <${USER_EMAIL}>
 	To: $recipients
-	Subject: [gnus git] $refname_type $short_refname ${change_type}d: $describe
+	Subject: $emailprefix $refname_type $short_refname ${change_type}d: $describe
 	X-Git-Refname: $refname
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev

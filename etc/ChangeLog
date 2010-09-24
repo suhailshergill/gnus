@@ -1,3 +1,7 @@
+2010-09-24  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: Use the emailprefix again.
+
 2010-09-23  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* post-receive: Add log count to header.
