@@ -1,5 +1,8 @@
 2010-09-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-cache.el (gnus-cache-braid-heads): When braiding heads, don't
+	use the same article number for all the cached articles.
+
 	* nnimap.el (nnimap-command): Register the last command time so
 	that we can use it for idling NOOPs.
 	(nnimap-open-connection): Start the keeplive timer.
