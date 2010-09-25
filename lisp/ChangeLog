@@ -1,5 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* gnus-bookmark.el: Remove useless gnus-bookmark-after-jump-hook.
+
 	* mml2015.el: Remove useless mml2015-verbose.
 
 	* mml-smime.el: Remove useless mml-smime-verbose.
