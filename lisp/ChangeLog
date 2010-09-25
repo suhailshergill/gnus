@@ -1,5 +1,7 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-srvr.el (gnus-server-copy-server): Add documentation.
+
 	* mm-decode.el (mm-save-part): Allow saving to other directories the
 	normal Emacs way.
 

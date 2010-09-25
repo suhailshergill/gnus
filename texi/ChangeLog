@@ -1,3 +1,8 @@
+2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Article Commands): Document gnus-fetch-partial-articles.
+	(Unavailable Servers): Document gnus-server-copy-server.
+
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
 	* gnus.texi (Customizing Articles): Remove gnus-treat-translate

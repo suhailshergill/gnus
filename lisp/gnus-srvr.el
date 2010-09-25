@@ -547,6 +547,7 @@ The following commands are available:
   (gnus-server-list-servers))
 
 (defun gnus-server-copy-server (from to)
+  "Copy a server definiton to a new name."
   (interactive
    (list
     (or (gnus-server-server-name)

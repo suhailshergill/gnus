@@ -10829,6 +10829,16 @@ Generate and print a PostScript image of the article buffer
 be run just before printing the buffer.  An alternative way to print
 article is to use Muttprint (@pxref{Saving Articles}).
 
+@item A C
+@vindex gnus-fetch-partial-articles
+@findex gnus-summary-show-complete-article
+If @code{gnus-fetch-partial-articles} is non-@code{nil}, Gnus will
+fetch partial articles, if the backend it fetches them from supports
+it.  Currently only @code{nnimap} does.  If you're looking at a
+partial article, and want to see the complete article instead, then
+the @kbd{A C} command (@code{gnus-summary-show-complete-article}) will
+do so.
+
 @end table
 
 
@@ -14140,6 +14150,14 @@ Close the connections to all servers in the buffer
 @findex gnus-server-remove-denials
 Remove all marks to whether Gnus was denied connection from any servers
 (@code{gnus-server-remove-denials}).
+
+@item c
+@kindex c (Server)
+@findex gnus-server-copy-server
+Copy a server and give it a new name
+(@code{gnus-server-copy-server}).  This can be useful if you have a
+complex method definition, and want to use the same definition towards
+a different (physical) server.
 
 @item L
 @kindex L (Server)
