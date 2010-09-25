@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-get-unread-articles): Don't try to open failed
+	servers twice.
+
 	* nnimap.el (nnimap-open-connection): Add more error reporting when
 	nnimap fails early.
 

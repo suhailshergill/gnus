@@ -1767,8 +1767,10 @@ If SCAN, request a scan of that group as well."
 		   (not (gnus-method-denied-p method)))
 	  (unless (gnus-server-opened method)
 	    (gnus-open-server method))
-	  (when (gnus-check-backend-function
-		 'retrieve-group-data-early (car method))
+	  (when (and
+		 (gnus-server-opened method)
+		 (gnus-check-backend-function
+		  'retrieve-group-data-early (car method)))
 	    (when (gnus-check-backend-function 'request-scan (car method))
 	      (gnus-request-scan nil method))
 	    (setcar (nthcdr 3 elem)
