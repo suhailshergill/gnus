@@ -2647,8 +2647,6 @@ a string, be sure to use a valid format, see RFC 2616."
       ,(nnheader-concat gnus-cache-directory "active"))))
   "List of predefined (convenience) servers.")
 
-(defvar gnus-topic-indentation "") ;; Obsolete variable.
-
 (defconst gnus-article-mark-lists
   '((marked . tick) (replied . reply)
     (expirable . expire) (killed . killed)

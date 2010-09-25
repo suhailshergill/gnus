@@ -1,6 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
 	* gnus.el: Remove useless variable gnus-use-generic-from.
+	Remove obsolete variable gnus-topic-indentation.
 
 	* gnus-uu.el: Remove useless gnus-uu-shar-file-name.
 
