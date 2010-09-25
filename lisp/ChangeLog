@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-wait-for-response): Reversed logic in the
+	nnimap-streaming test.
+
 	* gnus-start.el (gnus-get-unread-articles): Don't try to open failed
 	servers twice.
 

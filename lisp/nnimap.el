@@ -1142,8 +1142,8 @@ some servers.")
 		(not (re-search-backward
 		      (format "^%d .*\n" sequence)
 		      (if nnimap-streaming
-			  (point-min)
-			(max (point-min) (- (point) 500)))
+			  (max (point-min) (- (point) 500))
+			(point-min))
 		      t)))
       (when messagep
 	(message "Read %dKB" (/ (buffer-size) 1000)))
