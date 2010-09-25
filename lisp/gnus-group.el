@@ -2220,8 +2220,6 @@ Returns whether the fetching was successful or not."
 	   (other-frame 1))))
   (gnus-fetch-group group))
 
-(defvar gnus-ephemeral-group-server 0)
-
 (defcustom gnus-large-ephemeral-newsgroup 200
   "The number of articles which indicates a large ephemeral newsgroup.
 Same as `gnus-large-newsgroup', but only used for ephemeral newsgroups.

@@ -1,6 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
 	* gnus-group.el: Remove useless gnus-group-icon-cache.
+	Remove useless gnus-ephemeral-group-server.
 
 	* gnus-bookmark.el: Remove useless gnus-bookmark-after-jump-hook.
 
