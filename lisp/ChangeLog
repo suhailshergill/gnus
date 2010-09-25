@@ -1,5 +1,8 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* gnus-gravatar.el (gnus-gravatar-transform-address): Use
+	gnus-gravatar-size.
+
 	* gnus-art.el: Remove useless gnus-treat-translate.
 
 2010-09-24  Julien Danjou  <julien@danjou.info>
