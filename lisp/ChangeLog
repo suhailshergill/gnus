@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-retrieve-group-data-early): Fix typo in the
+	non-streaming case.
+
 	* gnus-art.el (gnus-flush-original-article-buffer): Separated out.
 	(gnus-article-encrypt-body): Use it.
 

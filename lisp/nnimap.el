@@ -856,7 +856,7 @@ some servers.")
 	  ;; commands, so throttle them.
 	  (when (and (not nnimap-streaming)
 		     (car sequences))
-	    (nnimap-wait-for-response (car sequences))))
+	    (nnimap-wait-for-response (caar sequences))))
 	sequences))))
 
 (deffoo nnimap-finish-retrieve-group-infos (server infos sequences)
