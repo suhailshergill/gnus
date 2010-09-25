@@ -1,3 +1,8 @@
+2010-09-25  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-rescale-image): Use our defalias
+	gnus-window-inside-pixel-edges.
+
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-decode.el (mm-save-part): Allow saving to other directories the
