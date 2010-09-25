@@ -181,10 +181,14 @@ If it is down, start it up (again)."
       (prog1
 	  (setq result (gnus-open-server method))
 	(unless silent
-	  (gnus-message 5 "Opening %s server%s...%s" (car method)
-			(if (equal (nth 1 method) "") ""
-			  (format " on %s" (nth 1 method)))
-			(if result "done" "failed")))))))
+	  (gnus-message
+	   (if result 5 3)
+	   "Opening %s server%s...%s" (car method)
+	   (if (equal (nth 1 method) "") ""
+	     (format " on %s" (nth 1 method)))
+	   (if result
+	       "done"
+	     (format "failed: %s" (nnheader-get-report (car method))))))))))
 
 (defun gnus-get-function (method function &optional noerror)
   "Return a function symbol based on METHOD and FUNCTION."

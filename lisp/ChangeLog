@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-check-server): Say what the error was when opening
+	failed.
+
 	* nnimap.el (nnimap-wait-for-response): Search further when we're not
 	using streaming.
 
