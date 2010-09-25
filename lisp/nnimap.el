@@ -128,8 +128,7 @@ not done by default on servers that doesn't support that command.")
 	  (nnimap-article-ranges (gnus-compress-sequence articles))
 	  (format "(UID RFC822.SIZE BODYSTRUCTURE %s)"
 		  (format
-		   (if (member "IMAP4REV1"
-			       (nnimap-capabilities nnimap-object))
+		   (if (nnimap-ver4-p)
 		       "BODY.PEEK[HEADER.FIELDS %s]"
 		     "RFC822.HEADER.LINES %s")
 		   (append '(Subject From Date Message-Id
@@ -370,7 +369,7 @@ not done by default on servers that doesn't support that command.")
 (deffoo nnimap-request-article (article &optional group server to-buffer)
   (with-current-buffer nntp-server-buffer
     (let ((result (nnimap-possibly-change-group group server))
-	  parts)
+	  parts structure)
       (when (stringp article)
 	(setq article (nnimap-find-article-by-message-id group article)))
       (when (and result
@@ -384,30 +383,107 @@ not done by default on servers that doesn't support that command.")
 	      (nnimap-command "UID FETCH %d (BODYSTRUCTURE)" article)
 	      (goto-char (point-min))
 	      (when (re-search-forward "FETCH.*BODYSTRUCTURE" nil t)
-		(let ((structure (ignore-errors (read (current-buffer)))))
-		  (setq parts (nnimap-find-wanted-parts structure))))))
-	  (setq result
-		(nnimap-command
-		 (if (member "IMAP4REV1" (nnimap-capabilities nnimap-object))
-		     "UID FETCH %d BODY.PEEK[]"
-		   "UID FETCH %d RFC822.PEEK")
-		 article))
-	  ;; Check that we really got an article.
-	  (goto-char (point-min))
-	  (unless (looking-at "\\* [0-9]+ FETCH")
-	    (setq result nil)))
-	(let ((buffer (nnimap-find-process-buffer (current-buffer))))
-	  (when (car result)
-	    (with-current-buffer (or to-buffer nntp-server-buffer)
-	      (insert-buffer-substring buffer)
-	      (goto-char (point-min))
-	      (let ((bytes (nnimap-get-length)))
-		(delete-region (line-beginning-position)
-			       (progn (forward-line 1) (point)))
-		(goto-char (+ (point) bytes))
-		(delete-region (point) (point-max))
-		(nnheader-ms-strip-cr))
-	      (cons group article))))))))
+		(setq structure (ignore-errors (read (current-buffer)))
+		      parts (nnimap-find-wanted-parts structure)))))
+	  (when (if parts
+		    (nnimap-get-partial-article article parts structure)
+		  (nnimap-get-whole-article article))
+	    (let ((buffer (current-buffer)))
+	      (with-current-buffer (or to-buffer nntp-server-buffer)
+		(erase-buffer)
+		(insert-buffer-substring buffer)
+		(nnheader-ms-strip-cr)
+		(cons group article)))))))))
+
+(defun nnimap-get-whole-article (article)
+  (let ((result
+	 (nnimap-command
+	  (if (nnimap-ver4-p)
+	      "UID FETCH %d BODY.PEEK[]"
+	    "UID FETCH %d RFC822.PEEK")
+	  article)))
+    ;; Check that we really got an article.
+    (goto-char (point-min))
+    (unless (looking-at "\\* [0-9]+ FETCH")
+      (setq result nil))
+    (when result
+      (goto-char (point-min))
+      (let ((bytes (nnimap-get-length)))
+	(delete-region (line-beginning-position)
+		       (progn (forward-line 1) (point)))
+	(goto-char (+ (point) bytes))
+	(delete-region (point) (point-max)))
+      t)))
+
+(defun nnimap-ver4-p ()
+  (member "IMAP4REV1" (nnimap-capabilities nnimap-object)))
+
+(defun nnimap-get-partial-article (article parts structure)
+  (let ((result
+	 (nnimap-command
+	  "UID FETCH %d (%s %s)"
+	  article
+	  (if (nnimap-ver4-p)
+	      "BODY.PEEK[HEADER]"
+	    "RFC822.HEADER")
+	  (if (nnimap-ver4-p)
+	      (mapconcat (lambda (part)
+			   (format "BODY.PEEK[%s]" part))
+			 parts " ")
+	    (mapconcat (lambda (part)
+			 (format "RFC822.PEEK[%s]" part))
+		       parts " ")))))
+    (when result
+      (nnimap-convert-partial-article structure))))
+
+(defun nnimap-convert-partial-article (structure)
+  ;; First just skip past the headers.
+  (goto-char (point-min))
+  (let ((bytes (nnimap-get-length))
+	id parts)
+    ;; Delete "FETCH" line.
+    (delete-region (line-beginning-position)
+		   (progn (forward-line 1) (point)))
+    (goto-char (+ (point) bytes))
+    ;; Collect all the body parts.
+    (while (looking-at ".*BODY\\[\\([.0-9]+\\)\\]")
+      (setq id (match-string 1)
+	    bytes (nnimap-get-length))
+      (beginning-of-line)
+      (delete-region (point) (progn (forward-line 1) (point)))
+      (push (list id (buffer-substring (point) (+ (point) bytes)))
+	    parts)
+      (delete-region (point) (+ (point) bytes)))
+    ;; Delete trailing junk.
+    (delete-region (point) (point-max))
+    ;; Now insert all the parts again where they fit in the structure.
+    (nnimap-insert-partial-structure structure parts)
+    t))
+
+(defun nnimap-insert-partial-structure (structure parts &optional subp)
+  (let ((type (car (last structure 4)))
+	(boundary (cadr (member "BOUNDARY" (car (last structure 3))))))
+    (when subp
+      (insert (format "Content-type: multipart/%s; boundary=%S\n\n"
+		      (downcase type) boundary)))
+    (while (not (stringp (car structure)))
+      (insert "\n--" boundary "\n")
+      (if (consp (caar structure))
+	  (nnimap-insert-partial-structure (pop structure) parts t)
+	(let ((bit (pop structure)))
+	  (insert (format  "Content-type: %s/%s"
+			   (downcase (nth 0 bit))
+			   (downcase (nth 1 bit))))
+	  (if (member "CHARSET" (nth 2 bit))
+	      (insert (format
+		       "; charset=%S\n" (cadr (member "CHARSET" (nth 2 bit)))))
+	    (insert "\n"))
+	  (insert (format "Content-transfer-encoding: %s\n"
+			  (nth 5 bit)))
+	  (insert "\n")
+	  (when (assoc (nth 9 bit) parts)
+	    (insert (cadr (assoc (nth 9 bit) parts)))))))
+    (insert "\n--" boundary "--\n")))
 
 (defun nnimap-find-wanted-parts (structure)
   (message-flatten-list (nnimap-find-wanted-parts-1 structure "")))
@@ -423,13 +499,14 @@ not done by default on servers that doesn't support that command.")
 			   (number-to-string num)
 			 (format "%s.%s" prefix num)))
 		  parts)
-	  (let ((type (format "%s/%s" (nth 0 sub) (nth 1 sub))))
-	    (when (string-match nnimap-fetch-partial-articles type)
-	      (push (if (string= prefix "")
+	  (let ((type (format "%s/%s" (nth 0 sub) (nth 1 sub)))
+		(id (if (string= prefix "")
 			(number-to-string num)
-		      (format "%s.%s" prefix num))
-		    parts)))
-	  (incf num))))
+		      (format "%s.%s" prefix num))))
+	    (setcar (nthcdr 9 sub) id)
+	    (when (string-match nnimap-fetch-partial-articles type)
+	      (push id parts))))
+	(incf num)))
     (nreverse parts)))
 
 (deffoo nnimap-request-group (group &optional server dont-check info)
@@ -1129,8 +1206,7 @@ not done by default on servers that doesn't support that command.")
     (nnimap-article-ranges articles)
     (format "(UID %s%s)"
 	    (format
-	     (if (member "IMAP4REV1"
-			 (nnimap-capabilities nnimap-object))
+	     (if (nnimap-ver4-p)
 		 "BODY.PEEK[HEADER] BODY.PEEK"
 	       "RFC822.PEEK"))
 	    (if nnimap-split-download-body-default

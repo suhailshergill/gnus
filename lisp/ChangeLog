@@ -1,5 +1,11 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-insert-partial-structure): New function.
+	(nnimap-get-partial-article): New function.
+	(nnimap-request-article): Use it.
+
+	* mm-decode.el (mm-with-part): Protect against killed buffers.
+
 	* nndraft.el (nndraft-retrieve-headers): Insert Lines and Chars headers
 	for prettier summary display.
 

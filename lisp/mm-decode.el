@@ -1147,13 +1147,15 @@ in HANDLE."
   ;; time to adjust it, since we know at this point that it should
   ;; be unibyte.
   `(let* ((handle ,handle))
-     (with-temp-buffer
-       (mm-disable-multibyte)
-       (insert-buffer-substring (mm-handle-buffer handle))
-       (mm-decode-content-transfer-encoding
-	(mm-handle-encoding handle)
-	(mm-handle-media-type handle))
-       ,@forms)))
+     (when (and (mm-handle-buffer handle)
+		(buffer-name (mm-handle-buffer handle)))
+       (with-temp-buffer
+	 (mm-disable-multibyte)
+	 (insert-buffer-substring (mm-handle-buffer handle))
+	 (mm-decode-content-transfer-encoding
+	  (mm-handle-encoding handle)
+	  (mm-handle-media-type handle))
+	 ,@forms))))
 (put 'mm-with-part 'lisp-indent-function 1)
 (put 'mm-with-part 'edebug-form-spec '(body))
 
