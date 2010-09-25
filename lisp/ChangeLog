@@ -1,5 +1,9 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-open-server): Don't query whether to go offline --
+	just do it.  It doesn't really seem to matter what the user responds
+	here, I think, so it's just a confusing question.
+
 	* nnimap.el (nnimap-retrieve-group-data-early): Fix typo in the
 	non-streaming case.
 

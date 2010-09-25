@@ -281,14 +281,7 @@ If it is down, start it up (again)."
 		  ;; recurse to open the agent's backend.
 		  (setq open-offline (eq gnus-server-unopen-status 'offline))
 		  gnus-server-unopen-status)
-		 ((and
-		   (not gnus-batch-mode)
-		   (gnus-y-or-n-p
-		    (format
-		     "Unable to open server %s (%s), go offline? "
-		     server
-		     (nnheader-get-report
-		      (car gnus-command-method)))))
+		 ((not gnus-batch-mode)
 		  (setq open-offline t)
 		  'offline)
 		 (t
