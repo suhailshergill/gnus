@@ -1131,9 +1131,12 @@ some servers.")
     (goto-char (point-max))
     (while (and (setq openp (memq (process-status process)
 				  '(open run)))
-		(not (re-search-backward (format "^%d .*\n" sequence)
-					 (max (point-min) (- (point) 500))
-					 t)))
+		(not (re-search-backward
+		      (format "^%d .*\n" sequence)
+		      (if nnimap-streaming
+			  (point-min)
+			(max (point-min) (- (point) 500)))
+		      t)))
       (when messagep
 	(message "Read %dKB" (/ (buffer-size) 1000)))
       (nnheader-accept-process-output process)

@@ -1,3 +1,8 @@
+2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-wait-for-response): Search further when we're not
+	using streaming.
+
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-rescale-image): Use our defalias
