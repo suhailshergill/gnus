@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnheader.el (nnheader-get-report-string): New function.
+	(nnheader-get-report): Use it.
+
 	* gnus-int.el (gnus-check-server): Say what the error was when opening
 	failed.
 
