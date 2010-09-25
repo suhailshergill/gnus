@@ -2047,6 +2047,7 @@ increase the score of each group you read."
   "e" gnus-summary-end-of-article
   "^" gnus-summary-refer-parent-article
   "r" gnus-summary-refer-parent-article
+  "C" gnus-summary-show-complete-article
   "D" gnus-summary-enter-digest-group
   "R" gnus-summary-refer-references
   "T" gnus-summary-refer-thread
@@ -9356,6 +9357,18 @@ to save in."
 		  (ps-spool-buffer-with-faces)
 		(ps-spool-buffer)))))
       (kill-buffer buffer))))
+
+(defun gnus-summary-show-complete-article ()
+  "Show a complete version of the current article.
+This is only useful if you're looking at a partial version of the
+article currently."
+  (interactive)
+  (let ((gnus-keep-backlog nil)
+	(gnus-use-cache nil)
+	(gnus-agent nil)
+	(gnus-fetch-partial-articles nil))
+    (gnus-flush-original-article-buffer)
+    (gnus-summary-show-article)))
 
 (defun gnus-summary-show-article (&optional arg)
   "Force redisplaying of the current article.

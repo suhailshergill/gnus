@@ -257,6 +257,22 @@ This can also be a list of the above values."
 		 (regexp :value ".*"))
   :group 'gnus-article-signature)
 
+(defcustom gnus-fetch-partial-articles nil
+  "If non-nil, Gnus will fetch partial articles.
+If t, nnimap will fetch only the first part.  If a string, it
+will fetch all parts that have types that match that string.  A
+likely value would be \"text/\" to automatically fetch all
+textual parts.
+
+Currently only the nnimap backend actually supports partial
+article fetching.  If the backend doesn't support it, it has no
+effect."
+  :version "24.1"
+  :type '(choice (const nil)
+		 (const t)
+		 (regexp))
+  :group 'gnus-article)
+
 (defcustom gnus-hidden-properties '(invisible t intangible t)
   "Property list to use for hiding text."
   :type 'sexp
@@ -7030,9 +7046,7 @@ groups."
       (gnus-backlog-remove-article
        (car gnus-article-current) (cdr gnus-article-current)))
     ;; Flush original article as well.
-    (when (get-buffer gnus-original-article-buffer)
-      (with-current-buffer gnus-original-article-buffer
-	(setq gnus-original-article nil)))
+    (gnus-flush-original-article-buffer)
     (when gnus-use-cache
       (gnus-cache-update-article
        (car gnus-article-current) (cdr gnus-article-current)))
@@ -7045,6 +7059,11 @@ groups."
     (set-window-start (get-buffer-window buf) start)
     (set-window-point (get-buffer-window buf) (point)))
   (gnus-summary-show-article))
+
+(defun gnus-flush-original-article-buffer ()
+  (when (get-buffer gnus-original-article-buffer)
+    (with-current-buffer gnus-original-article-buffer
+      (setq gnus-original-article nil))))
 
 (defun gnus-article-edit-exit ()
   "Exit the article editing without updating."
@@ -8512,9 +8531,7 @@ For example:
 	  (when gnus-keep-backlog
 	    (gnus-backlog-remove-article
 	     (car gnus-article-current) (cdr gnus-article-current)))
-          (when (get-buffer gnus-original-article-buffer)
-            (with-current-buffer gnus-original-article-buffer
-	      (setq gnus-original-article nil)))
+	  (gnus-flush-original-article-buffer)
 	  (when gnus-use-cache
 	    (gnus-cache-update-article
 	     (car gnus-article-current) (cdr gnus-article-current))))))))

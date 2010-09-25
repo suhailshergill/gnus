@@ -66,18 +66,15 @@ Values are `ssl', `network', `starttls' or `shell'.")
   "How nnimap authenticate itself to the server.
 Possible choices are nil (use default methods) or `anonymous'.")
 
-(defvoo nnimap-fetch-partial-articles nil
-  "If non-nil, nnimap will fetch partial articles.
-If t, nnimap will fetch only the first part.  If a string, it
-will fetch all parts that have types that match that string.  A
-likely value would be \"text/\" to automatically fetch all
-textual parts.")
-
 (defvoo nnimap-expunge t
   "If non-nil, expunge articles after deleting them.
 This is always done if the server supports UID EXPUNGE, but it's
 not done by default on servers that doesn't support that command.")
 
+(defvoo nnimap-streaming t
+  "If non-nil, try to use streaming commands with IMAP servers.
+Switching this off will make nnimap slower, but it helps with
+some servers.")
 
 (defvoo nnimap-connection-alist nil)
 
@@ -377,8 +374,8 @@ not done by default on servers that doesn't support that command.")
 	(erase-buffer)
 	(with-current-buffer (nnimap-buffer)
 	  (erase-buffer)
-	  (when nnimap-fetch-partial-articles
-	    (if (eq nnimap-fetch-partial-articles t)
+	  (when gnus-fetch-partial-articles
+	    (if (eq gnus-fetch-partial-articles t)
 		(setq parts '(1))
 	      (nnimap-command "UID FETCH %d (BODYSTRUCTURE)" article)
 	      (goto-char (point-min))
@@ -504,7 +501,7 @@ not done by default on servers that doesn't support that command.")
 			(number-to-string num)
 		      (format "%s.%s" prefix num))))
 	    (setcar (nthcdr 9 sub) id)
-	    (when (string-match nnimap-fetch-partial-articles type)
+	    (when (string-match gnus-fetch-partial-articles type)
 	      (push id parts))))
 	(incf num)))
     (nreverse parts)))
@@ -854,7 +851,12 @@ not done by default on servers that doesn't support that command.")
 			  (nnimap-send-command "UID FETCH %d:* FLAGS" start)
 			  start
 			  (car elem))
-		    sequences))))
+		    sequences)))
+	  ;; Some servers apparently can't have many outstanding
+	  ;; commands, so throttle them.
+	  (when (and (not nnimap-streaming)
+		     (car sequences))
+	    (nnimap-wait-for-response (car sequences))))
 	sequences))))
 
 (deffoo nnimap-finish-retrieve-group-infos (server infos sequences)

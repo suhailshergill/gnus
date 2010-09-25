@@ -1,11 +1,25 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-flush-original-article-buffer): Separated out.
+	(gnus-article-encrypt-body): Use it.
+
+	* gnus-sum.el (gnus-summary-show-complete-article): New command and
+	keystroke.
+
+	* nnimap.el (nnimap-find-wanted-parts-1): Use
+	gnus-fetch-partial-articles.
+
+	* gnus-art.el (gnus-fetch-partial-articles): New variable.
+
 	* nnimap.el (nnimap-insert-partial-structure): New function.
 	(nnimap-get-partial-article): New function.
 	(nnimap-request-article): Use it.
 	(nnimap-wait-for-response): Return whether the wait was successful.
 	(nnimap-finish-retrieve-group-infos): Don't do anything if the
 	retrieval wasn't successful.
+	(nnimap-retrieve-group-data-early): Allow throttling servers.
+	(nnimap-streaming): New variable.
+	(nnimap-fetch-partial-articles): Removed.
 
 	* mm-decode.el (mm-with-part): Protect against killed buffers.
 
