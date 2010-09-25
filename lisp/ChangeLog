@@ -1,5 +1,8 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* rfc1843.el: Remove useless rfc1843-old-gnus-decode-header-function
+	variables.
+
 	* nnheader.el: Remove useless variables news-reply-yank-from and
 	news-reply-yank-message-id.
 
