@@ -271,42 +271,50 @@ some servers.")
   (with-current-buffer (nnimap-make-process-buffer buffer)
     (let* ((coding-system-for-read 'binary)
 	   (coding-system-for-write 'binary)
+	   (port nil)
 	   (ports
 	    (cond
 	     ((eq nnimap-stream 'network)
 	      (open-network-stream
 	       "*nnimap*" (current-buffer) nnimap-address
-	       (or nnimap-server-port
-		   (if (netrc-find-service-number "imap")
-		       "imap"
-		     "143")))
+	       (setq port
+		     (or nnimap-server-port
+			 (if (netrc-find-service-number "imap")
+			     "imap"
+			   "143"))))
 	      '("143" "imap"))
 	     ((eq nnimap-stream 'shell)
 	      (nnimap-open-shell-stream
 	       "*nnimap*" (current-buffer) nnimap-address
-	       (or nnimap-server-port "imap"))
+	       (setq port (or nnimap-server-port "imap")))
 	      '("imap"))
 	     ((eq nnimap-stream 'starttls)
 	      (starttls-open-stream
 	       "*nnimap*" (current-buffer) nnimap-address
-	       (or nnimap-server-port "imap"))
+	       (setq port (or nnimap-server-port "imap")))
 	      '("imap"))
 	     ((eq nnimap-stream 'ssl)
 	      (open-tls-stream
 	       "*nnimap*" (current-buffer) nnimap-address
-	       (or nnimap-server-port
-		   (if (netrc-find-service-number "imaps")
-		       "imaps"
-		     "993")))
+	       (setq port
+		     (or nnimap-server-port
+			 (if (netrc-find-service-number "imaps")
+			     "imaps"
+			   "993"))))
 	      '("143" "993" "imap" "imaps"))))
 	   connection-result login-result credentials)
       (setf (nnimap-process nnimap-object)
 	    (get-buffer-process (current-buffer)))
-      (when (and (nnimap-process nnimap-object)
-		 (memq (process-status (nnimap-process nnimap-object))
-		       '(open run)))
+      (if (not (and (nnimap-process nnimap-object)
+		    (memq (process-status (nnimap-process nnimap-object))
+			  '(open run))))
+	  (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
+			   nnimap-address port nnimap-stream)
 	(gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
-	(when (setq connection-result (nnimap-wait-for-connection))
+	(if (not (setq connection-result (nnimap-wait-for-connection)))
+	    (nnheader-report 'nnimap
+			     "%s" (buffer-substring
+				   (point) (line-end-position)))
 	  (when (eq nnimap-stream 'starttls)
 	    (nnimap-command "STARTTLS")
 	    (starttls-negotiate (nnimap-process nnimap-object)))
