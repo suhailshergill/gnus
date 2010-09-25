@@ -1,5 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* gnus-sum.el: Remove useless gnus-newsgroup-none-id.
+
 	* gnus-picon.el: Remove useless gnus-picon-setup-p variable.
 
 	* gnus-group.el: Remove useless gnus-group-icon-cache.
