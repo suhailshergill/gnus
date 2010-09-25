@@ -1,5 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* mml-smime.el: Remove useless mml-smime-verbose.
+
 	* gnus.el: Remove useless gnus-local-domain.
 
 	* gnus-gravatar.el (gnus-gravatar-transform-address): Use
