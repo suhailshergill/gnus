@@ -548,8 +548,6 @@ simple manner.")
 (defvar gnus-group-list-mode nil)
 
 
-(defvar gnus-group-icon-cache nil)
-
 (defvar gnus-group-listed-groups nil)
 (defvar gnus-group-list-option nil)
 
