@@ -5091,7 +5091,10 @@ Deleting parts may malfunction or destroy the article; continue? "))
 	    "|\n"
 	    "| Type:           " type "\n"
 	    "| Filename:       " filename "\n"
-	    "| Size (encoded): " bsize " Byte\n"
+	    "| Size (encoded): " bsize (format " byte%s\n"
+					       (if (= bsize 1)
+						   ""
+						 "s"))
 	    (when description
 	      (concat    "| Description:    " description "\n"))
 	    "`----\n"))

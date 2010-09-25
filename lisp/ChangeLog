@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-mime-delete-part): Fix plural for "byte" when
+	there isn't a single byte.
+
 	* gnus-int.el (gnus-open-server): Don't query whether to go offline --
 	just do it.  It doesn't really seem to matter what the user responds
 	here, I think, so it's just a confusing question.
