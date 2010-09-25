@@ -1,5 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* mml1991.el: Remove useless mml1991-verbose.
+
 	* gnus.el: Remove useless variable gnus-use-generic-from.
 	Remove obsolete variable gnus-topic-indentation.
 
