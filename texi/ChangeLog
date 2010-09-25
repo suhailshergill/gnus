@@ -2,6 +2,7 @@
 
 	* gnus.texi (Article Commands): Document gnus-fetch-partial-articles.
 	(Unavailable Servers): Document gnus-server-copy-server.
+	(Using IMAP): Document the new nnimap.
 
 2010-09-25  Julien Danjou  <julien@danjou.info>
 

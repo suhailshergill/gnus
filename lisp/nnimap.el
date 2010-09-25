@@ -62,6 +62,10 @@ Values are `ssl', `network', `starttls' or `shell'.")
 (defvoo nnimap-inbox nil
   "The mail box where incoming mail arrives and should be split out of.")
 
+(defvoo nnimap-split-methods nil
+  "How mail is split.
+Uses the same syntax as nnmail-split-methods")
+
 (defvoo nnimap-authenticator nil
   "How nnimap authenticate itself to the server.
 Possible choices are nil (use default methods) or `anonymous'.")
@@ -106,8 +110,6 @@ some servers.")
     (save "gnus-save")
     (download "gnus-download")
     (forward "gnus-forward")))
-
-(defvar nnimap-split-methods nil)
 
 (defun nnimap-buffer ()
   (nnimap-find-process-buffer nntp-server-buffer))
