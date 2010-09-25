@@ -2620,9 +2620,6 @@ a string, be sure to use a valid format, see RFC 2616."
 (defvar gnus-tree-buffer "*Tree*"
   "Buffer where Gnus thread trees are displayed.")
 
-;; Dummy variable.
-(defvar gnus-use-generic-from nil)
-
 ;; Variable holding the user answers to all method prompts.
 (defvar gnus-method-history nil)
 

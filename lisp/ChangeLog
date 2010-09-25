@@ -1,5 +1,7 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* gnus.el: Remove useless variable gnus-use-generic-from.
+
 	* gnus-uu.el: Remove useless gnus-uu-shar-file-name.
 
 	* gnus-sum.el: Remove useless gnus-newsgroup-none-id.
