@@ -1,5 +1,11 @@
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
+	* nnheader.el: Remove useless variables news-reply-yank-from and
+	news-reply-yank-message-id.
+
+	* mml2015.el: Remove useless mc-default-scheme and mc-schemes
+	variables.
+
 	* mml1991.el: Remove useless mml1991-verbose.
 
 	* gnus.el: Remove useless variable gnus-use-generic-from.
