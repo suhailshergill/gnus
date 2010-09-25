@@ -1,5 +1,8 @@
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nndoc.el (nndoc-type-alist): Move mime-parts after mbox.  Suggested
+	by Jay Berkenbilt.
+
 	* gnus-art.el (gnus-mime-delete-part): Fix plural for "byte" when
 	there isn't a single byte.
 
