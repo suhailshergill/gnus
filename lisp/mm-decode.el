@@ -1248,9 +1248,13 @@ PROMPT overrides the default one used to ask user for a file name."
       (setq filename (gnus-map-function mm-file-name-rewrite-functions
 					(file-name-nondirectory filename))))
     (setq file
-          (read-file-name (or prompt "Save MIME part to: ")
+          (read-file-name (or prompt
+			      (format "Save MIME part to (default %s): "
+				      (or filename "")))
                           (or mm-default-directory default-directory)
-                          nil nil (or filename "")))
+			  (or filename "")))
+    (when (file-directory-p file)
+      (setq file (expand-file-name filename file)))
     (setq mm-default-directory (file-name-directory file))
     (and (or (not (file-exists-p file))
 	     (yes-or-no-p (format "File %s already exists; overwrite? "
