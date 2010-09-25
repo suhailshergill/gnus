@@ -265,36 +265,38 @@ If it is down, start it up (again)."
 	  (setq elem (list gnus-command-method nil)
 		gnus-opened-servers (cons elem gnus-opened-servers)))
 	;; Set the status of this server.
-        (setcar (cdr elem)
-                (cond (result
-                       (if (eq open-server-function #'nnagent-open-server)
-                           ;; The agent's backend has a "special" status
-                           'offline
-                         'ok))
-                      ((and gnus-agent
-                            (gnus-agent-method-p gnus-command-method))
-                       (cond (gnus-server-unopen-status
-                              ;; Set the server's status to the unopen
-                              ;; status.  If that status is offline,
-                              ;; recurse to open the agent's backend.
-                              (setq open-offline (eq gnus-server-unopen-status 'offline))
-                              gnus-server-unopen-status)
-                             ((and
-			       (not gnus-batch-mode)
-			       (gnus-y-or-n-p
-				(format
-				 "Unable to open server %s (%s), go offline? "
-				 server
-				 (nnheader-get-report
-				  (car gnus-command-method)))))
-                              (setq open-offline t)
-                              'offline)
-                             (t
-                              ;; This agentized server was still denied
-                              'denied)))
-                      (t
-                       ;; This unagentized server must be denied
-                       'denied)))
+        (setcar
+	 (cdr elem)
+	 (cond (result
+		(if (eq open-server-function #'nnagent-open-server)
+		    ;; The agent's backend has a "special" status
+		    'offline
+		  'ok))
+	       ((and gnus-agent
+		     (gnus-agent-method-p gnus-command-method))
+		(cond
+		 (gnus-server-unopen-status
+		  ;; Set the server's status to the unopen
+		  ;; status.  If that status is offline,
+		  ;; recurse to open the agent's backend.
+		  (setq open-offline (eq gnus-server-unopen-status 'offline))
+		  gnus-server-unopen-status)
+		 ((and
+		   (not gnus-batch-mode)
+		   (gnus-y-or-n-p
+		    (format
+		     "Unable to open server %s (%s), go offline? "
+		     server
+		     (nnheader-get-report
+		      (car gnus-command-method)))))
+		  (setq open-offline t)
+		  'offline)
+		 (t
+		  ;; This agentized server was still denied
+		  'denied)))
+	       (t
+		;; This unagentized server must be denied
+		'denied)))
 
         ;; NOTE: I MUST set the server's status to offline before this
         ;; recursive call as this status will drive the
