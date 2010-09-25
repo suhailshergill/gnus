@@ -188,7 +188,8 @@ If it is down, start it up (again)."
 	     (format " on %s" (nth 1 method)))
 	   (if result
 	       "done"
-	     (format "failed: %s" (nnheader-get-report (car method))))))))))
+	     (format "failed: %s"
+		     (nnheader-get-report-string (car method))))))))))
 
 (defun gnus-get-function (method function &optional noerror)
   "Return a function symbol based on METHOD and FUNCTION."
