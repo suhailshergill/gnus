@@ -862,26 +862,26 @@ not done by default on servers that doesn't support that command.")
 	     (nnimap-possibly-change-group nil server))
     (with-current-buffer (nnimap-buffer)
       ;; Wait for the final data to trickle in.
-      (nnimap-wait-for-response (cadar sequences))
-      ;; Now we should have all the data we need, no matter whether
-      ;; we're QRESYNCING, fetching all the flags from scratch, or
-      ;; just fetching the last 100 flags per group.
-      (nnimap-update-infos (nnimap-flags-to-marks
-			    (nnimap-parse-flags
-			     (nreverse sequences)))
-			   infos)
-      ;; Finally, just return something resembling an active file in
-      ;; the nntp buffer, so that the agent can save the info, too.
-      (with-current-buffer nntp-server-buffer
-	(erase-buffer)
-	(dolist (info infos)
-	  (let* ((group (gnus-info-group info))
-		 (active (gnus-active group)))
-	    (when active
-	      (insert (format "%S %d %d y\n"
-			      (gnus-group-real-name group)
-			      (cdr active)
-			      (car active))))))))))
+      (when (nnimap-wait-for-response (cadar sequences))
+	;; Now we should have all the data we need, no matter whether
+	;; we're QRESYNCING, fetching all the flags from scratch, or
+	;; just fetching the last 100 flags per group.
+	(nnimap-update-infos (nnimap-flags-to-marks
+			      (nnimap-parse-flags
+			       (nreverse sequences)))
+			     infos)
+	;; Finally, just return something resembling an active file in
+	;; the nntp buffer, so that the agent can save the info, too.
+	(with-current-buffer nntp-server-buffer
+	  (erase-buffer)
+	  (dolist (info infos)
+	    (let* ((group (gnus-info-group info))
+		   (active (gnus-active group)))
+	      (when active
+		(insert (format "%S %d %d y\n"
+				(gnus-group-real-name group)
+				(cdr active)
+				(car active)))))))))))
 
 (defun nnimap-update-infos (flags infos)
   (dolist (info infos)
@@ -1122,17 +1122,19 @@ not done by default on servers that doesn't support that command.")
 	 (match-string 1))))
 
 (defun nnimap-wait-for-response (sequence &optional messagep)
-  (let ((process (get-buffer-process (current-buffer))))
+  (let ((process (get-buffer-process (current-buffer)))
+	openp)
     (goto-char (point-max))
-    (while (and (memq (process-status process)
-		      '(open run))
+    (while (and (setq openp (memq (process-status process)
+				  '(open run)))
 		(not (re-search-backward (format "^%d .*\n" sequence)
 					 (max (point-min) (- (point) 500))
 					 t)))
       (when messagep
 	(message "Read %dKB" (/ (buffer-size) 1000)))
       (nnheader-accept-process-output process)
-      (goto-char (point-max)))))
+      (goto-char (point-max)))
+    openp))
 
 (defun nnimap-parse-response ()
   (let ((lines (split-string (nnimap-last-response-string) "\r\n" t))
