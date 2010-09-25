@@ -1,3 +1,7 @@
+2010-09-25  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi (Customizing Articles): Remove gnus-treat-translate
+
 2010-09-24  Julien Danjou  <julien@danjou.info>
 
 	* gnus.texi: Add Gravatars.
