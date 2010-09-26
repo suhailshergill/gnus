@@ -1,3 +1,7 @@
+2010-09-26 Julien Danjou <julien@danjou.info>
+
+	* ssl.el: Removed.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gpg.el: Removed -- seems unused.

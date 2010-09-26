@@ -1,3 +1,7 @@
+2010-09-26  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi (Oort Gnus): Remove mention of ssl.el
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Security): Remove gpg.el mention.
