@@ -1,3 +1,8 @@
+2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-open-connection): Record the greeting.
+	(nnimap): Add greeting.
+
 2010-09-26  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-show-images): Fix gnus-html-display-image

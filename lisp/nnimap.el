@@ -96,7 +96,7 @@ some servers.")
 
 (defstruct nnimap
   group process commands capabilities select-result newlinep server
-  last-command-time)
+  last-command-time greeting)
 
 (defvar nnimap-object nil)
 
@@ -317,6 +317,9 @@ some servers.")
 	    (nnheader-report 'nnimap
 			     "%s" (buffer-substring
 				   (point) (line-end-position)))
+	  (setf (nnimap-greeting nnimap-object)
+		(buffer-substring (line-beginning-position)
+				  (line-end-position)))
 	  (when (eq nnimap-stream 'starttls)
 	    (nnimap-command "STARTTLS")
 	    (starttls-negotiate (nnimap-process nnimap-object)))
