@@ -1,6 +1,7 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (NoCeM): Removed.
+	(Startup Variables): No jingle.
 
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

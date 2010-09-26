@@ -1627,15 +1627,6 @@ of doing your job.  Note that this variable is used before
 @vindex gnus-no-groups-message
 Message displayed by Gnus when no groups are available.
 
-@item gnus-play-startup-jingle
-@vindex gnus-play-startup-jingle
-If non-@code{nil}, play the Gnus jingle at startup.
-
-@item gnus-startup-jingle
-@vindex gnus-startup-jingle
-Jingle to be played if the above variable is non-@code{nil}.  The
-default is @samp{Tuxedomoon.Jingle4.au}.
-
 @item gnus-use-backend-marks
 @vindex gnus-use-backend-marks
 If non-@code{nil}, Gnus will store article marks both in the

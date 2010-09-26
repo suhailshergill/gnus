@@ -1614,15 +1614,6 @@ predicate.  See Info node `(gnus)Customizing Articles'."
   :link '(custom-manual "(gnus)Customizing Articles")
   :type gnus-article-treat-custom)
 
-(defcustom gnus-treat-play-sounds nil
-  "Play sounds.
-Valid values are nil, t, `head', `first', `last', an integer or a
-predicate.  See Info node `(gnus)Customizing Articles'."
-  :version "21.1"
-  :group 'gnus-article-treat
-  :link '(custom-manual "(gnus)Customizing Articles")
-  :type gnus-article-treat-custom)
-
 (defcustom gnus-treat-x-pgp-sig nil
   "Verify X-PGP-Sig.
 To automatically treat X-PGP-Sig, set it to head.
@@ -1727,8 +1718,7 @@ This requires GNU Libidn, and by default only enabled if it is found."
     (gnus-treat-hide-citation gnus-article-hide-citation)
     (gnus-treat-hide-citation-maybe gnus-article-hide-citation-maybe)
     (gnus-treat-highlight-citation gnus-article-highlight-citation)
-    (gnus-treat-body-boundary gnus-article-treat-body-boundary)
-    (gnus-treat-play-sounds gnus-earcon-display)))
+    (gnus-treat-body-boundary gnus-article-treat-body-boundary)))
 
 (defvar gnus-article-mime-handle-alist nil)
 (defvar article-lapsed-timer nil)

@@ -1,5 +1,18 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-play-startup-jingle): Removed.
+	(gnus-splash): Don't play jingle.
+
+	* gnus-art.el (gnus-treat-play-sounds): Removed.
+
+	* gnus.el (gnus-play-jingle): Remove audio support.
+
+	* gnus-cus.el (gnus-score-customize): Remove audio reference.
+
+	* earcon.el: Removed -- no users.
+
+	* gnus-audio.el: Removed -- no users of this package.
+
 	* gnus-sum.el (gnus-summary-limit-children): Remove nocem support.
 
 	* gnus-start.el (gnus-setup-news): Remove nocem support.

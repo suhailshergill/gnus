@@ -336,7 +336,7 @@ be unchanged except that the marks will be removed when copying or
 moving articles to a group that has not turned auto-expire on.
 @xref{Expiring Mail}.
 
-@itemize @bullet NoCeM support has been removed.
+@item NoCeM support has been removed.
 
 @end itemize
 
