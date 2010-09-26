@@ -10077,18 +10077,6 @@ string is invalid.
 An alist of @code{(RATE . REGEXP)} pairs used by the function
 @code{gnus-button-mid-or-mail-heuristic}.
 
-@c Stuff related to gnus-button-tex-level
-
-@item gnus-button-ctan-handler
-@findex gnus-button-ctan-handler
-The function to use for displaying CTAN links.  It must take one
-argument, the string naming the URL.
-
-@item gnus-ctan-url
-@vindex gnus-ctan-url
-Top directory of a CTAN (Comprehensive TeX Archive Network) archive used
-by @code{gnus-button-ctan-handler}.
-
 @c Misc stuff
 
 @item gnus-article-button-face
@@ -10160,14 +10148,6 @@ Related variables and functions include
 @code{gnus-button-prefer-mid-or-mail},
 @code{gnus-button-mid-or-mail-heuristic}, and
 @code{gnus-button-mid-or-mail-heuristic-alist}.
-
-@item gnus-button-tex-level
-@vindex gnus-button-tex-level
-Controls the display of references to @TeX{} or LaTeX stuff, e.g. for CTAN
-URLs.  See the variables @code{gnus-ctan-url},
-@code{gnus-button-ctan-handler},
-@code{gnus-button-ctan-directory-regexp}, and
-@code{gnus-button-handle-ctan-bogus-regexp}.
 
 @end table
 

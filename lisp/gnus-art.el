@@ -7154,47 +7154,7 @@ man page."
   :type '(choice (function-item :tag "Man" manual-entry)
 		 (function-item :tag "Woman" woman)
 		 (function :tag "Other"))
-  :group 'gnus-article-buttons)
-
-(defcustom gnus-ctan-url "http://tug.ctan.org/tex-archive/"
-  "Top directory of a CTAN \(Comprehensive TeX Archive Network\) archive.
-If the default site is too slow, try to find a CTAN mirror, see
-<URL:http://tug.ctan.org/tex-archive/CTAN.sites?action=/index.html>.  See also
-the variable `gnus-button-handle-ctan'."
-  :version "22.1"
-  :group 'gnus-article-buttons
-  :link '(custom-manual "(gnus)Group Parameters")
-  :type '(choice (const "http://www.tex.ac.uk/tex-archive/")
-		 (const "http://tug.ctan.org/tex-archive/")
-		 (const "http://www.dante.de/CTAN/")
-		 (string :tag "Other")))
-
-(defcustom gnus-button-ctan-handler 'browse-url
-  "Function to use for displaying CTAN links.
-The function must take one argument, the string naming the URL."
-  :version "22.1"
-  :type '(choice (function-item :tag "Browse Url" browse-url)
-		 (function :tag "Other"))
-  :group 'gnus-article-buttons)
-
-(defcustom gnus-button-handle-ctan-bogus-regexp "^/?tex-archive/\\|^/"
-  "Bogus strings removed from CTAN URLs."
-  :version "22.1"
-  :group 'gnus-article-buttons
-  :type '(choice (const "^/?tex-archive/\\|/")
-		 (regexp :tag "Other")))
-
-(defcustom gnus-button-ctan-directory-regexp
-  (regexp-opt
-   (list "archive-tools" "biblio" "bibliography" "digests" "documentation"
-	 "dviware" "fonts" "graphics" "help" "indexing" "info" "language"
-	 "languages" "macros" "nonfree" "obsolete" "support" "systems"
-	 "tds" "tools" "usergrps" "web") t)
-  "Regular expression for ctan directories.
-It should match all directories in the top level of `gnus-ctan-url'."
-  :version "22.1"
-  :group 'gnus-article-buttons
-  :type 'regexp)
+  :group 'gnus-article-buttons)=
 
 (defcustom gnus-button-mid-or-mail-regexp
   (concat "\\b\\(<?" gnus-button-valid-localpart-regexp "@"
@@ -7453,26 +7413,6 @@ Calls `describe-variable' or `describe-function'."
 	(gnus-message 1 "Cannot locale library `%s'." url)
       (find-file-read-only file))))
 
-(defun gnus-button-handle-ctan (url)
-  "Call `browse-url' when pushing a CTAN URL button."
-  (funcall
-   gnus-button-ctan-handler
-   (concat
-    gnus-ctan-url
-    (gnus-replace-in-string url gnus-button-handle-ctan-bogus-regexp ""))))
-
-(defcustom gnus-button-tex-level 5
-  "*Integer that says how many TeX-related buttons Gnus will show.
-The higher the number, the more buttons will appear and the more false
-positives are possible.  Note that you can set this variable local to
-specific groups.  Setting it higher in TeX groups is probably a good idea.
-See Info node `(gnus)Group Parameters' and the variable `gnus-parameters' on
-how to set variables in specific groups."
-  :version "22.1"
-  :group 'gnus-article-buttons
-  :link '(custom-manual "(gnus)Group Parameters")
-  :type 'integer)
-
 (defcustom gnus-button-man-level 5
   "*Integer that says how many man-related buttons Gnus will show.
 The higher the number, the more buttons will appear and the more false
@@ -7539,20 +7479,6 @@ positives are possible."
      0 (>= gnus-button-message-level 0) gnus-url-mailto 1)
     ("\\bmailto:\\([^ \n\t]+\\)"
      0 (>= gnus-button-message-level 0) gnus-url-mailto 1)
-    ;; CTAN
-    ((concat "\\bCTAN:[ \t\n]?[^>)!;:,'\n\t ]*\\("
-	     gnus-button-ctan-directory-regexp
-	     "[^][>)!;:,'\n\t ]+\\)")
-     0 (>= gnus-button-tex-level 1) gnus-button-handle-ctan 1)
-    ((concat "\\btex-archive/\\("
-	     gnus-button-ctan-directory-regexp
-	     "/[-_.a-z0-9/]+[-_./a-z0-9]+[/a-z0-9]\\)")
-     1 (>= gnus-button-tex-level 6) gnus-button-handle-ctan 1)
-    ((concat
-      "\\b\\("
-      gnus-button-ctan-directory-regexp
-      "/[-_.a-z0-9]+/[-_./a-z0-9]+[/a-z0-9]\\)")
-     1 (>= gnus-button-tex-level 8) gnus-button-handle-ctan 1)
     ;; Info Konqueror style <info:/foo/bar baz>.
     ;; Must come before " Gnus home-grown style".
     ("\\binfo://?\\([^'\">\n\t]+\\)"

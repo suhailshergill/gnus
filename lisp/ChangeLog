@@ -1,3 +1,13 @@
+2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-ctan-url): Seems not very useful -- removed.
+	(gnus-button-ctan-handler): Ditto.
+	(gnus-button-handle-ctan-bogus-regexp): Ditto.
+	(gnus-button-ctan-directory-regexp): Ditto.
+	(gnus-button-handle-ctan): Ditto.
+	(gnus-button-tex-level): Ditto.
+	(gnus-button-alist): Removed CTAN stuff.
+
 2010-09-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-wait-for-response): Reversed logic in the
