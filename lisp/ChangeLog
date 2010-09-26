@@ -1,5 +1,7 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mail-source.el (mail-source-value): Revert previous patch.
+
 	* nnimap.el (nnimap-credentials): Allow inhibiting the password query
 	on failure.
 	(nnimap-open-connection): Look up both virtual and physical server name
