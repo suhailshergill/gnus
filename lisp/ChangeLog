@@ -1,5 +1,10 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (auth-source-create): Query the user for whether to
+	store the credentials.
+
+	* netrc.el (netrc-store-data): New function.
+
 	* auth-source.el (auth-source-user-or-password): Use the existing auth
 	sources, if any, for creation.
 
