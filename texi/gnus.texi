@@ -14808,12 +14808,12 @@ from different locations, or with different user agents.
 @subsection Connecting to an @acronym{IMAP} Server
 
 Connecting to an @acronym{IMAP} can be very easy.  Type @kbd{B} in the
-group buffer, or add something like the following to your secondary
-select methods:
+group buffer, or (if your primary interest is reading email), say
+something like:
 
 @example
-(setq gnus-secondary-select-methods
-      '((nnimap "imap.gmail.com")))
+(setq gnus-select-method
+      '(nnimap "imap.gmail.com"))
 @end example
 
 You'll be prompted for a user name and password.  If you grow tired of
