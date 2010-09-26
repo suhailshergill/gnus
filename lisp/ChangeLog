@@ -2,6 +2,7 @@
 
 	* gnus-html.el (gnus-html-show-images): Fix gnus-html-display-image
 	arguments.
+	(gnus-html-wash-images): Fix spec computing to include start/end.
 
 	* gnus-art.el (gnus-article-treat-body-boundary): Fix length computing.
 
