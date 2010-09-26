@@ -32,9 +32,9 @@
 ;;; Code:
 
 (require 'gnus-util)
+(require 'netrc)
 
 (eval-when-compile (require 'cl))
-(autoload 'netrc-machine-user-or-password "netrc")
 (autoload 'secrets-create-item "secrets")
 (autoload 'secrets-delete-item "secrets")
 (autoload 'secrets-get-alias "secrets")
