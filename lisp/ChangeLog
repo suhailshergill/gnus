@@ -1,5 +1,8 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-expire-articles): Compress ranges before
+	deletion.
+
 	* gnus-picon.el (gnus-picon-inhibit-top-level-domains): New variable.
 	(gnus-picon-transform-address): Use it.
 

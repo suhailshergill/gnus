@@ -626,7 +626,7 @@ some servers.")
     articles)
    ((and force
 	 (eq nnmail-expiry-target 'delete))
-    (unless (nnimap-delete-article articles)
+    (unless (nnimap-delete-article (gnus-compress-sequence articles))
       (message "Article marked for deletion, but not expunged."))
     nil)
    (t
@@ -640,7 +640,7 @@ some servers.")
       (if (null deletable-articles)
 	  articles
 	(if (eq nnmail-expiry-target 'delete)
-	    (nnimap-delete-article deletable-articles)
+	    (nnimap-delete-article (gnus-compress-sequence deletable-articles))
 	  (setq deletable-articles
 		(nnimap-process-expiry-targets
 		 deletable-articles group server)))
@@ -667,7 +667,7 @@ some servers.")
     ;; Change back to the current group again.
     (nnimap-possibly-change-group group server)
     (setq deleted-articles (nreverse deleted-articles))
-    (nnimap-delete-article deleted-articles)
+    (nnimap-delete-article (gnus-compress-sequence deleted-articles))
     deleted-articles))
 
 (defun nnimap-find-expired-articles (group)
