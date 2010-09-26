@@ -1,5 +1,7 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nndoc.el (nndoc-request-list): Return success always.
+
 	* gnus-agent.el (gnus-agent-retrieve-headers): Don't propagate
 	`fetch-old' -- we only want to fetch the articles we've requested.  The
 	rest are in the agent, probably.
