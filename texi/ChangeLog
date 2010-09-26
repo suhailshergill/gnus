@@ -1,3 +1,10 @@
+2010-09-26  Andreas Seltenreich  <seltenreich@gmx.de>
+
+	* gnus.texi (Browse Foreign Server): New variable
+	gnus-browse-subscribe-newsgroup-method.
+
+	* gnus-news.texi: Mention it.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (NoCeM): Removed.
