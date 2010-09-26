@@ -1,3 +1,10 @@
+2009-02-08  Dave Love  <fx@gnu.org>
+
+	* gnus-win.el (gnus-window-to-buffer-helper,
+	gnus-all-windows-visible-p): Function needn't be a symbol.
+
+	* mail-source.el (mail-source-value): Function needn't be a symbol.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-cite-prefix-regexp): Remove } from the cite

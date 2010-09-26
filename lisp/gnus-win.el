@@ -289,12 +289,12 @@ See the Gnus manual for an explanation of the syntax used.")
 (defvar gnus-frame-list nil)
 
 (defun gnus-window-to-buffer-helper (obj)
-  (cond ((not (symbolp obj))
+  (cond ((functionp obj)
+	 (funcall obj))
+	((not (symbolp obj))
 	 obj)
 	((boundp obj)
 	 (symbol-value obj))
-	((fboundp obj)
-	 (funcall obj))
 	(t
 	 nil)))
 
@@ -315,7 +315,7 @@ See the Gnus manual for an explanation of the syntax used.")
     ;; The SPLIT might be something that is to be evaled to
     ;; return a new SPLIT.
     (while (and (not (assq (car split) gnus-window-to-buffer))
-		(symbolp (car split)) (fboundp (car split)))
+		(functionp (car split)))
       (setq split (eval split)))
     (let* ((type (car split))
 	   (subs (cddr split))
@@ -378,7 +378,7 @@ See the Gnus manual for an explanation of the syntax used.")
 	  (while subs
 	    (setq sub (append (pop subs) nil))
 	    (while (and (not (assq (car sub) gnus-window-to-buffer))
-			(symbolp (car sub)) (fboundp (car sub)))
+			(functionp (car sub)))
 	      (setq sub (eval sub)))
 	    (when sub
 	      (push sub comp-subs)
@@ -518,7 +518,7 @@ should have point."
       ;; The SPLIT might be something that is to be evaled to
       ;; return a new SPLIT.
       (while (and (not (assq (car split) gnus-window-to-buffer))
-		  (symbolp (car split)) (fboundp (car split)))
+		  (functionp (car split)))
 	(setq split (eval split)))
 
       (setq type (elt split 0))
