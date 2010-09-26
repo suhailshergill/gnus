@@ -1,5 +1,11 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmh.el (nnmh-request-expire-articles): Don't try to fetch the expiry
+	target here, because we don't know the Gnus name of the group.
+
+	* nndraft.el (nndraft-request-expire-articles): Fetch the expiry target
+	for the correct group.
+
 	* gnus-ems.el (gnus-create-image): Ignore all image-creation errors.
 
 	* gnus.el (gnus): Give a final warning after startup.
