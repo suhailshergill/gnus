@@ -1,3 +1,7 @@
+2010-09-26  Julien Danjou  <julien@danjou.info>
+
+	* gnus-art.el (gnus-article-treat-body-boundary): Fix length computing.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-picon.el (gnus-picon-inhibit-top-level-domains): New variable.
