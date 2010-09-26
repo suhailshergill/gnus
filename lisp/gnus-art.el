@@ -7154,7 +7154,7 @@ man page."
   :type '(choice (function-item :tag "Man" manual-entry)
 		 (function-item :tag "Woman" woman)
 		 (function :tag "Other"))
-  :group 'gnus-article-buttons)=
+  :group 'gnus-article-buttons)
 
 (defcustom gnus-button-mid-or-mail-regexp
   (concat "\\b\\(<?" gnus-button-valid-localpart-regexp "@"
