@@ -1,5 +1,8 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (auth-source-user-or-password): Use the existing auth
+	sources, if any, for creation.
+
 	* gnus.el (gnus-group-fast-parameter): Return the last matching
 	parameter instead of the first matching parameter.
 

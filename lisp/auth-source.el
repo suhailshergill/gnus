@@ -432,7 +432,10 @@ MODE can be \"login\" or \"password\"."
 	;; We haven't found something, so we will create it interactively.
 	(when (and (not found) create-missing)
 	  (setq found (apply 'auth-source-create
-			     mode (car auth-sources) search)))
+			     mode (if choices
+				      (car choices)
+				    (car auth-sources))
+			     search)))
 
 	;; Cache the result.
 	(when found
