@@ -223,6 +223,25 @@ Whether the passphrase is cached at all is controlled by
 	  handles
 	(list handles)))))
 
+(defun mml2015-gpg-pretty-print-fpr (fingerprint)
+  (let* ((result "")
+	 (fpr-length (string-width fingerprint))
+	 (n-slice 0)
+	 slice)
+    (setq fingerprint (string-to-list fingerprint))
+    (while fingerprint
+      (setq fpr-length (- fpr-length 4))
+      (setq slice (butlast fingerprint fpr-length))
+      (setq fingerprint (nthcdr 4 fingerprint))
+      (setq n-slice (1+ n-slice))
+      (setq result
+	    (concat
+	     result
+	     (case n-slice
+	       (1  slice)
+	       (otherwise (concat " " slice))))))
+    result))
+
 (defun mml2015-gpg-extract-signature-details ()
   (goto-char (point-min))
   (let* ((expired (re-search-forward
