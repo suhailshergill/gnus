@@ -3752,7 +3752,7 @@ has been fetched."
 	    (erase-buffer)
             (cond ((not (eq 'nov (let (gnus-agent) ; Turn off agent
                                    (gnus-retrieve-headers
-                                    uncached-articles group fetch-old))))
+                                    uncached-articles group))))
                    (nnvirtual-convert-headers))
                   ((eq 'nntp (car gnus-current-select-method))
                    ;; The author of gnus-get-newsgroup-headers-xover
