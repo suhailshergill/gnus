@@ -1,5 +1,11 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus): Give a final warning after startup.
+
+	* gnus-util.el (gnus-action-message-log): New variable.
+	(gnus-message): Use it.
+	(gnus-final-warning): New function.
+
 	* nnimap.el (nnimap-open-connection): Record the greeting.
 	(nnimap): Add greeting.
 
