@@ -1,5 +1,7 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-news.texi: Mention nnimap-inbox.
+
 	* gnus.texi (Picons): Document gnus-picon-inhibit-top-level-domains.
 
 2010-09-26  Julien Danjou  <julien@danjou.info>
