@@ -2,6 +2,8 @@
 
 	* gnus-picon.el (gnus-picon-xbm): Removed obsolete face.
 	(gnus-picon): Ditto.
+	(gnus-picon): Reinstate.  The background colour for picons is white.
+	(gnus-picon-insert-glyph): Make the background white.
 
 	* nnml.el (nnml-open-nov): Don't return dead buffers.
 

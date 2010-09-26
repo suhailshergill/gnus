@@ -85,6 +85,10 @@ added right to the textual representation."
 		 (const right))
   :group 'gnus-picon)
 
+(defface gnus-picon '((t (:foreground "black" :background "white")))
+  "Face to show picon in."
+  :group 'gnus-picon)
+
 ;;; Internal variables:
 
 (defvar gnus-picon-glyph-alist nil
@@ -147,7 +151,9 @@ replacement is added."
       (insert glyph)
     (gnus-add-wash-type category)
     (gnus-add-image category (car glyph))
-    (gnus-put-image (car glyph) (unless nostring (cdr glyph)) category)))
+    (let ((start (point)))
+      (gnus-put-image (car glyph) (unless nostring (cdr glyph)) category)
+      (put-text-property start (point) 'face 'gnus-picon))))
 
 (defun gnus-picon-create-glyph (file)
   (or (cdr (assoc file gnus-picon-glyph-alist))
