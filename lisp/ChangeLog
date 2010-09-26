@@ -3,6 +3,8 @@
 	* gnus-agent.el (gnus-agent-retrieve-headers): Don't propagate
 	`fetch-old' -- we only want to fetch the articles we've requested.  The
 	rest are in the agent, probably.
+	(gnus-agent-read-servers-validate): Change the level for the "Ignoring
+	disappeared server" to something low.  It's not important.
 
 	* nnimap.el (nnimap-get-whole-article): Remove the data that may have
 	arrived before the FETCH data.

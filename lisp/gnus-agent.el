@@ -1026,7 +1026,7 @@ supported."
                   (unless (member server gnus-agent-covered-methods)
                     (push server gnus-agent-covered-methods)
                     (setq gnus-agent-method-p-cache nil))
-                (gnus-message 1 "Ignoring disappeared server `%s'" server))))
+                (gnus-message 8 "Ignoring disappeared server `%s'" server))))
           (prog1 gnus-agent-covered-methods
             (setq gnus-agent-covered-methods nil))))
 
