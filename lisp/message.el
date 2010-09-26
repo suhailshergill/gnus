@@ -624,7 +624,7 @@ Done before generating the new subject of a forward."
 (defcustom message-cite-prefix-regexp
   (if (string-match "[[:digit:]]" "1")
       ;; Support POSIX?  XEmacs 21.5.27 doesn't.
-      "\\([ \t]*[_.[:word:]]+>+\\|[ \t]*[]>|}]\\)+"
+      "\\([ \t]*[_.[:word:]]+>+\\|[ \t]*[]>|]\\)+"
     ;; ?-, ?_ or ?. MUST NOT be in syntax entry w.
     (let (non-word-constituents)
       (with-syntax-table text-mode-syntax-table
@@ -633,12 +633,12 @@ Done before generating the new subject of a forward."
 	       (if (string-match "\\w" "_")  "" "_")
 	       (if (string-match "\\w" ".")  "" "."))))
       (if (equal non-word-constituents "")
-	  "\\([ \t]*\\(\\w\\)+>+\\|[ \t]*[]>|}]\\)+"
+	  "\\([ \t]*\\(\\w\\)+>+\\|[ \t]*[]>|]\\)+"
 	(concat "\\([ \t]*\\(\\w\\|["
 		non-word-constituents
-		"]\\)+>+\\|[ \t]*[]>|}]\\)+"))))
+		"]\\)+>+\\|[ \t]*[]>|]\\)+"))))
   "*Regexp matching the longest possible citation prefix on a line."
-  :version "23.2"
+  :version "24.1"
   :group 'message-insertion
   :link '(custom-manual "(message)Insertion Variables")
   :type 'regexp
