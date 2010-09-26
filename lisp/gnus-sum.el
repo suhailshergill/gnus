@@ -8646,8 +8646,7 @@ fetch-old-headers verbiage, and so on."
 		   (null gnus-summary-expunge-below)
 		   (not (eq gnus-build-sparse-threads 'some))
 		   (not (eq gnus-build-sparse-threads 'more))
-		   (null gnus-thread-expunge-below)
-		   (not gnus-use-nocem)))
+		   (null gnus-thread-expunge-below)))
     (push gnus-newsgroup-limit gnus-newsgroup-limits)
     (setq gnus-newsgroup-limit nil)
     (mapatoms
@@ -8730,14 +8729,7 @@ fetch-old-headers verbiage, and so on."
 	      t)
 	    ;; Do the `display' group parameter.
 	    (and gnus-newsgroup-display
-		 (not (funcall gnus-newsgroup-display)))
-	    ;; Check NoCeM things.
-	    (when (and gnus-use-nocem
-		       (gnus-nocem-unwanted-article-p
-			(mail-header-id (car thread))))
-	      (setq gnus-newsgroup-unreads
-		    (delq number gnus-newsgroup-unreads))
-	      t)))
+		 (not (funcall gnus-newsgroup-display)))))
 	  ;; Nope, invisible article.
 	  0
 	;; Ok, this article is to be visible, so we add it to the limit

@@ -1,5 +1,19 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-limit-children): Remove nocem support.
+
+	* gnus-start.el (gnus-setup-news): Remove nocem support.
+
+	* gnus-group.el (gnus-group-get-new-news): Removed nocem call.
+
+	* gnus.el (gnus-use-nocem): Removed.
+
+	* gnus-demon.el (gnus-demon-add-nocem, gnus-demon-scan-nocem):
+	Removed.
+
+	* gnus-nocem.el (gnus-nocem-issuers): Removed file.  Apparently nobody
+	uses NoCeM any more.
+
 	* gnus-art.el (gnus-ctan-url): Seems not very useful -- removed.
 	(gnus-button-ctan-handler): Ditto.
 	(gnus-button-handle-ctan-bogus-regexp): Ditto.

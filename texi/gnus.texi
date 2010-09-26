@@ -799,7 +799,6 @@ Various
 * Highlighting and Menus::      Making buffers look all nice and cozy.
 * Buttons::                     Get tendinitis in ten easy steps!
 * Daemons::                     Gnus can do things behind your back.
-* NoCeM::                       How to avoid spam and other fatty foods.
 * Undo::                        Some actions can be undone.
 * Predicate Specifiers::        Specifying predicates.
 * Moderation::                  What to do if you're a moderator.
@@ -11858,8 +11857,7 @@ read the same article more than once.  Unless, of course, somebody has
 posted it to several groups separately.  Posting the same article to
 several groups (not cross-posting) is called @dfn{spamming}, and you are
 by law required to send nasty-grams to anyone who perpetrates such a
-heinous crime.  You may want to try NoCeM handling to filter out spam
-(@pxref{NoCeM}).
+heinous crime.
 
 Remember: Cross-posting is kinda ok, but posting the same article
 separately to several groups is not.  Massive cross-posting (aka.
@@ -21738,7 +21736,6 @@ four days, Gnus will decay the scores four times, for instance.
 * Highlighting and Menus::      Making buffers look all nice and cozy.
 * Buttons::                     Get tendinitis in ten easy steps!
 * Daemons::                     Gnus can do things behind your back.
-* NoCeM::                       How to avoid spam and other fatty foods.
 * Undo::                        Some actions can be undone.
 * Predicate Specifiers::        Specifying predicates.
 * Moderation::                  What to do if you're a moderator.
@@ -22757,13 +22754,12 @@ your @file{~/.gnus.el} file:
 (gnus-demon-add-handler 'gnus-demon-close-connections 30 t)
 @end lisp
 
-@findex gnus-demon-add-nocem
 @findex gnus-demon-add-scanmail
 @findex gnus-demon-add-rescan
 @findex gnus-demon-add-scan-timestamps
 @findex gnus-demon-add-disconnection
 Some ready-made functions to do this have been created:
-@code{gnus-demon-add-nocem}, @code{gnus-demon-add-disconnection},
+@code{gnus-demon-add-disconnection},
 @code{gnus-demon-add-nntp-close-connection},
 @code{gnus-demon-add-scan-timestamps}, @code{gnus-demon-add-rescan}, and
 @code{gnus-demon-add-scanmail}.  Just put those functions in your
@@ -22780,152 +22776,6 @@ Note that adding daemons can be pretty naughty if you over do it.  Adding
 functions that scan all news and mail from all servers every two seconds
 is a sure-fire way of getting booted off any respectable system.  So
 behave.
-
-
-@node NoCeM
-@section NoCeM
-@cindex nocem
-@cindex spam
-
-@dfn{Spamming} is posting the same article lots and lots of times.
-Spamming is bad.  Spamming is evil.
-
-Spamming is usually canceled within a day or so by various anti-spamming
-agencies.  These agencies usually also send out @dfn{NoCeM} messages.
-NoCeM is pronounced ``no see-'em'', and means what the name
-implies---these are messages that make the offending articles, like, go
-away.
-
-What use are these NoCeM messages if the articles are canceled anyway?
-Some sites do not honor cancel messages and some sites just honor cancels
-from a select few people.  Then you may wish to make use of the NoCeM
-messages, which are distributed in the newsgroups
-@samp{news.lists.filters}, @samp{alt.nocem.misc}, etc.
-
-Gnus can read and parse the messages in this group automatically, and
-this will make spam disappear.
-
-There are some variables to customize, of course:
-
-@table @code
-@item gnus-use-nocem
-@vindex gnus-use-nocem
-Set this variable to @code{t} to set the ball rolling.  It is @code{nil}
-by default.
-
-You can also set this variable to a positive number as a group level.
-In that case, Gnus scans NoCeM messages when checking new news if this
-value is not exceeding a group level that you specify as the prefix
-argument to some commands, e.g. @code{gnus},
-@code{gnus-group-get-new-news}, etc.  Otherwise, Gnus does not scan
-NoCeM messages if you specify a group level that is smaller than this
-value to those commands.  For example, if you use 1 or 2 on the mail
-groups and the levels on the news groups remain the default, 3 is the
-best choice.
-
-@item gnus-nocem-groups
-@vindex gnus-nocem-groups
-Gnus will look for NoCeM messages in the groups in this list.  The
-default is
-@lisp
-("news.lists.filters" "alt.nocem.misc")
-@end lisp
-
-@item gnus-nocem-issuers
-@vindex gnus-nocem-issuers
-There are many people issuing NoCeM messages.  This list says what
-people you want to listen to.  The default is:
-
-@lisp
-("Adri Verhoef"
- "alba-nocem@@albasani.net"
- "bleachbot@@httrack.com"
- "news@@arcor-online.net"
- "news@@uni-berlin.de"
- "nocem@@arcor.de"
- "pgpmoose@@killfile.org"
- "xjsppl@@gmx.de")
-@end lisp
-
-Known despammers that you can put in this list are listed at@*
-@uref{http://www.xs4all.nl/~rosalind/nocemreg/nocemreg.html}.
-
-You do not have to heed NoCeM messages from all these people---just the
-ones you want to listen to.  You also don't have to accept all NoCeM
-messages from the people you like.  Each NoCeM message has a @dfn{type}
-header that gives the message a (more or less, usually less) rigorous
-definition.  Common types are @samp{spam}, @samp{spew}, @samp{mmf},
-@samp{binary}, and @samp{troll}.  To specify this, you have to use
-@code{(@var{issuer} @var{conditions} @dots{})} elements in the list.
-Each condition is either a string (which is a regexp that matches types
-you want to use) or a list on the form @code{(not @var{string})}, where
-@var{string} is a regexp that matches types you don't want to use.
-
-For instance, if you want all NoCeM messages from Chris Lewis except his
-@samp{troll} messages, you'd say:
-
-@lisp
-("clewis@@ferret.ocunix.on.ca" ".*" (not "troll"))
-@end lisp
-
-On the other hand, if you just want nothing but his @samp{spam} and
-@samp{spew} messages, you'd say:
-
-@lisp
-("clewis@@ferret.ocunix.on.ca" (not ".*") "spew" "spam")
-@end lisp
-
-The specs are applied left-to-right.
-
-
-@item gnus-nocem-verifyer
-@vindex gnus-nocem-verifyer
-@findex gnus-nocem-epg-verify
-@findex pgg-verify
-This should be a function for verifying that the NoCeM issuer is who she
-says she is.  This variable defaults to @code{gnus-nocem-epg-verify} if
-EasyPG is available, otherwise defaults to @code{pgg-verify}.  The
-function should return non-@code{nil} if the verification is successful,
-otherwise (including the case the NoCeM message was not signed) should
-return @code{nil}.  If this is too slow and you don't care for
-verification (which may be dangerous), you can set this variable to
-@code{nil}.
-
-Formerly the default was @code{mc-verify}, which is a Mailcrypt
-function.  While you can still use it, you can change it into
-@code{gnus-nocem-epg-verify} or @code{pgg-verify} running with GnuPG if
-you are willing to add the @acronym{PGP} public keys to GnuPG's keyring.
-
-@item gnus-nocem-directory
-@vindex gnus-nocem-directory
-This is where Gnus will store its NoCeM cache files.  The default is@*
-@file{~/News/NoCeM/}.
-
-@item gnus-nocem-expiry-wait
-@vindex gnus-nocem-expiry-wait
-The number of days before removing old NoCeM entries from the cache.
-The default is 15.  If you make it shorter Gnus will be faster, but you
-might then see old spam.
-
-@item gnus-nocem-check-from
-@vindex gnus-nocem-check-from
-Non-@code{nil} means check for valid issuers in message bodies.
-Otherwise don't bother fetching articles unless their author matches a
-valid issuer; that is much faster if you are selective about the
-issuers.
-
-@item gnus-nocem-check-article-limit
-@vindex gnus-nocem-check-article-limit
-If non-@code{nil}, the maximum number of articles to check in any NoCeM
-group.  @code{nil} means no restriction.  NoCeM groups can be huge and
-very slow to process.
-
-@end table
-
-Using NoCeM could potentially be a memory hog.  If you have many living
-(i. e., subscribed or unsubscribed groups), your Emacs process will grow
-big.  If this is a problem, you should kill off all (or most) of your
-unsubscribed groups (@pxref{Subscription Commands}).
 
 
 @node Undo
@@ -26971,13 +26821,6 @@ Mail can be re-scanned by a daemonic process (@pxref{Daemons}).
 \marginpar[\mbox{}\hfill\epsfig{figure=ps/fseptember,height=5cm}]{\epsfig{figure=ps/fseptember,height=5cm}}
 @end iflatex
 @end iftex
-
-@item
-Gnus can make use of NoCeM files to weed out spam (@pxref{NoCeM}).
-
-@lisp
-(setq gnus-use-nocem t)
-@end lisp
 
 @item
 Groups can be made permanently visible (@pxref{Listing Groups}).

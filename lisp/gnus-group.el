@@ -3946,14 +3946,6 @@ re-scanning.  If ARG is non-nil and not a number, this will force
     (unless gnus-slave
       (gnus-master-read-slave-newsrc))
 
-    ;; We might read in new NoCeM messages here.
-    (when (and gnus-use-nocem
-	       (or (and (numberp gnus-use-nocem)
-			(numberp arg)
-			(>= arg gnus-use-nocem))
-		   (not arg)))
-      (gnus-nocem-scan-groups))
-
     (gnus-get-unread-articles arg)
 
     ;; If the user wants it, we scan for new groups.

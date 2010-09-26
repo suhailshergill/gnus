@@ -1063,15 +1063,6 @@ If LEVEL is non-nil, the news will be set up at level LEVEL."
 	       (gnus-server-opened gnus-select-method))
       (gnus-check-bogus-newsgroups))
 
-    ;; We might read in new NoCeM messages here.
-    (when (and (not dont-connect)
-	       gnus-use-nocem
-	       (or (and (numberp gnus-use-nocem)
-			(numberp level)
-			(>= level gnus-use-nocem))
-		   (not level)))
-      (gnus-nocem-scan-groups))
-
     ;; Read any slave files.
     (gnus-master-read-slave-newsrc)
 
