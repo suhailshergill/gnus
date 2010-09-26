@@ -7,6 +7,11 @@
 
 	* gnus-art.el (gnus-mime-delete-part): Fix Lisp type of byte(s).
 
+2010-09-26  Florian Ragwitz  <rafl@debian.org>
+
+	* gnus-html.el (gnus-html-wash-tags): Decode URL entities to avoid
+	handing broken links to browse-url.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nndoc.el (nndoc-request-list): Return success always.
