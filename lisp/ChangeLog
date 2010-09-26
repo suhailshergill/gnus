@@ -1,5 +1,10 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-credentials): Allow inhibiting the password query
+	on failure.
+	(nnimap-open-connection): Look up both virtual and physical server name
+	credentials.
+
 	* gnus-win.el: Revert previous patch, since it made Gnus backtrace.
 
 2009-02-07  Dave Love  <fx@gnu.org>
