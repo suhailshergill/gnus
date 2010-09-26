@@ -3,6 +3,9 @@
 	* sieve-manage.el (sieve-manage-default-stream): Make default stream
 	customizable.
 
+	* gnus-html.el (gnus-html-wash-tags): Decode URL entities to avoid
+	handing broken links to browse-url.
+
 2010-10-05  Julien Danjou  <julien@danjou.info>
 
 	* gnus-util.el (gnus-emacs-completing-read)
