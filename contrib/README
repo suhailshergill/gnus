@@ -29,11 +29,6 @@ gnus-kill-to-score.el
 	Convert kill files to score files.  See (info "(gnus)Converting Kill
 	Files").
 
-gpg-ring.el
-gpg.el
-
-	Obsoleted by PGG and EasyPG.
-
 one-line-cookie.diff
 
 sendmail.el
