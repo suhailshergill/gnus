@@ -421,10 +421,13 @@ some servers.")
 	  article)))
     ;; Check that we really got an article.
     (goto-char (point-min))
-    (unless (looking-at "\\* [0-9]+ FETCH")
+    (unless (re-search-forward "\\* [0-9]+ FETCH" nil t)
       (setq result nil))
     (when result
-      (goto-char (point-min))
+      ;; Remove any data that may have arrived before the FETCH data.
+      (beginning-of-line)
+      (unless (bobp)
+	(delete-region (point-min) (point)))
       (let ((bytes (nnimap-get-length)))
 	(delete-region (line-beginning-position)
 		       (progn (forward-line 1) (point)))

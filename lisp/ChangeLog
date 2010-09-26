@@ -1,5 +1,8 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-get-whole-article): Remove the data that may have
+	arrived before the FETCH data.
+
 	* nnmh.el (nnmh-request-expire-articles): Don't try to fetch the expiry
 	target here, because we don't know the Gnus name of the group.
 
