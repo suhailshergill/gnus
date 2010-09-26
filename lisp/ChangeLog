@@ -1,5 +1,11 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-treatment-function-alist): Do picons before
+	highlight again, so that the highlight is correct.
+
+	* gnus-picon.el (gnus-picon): Remove again.
+	(gnus-picon-create-glyph): Set the background XPM colour explicitly.
+
 	* gnus-art.el (gnus-treatment-function-alist): Insert picons after
 	doing the header highlightling, so that the background colour of the
 	picon is correct.
