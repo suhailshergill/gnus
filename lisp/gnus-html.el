@@ -492,7 +492,11 @@ This only works if the article in question is HTML."
     (dolist (overlay (overlays-in (point-min) (point-max)))
       (let ((o (overlay-get overlay 'gnus-image)))
         (when o
-          (apply 'gnus-html-display-image o))))))
+          (apply 'gnus-html-display-image
+                 (list (car o)
+                       (overlay-start overlay)
+                       (overlay-end overlay)
+                       (cadr o))))))))
 
 ;;;###autoload
 (defun gnus-html-prefetch-images (summary)

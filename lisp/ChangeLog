@@ -1,5 +1,8 @@
 2010-09-26  Julien Danjou  <julien@danjou.info>
 
+	* gnus-html.el (gnus-html-show-images): Fix gnus-html-display-image
+	arguments.
+
 	* gnus-art.el (gnus-article-treat-body-boundary): Fix length computing.
 
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
