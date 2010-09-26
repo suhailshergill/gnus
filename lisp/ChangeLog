@@ -1,5 +1,8 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-read-ephemeral-bug-group): Add the bug email
+	address to the To list for easier response.
+
 	* gnus.el (gnus-play-startup-jingle): Removed.
 	(gnus-splash): Don't play jingle.
 	(gnus): Silence gnus-load message.

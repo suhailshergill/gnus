@@ -2418,6 +2418,13 @@ the bug number, and browsing the URL must return mbox output."
   (let ((tmpfile (mm-make-temp-file "gnus-temp-group-")))
     (with-temp-file tmpfile
       (url-insert-file-contents (format mbox-url number))
+      (goto-char (point-min))
+      (while (re-search-forward "^To: " nil t)
+	(end-of-line)
+	(insert (format ", %s@%s" number
+			(replace-regexp-in-string
+			 "/.*$" ""
+			 (replace-regexp-in-string "^http://" "" mbox-url)))))
       (write-region (point-min) (point-max) tmpfile)
       (gnus-group-read-ephemeral-group
        "gnus-read-ephemeral-bug"
