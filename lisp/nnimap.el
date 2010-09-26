@@ -119,7 +119,6 @@ some servers.")
     (erase-buffer)
     (when (nnimap-possibly-change-group group server)
       (with-current-buffer (nnimap-buffer)
-	(nnimap-send-command "SELECT %S" (utf7-encode group t))
 	(erase-buffer)
 	(nnimap-wait-for-response
 	 (nnimap-send-command

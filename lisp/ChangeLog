@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-request-expire-articles): Compress ranges before
 	deletion.
+	(nnimap-retrieve-headers): Don't select the group, because that's
+	already done by nnimap-possibly-change-group.
 
 	* gnus-picon.el (gnus-picon-inhibit-top-level-domains): New variable.
 	(gnus-picon-transform-address): Use it.
