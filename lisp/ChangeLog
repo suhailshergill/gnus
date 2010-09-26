@@ -1,3 +1,7 @@
+2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-win.el: Revert previous patch, since it made Gnus backtrace.
+
 2009-02-07  Dave Love  <fx@gnu.org>
 
 	* tls.el (open-tls-stream): Don't query killing process.
