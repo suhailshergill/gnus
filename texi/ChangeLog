@@ -1,3 +1,7 @@
+2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Security): Remove gpg.el mention.
+
 2010-09-26  Andreas Seltenreich  <seltenreich@gmx.de>
 
 	* gnus.texi (Browse Foreign Server): New variable

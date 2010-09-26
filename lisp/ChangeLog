@@ -1,3 +1,10 @@
+2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* mml2015.el (mml2015-use): Remove gpg support.
+
+	* mml1991.el (mml1991-function-alist): Remove gpg function.
+	(mml1991-gpg-sign): Removed.
+
 2010-09-26  Andreas Seltenreich  <seltenreich@gmx.de>
 
 	* gnus-srvr.el (gnus-browse-subscribe-newsgroup-method): New variable.
