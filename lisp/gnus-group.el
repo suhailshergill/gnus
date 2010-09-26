@@ -2419,6 +2419,7 @@ the bug number, and browsing the URL must return mbox output."
     (with-temp-file tmpfile
       (url-insert-file-contents (format mbox-url number))
       (goto-char (point-min))
+      ;; Add the debbugs address so that we can respond to reports easily.
       (while (re-search-forward "^To: " nil t)
 	(end-of-line)
 	(insert (format ", %s@%s" number
