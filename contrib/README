@@ -61,13 +61,6 @@ ucs-tables.el
 
 vcard.el
 
-xml.el
-
-	This is used for parsing RSS feeds.  Part of Emacs 21.3 and later.
-	Note that the version of this file in the Gnus contrib/ directory is
-	out of date with respect to the version in the Emacs tree, so don't use
-	this file unless using Emacs < 21.3.
-
 ;; Local Variables:
 ;; fill-column: 79
 ;; End:
