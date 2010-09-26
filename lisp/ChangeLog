@@ -1,5 +1,7 @@
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnml.el (nnml-open-nov): Don't return dead buffers.
+
 	* auth-source.el (auth-source-create): Query the user for whether to
 	store the credentials.
 
