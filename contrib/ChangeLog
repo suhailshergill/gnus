@@ -2,6 +2,8 @@
 
 	* ssl.el: Removed.
 
+	* xml.el: Removed.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gpg.el: Removed -- seems unused.
