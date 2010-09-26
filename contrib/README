@@ -45,12 +45,6 @@ smtpmail.el
 	(Emacs < 22).  XEmacs users should NOT use this, since it doesn't work.
 	See the XEmacs mail-lib module instead.
 
-ssl.el
-
-        Obsolete interface to OpenSSL.  Completely replaced by `lisp/tls.el',
-        which supports both GnuTLS and OpenSSL.  This file will be removed
-        eventually.
-
 ucs-tables.el
 
 	This file provides improved Unicode functionality.  It defines
