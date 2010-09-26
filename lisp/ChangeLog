@@ -2,6 +2,7 @@
 
 	* gnus.el (gnus-play-startup-jingle): Removed.
 	(gnus-splash): Don't play jingle.
+	(gnus): Silence gnus-load message.
 
 	* gnus-art.el (gnus-treat-play-sounds): Removed.
 
