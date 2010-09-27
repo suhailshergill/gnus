@@ -629,7 +629,7 @@ Done before generating the new subject of a forward."
 	 mail-citation-prefix-regexp)
 	((string-match "[[:digit:]]" "1")
 	 ;; Support POSIX?  XEmacs 21.5.27 doesn't.
-	 "\\([ \t]*[_.[:word:]]+>+\\|[ \t]*[]>|]\\)+")
+	 "\\([ \t]*[_.[:word:]]+>+\\|[ \t]*[]>|}]\\)+")
 	(t
 	 ;; ?-, ?_ or ?. MUST NOT be in syntax entry w.
 	 (let (non-word-constituents)
@@ -639,10 +639,10 @@ Done before generating the new subject of a forward."
 		    (if (string-match "\\w" "_")  "" "_")
 		    (if (string-match "\\w" ".")  "" "."))))
 	   (if (equal non-word-constituents "")
-	       "\\([ \t]*\\(\\w\\)+>+\\|[ \t]*[]>|]\\)+"
+	       "\\([ \t]*\\(\\w\\)+>+\\|[ \t]*[]>|}]\\)+"
 	     (concat "\\([ \t]*\\(\\w\\|["
 		     non-word-constituents
-		     "]\\)+>+\\|[ \t]*[]>|]\\)+")))))
+		     "]\\)+>+\\|[ \t]*[]>|}]\\)+")))))
   "*Regexp matching the longest possible citation prefix on a line."
   :version "24.1"
   :group 'message-insertion

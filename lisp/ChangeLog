@@ -1,5 +1,7 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-cite-prefix-regexp): Revert my last edit.
+
 	* gnus-sum.el (gnus-summary-show-complete-article): Bind the server
 	variable instead of the Gnus variable.
 
