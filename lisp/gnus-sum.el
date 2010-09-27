@@ -7090,15 +7090,6 @@ If FORCE (the prefix), also save the .newsrc file(s)."
       (when gnus-use-scoring
 	(gnus-score-save)))
     (gnus-run-hooks 'gnus-summary-prepare-exit-hook)
-    ;; If we have several article buffers, we kill them at exit.
-    (unless gnus-single-article-buffer
-      (when (gnus-buffer-live-p gnus-article-buffer)
-	(with-current-buffer gnus-article-buffer
-	  ;; Don't kill sticky article buffers
-	  (unless (eq major-mode 'gnus-sticky-article-mode)
-	    (gnus-kill-buffer gnus-article-buffer)
-	    (setq gnus-article-current nil))))
-      (gnus-kill-buffer gnus-original-article-buffer))
     (when gnus-use-cache
       (gnus-cache-possibly-remove-articles)
       (gnus-cache-save-buffers))
@@ -7147,6 +7138,17 @@ If FORCE (the prefix), also save the .newsrc file(s)."
 	;; Return to group mode buffer.
 	(when (eq mode 'gnus-summary-mode)
 	  (gnus-kill-buffer buf)))
+
+      ;; If we have several article buffers, we kill them at exit.
+      (unless gnus-single-article-buffer
+	(when (gnus-buffer-live-p gnus-article-buffer)
+	  (with-current-buffer gnus-article-buffer
+	    ;; Don't kill sticky article buffers
+	    (unless (eq major-mode 'gnus-sticky-article-mode)
+	      (gnus-kill-buffer gnus-article-buffer)
+	      (setq gnus-article-current nil))))
+	(gnus-kill-buffer gnus-original-article-buffer))
+
       (setq gnus-current-select-method gnus-select-method)
       (set-buffer gnus-group-buffer)
       (if quit-config
