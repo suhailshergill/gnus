@@ -1431,6 +1431,7 @@ the type of the variable (string, integer, character, etc).")
 (defvar gnus-newsgroup-last-directory nil)
 (defvar gnus-newsgroup-auto-expire nil)
 (defvar gnus-newsgroup-active nil)
+(defvar gnus-newsgroup-highest nil)
 
 (defvar gnus-newsgroup-data nil)
 (defvar gnus-newsgroup-data-reverse nil)
@@ -1582,6 +1583,7 @@ This list will always be a subset of gnus-newsgroup-undownloaded.")
     (gnus-summary-mark-below . global)
     (gnus-orphan-score . global)
     gnus-newsgroup-active gnus-scores-exclude-files
+    gnus-newsgroup-highest
     gnus-newsgroup-history gnus-newsgroup-ancient
     gnus-newsgroup-sparse gnus-newsgroup-process-stack
     (gnus-newsgroup-adaptive . gnus-use-adaptive-scoring)
@@ -3957,6 +3959,7 @@ If NO-DISPLAY, don't generate a summary buffer."
       (setq gnus-newsgroup-active
 	    (gnus-copy-sequence
 	     (gnus-active gnus-newsgroup-name)))
+      (setq gnus-newsgroup-highest (cdr gnus-newsgroup-active))
       ;; You can change the summary buffer in some way with this hook.
       (gnus-run-hooks 'gnus-select-group-hook)
       (when (memq 'summary (gnus-update-format-specifications
@@ -9810,7 +9813,8 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 		  ;; Mark this article as read in this group.
 		  (push (cons to-article gnus-read-mark) gnus-newsgroup-reads)
 		  ;; Increase the active status of this group.
-		  (setcdr (gnus-active to-group) to-article))
+		  (setcdr (gnus-active to-group) to-article)
+ 		  (setcdr gnus-newsgroup-active to-article))
 
 		(while marks
 		  (when (eq (gnus-article-mark-to-type (cdar marks)) 'list)
@@ -12636,13 +12640,14 @@ If ALL is a number, fetch this number of articles."
   (interactive)
   (prog1
       (let ((old (sort (mapcar 'car gnus-newsgroup-data) '<))
-	    (old-high (cdr gnus-newsgroup-active))
+	    (old-high gnus-newsgroup-highest)
 	    (nnmail-fetched-sources (list t))
 	    i new)
 	(setq gnus-newsgroup-active
 	      (gnus-copy-sequence
 	       (gnus-activate-group gnus-newsgroup-name 'scan)))
-	(setq i (cdr gnus-newsgroup-active))
+	(setq i (cdr gnus-newsgroup-active)
+	      gnus-newsgroup-highest i)
 	(while (> i old-high)
 	  (push i new)
 	  (decf i))

@@ -1,5 +1,9 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-read-group-1): Set gnus-newsgroup-highest.
+	(gnus-summary-insert-new-articles): Use gnus-newsgroup-highest to get
+	new articles.
+
 	* nnimap.el (nnimap-request-article): Don't partial-fetch single-part
 	parts.
 	(nnimap-request-article): Work with the t setting, too.
