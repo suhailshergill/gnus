@@ -1,3 +1,7 @@
+2010-09-27  Juanma Barranquero  <lekktu@gmail.com>
+
+	* nnmail.el (nnmail-fancy-expiry-targets): Fix typo in docstring.
+
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-request-accept-article): Message the error on
