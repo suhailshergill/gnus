@@ -85,6 +85,13 @@ some servers.")
 
 (defvoo nnimap-current-infos nil)
 
+(defvoo nnimap-fetch-partial-articles nil
+  "If non-nil, Gnus will fetch partial articles.
+If t, nnimap will fetch only the first part.  If a string, it
+will fetch all parts that have types that match that string.  A
+likely value would be \"text/\" to automatically fetch all
+textual parts.")
+
 (defvar nnimap-process nil)
 
 (defvar nnimap-status-string "")
@@ -414,8 +421,8 @@ some servers.")
 	(erase-buffer)
 	(with-current-buffer (nnimap-buffer)
 	  (erase-buffer)
-	  (when gnus-fetch-partial-articles
-	    (if (eq gnus-fetch-partial-articles t)
+	  (when nnimap-fetch-partial-articles
+	    (if (eq nnimap-fetch-partial-articles t)
 		(setq parts '(1))
 	      (nnimap-command "UID FETCH %d (BODYSTRUCTURE)" article)
 	      (goto-char (point-min))
@@ -544,7 +551,7 @@ some servers.")
 			(number-to-string num)
 		      (format "%s.%s" prefix num))))
 	    (setcar (nthcdr 9 sub) id)
-	    (when (string-match gnus-fetch-partial-articles type)
+	    (when (string-match nnimap-fetch-partial-articles type)
 	      (push id parts))))
 	(incf num)))
     (nreverse parts)))

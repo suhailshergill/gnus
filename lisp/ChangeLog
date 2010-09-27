@@ -1,5 +1,13 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-show-complete-article): Bind the server
+	variable instead of the Gnus variable.
+
+	* nnimap.el (nnimap-find-wanted-parts-1): Use it.
+
+	* gnus-art.el (gnus-fetch-partial-articles): Moved back to nnimap
+	again.
+
 	* nnimap.el (nnimap-request-accept-article): Remove the "." at the end,
 	since some servers don't like it.
 	(nnimap-open-connection): Forget credentials if the server says the

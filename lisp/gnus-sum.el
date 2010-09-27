@@ -9360,9 +9360,17 @@ article currently."
   (let ((gnus-keep-backlog nil)
 	(gnus-use-cache nil)
 	(gnus-agent nil)
-	(gnus-fetch-partial-articles nil))
-    (gnus-flush-original-article-buffer)
-    (gnus-summary-show-article)))
+	(variable (format "%s-fetch-partial-articles"
+			  (car (gnus-find-method-for-group
+				gnus-newsgroup-name))))
+	old-val)
+    (unwind-protect
+	(progn
+	  (setq old-val (symbol-value variable))
+	  (set variable nil)
+	  (gnus-flush-original-article-buffer)
+	  (gnus-summary-show-article))
+      (set variable old-val))))
 
 (defun gnus-summary-show-article (&optional arg)
   "Force redisplaying of the current article.
