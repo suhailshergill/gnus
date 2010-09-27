@@ -9362,9 +9362,11 @@ article currently."
   (let ((gnus-keep-backlog nil)
 	(gnus-use-cache nil)
 	(gnus-agent nil)
-	(variable (format "%s-fetch-partial-articles"
-			  (car (gnus-find-method-for-group
-				gnus-newsgroup-name))))
+	(variable (intern
+		   (format "%s-fetch-partial-articles"
+			   (car (gnus-find-method-for-group
+				 gnus-newsgroup-name)))
+		   obarray))
 	old-val)
     (unwind-protect
 	(progn

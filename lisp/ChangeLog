@@ -1,7 +1,12 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-article): Don't partial-fetch single-part
+	parts.
+	(nnimap-request-article): Work with the t setting, too.
+
 	* gnus-sum.el (gnus-summary-exit): Kill the article buffer later, so
 	that you don't get flashes of other buffers.
+	(gnus-summary-show-complete-article): Intern before setting.
 
 2010-09-27  David Engster  <dengste@eml.cc>
 
