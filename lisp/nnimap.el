@@ -770,8 +770,8 @@ some servers.")
 	(process-send-string (get-buffer-process (current-buffer)) message)
 	(process-send-string (get-buffer-process (current-buffer))
 			     (if (nnimap-newlinep nnimap-object)
-				 "\n"
-			       "\r\n"))
+				 ".\n"
+			       ".\r\n"))
 	(let ((result (nnimap-get-response sequence)))
 	  (if (not (car result))
 	      (progn
