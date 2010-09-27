@@ -1,5 +1,9 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-move-article): Add comment.
+	(gnus-summary-insert-new-articles): Copy the old-high watermark so that
+	nothing alters it while scanning for new messages.
+
 	* nnimap.el (nnimap-request-accept-article): Send a "." at the end,
 	which may or may not help.
 	(nnimap-open-connection): If we're doing a stream connection, and then

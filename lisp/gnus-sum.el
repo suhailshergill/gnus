@@ -9797,6 +9797,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 			   (not (memq article gnus-newsgroup-unreads)))
 		  ;; Mark this article as read in this group.
 		  (push (cons to-article gnus-read-mark) gnus-newsgroup-reads)
+		  ;; Increase the active status of this group.
 		  (setcdr (gnus-active to-group) to-article)
 		  (setcdr gnus-newsgroup-active to-article))
 
@@ -12624,13 +12625,13 @@ If ALL is a number, fetch this number of articles."
   (interactive)
   (prog1
       (let ((old (sort (mapcar 'car gnus-newsgroup-data) '<))
-	    (old-active gnus-newsgroup-active)
+	    (old-high (cdr gnus-newsgroup-active))
 	    (nnmail-fetched-sources (list t))
 	    i new)
 	(setq gnus-newsgroup-active
 	      (gnus-activate-group gnus-newsgroup-name 'scan))
 	(setq i (cdr gnus-newsgroup-active))
-	(while (> i (cdr old-active))
+	(while (> i old-high)
 	  (push i new)
 	  (decf i))
 	(if (not new)
