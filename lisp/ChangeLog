@@ -1,5 +1,8 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-accept-article): Remove the "." at the end,
+	since some servers don't like it.
+
 	* gnus-sum.el (gnus-summary-move-article): Add comment.
 	(gnus-summary-insert-new-articles): Copy the old-high watermark so that
 	nothing alters it while scanning for new messages.
