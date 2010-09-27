@@ -2,6 +2,9 @@
 
 	* nnimap.el (nnimap-request-accept-article): Send a "." at the end,
 	which may or may not help.
+	(nnimap-open-connection): If we're doing a stream connection, and then
+	discover we're on a STARTTLS-capable server, then open a STARTTLS
+	connection instead.
 
 2010-09-27  Florian Ragwitz  <rafl@debian.org>
 

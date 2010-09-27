@@ -271,91 +271,102 @@ some servers.")
   (unless nnimap-keepalive-timer
     (setq nnimap-keepalive-timer (run-at-time (* 60 15) (* 60 15)
 					      'nnimap-keepalive)))
-  (with-current-buffer (nnimap-make-process-buffer buffer)
-    (let* ((coding-system-for-read 'binary)
-	   (coding-system-for-write 'binary)
-	   (port nil)
-	   (ports
-	    (cond
-	     ((eq nnimap-stream 'network)
-	      (open-network-stream
-	       "*nnimap*" (current-buffer) nnimap-address
-	       (setq port
-		     (or nnimap-server-port
-			 (if (netrc-find-service-number "imap")
-			     "imap"
-			   "143"))))
-	      '("143" "imap"))
-	     ((eq nnimap-stream 'shell)
-	      (nnimap-open-shell-stream
-	       "*nnimap*" (current-buffer) nnimap-address
-	       (setq port (or nnimap-server-port "imap")))
-	      '("imap"))
-	     ((eq nnimap-stream 'starttls)
-	      (starttls-open-stream
-	       "*nnimap*" (current-buffer) nnimap-address
-	       (setq port (or nnimap-server-port "imap")))
-	      '("imap"))
-	     ((eq nnimap-stream 'ssl)
-	      (open-tls-stream
-	       "*nnimap*" (current-buffer) nnimap-address
-	       (setq port
-		     (or nnimap-server-port
-			 (if (netrc-find-service-number "imaps")
-			     "imaps"
-			   "993"))))
-	      '("143" "993" "imap" "imaps"))))
-	   connection-result login-result credentials)
-      (setf (nnimap-process nnimap-object)
-	    (get-buffer-process (current-buffer)))
-      (if (not (and (nnimap-process nnimap-object)
-		    (memq (process-status (nnimap-process nnimap-object))
-			  '(open run))))
-	  (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
-			   nnimap-address port nnimap-stream)
-	(gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
-	(if (not (setq connection-result (nnimap-wait-for-connection)))
-	    (nnheader-report 'nnimap
-			     "%s" (buffer-substring
-				   (point) (line-end-position)))
-	  (setf (nnimap-greeting nnimap-object)
-		(buffer-substring (line-beginning-position)
-				  (line-end-position)))
-	  (when (eq nnimap-stream 'starttls)
-	    (nnimap-command "STARTTLS")
-	    (starttls-negotiate (nnimap-process nnimap-object)))
-	  (when nnimap-server-port
-	    (push (format "%s" nnimap-server-port) ports))
-	  (unless (equal connection-result "PREAUTH")
-	    (if (not (setq credentials
-			   (if (eq nnimap-authenticator 'anonymous)
-			       (list "anonymous"
-				     (message-make-address))
-			     (or
-			      ;; First look for the credentials based
-			      ;; on the virtual server name.
-			      (nnimap-credentials
-			       (nnoo-current-server 'nnimap) ports t)
-			      ;; Then look them up based on the
-			      ;; physical address.
-			      (nnimap-credentials nnimap-address ports)))))
-		(setq nnimap-object nil)
-	      (setq login-result (nnimap-command "LOGIN %S %S"
-						 (car credentials)
-						 (cadr credentials)))
-	      (unless (car login-result)
-		(delete-process (nnimap-process nnimap-object))
-		(setq nnimap-object nil))))
-	  (when nnimap-object
+  (block nil
+    (with-current-buffer (nnimap-make-process-buffer buffer)
+      (let* ((coding-system-for-read 'binary)
+	     (coding-system-for-write 'binary)
+	     (port nil)
+	     (ports
+	      (cond
+	       ((eq nnimap-stream 'network)
+		(open-network-stream
+		 "*nnimap*" (current-buffer) nnimap-address
+		 (setq port
+		       (or nnimap-server-port
+			   (if (netrc-find-service-number "imap")
+			       "imap"
+			     "143"))))
+		'("143" "imap"))
+	       ((eq nnimap-stream 'shell)
+		(nnimap-open-shell-stream
+		 "*nnimap*" (current-buffer) nnimap-address
+		 (setq port (or nnimap-server-port "imap")))
+		'("imap"))
+	       ((eq nnimap-stream 'starttls)
+		(starttls-open-stream
+		 "*nnimap*" (current-buffer) nnimap-address
+		 (setq port (or nnimap-server-port "imap")))
+		'("imap"))
+	       ((eq nnimap-stream 'ssl)
+		(open-tls-stream
+		 "*nnimap*" (current-buffer) nnimap-address
+		 (setq port
+		       (or nnimap-server-port
+			   (if (netrc-find-service-number "imaps")
+			       "imaps"
+			     "993"))))
+		'("143" "993" "imap" "imaps"))))
+	     connection-result login-result credentials)
+	(setf (nnimap-process nnimap-object)
+	      (get-buffer-process (current-buffer)))
+	(if (not (and (nnimap-process nnimap-object)
+		      (memq (process-status (nnimap-process nnimap-object))
+			    '(open run))))
+	    (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
+			     nnimap-address port nnimap-stream)
+	  (gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
+	  (if (not (setq connection-result (nnimap-wait-for-connection)))
+	      (nnheader-report 'nnimap
+			       "%s" (buffer-substring
+				     (point) (line-end-position)))
+	    ;; Store the greeting (for debugging purposes).
+	    (setf (nnimap-greeting nnimap-object)
+		  (buffer-substring (line-beginning-position)
+				    (line-end-position)))
+	    ;; Store the capabilities.
 	    (setf (nnimap-capabilities nnimap-object)
 		  (mapcar
 		   #'upcase
-		   (or (nnimap-find-parameter "CAPABILITY" (cdr login-result))
-		       (nnimap-find-parameter
-			"CAPABILITY" (cdr (nnimap-command "CAPABILITY"))))))
-	    (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
-	      (nnimap-command "ENABLE QRESYNC"))
-	    t))))))
+		   (nnimap-find-parameter
+		    "CAPABILITY" (cdr (nnimap-command "CAPABILITY")))))
+	    (when (eq nnimap-stream 'starttls)
+	      (nnimap-command "STARTTLS")
+	      (starttls-negotiate (nnimap-process nnimap-object)))
+	    ;; If this is a STARTTLS-capable server, then sever the
+	    ;; connection and start a STARTTLS connection instead.
+	    (when (and (eq nnimap-stream 'network)
+		       (member "STARTTLS" (nnimap-capabilities nnimap-object)))
+	      (let ((nnimap-stream 'starttls))
+		(delete-process (nnimap-process nnimap-object))
+		(kill-buffer (current-buffer))
+		(return
+		 (nnimap-open-connection buffer))))
+	    (when nnimap-server-port
+	      (push (format "%s" nnimap-server-port) ports))
+	    (unless (equal connection-result "PREAUTH")
+	      (if (not (setq credentials
+			     (if (eq nnimap-authenticator 'anonymous)
+				 (list "anonymous"
+				       (message-make-address))
+			       (or
+				;; First look for the credentials based
+				;; on the virtual server name.
+				(nnimap-credentials
+				 (nnoo-current-server 'nnimap) ports t)
+				;; Then look them up based on the
+				;; physical address.
+				(nnimap-credentials nnimap-address ports)))))
+		  (setq nnimap-object nil)
+		(setq login-result (nnimap-command "LOGIN %S %S"
+						   (car credentials)
+						   (cadr credentials)))
+		(unless (car login-result)
+		  (delete-process (nnimap-process nnimap-object))
+		  (setq nnimap-object nil))))
+	    (when nnimap-object
+	      (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
+		(nnimap-command "ENABLE QRESYNC"))
+	      t)))))))
 
 (defun nnimap-find-parameter (parameter elems)
   (let (result)
