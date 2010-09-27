@@ -1,3 +1,8 @@
+2010-09-27  Florian Ragwitz  <rafl@debian.org>
+
+	* sieve-manage.el (sieve-manage-default-stream): Make default stream
+	customizable.
+
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (utf7): Required.
