@@ -4240,9 +4240,9 @@ Allow completion over sensible values."
 		  gnus-predefined-server-alist
 		  gnus-server-alist))
 	 (method
-	  (completing-read
-	   prompt servers
-	   nil t nil 'gnus-method-history)))
+	  (gnus-completing-read
+	   prompt (mapcar 'car servers)
+	   t nil 'gnus-method-history)))
     (cond
      ((equal method "")
       (setq method gnus-select-method))

@@ -857,12 +857,11 @@ Uses `gnus-registry-marks' to find what shortcuts to install."
 
 (defun gnus-registry-read-mark ()
   "Read a mark name from the user with completion."
-  (let ((mark (gnus-completing-read-with-default
-	       (symbol-name gnus-registry-default-mark)
-	       "Label"
-	       (mapcar (lambda (x)	; completion list
-			 (cons (symbol-name (car-safe x)) (car-safe x)))
-		       gnus-registry-marks))))
+  (let ((mark (gnus-completing-read
+               "Label"
+               (mapcar 'symbol-name (mapcar 'car gnus-registry-marks))
+               nil nil nil
+	       (symbol-name gnus-registry-default-mark))))
     (when (stringp mark)
       (intern mark))))
 
