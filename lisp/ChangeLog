@@ -1,5 +1,7 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (utf7): Required.
+
 	* message.el (message-cite-prefix-regexp): Remove "}" from citation
 	prefix.
 
