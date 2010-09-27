@@ -1,3 +1,8 @@
+2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-accept-article): Message the error on
+	error.
+
 2010-09-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-art.el (gnus-mime-delete-part): Fix Lisp type of byte(s).
