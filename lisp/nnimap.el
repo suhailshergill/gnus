@@ -361,6 +361,14 @@ some servers.")
 						   (car credentials)
 						   (cadr credentials)))
 		(unless (car login-result)
+		  ;; If the login failed, then forget the credentials
+		  ;; that are now possibly cached.
+		  (dolist (host (list (nnoo-current-server 'nnimap)
+				      nnimap-address))
+		    (dolist (port ports)
+		      (dolist (element '("login" "password"))
+			(auth-source-forget-user-or-password
+			 element host port))))
 		  (delete-process (nnimap-process nnimap-object))
 		  (setq nnimap-object nil))))
 	    (when nnimap-object
