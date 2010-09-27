@@ -6,7 +6,7 @@
 	discover we're on a STARTTLS-capable server, then open a STARTTLS
 	connection instead.
 
-2010-09-27  Florian Ragwitz  <rafl@debian.org>
+2010-09-27  Florian Ragwitz  <rafl@debian.org>  (tiny change)
 
 	* sieve-manage.el (sieve-manage-default-stream): Make default stream
 	customizable.
@@ -31,7 +31,7 @@
 
 	* gnus-art.el (gnus-mime-delete-part): Fix Lisp type of byte(s).
 
-2010-09-26  Florian Ragwitz  <rafl@debian.org>
+2010-09-26  Florian Ragwitz  <rafl@debian.org>  (tiny change)
 
 	* gnus-html.el (gnus-html-wash-tags): Decode URL entities to avoid
 	handing broken links to browse-url.
