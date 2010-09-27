@@ -1,5 +1,11 @@
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-move-article): Don't alter
+	gnus-newsgroup-active.  This makes `/ N' work after copying to the same
+	group.
+
+	* nnimap.el (nnimap-update-info): Don't destructively alter active.
+
 	* message.el (message-cite-prefix-regexp): Revert my last edit.
 
 	* gnus-sum.el (gnus-summary-show-complete-article): Bind the server

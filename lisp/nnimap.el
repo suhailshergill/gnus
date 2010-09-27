@@ -967,7 +967,8 @@ textual parts.")
 			      (t
 			       ;; No articles and no uidnext.
 			       nil)))
-	  (setcdr (gnus-active group) (or high (1- uidnext))))
+	  (gnus-set-active (cons (car (gnus-active group))
+				 (or high (1- uidnext)))))
 	(when (and (not high)
 		   uidnext)
 	  (setq high (1- uidnext)))

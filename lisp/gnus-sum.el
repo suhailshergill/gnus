@@ -9806,8 +9806,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 		  ;; Mark this article as read in this group.
 		  (push (cons to-article gnus-read-mark) gnus-newsgroup-reads)
 		  ;; Increase the active status of this group.
-		  (setcdr (gnus-active to-group) to-article)
-		  (setcdr gnus-newsgroup-active to-article))
+		  (setcdr (gnus-active to-group) to-article))
 
 		(while marks
 		  (when (eq (gnus-article-mark-to-type (cdar marks)) 'list)
@@ -12637,7 +12636,8 @@ If ALL is a number, fetch this number of articles."
 	    (nnmail-fetched-sources (list t))
 	    i new)
 	(setq gnus-newsgroup-active
-	      (gnus-activate-group gnus-newsgroup-name 'scan))
+	      (gnus-copy-sequence
+	       (gnus-activate-group gnus-newsgroup-name 'scan)))
 	(setq i (cdr gnus-newsgroup-active))
 	(while (> i old-high)
 	  (push i new)
