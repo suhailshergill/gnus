@@ -1212,13 +1212,18 @@ some servers.")
 	   (cond
 	    ((eql char ?\[)
 	     (split-string (buffer-substring
-			    (1+ (point)) (1- (search-forward "]")))))
+			    (1+ (point))
+			    (1- (search-forward "]" (line-end-position) 'move)))))
 	    ((eql char ?\()
 	     (split-string (buffer-substring
-			    (1+ (point)) (1- (search-forward ")")))))
+			    (1+ (point))
+			    (1- (search-forward ")" (line-end-position) 'move)))))
 	    ((eql char ?\")
 	     (forward-char 1)
-	     (buffer-substring (point) (1- (search-forward "\""))))
+	     (buffer-substring
+	      (point)
+	      (1- (or (search-forward "\"" (line-end-position) 'move)
+		      (point)))))
 	    (t
 	     (buffer-substring (point) (if (search-forward " " nil t)
 					   (1- (point))

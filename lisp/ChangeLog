@@ -4,6 +4,7 @@
 	since some servers don't like it.
 	(nnimap-open-connection): Forget credentials if the server says the
 	password was wrong.
+	(nnimap-parse-line): Protect against invalid data.
 
 	* gnus-sum.el (gnus-summary-move-article): Add comment.
 	(gnus-summary-insert-new-articles): Copy the old-high watermark so that
