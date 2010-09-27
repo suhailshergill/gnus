@@ -56,6 +56,82 @@
 	* gnus-gravatar.el (gnus-gravatar-insert): Search backward for
 	real-name, and then for mail address rather than doing : or , search.
 
+2010-09-27  Julien Danjou  <julien@danjou.info>
+
+	* gnus-srvr.el (gnus-server-add-server): Use gnus-completing-read.
+	(gnus-server-goto-server): Use gnus-completing-read.
+
+	* mm-view.el (mm-view-pkcs7-decrypt): Use gnus-completing-read.
+
+	* mm-util.el (defalias): Use gnus-completing-read.
+	(mm-codepage-setup): Use gnus-completing-read.
+
+	* smime.el (smime-sign-buffer): Use gnus-completing-read.
+	(smime-decrypt-buffer): Use gnus-completing-read.
+
+	* mml-smime.el (mml-smime-openssl-sign-query): Use gnus-completing-read.
+
+	* mml.el (mml-minibuffer-read-type): Use gnus-completing-read.
+	(mml-minibuffer-read-disposition): Use gnus-completing-read.
+	(mml-insert-multipart): Use gnus-completing-read.
+
+	* gnus-msg.el (gnus-summary-yank-message): Use gnus-completing-read.
+
+	* gnus-int.el (gnus-start-news-server): Use gnus-completing-read.
+
+	* mm-decode.el (mm-interactively-view-part): Use gnus-completing-read.
+
+	* gnus-dired.el (gnus-dired-attach): Use gnus-completing-read.
+
+	* gnus.el (gnus-read-method): Use gnus-completing-read.
+
+	* gnus-bookmark.el (gnus-bookmark-jump): Use gnus-completing-read.
+
+	* gnus-art.el (gnus-mime-view-part-as-type): Use gnus-completing-read.
+	(gnus-mime-action-on-part): Use gnus-completing-read.
+	(gnus-article-encrypt-body): Use gnus-completing-read.
+
+	* gnus-topic.el (gnus-topic-jump-to-topic): Use gnus-completing-read.
+	(gnus-topic-move-matching): Use gnus-completing-read.
+	(gnus-topic-copy-matching): Use gnus-completing-read.
+	(gnus-topic-sort-topics): Use gnus-completing-read.
+	(gnus-topic-move): Use gnus-completing-read.
+
+	* gnus-agent.el (gnus-agent-read-group): Remove prompt computing.
+	(gnus-agent-add-group): Use gnus-completing-read.
+
+	* nnmairix.el (nnmairix-create-server-and-default-group): Use
+	gnus-completing-read.
+	(nnmairix-update-groups): Use gnus-completing-read.
+	(nnmairix-get-server): Use gnus-completing-read.
+	(nnmairix-backend-to-server): Use gnus-completing-read.
+	(nnmairix-goto-original-article): Use gnus-completing-read.
+	(nnmairix-get-group-from-file-path): Use gnus-completing-read.
+
+	* nnrss.el (nnrss-find-rss-via-syndic8): Use gnus-completing-read.
+
+	* gnus-group.el (gnus-group-completing-read): Use gnus-completing-read.
+	(gnus-group-make-useful-group): Use gnus-completing-read.
+	(gnus-group-make-web-group): Use gnus-completing-read.
+	(gnus-group-add-to-virtual): Use gnus-completing-read.
+	(gnus-group-browse-foreign-server): Use gnus-completing-read.
+
+	* gnus-sum.el (gnus-summary-goto-article): Use gnus-completing-read.
+	(gnus-summary-limit-to-extra): Use gnus-completing-read.
+	(gnus-summary-execute-command): Use gnus-completing-read.
+	(gnus-summary-respool-article): Use gnus-completing-read.
+	(gnus-read-move-group-name): Use gnus-completing-read.
+
+	* gnus-score.el (gnus-summary-increase-score): Use gnus-completing-read.
+	(gnus-summary-score-effect): Use gnus-completing-read.
+
+	* gnus-registry.el (gnus-registry-read-mark): Use gnus-completing-read.
+
+	* gnus-util.el (gnus-completing-read): Use gnus-use-ido to apply the
+	right completing-read function.
+	(gnus-use-ido): New variable
+	(gnus-completing-read-with-default): Remove.
+
 2010-09-28  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* lpath.el: Remove url-http-file-exists-p, w32-focus-frame, and
