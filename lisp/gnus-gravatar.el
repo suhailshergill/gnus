@@ -59,7 +59,7 @@ unpressed button."
           (gravatar-retrieve
            (car address)
            'gnus-gravatar-insert
-           (list header (car address) category)))))))
+           (list header address category)))))))
 
 (defun gnus-gravatar-insert (gravatar header address category)
   "Insert GRAVATAR for ADDRESS in HEADER in current article buffer.
@@ -68,25 +68,30 @@ Set image category to CATEGORY."
     (gnus-with-article-headers
       (gnus-article-goto-header header)
       (mail-header-narrow-to-field)
-      (when (and (search-forward address nil t)
-                 (or (search-backward ",\n" nil t)
-                     (search-backward ", " nil t)
-                     (search-backward ": " nil t)))
-        (goto-char (1+ (point)))
-        ;; Do not do anything if there's already a gravatar. This can
-        ;; happens if the buffer has been regenerated in the mean time, for
-        ;; example we were fetching someaddress, and then we change to
-        ;; another mail with the same someaddress.
-        (unless (memq 'gnus-gravatar (text-properties-at (point)))
-          (let ((inhibit-read-only t)
-                (point (point))
-                (gravatar (append
-                           gravatar
-                           `(:ascent center :relief ,gnus-gravatar-relief))))
-            (gnus-put-image gravatar nil category)
-            (put-text-property point (point) 'gnus-gravatar address)
-            (gnus-add-wash-type category)
-            (gnus-add-image category gravatar)))))))
+      (goto-char (point-max))
+      (let ((real-name (cdr address))
+            (mail-address (car address)))
+        (when (if real-name             ; have a realname, go for it!
+                  (search-backward real-name)
+                (search-backward address))
+          (goto-char (1- (point)))
+          ;; If we're on the " quoting the name, go backward
+          (when (looking-at "\"")
+            (goto-char (1- (point))))
+          ;; Do not do anything if there's already a gravatar. This can
+          ;; happens if the buffer has been regenerated in the mean time, for
+          ;; example we were fetching someaddress, and then we change to
+          ;; another mail with the same someaddress.
+          (unless (memq 'gnus-gravatar (text-properties-at (point)))
+            (let ((inhibit-read-only t)
+                  (point (point))
+                  (gravatar (append
+                             gravatar
+                             `(:ascent center :relief ,gnus-gravatar-relief))))
+              (gnus-put-image gravatar nil category)
+              (put-text-property point (point) 'gnus-gravatar address)
+              (gnus-add-wash-type category)
+              (gnus-add-image category gravatar))))))))
 
 ;;;###autoload
 (defun gnus-treat-from-gravatar ()
