@@ -44,11 +44,18 @@
     (defmacro with-no-warnings (&rest body)
       `(progn ,@body))))
 
-(defcustom gnus-use-ido nil
-  "Whether to use `ido' for `completing-read'."
-  :version "24.1"
+(defcustom gnus-completing-read-function
+  #'gnus-std-completing-read
+  "Function to do a completing read."
   :group 'gnus-meta
-  :type 'boolean)
+  :type '(radio (function-item
+                 :doc "Use Emacs' standard `completing-read' function."
+                 gnus-std-completing-read)
+                (function-item :doc "Use iswitchb's completing-read function."
+                               gnus-icompleting-read)
+                (function-item :doc "Use ido's completing-read function."
+                               gnus-ido-completing-read)
+                (function)))
 
 (defcustom gnus-completion-styles
   (if (and (boundp 'completion-styles-alist)
@@ -1583,19 +1590,48 @@ SPEC is a predicate specifier that contains stuff like `or', `and',
 	`(,(car spec) ,@(mapcar 'gnus-make-predicate-1 (cdr spec)))
       (error "Invalid predicate specifier: %s" spec)))))
 
+(defun gnus-std-completing-read (prompt collection &optional require-match
+                                        initial-input history def)
+  (completing-read prompt collection nil require-match
+                   initial-input history def))
+
+(defun gnus-icompleting-read (prompt collection &optional require-match
+                                     initial-input history def)
+  (let ((iswitchb-make-buflist-hook
+         (lambda ()
+           (setq iswitchb-temp-buflist
+                 (let ((choices (append (list)
+                                        (when initial-input (list initial-input))
+                                        history collection))
+                       filtered-choices)
+                   (while choices
+                     (when (and (car choices) (not (member (car choices) filtered-choices)))
+                       (setq filtered-choices (cons (car choices) filtered-choices)))
+                     (setq choices (cdr choices)))
+                   (nreverse filtered-choices))))))
+    (unwind-protect
+        (progn
+          (when (not iswitchb-mode)
+            (add-hook 'minibuffer-setup-hook 'iswitchb-minibuffer-setup))
+          (iswitchb-read-buffer prompt def require-match))
+      (when (not iswitchb-mode)
+        (remove-hook 'minibuffer-setup-hook 'iswitchb-minibuffer-setup)))))
+
+(defun gnus-ido-completing-read (prompt collection &optional require-match
+                                        initial-input history def)
+  (ido-completing-read prompt collection nil require-match
+                       initial-input history def))
+
 (defun gnus-completing-read (prompt collection &optional require-match
                                     initial-input history def)
-  "Call `completing-read' or `ido-completing-read'.
-Depends on `gnus-use-ido'."
+  "Do a completing read with the configured `gnus-completing-read-function'."
   (let ((completion-styles gnus-completion-styles))
     (funcall
-     (if gnus-use-ido
-         'ido-completing-read
-       'completing-read)
+     gnus-completing-read-function
      (concat prompt (when def
                       (concat " (default " def ")"))
              ": ")
-     collection nil require-match initial-input history def)))
+     collection require-match initial-input history def)))
 
 (defun gnus-graphic-display-p ()
   (if (featurep 'xemacs)
