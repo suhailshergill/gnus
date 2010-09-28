@@ -160,6 +160,10 @@ If this variable is nil, no such courtesy message will be added."
   :type 'regexp)
 
 (defcustom message-from-style 'default
+  ;; In Emacs 24.1 this defaults to the value of `mail-from-style'
+  ;; that defaults to:
+  ;; `angles' in Emacs 22.1~23.1, XEmacs 21.4, 21.5, and SXEmacs 22.1;
+  ;; `default' in Emacs 23.2, and 24.1
   "*Specifies how \"From\" headers look.
 
 If nil, they contain just the return address like:
@@ -444,6 +448,10 @@ whitespace)."
   :group 'message-various)
 
 (defcustom message-interactive t
+  ;; In Emacs 24.1 this defaults to the value of `mail-interactive'
+  ;; that defaults to:
+  ;; `nil' in Emacs 22.1~22.3, XEmacs 21.4, 21.5, and SXEmacs 22.1;
+  ;; `t' in Emacs 23.1~24.1
   "Non-nil means when sending a message wait for and display errors.
 A value of nil means let mailer mail back a message to report errors."
   :version "23.2"
@@ -622,6 +630,10 @@ Done before generating the new subject of a forward."
   :type 'regexp)
 
 (defcustom message-cite-prefix-regexp
+  ;; In Emacs 24.1 this defaults to the value of
+  ;; `mail-citation-prefix-regexp'; the default value varies according
+  ;; to the Emacs version.  In XEmacs 21.4 and 21.5, sendmail.el
+  ;; provides it.
   (if (string-match "[[:digit:]]" "1")
       ;; Support POSIX?  XEmacs 21.5.27 doesn't.
       "\\([ \t]*[_.[:word:]]+>+\\|[ \t]*[]>|]\\)+"
@@ -830,6 +842,9 @@ Doing so would be even more evil than leaving it out."
   :type 'boolean)
 
 (defcustom message-sendmail-envelope-from nil
+  ;; In Emacs 24.1 this defaults to the value of `mail-envelope-from'
+  ;; if it is available, or defaults to nil.  sendmail.el provides it;
+  ;; the default value is nil in all (X)Emacsen that Gnus supports.
   "*Envelope-from when sending mail with sendmail.
 If this is nil, use `user-mail-address'.  If it is the symbol
 `header', use the From: header of the message."
@@ -1007,6 +1022,10 @@ Please also read the note in the documentation of
   :group 'message-insertion)
 
 (defcustom message-yank-prefix "> "
+  ;; In Emacs 24.1 this defaults to the value of `mail-yank-prefix'
+  ;; that defaults to:
+  ;; `nil' in Emacs 22.1~23.1;
+  ;; "> " in Emacs 23.2, 24.1, XEmacs 21.4, 21.5, and SXEmacs 22.1
   "*Prefix inserted on the lines of yanked messages.
 Fix `message-cite-prefix-regexp' if it is set to an abnormal value.
 See also `message-yank-cited-prefix' and `message-yank-empty-prefix'."
@@ -1033,6 +1052,10 @@ See also `message-yank-prefix' and `message-yank-cited-prefix'."
   :group 'message-insertion)
 
 (defcustom message-indentation-spaces 3
+  ;; In Emacs 24.1 this defaults to the value of
+  ;; `mail-indentation-spaces' that defaults to `3' in Emacs 22.1~24.1,
+  ;; and SXEmacs 22.1.  In XEmacs 21.4 and 21.5, sendmail.el provides
+  ;; it; the defalut value is `3'.
   "*Number of spaces to insert at the beginning of each cited line.
 Used by `message-yank-original' via `message-yank-cite'."
   :version "23.2"
@@ -1063,6 +1086,10 @@ point and mark around the citation text as modified."
   :group 'message-insertion)
 
 (defcustom message-signature t
+  ;; In Emacs 24.1 this defaults to the value of `mail-signature' that
+  ;; defaults to:
+  ;; `nil' in Emacs 22.1~23.1, XEmacs 21.4, 21.5, and SXEmacs 22.1;
+  ;; `t' in Emacs 23.2, and 24.1
   "*String to be inserted at the end of the message buffer.
 If t, the `message-signature-file' file will be inserted instead.
 If a function, the result from the function will be used instead.
@@ -1073,6 +1100,10 @@ If a form, the result from the form will be used instead."
   :group 'message-insertion)
 
 (defcustom message-signature-file "~/.signature"
+  ;; In Emacs 24.1 this defaults to the value of `mail-signature-file'
+  ;; that defaults to "~/.signature" in Emacs 22.1~24.1, and SXEmacs
+  ;; 22.1.  In XEmacs 21.4 and 21.5, sendmail.el provides it;
+  ;; the defalut value is "~/.signature".
   "*Name of file containing the text inserted at end of message buffer.
 Ignored if the named file doesn't exist.
 If nil, don't insert a signature.
