@@ -1,3 +1,8 @@
+2010-09-28  Julien Danjou  <julien@danjou.info>
+
+	* gnus-gravatar.el (gnus-gravatar-insert): Search backward for ",\n"
+	for fields that are across several lines.
+
 2010-09-28  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* lpath.el: Remove url-http-file-exists-p, w32-focus-frame, and

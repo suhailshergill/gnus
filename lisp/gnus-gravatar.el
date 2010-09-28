@@ -70,6 +70,7 @@ Set image category to CATEGORY."
       (mail-header-narrow-to-field)
       (when (and (search-forward address nil t)
                  (or (search-backward ", " nil t)
+                     (search-backward ",\n" nil t)
                      (search-backward ": " nil t)))
         (goto-char (1+ (point)))
         ;; Do not do anything if there's already a gravatar. This can
