@@ -33,7 +33,7 @@
        bookmark-prop-get display-time-event-handler epg-check-configuration
        find-coding-system frame-device recenter-top-bottom
        rmail-swap-buffers-maybe w3-do-setup w3-parse-buffer w3-prepare-buffer
-       w3-region w32-focus-frame w3m-detect-meta-charset w3m-region))
+       w3-region w3m-detect-meta-charset w3m-region))
     (maybe-bind
      '(w3m-link-map))))
 
@@ -66,9 +66,9 @@
      pgg-display-output-buffer posn-point posn-window put-image read-event
      recenter-top-bottom rmail-msg-restore-non-pruned-header
      rmail-swap-buffers-maybe select-safe-coding-system sort-coding-systems
-     track-mouse ucs-to-char url-generic-parse-url url-http-file-exists-p
-     url-insert-file-contents vcard-pretty-print w3-parse-buffer
-     w3m-detect-meta-charset w3m-region window-edges))
+     track-mouse ucs-to-char url-generic-parse-url url-insert-file-contents
+     vcard-pretty-print w3-parse-buffer w3m-detect-meta-charset w3m-region
+     window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table completion-styles cursor-in-non-selected-windows
@@ -90,7 +90,7 @@
        get-display-table make-temp-file next-single-char-property-change
        put-display-table select-frame-set-input-focus set-buffer-multibyte
        string-as-multibyte timer-set-function unicode-precedence-list
-       unicode-to-char w32-focus-frame x-focus-frame))
+       unicode-to-char))
     (maybe-bind
      '(header-line-format
        scroll-margin timer-list)))

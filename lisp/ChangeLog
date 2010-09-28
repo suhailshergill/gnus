@@ -1,5 +1,8 @@
 2010-09-28  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* lpath.el: Remove url-http-file-exists-p, w32-focus-frame, and
+	x-focus-frame.
+
 	* nnimap.el (auth-source-forget-user-or-password)
 	(auth-source-user-or-password): Autoload.
 
