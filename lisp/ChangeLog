@@ -37,6 +37,17 @@
 	`gnus-faces-properties-alist'.
 	Add :version property.
 
+2010-09-28  Florian Ragwitz  <rafl@debian.org>
+
+	* gnus-util.el (gnus-use-ido): Removed.
+	(gnus-std-completing-read): Add wrapper around completing-read.
+	(gnus-icompleting-read): Add wrapper around ibuffer-read-buffer.
+	(gnus-ido-completing-read): Add wrapper around ido-completing-read.
+	(gnus-completing-read-function): Add to chose from the above completion
+	functions or to provide a custom one.
+	(gnus-completing-read): Use the completing-read function configured
+	with gnus-completing-read-function.
+
 2010-09-28  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mail-source.el (mail-source-report-new-mail)
