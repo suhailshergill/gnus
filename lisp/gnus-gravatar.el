@@ -68,12 +68,13 @@ Set image category to CATEGORY."
     (gnus-with-article-headers
       (gnus-article-goto-header header)
       (mail-header-narrow-to-field)
-      (goto-char (point-max))
       (let ((real-name (cdr address))
             (mail-address (car address)))
         (when (if real-name             ; have a realname, go for it!
-                  (search-backward real-name)
-                (search-backward address))
+                  (and (search-forward real-name nil t)
+                       (search-backward real-name nil t))
+                (and (search-forward mail-address nil t)
+                     (search-backward mail-address nil t)))
           (goto-char (1- (point)))
           ;; If we're on the " quoting the name, go backward
           (when (looking-at "\"")
