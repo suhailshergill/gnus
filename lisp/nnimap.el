@@ -342,15 +342,6 @@ textual parts.")
 	    (when (eq nnimap-stream 'starttls)
 	      (nnimap-command "STARTTLS")
 	      (starttls-negotiate (nnimap-process nnimap-object)))
-	    ;; If this is a STARTTLS-capable server, then sever the
-	    ;; connection and start a STARTTLS connection instead.
-	    (when (and (eq nnimap-stream 'network)
-		       (member "STARTTLS" (nnimap-capabilities nnimap-object)))
-	      (let ((nnimap-stream 'starttls))
-		(delete-process (nnimap-process nnimap-object))
-		(kill-buffer (current-buffer))
-		(return
-		 (nnimap-open-connection buffer))))
 	    (when nnimap-server-port
 	      (push (format "%s" nnimap-server-port) ports))
 	    (unless (equal connection-result "PREAUTH")

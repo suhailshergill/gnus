@@ -1,5 +1,9 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Revert the auto-network->starttls
+	code, since if the user has requested network, that's what they ought
+	to get.
+
 	* pop3.el (pop3-send-streaming-command, pop3-stream-length): New
 	variable.
 
