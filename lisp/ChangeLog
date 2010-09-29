@@ -1,3 +1,8 @@
+2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nndraft.el (nndraft-request-expire-articles): Use the group name
+	instead if "nndraft".  Fix found by Nils Ackermann.
+
 2010-09-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-util.el (mm-codepage-iso-8859-list, mm-charset-eval-alist)
