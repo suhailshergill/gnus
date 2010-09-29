@@ -1,6 +1,7 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Using IMAP): Remove the @acronyms from the headings.
+	(Client-Side IMAP Splitting): Document 'default.
 
 2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

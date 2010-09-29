@@ -14834,7 +14834,7 @@ Here's an example method that's more complex:
 @example
 (nnimap "imap.gmail.com"
         (nnimap-inbox "INBOX")
-        (nnimap-split-methods ,nnmail-split-methods)
+        (nnimap-split-methods default)
         (nnimap-expunge t)
         (nnimap-stream 'ssl)
         (nnir-search-engine imap)
@@ -14903,7 +14903,8 @@ This is the @acronym{IMAP} mail box that will be scanned for new mail.
 
 @item nnimap-split-methods
 Uses the same syntax as @code{nnmail-split-methods} (@pxref{Splitting
-Mail}).
+Mail}), except the symbol @code{default}, which means that it should
+use the value of the @code{nnmail-split-methods} variable.
 
 @end table
 

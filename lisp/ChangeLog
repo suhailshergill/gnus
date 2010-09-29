@@ -1,5 +1,8 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-split-incoming-mail): If nnimap-split-methods is
+	`default', use nnmail-split-methods.
+
 	* gnus-sum.el (gnus-valid-move-group-p): Make sure that `group' is a
 	symbol.
 
