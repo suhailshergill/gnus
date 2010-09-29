@@ -1,3 +1,8 @@
+2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-insert-partial-structure): Get the type from the
+	correct slot, too.
+
 2010-09-29  Julien Danjou  <julien@danjou.info>
 
 	* gnus-util.el (gnus-icompleting-read): Require iswitchb. Fix history
