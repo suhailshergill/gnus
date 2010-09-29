@@ -1,5 +1,8 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-valid-move-group-p): Make sure that `group' is a
+	symbol.
+
 	* nnimap.el (nnimap-open-connection): Revert the auto-network->starttls
 	code, since if the user has requested network, that's what they ought
 	to get.
