@@ -422,7 +422,12 @@ textual parts.")
 	    (nnimap-command "UID FETCH %d (BODYSTRUCTURE)" article)
 	    (goto-char (point-min))
 	    (when (re-search-forward "FETCH.*BODYSTRUCTURE" nil t)
-	      (setq structure (ignore-errors (read (current-buffer)))
+	      (setq structure (ignore-errors
+				(let ((start (point)))
+				  (forward-sexp 1)
+				  (downcase-region start (point))
+				  (goto-char (point))
+				  (read (current-buffer))))
 		    parts (nnimap-find-wanted-parts structure))))
 	  (when (if parts
 		    (nnimap-get-partial-article article parts structure)

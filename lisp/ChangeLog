@@ -2,6 +2,7 @@
 
 	* nnimap.el (nnimap-split-incoming-mail): If nnimap-split-methods is
 	`default', use nnmail-split-methods.
+	(nnimap-request-article): Downcase the NILs so that they are nil.
 
 	* gnus-sum.el (gnus-valid-move-group-p): Make sure that `group' is a
 	symbol.
