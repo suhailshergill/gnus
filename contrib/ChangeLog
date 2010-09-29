@@ -1,3 +1,11 @@
+2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* smtpmail.el: Removed.
+
+	* ucs-tables.el: Removed.
+
+	* sendmail.el: Removed.
+
 2010-09-26 Julien Danjou <julien@danjou.info>
 
 	* ssl.el: Removed.
