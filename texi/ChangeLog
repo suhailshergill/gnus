@@ -1,3 +1,12 @@
+2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Using IMAP): Remove the @acronyms from the headings.
+
+2010-09-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Customizing the IMAP Connection): Document
+	nnimap-fetch-partial-articles.
+
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-news.texi: Mention nnimap-inbox.
