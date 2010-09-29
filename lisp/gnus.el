@@ -1426,6 +1426,7 @@ no need to set this variable."
   :group 'gnus-message
   :type '(choice (const :tag "default" nil)
 		 string))
+(make-obsolete-variable 'gnus-local-domain nil "24.1")
 
 (defvar gnus-local-organization nil
   "String with a description of what organization (if any) the user belongs to.

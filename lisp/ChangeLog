@@ -1,5 +1,7 @@
 2010-09-29  Julien Danjou  <julien@danjou.info>
 
+	* gnus.el (gnus-local-domain): Declare variable obsolete.
+
 	* gnus-util.el (gnus-icompleting-read): Require iswitchb. Fix history
 	computing.
 	(gnus-ido-completing-read): Require ido.
