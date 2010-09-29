@@ -1,5 +1,8 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* pop3.el (pop3-send-streaming-command, pop3-stream-length): New
+	variable.
+
 	* nnimap.el (nnimap-insert-partial-structure): Get the type from the
 	correct slot, too.
 
