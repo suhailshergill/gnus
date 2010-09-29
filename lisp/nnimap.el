@@ -766,6 +766,7 @@ textual parts.")
   (when (nnimap-possibly-change-group group server)
     (let (sequence)
       (with-current-buffer (nnimap-buffer)
+	(erase-buffer)
 	;; Just send all the STORE commands without waiting for
 	;; response.  If they're successful, they're successful.
 	(dolist (action actions)
@@ -1338,6 +1339,7 @@ textual parts.")
 (defun nnimap-mark-and-expunge-incoming (range)
   (when range
     (setq range (nnimap-article-ranges range))
+    (erase-buffer)
     (let ((sequence
 	   (nnimap-send-command
 	    "UID STORE %s +FLAGS.SILENT (\\Deleted)" range)))

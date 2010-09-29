@@ -3,6 +3,7 @@
 	* nnimap.el (nnimap-open-connection): Revert the auto-network->starttls
 	code, since if the user has requested network, that's what they ought
 	to get.
+	(nnimap-request-set-mark): Erase the buffer before issuing commands.
 
 	* pop3.el (pop3-send-streaming-command, pop3-stream-length): New
 	variable.
