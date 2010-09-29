@@ -510,7 +510,13 @@ textual parts.")
 
 (defun nnimap-insert-partial-structure (structure parts &optional subp)
   (let ((type (car (last structure 4)))
-	(boundary (cadr (member "BOUNDARY" (car (last structure 3))))))
+	(boundary (let ((bstruc structure))
+		    (while (consp (car bstruc))
+		      (pop bstruc))
+		    (setq bstruc (car (cdr bstruc)))
+		    (and (stringp (car bstruc))
+			 (string= (downcase (car bstruc)) "boundary")
+			 (cadr bstruc)))))
     (when subp
       (insert (format "Content-type: multipart/%s; boundary=%S\n\n"
 		      (downcase type) boundary)))

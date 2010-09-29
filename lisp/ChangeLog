@@ -1,5 +1,8 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-insert-partial-structure): Be way more permissive
+	when interpreting the structures.
+
 	* nnregistry.el: Added.
 
 	* nndraft.el (nndraft-request-expire-articles): Use the group name
