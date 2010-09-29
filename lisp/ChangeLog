@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-insert-partial-structure): Be way more permissive
 	when interpreting the structures.
+	(nnimap-request-accept-article): Add \r\n to the lines to make this
+	work with Cyrus.
 
 	* nnregistry.el: Added.
 
