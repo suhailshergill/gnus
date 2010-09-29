@@ -1,3 +1,9 @@
+2010-09-29  Julien Danjou  <julien@danjou.info>
+
+	* gnus-util.el (gnus-icompleting-read): Require iswitchb. Fix history
+	computing.
+	(gnus-ido-completing-read): Require ido.
+
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-registry.el: Don't prompt on load, which makes it impossible to

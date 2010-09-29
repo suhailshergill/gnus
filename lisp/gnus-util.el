@@ -1597,12 +1597,13 @@ SPEC is a predicate specifier that contains stuff like `or', `and',
 
 (defun gnus-icompleting-read (prompt collection &optional require-match
                                      initial-input history def)
+  (require 'iswitchb)
   (let ((iswitchb-make-buflist-hook
          (lambda ()
            (setq iswitchb-temp-buflist
                  (let ((choices (append (list)
                                         (when initial-input (list initial-input))
-                                        history collection))
+                                        (symbol-value history) collection))
                        filtered-choices)
                    (while choices
                      (when (and (car choices) (not (member (car choices) filtered-choices)))
@@ -1619,6 +1620,7 @@ SPEC is a predicate specifier that contains stuff like `or', `and',
 
 (defun gnus-ido-completing-read (prompt collection &optional require-match
                                         initial-input history def)
+  (require 'ido)
   (ido-completing-read prompt collection nil require-match
                        initial-input history def))
 
