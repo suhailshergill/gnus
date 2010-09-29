@@ -1,5 +1,7 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nndoc.el (nndoc-retrieve-groups): New function.
+
 	* nnimap.el (nnimap-split-incoming-mail): If nnimap-split-methods is
 	`default', use nnmail-split-methods.
 	(nnimap-request-article): Downcase the NILs so that they are nil.
