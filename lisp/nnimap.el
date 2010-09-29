@@ -70,6 +70,9 @@ Values are `ssl', `network', `starttls' or `shell'.")
   "How mail is split.
 Uses the same syntax as nnmail-split-methods")
 
+(make-obsolete-variable 'nnimap-split-rule "see `nnimap-split-methods'"
+			"Gnus 5.13")
+
 (defvoo nnimap-authenticator nil
   "How nnimap authenticate itself to the server.
 Possible choices are nil (use default methods) or `anonymous'.")

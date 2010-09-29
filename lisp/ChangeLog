@@ -4,6 +4,7 @@
 	code, since if the user has requested network, that's what they ought
 	to get.
 	(nnimap-request-set-mark): Erase the buffer before issuing commands.
+	(nnimap-split-rule): Mark as obsolete.
 
 	* pop3.el (pop3-send-streaming-command, pop3-stream-length): New
 	variable.
