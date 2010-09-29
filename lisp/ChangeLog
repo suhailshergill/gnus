@@ -30,6 +30,13 @@
 
 	* time-date.el: No need to require cl for Emacs 21.
 
+2010-09-29  Julien Danjou  <julien@danjou.info>
+
+	* gnus-gravatar.el (gnus-gravatar-properties): Add this properties in
+	replacement of `gnus-gravatar-relief' to mimic
+	`gnus-faces-properties-alist'.
+	Add :version property.
+
 2010-09-28  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mail-source.el (mail-source-report-new-mail)
