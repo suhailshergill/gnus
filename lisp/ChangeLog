@@ -1,5 +1,8 @@
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-registry.el: Don't prompt on load, which makes it impossible to
+	build Gnus.
+
 	* nnimap.el (nnimap-insert-partial-structure): Be way more permissive
 	when interpreting the structures.
 	(nnimap-request-accept-article): Add \r\n to the lines to make this
