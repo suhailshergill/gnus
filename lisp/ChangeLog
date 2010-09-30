@@ -1,3 +1,11 @@
+2010-09-30  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-install-nnregistry): New function to
+	install the nnregistry refer method.
+	(gnus-registry-install-hooks): Use it.
+	(gnus-registry-unfollowed-groups): Add nnmairix to the default
+	unfollowed groups.
+
 2010-09-30  Jose A. Ortega Ruiz  <jao@gnu.org>  (tiny change)
 
 	* gnus-sum.el (gnus-summary-show-thread): Skip past invisible text when
