@@ -1,5 +1,9 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* netrc.el (netrc-credentials): Return the value of the "default"
+	entry.
+	(netrc-machine): Ditto.
+
 	* nnimap.el (nnimap-find-article-by-message-id): Really return the
 	article number.
 	(nnimap-split-fancy): New variable.
