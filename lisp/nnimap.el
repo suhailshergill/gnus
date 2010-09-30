@@ -309,9 +309,11 @@ textual parts.")
 		 (setq port (or nnimap-server-port "imap")))
 		'("imap"))
 	       ((eq nnimap-stream 'starttls)
-		(starttls-open-stream
-		 "*nnimap*" (current-buffer) nnimap-address
-		 (setq port (or nnimap-server-port "imap")))
+		(let ((tls-program (nnimap-extend-tls-programs)))
+		  (open-tls-stream
+		   "*nnimap*" (current-buffer) nnimap-address
+		   (setq port (or nnimap-server-port "imap"))
+		   'starttls))
 		'("imap"))
 	       ((eq nnimap-stream 'ssl)
 		(open-tls-stream
@@ -382,6 +384,23 @@ textual parts.")
 	      (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
 		(nnimap-command "ENABLE QRESYNC"))
 	      t)))))))
+
+(defun nnimap-extend-tls-programs ()
+  (let ((programs tls-program)
+	result)
+    (unless (consp programs)
+      (setq programs (list programs)))
+    (dolist (program programs)
+      (push
+       (with-temp-buffer
+	 (insert program)
+	 (goto-char (point-min))
+	 (or (search-forward " " nil t)
+	     (goto-char (point-max)))
+	 (insert " %s ")
+	 (buffer-string))
+       result))
+    (nreverse result)))
 
 (defun nnimap-find-parameter (parameter elems)
   (let (result)

@@ -1,5 +1,12 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-extend-tls-programs): New function.
+	(nnimap-open-connection): Use tls.el exclusively, and not starttls.el.
+
+	* tls.el (tls-starttls-switches): New variable.
+	(tls-find-starttls-argument): Use it.
+	(open-tls-stream): Ditto.
+
 	* netrc.el (netrc-credentials): Return the value of the "default"
 	entry.
 	(netrc-machine): Ditto.
