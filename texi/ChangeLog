@@ -1,3 +1,8 @@
+2010-09-30  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus.texi (Spam Package Configuration Examples, SpamOracle): Remove
+	nnimap-split-rule from examples.
+
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Mail Source Specifiers): Remove webmail.el mentions.

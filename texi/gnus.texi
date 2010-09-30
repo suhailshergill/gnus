@@ -24166,8 +24166,8 @@ From Ted Zlatanov <tzz@@lifelogs.com>.
  spam-move-spam-nonspam-groups-only nil
  spam-mark-only-unseen-as-spam t
  spam-mark-ham-unread-before-move-from-spam-group t
- nnimap-split-rule 'nnimap-split-fancy
  ;; @r{understand what this does before you copy it to your own setup!}
+ ;; @r{for nnimap you'll probably want to set nnimap-split-methods, see the manual}
  nnimap-split-fancy '(|
                       ;; @r{trace references to parents and put in their group}
                       (: gnus-registry-split-fancy-with-parent)
@@ -24889,8 +24889,8 @@ messages stay in @samp{INBOX}:
 @example
 (setq spam-use-spamoracle t
       spam-split-group "Junk"
+      ;; @r{for nnimap you'll probably want to set nnimap-split-methods, see the manual}
       nnimap-split-inbox '("INBOX")
-      nnimap-split-rule 'nnimap-split-fancy
       nnimap-split-fancy '(| (: spam-split) "INBOX"))
 @end example
 
