@@ -1,3 +1,8 @@
+2010-09-30  Teemu Likonen  <tlikonen@iki.fi>  (tiny change)
+
+	* message.el (message-ignored-supersedes-headers): Strip Injection-*
+	headers before superseding.
+
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnrss.el (nnrss-use-local): Add documentation.
