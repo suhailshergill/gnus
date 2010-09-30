@@ -737,7 +737,8 @@ textual parts.")
 	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
 	  article result)
       (setq result (nnimap-wait-for-response sequence))
-      (when (car result)
+      (when (and result
+		 (car (setq result (nnimap-parse-response))))
 	;; Select the last instance of the message in the group.
 	(and (setq article
 		   (car (last (assoc "SEARCH" (cdr result)))))

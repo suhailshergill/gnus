@@ -1,5 +1,8 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-find-article-by-message-id): Really return the
+	article number.
+
 	* nntp.el (nntp-server-list-active-group): Document.
 
 	* nnimap.el (nnimap-find-article-by-message-id): Use EXAMINE instead of
