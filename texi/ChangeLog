@@ -1,6 +1,8 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Mail Source Specifiers): Remove webmail.el mentions.
+	(NNTP): Document nntp-server-list-active-group.  Suggested by Barry
+	Fishman.
 
 2010-09-30  Julien Danjou  <julien@danjou.info>
 

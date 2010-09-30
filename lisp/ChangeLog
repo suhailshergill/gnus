@@ -1,5 +1,7 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-server-list-active-group): Document.
+
 	* nnimap.el (nnimap-find-article-by-message-id): Use EXAMINE instead of
 	SELECT to get the message-id.
 
