@@ -1,3 +1,8 @@
+2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-accept-article): Get the Message-ID without
+	the \r.
+
 2010-09-30  Julien Danjou  <julien@danjou.info>
 
 	* gnus-agent.el (gnus-agent-add-group): Fix call to
