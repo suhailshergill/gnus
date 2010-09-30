@@ -1,5 +1,7 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnrss.el (nnrss-use-local): Add documentation.
+
 	* nnimap.el (nnimap-extend-tls-programs): New function.
 	(nnimap-open-connection): Use tls.el exclusively, and not starttls.el.
 	(nnimap-wait-for-connection): Accept the greeting from the stupid
