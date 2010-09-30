@@ -51,10 +51,12 @@
 	(nnimap-request-accept-article): Add \r\n to the lines to make this
 	work with Cyrus.
 
-	* nnregistry.el: Added.
-
 	* nndraft.el (nndraft-request-expire-articles): Use the group name
 	instead if "nndraft".  Fix found by Nils Ackermann.
+
+2010-09-29  Ludovic Courtes  <ludo@gnu.org>
+
+	* nnregistry.el: Added.
 
 2010-09-29  Stefan Monnier  <monnier@iro.umontreal.ca>
 
