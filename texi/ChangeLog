@@ -3,6 +3,7 @@
 	* gnus.texi (Mail Source Specifiers): Remove webmail.el mentions.
 	(NNTP): Document nntp-server-list-active-group.  Suggested by Barry
 	Fishman.
+	(Client-Side IMAP Splitting): Add nnimap-split-fancy.
 
 2010-09-30  Julien Danjou  <julien@danjou.info>
 

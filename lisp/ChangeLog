@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-find-article-by-message-id): Really return the
 	article number.
+	(nnimap-split-fancy): New variable.
+	(nnimap-split-incoming-mail): Use it.
 
 	* nntp.el (nntp-server-list-active-group): Document.
 

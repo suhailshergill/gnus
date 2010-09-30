@@ -70,6 +70,9 @@ Values are `ssl', `network', `starttls' or `shell'.")
   "How mail is split.
 Uses the same syntax as nnmail-split-methods")
 
+(defvoo nnimap-split-fancy nil
+  "Uses the same syntax as nnmail-split-fancy.")
+
 (make-obsolete-variable 'nnimap-split-rule "see `nnimap-split-methods'"
 			"Emacs 24.1")
 
@@ -1303,6 +1306,8 @@ textual parts.")
 	  (nnmail-split-methods (if (eq nnimap-split-methods 'default)
 				    nnmail-split-methods
 				  nnimap-split-methods))
+	  (nnmail-split-fancy (or nnimap-split-fancy
+				  nnmail-split-fancy))
 	  (nnmail-inhibit-default-split-group t)
 	  (groups (nnimap-get-groups))
 	  new-articles)

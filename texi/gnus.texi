@@ -14912,6 +14912,9 @@ Uses the same syntax as @code{nnmail-split-methods} (@pxref{Splitting
 Mail}), except the symbol @code{default}, which means that it should
 use the value of the @code{nnmail-split-methods} variable.
 
+@item nnimap-split-fancy
+Uses the same syntax as @code{nnmail-split-fancy}.
+
 @end table
 
 
