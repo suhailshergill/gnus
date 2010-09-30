@@ -350,6 +350,21 @@ textual parts.")
 		    "CAPABILITY" (cdr (nnimap-command "CAPABILITY")))))
 	    (when nnimap-server-port
 	      (push (format "%s" nnimap-server-port) ports))
+	    ;; If this is a STARTTLS-capable server, then sever the
+	    ;; connection and start a STARTTLS connection instead.
+	    (when (and (eq nnimap-stream 'network)
+		       (member "STARTTLS" (nnimap-capabilities nnimap-object)))
+	      (let ((nnimap-stream 'starttls))
+		(let ((tls-process
+		       (nnimap-open-connection buffer)))
+		  ;; If the STARTTLS connection was successful, we
+		  ;; kill our first non-encrypted connection.  If it
+		  ;; wasn't successful, we just use our unencrypted
+		  ;; connection.
+		  (when (memq (process-status tls-process) '(open run))
+		    (delete-process (nnimap-process nnimap-object))
+		    (kill-buffer (current-buffer))
+		    (return tls-process)))))
 	    (unless (equal connection-result "PREAUTH")
 	      (if (not (setq credentials
 			     (if (eq nnimap-authenticator 'anonymous)
@@ -381,7 +396,7 @@ textual parts.")
 	    (when nnimap-object
 	      (when (member "QRESYNC" (nnimap-capabilities nnimap-object))
 		(nnimap-command "ENABLE QRESYNC"))
-	      t)))))))
+	      (nnimap-process nnimap-object))))))))
 
 (defun nnimap-extend-tls-programs ()
   (let ((programs tls-program)

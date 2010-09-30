@@ -1,3 +1,8 @@
+2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-open-connection): Reinstate the auto-upgrade from
+	unencrypted to STARTTLS, if possible.
+
 2010-09-30  Teemu Likonen  <tlikonen@iki.fi>  (tiny change)
 
 	* message.el (message-ignored-supersedes-headers): Strip Injection-*
