@@ -38,6 +38,7 @@
 (require 'nnoo)
 (require 'netrc)
 (require 'utf7)
+(require 'tls)
 (require 'parse-time)
 
 (autoload 'auth-source-forget-user-or-password "auth-source")
@@ -347,9 +348,6 @@ textual parts.")
 		   #'upcase
 		   (nnimap-find-parameter
 		    "CAPABILITY" (cdr (nnimap-command "CAPABILITY")))))
-	    (when (eq nnimap-stream 'starttls)
-	      (nnimap-command "STARTTLS")
-	      (starttls-negotiate (nnimap-process nnimap-object)))
 	    (when nnimap-server-port
 	      (push (format "%s" nnimap-server-port) ports))
 	    (unless (equal connection-result "PREAUTH")
@@ -391,15 +389,7 @@ textual parts.")
     (unless (consp programs)
       (setq programs (list programs)))
     (dolist (program programs)
-      (push
-       (with-temp-buffer
-	 (insert program)
-	 (goto-char (point-min))
-	 (or (search-forward " " nil t)
-	     (goto-char (point-max)))
-	 (insert " %s ")
-	 (buffer-string))
-       result))
+      (push (concat program " " "%s") result))
     (nreverse result)))
 
 (defun nnimap-find-parameter (parameter elems)
@@ -1209,11 +1199,11 @@ textual parts.")
     (goto-char (point-min))
     (while (and (memq (process-status process)
 		      '(open run))
-		(not (re-search-forward "^\\* .*\n" nil t)))
+		(not (re-search-forward "^[*.] .*\n" nil t)))
       (nnheader-accept-process-output process)
       (goto-char (point-min)))
     (forward-line -1)
-    (and (looking-at "\\* \\([A-Z0-9]+\\)")
+    (and (looking-at "[*.] \\([A-Z0-9]+\\)")
 	 (match-string 1))))
 
 (defun nnimap-wait-for-response (sequence &optional messagep)

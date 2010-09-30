@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-extend-tls-programs): New function.
 	(nnimap-open-connection): Use tls.el exclusively, and not starttls.el.
+	(nnimap-wait-for-connection): Accept the greeting from the stupid
+	output from openssl s_client -starttls, too.
 
 	* tls.el (tls-starttls-switches): New variable.
 	(tls-find-starttls-argument): Use it.
