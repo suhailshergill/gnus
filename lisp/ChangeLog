@@ -1,5 +1,7 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnir.el: Use the server names without suffixes.
+
 	* nnimap.el (nnimap-open-connection): Reinstate the auto-upgrade from
 	unencrypted to STARTTLS, if possible.
 
