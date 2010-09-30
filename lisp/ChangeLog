@@ -1,3 +1,8 @@
+2010-09-30  Jose A. Ortega Ruiz  <jao@gnu.org>  (tiny change)
+
+	* gnus-sum.el (gnus-summary-show-thread): Skip past invisible text when
+	expanding threads.
+
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnir.el: Use the server names without suffixes (bug #7009).
