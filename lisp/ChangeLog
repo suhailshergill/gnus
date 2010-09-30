@@ -1,5 +1,12 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mail-source.el (mail-sources): Removed webmail support.
+	(defvar): Ditto.
+	(mail-source-fetcher-alist): Ditto.
+	(mail-source-fetch-webmail): Removed.
+
+	* webmail.el: Removed -- doesn't seem relevant any more.
+
 	* gnus.el: Fix up make-obsolete-variable declarations throughout.
 
 	* nnimap.el (nnimap-request-accept-article): Get the Message-ID without

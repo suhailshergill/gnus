@@ -29,8 +29,6 @@ gnus-kill-to-score.el
 	Convert kill files to score files.  See (info "(gnus)Converting Kill
 	Files").
 
-one-line-cookie.diff
-
 vcard.el
 
 ;; Local Variables:

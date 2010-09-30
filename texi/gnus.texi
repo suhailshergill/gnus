@@ -15559,45 +15559,6 @@ An example @acronym{IMAP} mail source:
       :fetchflag "\\Seen")
 @end lisp
 
-@item webmail
-Get mail from a webmail server, such as @uref{http://www.hotmail.com/},
-@uref{http://webmail.netscape.com/}, @uref{http://www.netaddress.com/},
-@uref{http://mail.yahoo.com/}.
-
-NOTE: Webmail largely depends on cookies.  A "one-line-cookie" patch is
-required for url "4.0pre.46".
-
-WARNING: Mails may be lost.  NO WARRANTY.
-
-Keywords:
-
-@table @code
-@item :subtype
-The type of the webmail server.  The default is @code{hotmail}.  The
-alternatives are @code{netscape}, @code{netaddress}, @code{my-deja}.
-
-@item :user
-The user name to give to the webmail server.  The default is the login
-name.
-
-@item :password
-The password to give to the webmail server.  If not specified, the user is
-prompted.
-
-@item :dontexpunge
-If non-@code{nil}, only fetch unread articles and don't move them to
-trash folder after finishing the fetch.
-
-@end table
-
-An example webmail source:
-
-@lisp
-(webmail :subtype 'hotmail
-         :user "user-name"
-         :password "secret")
-@end lisp
-
 @item group
 Get the actual mail source from the @code{mail-source} group parameter,
 @xref{Group Parameters}.
@@ -26239,7 +26200,7 @@ wrong show.
 Masanobu @sc{Umeda}---the writer of the original @sc{gnus}.
 
 @item
-Shenghuo Zhu---uudecode.el, mm-uu.el, rfc1843.el, webmail.el,
+Shenghuo Zhu---uudecode.el, mm-uu.el, rfc1843.el,
 nnwarchive and many, many other things connected with @acronym{MIME} and
 other types of en/decoding, as well as general bug fixing, new
 functionality and stuff.
