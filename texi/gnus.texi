@@ -23270,12 +23270,9 @@ The following variables offer control over how things are displayed.
 The size in pixels of gravatars. Gravatars are always square, so one
 number for the size is enough.
 
-@item gnus-gravatar-relief
-@vindex gnus-gravatar-relief
-If non-nil, adds a shadow rectangle around the image. The value,
-relief, specifies the width of the shadow lines, in pixels. If relief
-is negative, shadows are drawn so that the image appears as a pressed
-button; otherwise, it appears as an unpressed button.
+@item gnus-gravatar-properties
+@vindex gnus-gravatar-properties
+List of image properties applied to Gravatar images.
 
 @end table
 
