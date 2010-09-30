@@ -1,3 +1,8 @@
+2010-09-30  Julien Danjou  <julien@danjou.info>
+
+	* gnus-agent.el (gnus-agent-add-group): Fix call to
+	gnus-completing-read.
+
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nndoc.el (nndoc-retrieve-groups): New function.
