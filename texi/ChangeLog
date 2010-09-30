@@ -1,3 +1,8 @@
+2010-09-30  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi (Gravatars): Fix documentation about
+	gnu-gravatar-properties.
+
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Using IMAP): Remove the @acronyms from the headings.

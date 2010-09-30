@@ -1,3 +1,8 @@
+2010-09-30  Julien Danjou  <julien@danjou.info>
+
+	* gnus-agent.el (gnus-agent-add-group): Fix call to
+	gnus-completing-read.
+
 2010-09-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nndoc.el (nndoc-retrieve-groups): New function.
@@ -43,6 +48,11 @@
 
 	* nndraft.el (nndraft-request-expire-articles): Use the group name
 	instead if "nndraft".  Fix found by Nils Ackermann.
+
+2010-09-29  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* nnmail.el (group, group-art-list, group-art):
+	Remove unneeded directives.
 
 2010-09-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 
