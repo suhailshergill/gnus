@@ -729,16 +729,19 @@ textual parts.")
 
 
 (defun nnimap-find-article-by-message-id (group message-id)
-  (when (nnimap-possibly-change-group group nil)
-    (with-current-buffer (nnimap-buffer)
-      (let ((result
-	     (nnimap-command "UID SEARCH HEADER Message-Id %S" message-id))
-	    article)
-	(when (car result)
-	  ;; Select the last instance of the message in the group.
-	  (and (setq article
-		     (car (last (assoc "SEARCH" (cdr result)))))
-	       (string-to-number article)))))))
+  (with-current-buffer (nnimap-buffer)
+    (erase-buffer)
+    (setf (nnimap-group nnimap-object) nil)
+    (nnimap-send-command "EXAMINE %S" (utf7-encode group t))
+    (let ((sequence
+	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
+	  article result)
+      (setq result (nnimap-wait-for-response sequence))
+      (when (car result)
+	;; Select the last instance of the message in the group.
+	(and (setq article
+		   (car (last (assoc "SEARCH" (cdr result)))))
+	     (string-to-number article))))))
 
 (defun nnimap-delete-article (articles)
   (with-current-buffer (nnimap-buffer)

@@ -1,5 +1,8 @@
 2010-09-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-find-article-by-message-id): Use EXAMINE instead of
+	SELECT to get the message-id.
+
 	* mail-source.el (mail-sources): Removed webmail support.
 	(defvar): Ditto.
 	(mail-source-fetcher-alist): Ditto.
