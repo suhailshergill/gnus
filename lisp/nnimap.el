@@ -71,7 +71,7 @@ Values are `ssl', `network', `starttls' or `shell'.")
 Uses the same syntax as nnmail-split-methods")
 
 (make-obsolete-variable 'nnimap-split-rule "see `nnimap-split-methods'"
-			"Gnus 5.13")
+			"Emacs 24.1")
 
 (defvoo nnimap-authenticator nil
   "How nnimap authenticate itself to the server.
