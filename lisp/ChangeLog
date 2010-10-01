@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nndoc.el (nndoc-type-alist): Do babyl before mime-parts.  Suggested
+	by Jason Eisner.
+
 	* gnus-async.el (gnus-async-delete-prefetched-entry): Remove from hash
 	table, too.  Suggested by Stefan Wiens.
 	(gnus-async-prefetched-article-entry): Use intern-soft to avoid growing
