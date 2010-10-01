@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-scroll-up): Add more documentation.
+	Suggested by jidanni.
+
 	* gnus.el (gnus-large-newsgroup): Mention
 	gnus-large-ephemeral-newsgroup.  Suggested by jidanni.
 

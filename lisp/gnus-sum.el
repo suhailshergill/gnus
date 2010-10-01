@@ -7844,7 +7844,8 @@ If at the beginning of the article, go to the next article."
 
 (defun gnus-summary-scroll-up (lines)
   "Scroll up (or down) one line current article.
-Argument LINES specifies lines to be scrolled up (or down if negative)."
+Argument LINES specifies lines to be scrolled up (or down if negative).
+If no article is selected, then the current article will be selected first."
   (interactive "p")
   (gnus-configure-windows 'article)
   (gnus-summary-show-thread)
@@ -7860,7 +7861,8 @@ Argument LINES specifies lines to be scrolled up (or down if negative)."
 
 (defun gnus-summary-scroll-down (lines)
   "Scroll down (or up) one line current article.
-Argument LINES specifies lines to be scrolled down (or up if negative)."
+Argument LINES specifies lines to be scrolled down (or up if negative).
+If no article is selected, then the current article will be selected first."
   (interactive "p")
   (gnus-summary-scroll-up (- lines)))
 
