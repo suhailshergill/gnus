@@ -1,5 +1,11 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-clear-local-variables): This is probably no
+	longer needed, and probably doesn't work either, as pointed out by
+	Stefan Wiens.
+	(gnus-summary-exit): Remove call to the clearing function.
+	(gnus-summary-exit-no-update): Ditto.
+
 	* gnus-art.el (gnus-summary-save-in-file): Use with-current-buffer
 	instead of gnus-eval-in-buffer-window to avoid popping up frames.
 	Reported by Stefan Monnier.

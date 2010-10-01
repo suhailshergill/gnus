@@ -3109,16 +3109,6 @@ The following commands are available:
 	;; Simple nil-valued local variable.
 	(set (make-local-variable local) nil)))))
 
-(defun gnus-summary-clear-local-variables ()
-  (let ((locals gnus-summary-local-variables))
-    (while locals
-      (if (consp (car locals))
-	  (and (symbolp (caar locals))
-	       (set (caar locals) nil))
-	(and (symbolp (car locals))
-	     (set (car locals) nil)))
-      (setq locals (cdr locals)))))
-
 ;; Summary data functions.
 
 (defmacro gnus-data-number (data)
@@ -7129,13 +7119,6 @@ If FORCE (the prefix), also save the .newsrc file(s)."
 	  (progn
 	    (gnus-deaden-summary)
 	    (setq mode nil))
-	;; We set all buffer-local variables to nil.  It is unclear why
-	;; this is needed, but if we don't, buffer-local variables are
-	;; not garbage-collected, it seems.  This would the lead to en
-	;; ever-growing Emacs.
-	(gnus-summary-clear-local-variables)
-	(let ((gnus-summary-local-variables gnus-newsgroup-variables))
-	  (gnus-summary-clear-local-variables))
 	(when (get-buffer gnus-article-buffer)
 	  (bury-buffer gnus-article-buffer))
 	;; Return to group mode buffer.
@@ -7194,9 +7177,6 @@ If FORCE (the prefix), also save the .newsrc file(s)."
       (if (not gnus-kill-summary-on-exit)
 	  (gnus-deaden-summary)
 	(gnus-close-group group)
-	(gnus-summary-clear-local-variables)
-	(let ((gnus-summary-local-variables gnus-newsgroup-variables))
-	  (gnus-summary-clear-local-variables))
 	(gnus-kill-buffer gnus-summary-buffer))
       (unless gnus-single-article-buffer
 	(setq gnus-article-current nil))
