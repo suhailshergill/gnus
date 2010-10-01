@@ -912,6 +912,16 @@ textual parts.")
 				  (or highest exists)))))))))
 	t))))
 
+(deffoo nnimap-request-newgroups (date &optional server)
+  (nnimap-possibly-change-group nil server)
+  (with-current-buffer nntp-server-buffer
+    (erase-buffer)
+    (dolist (group (with-current-buffer (nnimap-buffer)
+		     (nnimap-get-groups)))
+      (unless (assoc group nnimap-current-infos)
+	;; Insert dummy numbers here -- they don't matter.
+	(insert (format "%S 0 1 y\n" group))))))
+
 (deffoo nnimap-retrieve-group-data-early (server infos)
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer (nnimap-buffer)
