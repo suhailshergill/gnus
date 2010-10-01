@@ -84,12 +84,22 @@
     (when (search-forward "\n\n" nil t)
       (buffer-substring (point) (point-max)))))
 
+(eval-and-compile
+  (cond ((featurep 'xemacs)
+	 (require 'gnus-xmas)
+	 (defalias 'gravatar-create-image 'gnus-xmas-create-image))
+	((featurep 'gnus-ems)
+	 (defalias 'gravatar-create-image 'gnus-create-image))
+	(t
+	 (require 'image)
+	 (defalias 'gravatar-create-image 'create-image))))
+
 (defun gravatar-data->image ()
   "Get data of current buffer and return an image.
 If no image available, return 'error."
   (let ((data (gravatar-get-data)))
     (if data
-        (create-image data  nil t)
+	(gravatar-create-image data  nil t)
       'error)))
 
 ;;;###autoload
