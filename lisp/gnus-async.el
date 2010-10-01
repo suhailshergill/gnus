@@ -314,6 +314,7 @@ that was fetched."
     (delete-region (cadr entry) (caddr entry))
     (set-marker (cadr entry) nil)
     (set-marker (caddr entry) nil))
+  (unintern (car entry) gnus-async-hashtb)
   (gnus-async-with-semaphore
     (setq gnus-async-article-alist
 	  (delq entry gnus-async-article-alist))))

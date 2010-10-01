@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-async.el (gnus-async-delete-prefetched-entry): Remove from hash
+	table, too.  Suggested by Stefan Wiens.
+
 	* gnus-sum.el (gnus-summary-clear-local-variables): This is probably no
 	longer needed, and probably doesn't work either, as pointed out by
 	Stefan Wiens.
