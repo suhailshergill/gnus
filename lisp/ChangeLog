@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-completing-read): Return the symbol name,
+	not the value from the collection.
+
 	* nnimap.el (nnimap-update-info): Ignore groups that have no UIDNEXT
 	values.  This sometimes happens on some groups that have no info.
 	(nnimap-request-newgroups): New function.
