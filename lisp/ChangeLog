@@ -1,5 +1,10 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-summary-save-in-file): Use with-current-buffer
+	instead of gnus-eval-in-buffer-window to avoid popping up frames.
+	Reported by Stefan Monnier.
+	(gnus-summary-save-in-rmail): Ditto.
+
 	* gnus-sum.el (gnus-summary-select-article-buffer): Show only the
 	article buffer, instead of both the article buffer and the summary
 	buffer.  Sort of suggested by Dan Jacobson.
