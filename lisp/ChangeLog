@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-check-bogus-newsgroups): Say how many groups
+	we're being queried about.  Suggested by Dan Jacobson.
+
 	* nndoc.el (nndoc-type-alist): Do babyl before mime-parts.  Suggested
 	by Jason Eisner.
 
