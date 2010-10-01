@@ -7,10 +7,10 @@
 	Suggested by Stefan Monnier.
 
 	* gnus-sum.el (gnus-summary-scroll-up): Add more documentation.
-	Suggested by jidanni.
+	Suggested by Dan Jacobson.
 
 	* gnus.el (gnus-large-newsgroup): Mention
-	gnus-large-ephemeral-newsgroup.  Suggested by jidanni.
+	gnus-large-ephemeral-newsgroup.  Suggested by Dan Jacobson.
 
 	* gnus-msg.el (gnus-summary-resend-message): When resending, don't
 	externalize attachments.  Bug reported by Steve Wen.
