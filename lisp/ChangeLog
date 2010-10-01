@@ -1,5 +1,11 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-select-article-buffer): Show only the
+	article buffer, instead of both the article buffer and the summary
+	buffer.  Sort of suggested by Dan Jacobson.
+
+	* gnus-win.el (gnus-buffer-configuration): Add an only-article spec.
+
 	* nnmbox.el (nnmbox-read-mbox): Mark buffer for deletion on Gnus exit.
 	Suggested by Dan Jacobson.
 

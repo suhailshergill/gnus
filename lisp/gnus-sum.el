@@ -6939,12 +6939,12 @@ displayed, no centering will be performed."
 ;; Various summary commands
 
 (defun gnus-summary-select-article-buffer ()
-  "Reconfigure windows to show article buffer."
+  "Reconfigure windows to show the article buffer."
   (interactive)
   (if (not (gnus-buffer-live-p gnus-article-buffer))
       (error "There is no article buffer for this summary buffer")
-    (gnus-configure-windows 'article)
-    (select-window (get-buffer-window gnus-article-buffer))))
+    (select-window (get-buffer-window gnus-article-buffer))
+    (gnus-configure-windows 'only-article t)))
 
 (defun gnus-summary-universal-argument (arg)
   "Perform any operation on all articles that are process/prefixed."
