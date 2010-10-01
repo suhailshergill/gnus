@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-continuum-version): Make inactive, since it doesn't
+	really message anything to the user.
+
 	* nnmail.el (nnmail-article-group): Allow using the fancy split method
 	directly.
 

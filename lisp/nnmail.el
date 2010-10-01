@@ -1149,10 +1149,10 @@ FUNC will be called with the group name to determine the article number."
 	  (setq nnmail-split-trace nil))
 	(if (or (and (symbolp nnmail-split-methods)
 		     (fboundp nnmail-split-methods))
-		(and (listp ruleset)
+		(and (listp nnmail-split-methods)
 		     ;; Not a regular split method, so it has to be a
 		     ;; fancy one.
-		     (not (let ((top-element (car-safe ruleset)))
+		     (not (let ((top-element (car-safe nnmail-split-methods)))
 			    (and (= 2 (length top-element))
 				 (stringp (nth 0 top-element))
 				 (stringp (nth 1 top-element)))))))

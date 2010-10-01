@@ -3205,7 +3205,6 @@ If ARG, insert string at point."
 
 (defun gnus-continuum-version (&optional version)
   "Return VERSION as a floating point number."
-  (interactive)
   (unless version
     (setq version gnus-version))
   (when (or (string-match "^\\([^ ]+\\)? ?Gnus v?\\([0-9.]+\\)$" version)
