@@ -24,7 +24,6 @@
 
 ;;; Code:
 
-(require 'image)
 (require 'url)
 (require 'url-cache)
 
