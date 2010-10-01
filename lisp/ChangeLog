@@ -1,3 +1,10 @@
+2010-10-01  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-install-nnregistry): Move the feature
+	check into `gnus-registry-initialize'.
+	(gnus-registry-initialize): Ditto.
+	Fix and extend header docs.
+
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-html.el (gnus-html-prefetch-images): Adjust regexp to avoid
