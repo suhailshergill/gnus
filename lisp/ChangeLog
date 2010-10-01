@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-encode.el (mm-content-transfer-encoding-defaults): Try to make the
+	documentation clearer.
+
 	* message.el (message-shorten-references): Comment on the number "21".
 	Suggested by Stefan Monnier.
 
