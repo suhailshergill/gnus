@@ -314,10 +314,10 @@ that was fetched."
     (delete-region (cadr entry) (caddr entry))
     (set-marker (cadr entry) nil)
     (set-marker (caddr entry) nil))
-  (unintern (car entry) gnus-async-hashtb)
   (gnus-async-with-semaphore
     (setq gnus-async-article-alist
-	  (delq entry gnus-async-article-alist))))
+	  (delq entry gnus-async-article-alist))
+    (unintern (car entry) gnus-async-hashtb)))
 
 (defun gnus-async-prefetch-remove-group (group)
   "Remove all articles belonging to GROUP from the prefetch buffer."
@@ -333,8 +333,8 @@ that was fetched."
   "Return the entry for ARTICLE in GROUP if it has been prefetched."
   (let ((entry (save-excursion
 		 (gnus-async-set-buffer)
-		 (assq (intern (format "%s-%d" group article)
-			       gnus-async-hashtb)
+		 (assq (intern-soft (format "%s-%d" group article)
+				    gnus-async-hashtb)
 		       gnus-async-article-alist))))
     ;; Perhaps something has emptied the buffer?
     (if (and entry
