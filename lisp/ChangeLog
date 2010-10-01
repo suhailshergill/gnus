@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmbox.el (nnmbox-read-mbox): Mark buffer for deletion on Gnus exit.
+	Suggested by Dan Jacobson.
+
 	* mm-encode.el (mm-content-transfer-encoding-defaults): Try to make the
 	documentation clearer.
 
