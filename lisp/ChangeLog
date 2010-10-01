@@ -1,5 +1,15 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-group): Low higher than high to signal no
+	messages in empty groups.
+
+2010-10-01  Ted Zlatanov  <tzz@lifelogs.com>
+
+	* nnimap.el (nnimap-request-group): Don't bug out when there's an empty
+	non-UIDNEXT group.
+
+2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
 	* gnus-group.el (gnus-group-completing-read): Return the symbol name,
 	not the value from the collection.
 

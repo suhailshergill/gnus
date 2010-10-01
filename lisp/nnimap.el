@@ -623,10 +623,11 @@ textual parts.")
 		(nnimap-update-infos marks (list info)))
 	      (goto-char (point-max))
 	      (let ((uidnext (nth 5 (car marks))))
-		(setq high (if uidnext
-			       (1- uidnext)
-			     (nth 3 (car marks)))
-		      low (or (nth 4 (car marks)) uidnext)))))
+		(setq high (or (if uidnext
+                                   (1- uidnext)
+                                 (nth 3 (car marks)))
+                               0)
+		      low (or (nth 4 (car marks)) uidnext 1)))))
 	  (erase-buffer)
 	  (insert
 	   (format
