@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-large-newsgroup): Mention
+	gnus-large-ephemeral-newsgroup.  Suggested by jidanni.
+
 	* gnus-msg.el (gnus-summary-resend-message): When resending, don't
 	externalize attachments.  Bug reported by Steve Wen.
 
