@@ -1,3 +1,8 @@
+2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-update-info): Ignore groups that have no UIDNEXT
+	values.  This sometimes happens on some groups that have no info.
+
 2010-10-01  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-registry.el (gnus-registry-install-nnregistry): Move the feature

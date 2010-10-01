@@ -990,7 +990,9 @@ textual parts.")
       (nnimap-update-info info (cdr (assoc group flags))))))
 
 (defun nnimap-update-info (info marks)
-  (when marks
+  (when (and marks
+	     ;; Ignore groups with no UIDNEXT values.
+	     (nth 4 marks))
     (destructuring-bind (existing flags high low uidnext start-article
 				  permanent-flags) marks
       (let ((group (gnus-info-group info))
