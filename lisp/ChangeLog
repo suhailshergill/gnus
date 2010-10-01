@@ -1,3 +1,29 @@
+2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-extend-tls-programs): Only extend those programs
+	for starttls that tls.el implements; i.e. openssl.
+
+	* tls.el (tls-starttls-switches): Give up on using starttls with
+	gnutls-cli.
+	(tls-program): Add --insecure to be consistent with the defaults from
+	openssl s_client.  Now all three commands are insecure.
+
+ 2010-10-01  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* lpath.el: Fbing iswitchb-read-buffer for Emacs 22 and XEmacs; bind
+	completion-styles-alist and fbind ido-completing-read for XEmacs.
+
+	* gnus-util.el (gnus-completing-read-function): Exclude
+	gnus-icompleting-read and gnus-ido-completing-read from candidates for
+	XEmacs since iswitchb.el is very old and ido.el is unavailable in
+	XEmacs.
+	(iswitchb-mode, iswitchb-temp-buflist, iswitchb-read-buffer): Silence
+	the byte compiler.
+
+ 	* gravatar.el: Don't load image.el that XEmacs doesn't provide.
+ 	(gravatar-create-image): New function that's an alias to
+ 	gnus-xmas-create-image, gnus-create-image, or create-image.
+
 2010-10-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gravatar.el: Don't load image.el that XEmacs doesn't provide.
