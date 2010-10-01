@@ -1,5 +1,8 @@
 2010-10-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmail.el (nnmail-article-group): Allow using the fancy split method
+	directly.
+
 	* nnimap.el (nnimap-request-group): Low higher than high to signal no
 	messages in empty groups.
 
