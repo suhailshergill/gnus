@@ -2,6 +2,8 @@
 
 	* gnus.texi (Splitting Mail): Mention the new fancy splitting
 	function.
+	(Article Hiding): Add google banner example.  Suggested by Benjamin
+	Xu.
 
 2010-09-30  Teodor Zlatanov  <tzz@lifelogs.com>
 
