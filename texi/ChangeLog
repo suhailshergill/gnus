@@ -33,7 +33,7 @@
 
 2010-09-26  Julien Danjou  <julien@danjou.info>
 
-	* gnus.texi (Oort Gnus): Remove mention of ssl.el
+	* gnus.texi (Oort Gnus): Remove mention of ssl.el.
 
 2010-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -59,7 +59,7 @@
 
 2010-09-25  Julien Danjou  <julien@danjou.info>
 
-	* gnus.texi (Customizing Articles): Remove gnus-treat-translate
+	* gnus.texi (Customizing Articles): Remove gnus-treat-translate.
 
 2010-09-24  Julien Danjou  <julien@danjou.info>
 
