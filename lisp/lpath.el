@@ -31,7 +31,7 @@
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
        bookmark-get-bookmark-record bookmark-make-record-default
        bookmark-prop-get display-time-event-handler epg-check-configuration
-       find-coding-system frame-device iswitchb-read-buffer recenter-top-bottom
+       find-coding-system frame-device recenter-top-bottom
        rmail-swap-buffers-maybe w3-do-setup w3-parse-buffer w3-prepare-buffer
        w3-region w3m-detect-meta-charset w3m-region))
     (maybe-bind
@@ -60,8 +60,7 @@
      display-time-event-handler epg-check-configuration event-click-count
      event-end event-start find-coding-systems-for-charsets
      find-coding-systems-region find-coding-systems-string find-image
-     float-time help-buffer ido-completing-read image-size
-     image-type-available-p insert-image iswitchb-read-buffer
+     float-time help-buffer image-size image-type-available-p insert-image
      mail-abbrevs-setup make-mode-line-mouse-map make-network-process
      mouse-minibuffer-check mouse-movement-p mouse-scroll-subr overlay-lists
      pgg-display-output-buffer posn-point posn-window put-image read-event
@@ -72,12 +71,11 @@
      window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
-     buffer-display-table completion-styles completion-styles-alist
-     cursor-in-non-selected-windows default-enable-multibyte-characters
-     default-file-name-coding-system eudc-protocol filladapt-mode
-     gnus-agent-expire-current-dirs help-xref-stack-item idna-program
-     installation-directory line-spacing mark-active
-     mouse-selection-click-count mouse-selection-click-count-buffer
+     buffer-display-table completion-styles cursor-in-non-selected-windows
+     default-enable-multibyte-characters default-file-name-coding-system
+     eudc-protocol filladapt-mode gnus-agent-expire-current-dirs
+     help-xref-stack-item idna-program installation-directory line-spacing
+     mark-active mouse-selection-click-count mouse-selection-click-count-buffer
      ps-print-color-p rmail-default-file rmail-default-rmail-file
      rmail-insert-mime-forwarded-message-function show-trailing-whitespace
      smtpmail-default-smtp-server temporary-file-directory tool-bar-mode
