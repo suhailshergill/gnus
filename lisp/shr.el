@@ -110,7 +110,8 @@ fit these criteria."
     (shr-add-font start (point) type)))
 
 (defun shr-add-font (start end type)
-  (put-text-property start end 'face type))
+  (let ((overlay (make-overlay start end)))
+    (overlay-put overlay 'face type)))
 
 (defun shr-a (cont)
   (let ((start (point))
