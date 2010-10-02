@@ -70,6 +70,58 @@
   (shr-generic cont)
   (insert "\n"))
 
+(defun shr-b (cont)
+  (shr-fontize-cont cont 'bold))
+
+(defun shr-i (cont)
+  (shr-fontize-cont cont 'italic))
+
+(defun shr-u (cont)
+  (shr-fontize-cont cont 'underline))
+
+(defun shr-s (cont)
+  (shr-fontize-cont cont 'strikethru))
+
+(defun shr-fontize-cont (cont type)
+  (let ((start (point)))
+    (shr-generic cont)
+    (shr-add-font start (point) type)))
+
+(defun shr-add-font (start end type)
+  (put-text-property start end 'face type))
+
+(defun shr-img (cont)
+  (shr-ensure-newline)
+  (let ((start (point-marker)))
+    (let ((alt (or (cdr (assq :alt cont)) "[img]"))
+	  (url (cdr (assq :src cont))))
+      (if (url-is-cached url)
+	  (shr-put-image (shr-get-image-data url) (point) alt)
+	(insert alt)
+	(url-retrieve url 'shr-image-fetched
+		      (list (current-buffer) start (point-marker)))))
+    (shr-ensure-newline)))
+
+(defun shr-image-fetched (status buffer start end)
+  (when (and (buffer-name buffer)
+	     (not (plist-get status :error)))
+    (url-store-in-cache (current-buffer))
+    (when (or (search-forward "\n\n" nil t)
+	      (search-forward "\r\n\r\n" nil t))
+      (let ((data (buffer-substring (point) (point-max))))
+        (with-current-buffer buffer
+          (let ((alt (buffer-substring start end))
+		(inhibit-read-only t))
+	    (delete-region start end)
+	    (shr-put-image data start alt))))))
+  (kill-buffer (current-buffer)))
+
+(defun shr-put-image (data point alt)
+  (if (not (display-graphic-p))
+      (insert alt)
+    (let ((image (create-image data nil t)))
+      (put-image image point alt))))
+
 (defun shr-pre (cont)
   (let ((shr-folding-mode nil))
     (shr-ensure-newline)
@@ -96,6 +148,16 @@
 	  (if (> (+ column (length elem) 1) shr-width)
 	      (insert "\n" elem)
 	    (insert " " elem))))))))
+
+(defun shr-get-image-data (url)
+  "Get image data for URL.
+Return a string with image data."
+  (with-temp-buffer
+    (mm-disable-multibyte)
+    (url-cache-extract (url-cache-create-filename url))
+    (when (or (search-forward "\n\n" nil t)
+              (search-forward "\r\n\r\n" nil t))
+      (buffer-substring (point) (point-max)))))
 
 (provide 'shr)
 
