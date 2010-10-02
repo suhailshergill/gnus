@@ -30,6 +30,26 @@
 
 ;;; Code:
 
+(defgroup shr nil
+  "Simple HTML Renderer"
+  :group 'mail)
+
+(defcustom shr-max-image-proportion 0.9
+  "How big pictures displayed are in relation to the window they're in.
+A value of 0.7 means that they are allowed to take up 70% of the
+width and height of the window.  If they are larger than this,
+and Emacs supports it, then the images will be rescaled down to
+fit these criteria."
+  :version "24.1"
+  :group 'shr
+  :type 'float)
+
+(defcustom shr-blocked-images nil
+  "Images that have URLs matching this regexp will be blocked."
+  :version "24.1"
+  :group 'shr
+  :type 'regexp)
+
 (defvar shr-folding-mode nil)
 
 (defvar shr-width 70)
@@ -90,17 +110,37 @@
 (defun shr-add-font (start end type)
   (put-text-property start end 'face type))
 
+(defun shr-a (cont)
+  (let ((start (point))
+	(url (cdr (assq :href cont))))
+    (shr-generic cont)
+    (widget-convert-button
+     'link start (point)
+     :action 'shr-browse-url
+     :url url
+     :keymap widget-keymap
+     :help-echo url)))
+
+(defun shr-browse-url (widget &rest stuff)
+  (browse-url (widget-get widget :url)))
+
 (defun shr-img (cont)
-  (shr-ensure-newline)
   (let ((start (point-marker)))
-    (let ((alt (or (cdr (assq :alt cont)) "[img]"))
+    (let ((alt (cdr (assq :alt cont)))
 	  (url (cdr (assq :src cont))))
-      (if (url-is-cached url)
-	  (shr-put-image (shr-get-image-data url) (point) alt)
+      (when (zerop (length alt))
+	(setq alt "[img]"))
+      (cond
+       ((and shr-blocked-images
+	     (string-match shr-blocked-images url))
+	(insert alt))
+       ((url-is-cached url)
+	(shr-put-image (shr-get-image-data url) (point) alt))
+       (t
 	(insert alt)
 	(url-retrieve url 'shr-image-fetched
 		      (list (current-buffer) start (point-marker)))))
-    (shr-ensure-newline)))
+      (insert " "))))
 
 (defun shr-image-fetched (status buffer start end)
   (when (and (buffer-name buffer)
@@ -119,8 +159,35 @@
 (defun shr-put-image (data point alt)
   (if (not (display-graphic-p))
       (insert alt)
-    (let ((image (create-image data nil t)))
+    (let ((image (shr-rescale-image data)))
       (put-image image point alt))))
+
+(defun shr-rescale-image (data)
+  (if (or (not (fboundp 'imagemagick-types))
+	  (not (get-buffer-window (current-buffer))))
+      (create-image data nil t)
+    (let* ((image (create-image data nil t))
+	   (size (image-size image))
+	   (width (car size))
+	   (height (cdr size))
+	   (edges (window-inside-pixel-edges
+		   (get-buffer-window (current-buffer))))
+	   (window-width (truncate (* shr-max-image-proportion
+				      (- (nth 2 edges) (nth 0 edges)))))
+	   (window-height (truncate (* shr-max-image-proportion
+				       (- (nth 3 edges) (nth 1 edges)))))
+	   scaled-image)
+      (when (> height window-height)
+	(setq image (or (create-image data 'imagemagick t
+				      :height window-height)
+			image))
+	(setq size (image-size image t)))
+      (when (> (car size) window-width)
+	(setq image (or
+		     (create-image data 'imagemagick t
+				   :width window-width)
+		     image)))
+      image)))
 
 (defun shr-pre (cont)
   (let ((shr-folding-mode nil))
