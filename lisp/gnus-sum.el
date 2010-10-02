@@ -11908,11 +11908,11 @@ save those articles instead."
            ((null split-name)
             (gnus-group-completing-read
              prom
-             (remove-if-not 'gnus-valid-move-group-p gnus-active-hashtb)
+             (gnus-remove-if-not 'gnus-valid-move-group-p gnus-active-hashtb)
              nil prefix nil default))
            ((= 1 (length split-name))
             (gnus-group-completing-read
-             prom (remove-if-not 'gnus-valid-move-group-p gnus-active-hashtb)
+             prom (gnus-remove-if-not 'gnus-valid-move-group-p gnus-active-hashtb)
              nil prefix 'gnus-group-history (car split-name)))
            (t
             (gnus-completing-read
