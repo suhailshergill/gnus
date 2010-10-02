@@ -30,6 +30,73 @@
 
 ;;; Code:
 
-(provice 'shr)
+(defvar shr-folding-mode nil)
+
+(defvar shr-width 70)
+
+(defun shr-transform-dom (dom)
+  (let ((result (list (pop dom))))
+    (dolist (arg (pop dom))
+      (push (cons (intern (concat ":" (symbol-name (car arg))) obarray)
+		  (cdr arg))
+	    result))
+    (dolist (sub dom)
+      (if (stringp sub)
+	  (push (cons :text sub) result)
+	(push (shr-transform-dom sub) result)))
+    (nreverse result)))
+
+(defun shr-insert-document (dom)
+  (setq dom (shr-transform-dom dom))
+  (shr-descend dom))
+
+(defun shr-descend (dom)
+  (let ((function (intern (concat "shr-" (symbol-name (car dom))) obarray)))
+    (if (fboundp function)
+	(funcall function (cdr dom))
+      (shr-generic (cdr dom)))))
+
+(defun shr-generic (cont)
+  (dolist (sub cont)
+    (cond
+     ((eq (car sub) :text)
+      (shr-insert (cdr sub)))
+     ((consp (cdr sub))
+      (shr-descend sub)))))
+
+(defun shr-p (cont)
+  (shr-ensure-newline)
+  (insert "\n")
+  (shr-generic cont)
+  (insert "\n"))
+
+(defun shr-pre (cont)
+  (let ((shr-folding-mode nil))
+    (shr-ensure-newline)
+    (shr-generic cont)
+    (shr-ensure-newline)))
+
+(defun shr-blockquote (cont)
+  (shr-pre cont))
+
+(defun shr-ensure-newline ()
+  (unless (zerop (current-column))
+    (insert "\n")))
+
+(defun shr-insert (text)
+  (cond
+   ((eq shr-folding-mode 'none)
+    (insert t))
+   (t
+    (let (column)
+      (dolist (elem (split-string text))
+	(setq column (current-column))
+	(if (zerop column)
+	    (insert elem)
+	  (if (> (+ column (length elem) 1) shr-width)
+	      (insert "\n" elem)
+	    (insert " " elem))))))))
+
+(provide 'shr)
 
 ;;; shr.el ends here
