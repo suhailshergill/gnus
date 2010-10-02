@@ -51,6 +51,7 @@ fit these criteria."
   :type 'regexp)
 
 (defvar shr-folding-mode nil)
+(defvar shr-state nil)
 
 (defvar shr-width 70)
 
@@ -68,7 +69,8 @@ fit these criteria."
 
 ;;;###autoload
 (defun shr-insert-document (dom)
-  (shr-descend (shr-transform-dom dom)))
+  (let ((shr-state nil))
+    (shr-descend (shr-transform-dom dom))))
 
 (defun shr-descend (dom)
   (let ((function (intern (concat "shr-" (symbol-name (car dom))) obarray)))
@@ -134,14 +136,15 @@ fit these criteria."
        ((and shr-blocked-images
 	     (string-match shr-blocked-images url))
 	(insert alt))
-       ((url-is-cached url)
+       ((url-is-cached (browse-url-url-encode-chars url "[&)$ ]"))
 	(shr-put-image (shr-get-image-data url) (point) alt))
        (t
 	(insert alt)
 	(url-retrieve url 'shr-image-fetched
 		      (list (current-buffer) start (point-marker))
 		      t)))
-      (insert " "))))
+      (insert " ")
+      (setq shr-state 'image))))
 
 (defun shr-image-fetched (status buffer start end)
   (when (and (buffer-name buffer)
@@ -204,6 +207,9 @@ fit these criteria."
     (insert "\n")))
 
 (defun shr-insert (text)
+  (when (eq shr-state 'image)
+    (insert "\n")
+    (setq shr-state nil))
   (cond
    ((eq shr-folding-mode 'none)
     (insert t))

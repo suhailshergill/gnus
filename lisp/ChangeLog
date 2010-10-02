@@ -2,6 +2,7 @@
 
 	* shr.el (shr-insert-document): Autoload.
 	(shr-img): Be silent.
+	(shr-insert): Add a newline after every picture before text.
 
 	* mm-decode.el (mm-text-html-renderer): Default to shr.el rendering, if
 	possible.
