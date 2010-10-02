@@ -52,6 +52,7 @@ fit these criteria."
 
 (defvar shr-folding-mode nil)
 (defvar shr-state nil)
+(defvar shr-start nil)
 
 (defvar shr-width 70)
 
@@ -69,7 +70,8 @@ fit these criteria."
 
 ;;;###autoload
 (defun shr-insert-document (dom)
-  (let ((shr-state nil))
+  (let ((shr-state nil)
+	(shr-start nil))
     (shr-descend (shr-transform-dom dom))))
 
 (defun shr-descend (dom)
@@ -105,20 +107,20 @@ fit these criteria."
   (shr-fontize-cont cont 'strikethru))
 
 (defun shr-fontize-cont (cont type)
-  (let ((start (point)))
+  (let (shr-start)
     (shr-generic cont)
-    (shr-add-font start (point) type)))
+    (shr-add-font shr-start (point) type)))
 
 (defun shr-add-font (start end type)
   (let ((overlay (make-overlay start end)))
     (overlay-put overlay 'face type)))
 
 (defun shr-a (cont)
-  (let ((start (point))
-	(url (cdr (assq :href cont))))
+  (let ((url (cdr (assq :href cont)))
+	shr-start)
     (shr-generic cont)
     (widget-convert-button
-     'link start (point)
+     'link shr-start (point)
      :action 'shr-browse-url
      :url url
      :keymap widget-keymap
@@ -218,11 +220,16 @@ fit these criteria."
     (let (column)
       (dolist (elem (split-string text))
 	(setq column (current-column))
-	(if (zerop column)
-	    (insert elem)
+	(when (plusp column)
 	  (if (> (+ column (length elem) 1) shr-width)
-	      (insert "\n" elem)
-	    (insert " " elem))))))))
+	      (insert "\n")
+	    (insert " ")))
+	;; The shr-start is a special variable that is used to pass
+	;; upwards the first point in the buffer where the text really
+	;; starts.
+	(unless shr-start
+	  (setq shr-start (point)))
+	(insert elem))))))
 
 (defun shr-get-image-data (url)
   "Get image data for URL.

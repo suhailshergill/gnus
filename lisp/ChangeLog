@@ -4,6 +4,7 @@
 	(shr-img): Be silent.
 	(shr-insert): Add a newline after every picture before text.
 	(shr-add-font): Use overlays for combining faces.
+	(shr-insert): Pass upwards the text start point.
 
 	* mm-decode.el (mm-text-html-renderer): Default to shr.el rendering, if
 	possible.
