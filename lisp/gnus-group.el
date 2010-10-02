@@ -2176,7 +2176,7 @@ respectively if they are omitted."
                               (if (string-match "[^\000-\177]" group)
                                   (gnus-group-decoded-name group)
                                 group)))
-                          (gnus-remove-if-not 'symbolp collection)))
+                          (remove-if-not 'symbolp collection)))
          (group
           (gnus-completing-read (or prompt "Group") choices
                                 require-match initial-input

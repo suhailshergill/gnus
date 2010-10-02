@@ -1307,10 +1307,6 @@ This function saves the current buffer."
       (setq list (cdr list)))
     (nreverse out)))
 
-(defun gnus-remove-if-not (predicate list)
-  "Return a copy of LIST with all items not satisfying PREDICATE removed."
-  (gnus-remove-if `(lambda (item) (not (,predicate item))) list))
-
 (if (fboundp 'assq-delete-all)
     (defalias 'gnus-delete-alist 'assq-delete-all)
   (defun gnus-delete-alist (key alist)

@@ -916,7 +916,7 @@ EXTRA is the possible non-standard header."
   (interactive (list (gnus-completing-read "Header"
                                            (mapcar
                                             'car
-                                            (gnus-remove-if-not
+                                            (remove-if-not
                                              (lambda (x) (fboundp (nth 2 x)))
                                              gnus-header-index))
                                            t)
