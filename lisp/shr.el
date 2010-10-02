@@ -66,9 +66,9 @@ fit these criteria."
 	(push (shr-transform-dom sub) result)))
     (nreverse result)))
 
+;;;###autoload
 (defun shr-insert-document (dom)
-  (setq dom (shr-transform-dom dom))
-  (shr-descend dom))
+  (shr-descend (shr-transform-dom dom)))
 
 (defun shr-descend (dom)
   (let ((function (intern (concat "shr-" (symbol-name (car dom))) obarray)))
@@ -139,7 +139,8 @@ fit these criteria."
        (t
 	(insert alt)
 	(url-retrieve url 'shr-image-fetched
-		      (list (current-buffer) start (point-marker)))))
+		      (list (current-buffer) start (point-marker))
+		      t)))
       (insert " "))))
 
 (defun shr-image-fetched (status buffer start end)
