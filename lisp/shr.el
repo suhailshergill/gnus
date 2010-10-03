@@ -98,7 +98,7 @@ fit these criteria."
 (defun shr-ensure-paragraph ()
   (unless (bobp)
     (if (bolp)
-	(unless (eql (char-after (1- (point))) ?\n)
+	(unless (eql (char-after (- (point) 2)) ?\n)
 	  (insert "\n"))
       (insert "\n\n"))))
 

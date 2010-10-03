@@ -1,6 +1,7 @@
 2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el: Add headings.
+	(shr-ensure-paragraph): Actually work.
 
 2010-10-03  Julien Danjou  <julien@danjou.info>
 
