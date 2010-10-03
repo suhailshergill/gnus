@@ -23,6 +23,10 @@
 	* gnus-gravatar.el (gnus-gravatar-insert): Adjust character where we
 	should go backward.
 
+2010-10-02  Juanma Barranquero  <lekktu@gmail.com>
+
+	* shr.el (shr): Fix typo in provide call.
+
 2010-10-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el: New file.
