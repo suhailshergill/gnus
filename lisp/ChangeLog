@@ -1,5 +1,8 @@
 2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-p): Don't insert newlines on empty tags at the
+	beginning of the buffer.
+
 	* gnus-sum.el (gnus-summary-select-article-buffer): Really select the
 	article buffer again.
 
