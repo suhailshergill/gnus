@@ -208,7 +208,7 @@ fit these criteria."
     (shr-ensure-newline)))
 
 (defun shr-tag-blockquote (cont)
-  (shr-pre cont))
+  (shr-tag-pre cont))
 
 (defun shr-ensure-newline ()
   (unless (zerop (current-column))

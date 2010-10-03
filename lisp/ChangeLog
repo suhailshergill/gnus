@@ -1,5 +1,7 @@
 2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-blockquote): Convert name.
+
 	* gnus-sum.el (gnus-summary-select-article-buffer): If the article
 	buffer isn't shown, then select the current article first instead of
 	bugging out.
