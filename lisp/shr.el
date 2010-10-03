@@ -99,7 +99,11 @@ fit these criteria."
     (if (bolp)
 	(unless (eql (char-after (- (point) 2)) ?\n)
 	  (insert "\n"))
-      (insert "\n\n"))))
+      (if (save-excursion
+	    (beginning-of-line)
+	    (looking-at " *"))
+	  (insert "\n")
+	(insert "\n\n")))))
 
 (defun shr-tag-b (cont)
   (shr-fontize-cont cont 'bold))
