@@ -53,6 +53,7 @@ fit these criteria."
 (defvar shr-folding-mode nil)
 (defvar shr-state nil)
 (defvar shr-start nil)
+(defvar shr-indentation 0)
 
 (defvar shr-width 70)
 
@@ -209,7 +210,8 @@ fit these criteria."
     (shr-ensure-newline)))
 
 (defun shr-tag-blockquote (cont)
-  (shr-tag-pre cont))
+  (let ((shr-indentation (+ shr-indentation 4)))
+    (shr-tag-pre cont)))
 
 (defun shr-ensure-newline ()
   (unless (zerop (current-column))
@@ -230,6 +232,9 @@ fit these criteria."
 	  (if (> (+ column (length elem) 1) shr-width)
 	      (insert "\n")
 	    (insert " ")))
+	(when (and (bolp)
+		   (plusp shr-indentation))
+	  (insert (make-string shr-indentation ? )))
 	;; The shr-start is a special variable that is used to pass
 	;; upwards the first point in the buffer where the text really
 	;; starts.
