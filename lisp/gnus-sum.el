@@ -6936,7 +6936,7 @@ displayed, no centering will be performed."
     (unless (get-buffer-window gnus-article-buffer)
       (gnus-summary-show-article))
     (select-window (get-buffer-window gnus-article-buffer))
-    (gnus-configure-windows 'only-article t)))
+    (gnus-configure-windows 'article t)))
 
 (defun gnus-summary-universal-argument (arg)
   "Perform any operation on all articles that are process/prefixed."

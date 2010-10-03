@@ -3,6 +3,8 @@
 	* gnus-sum.el (gnus-summary-select-article-buffer): If the article
 	buffer isn't shown, then select the current article first instead of
 	bugging out.
+	(gnus-summary-select-article-buffer): Show both the article and summary
+	buffers again.
 
 	* shr.el (shr-fontize-cont): Protect against regions with no text.
 	Rename tag functions to shr-tag-* for enhanced security.
