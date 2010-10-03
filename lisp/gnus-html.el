@@ -105,12 +105,7 @@ CHARS is a regexp-like character alternative (e.g., \"[)$]\")."
 					  (match-string 0 encoded-text)))
 				 t t encoded-text)
 		  s (1+ s)))
-	  encoded-text))))
-  ;; XEmacs does not have window-inside-pixel-edges
-  (defalias 'gnus-window-inside-pixel-edges
-    (if (fboundp 'window-inside-pixel-edges)
-        'window-inside-pixel-edges
-      'window-pixel-edges)))
+	  encoded-text)))))
 
 (defun gnus-html-encode-url (url)
   "Encode URL."
