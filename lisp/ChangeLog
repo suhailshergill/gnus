@@ -1,5 +1,7 @@
 2010-10-03  Julien Danjou  <julien@danjou.info>
 
+	* gnus-html.el (gnus-html-put-image): Use gnus-rescale-image.
+
 	* mm-view.el (gnus-window-inside-pixel-edges): Add autoload for
 	gnus-window-inside-pixel-edges.
 
