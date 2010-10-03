@@ -1,3 +1,21 @@
+2010-10-03  Julien Danjou  <julien@danjou.info>
+
+	* gnus-html.el (gnus-html-put-image): Use gnus-rescale-image.
+
+	* mm-view.el (gnus-window-inside-pixel-edges): Add autoload for
+	gnus-window-inside-pixel-edges.
+
+	* gnus-ems.el (gnus-window-inside-pixel-edges): Move from gnus-html to
+	gnus-ems.
+
+	* mm-view.el (mm-inline-image-emacs): Support image resizing.
+
+	* gnus-util.el (gnus-rescale-image): Add generic gnus-rescale-image
+	function.
+
+	* mm-decode.el (mm-inline-large-images): Enhance defcustom and add
+	resize choice.
+
 2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-tag-p): Don't insert newlines on empty tags at the

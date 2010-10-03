@@ -369,8 +369,12 @@ enables you to choose manually one of two types those mails include."
   :group 'mime-display)
 
 (defcustom mm-inline-large-images nil
-  "If non-nil, then all images fit in the buffer."
-  :type 'boolean
+  "If t, then all images fit in the buffer.
+If 'resize, try to resize the images so they fit."
+  :type '(radio
+          (const :tag "Inline large images as they are." t)
+          (const :tag "Resize large images." resize)
+          (const :tag "Do not inline large images." nil))
   :group 'mime-display)
 
 (defcustom mm-file-name-rewrite-functions
