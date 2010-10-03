@@ -262,6 +262,7 @@ Return a string with image data."
 (defvar shr-list-mode nil)
 
 (defun shr-tag-ul (cont)
+  (shr-ensure-paragraph)
   (let ((shr-list-mode 'ul))
     (shr-generic cont)))
 
@@ -275,7 +276,7 @@ Return a string with image data."
       (progn
 	(insert (format "%d " shr-list-mode))
 	(setq shr-list-mode (1+ shr-list-mode)))
-    (insert "* "))
+    (insert "*"))
   (shr-generic cont))
 
 (defun shr-tag-br (cont)

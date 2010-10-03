@@ -2,6 +2,7 @@
 
 	* shr.el: Add headings.
 	(shr-ensure-paragraph): Actually work.
+	(shr-tag-li): Make <ul> prettier.
 
 2010-10-03  Julien Danjou  <julien@danjou.info>
 
