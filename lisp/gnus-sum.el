@@ -6935,8 +6935,8 @@ displayed, no centering will be performed."
       (error "There is no article buffer for this summary buffer")
     (unless (get-buffer-window gnus-article-buffer)
       (gnus-summary-show-article))
-    (select-window (get-buffer-window gnus-article-buffer))
-    (gnus-configure-windows 'article t)))
+    (gnus-configure-windows 'article t)
+    (select-window (get-buffer-window gnus-article-buffer))))
 
 (defun gnus-summary-universal-argument (arg)
   "Perform any operation on all articles that are process/prefixed."
