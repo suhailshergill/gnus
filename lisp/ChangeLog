@@ -54,6 +54,13 @@
 	Rename tag functions to shr-tag-* for enhanced security.
 	(shr-tag-ul, shr-tag-ol, shr-tag-li, shr-tag-br): New functions.
 
+2010-10-03  Chong Yidong  <cyd@stupidchicken.com>
+
+	* shr.el (shr-insert):
+	* pop3.el (pop3-movemail):
+	* gnus-html.el (gnus-html-wash-tags): Don't use plusp, as cl may not be
+	loaded.
+
 2010-10-03  Glenn Morris  <rgm@gnu.org>
 
 	* nnmairix.el (nnmairix-replace-illegal-chars): Drop Emacs 20 code.

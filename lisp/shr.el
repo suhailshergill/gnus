@@ -142,7 +142,7 @@ fit these criteria."
   (browse-url (widget-get widget :url)))
 
 (defun shr-tag-img (cont)
-  (when (and (plusp (current-column))
+  (when (and (> (current-column) 0)
 	     (not (eq shr-state 'image)))
     (insert "\n"))
   (let ((start (point-marker)))
@@ -242,7 +242,7 @@ fit these criteria."
 	(insert " "))
       (dolist (elem (split-string text))
 	(setq column (current-column))
-	(when (plusp column)
+	(when (> column 0)
 	  (cond
 	   ((> (+ column (length elem) 1) shr-width)
 	    (insert "\n"))
@@ -250,7 +250,7 @@ fit these criteria."
 	    (insert " "))))
 	(setq first nil)
 	(when (and (bolp)
-		   (plusp shr-indentation))
+		   (> shr-indentation 0))
 	  (insert (make-string shr-indentation ? )))
 	;; The shr-start is a special variable that is used to pass
 	;; upwards the first point in the buffer where the text really
