@@ -90,12 +90,17 @@ fit these criteria."
       (shr-descend sub)))))
 
 (defun shr-tag-p (cont)
-  (unless (bobp)
-    (shr-ensure-newline)
-    (insert "\n"))
+  (shr-ensure-paragraph)
   (shr-generic cont)
   (unless (bobp)
     (insert "\n")))
+
+(defun shr-ensure-paragraph ()
+  (unless (bobp)
+    (if (bolp)
+	(unless (eql (char-after (1- (point))) ?\n)
+	  (insert "\n"))
+      (insert "\n\n"))))
 
 (defun shr-tag-b (cont)
   (shr-fontize-cont cont 'bold))
@@ -109,10 +114,11 @@ fit these criteria."
 (defun shr-s (cont)
   (shr-fontize-cont cont 'strikethru))
 
-(defun shr-fontize-cont (cont type)
+(defun shr-fontize-cont (cont &rest types)
   (let (shr-start)
     (shr-generic cont)
-    (shr-add-font (or shr-start (point)) (point) type)))
+    (dolist (type types)
+      (shr-add-font (or shr-start (point)) (point) type))))
 
 (defun shr-add-font (start end type)
   (let ((overlay (make-overlay start end)))
@@ -275,6 +281,26 @@ Return a string with image data."
 (defun shr-tag-br (cont)
   (shr-ensure-newline)
   (shr-generic cont))
+
+(defun shr-tag-h1 (cont)
+  (shr-heading cont 'bold 'underline))
+
+(defun shr-tag-h2 (cont)
+  (shr-heading cont 'bold))
+
+(defun shr-tag-h3 (cont)
+  (shr-heading cont 'italic))
+
+(defun shr-tag-h4 (cont)
+  (shr-heading cont))
+
+(defun shr-tag-h5 (cont)
+  (shr-heading cont))
+
+(defun shr-heading (cont &rest types)
+  (shr-ensure-paragraph)
+  (apply #'shr-fontize-cont cont types)
+  (shr-ensure-paragraph))
 
 (provide 'shr)
 
