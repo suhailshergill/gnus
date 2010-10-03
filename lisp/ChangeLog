@@ -1,3 +1,9 @@
+2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-fontize-cont): Protect against regions with no text.
+	Rename tag functions to shr-tag-* for enhanced security.
+	(shr-tag-ul, shr-tag-ol, shr-tag-li, shr-tag-br): New functions.
+
 2010-10-03  Glenn Morris  <rgm@gnu.org>
 
 	* nnmairix.el (nnmairix-replace-illegal-chars): Drop Emacs 20 code.

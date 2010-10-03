@@ -75,7 +75,7 @@ fit these criteria."
     (shr-descend (shr-transform-dom dom))))
 
 (defun shr-descend (dom)
-  (let ((function (intern (concat "shr-" (symbol-name (car dom))) obarray)))
+  (let ((function (intern (concat "shr-tag-" (symbol-name (car dom))) obarray)))
     (if (fboundp function)
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))))
@@ -85,22 +85,22 @@ fit these criteria."
     (cond
      ((eq (car sub) :text)
       (shr-insert (cdr sub)))
-     ((consp (cdr sub))
+     ((listp (cdr sub))
       (shr-descend sub)))))
 
-(defun shr-p (cont)
+(defun shr-tag-p (cont)
   (shr-ensure-newline)
   (insert "\n")
   (shr-generic cont)
   (insert "\n"))
 
-(defun shr-b (cont)
+(defun shr-tag-b (cont)
   (shr-fontize-cont cont 'bold))
 
-(defun shr-i (cont)
+(defun shr-tag-i (cont)
   (shr-fontize-cont cont 'italic))
 
-(defun shr-u (cont)
+(defun shr-tag-u (cont)
   (shr-fontize-cont cont 'underline))
 
 (defun shr-s (cont)
@@ -109,13 +109,13 @@ fit these criteria."
 (defun shr-fontize-cont (cont type)
   (let (shr-start)
     (shr-generic cont)
-    (shr-add-font shr-start (point) type)))
+    (shr-add-font (or shr-start (point)) (point) type)))
 
 (defun shr-add-font (start end type)
   (let ((overlay (make-overlay start end)))
     (overlay-put overlay 'face type)))
 
-(defun shr-a (cont)
+(defun shr-tag-a (cont)
   (let ((url (cdr (assq :href cont)))
 	shr-start)
     (shr-generic cont)
@@ -129,7 +129,10 @@ fit these criteria."
 (defun shr-browse-url (widget &rest stuff)
   (browse-url (widget-get widget :url)))
 
-(defun shr-img (cont)
+(defun shr-tag-img (cont)
+  (when (and (plusp (current-column))
+	     (not (eq shr-state 'image)))
+    (insert "\n"))
   (let ((start (point-marker)))
     (let ((alt (cdr (assq :alt cont)))
 	  (url (cdr (assq :src cont))))
@@ -166,8 +169,10 @@ fit these criteria."
 (defun shr-put-image (data point alt)
   (if (not (display-graphic-p))
       (insert alt)
-    (let ((image (shr-rescale-image data)))
-      (put-image image point alt))))
+    (let ((image (ignore-errors
+		   (shr-rescale-image data))))
+      (when image
+	(put-image image point alt)))))
 
 (defun shr-rescale-image (data)
   (if (or (not (fboundp 'imagemagick-types))
@@ -196,13 +201,13 @@ fit these criteria."
 		     image)))
       image)))
 
-(defun shr-pre (cont)
+(defun shr-tag-pre (cont)
   (let ((shr-folding-mode nil))
     (shr-ensure-newline)
     (shr-generic cont)
     (shr-ensure-newline)))
 
-(defun shr-blockquote (cont)
+(defun shr-tag-blockquote (cont)
   (shr-pre cont))
 
 (defun shr-ensure-newline ()
@@ -240,6 +245,29 @@ Return a string with image data."
     (when (or (search-forward "\n\n" nil t)
               (search-forward "\r\n\r\n" nil t))
       (buffer-substring (point) (point-max)))))
+
+(defvar shr-list-mode nil)
+
+(defun shr-tag-ul (cont)
+  (let ((shr-list-mode 'ul))
+    (shr-generic cont)))
+
+(defun shr-tag-ol (cont)
+  (let ((shr-list-mode 1))
+    (shr-generic cont)))
+
+(defun shr-tag-li (cont)
+  (shr-ensure-newline)
+  (if (numberp shr-list-mode)
+      (progn
+	(insert (format "%d " shr-list-mode))
+	(setq shr-list-mode (1+ shr-list-mode)))
+    (insert "* "))
+  (shr-generic cont))
+
+(defun shr-tag-br (cont)
+  (shr-ensure-newline)
+  (shr-generic cont))
 
 (provide 'shr)
 
