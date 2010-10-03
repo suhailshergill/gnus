@@ -1,3 +1,7 @@
+2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el: Add headings.
+
 2010-10-03  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-put-image): Use gnus-rescale-image.
