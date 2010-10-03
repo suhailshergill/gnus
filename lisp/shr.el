@@ -286,7 +286,7 @@ Return a string with image data."
       (progn
 	(insert (format "%d " shr-list-mode))
 	(setq shr-list-mode (1+ shr-list-mode)))
-    (insert "*"))
+    (insert "* "))
   (shr-generic cont))
 
 (defun shr-tag-br (cont)
