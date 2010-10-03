@@ -1,5 +1,11 @@
 2010-10-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-p): Don't insert newlines at the start of the
+	buffer.
+
+	* mm-decode.el (mm-shr): Narrow before inserting, so that shr can know
+	when it's at the start of the buffer.
+
 	* shr.el (shr-tag-blockquote): Convert name.
 	(shr-rescale-image): Use the right image-size variant.
 

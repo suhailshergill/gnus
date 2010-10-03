@@ -1679,9 +1679,11 @@ If RECURSIVE, search recursively."
   (let ((article-buffer (current-buffer)))
     (unless handle
       (setq handle (mm-dissect-buffer t)))
-    (shr-insert-document
-     (mm-with-part handle
-       (libxml-parse-html-region (point-min) (point-max))))))
+    (save-restriction
+      (narrow-to-region (point) (point))
+      (shr-insert-document
+       (mm-with-part handle
+	 (libxml-parse-html-region (point-min) (point-max)))))))
 
 (provide 'mm-decode)
 

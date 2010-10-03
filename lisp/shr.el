@@ -89,8 +89,9 @@ fit these criteria."
       (shr-descend sub)))))
 
 (defun shr-tag-p (cont)
-  (shr-ensure-newline)
-  (insert "\n")
+  (unless (bobp)
+    (shr-ensure-newline)
+    (insert "\n"))
   (shr-generic cont)
   (insert "\n"))
 
