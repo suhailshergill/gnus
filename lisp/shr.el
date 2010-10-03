@@ -232,13 +232,20 @@ fit these criteria."
    ((eq shr-folding-mode 'none)
     (insert t))
    (t
-    (let (column)
+    (let ((first t)
+	  column)
+      (when (and (string-match "^[ \n]" text)
+		 (not (bolp)))
+	(insert " "))
       (dolist (elem (split-string text))
 	(setq column (current-column))
 	(when (plusp column)
-	  (if (> (+ column (length elem) 1) shr-width)
-	      (insert "\n")
-	    (insert " ")))
+	  (cond
+	   ((> (+ column (length elem) 1) shr-width)
+	    (insert "\n"))
+	   ((not first)
+	    (insert " "))))
+	(setq first nil)
 	(when (and (bolp)
 		   (plusp shr-indentation))
 	  (insert (make-string shr-indentation ? )))
@@ -247,7 +254,10 @@ fit these criteria."
 	;; starts.
 	(unless shr-start
 	  (setq shr-start (point)))
-	(insert elem))))))
+	(insert elem))
+      (when (and (string-match "[ \n]$" text)
+		 (not (bolp)))
+	(insert " "))))))
 
 (defun shr-get-image-data (url)
   "Get image data for URL.
