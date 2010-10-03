@@ -6933,6 +6933,8 @@ displayed, no centering will be performed."
   (interactive)
   (if (not (gnus-buffer-live-p gnus-article-buffer))
       (error "There is no article buffer for this summary buffer")
+    (unless (get-buffer-window gnus-article-buffer)
+      (gnus-summary-show-article))
     (select-window (get-buffer-window gnus-article-buffer))
     (gnus-configure-windows 'only-article t)))
 
