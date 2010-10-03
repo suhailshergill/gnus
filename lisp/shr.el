@@ -179,7 +179,7 @@ fit these criteria."
 	  (not (get-buffer-window (current-buffer))))
       (create-image data nil t)
     (let* ((image (create-image data nil t))
-	   (size (image-size image))
+	   (size (image-size image t))
 	   (width (car size))
 	   (height (cdr size))
 	   (edges (window-inside-pixel-edges
