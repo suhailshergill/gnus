@@ -4,6 +4,7 @@
 	(shr-ensure-paragraph): Actually work.
 	(shr-tag-li): Make <ul> prettier.
 	(shr-insert): Get white space at the beginning/end of elements right.
+	(shr-tag-p): Collapse subsequent <p>s.
 
 2010-10-03  Julien Danjou  <julien@danjou.info>
 

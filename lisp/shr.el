@@ -92,8 +92,7 @@ fit these criteria."
 (defun shr-tag-p (cont)
   (shr-ensure-paragraph)
   (shr-generic cont)
-  (unless (bobp)
-    (insert "\n")))
+  (shr-ensure-paragraph))
 
 (defun shr-ensure-paragraph ()
   (unless (bobp)
