@@ -311,6 +311,9 @@ Return a string with image data."
 (defun shr-tag-h5 (cont)
   (shr-heading cont))
 
+(defun shr-tag-h6 (cont)
+  (shr-heading cont))
+
 (defun shr-heading (cont &rest types)
   (shr-ensure-paragraph)
   (apply #'shr-fontize-cont cont types)
