@@ -114,7 +114,7 @@ fit these criteria."
 (defun shr-tag-u (cont)
   (shr-fontize-cont cont 'underline))
 
-(defun shr-s (cont)
+(defun shr-tag-s (cont)
   (shr-fontize-cont cont 'strikethru))
 
 (defun shr-fontize-cont (cont &rest types)

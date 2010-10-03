@@ -8,6 +8,7 @@
 	(shr-ensure-paragraph): Don't insert double line feeds after blank
 	lines.
 	(shr-insert): \t is also space.
+	(shr-tag-s): Fix "s" tag name function.
 
 2010-10-03  Julien Danjou  <julien@danjou.info>
 
