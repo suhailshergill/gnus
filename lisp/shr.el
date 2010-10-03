@@ -94,7 +94,8 @@ fit these criteria."
     (shr-ensure-newline)
     (insert "\n"))
   (shr-generic cont)
-  (insert "\n"))
+  (unless (bobp)
+    (insert "\n")))
 
 (defun shr-tag-b (cont)
   (shr-fontize-cont cont 'bold))
