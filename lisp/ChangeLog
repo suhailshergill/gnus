@@ -9,6 +9,7 @@
 	lines.
 	(shr-insert): \t is also space.
 	(shr-tag-s): Fix "s" tag name function.
+	(shr-tag-s): Fix face prop name.
 
 2010-10-03  Julien Danjou  <julien@danjou.info>
 
