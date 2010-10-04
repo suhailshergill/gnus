@@ -324,7 +324,9 @@ textual parts.")
 			   (if (netrc-find-service-number "imaps")
 			       "imaps"
 			     "993"))))
-		'("143" "993" "imap" "imaps"))))
+		'("143" "993" "imap" "imaps"))
+	       (t
+		(error "Unknown stream type: %s" nnimap-stream))))
 	     connection-result login-result credentials)
 	(setf (nnimap-process nnimap-object)
 	      (get-buffer-process (current-buffer)))
