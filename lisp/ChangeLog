@@ -1,5 +1,8 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Give an error if nnimap-stream is
+	unknown.
+
 	* shr.el (shr-tag-blockquote): Ensure paragraph after quote, too.
 	(shr-get-image-data): Ensure against the cache file missing.
 
