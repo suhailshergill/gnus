@@ -1,5 +1,8 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* spam-report.el (spam-report-url-ping-plain): Don't query about
+	killing the process.
+
 	* shr.el (shr-render-td): Protect against too-wide text.
 
 2010-10-04  Julien Danjou  <julien@danjou.info>
