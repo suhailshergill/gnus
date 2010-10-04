@@ -346,10 +346,12 @@ redirects somewhere else."
 Return a string with image data."
   (with-temp-buffer
     (mm-disable-multibyte)
-    (url-cache-extract (url-cache-create-filename url))
-    (when (or (search-forward "\n\n" nil t)
-              (search-forward "\r\n\r\n" nil t))
-      (buffer-substring (point) (point-max)))))
+    (when (ignore-errors
+	    (url-cache-extract (url-cache-create-filename url))
+	    t)
+      (when (or (search-forward "\n\n" nil t)
+		(search-forward "\r\n\r\n" nil t))
+	(buffer-substring (point) (point-max))))))
 
 (defvar shr-list-mode nil)
 

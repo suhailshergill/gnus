@@ -1,6 +1,7 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-tag-blockquote): Ensure paragraph after quote, too.
+	(shr-get-image-data): Ensure against the cache file missing.
 
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Message while waiting
 	for data.
