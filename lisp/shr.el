@@ -242,11 +242,12 @@ fit these criteria."
 	(insert " "))
       (dolist (elem (split-string text))
 	(setq column (current-column))
-	(when (> column 0)
+	(when (and (not first)
+		   (> column 0))
 	  (cond
 	   ((> (+ column (length elem) 1) shr-width)
 	    (insert "\n"))
-	   ((not first)
+	   (t
 	    (insert " "))))
 	(setq first nil)
 	(when (and (bolp)
