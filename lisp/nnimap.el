@@ -424,7 +424,10 @@ textual parts.")
     result))
 
 (deffoo nnimap-close-server (&optional server)
-  t)
+  (when (nnoo-change-server 'nnimap server nil)
+    (ignore-errors
+      (delete-process (get-buffer-process (nnimap-buffer))))
+    t))
 
 (deffoo nnimap-request-close ()
   t)
