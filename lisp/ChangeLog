@@ -3,6 +3,7 @@
 	* shr.el (browse-url): Required.
 	(shr-ensure-paragraph): Don't insert a new newline after empty-ish
 	lines.
+	(shr-show-alt-text, shr-browse-image): New commands.
 
 	* gnus-sum.el (gnus-widen-article-window): New variable.
 	(gnus-summary-select-article-buffer): Use it.

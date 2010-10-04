@@ -59,6 +59,15 @@ fit these criteria."
 
 (defvar shr-width 70)
 
+(defvar shr-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "a" 'shr-show-alt-text)
+    (define-key map "i" 'shr-browse-image)
+    (define-key map "I" 'shr-insert-image)
+    (define-key map "u" 'shr-copy-string)
+    (define-key map "v" 'shr-browse-url)
+    map))
+
 (defun shr-transform-dom (dom)
   (let ((result (list (pop dom))))
     (dolist (arg (pop dom))
@@ -165,8 +174,28 @@ fit these criteria."
 	(url-retrieve url 'shr-image-fetched
 		      (list (current-buffer) start (point-marker))
 		      t)))
+      (put-text-property start (point) 'keymap shr-map)
+      (put-text-property start (point) 'shr-alt alt)
+      (put-text-property start (point) 'shr-image url)
       (insert " ")
       (setq shr-state 'image))))
+
+(defun shr-show-alt-text ()
+  "Show the ALT text of the image under point."
+  (interactive)
+  (let ((text (get-text-property (point) 'shr-alt)))
+    (if (not text)
+	(message "No image under point")
+      (message "%s" text))))
+
+(defun shr-browse-image ()
+  "Browse the image under point."
+  (interactive)
+  (let ((url (get-text-property (point) 'shr-image)))
+    (if (not url)
+	(message "No image under point")
+      (message "Browsing %s..." url)
+      (browse-url url))))
 
 (defun shr-image-fetched (status buffer start end)
   (when (and (buffer-name buffer)
