@@ -1,5 +1,8 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-finish-retrieve-group-infos): Message while waiting
+	for data.
+
 	* spam-report.el (spam-report-url-ping-plain): Don't query about
 	killing the process.
 

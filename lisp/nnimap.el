@@ -977,7 +977,7 @@ textual parts.")
 	     (nnimap-possibly-change-group nil server))
     (with-current-buffer (nnimap-buffer)
       ;; Wait for the final data to trickle in.
-      (when (nnimap-wait-for-response (cadar sequences))
+      (when (nnimap-wait-for-response (cadar sequences) t)
 	;; Now we should have all the data we need, no matter whether
 	;; we're QRESYNCING, fetching all the flags from scratch, or
 	;; just fetching the last 100 flags per group.
@@ -1254,7 +1254,7 @@ textual parts.")
 			(point-min))
 		      t)))
       (when messagep
-	(message "Read %dKB" (/ (buffer-size) 1000)))
+	(message "nnimap read %dk" (/ (buffer-size) 1000)))
       (nnheader-accept-process-output process)
       (goto-char (point-max)))
     openp))
