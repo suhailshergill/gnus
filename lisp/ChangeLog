@@ -7,6 +7,8 @@
 	(shr-tag-li): Get <li> indentation even righter.
 	(shr-tag-blockquote): Ensure paragraph start.
 
+	* shr.el: Implement table rendering.
+
 2010-10-04  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-put-image): Fix resize image code.
