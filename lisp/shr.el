@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(require 'browse-url)
+
 (defgroup shr nil
   "Simple HTML Renderer"
   :group 'mail)

@@ -1,5 +1,7 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (browse-url): Required.
+
 	* gnus-sum.el (gnus-widen-article-window): New variable.
 	(gnus-summary-select-article-buffer): Use it.
 
