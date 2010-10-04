@@ -12,6 +12,9 @@
 
 2010-10-04  Julien Danjou  <julien@danjou.info>
 
+	* mml-smime.el (mml-smime-openssl-encrypt-query): Fix choices.
+	(mml-smime-openssl-sign-query): Fix gnus-completing-read call.
+
 	* gravatar.el (gravatar-retrieved): Kill buffer when gravatar has been
 	retrieved.
 
