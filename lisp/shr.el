@@ -471,7 +471,8 @@ Return a string with image data."
 
 (defun shr-render-td (cont width fill)
   (with-temp-buffer
-    (let ((shr-width width))
+    (let ((shr-width width)
+	  (shr-indentation 0))
       (shr-generic cont))
     (while (re-search-backward "\n *$" nil t)
       (delete-region (match-beginning 0) (match-end 0)))
@@ -485,7 +486,8 @@ Return a string with image data."
 	(goto-char (point-min))
 	(while (not (eobp))
 	  (end-of-line)
-	  (insert (make-string (- width (current-column)) ? ))
+	  (when (> (- width (current-column)) 0)
+	    (insert (make-string (- width (current-column)) ? )))
 	  (forward-line 1)))
       (list max (count-lines (point-min) (point-max)) (buffer-string)))))
 

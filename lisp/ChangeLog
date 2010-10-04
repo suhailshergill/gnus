@@ -1,3 +1,7 @@
+2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-render-td): Protect against too-wide text.
+
 2010-10-04  Julien Danjou  <julien@danjou.info>
 
 	* gravatar.el (gravatar-retrieved): Kill buffer when gravatar has been
