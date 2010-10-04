@@ -292,7 +292,8 @@ redirects somewhere else."
 (defun shr-tag-blockquote (cont)
   (shr-ensure-paragraph)
   (let ((shr-indentation (+ shr-indentation 4)))
-    (shr-generic cont)))
+    (shr-generic cont))
+  (shr-ensure-paragraph))
 
 (defun shr-ensure-newline ()
   (unless (zerop (current-column))

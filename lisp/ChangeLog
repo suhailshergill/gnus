@@ -1,5 +1,7 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-blockquote): Ensure paragraph after quote, too.
+
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Message while waiting
 	for data.
 
