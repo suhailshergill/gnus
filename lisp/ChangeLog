@@ -1,5 +1,8 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-widen-article-window): New variable.
+	(gnus-summary-select-article-buffer): Use it.
+
 	* message.el (message-idna-to-ascii-rhs-1): Don't bug out on addresses
 	without @ signs.
 

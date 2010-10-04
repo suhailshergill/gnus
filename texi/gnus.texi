@@ -12846,6 +12846,11 @@ If non-@code{nil}, use the same article buffer for all the groups.
 (This is the default.)  If @code{nil}, each group will have its own
 article buffer.
 
+@item gnus-widen-article-window
+@cindex gnus-widen-article-window
+If non-@code{nil}, selecting the article buffer with the @kbd{h}
+command will ``widen'' the article window to take the entire frame.
+
 @vindex gnus-article-decode-hook
 @item gnus-article-decode-hook
 @cindex @acronym{MIME}

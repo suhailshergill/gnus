@@ -474,6 +474,12 @@ If nil, each group will get its own article buffer."
   :group 'gnus-article-various
   :type 'boolean)
 
+(defcustom gnus-widen-article-window nil
+  "If non-nil, selecting the article buffer will display only the article buffer."
+  :version "24.1"
+  :group 'gnus-article-various
+  :type 'boolean)
+
 (defcustom gnus-break-pages t
   "*If non-nil, do page breaking on articles.
 The page delimiter is specified by the `gnus-page-delimiter'
@@ -6933,7 +6939,11 @@ displayed, no centering will be performed."
       (error "There is no article buffer for this summary buffer")
     (unless (get-buffer-window gnus-article-buffer)
       (gnus-summary-show-article))
-    (gnus-configure-windows 'article t)
+    (gnus-configure-windows
+     (if gnus-widen-article-window
+	 'only-article
+       'article)
+     t)
     (select-window (get-buffer-window gnus-article-buffer))))
 
 (defun gnus-summary-universal-argument (arg)
