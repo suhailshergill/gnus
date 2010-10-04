@@ -6,6 +6,7 @@
 	(shr-tag-li): Get <li> indentation right.
 	(shr-tag-li): Get <li> indentation even righter.
 	(shr-tag-blockquote): Ensure paragraph start.
+	(shr-make-table): Tweak table generation.
 
 	* shr.el: Implement table rendering.
 

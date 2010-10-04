@@ -354,10 +354,18 @@ Return a string with image data."
 	(insert "|\n"))
       (dolist (column row)
 	(goto-char start)
-	(end-of-line)
-	(dolist (line (split-string (nth 2 column) "\n"))
-	  (insert line "|")
-	  (forward-line 1))))
+	(let ((lines (split-string (nth 2 column) "\n")))
+	  (dolist (line lines)
+	    (when (> (length line) 0)
+	      (end-of-line)
+	      (insert line "|")
+	      (forward-line 1)))
+	  ;; Add blank lines at padding at the bottom of the TD,
+	  ;; possibly.
+	  (dotimes (i (- height (length lines)))
+	    (end-of-line)
+	    (insert (make-string (length (car lines)) ? ) "|")
+	    (forward-line 1)))))
     (shr-insert-table-ruler widths)))
 
 (defun shr-insert-table-ruler (widths)
@@ -395,6 +403,8 @@ Return a string with image data."
   (with-temp-buffer
     (let ((shr-width width))
       (shr-generic cont))
+    (while (re-search-backward "\n *$" nil t)
+      (delete-region (match-beginning 0) (match-end 0)))
     (goto-char (point-min))
     (let ((max 0))
       (while (not (eobp))
