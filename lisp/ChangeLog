@@ -1,3 +1,8 @@
+2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-idna-to-ascii-rhs-1): Don't bug out on addresses
+	without @ signs.
+
 2010-10-04  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)
 
 	* nnir.el (nnir-run-imap): Remove spurious space in search string.
