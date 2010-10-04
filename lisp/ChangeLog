@@ -4,6 +4,7 @@
 	(shr-insert): Tweak line breaking.
 	(shr-insert): Handle <pre> better.
 	(shr-tag-li): Get <li> indentation right.
+	(shr-tag-li): Get <li> indentation even righter.
 
 2010-10-04  Julien Danjou  <julien@danjou.info>
 
