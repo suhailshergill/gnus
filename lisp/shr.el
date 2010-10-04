@@ -385,7 +385,7 @@ Return a string with image data."
 	  (incf i))))
     widths))
 
-(defun shr-make-table (cons widths &optional fill)
+(defun shr-make-table (cont widths &optional fill)
   (let ((trs nil))
     (dolist (row cont)
       (when (eq (car row) 'tr)

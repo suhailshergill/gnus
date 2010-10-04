@@ -1,5 +1,7 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el (iswitchb): Require to shut up the compiler.
+
 	* shr.el (shr-ensure-paragraph): Fix the non-empty line case.
 	(shr-insert): Tweak line breaking.
 	(shr-insert): Handle <pre> better.
@@ -7,6 +9,7 @@
 	(shr-tag-li): Get <li> indentation even righter.
 	(shr-tag-blockquote): Ensure paragraph start.
 	(shr-make-table): Tweak table generation.
+	(shr-make-table): Fix typo.
 
 	* shr.el: Implement table rendering.
 

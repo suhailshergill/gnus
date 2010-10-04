@@ -33,6 +33,7 @@
 (defalias 'facep 'ignore)
 
 (require 'cl)
+(require 'iswitchb)
 
 (defvar srcdir (or (getenv "srcdir") "."))
 (defvar loaddir (and load-file-name (file-name-directory load-file-name)))
@@ -129,8 +130,10 @@
 
 (eval-and-compile
   (unless (featurep 'xemacs)
+    (defvar iswitchb-temp-buflist)
     (defalias 'get-popup-menu-response 'ignore)
     (defalias 'event-object 'ignore)
+    (autoload 'iswitchb-read-buffer "iswitchb")
     (autoload 'netrc-credentials "netrc")
     (defalias 'x-defined-colors 'ignore)
     (defalias 'read-color 'ignore)))
