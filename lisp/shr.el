@@ -289,12 +289,13 @@ Return a string with image data."
 
 (defun shr-tag-li (cont)
   (shr-ensure-newline)
-  (if (numberp shr-list-mode)
-      (progn
-	(insert (format "%d " shr-list-mode))
-	(setq shr-list-mode (1+ shr-list-mode)))
-    (insert "* "))
-  (shr-generic cont))
+  (let ((shr-indentation (+ shr-indentation 2)))
+    (if (numberp shr-list-mode)
+	(progn
+	  (insert (format "%d " shr-list-mode))
+	  (setq shr-list-mode (1+ shr-list-mode)))
+      (insert "* "))
+    (shr-generic cont)))
 
 (defun shr-tag-br (cont)
   (unless (bobp)
