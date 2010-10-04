@@ -1,5 +1,7 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-salt.el: Remove all gnus-carpal stuff -- it's not useful.
+
 	* nnimap.el (nnimap-open-connection): Allow tls as a synonym for ssl.
 	(nnimap-close-server): Implement.
 

@@ -3493,8 +3493,6 @@ display only a single character."
       ;; Fix by Sudish Joseph <joseph@cis.ohio-state.edu>
       (setq gnus-summary-buffer (set-buffer (gnus-get-buffer-create buffer)))
       (gnus-summary-mode group)
-      (when gnus-carpal
-	(gnus-carpal-setup-buffer 'summary))
       (when (gnus-group-quit-config group)
 	(set (make-local-variable 'gnus-single-article-buffer) nil))
       (make-local-variable 'gnus-article-buffer)
