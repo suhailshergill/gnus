@@ -99,7 +99,9 @@ fit these criteria."
 (defun shr-ensure-paragraph ()
   (unless (bobp)
     (if (bolp)
-	(unless (eql (char-after (- (point) 2)) ?\n)
+	(unless (save-excursion
+		  (forward-line -1)
+		  (looking-at " *$"))
 	  (insert "\n"))
       (if (save-excursion
 	    (beginning-of-line)
