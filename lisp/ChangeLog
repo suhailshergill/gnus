@@ -1,5 +1,7 @@
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Allow tls as a synonym for ssl.
+
 	* dgnushack.el (iswitchb): Require to shut up the compiler.
 
 	* shr.el (shr-ensure-paragraph): Fix the non-empty line case.

@@ -316,7 +316,7 @@ textual parts.")
 		   (setq port (or nnimap-server-port "imap"))
 		   'starttls))
 		'("imap"))
-	       ((eq nnimap-stream 'ssl)
+	       ((memq nnimap-stream '(ssl tls))
 		(open-tls-stream
 		 "*nnimap*" (current-buffer) nnimap-address
 		 (setq port
