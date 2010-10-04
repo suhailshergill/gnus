@@ -64,8 +64,9 @@ fit these criteria."
     (define-key map "a" 'shr-show-alt-text)
     (define-key map "i" 'shr-browse-image)
     (define-key map "I" 'shr-insert-image)
-    (define-key map "u" 'shr-copy-string)
+    (define-key map "u" 'shr-copy-url)
     (define-key map "v" 'shr-browse-url)
+    (define-key map "\r" 'shr-browse-url)
     map))
 
 (defun shr-transform-dom (dom)
@@ -142,17 +143,53 @@ fit these criteria."
 
 (defun shr-tag-a (cont)
   (let ((url (cdr (assq :href cont)))
+	(start (point))
 	shr-start)
     (shr-generic cont)
     (widget-convert-button
-     'link shr-start (point)
-     :action 'shr-browse-url
-     :url url
-     :keymap widget-keymap
-     :help-echo url)))
+     'link (or shr-start start) (point)
+     :help-echo url)
+    (put-text-property (or shr-start start) (point) 'keymap shr-map)
+    (put-text-property (or shr-start start) (point) 'shr-url url)))
 
-(defun shr-browse-url (widget &rest stuff)
-  (browse-url (widget-get widget :url)))
+(defun shr-browse-url ()
+  "Browse the URL under point."
+  (interactive)
+  (let ((url (get-text-property (point) 'shr-url)))
+    (if (not url)
+	(message "No link under point")
+      (browse-url url))))
+
+(defun shr-copy-url ()
+  "Copy the URL under point to the kill ring.
+If called twice, then try to fetch the URL and see whether it
+redirects somewhere else."
+  (interactive)
+  (let ((url (get-text-property (point) 'shr-url)))
+    (cond
+     ((not url)
+      (message "No URL under point"))
+     ;; Resolve redirected URLs.
+     ((equal url (car kill-ring))
+      (url-retrieve
+       url
+       (lambda (a)
+	 (when (and (consp a)
+		    (eq (car a) :redirect))
+	   (with-temp-buffer
+	     (insert (cadr a))
+	     (goto-char (point-min))
+	     ;; Remove common tracking junk from the URL.
+	     (when (re-search-forward ".utm_.*" nil t)
+	       (replace-match "" t t))
+	     (message "Copied %s" (buffer-string))
+	     (copy-region-as-kill (point-min) (point-max)))))))
+     ;; Copy the URL to the kill ring.
+     (t
+      (with-temp-buffer
+	(insert url)
+	(copy-region-as-kill (point-min) (point-max))
+	(message "Copied %s" url))))))
 
 (defun shr-tag-img (cont)
   (when (and (> (current-column) 0)
@@ -174,10 +211,10 @@ fit these criteria."
 	(url-retrieve url 'shr-image-fetched
 		      (list (current-buffer) start (point-marker))
 		      t)))
+      (insert " ")
       (put-text-property start (point) 'keymap shr-map)
       (put-text-property start (point) 'shr-alt alt)
       (put-text-property start (point) 'shr-image url)
-      (insert " ")
       (setq shr-state 'image))))
 
 (defun shr-show-alt-text ()
