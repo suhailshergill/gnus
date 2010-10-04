@@ -5,6 +5,7 @@
 	(shr-insert): Handle <pre> better.
 	(shr-tag-li): Get <li> indentation right.
 	(shr-tag-li): Get <li> indentation even righter.
+	(shr-tag-blockquote): Ensure paragraph start.
 
 2010-10-04  Julien Danjou  <julien@danjou.info>
 

@@ -220,6 +220,7 @@ fit these criteria."
     (shr-ensure-newline)))
 
 (defun shr-tag-blockquote (cont)
+  (shr-ensure-paragraph)
   (let ((shr-indentation (+ shr-indentation 4)))
     (shr-generic cont)))
 
