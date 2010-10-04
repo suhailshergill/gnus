@@ -1,3 +1,8 @@
+2010-10-04  Julien Danjou  <julien@danjou.info>
+
+	* gnus-util.el (gnus-emacs-completing-read): Mapcar collection to list,
+	for XEmacs.
+
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-open-connection): Allow tls as a synonym for ssl.
