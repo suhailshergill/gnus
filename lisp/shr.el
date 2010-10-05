@@ -460,7 +460,7 @@ Return a string with image data."
 	(goto-char start)
 	(let ((lines (split-string (nth 2 column) "\n"))
 	      (overlay-lines (nth 3 column))
-	      overlay)
+	      overlay overlay-line)
 	  (dolist (line lines)
 	    (setq overlay-line (pop overlay-lines))
 	    (when (> (length line) 0)
