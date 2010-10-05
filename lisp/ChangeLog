@@ -1,5 +1,7 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-make-group): Doc fix.
+
 	* nnimap.el (nnimap-request-newgroups): Return success.
 
 	* shr.el (shr-find-elements): New function.
