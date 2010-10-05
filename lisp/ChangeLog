@@ -1,3 +1,7 @@
+2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-tag-em): Add <EM> tag.
+
 2010-10-05  Florian Ragwitz  <rafl@debian.org>  (tiny change)
 
 	* sieve-manage.el (sieve-manage-default-stream): Make default stream
