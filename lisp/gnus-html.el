@@ -367,13 +367,9 @@ Use ALT-TEXT for the image string."
   (let ((args (list (car image)
 		    'gnus-html-image-fetched
 		    (list buffer image))))
-    (when (> (if (featurep 'xemacs)
-		 (1- (length
-		      (delete "&optional"
-			      (delete "&rest"
-				      (split-string
-				       (function-arglist 'url-retrieve))))))
-	       (length (help-function-arglist 'url-retrieve)))
+    (when (> (length (if (featurep 'xemacs)
+			 (split-string (function-arglist 'url-retrieve))
+		       (help-function-arglist 'url-retrieve)))
 	     4)
       (setq args (nconc args (list t))))
     (apply #'url-retrieve args)))
