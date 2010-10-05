@@ -1,5 +1,7 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnir.el (nnir-retrieve-headers): Don't bug out on invalid data.
+
 	* gnus-group.el (gnus-group-make-group): Doc fix.
 
 	* nnimap.el (nnimap-request-newgroups): Return success.
