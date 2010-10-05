@@ -1,3 +1,8 @@
+2010-10-05  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* dgnushack.el (dgnushack-compile): Exclude shr.el from being compiled
+	for Emacsen having no `libxml-parse-html-region' support.
+
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-html.el (gnus-html-schedule-image-fetching): Protect against

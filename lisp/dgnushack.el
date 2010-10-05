@@ -283,6 +283,8 @@ dgnushack-compile."
 		 '("md5.el")
 	       '("gnus-xmas.el" "messagexmas.el" "nnheaderxm.el")))
       (setq files (delete file files)))
+    (unless (fboundp 'libxml-parse-html-region)
+      (setq files (delete "shr.el" files)))
 
     (dolist (file files)
       (setq file (expand-file-name file srcdir))
