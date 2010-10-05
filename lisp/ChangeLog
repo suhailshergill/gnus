@@ -2,6 +2,8 @@
 
 	* shr.el (shr-render-td): Allow blank/missing <TD>s.
 
+	* shr.el: Document the table-rendering algorithm.
+
 2010-10-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* dgnushack.el (dgnushack-compile): Exclude shr.el from being compiled
