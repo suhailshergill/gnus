@@ -222,7 +222,10 @@ redirects somewhere else."
 	    (and shr-blocked-images
 		 (string-match shr-blocked-images url)))
 	(setq shr-start (point))
-	(insert alt))
+	(let ((shr-state 'space))
+	  (if (> (length alt) 8)
+	      (shr-insert (substring alt 0 8))
+	    (shr-insert alt))))
        ((url-is-cached (browse-url-url-encode-chars url "[&)$ ]"))
 	(shr-put-image (shr-get-image-data url) (point) alt))
        (t

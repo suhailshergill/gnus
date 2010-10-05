@@ -1,5 +1,8 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-img): Shorten ALT texts and allow them to be
+	line-broken.
+
 	* mm-decode.el (mm-shr): Require shr.
 
 	* gnus-art.el (gnus-blocked-images): Move variable here.
