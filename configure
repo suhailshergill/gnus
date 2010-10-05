@@ -1239,8 +1239,8 @@ if test -n "$ac_init_help"; then
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-xemacs           Use XEmacs to build
-  --with-emacs            Use Emacs to build
+  --with-xemacs[=PROG]    use XEmacs to build (default: PROG=xemacs)
+  --with-emacs[=PROG]     use Emacs to build (default: PROG=emacs)
   --with-lispdir=DIR      Where to install lisp files
   --with-etcdir=DIR       Where to install etc files
   --with-url=DIR          Specify where to find the url package
@@ -3564,5 +3564,4 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: unrecognized options: $ac_unrecognized_opts" >&5
 $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
-
 

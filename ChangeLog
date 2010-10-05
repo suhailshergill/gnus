@@ -1,3 +1,7 @@
+2010-10-04  Andreas Schwab  <schwab@linux-m68k.org>
+
+	* configure.in: Fix help strings.
+
 2010-04-23  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* .gitignore: Remove configure from ignores.

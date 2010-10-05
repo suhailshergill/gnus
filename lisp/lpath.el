@@ -31,9 +31,10 @@
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
        bookmark-get-bookmark-record bookmark-make-record-default
        bookmark-prop-get display-time-event-handler epg-check-configuration
-       find-coding-system frame-device recenter-top-bottom
-       rmail-swap-buffers-maybe w3-do-setup w3-parse-buffer w3-prepare-buffer
-       w3-region w3m-detect-meta-charset w3m-region))
+       find-coding-system frame-device libxml-parse-html-region
+       recenter-top-bottom rmail-swap-buffers-maybe shr-insert-document
+       w3-do-setup w3-parse-buffer w3-prepare-buffer w3-region
+       w3m-detect-meta-charset w3m-region))
     (maybe-bind
      '(w3m-link-map))))
 
@@ -60,23 +61,24 @@
      display-time-event-handler epg-check-configuration event-click-count
      event-end event-start find-coding-systems-for-charsets
      find-coding-systems-region find-coding-systems-string find-image
-     float-time help-buffer image-size image-type-available-p insert-image
+     float-time help-buffer ido-completing-read image-size
+     image-type-available-p insert-image libxml-parse-html-region
      mail-abbrevs-setup make-mode-line-mouse-map make-network-process
      mouse-minibuffer-check mouse-movement-p mouse-scroll-subr overlay-lists
      pgg-display-output-buffer posn-point posn-window put-image read-event
      recenter-top-bottom rmail-msg-restore-non-pruned-header
-     rmail-swap-buffers-maybe select-safe-coding-system sort-coding-systems
-     track-mouse ucs-to-char url-generic-parse-url url-insert-file-contents
-     vcard-pretty-print w3-parse-buffer w3m-detect-meta-charset w3m-region
-     window-edges))
+     rmail-swap-buffers-maybe select-safe-coding-system shr-insert-document
+     sort-coding-systems track-mouse ucs-to-char url-generic-parse-url
+     url-insert-file-contents vcard-pretty-print w3-parse-buffer
+     w3m-detect-meta-charset w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table completion-styles completion-styles-alist
      cursor-in-non-selected-windows default-enable-multibyte-characters
      default-file-name-coding-system eudc-protocol filladapt-mode
      gnus-agent-expire-current-dirs help-xref-stack-item idna-program
-     installation-directory line-spacing mark-active
-     mouse-selection-click-count mouse-selection-click-count-buffer
+     installation-directory iswitchb-mode iswitchb-temp-buflist line-spacing
+     mark-active mouse-selection-click-count mouse-selection-click-count-buffer
      ps-print-color-p rmail-default-file rmail-default-rmail-file
      rmail-insert-mime-forwarded-message-function show-trailing-whitespace
      smtpmail-default-smtp-server temporary-file-directory tool-bar-mode
@@ -88,10 +90,10 @@
     (maybe-fbind
      '(custom-autoload
        decode-char display-graphic-p display-images-p display-visual-class
-       get-display-table make-temp-file next-single-char-property-change
-       put-display-table select-frame-set-input-focus set-buffer-multibyte
-       string-as-multibyte timer-set-function unicode-precedence-list
-       unicode-to-char))
+       get-display-table help-function-arglist make-temp-file
+       next-single-char-property-change put-display-table
+       select-frame-set-input-focus set-buffer-multibyte string-as-multibyte
+       timer-set-function unicode-precedence-list unicode-to-char))
     (maybe-bind
      '(header-line-format
        scroll-margin timer-list)))
