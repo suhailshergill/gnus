@@ -1,5 +1,7 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-blocked-images): Move variable here.
+
 	* shr.el (shr-insert-table): Bind free variable.
 
 	* mm-decode.el (mm-shr): Bind shr-content-function.
