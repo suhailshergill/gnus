@@ -2,6 +2,7 @@
 
 	* shr.el (shr-tag-img): Shorten ALT texts and allow them to be
 	line-broken.
+	(shr-tag-img): Ignore image fetching errors.
 
 	* mm-decode.el (mm-shr): Require shr.
 

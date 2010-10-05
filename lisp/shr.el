@@ -230,9 +230,10 @@ redirects somewhere else."
 	(shr-put-image (shr-get-image-data url) (point) alt))
        (t
 	(insert alt)
-	(url-retrieve url 'shr-image-fetched
-		      (list (current-buffer) start (point-marker))
-		      t)))
+	(ignore-errors
+	  (url-retrieve url 'shr-image-fetched
+			(list (current-buffer) start (point-marker))
+			t))))
       (insert " ")
       (put-text-property start (point) 'keymap shr-map)
       (put-text-property start (point) 'shr-alt alt)
