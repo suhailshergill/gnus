@@ -56,6 +56,7 @@ fit these criteria."
 (defvar shr-state nil)
 (defvar shr-start nil)
 (defvar shr-indentation 0)
+(defvar shr-inhibit-images nil)
 
 (defvar shr-width 70)
 
@@ -204,8 +205,10 @@ redirects somewhere else."
       (when (zerop (length alt))
 	(setq alt "[img]"))
       (cond
-       ((and shr-blocked-images
-	     (string-match shr-blocked-images url))
+       ((or shr-inhibit-images
+	    (and shr-blocked-images
+		 (string-match shr-blocked-images url)))
+	(setq shr-start (point))
 	(insert alt))
        ((url-is-cached (browse-url-url-encode-chars url "[&)$ ]"))
 	(shr-put-image (shr-get-image-data url) (point) alt))
@@ -414,8 +417,20 @@ Return a string with image data."
   (let* ((columns (shr-column-specs cont))
 	 (suggested-widths (shr-pro-rate-columns columns))
 	 (sketch (shr-make-table cont suggested-widths))
-	 (sketch-widths (shr-table-widths sketch (length suggested-widths))))
-    (shr-insert-table (shr-make-table cont sketch-widths t) sketch-widths)))
+	 (sketch-widths (shr-table-widths sketch (length suggested-widths)))
+	 (shr-inhibit-images t))
+    (shr-insert-table (shr-make-table cont sketch-widths t) sketch-widths))
+  (dolist (elem (shr-find-elements cont 'img))
+    (shr-tag-img (cdr elem))))
+
+(defun shr-find-elements (cont type)
+  (let (result)
+    (dolist (elem cont)
+      (cond ((eq (car elem) type)
+	     (push elem result))
+	    ((consp (cdr elem))
+	     (setq result (nconc (shr-find-elements (cdr elem) type) result)))))
+    (nreverse result)))
 
 (defun shr-insert-table (table widths)
   (shr-insert-table-ruler widths)

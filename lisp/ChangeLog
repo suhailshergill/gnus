@@ -1,5 +1,8 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-find-elements): New function.
+	(shr-tag-table): Put all the images after the table.
+
 	* mm-decode.el (mm-shr): Bind shr-blocked-images to
 	gnus-blocked-images.
 
