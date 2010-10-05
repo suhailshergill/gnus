@@ -1,5 +1,8 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-schedule-image-fetching): Protect against
+	invalid URLs.
+
 	* shr.el (shr-tag-img): Shorten ALT texts and allow them to be
 	line-broken.
 	(shr-tag-img): Ignore image fetching errors.

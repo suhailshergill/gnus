@@ -365,7 +365,8 @@ Use ALT-TEXT for the image string."
 		       (help-function-arglist 'url-retrieve)))
 	     4)
       (setq args (nconc args (list t))))
-    (apply #'url-retrieve args)))
+    (ignore-errors
+      (apply #'url-retrieve args))))
 
 (defun gnus-html-image-fetched (status buffer image)
   "Callback function called when image has been fetched."
