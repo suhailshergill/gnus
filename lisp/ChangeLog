@@ -1,3 +1,7 @@
+2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-render-td): Allow blank/missing <TD>s.
+
 2010-10-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* dgnushack.el (dgnushack-compile): Exclude shr.el from being compiled
