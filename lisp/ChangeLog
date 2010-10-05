@@ -1,5 +1,7 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-newgroups): Return success.
+
 	* shr.el (shr-find-elements): New function.
 	(shr-tag-table): Put all the images after the table.
 	(shr-tag-table): Really inhibit images inside the table.
