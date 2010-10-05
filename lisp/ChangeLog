@@ -1,5 +1,8 @@
 2010-10-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* gnus-registry.el (gnus-registry-install-nnregistry): Rewrite so as
+	not to use `delete-dups' that is unavailable in XEmacs 21.4.
+
 	* lpath.el: Fbind libxml-parse-html-region and shr-insert-document for
 	Emacs 22 and XEmacs; fbind help-function-arglist for XEmacs 21.4 and
 	SXEmacs.
