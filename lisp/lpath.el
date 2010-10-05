@@ -90,10 +90,10 @@
     (maybe-fbind
      '(custom-autoload
        decode-char display-graphic-p display-images-p display-visual-class
-       get-display-table make-temp-file next-single-char-property-change
-       put-display-table select-frame-set-input-focus set-buffer-multibyte
-       string-as-multibyte timer-set-function unicode-precedence-list
-       unicode-to-char))
+       get-display-table help-function-arglist make-temp-file
+       next-single-char-property-change put-display-table
+       select-frame-set-input-focus set-buffer-multibyte string-as-multibyte
+       timer-set-function unicode-precedence-list unicode-to-char))
     (maybe-bind
      '(header-line-format
        scroll-margin timer-list)))

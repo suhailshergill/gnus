@@ -1,7 +1,11 @@
 2010-10-05  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* lpath.el: Fbind libxml-parse-html-region and shr-insert-document for
-	Emacs 22 and XEmacs.
+	Emacs 22 and XEmacs; fbind help-function-arglist for XEmacs 21.4 and
+	SXEmacs.
+
+	* gnus-html.el: Don't require help-fns under XEmacs.
+	(gnus-html-schedule-image-fetching): Work for XEmacs.
 
 	* mm-decode.el (mm-shr): Decode contents by charset.
 
