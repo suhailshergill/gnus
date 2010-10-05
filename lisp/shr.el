@@ -536,7 +536,7 @@ Return a string with image data."
       (when fill
 	(goto-char (point-min))
 	;; If the buffer is totally empty, then put a single blank
-	;; line her.
+	;; line here.
 	(if (zerop (buffer-size))
 	    (insert (make-string width ? ))
 	  ;; Otherwise, fill the buffer.
