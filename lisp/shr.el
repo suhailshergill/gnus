@@ -445,11 +445,20 @@ Return a string with image data."
 	(insert "|\n"))
       (dolist (column row)
 	(goto-char start)
-	(let ((lines (split-string (nth 2 column) "\n")))
+	(let ((lines (split-string (nth 2 column) "\n"))
+	      (overlay-lines (nth 3 column))
+	      overlay)
 	  (dolist (line lines)
+	    (setq overlay-line (pop overlay-lines))
 	    (when (> (length line) 0)
 	      (end-of-line)
 	      (insert line "|")
+	      (dolist (overlay overlay-line)
+		(let ((o (make-overlay (- (point) (nth 0 overlay) 1)
+				       (- (point) (nth 1 overlay) 1)))
+		      (properties (nth 2 overlay)))
+		  (while properties
+		    (overlay-put o (pop properties) (pop properties)))))
 	      (forward-line 1)))
 	  ;; Add blank lines at padding at the bottom of the TD,
 	  ;; possibly.
@@ -510,7 +519,30 @@ Return a string with image data."
 	  (when (> (- width (current-column)) 0)
 	    (insert (make-string (- width (current-column)) ? )))
 	  (forward-line 1)))
-      (list max (count-lines (point-min) (point-max)) (buffer-string)))))
+      (list max
+	    (count-lines (point-min) (point-max))
+	    (buffer-string)
+	    (and fill
+		 (shr-collect-overlays))))))
+
+(defun shr-collect-overlays ()
+  (save-excursion
+    (goto-char (point-min))
+    (let ((overlays nil))
+      (while (not (eobp))
+	(push (shr-overlays-in-region (point) (line-end-position))
+	      overlays)
+	(forward-line 1))
+      (nreverse overlays))))
+
+(defun shr-overlays-in-region (start end)
+  (let (result)
+    (dolist (overlay (overlays-in start end))
+      (push (list (max start (- end (overlay-start overlay)))
+		  (min end (- end (overlay-end overlay) start))
+		  (overlay-properties overlay))
+	    result))
+    (nreverse result)))
 
 (defun shr-pro-rate-columns (columns)
   (let ((total-percentage 0)
