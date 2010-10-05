@@ -1,3 +1,8 @@
+2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* mm-decode.el (mm-shr): Bind shr-blocked-images to
+	gnus-blocked-images.
+
 2010-10-05  Julien Danjou  <julien@danjou.info>
 
 	* gnus-html.el (gnus-html-wash-images): Rescale image from cid too.

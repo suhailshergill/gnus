@@ -1685,6 +1685,8 @@ If RECURSIVE, search recursively."
 
 (defun mm-shr (handle)
   (let ((article-buffer (current-buffer))
+	(shr-blocked-images (with-current-buffer gnus-summary-buffer
+			      gnus-blocked-images))
 	charset)
     (unless handle
       (setq handle (mm-dissect-buffer t)))
