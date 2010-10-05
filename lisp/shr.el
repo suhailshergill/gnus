@@ -52,6 +52,11 @@ fit these criteria."
   :group 'shr
   :type 'regexp)
 
+(defvar shr-content-function nil
+  "If bound, this should be a function that will return the content.
+This is used for cid: URLs, and the function is called with the
+cid: URL as the argument.")
+
 (defvar shr-folding-mode nil)
 (defvar shr-state nil)
 (defvar shr-start nil)
@@ -205,6 +210,14 @@ redirects somewhere else."
       (when (zerop (length alt))
 	(setq alt "[img]"))
       (cond
+       ((and (not shr-inhibit-images)
+	     (string-match "\\`cid:" url))
+	(let ((url (substring url (match-end 0)))
+	      image)
+	  (if (or (not shr-content-function)
+		  (not (setq image (funcall shr-content-function url))))
+	      (insert alt)
+	    (shr-put-image image (point) alt))))
        ((or shr-inhibit-images
 	    (and shr-blocked-images
 		 (string-match shr-blocked-images url)))
@@ -570,8 +583,8 @@ Return a string with image data."
 			   (string-match "\\([0-9]+\\)%" width))
 		  (aset columns i
 			(/ (string-to-number (match-string 1 width))
-			   100.0)))))
-	    (setq i (1+ i))))))
+			   100.0))))
+	      (setq i (1+ i)))))))
     columns))
 
 (defun shr-count (cont elem)
@@ -585,7 +598,8 @@ Return a string with image data."
   (let ((max 0))
     (dolist (row cont)
       (when (eq (car row) 'tr)
-	(setq max (max max (shr-count (cdr row) 'td)))))
+	(setq max (max max (+ (shr-count (cdr row) 'td)
+			      (shr-count (cdr row) 'th))))))
     max))
 
 (provide 'shr)

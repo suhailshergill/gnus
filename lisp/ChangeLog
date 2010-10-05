@@ -1,5 +1,9 @@
 2010-10-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-shr): Bind shr-content-function.
+
+	* shr.el (shr-content-function): New variable.
+
 	* gnus-sum.el (gnus-article-sort-by-most-recent-date): New function,
 	added for symmetry.
 
