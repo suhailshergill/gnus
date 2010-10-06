@@ -50,9 +50,11 @@
 ;;
 ;; and that's it.  Example of a managesieve session in *scratch*:
 ;;
+;; (with-current-buffer (sieve-manage-open "mail.example.com")
+;;   (sieve-manage-authenticate)
+;;   (sieve-manage-listscripts))
 ;;
-;; (sieve-manage-listscripts my-buf)
-;; ("vacation" "testscript" ("splitmail") "badscript")
+;; => ((active . "main") "vacation")
 ;;
 ;; References:
 ;;
@@ -443,6 +445,17 @@ to work in."
     (when (sieve-manage-opened buffer)
       (sieve-manage-erase)
       buffer)))
+
+(defun sieve-manage-authenticate (&optional buffer)
+  "Authenticate on server in BUFFER.
+Return `sieve-manage-state' value."
+  (with-current-buffer (or buffer (current-buffer))
+    (if (eq sieve-manage-state 'nonauth)
+        (when (funcall (nth 2 (assq sieve-manage-auth
+                                    sieve-manage-authenticator-alist))
+                       (current-buffer))
+          (setq sieve-manage-state 'auth))
+      sieve-manage-state)))
 
 (defun sieve-manage-opened (&optional buffer)
   "Return non-nil if connection to managesieve server in BUFFER is open.
