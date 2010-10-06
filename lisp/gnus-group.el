@@ -2191,7 +2191,7 @@ if it is not a list."
 				      (or hist 'gnus-group-history)
 				      def))
     (if (if (listp collection)
-	    (member group choices)
+	    (member group (mapcar 'symbol-name collection))
 	  (symbol-value (intern-soft group collection)))
 	group
       (mm-encode-coding-string group (gnus-group-name-charset nil group)))))
