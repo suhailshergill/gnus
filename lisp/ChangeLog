@@ -4,6 +4,8 @@
 
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
+	* nnrss.el (nnrss-check-group): Remove 404 URL in comment.
+
 	* nnir.el: Fix Swish-E URL.
 	Fix Namazu URL.
 
