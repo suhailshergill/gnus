@@ -2195,7 +2195,6 @@ Leading \"Re: \" is not stripped by this function.  Use the function
 
 (defun message-change-subject (new-subject)
   "Ask for NEW-SUBJECT header, append (was: <Old Subject>)."
-  ;; <URL:http://www.landfield.com/usefor/drafts/draft-ietf-usefor-useage--1.02.unpaged>
   (interactive
    (list
     (read-from-minibuffer "New subject: ")))
