@@ -358,10 +358,6 @@ latest version of gnus or some explanation on where to find it.
 
 *  A way to continue editing the latest Message composition.
 
-*  http://www.sonicnet.com/feature/ari3/
-
-   [N/A]
-
 *  facep is not declared.
 
 * Include a section in the manual on why the number of articles isn't
@@ -370,13 +366,7 @@ the same in the group buffer and on the SPC prompt.
 *  Interacting with rmail fcc isn't easy.
 
 *       Hypermail:
-      [N/A]<URL:http://www.falch.no/people/pepper/DSSSL-Lite/archives/>
-      [N/A]<URL:http://www.eit.com/software/hypermail/hypermail.html>
-      [N/A]<URL:http://homer.ncm.com/>
-      [N/A]<URL:http://www.yahoo.com/Computers_and_Internet/Internet/World_Wide_Web/HTML_Converters/>
       http://www.uwsg.indiana.edu/hypermail/linux/kernel/9610/index.html
-      [N/A]<URL:http://union.ncsa.uiuc.edu/HyperNews/get/www/html/converters.html>
-      [N/A]http://www.miranova.com/gnus-list/
 
    [w3 or nnwarchive?]
 
@@ -610,8 +600,6 @@ exceeding lisp nesting on huge groups.
 
 *  when replying to several messages at once, put the "other"
  message-ids into a See-Also header.
-
-*  support setext: URL:http://www.bsdi.com/setext/
 
 *  support ProleText:
  <URL:http://proletext.clari.net/prole/proletext.html>
@@ -1200,11 +1188,6 @@ gnus-killed-list:
 
 *  a new nncvs backend.  Each group would show an article, using
  version branches as threading, checkin date as the date, etc.
-
-*  http://www.dejanews.com/forms/dnsetfilter_exp.html ?  This filter
- allows one to construct advance queries on the Dejanews database
- such as specifying start and end dates, subject, author, and/or
- newsgroup name.
 
 *  new Date header scoring type - older, newer
 

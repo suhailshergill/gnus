@@ -1,5 +1,7 @@
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
+	* todo: Remove other broken links
+
 	* make.bat: Remove Windows 98 stuff and reference to my.gnus.org.
 
 2010-10-04  Andreas Schwab  <schwab@linux-m68k.org>
