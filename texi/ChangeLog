@@ -1,6 +1,7 @@
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
 	* gnus-faq.texi (FAQ 5-5): Fix Flyspell URL.
+	(FAQ 7-1): Fix getmail URL.
 
 2010-10-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

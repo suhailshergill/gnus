@@ -1984,7 +1984,7 @@ server like
 @uref{http://www.isc.org/products/INN/, inn}. 
 Then you want to fetch your Mail, popular choices
 are @uref{http://www.catb.org/~esr/fetchmail/, fetchmail}
-and @uref{http://www.qcc.ca/~charlesc/software/getmail-3.0/, getmail}.
+and @uref{http://pyropus.ca/software/getmail/, getmail}.
 You should tell those to write the mail to your disk and
 Gnus to read it from there. Last but not least the mail
 sending part: This can be done with every MTA like
