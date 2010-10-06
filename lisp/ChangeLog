@@ -5,6 +5,7 @@
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
 	* nnir.el: Fix Swish-E URL.
+	Fix Namazu URL.
 
 	* message.el (message-change-subject): Remove 404 URL in a comment.
 

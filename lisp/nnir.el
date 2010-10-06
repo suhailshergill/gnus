@@ -595,7 +595,7 @@ arrive at the correct group name, \"mail.misc\"."
   :type '(directory)
   :group 'nnir)
 
-;; Namazu engine, see <URL:http://ww.namazu.org/>
+;; Namazu engine, see <URL:http://www.namazu.org/>
 
 (defcustom nnir-namazu-program "namazu"
   "*Name of Namazu search executable."
