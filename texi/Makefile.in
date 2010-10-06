@@ -92,11 +92,6 @@ gnus-booklet.pdf: $(REFCARD).tex  $(LOGO).pdf
           $(PDFLATEX) -jobname=gnus-booklet '\def\booklettrue{}\def\letterpapertrue{}\input{$(REFCARD)}' ;\
 	fi
 
-gnus-faq-full-update: gnus-faq-clean gnus-faq-texi
-
-gnus-faq-clean:
-	rm -f gnus-faq.xml gnus-faq.*.tmp
-
 almost-clean:
 	rm -f *.[cgk]idx *.aux *.cp *.cps *.dvi *.dvi-x *.fn *.ky	\
 	*.kys *.latexi *.log *.orig *.pdf *.pdf-x *.pg *.rej		\
@@ -197,7 +192,6 @@ distclean: clean
 	rm -f message-[0-9]
 	rm -f $(INFO_DEPS)
 	rm -f gnusconfig.tex
-	rm -f gnus-faq.xml gnus-faq.*.tmp
 
 install: $(INFO_DEPS)
 	$(SHELL) $(top_srcdir)/mkinstalldirs "$(infodir)"
