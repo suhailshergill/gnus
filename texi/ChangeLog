@@ -1,5 +1,7 @@
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
+	* Makefile.in: Remove xml2texi stuff.
+
 	* gnus-faq.texi (FAQ 8-3): Remove references to my.gnus.org.
 
 	* gnus.texi (Comparing Mail Back Ends): Remove broken link and allusion
