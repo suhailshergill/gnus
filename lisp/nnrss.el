@@ -963,7 +963,7 @@ whether they are `offsite' or `onsite'."
 
 (defun nnrss-discover-feed (url)
   "Given a page, find an RSS feed using Mark Pilgrim's
-`ultra-liberal rss locator' (URL `http://diveintomark.org/2002/08/15.html')."
+`ultra-liberal rss locator'."
 
   (let ((parsed-page (nnrss-fetch url)))
 
