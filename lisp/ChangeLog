@@ -1,5 +1,8 @@
 2010-10-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Prepare to support
+	open-gnutls-stream.
+
 	* shr.el: Rearrange function order to be more logical.
 
 2010-10-06  Julien Danjou  <julien@danjou.info>
