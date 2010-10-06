@@ -1,5 +1,8 @@
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
+	* gnus.texi (Comparing Mail Back Ends): Remove broken link and allusion
+	to ReiserFS.
+
 	* gnus-faq.texi (FAQ 5-5): Fix Flyspell URL.
 	(FAQ 7-1): Fix getmail URL.
 
