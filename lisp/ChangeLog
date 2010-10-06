@@ -1,5 +1,7 @@
 2010-10-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-insert): Get 'space transition right.
+
 	* nnimap.el (nnimap-open-connection): Prepare to support
 	open-gnutls-stream.
 
