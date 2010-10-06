@@ -1,5 +1,8 @@
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
+	* message.texi (PGP Compatibility): Remove reference to gpg-2comp,
+	broken link.
+
 	* Makefile.in: Remove xml2texi stuff.
 
 	* gnus-faq.texi (FAQ 8-3): Remove references to my.gnus.org.
