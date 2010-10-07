@@ -1016,8 +1016,10 @@ textual parts.")
 
 (defun nnimap-update-info (info marks)
   (when (and marks
-	     ;; Ignore groups with no UIDNEXT values.
-	     (nth 4 marks))
+	     ;; Ignore groups with no UIDNEXT/marks.  This happens for
+	     ;; completely empty groups.
+	     (or (car marks)
+		 (nth 4 marks)))
     (destructuring-bind (existing flags high low uidnext start-article
 				  permanent-flags) marks
       (let ((group (gnus-info-group info))
