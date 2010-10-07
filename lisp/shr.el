@@ -523,23 +523,31 @@ Return a string with image data."
 
 (defun shr-table-widths (table suggested-widths)
   (let* ((length (length suggested-widths))
-	 (widths (make-vector length 0)))
+	 (widths (make-vector length 0))
+	 (natural-widths (make-vector length 0)))
     (dolist (row table)
       (let ((i 0))
 	(dolist (column row)
 	  (aset widths i (max (aref widths i)
 			      (car column)))
+	  (aset natural-widths i (max (aref natural-widths i)
+				      (cadr column)))
 	  (setq i (1+ i)))))
     (let ((extra (- (reduce '+ suggested-widths)
-		    (reduce '+ widths))))
+		    (reduce '+ widths)))
+	  (expanded-columns 0))
       (when (> extra 0)
 	(dotimes (i length)
-	  (aset widths i
-		(+ (aref widths i)
-		   (truncate
-		    (* extra
-		       (/ (* (aref widths i) 1.0)
-			  (reduce '+ widths)))))))))
+	  ;; If the natural width is wider than the rendered width, we
+	  ;; want to allow the column to expand.
+	  (when (> (aref natural-widths i) (aref widths i))
+	    (setq expanded-columns (1+ expanded-columns))))
+	(dotimes (i length)
+	  (when (> (aref natural-widths i) (aref widths i))
+	    (aset widths i (min
+			    (1+ (aref natural-widths i))
+			    (+ (/ extra expanded-columns)
+			       (aref widths i))))))))
     widths))
 
 (defun shr-make-table (cont widths &optional fill)
@@ -600,11 +608,13 @@ Return a string with image data."
   (let ((current 0)
 	(max 0))
     (while (not (eobp))
+      (end-of-line)
       (setq current (+ current (current-column)))
       (unless (get-text-property (point) 'shr-break)
 	(setq max (max max current)
 	      current 0))
-      (forward-line 1))))
+      (forward-line 1))
+    max))
 
 (defun shr-collect-overlays ()
   (save-excursion
