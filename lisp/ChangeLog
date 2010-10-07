@@ -1,3 +1,12 @@
+2010-10-07  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-int.el (gnus-after-set-mark-hook, gnus-before-update-mark-hook):
+	Hooks for mark updates.
+	(gnus-request-set-mark, gnus-request-update-mark): Use them.
+
+	* gnus-util.el (gnus-run-hooks-with-args): Convenience function to run
+	hooks with arguments, which is needed for mark update hooks.
+
 2010-10-06  Julien Danjou  <julien@danjou.info>
 
 	* sieve-manage.el: Update example in `Commentary'.
