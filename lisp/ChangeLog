@@ -1,5 +1,8 @@
 2010-10-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-get-unread-articles): Require gnus-agent before
+	bidning gnus-agent variables.
+
 	* shr.el (shr-render-td): Use a cache for the table rendering function
 	to avoid getting an exponential rendering behaviour in nested tables.
 	(shr-insert): Rework the line-breaking algorithm.
