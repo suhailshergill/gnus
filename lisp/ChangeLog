@@ -1,5 +1,7 @@
 2010-10-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-update-info): Remove double setting of high.
+
 	* gnus.el (gnus-carpal): The carpal mode has been removed, but define
 	the variable for backwards compatability.
 
