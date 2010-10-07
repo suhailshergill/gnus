@@ -1,3 +1,8 @@
+2010-10-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-render-td): Use a cache for the table rendering function
+	to avoid getting an exponential rendering behaviour in nested tables.
+
 2010-10-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-gravatar.el (gnus-gravatar-too-ugly): New user option.

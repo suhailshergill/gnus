@@ -68,6 +68,7 @@ cid: URL as the argument.")
 (defvar shr-indentation 0)
 (defvar shr-inhibit-images nil)
 (defvar shr-list-mode nil)
+(defvar shr-content-cache nil)
 
 (defvar shr-map
   (let ((map (make-sparse-keymap)))
@@ -83,6 +84,7 @@ cid: URL as the argument.")
 
 ;;;###autoload
 (defun shr-insert-document (dom)
+  (setq shr-content-cache nil)
   (let ((shr-state nil)
 	(shr-start nil))
     (shr-descend (shr-transform-dom dom))))
@@ -134,6 +136,17 @@ redirects somewhere else."
 	(message "No image under point")
       (message "Browsing %s..." url)
       (browse-url url))))
+
+(defun shr-insert-image ()
+  "Insert the image under point into the buffer."
+  (interactive)
+  (let ((url (get-text-property (point) 'shr-image)))
+    (if (not url)
+	(message "No image under point")
+      (message "Inserting %s..." url)
+      (url-retrieve url 'shr-image-fetched
+		    (list (current-buffer) (1- (point)) (point-marker))
+		    t))))
 
 ;;; Utility functions.
 
@@ -570,13 +583,18 @@ Return a string with image data."
 
 (defun shr-render-td (cont width fill)
   (with-temp-buffer
-    (let ((shr-width width)
-	  (shr-indentation 0))
-      (shr-generic cont))
-    (delete-region
-     (point)
-     (+ (point)
-	(skip-chars-backward " \t\n")))
+    (let ((cache (cdr (assoc (cons width cont) shr-content-cache))))
+      (if cache
+	  (insert cache)
+	(let ((shr-width width)
+	      (shr-indentation 0))
+	  (shr-generic cont))
+	(delete-region
+	 (point)
+	 (+ (point)
+	    (skip-chars-backward " \t\n")))
+	(push (cons (cons width cont) (buffer-string))
+	      shr-content-cache)))
     (goto-char (point-min))
     (let ((max 0))
       (while (not (eobp))
