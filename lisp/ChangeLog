@@ -1,5 +1,7 @@
 2010-10-07  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* auth-source.el: Update docs with TODO items.
+
 	* gnus-sync.el: Update docs to explain state and plans.
 
 	* gnus-int.el (gnus-after-set-mark-hook, gnus-before-update-mark-hook):
