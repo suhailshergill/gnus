@@ -404,11 +404,14 @@ Return a string with image data."
 (defun shr-tag-ul (cont)
   (shr-ensure-paragraph)
   (let ((shr-list-mode 'ul))
-    (shr-generic cont)))
+    (shr-generic cont))
+  (shr-ensure-paragraph))
 
 (defun shr-tag-ol (cont)
+  (shr-ensure-paragraph)
   (let ((shr-list-mode 1))
-    (shr-generic cont)))
+    (shr-generic cont))
+  (shr-ensure-paragraph))
 
 (defun shr-tag-li (cont)
   (shr-ensure-newline)

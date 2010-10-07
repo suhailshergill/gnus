@@ -5,6 +5,7 @@
 	(shr-insert): Rework the line-breaking algorithm.
 	(shr-insert): Don't leave trailing spaces.
 	(shr-insert-table): Also insert empty TDs.
+	(shr-tag-blockquote): Ensure paragraphs after </ul>.
 
 2010-10-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 
