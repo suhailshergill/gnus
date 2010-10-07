@@ -4,6 +4,7 @@
 	to avoid getting an exponential rendering behaviour in nested tables.
 	(shr-insert): Rework the line-breaking algorithm.
 	(shr-insert): Don't leave trailing spaces.
+	(shr-insert-table): Also insert empty TDs.
 
 2010-10-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 

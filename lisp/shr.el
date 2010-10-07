@@ -504,16 +504,15 @@ Return a string with image data."
 	      overlay overlay-line)
 	  (dolist (line lines)
 	    (setq overlay-line (pop overlay-lines))
-	    (when (> (length line) 0)
-	      (end-of-line)
-	      (insert line "|")
-	      (dolist (overlay overlay-line)
-		(let ((o (make-overlay (- (point) (nth 0 overlay) 1)
-				       (- (point) (nth 1 overlay) 1)))
-		      (properties (nth 2 overlay)))
-		  (while properties
-		    (overlay-put o (pop properties) (pop properties)))))
-	      (forward-line 1)))
+	    (end-of-line)
+	    (insert line "|")
+	    (dolist (overlay overlay-line)
+	      (let ((o (make-overlay (- (point) (nth 0 overlay) 1)
+				     (- (point) (nth 1 overlay) 1)))
+		    (properties (nth 2 overlay)))
+		(while properties
+		  (overlay-put o (pop properties) (pop properties)))))
+	    (forward-line 1))
 	  ;; Add blank lines at padding at the bottom of the TD,
 	  ;; possibly.
 	  (dotimes (i (- height (length lines)))
