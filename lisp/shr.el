@@ -184,7 +184,8 @@ redirects somewhere else."
 	   ((and (or (not first)
 		     (eq shr-state 'space))
 		 (> (+ column (length elem) 1) shr-width))
-	    (insert "\n"))
+	    (insert "\n")
+	    (put-text-property (1- (point)) (point) 'shr-break t))
 	   ((not first)
 	    (insert " "))))
 	(setq first nil)
@@ -459,7 +460,7 @@ Return a string with image data."
 	 ;; be smaller (if there's little text) or bigger (if there's
 	 ;; unbreakable text).
 	 (sketch (shr-make-table cont suggested-widths))
-	 (sketch-widths (shr-table-widths sketch (length suggested-widths))))
+	 (sketch-widths (shr-table-widths sketch suggested-widths)))
     ;; Then render the table again with these new "hard" widths.
     (shr-insert-table (shr-make-table cont sketch-widths t) sketch-widths))
   ;; Finally, insert all the images after the table.  The Emacs buffer
@@ -490,7 +491,7 @@ Return a string with image data."
 	(insert "|\n"))
       (dolist (column row)
 	(goto-char start)
-	(let ((lines (split-string (nth 2 column) "\n"))
+	(let ((lines (nth 2 column))
 	      (overlay-lines (nth 3 column))
 	      overlay overlay-line)
 	  (dolist (line lines)
@@ -520,14 +521,25 @@ Return a string with image data."
     (insert (make-string (aref widths i) ?-) ?+))
   (insert "\n"))
 
-(defun shr-table-widths (table length)
-  (let ((widths (make-vector length 0)))
+(defun shr-table-widths (table suggested-widths)
+  (let* ((length (length suggested-widths))
+	 (widths (make-vector length 0)))
     (dolist (row table)
       (let ((i 0))
 	(dolist (column row)
 	  (aset widths i (max (aref widths i)
 			      (car column)))
-	  (incf i))))
+	  (setq i (1+ i)))))
+    (let ((extra (- (reduce '+ suggested-widths)
+		    (reduce '+ widths))))
+      (when (> extra 0)
+	(dotimes (i length)
+	  (aset widths i
+		(+ (aref widths i)
+		   (truncate
+		    (* extra
+		       (/ (* (aref widths i) 1.0)
+			  (reduce '+ widths)))))))))
     widths))
 
 (defun shr-make-table (cont widths &optional fill)
@@ -575,11 +587,24 @@ Return a string with image data."
 	    (when (> (- width (current-column)) 0)
 	      (insert (make-string (- width (current-column)) ? )))
 	    (forward-line 1))))
-      (list max
-	    (count-lines (point-min) (point-max))
-	    (buffer-string)
-	    (and fill
-		 (shr-collect-overlays))))))
+      (if fill
+	  (list max
+		(count-lines (point-min) (point-max))
+		(split-string (buffer-string) "\n")
+		(shr-collect-overlays))
+	(list max
+	      (shr-natural-width))))))
+
+(defun shr-natural-width ()
+  (goto-char (point-min))
+  (let ((current 0)
+	(max 0))
+    (while (not (eobp))
+      (setq current (+ current (current-column)))
+      (unless (get-text-property (point) 'shr-break)
+	(setq max (max max current)
+	      current 0))
+      (forward-line 1))))
 
 (defun shr-collect-overlays ()
   (save-excursion
@@ -608,12 +633,12 @@ Return a string with image data."
   (let ((total-percentage 0)
 	(widths (make-vector (length columns) 0)))
     (dotimes (i (length columns))
-      (incf total-percentage (aref columns i)))
+      (setq total-percentage (+ total-percentage (aref columns i))))
     (setq total-percentage (/ 1.0 total-percentage))
     (dotimes (i (length columns))
       (aset widths i (max (truncate (* (aref columns i)
 				       total-percentage
-				       shr-width))
+				       (- shr-width (1+ (length columns)))))
 			  10)))
     widths))
 
