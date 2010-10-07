@@ -1,5 +1,9 @@
 2010-10-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-save-part): If given a non-directory result, expand
+	the file name before using to avoid setting mm-default-directory to
+	nil.
+
 	* gnus-start.el (gnus-get-unread-articles): Require gnus-agent before
 	bidning gnus-agent variables.
 
