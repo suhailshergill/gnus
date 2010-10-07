@@ -208,7 +208,9 @@ redirects somewhere else."
 	    (when (> shr-indentation 0)
 	      (shr-indent))
 	    (end-of-line)))
-	(insert " "))))))
+	(insert " "))
+      (unless (string-match "[ \t\n]\\'" text)
+	(delete-char -1))))))
 
 (defun shr-ensure-newline ()
   (unless (zerop (current-column))

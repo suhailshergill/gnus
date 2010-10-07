@@ -3,6 +3,7 @@
 	* shr.el (shr-render-td): Use a cache for the table rendering function
 	to avoid getting an exponential rendering behaviour in nested tables.
 	(shr-insert): Rework the line-breaking algorithm.
+	(shr-insert): Don't leave trailing spaces.
 
 2010-10-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 
