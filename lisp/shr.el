@@ -449,6 +449,10 @@ Return a string with image data."
 (defun shr-tag-h6 (cont)
   (shr-heading cont))
 
+(defun shr-tag-hr (cont)
+  (shr-ensure-newline)
+  (insert (make-string shr-width ?-) "\n"))
+
 ;;; Table rendering algorithm.
 
 ;; Table rendering is the only complicated thing here.  We do this by
