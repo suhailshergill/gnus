@@ -1,5 +1,21 @@
 2010-10-08  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* gnus-util.el (gnus-alist-pull): Rename `gnus-pull'.
+
+	* gnus-sum.el (gnus-mark-article-as-unread)
+	(gnus-summary-mark-article-as-unread, gnus-summary-remove-bookmark)
+	(gnus-summary-set-bookmark): Use it.
+
+	* gnus-msg.el (gnus-setup-message): Use it.
+
+	* gnus-demon.el (gnus-demon-remove-handler): Use it.
+
+	* gnus.el (gnus-group-remove-parameter): Use it.
+
+	* gnus-group.el (gnus-group-make-web-group): Use it.
+
+	* gnus-demon.el (gnus-demon-remove-handler): Use it.
+
 	* nnregistry.el: Update docs to mention manual.
 
 	* gnus-registry.el: Update docs to mention nnregistry.el.
