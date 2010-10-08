@@ -1,3 +1,7 @@
+2010-10-08  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi: add mm-shr
+
 2010-10-08  Ludovic Courtès <ludo@gnu.org>
 
 	* gnus.texi (Finding the Parent, The Gnus Registry)

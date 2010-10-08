@@ -9812,6 +9812,10 @@ Customization, emacs-mime, The Emacs MIME Manual}) to convert the
 can use include:
 
 @table @code
+@item mm-shr
+Use Gnus simple html renderer.
+
+@table @code
 @item gnus-article-html
 Use Gnus rendered based on w3m.
 
@@ -12455,7 +12459,7 @@ section only describes the default method.
 @item mm-text-html-renderer
 @vindex mm-text-html-renderer
 If set to @code{gnus-article-html}, Gnus will use the built-in method,
-that's based on @code{curl} and @code{w3m}.
+that's based on @code{w3m}.
 
 @item gnus-blocked-images
 @vindex gnus-blocked-images
