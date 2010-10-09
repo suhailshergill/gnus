@@ -4,6 +4,8 @@
 	try to use that for the tls stream.
 	(nnimap-retrieve-group-data-early): Rework the marks code to heed
 	UIDVALIDITY and find out which groups are read-only and not.
+	(nnimap-get-flags): Use the same marks parsing code as the rest of
+	nnimap.
 
 2010-10-09  Julien Danjou  <julien@danjou.info>
 
