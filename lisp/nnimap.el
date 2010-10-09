@@ -337,7 +337,8 @@ textual parts.")
 			    '(open run))))
 	    (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
 			     nnimap-address port nnimap-stream)
-	  (gnus-set-process-query-on-exit-flag (nnimap-process nnimap-object) nil)
+	  (gnus-set-process-query-on-exit-flag
+	   (nnimap-process nnimap-object) nil)
 	  (if (not (setq connection-result (nnimap-wait-for-connection)))
 	      (nnheader-report 'nnimap
 			       "%s" (buffer-substring
@@ -654,7 +655,8 @@ textual parts.")
 (deffoo nnimap-request-rename-group (group new-name &optional server)
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer (nnimap-buffer)
-      (car (nnimap-command "RENAME %S %S" (utf7-encode group t) (utf7-encode new-name t))))))
+      (car (nnimap-command "RENAME %S %S"
+			   (utf7-encode group t) (utf7-encode new-name t))))))
 
 (deffoo nnimap-request-expunge-group (group &optional server)
   (when (nnimap-possibly-change-group group server)
@@ -1292,13 +1294,15 @@ textual parts.")
 	  (push
 	   (cond
 	    ((eql char ?\[)
-	     (split-string (buffer-substring
-			    (1+ (point))
-			    (1- (search-forward "]" (line-end-position) 'move)))))
+	     (split-string
+	      (buffer-substring
+	       (1+ (point))
+	       (1- (search-forward "]" (line-end-position) 'move)))))
 	    ((eql char ?\()
-	     (split-string (buffer-substring
-			    (1+ (point))
-			    (1- (search-forward ")" (line-end-position) 'move)))))
+	     (split-string
+	      (buffer-substring
+	       (1+ (point))
+	       (1- (search-forward ")" (line-end-position) 'move)))))
 	    ((eql char ?\")
 	     (forward-char 1)
 	     (buffer-substring
