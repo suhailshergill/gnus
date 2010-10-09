@@ -1,3 +1,7 @@
+2010-10-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el: Start implementing QRESYNC support.
+
 2010-10-09  Julien Danjou  <julien@danjou.info>
 
 	* nnir.el (nnir-engines): Fix too many arguments.

@@ -963,9 +963,9 @@ textual parts.")
 		   uidvalidity
 		   modseq)
 	      (push
-	       (list 'qresync
-		     (nnimap-send-command "EXAMINE %S (QRESYNC (%s %s))"
+	       (list (nnimap-send-command "EXAMINE %S (QRESYNC (%s %s))"
 					  group uidvalidity modseq)
+		     'qresync
 		     nil group 'qresync)
 	       sequences)
 	    (let ((start
@@ -998,7 +998,10 @@ textual parts.")
 	     (nnimap-possibly-change-group nil server))
     (with-current-buffer (nnimap-buffer)
       ;; Wait for the final data to trickle in.
-      (when (nnimap-wait-for-response (cadar sequences) t)
+      (when (nnimap-wait-for-response (if (eq (cadar sequences) 'qresync)
+					  (caar sequences)
+					(cadar sequences))
+				      t)
 	;; Now we should have most of the data we need, no matter
 	;; whether we're QRESYNCING, fetching all the flags from
 	;; scratch, or just fetching the last 100 flags per group.
@@ -1028,7 +1031,8 @@ textual parts.")
 
 (defun nnimap-update-info (info marks)
   (destructuring-bind (existing flags high low uidnext start-article
-				permanent-flags uidvalidity) marks
+				permanent-flags uidvalidity
+				vanished highestmodseq) marks
     (cond
      ;; Ignore groups with no UIDNEXT/marks.  This happens for
      ;; completely empty groups.
@@ -1043,7 +1047,8 @@ textual parts.")
 	(and old-uidvalidity
 	     (not (equal old-uidvalidity uidvalidity))
 	     (> start-article 1)))
-      (gnus-group-remove-parameter info 'uidvalidity))
+      (gnus-group-remove-parameter info 'uidvalidity)
+      (gnus-group-remove-parameter info 'modseq))
      ;; We have the data needed to update.
      (t
       (let ((group (gnus-info-group info))
@@ -1077,53 +1082,82 @@ textual parts.")
 	   (if (memq '%* permanent-flags)
 	       t
 	     nil)))
-	;; Then update marks and read articles if this isn't a
+	;; Update marks and read articles if this isn't a
 	;; read-only IMAP group.
 	(when (cdr (assq 'permanent-flags (gnus-info-params info)))
-	  ;; Update the list of read articles.
-	  (let* ((unread
-		  (gnus-compress-sequence
-		   (gnus-set-difference
-		    (gnus-set-difference
-		     existing
-		     (cdr (assoc '%Seen flags)))
-		    (cdr (assoc '%Flagged flags)))))
-		 (read (gnus-range-difference
-			(cons start-article high) unread)))
-	    (when (> start-article 1)
-	      (setq read
-		    (gnus-range-nconcat
-		     (if (> start-article 1)
-			 (gnus-sorted-range-intersection
-			  (cons 1 (1- start-article))
-			  (gnus-info-read info))
-		       (gnus-info-read info))
-		     read)))
-	    (gnus-info-set-read info read)
-	    ;; Update the marks.
-	    (setq marks (gnus-info-marks info))
-	    (dolist (type (cdr nnimap-mark-alist))
-	      (let ((old-marks (assoc (car type) marks))
-		    (new-marks
-		     (gnus-compress-sequence
-		      (cdr (or (assoc (caddr type) flags) ; %Flagged
-			       (assoc (intern (cadr type) obarray) flags)
-			       (assoc (cadr type) flags)))))) ; "\Flagged"
-		(setq marks (delq old-marks marks))
-		(pop old-marks)
-		(when (and old-marks
-			   (> start-article 1))
-		  (setq old-marks (gnus-range-difference
-				   old-marks
-				   (cons start-article high)))
-		  (setq new-marks (gnus-range-nconcat old-marks new-marks)))
-		(when new-marks
-		  (push (cons (car type) new-marks) marks)))
-	      (gnus-info-set-marks info marks t))))
+	  (if (and highestmodseq
+		   (not start-article))
+	      ;; We've gotten the data by QRESYNCing.
+	      (nnimap-update-qresync-info
+	       info (nnimap-imap-ranges-to-gnus-ranges vanished) flags)
+	    ;; Do normal non-QRESYNC flag updates.
+	    ;; Update the list of read articles.
+	    (let* ((unread
+		    (gnus-compress-sequence
+		     (gnus-set-difference
+		      (gnus-set-difference
+		       existing
+		       (cdr (assoc '%Seen flags)))
+		      (cdr (assoc '%Flagged flags)))))
+		   (read (gnus-range-difference
+			  (cons start-article high) unread)))
+	      (when (> start-article 1)
+		(setq read
+		      (gnus-range-nconcat
+		       (if (> start-article 1)
+			   (gnus-sorted-range-intersection
+			    (cons 1 (1- start-article))
+			    (gnus-info-read info))
+			 (gnus-info-read info))
+		       read)))
+	      (gnus-info-set-read info read)
+	      ;; Update the marks.
+	      (setq marks (gnus-info-marks info))
+	      (dolist (type (cdr nnimap-mark-alist))
+		(let ((old-marks (assoc (car type) marks))
+		      (new-marks
+		       (gnus-compress-sequence
+			(cdr (or (assoc (caddr type) flags) ; %Flagged
+				 (assoc (intern (cadr type) obarray) flags)
+				 (assoc (cadr type) flags)))))) ; "\Flagged"
+		  (setq marks (delq old-marks marks))
+		  (pop old-marks)
+		  (when (and old-marks
+			     (> start-article 1))
+		    (setq old-marks (gnus-range-difference
+				     old-marks
+				     (cons start-article high)))
+		    (setq new-marks (gnus-range-nconcat old-marks new-marks)))
+		  (when new-marks
+		    (push (cons (car type) new-marks) marks)))
+		(gnus-info-set-marks info marks t)))))
 	;; Note the active level for the next run-through.
 	(gnus-group-set-parameter info 'active (gnus-active group))
 	(gnus-group-set-parameter info 'uidvalidity uidvalidity)
+	(gnus-group-set-parameter info 'modseq highestmodseq)
 	(nnimap-store-info info (gnus-active group)))))))
+
+(defun nnimap-update-qresync-info (info vanished flags)
+  ;; Add all the vanished articles to the list of read articles.
+  (gnus-info-set-read
+   info
+   (gnus-range-add (gnus-info-read info)
+		   vanished))
+  )
+
+(defun nnimap-imap-ranges-to-gnus-ranges (irange)
+  (if (zerop (length irange))
+      nil
+    (let ((result nil))
+      (dolist (elem (split-string irange ","))
+	(push
+	 (if (string-match ":" elem)
+	     (let ((numbers (split-string elem ":")))
+	       (cons (string-to-number (car numbers))
+		     (string-to-number (cadr numbers))))
+	   (string-to-number elem))
+	 result))
+      (nreverse result))))
 
 (defun nnimap-store-info (info active)
   (let* ((group (gnus-group-real-name (gnus-info-group info)))
@@ -1134,14 +1168,16 @@ textual parts.")
 
 (defun nnimap-flags-to-marks (groups)
   (let (data group totalp uidnext articles start-article mark permanent-flags
-	     uidvalidity)
+	     uidvalidity vanished highestmodseq)
     (dolist (elem groups)
       (setq group (car elem)
 	    uidnext (nth 1 elem)
 	    start-article (nth 2 elem)
 	    permanent-flags (nth 3 elem)
 	    uidvalidity (nth 4 elem)
-	    articles (nthcdr 5 elem))
+	    vanished (nth 5 elem)
+	    highestmodseq (nth 6 elem)
+	    articles (nthcdr 7 elem))
       (let ((high (caar articles))
 	    marks low existing)
 	(dolist (article articles)
@@ -1153,7 +1189,7 @@ textual parts.")
 		(push (list flag (car article)) marks)
 	      (setcdr mark (cons (car article) (cdr mark))))))
 	(push (list group existing marks high low uidnext start-article
-		    permanent-flags uidvalidity)
+		    permanent-flags uidvalidity vanished highestmodseq)
 	      data)))
     data))
 
@@ -1163,13 +1199,13 @@ textual parts.")
   (subst-char-in-region (point-min) (point-max)
 			?\\ ?% t)
   (let (start end articles groups uidnext elems permanent-flags
-	      uidvalidity)
+	      uidvalidity vanished highestmodseq)
     (dolist (elem sequences)
       (destructuring-bind (group-sequence flag-sequence totalp group command)
 	  elem
 	(setq start (point))
-	;; The EXAMINE was successful.
 	(when (and
+	       ;; The EXAMINE was successful.
 	       (search-forward (format "\n%d OK " group-sequence) nil t)
 	       (progn
 		 (forward-line 1)
@@ -1189,24 +1225,42 @@ textual parts.")
 		 (goto-char start)
 		 (setq uidvalidity
 		       (and (re-search-forward "UIDVALIDITY \\([0-9]+\\)"
-					    (or end (point-min)) t)
+					       (or end (point-min)) t)
 			    ;; Store UIDVALIDITY as a string, as it's
 			    ;; too big for 32-bit Emacsen, usually.
 			    (match-string 1)))
+		 (goto-char start)
+		 (setq vanished
+		       (and (eq flag-sequence 'qresync)
+			    (re-search-forward "VANISHED.* \\([0-9:,]+\\)"
+					       (or end (point-min)) t)
+			    (match-string 1)))
+		 (goto-char start)
+		 (setq highestmodseq
+		       (and (search-forward "HIGHESTMODSEQ "
+					    (or end (point-min)) t)
+			    (read (current-buffer))))
 		 (goto-char end)
 		 (forward-line -1))
 	       ;; The UID FETCH FLAGS was successful.
-	       (search-forward (format "\n%d OK " flag-sequence) nil t))
-	  (setq start (point))
-	  (goto-char end)
+	       (or (eq flag-sequence 'qresync)
+		   (search-forward (format "\n%d OK " flag-sequence) nil t)))
+	  (if (eq flag-sequence 'qresync)
+	      (progn
+		(goto-char start)
+		(setq start end))
+	    (setq start (point))
+	    (goto-char end))
 	  (while (search-forward " FETCH " start t)
 	    (setq elems (read (current-buffer)))
 	    (push (cons (cadr (memq 'UID elems))
 			(cadr (memq 'FLAGS elems)))
 		  articles))
-	  (push (nconc (list group uidnext totalp permanent-flags uidvalidity)
+	  (push (nconc (list group uidnext totalp permanent-flags uidvalidity
+			     vanished highestmodseq)
 		       articles)
 		groups)
+	  (goto-char end)
 	  (setq articles nil))))
     groups))
 
