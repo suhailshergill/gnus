@@ -1,5 +1,9 @@
 2010-10-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmail.el (nnmail-expiry-target-group): Say that every expiry target
+	group is the "last", so that the backends like nnfolder actually save
+	their folders.
+
 	* nnimap.el (nnimap-open-connection): If we have gnutls loaded, then
 	try to use that for the tls stream.
 	(nnimap-retrieve-group-data-early): Rework the marks code to heed
