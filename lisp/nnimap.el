@@ -317,8 +317,7 @@ textual parts.")
 		   'starttls))
 		'("imap"))
 	       ((memq nnimap-stream '(ssl tls))
-		(funcall (if (and nil
-				  (fboundp 'open-gnutls-stream))
+		(funcall (if (fboundp 'open-gnutls-stream)
 			     'open-gnutls-stream
 			   'open-tls-stream)
 			 "*nnimap*" (current-buffer) nnimap-address
