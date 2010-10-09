@@ -1,5 +1,8 @@
 2010-10-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* spam.el (gnus-summary-mode-map): Bind to "$".  Suggested by Russ
+	Allbery.
+
 	* shr.el: Rework the way things are indented by <li> slightly.
 
 	* gnus.el (gnus-group-set-parameter): Fix typo.
