@@ -949,7 +949,7 @@ textual parts.")
       (erase-buffer)
       (setf (nnimap-group nnimap-object) nil)
       ;; QRESYNC handling isn't implemented.
-      (let ((qresyncp (member "notQRESYNC" (nnimap-capabilities nnimap-object)))
+      (let ((qresyncp (member "QRESYNC" (nnimap-capabilities nnimap-object)))
 	    params groups sequences active uidvalidity modseq group)
 	;; Go through the infos and gather the data needed to know
 	;; what and how to request the data.
@@ -1095,7 +1095,7 @@ textual parts.")
 		   (not start-article))
 	      ;; We've gotten the data by QRESYNCing.
 	      (nnimap-update-qresync-info
-	       info (nnimap-imap-ranges-to-gnus-ranges vanished) flags)
+	       info existing (nnimap-imap-ranges-to-gnus-ranges vanished) flags)
 	    ;; Do normal non-QRESYNC flag updates.
 	    ;; Update the list of read articles.
 	    (let* ((unread
@@ -1143,13 +1143,31 @@ textual parts.")
 	(gnus-group-set-parameter info 'modseq highestmodseq)
 	(nnimap-store-info info (gnus-active group)))))))
 
-(defun nnimap-update-qresync-info (info vanished flags)
+(defun nnimap-update-qresync-info (info existing vanished flags)
   ;; Add all the vanished articles to the list of read articles.
   (gnus-info-set-read
    info
    (gnus-range-add (gnus-info-read info)
 		   vanished))
-  )
+  (let ((marks (gnus-info-marks info)))
+    (dolist (type (cdr nnimap-mark-alist))
+      (let ((ticks (assoc (car type) marks))
+	    (new-marks
+	     (cdr (or (assoc (caddr type) flags) ; %Flagged
+		      (assoc (intern (cadr type) obarray) flags)
+		      (assoc (cadr type) flags))))) ; "\Flagged"
+	(setq marks (delq ticks marks))
+	(pop ticks)
+	;; Add the new marks we got.
+	(setq ticks (gnus-add-to-range ticks new-marks))
+	;; Remove the marks from messages that don't have them.
+	(setq ticks (gnus-remove-from-range
+		     ticks
+		     (gnus-compress-sequence
+		      (gnus-sorted-complement existing new-marks))))
+	(when ticks
+	  (push (cons (car type) ticks) marks)))
+      (gnus-info-set-marks info marks t))))
 
 (defun nnimap-imap-ranges-to-gnus-ranges (irange)
   (if (zerop (length irange))
