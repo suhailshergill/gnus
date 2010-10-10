@@ -1070,10 +1070,10 @@ textual parts.")
 			      (uidnext
 			       ;; No articles in this group.
 			       (cons uidnext (1- uidnext)))
-			      (start-article
-			       (cons start-article (1- start-article)))
 			      (active
 			       active)
+			      (start-article
+			       (cons start-article (1- start-article)))
 			      (t
 			       ;; No articles and no uidnext.
 			       nil)))
