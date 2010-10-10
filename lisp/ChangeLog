@@ -1,5 +1,8 @@
 2010-10-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-set-local-parameters): Ignore the `active'
+	non-variable, too.
+
 	* nnimap.el (nnimap-open-connection): Use gnutls STARTTLS, if
 	available.
 	(nnimap-update-info): Rely more on the current active than the param
