@@ -1066,8 +1066,8 @@ textual parts.")
       (let* ((group (gnus-info-group info))
 	     (completep (and start-article
 			     (= start-article 1)))
-	     (active (or (cdr (assq 'active (gnus-info-params info)))
-			 (gnus-active group))))
+	     (active (or (gnus-active group)
+			 (cdr (assq 'active (gnus-info-params info))))))
 	(when uidnext
 	  (setq high (1- uidnext)))
 	;; First set the active ranges based on high/low.

@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-open-connection): Use gnutls STARTTLS, if
 	available.
+	(nnimap-update-info): Rely more on the current active than the param
+	active to avoid marking articles as read too much.
 
 	* auth-source.el (auth-source-create): Use (user-login-name) for the
 	user name default.
