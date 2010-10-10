@@ -1,3 +1,8 @@
+2010-10-10  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* nnimap.el (nnimap-wait-for-response): If the user hits `C-g', kill
+	the process, too.
+
 2010-10-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* spam.el (gnus-summary-mode-map): Bind to "$".  Suggested by Russ

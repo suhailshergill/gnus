@@ -1355,20 +1355,28 @@ textual parts.")
 (defun nnimap-wait-for-response (sequence &optional messagep)
   (let ((process (get-buffer-process (current-buffer)))
 	openp)
-    (goto-char (point-max))
-    (while (and (setq openp (memq (process-status process)
-				  '(open run)))
-		(not (re-search-backward
-		      (format "^%d .*\n" sequence)
-		      (if nnimap-streaming
-			  (max (point-min) (- (point) 500))
-			(point-min))
-		      t)))
-      (when messagep
-	(message "nnimap read %dk" (/ (buffer-size) 1000)))
-      (nnheader-accept-process-output process)
-      (goto-char (point-max)))
-    openp))
+    (condition-case nil
+        (progn
+	  (goto-char (point-max))
+	  (while (and (setq openp (memq (process-status process)
+					'(open run)))
+		      (not (re-search-backward
+			    (format "^%d .*\n" sequence)
+			    (if nnimap-streaming
+				(max (point-min) (- (point) 500))
+			      (point-min))
+			    t)))
+	    (when messagep
+	      (message "nnimap read %dk" (/ (buffer-size) 1000)))
+	    (nnheader-accept-process-output process)
+	    (goto-char (point-max)))
+          openp)
+      (quit
+       ;; The user hit C-g while we were waiting: kill the process, in case
+       ;; it's a gnutls-cli process that's stuck (tends to happen a lot behind
+       ;; NAT routers).
+       (delete-process process)
+       nil))))
 
 (defun nnimap-parse-response ()
   (let ((lines (split-string (nnimap-last-response-string) "\r\n" t))
