@@ -1160,9 +1160,11 @@ textual parts.")
   (gnus-info-set-read
    info
    (gnus-add-to-range
-    (gnus-range-add (gnus-info-read info)
-		    vanished)
-    (cdr (assq '%Flagged flags))))
+    (gnus-add-to-range
+     (gnus-range-add (gnus-info-read info)
+		     vanished)
+     (cdr (assq '%Flagged flags)))
+    (cdr (assq '%Seen flags))))
   (let ((marks (gnus-info-marks info)))
     (dolist (type (cdr nnimap-mark-alist))
       (let ((ticks (assoc (car type) marks))

@@ -3,6 +3,7 @@
 	* nnimap.el (nnimap-update-qresync-info): \Flagged messages are read
 	for Gnus.
 	(nnimap-retrieve-group-data-early): utf7-encode the group parameters.
+	(nnimap-update-qresync-info): Mark \Seen articles as read.
 
 	* gnus-sum.el (gnus-summary-set-local-parameters): Ignore the `active'
 	non-variable, too.
