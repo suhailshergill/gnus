@@ -1,3 +1,8 @@
+2010-10-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-update-info): If the server doesn't return any
+	useful info, just use the previous info.
+
 2010-10-10  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (autoload): Clean up autoloads.

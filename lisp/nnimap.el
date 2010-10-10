@@ -1038,7 +1038,9 @@ textual parts.")
      ;; completely empty groups.
      ((and (not existing)
 	   (not uidnext))
-      )
+      (let ((active (cdr (assq 'active (gnus-info-params info)))))
+	(when active
+	  (gnus-set-active (gnus-info-group info) active))))
      ;; We have a mismatch between the old and new UIDVALIDITY
      ;; identifiers, so we have to re-request the group info (the next
      ;; time).  This virtually never happens.
@@ -1051,9 +1053,11 @@ textual parts.")
       (gnus-group-remove-parameter info 'modseq))
      ;; We have the data needed to update.
      (t
-      (let ((group (gnus-info-group info))
-	    (completep (and start-article
-			    (= start-article 1))))
+      (let* ((group (gnus-info-group info))
+	     (completep (and start-article
+			     (= start-article 1)))
+	     (active (or (cdr (assq 'active (gnus-info-params info)))
+			 (gnus-active group))))
 	(when uidnext
 	  (setq high (1- uidnext)))
 	;; First set the active ranges based on high/low.
@@ -1068,12 +1072,14 @@ textual parts.")
 			       (cons uidnext (1- uidnext)))
 			      (start-article
 			       (cons start-article (1- start-article)))
+			      (active
+			       active)
 			      (t
 			       ;; No articles and no uidnext.
 			       nil)))
 	  (gnus-set-active
 	   group
-	   (cons (car (gnus-active group))
+	   (cons (car active)
 		 (or high (1- uidnext)))))
 	;; See whether this is a read-only group.
 	(unless (eq permanent-flags 'not-scanned)
