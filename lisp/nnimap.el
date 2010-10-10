@@ -1157,8 +1157,10 @@ textual parts.")
   ;; Add all the vanished articles to the list of read articles.
   (gnus-info-set-read
    info
-   (gnus-range-add (gnus-info-read info)
-		   vanished))
+   (gnus-add-to-range
+    (gnus-range-add (gnus-info-read info)
+		    vanished)
+    (cdr (assq '%Flagged flags))))
   (let ((marks (gnus-info-marks info)))
     (dolist (type (cdr nnimap-mark-alist))
       (let ((ticks (assoc (car type) marks))
