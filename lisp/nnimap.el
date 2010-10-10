@@ -974,7 +974,8 @@ textual parts.")
 		   modseq)
 	      (push
 	       (list (nnimap-send-command "EXAMINE %S (QRESYNC (%s %s))"
-					  group uidvalidity modseq)
+					  (utf7-encode group t)
+					  uidvalidity modseq)
 		     'qresync
 		     nil group 'qresync)
 	       sequences)
@@ -992,7 +993,8 @@ textual parts.")
 		     ;; examine), but will tell us whether the group
 		     ;; is read-only or not.
 		     "SELECT")))
-	      (push (list (nnimap-send-command "%s %S" command group)
+	      (push (list (nnimap-send-command "%s %S" command
+					       (utf7-encode group t))
 			  (nnimap-send-command "UID FETCH %d:* FLAGS" start)
 			  start group command)
 		    sequences)))
