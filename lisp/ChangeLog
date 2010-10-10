@@ -1,5 +1,8 @@
 2010-10-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Use gnutls STARTTLS, if
+	available.
+
 	* auth-source.el (auth-source-create): Use (user-login-name) for the
 	user name default.
 

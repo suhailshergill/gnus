@@ -295,7 +295,9 @@ textual parts.")
 	     (port nil)
 	     (ports
 	      (cond
-	       ((eq nnimap-stream 'network)
+	       ((or (eq nnimap-stream 'network)
+		    (and (eq nnimap-stream 'starttls)
+			 (fboundp 'open-gnutls-stream)))
 		(open-network-stream
 		 "*nnimap*" (current-buffer) nnimap-address
 		 (setq port
@@ -357,8 +359,16 @@ textual parts.")
 	      (push (format "%s" nnimap-server-port) ports))
 	    ;; If this is a STARTTLS-capable server, then sever the
 	    ;; connection and start a STARTTLS connection instead.
-	    (when (and (eq nnimap-stream 'network)
-		       (member "STARTTLS" (nnimap-capabilities nnimap-object)))
+	    (cond
+	     ((and (or (and (eq nnimap-stream 'network)
+			    (member "STARTTLS"
+				    (nnimap-capabilities nnimap-object)))
+		       (eq nnimap-stream 'starttls))
+		   (fboundp 'open-gnutls-stream))
+	      (nnimap-command "STARTTLS")
+	      (gnutls-negotiate (nnimap-process nnimap-object) nil))
+	     ((and (eq nnimap-stream 'network)
+		   (member "STARTTLS" (nnimap-capabilities nnimap-object)))
 	      (let ((nnimap-stream 'starttls))
 		(let ((tls-process
 		       (nnimap-open-connection buffer)))
@@ -369,7 +379,7 @@ textual parts.")
 		  (when (memq (process-status tls-process) '(open run))
 		    (delete-process (nnimap-process nnimap-object))
 		    (kill-buffer (current-buffer))
-		    (return tls-process)))))
+		    (return tls-process))))))
 	    (unless (equal connection-result "PREAUTH")
 	      (if (not (setq credentials
 			     (if (eq nnimap-authenticator 'anonymous)
