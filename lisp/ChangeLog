@@ -1,5 +1,8 @@
 2010-10-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (auth-source-create): Use (user-login-name) for the
+	user name default.
+
 	* nnimap.el (nnimap-update-info): If the server doesn't return any
 	useful info, just use the previous info.
 	(nnimap-update-info): Prefer old info over start-article.
