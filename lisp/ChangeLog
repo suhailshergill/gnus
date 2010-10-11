@@ -1,5 +1,7 @@
 2010-10-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-insert): Fix up the white space only regexp.
+
 	* nnimap.el (nnimap-transform-split-mail): Not all articles have
 	bodies.  Protect against this.  Reported by Michael Welsh Duggan.
 

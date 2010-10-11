@@ -194,7 +194,7 @@ redirects somewhere else."
 
 (defun shr-insert (text)
   (when (and (eq shr-state 'image)
-             (not (string-match "^\\s-*$" text)))
+	     (not (string-match "\\`[ \t\n]+\\'" text)))
     (insert "\n")
     (setq shr-state nil))
   (cond
