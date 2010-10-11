@@ -1627,8 +1627,10 @@ textual parts.")
 	(forward-char (1+ bytes))
 	(setq bytes (nnimap-get-length))
 	(delete-region (line-beginning-position) (line-end-position))
-	(forward-char (1+ bytes))
-	(delete-region (line-beginning-position) (line-end-position))))))
+	;; There's a body; skip past that.
+	(when bytes
+	  (forward-char (1+ bytes))
+	  (delete-region (line-beginning-position) (line-end-position)))))))
 
 (defun nnimap-dummy-active-number (group &optional server)
   1)

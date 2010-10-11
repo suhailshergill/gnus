@@ -1,5 +1,8 @@
 2010-10-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-transform-split-mail): Not all articles have
+	bodies.  Protect against this.  Reported by Michael Welsh Duggan.
+
 	* shr.el (shr-current-column): New function.
 	(shr-find-fill-point): New function.
 
