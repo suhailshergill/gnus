@@ -59,7 +59,12 @@ fit these criteria."
   :type 'char)
 
 (defcustom shr-table-corner ?+
-  "Charater used to draw table corner."
+  "Character used to draw table corner."
+  :group 'shr
+  :type 'char)
+
+(defcustom shr-hr-line ?-
+  "Character used to draw hr line."
   :group 'shr
   :type 'char)
 
@@ -468,7 +473,7 @@ Return a string with image data."
 
 (defun shr-tag-hr (cont)
   (shr-ensure-newline)
-  (insert (make-string shr-width ?-) "\n"))
+  (insert (make-string shr-width shr-hr-line) "\n"))
 
 ;;; Table rendering algorithm.
 
