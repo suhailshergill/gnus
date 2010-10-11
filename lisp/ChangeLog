@@ -3,6 +3,14 @@
 	* sieve-manage.el (sieve-manage-open): Allow port names as well as port
 	numbers.
 
+2010-10-11  Julien Danjou  <julien@danjou.info>
+
+	* shr.el (shr-hr-line): Add.
+	(shr-tag-hr): Use shr-hr-line to specify which character to use to
+	display hr lines.
+	(shr-max-columns): Do not change state to nil if we just inserting
+	spaces.
+
 2010-10-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-topic.el (gnus-topic-read-group): If after the last group,
