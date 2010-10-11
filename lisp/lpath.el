@@ -31,10 +31,10 @@
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
        bookmark-get-bookmark-record bookmark-make-record-default
        bookmark-prop-get display-time-event-handler epg-check-configuration
-       find-coding-system frame-device libxml-parse-html-region
-       recenter-top-bottom rmail-swap-buffers-maybe shr-insert-document
-       w3-do-setup w3-parse-buffer w3-prepare-buffer w3-region
-       w3m-detect-meta-charset w3m-region))
+       find-coding-system frame-device gnutls-negotiate
+       libxml-parse-html-region recenter-top-bottom rmail-swap-buffers-maybe
+       shr-insert-document w3-do-setup w3-parse-buffer w3-prepare-buffer
+       w3-region w3m-detect-meta-charset w3m-region))
     (maybe-bind
      '(w3m-link-map))))
 
@@ -61,7 +61,7 @@
      display-time-event-handler epg-check-configuration event-click-count
      event-end event-start find-coding-systems-for-charsets
      find-coding-systems-region find-coding-systems-string find-image
-     float-time help-buffer ido-completing-read image-size
+     float-time gnutls-negotiate help-buffer ido-completing-read image-size
      image-type-available-p insert-image libxml-parse-html-region
      mail-abbrevs-setup make-mode-line-mouse-map make-network-process
      mouse-minibuffer-check mouse-movement-p mouse-scroll-subr overlay-lists
