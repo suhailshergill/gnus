@@ -193,7 +193,8 @@ redirects somewhere else."
       (shr-descend sub)))))
 
 (defun shr-insert (text)
-  (when (eq shr-state 'image)
+  (when (and (eq shr-state 'image)
+             (not (string-match "^\\s-*$" text)))
     (insert "\n")
     (setq shr-state nil))
   (cond
