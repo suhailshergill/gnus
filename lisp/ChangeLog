@@ -1,5 +1,8 @@
 2010-10-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-rename-group): Select group read-only
+	before renaming it.
+
 	* shr.el (shr-insert): Fix up the white space only regexp.
 
 	* nnimap.el (nnimap-transform-split-mail): Not all articles have
