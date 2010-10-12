@@ -1,6 +1,7 @@
 2010-10-12  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-tag-img): Encode URL properly when retrieving.
+	(shr-get-image-data): Encode URL properly when fetching from cache.
 
 	* gnus-gravatar.el (gnus-gravatar-insert): Check if buffer is alive
 	before inserting the Gravatar.

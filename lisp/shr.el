@@ -344,7 +344,7 @@ Return a string with image data."
   (with-temp-buffer
     (mm-disable-multibyte)
     (when (ignore-errors
-	    (url-cache-extract (url-cache-create-filename url))
+	    (url-cache-extract (url-cache-create-filename (shr-encode-url url)))
 	    t)
       (when (or (search-forward "\n\n" nil t)
 		(search-forward "\r\n\r\n" nil t))
