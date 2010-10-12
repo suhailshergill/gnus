@@ -43,8 +43,7 @@
   :version "24.1"
   :group 'gnus-gravatar)
 
-(defcustom gnus-gravatar-too-ugly (if (boundp 'gnus-article-x-face-too-ugly)
-				      gnus-article-x-face-too-ugly)
+(defcustom gnus-gravatar-too-ugly gnus-article-x-face-too-ugly
   "Regexp matching posters whose avatar shouldn't be shown automatically."
   :type '(choice regexp (const nil))
   :version "24.1"
