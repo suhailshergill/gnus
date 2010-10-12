@@ -1,5 +1,8 @@
 2010-10-12  Julien Danjou  <julien@danjou.info>
 
+	* gnus-gravatar.el (gnus-gravatar-insert): Check if buffer is alive
+	before inserting the Gravatar.
+
 	* shr.el (shr-tag-img): Add align attribute support for <img>.
 
 2010-10-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
