@@ -1,3 +1,8 @@
+2010-10-12  Daiki Ueno  <ueno@unixuser.org>
+
+	* auth.texi (GnuPG and EasyPG Assistant Configuration): Clarify
+	some configurations require to set up gpg-agent.
+
 2010-10-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Spam Package Introduction): Mention `$'.
