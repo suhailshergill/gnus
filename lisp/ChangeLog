@@ -1,3 +1,8 @@
+2010-10-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-rename-group): Unselect by selecting a
+	mailbox that doesn't exist.
+
 2010-10-12  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-tag-img): Encode URL properly when retrieving.
