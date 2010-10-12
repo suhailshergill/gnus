@@ -1,3 +1,7 @@
+2010-10-12  Julien Danjou  <julien@danjou.info>
+
+	* shr.el (shr-tag-img): Add align attribute support for <img>.
+
 2010-10-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-gravatar.el (gnus-art): Required.
