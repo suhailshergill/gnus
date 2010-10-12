@@ -1,5 +1,7 @@
 2010-10-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* rfc2231.el (rfc2231-parse-string): Ignore repeated parts.
+
 	* nnimap.el (nnimap-request-rename-group): Unselect by selecting a
 	mailbox that doesn't exist.
 
