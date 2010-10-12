@@ -389,6 +389,10 @@ Return a string with image data."
     (put-text-property (or shr-start start) (point) 'keymap shr-map)
     (put-text-property (or shr-start start) (point) 'shr-url url)))
 
+(defun shr-encode-url (url)
+  "Encode URL."
+  (browse-url-url-encode-chars url "[)$ ]"))
+
 (defun shr-tag-img (cont)
   (when (and (> (current-column) 0)
 	     (not (eq shr-state 'image)))
@@ -422,12 +426,12 @@ Return a string with image data."
 	  (if (> (length alt) 8)
 	      (shr-insert (substring alt 0 8))
 	    (shr-insert alt))))
-       ((url-is-cached (browse-url-url-encode-chars url "[&)$ ]"))
+       ((url-is-cached (shr-encode-url url))
 	(shr-put-image (shr-get-image-data url) (point) alt))
        (t
 	(insert alt)
 	(ignore-errors
-	  (url-retrieve url 'shr-image-fetched
+	  (url-retrieve (shr-encode-url url) 'shr-image-fetched
 			(list (current-buffer) start (point-marker))
 			t))))
       (insert " ")
