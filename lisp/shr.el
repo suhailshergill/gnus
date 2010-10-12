@@ -399,13 +399,23 @@ Return a string with image data."
     (insert "\n"))
   (let ((alt (cdr (assq :alt cont)))
         (url (cdr (assq :src cont)))
-        (align (cdr (assq :align cont))))
-    (cond ((string= align "right")
-           (insert
-            (make-string (- fill-column (- (point) (line-beginning-position))) ? )))
-          ((string= align "center")
-           (insert
-            (make-string (- (/ fill-column 2) (- (point) (line-beginning-position))) ? ))))
+        (width (cdr (assq :width cont))))
+    ;; Only respect align if width specified.
+    (when width
+      ;; Check that width is not larger than max width, otherwise ignore
+      ;; align
+      (let ((max-width (* fill-column (frame-char-width)))
+            (width (string-to-number width)))
+        (when (< width max-width)
+          (let ((align (cdr (assq :align cont))))
+            (cond ((string= align "right")
+                   (insert (propertize
+                            " " 'display
+                            `(space . (:align-to ,(list (- max-width width)))))))
+                  ((string= align "center")
+                   (insert (propertize
+                            " " 'display
+                            `(space . (:balign-to ,(list (- (/ max-width 2) width))))))))))))
     (let ((start (point-marker)))
       (when (zerop (length alt))
         (setq alt "[img]"))
