@@ -1,5 +1,7 @@
 2010-10-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-gravatar.el (gnus-art): Required.
+
 	* gnus-sum.el (gnus-summary-mark-as-unread-forward)
 	(gnus-summary-mark-as-unread-backward, gnus-summary-mark-as-unread):
 	Remove long obsoleted functions.

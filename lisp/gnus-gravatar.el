@@ -25,6 +25,7 @@
 ;;; Code:
 
 (require 'gravatar)
+(require 'gnus-art)
 
 (defgroup gnus-gravatar nil
   "Gnus Gravatar."
