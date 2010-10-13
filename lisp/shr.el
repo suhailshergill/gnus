@@ -219,7 +219,7 @@ redirects somewhere else."
 	(unless shr-start
 	  (setq shr-start (point)))
 	(insert elem)
-	(when (> (shr-current-column) shr-width)
+	(when (> (current-column) shr-width)
 	  (if (not (search-backward " " (line-beginning-position) t))
 	      (insert "\n")
 	    (delete-char 1)
@@ -242,15 +242,6 @@ redirects somewhere else."
       (backward-char 1))
     (or found
 	(end-of-line))))
-
-(defun shr-current-column ()
-  (let ((column 0))
-    (save-excursion
-      (beginning-of-line)
-      (while (not (eolp))
-	(incf column (char-width (following-char)))
-	(forward-char 1)))
-    column))
 
 (defun shr-ensure-newline ()
   (unless (zerop (current-column))
