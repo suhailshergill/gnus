@@ -235,7 +235,7 @@ redirects somewhere else."
 (defun shr-find-fill-point ()
   (let ((found nil))
     (while (and (not found)
-		(not (bolp)))
+		(> (current-column) shr-indentation))
       (when (and (or (eq (preceding-char) ? )
 		     (aref fill-find-break-point-function-table
 			   (preceding-char)))

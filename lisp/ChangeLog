@@ -1,5 +1,7 @@
 2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-find-fill-point): Don't inloop on indented text.
+
 	* tls.el (tls-program): Remove spurious %s from openssl.
 
 	* nnimap.el (nnimap-open-connection): Fix open-tls-stream call.
