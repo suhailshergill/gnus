@@ -271,9 +271,8 @@ If you don't customize @code{auth-sources}, the auth-source library
 reads @code{~/.authinfo.gpg}, which is a GnuPG encrypted file.
 
 In Emacs 23 or later there is an option @code{auto-encryption-mode} to
-automatically decrypt @code{*.gpg} files.  It is enabled by default so
-there is no setting is needed.  If you are using earlier versions of
-Emacs, you will need:
+automatically decrypt @code{*.gpg} files.  It is enabled by default.
+If you are using earlier versions of Emacs, you will need:
 
 @lisp
 (require 'epa-file)

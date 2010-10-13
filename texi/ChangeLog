@@ -1,3 +1,8 @@
+2010-10-13  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth.texi (GnuPG and EasyPG Assistant Configuration): Fix syntax and
+	trim sentence.
+
 2010-10-12  Daiki Ueno  <ueno@unixuser.org>
 
 	* auth.texi (GnuPG and EasyPG Assistant Configuration): Clarify
