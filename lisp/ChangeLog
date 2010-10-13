@@ -1,5 +1,8 @@
 2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-find-fill-point): Use a filling algorithm that should
+	probably work for CJVK text, too.
+
 	* nnimap.el (nnimap-extend-tls-programs): Removed.
 	(nnimap-open-connection): Bind STARTTLS to openssl explicitly.
 
