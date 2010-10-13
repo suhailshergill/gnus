@@ -1,3 +1,12 @@
+2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-extend-tls-programs): Removed.
+	(nnimap-open-connection): Bind STARTTLS to openssl explicitly.
+
+	* tls.el (tls-starttls-switches): Remove starttls hack.
+	(open-tls-stream): Ditto.
+	(tls-find-starttls-argument): Ditto.
+
 2010-10-13  Julien Danjou  <julien@danjou.info>
 
 	* nnimap.el (nnimap-parse-flags): Be more strict when looking for FETCH
