@@ -1691,7 +1691,7 @@ If RECURSIVE, search recursively."
   ;; Require since we bind its variables.
   (require 'shr)
   (let ((article-buffer (current-buffer))
-	(shr-blocked-images (if (and (boundp gnus-summary-buffer)
+	(shr-blocked-images (if (and (boundp 'gnus-summary-buffer)
 				     (buffer-name gnus-summary-buffer))
 				(with-current-buffer gnus-summary-buffer
 				  gnus-blocked-images)
