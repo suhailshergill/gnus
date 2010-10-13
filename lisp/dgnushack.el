@@ -237,6 +237,16 @@ in `defcustom' forms."
   (maybe-fbind '(defined-colors face-attribute))
   (maybe-bind '(idna-program installation-directory)))
 
+(when (featurep 'xemacs)
+  (defadvice byte-optimize-apply (before use-mapcan (form) activate)
+    "Replace (apply 'nconc (mapcar ...)) with (mapcan ...)."
+    (let ((last (nth (1- (length form)) form)))
+      (when (and (eq last (third form))
+		 (consp last)
+		 (eq 'mapcar (car last))
+		 (equal (nth 1 form) ''nconc))
+	(setq form (cons 'mapcan (cdr last)))))))
+
 (defun dgnushack-compile-verbosely ()
   "Call dgnushack-compile with warnings ENABLED.  If you are compiling
 patches to gnus, you should consider modifying make.bat to call
