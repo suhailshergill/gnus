@@ -1,3 +1,8 @@
+2010-10-13  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-parse-flags): Be more strict when looking for FETCH
+	responses.
+
 2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-decode.el (mm-shr): Allow use from non-Gnus users.
