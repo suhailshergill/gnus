@@ -77,7 +77,7 @@ and `gnutls-cli' (version 2.0.1) output."
 
 (defcustom tls-program '("gnutls-cli --insecure -p %p %h"
 			 "gnutls-cli --insecure -p %p %h --protocols ssl3"
-			 "openssl s_client %s -connect %h:%p -no_ssl2 -ign_eof")
+			 "openssl s_client -connect %h:%p -no_ssl2 -ign_eof")
   "List of strings containing commands to start TLS stream to a host.
 Each entry in the list is tried until a connection is successful.
 %h is replaced with server hostname, %p with port to connect to.

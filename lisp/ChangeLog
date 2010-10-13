@@ -1,5 +1,7 @@
 2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* tls.el (tls-program): Remove spurious %s from openssl.
+
 	* nnimap.el (nnimap-open-connection): Fix open-tls-stream call.
 	(nnimap-parse-flags): Fix regexp.
 
