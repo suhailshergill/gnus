@@ -1,5 +1,7 @@
 2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Fix open-tls-stream call.
+
 	* shr.el (shr-find-fill-point): Use a filling algorithm that should
 	probably work for CJVK text, too.
 
