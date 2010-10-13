@@ -1,5 +1,8 @@
 2010-10-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-spec.el (gnus-parse-simple-format): princ doesn't really insert
+	anything in Emacs.
+
 	* shr.el (shr-current-column): Remove buggy and unnecessary function.
 
 2010-10-13  Julien Danjou  <julien@danjou.info>
