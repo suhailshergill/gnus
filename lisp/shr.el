@@ -404,14 +404,17 @@ Return a string with image data."
             (width (string-to-number width)))
         (when (< width max-width)
           (let ((align (cdr (assq :align cont))))
-            (cond ((string= align "right")
-                   (insert (propertize
-                            " " 'display
-                            `(space . (:align-to ,(list (- max-width width)))))))
-                  ((string= align "center")
-                   (insert (propertize
-                            " " 'display
-                            `(space . (:balign-to ,(list (- (/ max-width 2) width))))))))))))
+            (cond
+	     ((string= align "right")
+	      (insert (propertize
+		       " " 'display
+		       `(space . (:align-to
+				  ,(list (- max-width width)))))))
+	     ((string= align "center")
+	      (insert (propertize
+		       " " 'display
+		       `(space . (:balign-to
+				  ,(list (- (/ max-width 2) width))))))))))))
     (let ((start (point-marker)))
       (when (zerop (length alt))
         (setq alt "[img]"))
