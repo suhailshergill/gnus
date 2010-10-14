@@ -304,6 +304,7 @@ textual parts.")
 	       ((or (eq nnimap-stream 'network)
 		    (and (eq nnimap-stream 'starttls)
 			 (fboundp 'open-gnutls-stream)))
+		(message "Opening connection to %s..." nnimap-address)
 		(open-network-stream
 		 "*nnimap*" (current-buffer) nnimap-address
 		 (setq port
@@ -313,11 +314,14 @@ textual parts.")
 			     "143"))))
 		'("143" "imap"))
 	       ((eq nnimap-stream 'shell)
+		(message "Opening connection to %s via shell..." nnimap-address)
 		(nnimap-open-shell-stream
 		 "*nnimap*" (current-buffer) nnimap-address
 		 (setq port (or nnimap-server-port "imap")))
 		'("imap"))
 	       ((eq nnimap-stream 'starttls)
+		(message "Opening connection to %s via starttls..."
+			 nnimap-address)
 		(let ((tls-program
 		       '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof -starttls imap")))
 		  (open-tls-stream
@@ -325,6 +329,7 @@ textual parts.")
 		   (setq port (or nnimap-server-port "imap"))))
 		'("imap"))
 	       ((memq nnimap-stream '(ssl tls))
+		(message "Opening connection to %s via tls..." nnimap-address)
 		(funcall (if (fboundp 'open-gnutls-stream)
 			     'open-gnutls-stream
 			   'open-tls-stream)

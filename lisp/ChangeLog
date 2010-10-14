@@ -1,5 +1,8 @@
 2010-10-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Message when opening connection
+	for debugging purposes.
+
 	* gnus-art.el (gnus-article-setup-buffer): Set article mode truncation
 	on every setup buffer call to allow this to change from article to
 	article.
