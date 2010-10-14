@@ -1,3 +1,7 @@
+2010-10-14  Julien Danjou  <julien@danjou.info>
+
+	* shr.el: Fix defcustom type (char -> character).
+
 2010-10-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-open-connection): tls-program should be a list of

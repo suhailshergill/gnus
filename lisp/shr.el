@@ -56,17 +56,17 @@ fit these criteria."
 (defcustom shr-table-line ?-
   "Character used to draw table line."
   :group 'shr
-  :type 'char)
+  :type 'character)
 
 (defcustom shr-table-corner ?+
   "Character used to draw table corner."
   :group 'shr
-  :type 'char)
+  :type 'character)
 
 (defcustom shr-hr-line ?-
   "Character used to draw hr line."
   :group 'shr
-  :type 'char)
+  :type 'character)
 
 (defcustom shr-width fill-column
   "Frame width to use for rendering."
