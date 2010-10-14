@@ -1,3 +1,12 @@
+2010-10-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-article-setup-buffer): Set article mode truncation
+	on every setup buffer call to allow this to change from article to
+	article.
+
+	* shr.el (shr-tag-table): Experimental feature: Truncate lines in
+	buffers where we have a wide table.
+
 2010-10-14  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* gnus-sum.el (gnus-summary-refer-thread): Implement a version that

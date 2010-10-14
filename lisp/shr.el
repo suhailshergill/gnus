@@ -540,6 +540,11 @@ Return a string with image data."
 	 ;; unbreakable text).
 	 (sketch (shr-make-table cont suggested-widths))
 	 (sketch-widths (shr-table-widths sketch suggested-widths)))
+    ;; This probably won't work very well.
+    (when (> (1+ (loop for width across sketch-widths
+		       summing (1+ width)))
+	     (frame-width))
+      (setq truncate-lines t))
     ;; Then render the table again with these new "hard" widths.
     (shr-insert-table (shr-make-table cont sketch-widths t) sketch-widths))
   ;; Finally, insert all the images after the table.  The Emacs buffer
