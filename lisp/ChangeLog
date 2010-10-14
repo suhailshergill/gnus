@@ -1,3 +1,8 @@
+2010-10-14  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* gnus-sum.el (gnus-summary-refer-thread): Implement a version that
+	uses *-request-thread.
+
 2010-10-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-open-connection): Remove %s from openssl

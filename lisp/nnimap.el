@@ -1311,6 +1311,25 @@ textual parts.")
   (setq nnimap-status-string "Read-only server")
   nil)
 
+(deffoo nnimap-request-thread (id)
+    (let* ((refs (split-string
+	       (or (mail-header-references (gnus-summary-article-header))
+		   "")))
+	   (cmd (let ((value
+		       (format
+			"(OR HEADER REFERENCES %s HEADER Message-Id %s)"
+			id id)))
+		  (dolist (refid refs value)
+		    (setq value (format
+				 "(OR (OR HEADER Message-Id %s HEADER REFERENCES %s) %s)"
+				 refid refid value)))))
+	   (result
+	    (with-current-buffer (nnimap-buffer)
+	      (nnimap-command  "UID SEARCH %s" cmd))))
+      (gnus-fetch-headers (and (car result)
+	   (delete 0 (mapcar #'string-to-number
+			     (cdr (assoc "SEARCH" (cdr result)))))))))
+
 (defun nnimap-possibly-change-group (group server)
   (let ((open-result t))
     (when (and server
