@@ -319,7 +319,7 @@ textual parts.")
 		'("imap"))
 	       ((eq nnimap-stream 'starttls)
 		(let ((tls-program
-		       '("openssl s_client %s -connect %h:%p -no_ssl2 -ign_eof -starttls imap")))
+		       '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof -starttls imap")))
 		  (open-tls-stream
 		   "*nnimap*" (current-buffer) nnimap-address
 		   (setq port (or nnimap-server-port "imap"))))
