@@ -6,6 +6,11 @@
 
 	* shr.el (shr-tag-img): Ignore images with no data.
 
+2010-10-15  Julien Danjou  <julien@danjou.info>
+
+	* mml.el (mml-generate-mime-1): Add `mml-enable-flow' variable to add a
+	possibility to disable format=flow encoding when using hard newlines.
+
 2010-10-15  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-insert): Remove space inserted before or after a
