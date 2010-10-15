@@ -1,5 +1,7 @@
 2010-10-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el: Autoload gnus-html-show-images.
+
 	* nnimap.el: Use nnheader-message throughout.
 
 	* shr.el (shr-tag-img): Ignore images with no data.
