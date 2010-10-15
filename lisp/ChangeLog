@@ -3,6 +3,11 @@
 	* gnus-sum.el (gnus-summary-refer-thread): unconditionally ignore
 	duplicates.
 
+2010-10-15  Kan-Ru Chen  <kanru@kanru.info>  (tiny change)
+
+	* gnus-diary.el (gnus-diary-check-message): Fix gnus-completing-read
+	call.
+
 2010-10-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.el: Autoload gnus-html-show-images.
