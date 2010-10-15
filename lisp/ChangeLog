@@ -1,3 +1,8 @@
+2010-10-15  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* gnus-sum.el (gnus-summary-refer-thread): unconditionally ignore
+	duplicates.
+
 2010-10-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.el: Autoload gnus-html-show-images.
