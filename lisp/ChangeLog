@@ -1,5 +1,8 @@
 2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-get-reply-headers): If we're fed `to-address',
+	then always use that.
+
 	* gnus-art.el (gnus-article-make-menu-bar): The article/group menus
 	aren't so wide as to need to switch off the edit menu.
 
