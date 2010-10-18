@@ -617,7 +617,13 @@ textual parts.")
     (nreverse parts)))
 
 (deffoo nnimap-request-group (group &optional server dont-check info)
-  (let ((result (nnimap-possibly-change-group group server))
+  (let ((result (nnimap-possibly-change-group
+		 ;; Don't SELECT the group if we're going to select it
+		 ;; later, anyway.
+		 (if dont-check
+		     nil
+		   group)
+		 server))
 	articles active marks high low)
     (with-current-buffer nntp-server-buffer
       (when result
@@ -634,6 +640,7 @@ textual parts.")
 		   (nnimap-send-command "SELECT %S" (utf7-encode group t)))
 		  (flag-sequence
 		   (nnimap-send-command "UID FETCH 1:* FLAGS")))
+	      (setf (nnimap-group nnimap-object) group)
 	      (nnimap-wait-for-response flag-sequence)
 	      (setq marks
 		    (nnimap-flags-to-marks

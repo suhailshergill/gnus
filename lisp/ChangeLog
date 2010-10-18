@@ -1,3 +1,8 @@
+2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-group): Don't SELECT the group twice on
+	`M-g'.
+
 2010-10-18  Andrew Cohen  <cohen@andy.bu.edu>
 
  	* gnus-registry.el (gnus-registry-split-fancy-with-parent): Splitting
