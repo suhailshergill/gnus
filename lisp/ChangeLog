@@ -1,3 +1,9 @@
+2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-article-dumbquotes-map): Make into a char/string
+	alist, so that we can look for non-Unicode chars.
+	(article-translate-strings): Allow both character and string maps.
+
 2010-10-18  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-insert): Don't insert space behind a wide character
