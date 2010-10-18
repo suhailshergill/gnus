@@ -2,6 +2,8 @@
 
 	* nnimap.el (nnimap-request-group): Don't SELECT the group twice on
 	`M-g'.
+	(nnimap-update-info): Update flags/read marks even if \* isn't part of
+	the permanent marks.
 
 2010-10-18  Andrew Cohen  <cohen@andy.bu.edu>
 
