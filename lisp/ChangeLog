@@ -1,5 +1,8 @@
 2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-delay.el (gnus-delay-article): Remove superfluous `group'
+	binding.  Suggested by Leo <sdl.web@gmail.com> (bug #6613).
+
 	* nnimap.el (nnimap-request-group): Don't SELECT the group twice on
 	`M-g'.
 	(nnimap-update-info): Update flags/read marks even if \* isn't part of
