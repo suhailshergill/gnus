@@ -4402,7 +4402,6 @@ If variable `gnus-use-long-file-name' is non-nil, it is
 (defun gnus-article-make-menu-bar ()
   (unless (boundp 'gnus-article-commands-menu)
     (gnus-summary-make-menu-bar))
-  (gnus-turn-off-edit-menu 'article)
   (unless (boundp 'gnus-article-article-menu)
     (easy-menu-define
      gnus-article-article-menu gnus-article-mode-map ""

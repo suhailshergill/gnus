@@ -1,5 +1,8 @@
 2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-make-menu-bar): The article/group menus
+	aren't so wide as to need to switch off the edit menu.
+
 	* gnus-delay.el (gnus-delay-article): Remove superfluous `group'
 	binding.  Suggested by Leo <sdl.web@gmail.com> (bug #6613).
 
