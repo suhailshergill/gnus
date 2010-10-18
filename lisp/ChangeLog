@@ -1,3 +1,9 @@
+2010-10-18  Andrew Cohen  <cohen@andy.bu.edu>
+
+ 	* gnus-registry.el (gnus-registry-split-fancy-with-parent): Splitting
+	according to references/in-reply-to obeys the ignore-groups variable,
+	while splitting by sender and subject do not.
+
 2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-art.el (gnus-article-dumbquotes-map): Make into a char/string
