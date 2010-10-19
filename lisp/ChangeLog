@@ -1,5 +1,10 @@
 2010-10-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nndoc.el (nndoc-type-alist): Add git support.
+	(nndoc-git-type-p): New function.
+	(nndoc-transform-git-article): Ditto.
+	(nndoc-transform-git-headers): Ditto.
+
 	* shr.el (shr-parse-style): New function.
 	(shr-tag-span): Ditto.
 
