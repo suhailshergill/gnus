@@ -1,3 +1,15 @@
+2010-10-19  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* shr.el: Load kinsoku.
+	(shr-kinsoku-shorten): New internal variable.
+	(shr-find-fill-point): Make kinsoku shorten text line if
+	shr-kinsoku-shorten is bound to non-nil.
+	(shr-tag-table): Bild shr-kinsoku-shorten to t; refer to
+	shr-indentation too when testing if table is wider than frame width.
+	(shr-insert-table): Use `string-width' instead of `length' to measure
+	text width.
+	(shr-insert-table-ruler): Make sure indentation is done at bol.
+
 2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-agent.el (gnus-agent-toggle-plugged): Use the right minor mode
@@ -20,7 +32,7 @@
 
 2010-10-18  Andrew Cohen  <cohen@andy.bu.edu>
 
- 	* gnus-registry.el (gnus-registry-split-fancy-with-parent): Splitting
+	* gnus-registry.el (gnus-registry-split-fancy-with-parent): Splitting
 	according to references/in-reply-to obeys the ignore-groups variable,
 	while splitting by sender and subject do not.
 
