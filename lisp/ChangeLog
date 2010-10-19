@@ -10,6 +10,12 @@
 	text width.
 	(shr-insert-table-ruler): Make sure indentation is done at bol.
 
+2010-10-19  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* nnimap.el (nnimap-request-move-article, nnimap-parse-line)
+	(nnimap-process-expiry-targets): Use unibyte for buffers that hold
+	undecoded network data.
+
 2010-10-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-agent.el (gnus-agent-toggle-plugged): Use the right minor mode
