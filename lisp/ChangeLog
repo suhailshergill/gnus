@@ -1,5 +1,8 @@
 2010-10-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-parse-style): New function.
+	(shr-tag-span): Ditto.
+
 	* nnmairix.el (nnmairix-summary-mode-hook): Move nnmairix's `$' command
 	to `G G' to avoid collisions.
 
