@@ -1,3 +1,8 @@
+2010-10-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnmairix.el (nnmairix-summary-mode-hook): Move nnmairix's `$' command
+	to `G G' to avoid collisions.
+
 2010-10-19  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el: Load kinsoku if necessary.
