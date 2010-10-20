@@ -1,3 +1,8 @@
+2010-10-20  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-blocked-images): New function.  Allow the
+	`gnus-blocked-images' to be a function.
+
 2010-10-20  Julien Danjou  <julien@danjou.info>
 
 	* spam.el (spam-list-of-processors): Mark as obsolete.

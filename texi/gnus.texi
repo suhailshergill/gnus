@@ -12462,15 +12462,20 @@ that's based on @code{w3m}.
 
 @item gnus-blocked-images
 @vindex gnus-blocked-images
-Images that have @acronym{URL}s that match this regexp won't be
-fetched and displayed.  For instance, do block all @acronym{URL}s that
-have the string ``ads'' in them, do the following:
+External images that have @acronym{URL}s that match this regexp won't
+be fetched and displayed.  For instance, do block all @acronym{URL}s
+that have the string ``ads'' in them, do the following:
 
 @lisp
 (setq gnus-blocked-images "ads")
 @end lisp
 
-The default is to block all external images.
+This can also be a function to be evaluated.  If so, it will be
+called with the group name as the parameter.  The default value is
+@code{gnus-block-private-groups}, which will return @samp{"."} for
+anything that isn't a newsgroup.  This means that no external images
+will be fetched as a result of reading mail, so that nobody can use
+web bugs (and the like) to track whether you've read email.
 
 @item gnus-html-cache-directory
 @vindex gnus-html-cache-directory

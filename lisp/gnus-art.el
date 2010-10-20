@@ -1639,8 +1639,11 @@ This requires GNU Libidn, and by default only enabled if it is found."
   :group 'gnus-article
   :type 'boolean)
 
-(defcustom gnus-blocked-images "."
-  "Images that have URLs matching this regexp will be blocked."
+(defcustom gnus-blocked-images 'gnus-block-private-groups
+  "Images that have URLs matching this regexp will be blocked.
+This can also be a function to be evaluated.  If so, it will be
+called with the group name as the parameter, and should return a
+regexp."
   :version "24.1"
   :group 'gnus-art
   :type 'regexp)
@@ -6895,6 +6898,18 @@ If given a prefix, show the hidden text instead."
 	  (set-window-point (gnus-get-buffer-window (current-buffer) t)
 			    (point))
 	  (set-buffer buf))))))
+
+(defun gnus-block-private-groups (group)
+  (if (gnus-news-group-p group)
+      ;; Block nothing in news groups.
+      nil
+    ;; Block everything anywhere else.
+    "."))
+
+(defun gnus-blocked-images ()
+  (if (functionp gnus-blocked-images)
+      (funcall gnus-blocked-images gnus-newsgroup-name)
+    gnus-blocked-images))
 
 ;;;
 ;;; Article editing
