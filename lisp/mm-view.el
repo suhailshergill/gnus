@@ -426,7 +426,7 @@
        (buffer-string)))))
 
 (defun mm-inline-text-html (handle)
-  (let* ((func (or mm-inline-text-html-renderer mm-text-html-renderer))
+  (let* ((func mm-text-html-renderer)
 	 (entry (assq func mm-text-html-renderer-alist))
 	 (inhibit-read-only t))
     (if entry

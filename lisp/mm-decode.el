@@ -137,10 +137,6 @@ nil    : use external viewer (default web browser)."
 		 (function))
   :group 'mime-display)
 
-(defvar mm-inline-text-html-renderer nil
-  "Function used for rendering inline HTML contents.
-It is suggested to customize `mm-text-html-renderer' instead.")
-
 (defcustom mm-inline-text-html-with-images nil
   "If non-nil, Gnus will allow retrieving images in HTML contents with
 the <img> tags.  It has no effect on Emacs/w3.  See also the
@@ -245,8 +241,7 @@ before the external MIME handler is invoked."
     ("text/html"
      mm-inline-text-html
      (lambda (handle)
-       (or mm-inline-text-html-renderer
-	   mm-text-html-renderer)))
+       mm-text-html-renderer))
     ("text/x-vcard"
      mm-inline-text-vcard
      (lambda (handle)
