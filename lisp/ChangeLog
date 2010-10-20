@@ -116,8 +116,8 @@
 
 2010-10-15  Julien Danjou  <julien@danjou.info>
 
-	* mml.el (mml-generate-mime-1): Add `mml-enable-flow' variable to add a
-	possibility to disable format=flow encoding when using hard newlines.
+	* mml.el (mml-generate-mime-1): Add `mml-enable-flowed' variable to add
+	a possibility to disable format=flow encoding when using hard newlines.
 
 2010-10-15  Katsumi Yamaoka  <yamaoka@jpl.org>
 
