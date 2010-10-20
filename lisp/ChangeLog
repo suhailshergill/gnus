@@ -1,3 +1,10 @@
+2010-10-20  Andreas Seltenreich  <seltenreich@gmx.de>
+
+	* gnus-draft.el (gnus-draft-check-draft-articles): Don't unnecessarily
+	run file-truename on remote files.  This can be expensive and even
+	prevent one from editing drafts if some unrelated buffer has a stale
+	connection.
+
 2010-10-20  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-find-fill-point): Shorten line if the preceding char is
