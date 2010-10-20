@@ -9809,10 +9809,10 @@ Customization, emacs-mime, The Emacs MIME Manual}) to convert the
 @acronym{HTML}.  Pre-defined functions you can use include:
 
 @table @code
-@item mm-shr
+@item shr
 Use Gnus simple html renderer.
 
-@item gnus-article-html
+@item gnus-w3m
 Use Gnus rendered based on w3m.
 
 @item w3
