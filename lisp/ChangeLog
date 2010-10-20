@@ -1,7 +1,12 @@
 2010-10-20  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (article-wash-html): Simplify and remove the charset
+	stuff.  Use the normal html rendering code instead of the special html
+	washing code.
+
 	* mm-view.el (mm-text-html-renderer-alist): Add the `shr' and
 	`gnus-w3m' symbols.
+	(mm-text-html-washer-alist): Removed.
 
 	* mm-decode.el (mm-inline-text-html-renderer): Removed.
 	(mm-inline-media-tests): Removed use.
