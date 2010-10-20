@@ -50,9 +50,11 @@
 (defvar w3m-minor-mode-map)
 
 (defvar mm-text-html-renderer-alist
-  '((w3  . mm-inline-text-html-render-with-w3)
+  '((shr . mm-shr)
+    (w3  . mm-inline-text-html-render-with-w3)
     (w3m . mm-inline-text-html-render-with-w3m)
     (w3m-standalone . mm-inline-text-html-render-with-w3m-standalone)
+    (gnus-w3m . gnus-article-html)
     (links mm-inline-render-with-file
 	   mm-links-remove-leading-blank
 	   "links" "-dump" file)

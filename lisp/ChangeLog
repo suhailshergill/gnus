@@ -1,7 +1,11 @@
 2010-10-20  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-view.el (mm-text-html-renderer-alist): Add the `shr' and
+	`gnus-w3m' symbols.
+
 	* mm-decode.el (mm-inline-text-html-renderer): Removed.
 	(mm-inline-media-tests): Removed use.
+	(mm-text-html-renderer): Change default to the `shr' symbol.
 
 	* mm-view.el (mm-inline-text-html): Removed use.
 
