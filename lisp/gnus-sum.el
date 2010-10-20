@@ -10257,7 +10257,7 @@ groups."
   "Make edits to the current article permanent."
   (interactive)
   (save-excursion
-   ;; The buffer restriction contains the entire article if it exists.
+    ;; The buffer restriction contains the entire article if it exists.
     (when (article-goto-body)
       (let ((lines (count-lines (point) (point-max)))
 	    (length (- (point-max) (point)))
@@ -10325,8 +10325,8 @@ groups."
 	;; Prettify the article buffer again.
 	(unless no-highlight
 	  (with-current-buffer gnus-article-buffer
-	    ;;;!!! Fix this -- article should be rehighlighted.
-	    ;;;(gnus-run-hooks 'gnus-article-display-hook)
+	    ;;!!! Fix this -- article should be rehighlighted.
+	    ;;(gnus-run-hooks 'gnus-article-display-hook)
 	    (set-buffer gnus-original-article-buffer)
 	    (gnus-request-article
 	     (cdr gnus-article-current)
