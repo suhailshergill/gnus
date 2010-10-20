@@ -2,6 +2,7 @@
 
 	* gnus-art.el (gnus-blocked-images): New function.  Allow the
 	`gnus-blocked-images' to be a function.
+	(gnus-article-wash-function): Removed.
 
 2010-10-20  Julien Danjou  <julien@danjou.info>
 

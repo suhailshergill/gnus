@@ -9803,13 +9803,10 @@ If a prefix is given, a charset will be asked for.  If it is a number,
 the charset defined in @code{gnus-summary-show-article-charset-alist}
 (@pxref{Paging the Article}) will be used.
 
-@vindex gnus-article-wash-function
 The default is to use the function specified by
 @code{mm-text-html-renderer} (@pxref{Display Customization, ,Display
 Customization, emacs-mime, The Emacs MIME Manual}) to convert the
-@acronym{HTML}, but this is controlled by the
-@code{gnus-article-wash-function} variable.  Pre-defined functions you
-can use include:
+@acronym{HTML}.  Pre-defined functions you can use include:
 
 @table @code
 @item mm-shr

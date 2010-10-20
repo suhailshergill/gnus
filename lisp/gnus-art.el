@@ -1621,9 +1621,6 @@ It is a string, such as \"PGP\". If nil, ask user."
   :type 'string
   :group 'mime-security)
 
-(defvar gnus-article-wash-function nil
-  "Function used for converting HTML into text.")
-
 (defcustom gnus-use-idna (and (condition-case nil (require 'idna) (file-error))
 			      (mm-coding-system-p 'utf-8)
 			      (executable-find idna-program))
@@ -2732,7 +2729,7 @@ charset defined in `gnus-summary-show-article-charset-alist' is used."
       (save-window-excursion
 	(save-restriction
 	  (narrow-to-region (point) (point-max))
-	  (let* ((func (or gnus-article-wash-function mm-text-html-renderer))
+	  (let* ((func mm-text-html-renderer)
 		 (entry (assq func mm-text-html-washer-alist)))
 	    (when entry
 	      (setq func (cdr entry)))
