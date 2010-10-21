@@ -1360,7 +1360,7 @@ saved \"archive\" method to be updated whenever you change the value of
   :group 'gnus-message
   :type 'boolean)
 
-(defcustom gnus-message-archive-group ((format-time-string "sent.%Y-%m"))
+(defcustom gnus-message-archive-group '((format-time-string "sent.%Y-%m"))
   "*Name of the group in which to save the messages you've written.
 This can either be a string; a list of strings; or an alist
 of regexps/functions/forms to be evaluated to return a string (or a list
