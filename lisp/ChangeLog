@@ -1,7 +1,3 @@
-2010-10-21  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* gnus-sum.el (gnus-summary-edit-article-done): Bind replace-result.
-
 2010-10-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-html.el (gnus-html-prefetch-images): Only prefetch http images
