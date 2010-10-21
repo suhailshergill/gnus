@@ -17,20 +17,20 @@
   IMHO. -- rsteib) in group, summary and message mode.
 
   Some modes might also deserve improved tool bars:
-  
+
   - gnus-draft-mode
-  
+
   - mml-preview buffer:
-  
+
     . zap most buttons; except print, customize (?) and help
-  
+
     . "exit" should just kill the buffer
-  
+
   - gnus-server-mode: Add some commands from the Connections and Server
     menu.
-  
+
   - gnus-browse-mode (could borrow some icons from gnus-group-mode)
-  
+
   (See http://article.gmane.org/gmane.emacs.gnus.general/62147).
 
 * Maybe Gnus should support the LIST SUBSCRIPTIONS, see RFC 2980.
@@ -50,7 +50,7 @@
 
 * gnus-topic-kill-region
   From Colin Marquardt <colin.marquardt@usa.alcatel.com>
-  
+
   I noticed that when re-arranging topics, C-k yanks a topic just fine
   (runs gnus-topic-kill-group).
 
@@ -63,7 +63,7 @@
   gnus-group-kill-region which handles topics as well?
 
 * Speed up sorting in summary buffer if there is a limit.
-  
+
   Suggested by Daniel Ortmann <ortmann@isl.net>.
 
 * Investigate the memory usage of Gnus. 
@@ -73,16 +73,16 @@
   design are causing waste; they could be in Gnus, or in Emacs. -- RMS
 
 * Google group digest
-  
+
   The result of Google group search return a thread. Is it a digest
   format?
 
 * NOV caching.
-  
+
   Implement NOV caching with Gnus Agent.
 
 * Allow specification of server in Newsgroups header
-  
+
   [Kai wrote]
 
   WIBNI I could put `Newsgroups: nntp+quimby:bla' into a message and
@@ -228,9 +228,6 @@
   so one could do things like limiting on, to do whatever one likes with
   these articles.
 
-* A possibility to add notes to messages. If those could include links
-  to other (stored) messages this would be very practical.
-
 * Allow article editing in groups which do not support it, but
   emulating it via deleting the old article and entering the new one
   into the group.  This would be very useful to support `T ^' (say) in
@@ -337,8 +334,6 @@
 * Make it possible to refer to uniquely-named groups without
   select-method prefix (e.g. mail.misc instead of nnml:mail.misc).
 
-* Allow a user-defined picons directory for personal groups.
-
 * Annotations as discussed last autumn. Be able to make comments to
   articles for all backends. The comments maybe should go into a
   seperate "backend", like nndraft.
@@ -369,8 +364,6 @@ the same in the group buffer and on the SPC prompt.
    [w3 or nnwarchive?]
 
 * `^-- ' is made into - in LaTeX.
-
-*  gnus-kill is much slower than it was in GNUS 4.1.3.
 
 *  when expunging articles on low score, the sparse nodes keep
  hanging on?
@@ -500,9 +493,6 @@ exceeding lisp nesting on huge groups.
 *  a regexp alist that says what level groups are to be subscribed
  on.  Eg. - `(("nnml:" . 1))'.
 
-*  easier interface to nnkiboze to create ephemeral groups that
- contain groups that match a regexp.
-
 *  allow newlines in <URL:> urls, but remove them before using the
  URL.
 
@@ -521,20 +511,11 @@ exceeding lisp nesting on huge groups.
 *  when entering a group, Gnus should look through the score files
  very early for `local' atoms and set those local variables.
 
-*  message annotations.
-
 *  topics are always yanked before groups, and that's not good.
 
 *  (set-extent-property extent 'help-echo "String to display in
  minibuf") to display help in the minibuffer on buttons under
  XEmacs.
-
-*  allow group line format spec to say how many articles there are
- in the cache.
-
-*  AUTHINFO GENERIC
-
-*  `run-with-idle-timer' in gnus-demon.
 
 *  stop using invisible text properties and start using overlays
  instead
@@ -622,8 +603,6 @@ exceeding lisp nesting on huge groups.
 *  function for starting to edit a file to put into the current mail
  group.
 
-*  score-find-trace should display the total score of the article.
-
 *  "ghettozie" - score on Xref header and nix it out after using it
  to avoid marking as read in other groups it has been crossposted
  to.
@@ -647,13 +626,6 @@ exceeding lisp nesting on huge groups.
 
 *  `gnus-summary-find-matching' should accept pseudo-"headers" like
  "body", "head" and "all"
-
-* When buttifying <URL: > things, all white space (including newlines) should
- be ignored.
-
- [Done]
-
- But not for cited URLs.
 
 *  Process-marking all groups in a topic should process-mark groups
  in subtopics as well.
@@ -722,10 +694,6 @@ gnus-killed-list:
 *  Topic movement commands - like thread movement.  Up, down,
  forward, next.
 
-*  a way to tick/mark as read Gcc'd articles.
-
-   [done, (setq gnus-inews-mark-gcc-as-read t)]
-
 *  a way to say that all groups within a specific topic comes from a
  particular server?  Hm.
 
@@ -737,9 +705,6 @@ gnus-killed-list:
 *  a command to create an ephemeral nndoc group out of a file, and
  then splitting it/moving it to some other group/backend.
 
-*  a group parameter for nnkiboze groups that says that all kibozed
- articles should be entered into the cache.
-
 *  It should also probably be possible to delimit what
  `gnus-jog-cache' does - for instance, work on just some groups, or
  on some levels, and entering just articles that have a score
@@ -747,8 +712,6 @@ gnus-killed-list:
 
 *  nnfolder should append to the folder instead of re-writing the
  entire folder to disk when accepting new messages.
-
-*  allow all backends to do the proper thing with .gz files.
 
 *  a backend for reading collections of babyl files nnbabylfolder?
 
@@ -823,8 +786,6 @@ gnus-killed-list:
 *  allow exploding incoming digests when reading incoming mail and
  splitting the resulting digests.
 
-*  nnsoup shouldn't set the `message-' variables.
-
 *  command to nix out all nnoo state information.
 
 *  nnmail-process-alist that calls functions if group names matches
@@ -871,10 +832,6 @@ gnus-killed-list:
 
 *  command for enter a group just to read the cached articles.  A
  way to say "ignore the nntp connection; just read from the cache."
-
-*  `X u' should decode base64 articles.
-
-   [`X m' does so.]
 
 *  a way to hide all "inner" cited text, leaving just the most
  recently cited text.
@@ -995,9 +952,6 @@ gnus-killed-list:
  I'd like `nneething' to use this function, so it would work on a
  directory potentially containing mboxes or babyl files.
 
-* Please send a mail to bwarsaw@cnri.reston.va.us (Barry A. Warsaw)
- and tell him what you are doing.
-
 * Currently, I get prompted:
 
  decend into sci?  - type y decend into sci.something ?  - type n
@@ -1100,8 +1054,6 @@ gnus-killed-list:
  buffer active.  Make it work when posting from the group buffer as
  well.  (message-sent-hook).
 
-*  rewrite gnus-demon to use run-with-idle-timers.
-
 *  * Enhancements to Gnus:
 
  Add two commands:
@@ -1118,16 +1070,11 @@ gnus-killed-list:
  through the article numbers and see that there are no duplicates,
  and stuff.
 
-*  `unsmileyfy-buffer' to undo smileification.
-
 *  a command to give all relevant info on an article, including all
  secondary marks.
 
 *  when doing `-request-accept-article', the backends should do the
  nnmail duplicate checking.
-
-*  allow `message-signature-file' to be a function to return the
- value of the signature file.
 
 *  In addition, I would love it if I could configure message-tab so
  that it could call `bbdb-complete-name' in other headers.  So,
@@ -1174,7 +1121,9 @@ gnus-killed-list:
 *  a new nncvs backend.  Each group would show an article, using
  version branches as threading, checkin date as the date, etc.
 
-*  new Date header scoring type - older, newer
+* A Date scoring type that will match if the article is less than a certain
+ number of days old. With - < > = (etc) that take floating point numbers and
+ match on the age of the article.
 
 *  use the summary toolbar in the article buffer.
 
@@ -1192,10 +1141,6 @@ gnus-killed-list:
 
 *  make it possible to cancel articles using the select method for
  the current group.
-
-*  `gnus-summary-select-article-on-entry' or something.  It'll
- default to t and will select whatever article decided by
- `gnus-auto-select-first'.
 
 *  a new variable to control which selection commands should be
  unselecting.  `first', `best', `next', `prev', `next-unread',
@@ -1232,20 +1177,6 @@ gnus-killed-list:
 
 *  allow message-default-headers to be a function.
 
-*  new Date score match types - < > = (etc) that take floating point
- numbers and match on the age of the article.
-
-*      >  > > If so, I've got one gripe: It seems that when I fire up gnus 5.2.25
-      >  > > under xemacs-19.14, it's creating a new frame, but is erasing the
-      >  > > buffer in the frame that it was called from =:-O
-      >
-      >  > Hm.  How do you start up Gnus?  From the toolbar or with
-      >  > `M-x gnus-other-frame'?
-      >
-      >    I normally start it up from the toolbar; at
-      > least that's the way I've caught it doing the
-      > deed before.
-
 *  all commands that react to the process mark should push the
  current process mark set onto the stack.
 
@@ -1263,8 +1194,6 @@ gnus-killed-list:
 
 *  use run-with-idle-timer for gnus-demon instead of the home-brewed
  stuff for better reliability.
-
-*  add a way to select which NoCeM type to apply - spam, troll, etc.
 
 *  nndraft-request-group should tally auto-save files.
 
@@ -1287,19 +1216,12 @@ gnus-killed-list:
 
 *  include the texi/dir file in the distribution.
 
-*  format spec to "tab" to a position.
-
-*  Move all prompting to the new `M-n' default style.
-
 *  command to display all dormant articles.
 
 *  gnus-auto-select-next makeover - list of things it should do.
 
 *  a score match type that adds scores matching on From if From has
  replied to something someone else has said.
-
-*  Read Netscape discussion groups:
- snews://secnews.netscape.com/netscape.communicator.unix
 
 * One command to edit the original version if an article, and one to
  edit the displayed version.
@@ -1326,11 +1248,6 @@ gnus-killed-list:
  special, unique buffer.
 
 * A command to send a mail to the admin-address group param.
-
-* A Date scoring type that will match if the article is less than a
- certain number of days old.
-
-* New spec: %~(tab 56) to put point on column 56
 
 * Allow Gnus Agent scoring to use normal score files.
 
@@ -1363,8 +1280,6 @@ gnus-killed-list:
 * gnus-fetch-group and friends should exit Gnus when the user exits
  the group.
 
-* The jingle is only played on the second invocation of Gnus.
-
 * Crossposted articles should "inherit" the % or  mark from the other
  groups it has been crossposted to, or something.  (Agent.)
 
@@ -1379,18 +1294,6 @@ gnus-killed-list:
 
 * When stading on a topic line and `t'-ing, point goes to the last
  line.  It should go somewhere else.
-
-* I'm having trouble accessing a newsgroup with a "+" in its name
- with Gnus.  There is a new newsgroup on msnews.microsoft.com named
- "microsoft.public.multimedia.directx.html+time" that I'm trying to
- access as
- "nntp+msnews.microsoft.com:microsoft.public.multimedia.directx.html+time"
- but it gives an error that it cant access the group.
-
- Is the "+" character illegal in newsgroup names?  Is there any way
- in Gnus to work around this?  (gnus 5.6.45 - XEmacs 20.4)
-
- [It works in 5.8.8.]
 
 *  When `#F', do:
 
