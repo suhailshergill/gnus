@@ -1202,7 +1202,10 @@ gnus-killed-list:
 
 *  nn*-spool-methods
 
-*  interrupitng agent fetching of articles should save articles.
+* Interrupting the agent fetching of articles should save articles.
+ Have the Agent write out articles, one by one, as it retrieves
+ them, to avoid having to re-fetch them all if Emacs should crash
+ while fetching.
 
 *  command to open a digest group, and copy all the articles there
  to the current group.
@@ -1317,10 +1320,6 @@ gnus-killed-list:
 
 * Remove list identifiers from the subject in the summary when doing
  `^' and the like.
-
-* Have the Agent write out articles, one by one, as it retrieves
- them, to avoid having to re-fetch them all if Emacs should crash
- while fetching.
 
 * nnweb should include the "get whole article" article when getting
  articles.
