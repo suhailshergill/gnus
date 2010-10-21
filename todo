@@ -1175,8 +1175,6 @@ gnus-killed-list:
 	     (yes-or-no-p "New mail has arrived.  Quit Gnus anyways? ")
 	     (y-or-n-p "Are you sure you want to quit Gnus? "))))
 
-*  allow message-default-headers to be a function.
-
 *  all commands that react to the process mark should push the
  current process mark set onto the stack.
 

@@ -1,3 +1,8 @@
+2010-10-21  Julien Danjou  <julien@danjou.info>
+
+	* message.el (message-setup-1): Allow message-default-headers to be a
+	function.
+
 2010-10-21  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-tag-table): Simplify.
