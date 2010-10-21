@@ -1,8 +1,6 @@
 ;; Also know as the "wish list".  Some are done. For the others, no
 ;; promise when to be implemented.
 
-* Go through the todo list and remove items already done.
-
 * Use a new custom type (`define-widget') for posting-style in `gnus-cus.el'
   (G c) and for `gnus-posting-styles'.  Maybe some allowed types are still
   missing.
@@ -851,11 +849,6 @@ gnus-killed-list:
 *  command to create an ephemeral nnvirtual group that matches some
  regexp(s).
 
-*  nndoc should understand "Content-Type: message/rfc822" forwarded
- messages.
-
- [done]
-
 *  it should be possible to score "thread" on the From header.
 
 *  hitting RET on a "gnus-uu-archive" pseudo article should unpack
@@ -1089,14 +1082,6 @@ gnus-killed-list:
  somewhat limiting the top-level directory only (in case
  directories would be matched by the wildcard expression).
 
-* It would be nice if it also handled
-
- <URL:news://sunsite.auc.dk/>
-
- which should correspond to `B nntp RET sunsite.auc.dk' in *Group*.
-
- [done]
-
 *    Take a look at w3-menu.el in the Emacs-W3 distribution - this
  works out really well.  Each menu is 'named' by a symbol that
  would be on a gnus-*-menus (where * would be whatever, but at
@@ -1288,10 +1273,6 @@ gnus-killed-list:
 *  gnus-article-highlight-limit that says when not to highlight
  (long) articles.
 
-*  (nnoo-set SERVER VARIABLE VALUE)
-
-   [done]
-
 *  nn*-spool-methods
 
 *  interrupitng agent fetching of articles should save articles.
@@ -1440,19 +1421,8 @@ gnus-killed-list:
  them, to avoid having to re-fetch them all if Emacs should crash
  while fetching.
 
-* Be able to forward groups of messages as MIME digests.
-
- [done]
-
 * nnweb should include the "get whole article" article when getting
  articles.
-
-* When I type W W c (gnus-article-hide-citation) in the summary
- buffer, the citations are revealed, but the [+] buttons don't turn
- into [-] buttons.  (If I click on one of the [+] buttons, it does
- turn into a [-] button.)
-
- [fixed]
 
 * Perhaps there should be a command to "attach" a buffer of comments
  to a message?  That is, `B WHATEVER', you're popped into a buffer,
