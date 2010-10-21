@@ -1355,7 +1355,7 @@ updated if the value of this variable is nil, even if you change the
 value of `gnus-message-archive-method' afterward.  If you want the
 saved \"archive\" method to be updated whenever you change the value of
 `gnus-message-archive-method', set this variable to a non-nil value."
-  :version "24.1"
+  :version "23.1"
   :group 'gnus-server
   :group 'gnus-message
   :type 'boolean)
@@ -1380,6 +1380,7 @@ unprefixed -- which implicitly means \"store on the archive server\".
 However, you may wish to store the message on some other server.  In
 that case, just return a fully prefixed name of the group --
 \"nnml+private:mail.misc\", for instance."
+  :version "24.1"
   :group 'gnus-message
   :type '(choice (const :tag "none" nil)
 		 (const :tag "Weekly" ((format-time-string "sent.%Yw%U")))
