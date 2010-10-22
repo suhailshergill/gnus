@@ -1,3 +1,8 @@
+2010-10-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-group.el (gnus-group-mark-group): Use gnus-group-position-point
+	instead of the summary one.
+
 2010-10-22  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mml.el (mml-preview): Work properly when editing article.
