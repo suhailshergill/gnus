@@ -1,3 +1,8 @@
+2010-10-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-agent.el (gnus-agent-fetch-group): Don't download stuff if the
+	group isn't covered by the agent.
+
 2010-10-22  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-method-default-engines): new variable.
