@@ -1,5 +1,8 @@
 2010-10-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-group-make-articles-read): Propagate marks to the
+	backend for unknown groups.  This is mainly useful for nnimap groups.
+
 	* gnus-agent.el (gnus-agent-fetch-group): Don't download stuff if the
 	group isn't covered by the agent.
 
