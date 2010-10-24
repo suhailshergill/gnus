@@ -1048,12 +1048,7 @@ textual parts.")
 					       (utf7-encode group t))
 			  (nnimap-send-command "UID FETCH %d:* FLAGS" start)
 			  start group command)
-		    sequences)))
-	  ;; Some servers apparently can't have many outstanding
-	  ;; commands, so throttle them.
-	  (when (and (not nnimap-streaming)
-		     (car sequences))
-	    (nnimap-wait-for-response (caar sequences))))
+		    sequences))))
 	sequences))))
 
 (deffoo nnimap-finish-retrieve-group-infos (server infos sequences)
@@ -1431,6 +1426,10 @@ textual parts.")
 	    (if (nnimap-newlinep nnimap-object)
 		""
 	      "\r"))))
+  ;; Some servers apparently can't have many outstanding
+  ;; commands, so throttle them.
+  (unless nnimap-streaming
+    (nnimap-wait-for-response nnimap-sequence))
   nnimap-sequence)
 
 (defun nnimap-log-command (command)

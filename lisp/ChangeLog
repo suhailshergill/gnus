@@ -4,6 +4,8 @@
 	(nnimap-request-move-article): Try to be slighly faster by not
 	requesting the entire message when moving.
 	(nnimap-transform-headers): Don't bug out on bodiless articles.
+	(nnimap-send-command): Have no outstanding messages if the IMAP server
+	doesn't support streaming.
 
 2010-10-24  Julien Danjou  <julien@danjou.info>
 
