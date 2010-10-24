@@ -1,3 +1,13 @@
+2010-10-22  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-method-default-engines): new variable.
+	(nnir-run-query): use it.
+	(nnir-group-mode-hook): remove key binding and move to gnus-group.el.
+	(gnus-summary-nnir-goto-thread): change group if needed.
+
+	* gnus-group.el (gnus-group-group-map): add key binding for
+	gnus-group-make-nnir-group.
+
 2010-10-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-tag-object): Added.
