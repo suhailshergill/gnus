@@ -1,5 +1,8 @@
 2010-10-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-prefetch-images): Decode entities before
+	prefetching images.
+
 	* gnus-sum.el (gnus-group-make-articles-read): Propagate marks to the
 	backend for unknown groups.  This is mainly useful for nnimap groups.
 
