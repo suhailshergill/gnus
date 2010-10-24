@@ -136,6 +136,16 @@ textual parts.")
 (defun nnimap-buffer ()
   (nnimap-find-process-buffer nntp-server-buffer))
 
+(defun nnimap-header-parameters ()
+  (format "(UID RFC822.SIZE BODYSTRUCTURE %s)"
+	  (format
+	   (if (nnimap-ver4-p)
+	       "BODY.PEEK[HEADER.FIELDS %s]"
+	     "RFC822.HEADER.LINES %s")
+	   (append '(Subject From Date Message-Id
+			     References In-Reply-To Xref)
+		   nnmail-extra-headers))))
+
 (deffoo nnimap-retrieve-headers (articles &optional group server fetch-old)
   (with-current-buffer nntp-server-buffer
     (erase-buffer)
@@ -146,14 +156,7 @@ textual parts.")
 	 (nnimap-send-command
 	  "UID FETCH %s %s"
 	  (nnimap-article-ranges (gnus-compress-sequence articles))
-	  (format "(UID RFC822.SIZE BODYSTRUCTURE %s)"
-		  (format
-		   (if (nnimap-ver4-p)
-		       "BODY.PEEK[HEADER.FIELDS %s]"
-		     "RFC822.HEADER.LINES %s")
-		   (append '(Subject From Date Message-Id
-				     References In-Reply-To Xref)
-			   nnmail-extra-headers))))
+	  (nnimap-header-parameters))
 	 t)
 	(nnimap-transform-headers))
       (insert-buffer-substring
@@ -490,12 +493,28 @@ textual parts.")
 		(nnheader-ms-strip-cr)
 		(cons group article)))))))))
 
-(defun nnimap-get-whole-article (article)
+(deffoo nnimap-request-head (article &optional group server to-buffer)
+  (when (nnimap-possibly-change-group group server)
+    (with-current-buffer (nnimap-buffer)
+      (when (stringp article)
+	(setq article (nnimap-find-article-by-message-id group article)))
+      (nnimap-get-whole-article
+       article (format "UID FETCH %%d %s"
+		       (nnimap-header-parameters)))
+      (let ((buffer (current-buffer)))
+	(with-current-buffer (or to-buffer nntp-server-buffer)
+	  (erase-buffer)
+	  (insert-buffer-substring buffer)
+	  (nnheader-ms-strip-cr)
+	  (cons group article))))))
+
+(defun nnimap-get-whole-article (article &optional command)
   (let ((result
 	 (nnimap-command
-	  (if (nnimap-ver4-p)
-	      "UID FETCH %d BODY.PEEK[]"
-	    "UID FETCH %d RFC822.PEEK")
+	  (or command
+	      (if (nnimap-ver4-p)
+		  "UID FETCH %d BODY.PEEK[]"
+		"UID FETCH %d RFC822.PEEK"))
 	  article)))
     ;; Check that we really got an article.
     (goto-char (point-min))
@@ -715,7 +734,10 @@ textual parts.")
 					     &optional last internal-move-group)
   (with-temp-buffer
     (mm-disable-multibyte)
-    (when (nnimap-request-article article group server (current-buffer))
+    (when (funcall (if internal-move-group
+		       'nnimap-request-head
+		     'nnimap-request-article)
+		   article group server (current-buffer))
       ;; If the move is internal (on the same server), just do it the easy
       ;; way.
       (let ((message-id (message-field-value "message-id")))
