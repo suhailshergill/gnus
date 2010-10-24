@@ -6942,7 +6942,9 @@ displayed, no centering will be performed."
 ;; Various summary commands
 
 (defun gnus-summary-select-article-buffer ()
-  "Reconfigure windows to show the article buffer."
+  "Reconfigure windows to show the article buffer.
+If `gnus-widen-article-buffer' is set, show only the article
+buffer."
   (interactive)
   (if (not (gnus-buffer-live-p gnus-article-buffer))
       (error "There is no article buffer for this summary buffer")

@@ -2,6 +2,8 @@
 
 	* gnus-sum.el (gnus-summary-select-article): Make sure we have the
 	original article buffer live.
+	(gnus-summary-select-article-buffer): Mention
+	gnus-widen-article-buffer.
 
 2010-10-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
