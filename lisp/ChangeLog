@@ -1,5 +1,7 @@
 2010-10-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-object): Added.
+
 	* gnus-sum.el (gnus-summary-select-article): Make sure we have the
 	original article buffer live.
 	(gnus-summary-select-article-buffer): Mention
