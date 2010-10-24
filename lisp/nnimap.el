@@ -174,7 +174,7 @@ textual parts.")
 	    (return)))
 	(setq article (match-string 1))
 	;; Unfold quoted {number} strings.
-	(while (re-search-forward "[^]] {\\([0-9]+\\)}\r\n"
+	(while (re-search-forward "[^]][ (]{\\([0-9]+\\)}\r\n"
 				  (1+ (line-end-position)) t)
 	  (setq size (string-to-number (match-string 1)))
 	  (delete-region (+ (match-beginning 0) 2) (point))

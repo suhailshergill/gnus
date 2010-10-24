@@ -6,6 +6,7 @@
 	(nnimap-transform-headers): Don't bug out on bodiless articles.
 	(nnimap-send-command): Have no outstanding messages if the IMAP server
 	doesn't support streaming.
+	(nnimap-transform-headers): Fold {quoted} strings more sloppily.
 
 2010-10-24  Julien Danjou  <julien@danjou.info>
 
