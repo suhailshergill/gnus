@@ -1190,9 +1190,6 @@ gnus-killed-list:
 *  gnus-(group,summary)-highlight should respect any `face' text
  props set on the lines.
 
-*  use run-with-idle-timer for gnus-demon instead of the home-brewed
- stuff for better reliability.
-
 *  nndraft-request-group should tally auto-save files.
 
 *  implement nntp-retry-on-break and nntp-command-timeout.
