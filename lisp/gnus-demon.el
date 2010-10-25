@@ -32,7 +32,6 @@
 (require 'nnheader)
 (require 'nntp)
 (require 'nnmail)
-(require 'gnus-util)
 
 (defgroup gnus-demon nil
   "Demonic behavior."
@@ -105,7 +104,7 @@ Emacs has been idle for IDLE `gnus-demon-timestep's."
   (unless gnus-inhibit-demon
     (when (or (not idle)
               (<= idle (gnus-demon-idle-since)))
-      (gnus-with-local-quit
+      (with-local-quit
        (ignore-errors
          (funcall func))))))
 
