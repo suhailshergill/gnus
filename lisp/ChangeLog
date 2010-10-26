@@ -1,6 +1,10 @@
+2010-10-26  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* lpath.el: Fbind current-idle-time for XEmacs 21.4 and SXEmacs 22.1.
+
 2010-10-25  Julien Danjou  <julien@danjou.info>
 
-	* gnus-util.el: Remove `gnus-with-local-quit'
+	* gnus-util.el: Remove `gnus-with-local-quit'.
 
 	* gnus-demon.el (gnus-demon-init): Use run-with-idle-timer function.
 
