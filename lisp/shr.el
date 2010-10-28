@@ -378,8 +378,9 @@ redirects somewhere else."
                      (shr-rescale-image data))))
         (when image
           (put-image image point alt)))
-    (goto-char point)
-    (insert alt)))
+    (save-excursion
+      (goto-char point)
+      (insert alt))))
 
 (defun shr-rescale-image (data)
   (if (or (not (fboundp 'imagemagick-types))
