@@ -1,5 +1,7 @@
 2010-10-28  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-put-image): Use point even if only inserting text.
+
 	* nnir.el (nnir-run-swish-e): Remove hyrex support.
 
 2010-10-28  Katsumi Yamaoka  <yamaoka@jpl.org>
