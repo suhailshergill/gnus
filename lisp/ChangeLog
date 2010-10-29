@@ -1,5 +1,9 @@
 2010-10-29  Julien Danjou  <julien@danjou.info>
 
+	* gnus-sum.el (gnus-summary-delete-marked-as-read): Remove obsolete
+	defalias.
+	(gnus-summary-delete-marked-with): Remove obsolete defalias.
+
 	* gnus.el: Remove `gnus-nntp-service' variable.
 	(gnus-secondary-servers): Make obsolete.
 	(gnus-nntp-server): Make obsolete.
