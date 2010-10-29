@@ -1,3 +1,10 @@
+2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-quote-specials): Function copied over from
+	imap.el.
+	(nnimap-open-connection): Use AUTHENTICATE PLAIN on servers that say
+	they support that.  Suggested by Tom Regner.
+
 2010-10-29  Julien Danjou  <julien@danjou.info>
 
 	* gnus-sum.el (gnus-summary-delete-marked-as-read): Remove obsolete
