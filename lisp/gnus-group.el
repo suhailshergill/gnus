@@ -1090,8 +1090,7 @@ When FORCE, rebuild the tool bar."
   (when (and (not (featurep 'xemacs))
 	     (boundp 'tool-bar-mode)
 	     tool-bar-mode
-	     ;; The Gnus 5.10.6 code checked (default-value 'tool-bar-mode).
-	     ;; Why?  --rsteib
+             (display-graphic-p)
 	     (or (not gnus-group-tool-bar-map) force))
     (let* ((load-path
 	    (gmm-image-load-path-for-library "gnus"
