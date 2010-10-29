@@ -1615,7 +1615,7 @@ textual parts.")
 	  new-articles)
       (erase-buffer)
       (nnimap-command "SELECT %S" nnimap-inbox)
-      (setf (nnimap-group nnimap-object) group)
+      (setf (nnimap-group nnimap-object) nnimap-inbox)
       (setq new-articles (nnimap-new-articles (nnimap-get-flags "1:*")))
       (when new-articles
 	(nnimap-fetch-inbox new-articles)

@@ -1,5 +1,7 @@
 2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-split-incoming-mail): Fix typo.
+
 	* gnus-util.el (gnus-list-memq-of-list): New function.
 
 	* nnimap.el (nnimap-split-incoming-mail): Note that the INBOX has been
