@@ -526,8 +526,7 @@ FRONT-ADVANCE and REAR-ADVANCE are ignored."
       (while (not (eobp))
 	(insert (make-string (/ (max (- (window-width) (or x 35)) 0) 2)
 			     ?\ ))
-	(forward-line 1))
-      (setq gnus-simple-splash nil))
+	(forward-line 1)))
     (goto-char (point-min))
     (let* ((pheight (+ 20 (count-lines (point-min) (point-max))))
 	   (wheight (window-height))
@@ -811,10 +810,6 @@ XEmacs compatibility workaround."
 	   (cons gnus-xmas-modeline-left-extent gnus-xmas-modeline-glyph)
 	 (cons gnus-xmas-modeline-left-extent (substring line 0 chop)))
        (cons gnus-xmas-modeline-right-extent (substring line chop)))))))
-
-(defun gnus-xmas-splash ()
-  (when (eq (device-type) 'x)
-    (gnus-splash)))
 
 (defun gnus-xmas-annotation-in-region-p (b e)
   (or (map-extents (lambda (e u) t) nil b e nil nil 'mm t)

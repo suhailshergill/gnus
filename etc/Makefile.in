@@ -24,7 +24,7 @@ install:
 	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)/images/gnus" "$(etcdir)/images/mail"
 	@cd $(srcdir) \
 	&& for p in images/gnus/*.pbm images/gnus/*.png images/gnus/*.svg \
-		    images/gnus/*.xbm images/gnus/*.xpm images/gnus/x-splash \
+		    images/gnus/*.xbm images/gnus/*.xpm \
 		    images/mail/*.pbm images/mail/*.png images/mail/*.svg \
 		    images/mail/*.xbm images/mail/*.xpm \
 		    images/*.pbm images/*.png images/*.svg images/*.xbm \
@@ -58,7 +58,7 @@ uninstall:
 	rm -f "$(etcdir)/gnus-tut.txt"
 	@cd $(srcdir) \
 	&& for p in images/gnus/*.pbm images/gnus/*.png images/gnus/*.svg \
-		    images/gnus/*.xbm images/gnus/*.xpm images/gnus/x-splash \
+		    images/gnus/*.xbm images/gnus/*.xpm \
 		    images/mail/*.pbm images/mail/*.png images/mail/*.svg \
 		    images/mail/*.xbm images/mail/*.xpm \
 		    images/*.pbm images/*.png images/*.svg images/*.xbm \

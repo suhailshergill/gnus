@@ -1,5 +1,11 @@
 2010-10-29  Julien Danjou  <julien@danjou.info>
 
+	* gnus-start.el (gnus-1): Remove x-splash calls.
+
+	* gnus-ems.el (gnus-x-splash): Remove.
+
+	* gnus.el (gnus-group-startup-message): Simplify/update code.
+
 	* gnus-xmas.el (gnus-xmas-define): Remove unused gnus-characterp
 	definition.
 
