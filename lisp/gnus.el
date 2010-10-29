@@ -1255,15 +1255,6 @@ by the user.
 If you want to change servers, you should use `gnus-select-method'.
 See the documentation to that variable.")
 
-;; Don't touch this variable.
-(defvar gnus-nntp-service "nntp"
-  "NNTP service name (\"nntp\" or 119).
-This is an obsolete variable, which is scarcely used.  If you use an
-nntp server for your newsgroup and want to change the port number
-used to 899, you would say something along these lines:
-
- (setq gnus-select-method '(nntp \"my.nntp.server\" (nntp-port-number 899)))")
-
 (defcustom gnus-nntpserver-file "/etc/nntpserver"
   "A file with only the name of the nntp server in it."
   :group 'gnus-files
@@ -1287,20 +1278,11 @@ Check the NNTPSERVER environment variable and the
 ;;;###autoload  (custom-autoload 'gnus-select-method "gnus"))
 
 (defcustom gnus-select-method
-  (condition-case nil
-      (nconc
-       (list 'nntp (or (condition-case nil
-			   (gnus-getenv-nntpserver)
-			 (error nil))
-		       (when (and gnus-default-nntp-server
-				  (not (string= gnus-default-nntp-server "")))
-			 gnus-default-nntp-server)
-		       "news"))
-       (if (or (null gnus-nntp-service)
-	       (equal gnus-nntp-service "nntp"))
-	   nil
-	 (list gnus-nntp-service)))
-    (error nil))
+  (list 'nntp (or (gnus-getenv-nntpserver)
+                  (when (and gnus-default-nntp-server
+                             (not (string= gnus-default-nntp-server "")))
+                    gnus-default-nntp-server)
+                  "news"))
   "Default method for selecting a newsgroup.
 This variable should be a list, where the first element is how the
 news is to be fetched, the second is the address.

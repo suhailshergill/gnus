@@ -1,5 +1,7 @@
 2010-10-29  Julien Danjou  <julien@danjou.info>
 
+	* gnus.el: Remove `gnus-nntp-service' variable.
+
 	* gnus-start.el (gnus-1): Remove x-splash calls.
 
 	* gnus-ems.el (gnus-x-splash): Remove.
