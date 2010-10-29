@@ -1473,7 +1473,7 @@ Also see `gnus-large-ephemeral-newsgroup'."
 		 integer))
 
 (defcustom gnus-use-long-file-name (not (memq system-type '(usg-unix-v)))
-  "*Non-nil means that the default name of a file to save articles in is the group name.
+  "Non-nil means that the default name of a file to save articles in is the group name.
 If it's nil, the directory form of the group name is used instead.
 
 If this variable is a list, and the list contains the element
@@ -1483,8 +1483,8 @@ saving; and if it contains the element `not-kill', long file names
 will not be used for kill files.
 
 Note that the default for this variable varies according to what system
-type you're using.  On `usg-unix-v' and `xenix' this variable defaults
-to nil while on all other systems it defaults to t."
+type you're using.  On `usg-unix-v' this variable defaults to nil while
+on all other systems it defaults to t."
   :group 'gnus-start
   :type '(radio (sexp :format "Non-nil\n"
 		      :match (lambda (widget value)
