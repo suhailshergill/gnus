@@ -14929,6 +14929,11 @@ use the value of the @code{nnmail-split-methods} variable.
 @item nnimap-split-fancy
 Uses the same syntax as @code{nnmail-split-fancy}.
 
+@item nnimap-unsplittable-articles
+List of flag symbols to ignore when doing splitting.  That is,
+articles that have these flags won't be considered when splitting.
+The default is @samp{(%Deleted %Seen)}.
+
 @end table
 
 

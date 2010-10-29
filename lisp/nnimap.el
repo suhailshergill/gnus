@@ -78,6 +78,9 @@ Uses the same syntax as nnmail-split-methods")
 (defvoo nnimap-split-fancy nil
   "Uses the same syntax as nnmail-split-fancy.")
 
+(defvoo nnimap-unsplittable-articles '(%Deleted %Seen)
+  "Articles with the flags in the list will not be considered when splitting.")
+
 (make-obsolete-variable 'nnimap-split-rule "see `nnimap-split-methods'"
 			"Emacs 24.1")
 
@@ -1685,9 +1688,8 @@ textual parts.")
 (defun nnimap-new-articles (flags)
   (let (new)
     (dolist (elem flags)
-      (when (or (null (cdr elem))
-		(and (not (memq '%Deleted (cdr elem)))
-		     (not (memq '%Seen (cdr elem)))))
+      (unless (gnus-list-memq-of-list nnimap-unsplittable-articles
+				      (cdr elem))
 	(push (car elem) new)))
     (gnus-compress-sequence (nreverse new))))
 

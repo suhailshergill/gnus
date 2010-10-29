@@ -1,7 +1,11 @@
 2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-util.el (gnus-list-memq-of-list): New function.
+
 	* nnimap.el (nnimap-split-incoming-mail): Note that the INBOX has been
 	selected.
+	(nnimap-unsplittable-articles): New slot.
+	(nnimap-new-articles): Use it.
 
 2010-10-29  Stephen Berman  <stephen.berman@gmx.net>  (tiny change)
 
