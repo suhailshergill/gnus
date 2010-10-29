@@ -90,6 +90,7 @@ cid: URL as the argument.")
 (defvar shr-list-mode nil)
 (defvar shr-content-cache nil)
 (defvar shr-kinsoku-shorten nil)
+(defvar shr-table-depth 0)
 
 (defvar shr-map
   (let ((map (make-sparse-keymap)))
@@ -630,6 +631,7 @@ Return a string with image data."
   (setq cont (or (cdr (assq 'tbody cont))
 		 cont))
   (let* ((shr-inhibit-images t)
+	 (shr-table-depth (1+ shr-table-depth))
 	 (shr-kinsoku-shorten t)
 	 ;; Find all suggested widths.
 	 (columns (shr-column-specs cont))
@@ -651,8 +653,9 @@ Return a string with image data."
   ;; Finally, insert all the images after the table.  The Emacs buffer
   ;; model isn't strong enough to allow us to put the images actually
   ;; into the tables.
-  (dolist (elem (shr-find-elements cont 'img))
-    (shr-tag-img (cdr elem))))
+  (when (zerop shr-table-depth)
+    (dolist (elem (shr-find-elements cont 'img))
+      (shr-tag-img (cdr elem)))))
 
 (defun shr-tag-table (cont)
   (shr-ensure-paragraph)

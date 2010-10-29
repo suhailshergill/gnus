@@ -1,5 +1,8 @@
 2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-table-depth): New variable.
+	(shr-tag-table-1): Only insert the images after the top-level table.
+
 	* nnimap.el (nnimap-split-incoming-mail): Fix typo.
 
 	* gnus-util.el (gnus-list-memq-of-list): New function.
