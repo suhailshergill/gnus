@@ -1,3 +1,8 @@
+2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-split-incoming-mail): Note that the INBOX has been
+	selected.
+
 2010-10-29  Stephen Berman  <stephen.berman@gmx.net>  (tiny change)
 
 	* gnus-group.el (gnus-group-get-new-news-this-group): Don't have point
