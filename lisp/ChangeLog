@@ -1,5 +1,8 @@
 2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-msg.el (gnus-inews-do-gcc): Don't have the backends do the slow
+	*-request-group, which seems unnecessary.
+
 	* nnimap.el (nnimap-quote-specials): Function copied over from
 	imap.el.
 	(nnimap-open-connection): Use AUTHENTICATE PLAIN on servers that say
