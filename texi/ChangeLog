@@ -1,3 +1,8 @@
+2010-10-29  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi (Finding the News): Remove references to obsoletes
+	variables `gnus-nntp-server' and `gnus-secondary-servers'.
+
 2010-10-22  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus.texi (Group Parameters, Buttons): Fix typos.

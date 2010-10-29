@@ -1,6 +1,8 @@
 2010-10-29  Julien Danjou  <julien@danjou.info>
 
 	* gnus.el: Remove `gnus-nntp-service' variable.
+	(gnus-secondary-servers): Make obsolete.
+	(gnus-nntp-server): Make obsolete.
 
 	* gnus-start.el (gnus-1): Remove x-splash calls.
 
