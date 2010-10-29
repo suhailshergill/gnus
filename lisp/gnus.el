@@ -916,7 +916,8 @@ be set in `.emacs' instead."
 ;;; Gnus buffers
 ;;;
 
-(defvar gnus-buffers nil)
+(defvar gnus-buffers nil
+  "List of buffers handled by Gnus.")
 
 (defun gnus-get-buffer-create (name)
   "Do the same as `get-buffer-create', but store the created buffer."
@@ -948,7 +949,8 @@ be set in `.emacs' instead."
 
 ;;; Splash screen.
 
-(defvar gnus-group-buffer "*Group*")
+(defvar gnus-group-buffer "*Group*"
+  "Name of the Gnus group buffer.")
 
 (defface gnus-splash
   '((((class color)
