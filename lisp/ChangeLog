@@ -2,6 +2,8 @@
 
 	* gnus-group.el (gnus-group-make-tool-bar): Check for display graphic
 	capability before doing anything.
+	(gnus-group-insert-group-line): Remove useless
+	gnus-group-remove-excess-properties.
 
 2010-10-29  Katsumi Yamaoka  <yamaoka@jpl.org>
 
