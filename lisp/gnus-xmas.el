@@ -406,14 +406,6 @@ then we display only bindings that start with that prefix."
   (unless (face-differs-from-default-p 'underline)
     (funcall (intern "set-face-underline-p") 'underline t))
 
-  (cond
-   ((fboundp 'char-or-char-int-p)
-    ;; Handle both types of marks for XEmacs-20.x.
-    (defalias 'gnus-characterp 'char-or-char-int-p))
-   ;; V19 of XEmacs, probably.
-   (t
-    (defalias 'gnus-characterp 'characterp)))
-
   (defalias 'gnus-make-overlay
     (lambda (beg end &optional buffer front-advance rear-advance)
       "Create a new overlay with range BEG to END in BUFFER.

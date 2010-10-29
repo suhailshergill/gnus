@@ -1,5 +1,8 @@
 2010-10-29  Julien Danjou  <julien@danjou.info>
 
+	* gnus-xmas.el (gnus-xmas-define): Remove unused gnus-characterp
+	definition.
+
 	* gnus-group.el (gnus-group-make-tool-bar): Check for display graphic
 	capability before doing anything.
 	(gnus-group-insert-group-line): Remove useless

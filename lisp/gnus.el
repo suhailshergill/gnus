@@ -349,7 +349,6 @@ be set in `.emacs' instead."
 		     (list str))
 	    line)))
     (defalias 'gnus-mode-line-buffer-identification 'identity))
-  (defalias 'gnus-characterp 'numberp)
   (defalias 'gnus-deactivate-mark 'deactivate-mark)
   (defalias 'gnus-window-edges 'window-edges)
   (defalias 'gnus-key-press-event-p 'numberp)
