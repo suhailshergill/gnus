@@ -211,6 +211,20 @@ result, `gnus-retrieve-headers' will be called instead.")
 
 ;;; Developer Extension Variable:
 
+(defcustom nnir-search-engine 'wais
+  "*The search engine to use.  Must be a symbol.
+See `nnir-engines' for a list of supported engines, and for example
+settings of `nnir-search-engine'."
+  :type '(sexp)
+  :group 'nnir)
+
+(defcustom nnir-imap-default-search-key "Whole message"
+  "*The default IMAP search key for an nnir search. Must be one of
+  the keys in `nnir-imap-search-arguments'. To use raw imap queries
+  by default set this to \"Imap\""
+  :type '(string)
+  :group 'nnir)
+
 (defvar nnir-engines
   `((wais    nnir-run-waissearch
              ())
@@ -263,13 +277,6 @@ Add an entry here when adding a new search engine.")
     (nntp . gmane))
   "*Alist of default search engines keyed by server method"
   :type '(alist)
-  :group 'nnir)
-
-(defcustom nnir-imap-default-search-key "Whole message"
-  "*The default IMAP search key for an nnir search. Must be one of
-  the keys in `nnir-imap-search-arguments'. To use raw imap queries
-  by default set this to \"Imap\""
-  :type '(string)
   :group 'nnir)
 
 (defcustom nnir-wais-program "waissearch"

@@ -1,3 +1,8 @@
+2010-10-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnir.el (nnir-search-engine): Ressurect variable, since it's used
+	later in the file.
+
 2010-10-30  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el: general clean up. allow searching with multiple
