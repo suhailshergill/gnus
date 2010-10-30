@@ -1431,14 +1431,6 @@ list, Gnus will try all the methods in the list until it finds a match."
 					(nnweb "refer" (nnweb-type google)))
 				 gnus-select-method))))
 
-(defcustom gnus-group-fetch-control-use-browse-url nil
-  "*Non-nil means that control messages are displayed using `browse-url'.
-Otherwise they are fetched with ange-ftp and displayed in an ephemeral
-group."
-  :version "22.1"
-  :group 'gnus-group-various
-  :type 'boolean)
-
 (defcustom gnus-use-cross-reference t
   "*Non-nil means that cross referenced articles will be marked as read.
 If nil, ignore cross references.  If t, mark articles as read in

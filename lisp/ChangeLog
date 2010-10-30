@@ -1,5 +1,7 @@
 2010-10-30  Julien Danjou  <julien@danjou.info>
 
+	* gnus-group.el: Remove gnus-group-fetch-control.
+
 	* gnus-start.el (gnus-find-new-newsgroups): Remove
 	gnus-check-first-time-used.
 
