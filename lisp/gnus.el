@@ -1388,11 +1388,6 @@ you could set this variable:
   :group 'gnus-server
   :type '(repeat gnus-select-method))
 
-(defvar gnus-backup-default-subscribed-newsgroups
-  '("news.announce.newusers" "news.groups.questions" "gnu.emacs.gnus")
-  "Default default new newsgroups the first time Gnus is run.
-Should be set in paths.el, and shouldn't be touched by the user.")
-
 (defcustom gnus-local-domain nil
   "Local domain name without a host name.
 The DOMAINNAME environment variable is used instead if it is defined.
