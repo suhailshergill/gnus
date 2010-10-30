@@ -493,20 +493,35 @@ Return a string with image data."
     (shr-urlify (or shr-start start) url)))
 
 (defun shr-tag-object (cont)
-  (let ((url (cdr (assq :src (cdr (assq 'embed cont)))))
-	(start (point)))
+  (let ((start (point))
+	url)
+    (dolist (elem cont)
+      (when (eq (car elem) 'embed)
+	(setq url (or url (cdr (assq :src (cdr elem))))))
+      (when (and (eq (car elem) 'param)
+		 (equal (cdr (assq :name (cdr elem))) "movie"))
+	(setq url (or url (cdr (assq :value (cdr elem)))))))
     (when url
       (shr-insert " [multimedia] ")
-      (shr-urlify start url))))
+      (shr-urlify start url))
+    (shr-generic cont)))
 
-(defun shr-tag-img (cont)
-  (when (and cont
-	     (cdr (assq :src cont)))
+(defun shr-tag-video (cont)
+  (let ((image (cdr (assq :poster cont)))
+	(url (cdr (assq :src cont)))
+	(start (point)))
+    (shr-tag-img nil image)
+    (shr-urlify start url)))
+
+(defun shr-tag-img (cont &optional url)
+  (when (or url
+	    (and cont
+		 (cdr (assq :src cont))))
     (when (and (> (current-column) 0)
 	       (not (eq shr-state 'image)))
       (insert "\n"))
     (let ((alt (cdr (assq :alt cont)))
-	  (url (cdr (assq :src cont))))
+	  (url (or url (cdr (assq :src cont)))))
       (let ((start (point-marker)))
 	(when (zerop (length alt))
 	  (setq alt "[img]"))
