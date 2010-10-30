@@ -1,3 +1,7 @@
+2010-10-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-tag-img): Output "*" instead of "[img]".
+
 2010-10-30  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el move defvar, defcustom around to keep file organized and keep

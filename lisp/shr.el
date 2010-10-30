@@ -524,7 +524,7 @@ Return a string with image data."
 	  (url (or url (cdr (assq :src cont)))))
       (let ((start (point-marker)))
 	(when (zerop (length alt))
-	  (setq alt "[img]"))
+	  (setq alt "*"))
 	(cond
 	 ((or (member (cdr (assq :height cont)) '("0" "1"))
 	      (member (cdr (assq :width cont)) '("0" "1")))
