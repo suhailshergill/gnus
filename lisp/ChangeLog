@@ -1,3 +1,11 @@
+2010-10-30  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el move defvar, defcustom around to keep file organized and keep
+	byte-compiler quiet.
+	(nnir-read-parms): accept search-engine as arg.
+	(nnir-run-query): pass search-engine as arg.
+	(nnir-search-engine): remove.
+
 2010-10-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-generic): The text nodes should be text, not :text.

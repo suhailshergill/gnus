@@ -183,88 +183,6 @@
 
 (gnus-declare-backend "nnir" 'mail)
 
-(defvar nnir-imap-search-arguments
-  '(("Whole message" . "TEXT")
-    ("Subject" . "SUBJECT")
-    ("To" . "TO")
-    ("From" . "FROM")
-    ("Imap" . ""))
-  "Mapping from user readable keys to IMAP search items for use in nnir")
-
-(defvar nnir-imap-search-other "HEADER %S"
-  "The IMAP search item to use for anything other than
-  `nnir-imap-search-arguments'. By default this is the name of an
-  email header field")
-
-(defvar nnir-imap-search-argument-history ()
-  "The history for querying search options in nnir")
-
-(defvar nnir-search-history ()
-  "The history for querying search options in nnir")
-
-(defvar nnir-get-article-nov-override-function nil
-  "If non-nil, a function that will be passed each search result.  This
-should return a message's headers in NOV format.
-
-If this variable is nil, or if the provided function returns nil for a search
-result, `gnus-retrieve-headers' will be called instead.")
-
-;;; Developer Extension Variable:
-
-(defcustom nnir-search-engine 'wais
-  "*The search engine to use.  Must be a symbol.
-See `nnir-engines' for a list of supported engines, and for example
-settings of `nnir-search-engine'."
-  :type '(sexp)
-  :group 'nnir)
-
-(defcustom nnir-imap-default-search-key "Whole message"
-  "*The default IMAP search key for an nnir search. Must be one of
-  the keys in `nnir-imap-search-arguments'. To use raw imap queries
-  by default set this to \"Imap\""
-  :type '(string)
-  :group 'nnir)
-
-(defvar nnir-engines
-  `((wais    nnir-run-waissearch
-             ())
-    (imap    nnir-run-imap
-             ((criteria
-	       "Imap Search in"                   ; Prompt
-	       ,(mapcar 'car nnir-imap-search-arguments) ; alist for completing
-	       nil                                ; allow any user input
-	       nil                                ; initial value
-	       nnir-imap-search-argument-history  ; the history to use
-	       ,nnir-imap-default-search-key      ; default
-	       )))
-    (gmane   nnir-run-gmane
-	     ((author . "Gmane Author: ")))
-    (swish++ nnir-run-swish++
-             ((group . "Swish++ Group spec: ")))
-    (swish-e nnir-run-swish-e
-             ((group . "Swish-e Group spec: ")))
-    (namazu  nnir-run-namazu
-             ())
-    (hyrex   nnir-run-hyrex
-	     ((group . "Hyrex Group spec: ")))
-    (find-grep nnir-run-find-grep
-	       ((grep-options . "Grep options: "))))
-  "Alist of supported search engines.
-Each element in the alist is a three-element list (ENGINE FUNCTION ARGS).
-ENGINE is a symbol designating the searching engine.  FUNCTION is also
-a symbol, giving the function that does the search.  The third element
-ARGS is a list of cons pairs (PARAM . PROMPT).  When issuing a query,
-the FUNCTION will issue a query for each of the PARAMs, using PROMPT.
-
-The value of `nnir-search-engine' must be one of the ENGINE symbols.
-For example, for searching a server using namazu include
-    (nnir-search-engine namazu)
-in the server definition.  Note that you have to set additional
-variables for most backends.  For example, the `namazu' backend
-needs the variables `nnir-namazu-program',
-`nnir-namazu-index-directory' and `nnir-namazu-remove-prefix'.
-
-Add an entry here when adding a new search engine.")
 
 ;;; User Customizable Variables:
 
@@ -277,6 +195,13 @@ Add an entry here when adding a new search engine.")
     (nntp . gmane))
   "*Alist of default search engines keyed by server method"
   :type '(alist)
+  :group 'nnir)
+
+(defcustom nnir-imap-default-search-key "Whole message"
+  "*The default IMAP search key for an nnir search. Must be one of
+  the keys in `nnir-imap-search-arguments'. To use raw imap queries
+  by default set this to \"Imap\""
+  :type '(string)
   :group 'nnir)
 
 (defcustom nnir-wais-program "waissearch"
@@ -463,6 +388,74 @@ arrive at the correct group name, \"mail.misc\"."
   :type '(directory)
   :group 'nnir)
 
+;; Imap variables
+
+(defvar nnir-imap-search-arguments
+  '(("Whole message" . "TEXT")
+    ("Subject" . "SUBJECT")
+    ("To" . "TO")
+    ("From" . "FROM")
+    ("Imap" . ""))
+  "Mapping from user readable keys to IMAP search items for use in nnir")
+
+(defvar nnir-imap-search-other "HEADER %S"
+  "The IMAP search item to use for anything other than
+  `nnir-imap-search-arguments'. By default this is the name of an
+  email header field")
+
+(defvar nnir-imap-search-argument-history ()
+  "The history for querying search options in nnir")
+
+;;; Developer Extension Variable:
+
+(defvar nnir-engines
+  `((wais    nnir-run-waissearch
+             ())
+    (imap    nnir-run-imap
+             ((criteria
+	       "Imap Search in"                   ; Prompt
+	       ,(mapcar 'car nnir-imap-search-arguments) ; alist for completing
+	       nil                                ; allow any user input
+	       nil                                ; initial value
+	       nnir-imap-search-argument-history  ; the history to use
+	       ,nnir-imap-default-search-key      ; default
+	       )))
+    (gmane   nnir-run-gmane
+	     ((author . "Gmane Author: ")))
+    (swish++ nnir-run-swish++
+             ((group . "Swish++ Group spec: ")))
+    (swish-e nnir-run-swish-e
+             ((group . "Swish-e Group spec: ")))
+    (namazu  nnir-run-namazu
+             ())
+    (hyrex   nnir-run-hyrex
+	     ((group . "Hyrex Group spec: ")))
+    (find-grep nnir-run-find-grep
+	       ((grep-options . "Grep options: "))))
+  "Alist of supported search engines.
+Each element in the alist is a three-element list (ENGINE FUNCTION ARGS).
+ENGINE is a symbol designating the searching engine.  FUNCTION is also
+a symbol, giving the function that does the search.  The third element
+ARGS is a list of cons pairs (PARAM . PROMPT).  When issuing a query,
+the FUNCTION will issue a query for each of the PARAMs, using PROMPT.
+
+The value of `nnir-search-engine' must be one of the ENGINE symbols.
+For example, for searching a server using namazu include
+    (nnir-search-engine namazu)
+in the server definition.  Note that you have to set additional
+variables for most backends.  For example, the `namazu' backend
+needs the variables `nnir-namazu-program',
+`nnir-namazu-index-directory' and `nnir-namazu-remove-prefix'.
+
+Add an entry here when adding a new search engine.")
+
+(defvar nnir-get-article-nov-override-function nil
+  "If non-nil, a function that will be passed each search result.  This
+should return a message's headers in NOV format.
+
+If this variable is nil, or if the provided function returns nil for a search
+result, `gnus-retrieve-headers' will be called instead.")
+
 ;;; Internal Variables:
 
 (defvar nnir-current-query nil
@@ -479,6 +472,9 @@ arrive at the correct group name, \"mail.misc\"."
 
 (defvar nnir-tmp-buffer " *nnir*"
   "Internal: temporary buffer.")
+
+(defvar nnir-search-history ()
+  "Internal: the history for querying search options in nnir")
 
 (defvar nnir-extra-parms nil
   "Internal: stores request for extra search parms")
@@ -1431,7 +1427,7 @@ Tested with Namazu 2.0.6 on a GNU/Linux system."
 
 ;;; Util Code:
 
-(defun nnir-read-parms (query)
+(defun nnir-read-parms (query nnir-search-engine)
   "Reads additional search parameters according to `nnir-engines'."
   (let ((parmspec (caddr (assoc nnir-search-engine nnir-engines))))
     (nconc query
@@ -1472,7 +1468,7 @@ Tested with Namazu 2.0.6 on a GNU/Linux system."
                        (if search-func
 			   (funcall search-func
 				    (if nnir-extra-parms
-					(nnir-read-parms q)
+					(nnir-read-parms q nnir-search-engine)
 				      q)
 				    server (cdr x))
                          nil)))
