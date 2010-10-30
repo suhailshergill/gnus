@@ -370,18 +370,17 @@ redirects somewhere else."
           (let ((alt (buffer-substring start end))
 		(inhibit-read-only t))
 	    (delete-region start end)
-	    (shr-put-image data start alt))))))
+	    (goto-char start)
+	    (shr-put-image data alt))))))
   (kill-buffer (current-buffer)))
 
-(defun shr-put-image (data point alt)
+(defun shr-put-image (data alt)
   (if (display-graphic-p)
       (let ((image (ignore-errors
                      (shr-rescale-image data))))
         (when image
-          (put-image image point alt)))
-    (save-excursion
-      (goto-char point)
-      (insert alt))))
+	  (insert-image image (or alt "*"))))
+    (insert alt)))
 
 (defun shr-rescale-image (data)
   (if (or (not (fboundp 'imagemagick-types))
@@ -523,7 +522,7 @@ Return a string with image data."
 	    (if (or (not shr-content-function)
 		    (not (setq image (funcall shr-content-function url))))
 		(insert alt)
-	      (shr-put-image image (point) alt))))
+	      (shr-put-image image alt))))
 	 ((or shr-inhibit-images
 	      (and shr-blocked-images
 		   (string-match shr-blocked-images url)))
@@ -533,17 +532,17 @@ Return a string with image data."
 		(shr-insert (substring alt 0 8))
 	      (shr-insert alt))))
 	 ((url-is-cached (shr-encode-url url))
-	  (shr-put-image (shr-get-image-data url) (point) alt))
+	  (shr-put-image (shr-get-image-data url) alt))
 	 (t
 	  (insert alt)
 	  (ignore-errors
 	    (url-retrieve (shr-encode-url url) 'shr-image-fetched
 			  (list (current-buffer) start (point-marker))
 			  t))))
-	(insert " ")
 	(put-text-property start (point) 'keymap shr-map)
 	(put-text-property start (point) 'shr-alt alt)
 	(put-text-property start (point) 'shr-image url)
+	(put-text-property start (point) 'help-echo alt)
 	(setq shr-state 'image)))))
 
 (defun shr-tag-pre (cont)
