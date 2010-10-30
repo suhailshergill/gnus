@@ -1,3 +1,8 @@
+2010-10-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-tag-span): Drop colorisation of regions since we don't
+	control the background color.
+
 2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-table-depth): New variable.

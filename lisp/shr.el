@@ -471,14 +471,6 @@ Return a string with image data."
 (defun shr-tag-s (cont)
   (shr-fontize-cont cont 'strike-through))
 
-(defun shr-tag-span (cont)
-  (let ((start (point))
-	(color (cdr (assq 'color (shr-parse-style (cdr (assq :style cont)))))))
-    (shr-generic cont)
-    (when color
-      (let ((overlay (make-overlay start (point))))
-	(overlay-put overlay 'face (cons 'foreground-color color))))))
-
 (defun shr-parse-style (style)
   (when style
     (let ((plist nil))
