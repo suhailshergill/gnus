@@ -1,3 +1,20 @@
+2010-10-30  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el: general clean up. allow searching with multiple
+	engines. allow separate extra-parameters for each engine. batch queries
+	when possible.
+	(nnir-imap-default-search-key,nnir-method-default-engines): add
+	customize interface.
+	(nnir-run-gmane): new engine.
+	(nnir-engines): use it. qualify all prompts with engine name.
+	(nnir-search-engine): remove global variable.
+	(nnir-run-hyrex): restore for now.
+	(nnir-extra-parms,nnir-search-history): new variables.
+	(gnus-group-make-nnir-group): use them.
+	(nnir-group-server): remove in favor of gnus-group-server.
+	(nnir-request-group): avoid searching twice.
+	(nnir-sort-groups-by-server): new function.
+
 2010-10-30  Julien Danjou  <julien@danjou.info>
 
 	* gnus-group.el: Remove gnus-group-fetch-control.
