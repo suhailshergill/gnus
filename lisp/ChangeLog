@@ -1,5 +1,7 @@
 2010-10-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-generic): The text nodes should be text, not :text.
+
 	* nnir.el (nnir-search-engine): Ressurect variable, since it's used
 	later in the file.
 

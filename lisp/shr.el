@@ -181,7 +181,7 @@ redirects somewhere else."
 	    result))
     (dolist (sub dom)
       (if (stringp sub)
-	  (push (cons :text sub) result)
+	  (push (cons 'text sub) result)
 	(push (shr-transform-dom sub) result)))
     (nreverse result)))
 
@@ -194,7 +194,7 @@ redirects somewhere else."
 (defun shr-generic (cont)
   (dolist (sub cont)
     (cond
-     ((eq (car sub) :text)
+     ((eq (car sub) 'text)
       (shr-insert (cdr sub)))
      ((listp (cdr sub))
       (shr-descend sub)))))
