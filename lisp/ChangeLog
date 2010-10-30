@@ -2,6 +2,7 @@
 
 	* shr.el (shr-tag-span): Drop colorisation of regions since we don't
 	control the background color.
+	(shr-tag-img): Ignore very small web bug type images.
 
 2010-10-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

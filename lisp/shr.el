@@ -512,6 +512,10 @@ Return a string with image data."
 	(when (zerop (length alt))
 	  (setq alt "[img]"))
 	(cond
+	 ((or (member (cdr (assq :height cont)) '("0" "1"))
+	      (member (cdr (assq :width cont)) '("0" "1")))
+	  ;; Ignore zero-sized or single-pixel images.
+	  )
 	 ((and (not shr-inhibit-images)
 	       (string-match "\\`cid:" url))
 	  (let ((url (substring url (match-end 0)))
