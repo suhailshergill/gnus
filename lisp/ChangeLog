@@ -1,3 +1,8 @@
+2010-10-31  Daniel Dehennin  <daniel.dehennin@baby-gnu.org>
+
+	* gnus-msg.el (gnus-configure-posting-styles): Permit the use of
+	regular expression match and replace in posting styles.
+
 2010-10-31  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (gnus-group-make-nnir-group,nnir-run-query): Allow searching
@@ -8,7 +13,6 @@
 
 	* gnus-srvr.el (gnus-server-mode-map): add binding "G" to search the
 	server on the current line with nnir.
-
 
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
