@@ -1,3 +1,15 @@
+2010-10-31  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (gnus-group-make-nnir-group,nnir-run-query): Allow searching
+	an entire server.
+	(nnir-get-active): New function.
+	(nnir-run-imap): Use it.
+	(nnir-run-gmane): Who knew, gmane search returns an article score!
+
+	* gnus-srvr.el (gnus-server-mode-map): add binding "G" to search the
+	server on the current line with nnir.
+
+
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-cite.el (gnus-article-foldable-buffer): Refactor out.
