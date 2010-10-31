@@ -543,7 +543,7 @@ longer than the frame width."
 		(do-fill (not long-lines))
 		use-hard-newlines)
 	    (unless do-fill
-	      (setq do-fill (gnus-article-foldable-buffer)))
+	      (setq do-fill (gnus-article-foldable-buffer (cdar marks))))
 	    (when do-fill
 	      (fill-region (point-min) (point-max))))
 	  (set-marker (caar marks) nil)
@@ -557,11 +557,12 @@ longer than the frame width."
 	      gnus-cite-loose-attribution-alist nil
 	      gnus-cite-article nil)))))
 
-(defun gnus-article-foldable-buffer ()
+(defun gnus-article-foldable-buffer (prefix)
   (let ((do-fill nil)
 	columns)
     (goto-char (point-min))
     (while (not (eobp))
+      (forward-char (length prefix))
       (skip-chars-forward " \t")
       (unless (eolp)
 	(let ((elem (assq (current-column) columns)))
