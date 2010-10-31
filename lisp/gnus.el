@@ -1031,10 +1031,11 @@ be set in `.emacs' instead."
   (unless (and
            (fboundp 'find-image)
            (display-graphic-p)
-           ;; Make sure the library defining `image-load-path' is loaded
-           ;; (`find-image' is autoloaded) (and discard the result).  Else, we may
-           ;; get "defvar ignored because image-load-path is let-bound" when calling
-           ;; `find-image' below.
+           ;; Make sure the library defining `image-load-path' is
+           ;; loaded (`find-image' is autoloaded) (and discard the
+           ;; result).  Else, we may get "defvar ignored because
+           ;; image-load-path is let-bound" when calling `find-image'
+           ;; below.
            (or (find-image '(nil (:type xpm :file "gnus.xpm"))) t)
            (let* ((data-directory (nnheader-find-etc-directory "images/gnus"))
                   (image-load-path (cond (data-directory
