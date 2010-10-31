@@ -1065,6 +1065,7 @@ be set in `.emacs' instead."
                  (insert-char ?\  (max 0 (round (- (window-width)
                                                    (or x (car size))) 2)))
                  (insert-image image))
+	       (goto-char (point-min))
                t)))
     (insert
      (format "

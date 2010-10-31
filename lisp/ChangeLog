@@ -1,5 +1,8 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-group-startup-message): Move point to the start of the
+	buffer.
+
 	* nnimap.el (nnimap-capability): New function.
 	(nnimap-open-connection): Only send AUTHENTICATE PLAIN if LOGINDISABLED
 	is set.
