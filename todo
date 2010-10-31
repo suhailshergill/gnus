@@ -94,10 +94,6 @@
 
   Thanks for Micha Wiedenmann for this suggestion.
 
-* Parsing of the common list confirmation requests so that Gnus can
-   prepare the response with a single command.  Including LISTSERV
-   periodic ping messages and the like.
-
 * Parsing of the subscription notice to stash away details like what
    address you're subscribed to the list under (and automatically send
    mail to the list using that address, when you send mail inside the list
