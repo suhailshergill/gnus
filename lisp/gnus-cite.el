@@ -558,13 +558,25 @@ longer than the frame width."
 	      gnus-cite-article nil)))))
 
 (defun gnus-article-foldable-buffer ()
-  (goto-char (point-min))
-  (while (not (eobp))
-    (end-of-line)
-    (when (> (current-column) (frame-width))
-      (setq do-fill t))
-    (forward-line 1))
-  do-fill)
+  (let ((do-fill nil)
+	columns)
+    (goto-char (point-min))
+    (while (not (eobp))
+      (skip-chars-forward " \t")
+      (unless (eolp)
+	(let ((elem (assq (current-column) columns)))
+	  (unless elem
+	    (setq elem (cons (current-column) 0))
+	    (push elem columns))
+	  (setcdr elem (1+ (cdr elem)))))
+      (end-of-line)
+      (when (> (current-column) (frame-width))
+	(setq do-fill t))
+      (forward-line 1))
+    (and do-fill
+	 ;; We know know that there are long lines here, but does this look
+	 ;; like code?  Check for ragged edges on the left.
+	 (< (length columns) 3))))
 
 (defun gnus-article-natural-long-line-p ()
   "Return true if the current line is long, and it's natural text."
