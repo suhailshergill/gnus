@@ -128,10 +128,6 @@
   locations (e.g. work and home) and want to have the same
   configuration.
 
-* gnus-uu-decode should complain if one or more parts of a series post
-  (ie, "part N of X") is missing, and optionally tick what parts are
-  there for decoding in a later session.
-
 * Additional article marking, and an ability to affect marks placed
   during e.g. mail acquisition.  I want to be able to notice the
   subject "fast money" or "web traffic", automatically mark it with a
