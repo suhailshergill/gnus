@@ -516,9 +516,14 @@ Lines matching `gnus-cite-attribution-suffix' and perhaps
 	    (setq m (cdr m))))
 	marks))))
 
-(defun gnus-article-fill-cited-article (&optional width)
+(defun gnus-article-fill-cited-long-lines ()
+  (gnus-article-fill-cited-article nil t))
+
+(defun gnus-article-fill-cited-article (&optional width long-lines)
   "Do word wrapping in the current article.
-If WIDTH (the numerical prefix), use that text width when filling."
+If WIDTH (the numerical prefix), use that text width when
+filling.  If LONG-LINES, only fill sections that have lines
+longer than the frame width."
   (interactive "P")
   (with-current-buffer gnus-article-buffer
     (let ((buffer-read-only nil)
@@ -535,8 +540,17 @@ If WIDTH (the numerical prefix), use that text width when filling."
 		(fill-prefix
 		 (if (string= (cdar marks) "") ""
 		   (concat (cdar marks) " ")))
+		(do-fill (not long-lines))
 		use-hard-newlines)
-	    (fill-region (point-min) (point-max)))
+	    (goto-char (point-min))
+	    (unless do-fill
+	      (while (not (eobp))
+		(end-of-line)
+		(when (> (current-column) (frame-width))
+		  (setq do-fill t))
+		(forward-line 1)))
+	    (when do-fill
+	      (fill-region (point-min) (point-max))))
 	  (set-marker (caar marks) nil)
 	  (setq marks (cdr marks)))
 	(when marks

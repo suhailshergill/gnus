@@ -1,7 +1,14 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-treatment-function-alist): Have
+	gnus-treat-fill-long-lines point to gnus-article-fill-cited-long-lines.
+	(gnus-treat-fill-long-lines): Change default to fill all text/plain
+	sections.
+
 	* gnus-cite.el (gnus-article-fill-cited-article): Remove unused `force'
 	parameter.
+	(gnus-article-fill-cited-long-lines): New function.
+	(gnus-article-fill-cited-article): Allow filling only long sections.
 
 	* shr.el (shr-find-fill-point): Don't break lines between punctuation
 	and non-punctuation (like after the apostrophe in "'We").

@@ -1590,7 +1590,7 @@ predicate.  See Info node `(gnus)Customizing Articles'."
   :link '(custom-manual "(gnus)Customizing Articles")
   :type gnus-article-treat-custom)
 
-(defcustom gnus-treat-fill-long-lines nil
+(defcustom gnus-treat-fill-long-lines '(typep "text/plain")
   "Fill long lines.
 Valid values are nil, t, `head', `first', `last', an integer or a
 predicate.  See Info node `(gnus)Customizing Articles'."
@@ -1664,7 +1664,7 @@ regexp."
     (gnus-treat-highlight-signature gnus-article-highlight-signature)
     (gnus-treat-buttonize gnus-article-add-buttons)
     (gnus-treat-fill-article gnus-article-fill-cited-article)
-    (gnus-treat-fill-long-lines gnus-article-fill-long-lines)
+    (gnus-treat-fill-long-lines gnus-article-fill-cited-long-lines)
     (gnus-treat-strip-cr gnus-article-remove-cr)
     (gnus-treat-unsplit-urls gnus-article-unsplit-urls)
     (gnus-treat-date-ut gnus-article-date-ut)
@@ -5704,7 +5704,7 @@ all parts."
 	  (save-restriction
 	    (article-goto-body)
 	    (narrow-to-region (point) (point-max))
-	    (gnus-treat-article nil 1 1)
+	    (gnus-treat-article nil 1 1 "text/plain")
 	    (widen)))
 	(unless ihandles
 	  ;; Highlight the headers.
