@@ -1,5 +1,8 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-find-fill-point): Don't break lines between punctuation
+	and non-punctuation (like after the apostrophe in "'We").
+
 	* gnus-sum.el (gnus-summary-select-article): Make sure
 	gnus-original-article-buffer is alive.
 
