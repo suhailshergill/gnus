@@ -930,6 +930,7 @@ textual parts.")
       (nnimap-add-cr)
       (setq message (buffer-substring-no-properties (point-min) (point-max)))
       (with-current-buffer (nnimap-buffer)
+	(erase-buffer)
 	(setq sequence (nnimap-send-command
 			"APPEND %S {%d}" (utf7-encode group t)
 			(length message)))

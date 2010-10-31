@@ -1,5 +1,8 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-accept-article): Erase buffer before
+	appending for easier debugging.
+
 	* gnus-art.el (gnus-treat-article): Only inhibit body washing, and
 	leave the header washing to take place.
 
