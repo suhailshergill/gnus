@@ -1066,7 +1066,7 @@ be set in `.emacs' instead."
                  (insert-image image))
                t)))
     (insert
-     (format "              
+     (format "
 	  _    ___ _             _
 	  _ ___ __ ___  __    _ ___
 	  __   _     ___    __  ___
