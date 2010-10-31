@@ -1,5 +1,7 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el: Autoload gnus-article-fill-cited-long-lines.
+
 	* gnus-art.el (gnus-treatment-function-alist): Have
 	gnus-treat-fill-long-lines point to gnus-article-fill-cited-long-lines.
 	(gnus-treat-fill-long-lines): Change default to fill all text/plain

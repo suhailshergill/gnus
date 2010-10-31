@@ -2773,7 +2773,8 @@ gnus-registry.el will populate this if it's loaded.")
      ("gnus-cite" :interactive t
       gnus-article-highlight-citation gnus-article-hide-citation-maybe
       gnus-article-hide-citation gnus-article-fill-cited-article
-      gnus-article-hide-citation-in-followups)
+      gnus-article-hide-citation-in-followups
+      gnus-article-fill-cited-long-lines)
      ("gnus-kill" gnus-kill gnus-apply-kill-file-internal
       gnus-kill-file-edit-file gnus-kill-file-raise-followups-to-author
       gnus-execute gnus-expunge gnus-batch-kill gnus-batch-score)
