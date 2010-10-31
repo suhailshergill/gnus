@@ -1517,7 +1517,7 @@
 
 2010-09-27  David Engster  <dengste@eml.cc>
 
-	* nnmairix.el: (nnmairix-replace-group-and-numbers): Deal with NOV as
+	* nnmairix.el (nnmairix-replace-group-and-numbers): Deal with NOV as
 	well as HEADERS.
 	(nnmairix-retrieve-headers): Provide new argument for the above.
 
@@ -1901,7 +1901,7 @@
 	(nnimap-make-process-buffer): Store all the process buffers.
 	(nnimap-keepalive): New function.
 
-	* starttls.el: (starttls-open-stream): Add autoload cookie.
+	* starttls.el (starttls-open-stream): Add autoload cookie.
 
 2010-09-24  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)
 
