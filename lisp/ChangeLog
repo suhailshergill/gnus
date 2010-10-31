@@ -2,6 +2,9 @@
 
 	* nnimap.el (nnimap-request-accept-article): Erase buffer before
 	appending for easier debugging.
+	(nnimap-wait-for-connection): Take a regexp.
+	(nnimap-request-accept-article): Wait for the continuation line before
+	sending anything unless we're streaming.
 
 	* gnus-art.el (gnus-treat-article): Only inhibit body washing, and
 	leave the header washing to take place.
