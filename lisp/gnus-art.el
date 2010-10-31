@@ -5992,7 +5992,7 @@ If displaying \"text/html\" is discouraged \(see
 		  (gnus-treat-article
 		   nil (length gnus-article-mime-handle-alist)
 		   (gnus-article-mime-total-parts)
-		   (mm-handle-media-type handle))))))
+		   (mm-handle-media-type preferred))))))
 	  (goto-char (point-max))
 	  (setcdr begend (point-marker)))))
     (when ibegend

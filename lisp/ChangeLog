@@ -1,5 +1,8 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-mime-display-alternative): Actually pass the type
+	on to `gnus-treat-article'.
+
 	* gnus.el: Autoload gnus-article-fill-cited-long-lines.
 
 	* gnus-art.el (gnus-treatment-function-alist): Have
