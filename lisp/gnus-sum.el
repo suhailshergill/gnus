@@ -7596,6 +7596,7 @@ be displayed."
 		       (not (get-buffer gnus-original-article-buffer))))
 	      (and (not gnus-single-article-buffer)
 		   (or (null gnus-current-article)
+		       (not (get-buffer gnus-original-article-buffer))
 		       (not (eq gnus-current-article article))))
 	      force)
 	  ;; The requested article is different from the current article.

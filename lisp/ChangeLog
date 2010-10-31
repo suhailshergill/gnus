@@ -1,5 +1,8 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-select-article): Make sure
+	gnus-original-article-buffer is alive.
+
 	* nndoc.el (nndoc-dissect-buffer): Reverse the order of the articles to
 	reflect the order they're in in the digest.
 
