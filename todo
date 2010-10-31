@@ -111,10 +111,6 @@
    X-Loop, and all of the other random headers that often work would be
    very cool.
 
-* Support for zipped folders for all backends this makes sense for.
-  Most likely using jka-compr. (It has been suggested that this do
-  work but I think it should be verified for all backends.)
-
 * Agent (Can someone write some subtopics here? I don't use it myself
   so I don't know what is lacking.)
 
