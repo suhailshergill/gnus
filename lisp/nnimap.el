@@ -1482,7 +1482,7 @@ textual parts.")
   (nnimap-wait-for-response sequence)
   (nnimap-parse-response))
 
-(defun nnimap-wait-for-connection (regexp)
+(defun nnimap-wait-for-connection (&optional regexp)
   (unless regexp
     (setq regexp "^[*.] .*\n"))
   (let ((process (get-buffer-process (current-buffer))))
