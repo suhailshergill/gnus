@@ -1,5 +1,7 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-cite.el (gnus-article-foldable-buffer): Refactor out.
+
 	* gnus-sum.el (gnus-summary-show-article): Add `C-u C-u g' for showing
 	the raw article, and change `C-u g' to show the article without doing
 	treatments.

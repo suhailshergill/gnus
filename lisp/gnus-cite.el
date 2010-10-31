@@ -542,13 +542,8 @@ longer than the frame width."
 		   (concat (cdar marks) " ")))
 		(do-fill (not long-lines))
 		use-hard-newlines)
-	    (goto-char (point-min))
 	    (unless do-fill
-	      (while (not (eobp))
-		(end-of-line)
-		(when (> (current-column) (frame-width))
-		  (setq do-fill t))
-		(forward-line 1)))
+	      (setq do-fill (gnus-article-foldable-buffer)))
 	    (when do-fill
 	      (fill-region (point-min) (point-max))))
 	  (set-marker (caar marks) nil)
@@ -561,6 +556,15 @@ longer than the frame width."
 	      gnus-cite-loose-prefix-alist nil
 	      gnus-cite-loose-attribution-alist nil
 	      gnus-cite-article nil)))))
+
+(defun gnus-article-foldable-buffer ()
+  (goto-char (point-min))
+  (while (not (eobp))
+    (end-of-line)
+    (when (> (current-column) (frame-width))
+      (setq do-fill t))
+    (forward-line 1))
+  do-fill)
 
 (defun gnus-article-natural-long-line-p ()
   "Return true if the current line is long, and it's natural text."
