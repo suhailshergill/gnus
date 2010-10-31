@@ -1,3 +1,8 @@
+2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-treat-article): Only inhibit body washing, and
+	leave the header washing to take place.
+
 2010-10-31  Daniel Dehennin  <daniel.dehennin@baby-gnu.org>
 
 	* gnus-msg.el (gnus-configure-posting-styles): Permit the use of
