@@ -1,3 +1,9 @@
+2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-capability): New function.
+	(nnimap-open-connection): Only send AUTHENTICATE PLAIN if LOGINDISABLED
+	is set.
+
 2010-10-31  David Engster  <dengste@eml.cc>
 
 	* nnmairix.el (nnmairix-get-valid-servers): Return list of strings to
