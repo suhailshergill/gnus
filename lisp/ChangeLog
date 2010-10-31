@@ -1,5 +1,8 @@
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-cite.el (gnus-article-fill-cited-article): Remove unused `force'
+	parameter.
+
 	* shr.el (shr-find-fill-point): Don't break lines between punctuation
 	and non-punctuation (like after the apostrophe in "'We").
 

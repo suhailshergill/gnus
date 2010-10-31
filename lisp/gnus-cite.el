@@ -516,10 +516,10 @@ Lines matching `gnus-cite-attribution-suffix' and perhaps
 	    (setq m (cdr m))))
 	marks))))
 
-(defun gnus-article-fill-cited-article (&optional force width)
+(defun gnus-article-fill-cited-article (&optional width)
   "Do word wrapping in the current article.
 If WIDTH (the numerical prefix), use that text width when filling."
-  (interactive (list t current-prefix-arg))
+  (interactive "P")
   (with-current-buffer gnus-article-buffer
     (let ((buffer-read-only nil)
 	  (inhibit-point-motion-hooks t)
