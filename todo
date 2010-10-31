@@ -172,12 +172,6 @@
   [Probably `assistant.el' will provide this.  But it's development is
   stalled.]
 
-* Full integration of nnir into Gnus.  Generic hooks for adding new
-  external nnir sources.  I use a couple experimental, in-house tools
-  (JPRC is a research lab, occupied with document analysis and machine
-  learning) and adding new search engines to nnir by hacking the main
-  nnir.el module is rather clunky.
-
 * Manual ordering of articles in an nnml folder.
 
   That is, keystrokes to move articles (or whole threads) up or down
