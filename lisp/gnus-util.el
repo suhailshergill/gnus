@@ -2002,8 +2002,7 @@ This is the definition of match-substitute-replacement in subr.el from GNU Emacs
 					(- x (match-beginning 0))
 				      x))
 				  (match-data t)))
-	  (replace-match replacement fixedcase literal match subexp))))
-    )))
+	  (replace-match replacement fixedcase literal match subexp)))))))
 
 (provide 'gnus-util)
 
