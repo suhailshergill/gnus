@@ -111,9 +111,13 @@
    X-Loop, and all of the other random headers that often work would be
    very cool.
 
-* Agent (Can someone write some subtopics here? I don't use it myself
-  so I don't know what is lacking.)
+* Agent:
 
+* A better interface to the agent download scoring rules, like the one
+  for the other scoring rules.
+
+* Editing of messages in the agents cache.
+  
 * Support for encrypted folders. Even if the mail arrives unencrypted
   Gnus should be able to encrypt the *folder* for added safety. This
   should go for both Gnus' own folders and the folders Gnus reads from
@@ -199,11 +203,6 @@
   - we should be able to split mails to groups AND backends at the same time.
   - meanwhile, we should still be able to associate certain mail sources with
     certain backends.
-
-* A better interface to the agent download scoring rules, like the one
-  for the other scoring rules.
-
-* Editing of messages in the agents cache.
 
 * More article marks (like '!' or '?').
   Maybe user defined marks that can be displayed as any choosen charakter,

@@ -8255,6 +8255,8 @@ For example:
 ;;; Treatment top-level handling.
 ;;;
 
+(defvar gnus-inhibit-article-treatments nil)
+
 (defun gnus-treat-article (condition &optional part-number total-parts type)
   (let ((length (- (point-max) (point-min)))
 	(alist gnus-treatment-function-alist)
@@ -8277,6 +8279,7 @@ For example:
 	      (symbol-value (car elem))))
       (when (and (or (consp val)
 		     treated-type)
+		 (not gnus-inhibit-article-treatments)
 		 (gnus-treat-predicate val)
 		 (or (not (get (car elem) 'highlight))
 		     highlightp))
