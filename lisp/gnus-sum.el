@@ -9338,7 +9338,7 @@ to save in."
 	  (gnus-remove-text-with-property 'gnus-decoration)
 	  (when (gnus-visual-p 'article-highlight 'highlight)
 	    ;; Copy-to-buffer doesn't copy overlays.  So redo the
-	    ;; highlight.
+	    ;; highlighting.
 	    (let ((gnus-article-buffer buffer))
 	      (gnus-article-highlight-citation t)
 	      (gnus-article-highlight-signature)
