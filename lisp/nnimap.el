@@ -1555,12 +1555,16 @@ textual parts.")
 	     (split-string
 	      (buffer-substring
 	       (1+ (point))
-	       (1- (search-forward "]" (line-end-position) 'move)))))
+	       (if (search-forward "]" (line-end-position) 'move)
+		   (1- (point))
+		 (point)))))
 	    ((eql char ?\()
 	     (split-string
 	      (buffer-substring
 	       (1+ (point))
-	       (1- (search-forward ")" (line-end-position) 'move)))))
+	       (if (search-forward ")" (line-end-position) 'move)
+		   (1- (point))
+		 (point)))))
 	    ((eql char ?\")
 	     (forward-char 1)
 	     (buffer-substring
