@@ -698,7 +698,8 @@ textual parts.")
 				  1 group "SELECT")))))
 	      (when (and info
 			 marks)
-		(nnimap-update-infos marks (list info)))
+		(nnimap-update-infos marks (list info))
+		(nnimap-store-info info (gnus-active (gnus-info-group info))))
 	      (goto-char (point-max))
 	      (let ((uidnext (nth 5 (car marks))))
 		(setq high (or (if uidnext
