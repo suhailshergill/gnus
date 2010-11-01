@@ -1,3 +1,38 @@
+2010-11-01  Glenn Morris  <rgm@gnu.org>
+
+	* nnir.el (declare-function): Add compat stub.
+	(mm-url-insert, mm-url-encode-www-form-urlencoded): Declare.
+	(nnir-run-gmane): Require 'mm-url.
+
+	* mm-util.el (mm-string-to-multibyte): Simplify.
+
+	* shr.el (declare-function): Add compat stub.
+	(url-cache-create-filename): Declare.
+	(mm-disable-multibyte, widget-convert-button): Autoload.
+
+	* smime.el (ldap-search): Declare.
+	(smime-cert-by-ldap-1): Require ldap on Emacs.
+
+	* nnimap.el: Require nnmail, and gnus-sum when compiling.
+	(nnimap-keepalive): Use gnus-float-time.
+
+	* mail-source.el (nnheader-message, gnus-float-time): Autoload.
+	(mail-source-delete-crash-box): Use gnus-float-time.
+
+	* gnus-dired.el (gnus-completing-read): Autoload.
+
+	* mm-view.el (gnus-rescale-image): Autoload.
+
+	* mm-decode.el (gnus-completing-read, gnus-blocked-images): Autoload.
+
+	* gnus.el (gnus-sloppily-equal-method-parameters): Move defn before use.
+
+	* sieve-manage.el: Require 'cl when compiling.
+
+	* gnus-util.el (iswitchb-read-buffer): Declare rather than autoload.
+	(gnus-iswitchb-completing-read): Require iswitchb.
+	(gnus-select-frame-set-input-focus): Silence compiler.
+
 2010-10-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-subject-trailing-was-query): Change default to t,
