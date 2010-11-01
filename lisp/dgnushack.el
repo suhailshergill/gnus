@@ -130,7 +130,6 @@
 
 (eval-and-compile
   (unless (featurep 'xemacs)
-    (defvar iswitchb-temp-buflist)
     (defalias 'get-popup-menu-response 'ignore)
     (defalias 'event-object 'ignore)
     (autoload 'iswitchb-read-buffer "iswitchb")
