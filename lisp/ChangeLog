@@ -1,5 +1,7 @@
 2010-11-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-print-buffer): Rewrite to use with-temp-buffer.
+
 	* nnimap.el (nnimap-request-group): Store the new updated info.
 	(nnimap-request-group): Select the group when we don't know whether it
 	exists or not.
