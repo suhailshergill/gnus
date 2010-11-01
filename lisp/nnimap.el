@@ -669,7 +669,8 @@ textual parts.")
   (let ((result (nnimap-possibly-change-group
 		 ;; Don't SELECT the group if we're going to select it
 		 ;; later, anyway.
-		 (if dont-check
+		 (if (and dont-check
+			  (assoc group nnimap-current-infos))
 		     nil
 		   group)
 		 server))
