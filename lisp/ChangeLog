@@ -1,5 +1,18 @@
 2010-11-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* shr.el: No need to declare `declare-function' since shr.el is for
+	only Emacsen that provide `libxml-parse-html-region'.
+
+	* dgnushack.el: Remove `(defvar iswitchb-temp-buflist)', that is
+	effective only in a file it is referred to.
+
+2010-11-01  Glenn Morris  <rgm@gnu.org>
+
+	* nnimap.el (gnutls-negotiate):
+	* nntp.el (netrc-parse): Fix declarations.
+
+2010-11-01  Katsumi Yamaoka  <yamaoka@jpl.org>
+
 	* gnus-util.el (gnus-string-match-p): New function, that is an alias to
 	string-match-p in Emacs >=23.
 
