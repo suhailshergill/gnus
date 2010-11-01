@@ -1,5 +1,8 @@
 2010-11-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-cite.el (gnus-article-fill-cited-article): Minimize the
+	long-lines case by only filling the long lines.
+
 	* nnimap.el (nnimap-parse-line): Don't bug out oddly formed replies
 	(bug #7311).
 
