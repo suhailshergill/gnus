@@ -4556,7 +4556,7 @@ However, you can also create e.g. a new @code{nnmaildir} or @code{nnml}
 server exclusively for @code{nnmairix} in your secondary select methods
 (@pxref{Finding the News}).  If you use a secondary @code{nnml} server
 just for mairix, make sure that you explicitly set the server variable
-@code{nnml-get-new-mail} to @code{nil}, or you might loose mail
+@code{nnml-get-new-mail} to @code{nil}, or you might lose mail
 (@pxref{nnmairix caveats}).  If you want to use mairix remotely on an
 @acronym{IMAP} server, you have to choose the corresponding
 @code{nnimap} server here.
@@ -19840,7 +19840,7 @@ limit to control how often the cycling occurs.  A large value improves
 performance.  A small value minimizes the time lost should the
 connection be lost while fetching (You may need to run
 @code{gnus-agent-regenerate-group} to update the group's state.
-However, all articles parsed prior to loosing the connection will be
+However, all articles parsed prior to losing the connection will be
 available while unplugged).  The default is 10M so it is unusual to
 see any cycling.
 
