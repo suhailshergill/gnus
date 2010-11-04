@@ -1,3 +1,8 @@
+2010-11-03  Kan-Ru Chen  <kanru@kanru.info>  (tiny change)
+
+	* gnus.texi (Customizing the IMAP Connection): Document
+	`nnimap-expunge' and remove `nnimap-expunge-inbox' from example.
+
 2010-11-03  Glenn Morris  <rgm@gnu.org>
 
 	* gnus.texi (Agent Variables, Configuring nnmairix): Spelling fix.
