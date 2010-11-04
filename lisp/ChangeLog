@@ -1,3 +1,7 @@
+2010-11-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* mm-decode.el (mm-save-part): Put the entire path in the `M-n' slot.
+
 2010-11-04  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-tag-img): Use string-width and truncate-string-to-width
