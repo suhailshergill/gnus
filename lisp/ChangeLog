@@ -1,5 +1,8 @@
 2010-11-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-send-mail): Use the value of
+	message-courtesy-message from the message buffer.
+
 	* gnus-html.el (gnus-html-browse-url): Implement mailto: URLs.
 
 	* shr.el (shr-browse-url): Implement mailto: URLs.
