@@ -1,5 +1,9 @@
 2010-11-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-browse-url): Implement mailto: URLs.
+
+	* shr.el (shr-browse-url): Implement mailto: URLs.
+
 	* gnus-sum.el (gnus-summary-show-article): Take `t' as the arg to mean
 	"raw".
 
