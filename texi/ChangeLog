@@ -1,3 +1,8 @@
+2010-11-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Customizing the IMAP Connection): Remove nnir mention,
+	since that works by default.
+
 2010-11-03  Kan-Ru Chen  <kanru@kanru.info>  (tiny change)
 
 	* gnus.texi (Customizing the IMAP Connection): Document

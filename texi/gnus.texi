@@ -14845,8 +14845,7 @@ Here's an example method that's more complex:
         (nnimap-inbox "INBOX")
         (nnimap-split-methods default)
         (nnimap-expunge t)
-        (nnimap-stream ssl)
-        (nnir-search-engine imap))
+        (nnimap-stream ssl))
 @end example
 
 @table @code
