@@ -1,5 +1,8 @@
 2010-11-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-ems.el (gnus-put-image): Use a blank text as the insertion
+	string to avoid making the From headers syntactically invalid.
+
 	* message.el (message-send-mail): Don't insert courtesy messages if the
 	message already has List-Post and List-ID messages.
 
