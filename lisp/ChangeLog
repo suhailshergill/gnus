@@ -1,3 +1,19 @@
+2010-11-06  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (gnus-summary-nnir-goto-thread): remove function and
+	binding. handled by `gnus-summary-refer-thread' instead.
+	(nnir-warp-to-article): new backend function.
+
+	* nnimap.el (nnimap-request-thread): force dependency updating.
+
+	* gnus-sum.el (gnus-fetch-headers): allow more arguments.
+	(gnus-summary-refer-thread): rework to improve thread-referral.
+
+	* gnus-int.el (gnus-warp-to-article): new function.
+
+	* gnus-sum.el (gnus-summary-article-map): bind it.
+
+
 2010-11-04  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (gnus-summary-nnir-goto-thread): limiting work done by
