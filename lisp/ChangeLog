@@ -1,3 +1,8 @@
+2010-11-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-send-mail): Don't insert courtesy messages if the
+	message already has List-Post and List-ID messages.
+
 2010-11-06  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (gnus-summary-nnir-goto-thread): remove function and
@@ -12,7 +17,6 @@
 	* gnus-int.el (gnus-warp-to-article): new function.
 
 	* gnus-sum.el (gnus-summary-article-map): bind it.
-
 
 2010-11-04  Andrew Cohen  <cohen@andy.bu.edu>
 

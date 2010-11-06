@@ -4526,6 +4526,8 @@ This function could be useful in `message-setup-hook'."
 	      (save-restriction
 		(message-narrow-to-headers)
 		(and news
+		     (not (message-fetch-field "List-Post"))
+		     (not (message-fetch-field "List-ID"))
 		     (or (message-fetch-field "cc")
 			 (message-fetch-field "bcc")
 			 (message-fetch-field "to"))
