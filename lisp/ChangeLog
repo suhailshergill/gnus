@@ -1,5 +1,8 @@
 2010-11-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-get-unread-articles): Ignore totally non-existent
+	methods.
+
 	* gnus-group.el (gnus-group-read-ephemeral-group): Remove superfluous
 	": " from the prompt.
 	(gnus-group-make-group): Ditto.
