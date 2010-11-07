@@ -6,31 +6,37 @@
 	* message.el (message-send-mail): Don't insert courtesy messages if the
 	message already has List-Post and List-ID messages.
 
+2010-11-06  Glenn Morris  <rgm@gnu.org>
+
+	* gnus-art.el (gnus-treat-article): Give dynamic local variables
+	`condition', `type', `length' a prefix.
+	(gnus-treat-predicate): Update for above name changes.
+
 2010-11-06  Andrew Cohen  <cohen@andy.bu.edu>
 
-	* nnir.el (gnus-summary-nnir-goto-thread): remove function and
-	binding. handled by `gnus-summary-refer-thread' instead.
-	(nnir-warp-to-article): new backend function.
+	* nnir.el (gnus-summary-nnir-goto-thread): Remove function and
+	binding.  Handled by `gnus-summary-refer-thread' instead.
+	(nnir-warp-to-article): New backend function.
 
-	* nnimap.el (nnimap-request-thread): force dependency updating.
+	* nnimap.el (nnimap-request-thread): Force dependency updating.
 
-	* gnus-sum.el (gnus-fetch-headers): allow more arguments.
-	(gnus-summary-refer-thread): rework to improve thread-referral.
+	* gnus-sum.el (gnus-fetch-headers): Allow more arguments.
+	(gnus-summary-refer-thread): Rework to improve thread-referral.
 
-	* gnus-int.el (gnus-warp-to-article): new function.
+	* gnus-int.el (gnus-warp-to-article): New function.
 
-	* gnus-sum.el (gnus-summary-article-map): bind it.
+	* gnus-sum.el (gnus-summary-article-map): Bind it.
 
 2010-11-04  Andrew Cohen  <cohen@andy.bu.edu>
 
-	* nnir.el (gnus-summary-nnir-goto-thread): limiting work done by
+	* nnir.el (gnus-summary-nnir-goto-thread): Limit work done by
 	gnus-summary-refer-thread.
 
-	* gnus-sum.el (gnus-build-all-threads): force updating of dependency
+	* gnus-sum.el (gnus-build-all-threads): Force updating of dependency
 	headers.
-	(gnus-summary-limit-include-thread): prevent articles in thread from
+	(gnus-summary-limit-include-thread): Prevent articles in thread from
 	being cut in gnus-cut-threads.
-	(gnus-summary-refer-thread): limit retrieved headers to those in
+	(gnus-summary-refer-thread): Limit retrieved headers to those in
 	thread.
 
 2010-11-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
