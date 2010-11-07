@@ -2,6 +2,7 @@
 
 	* gnus-start.el (gnus-get-unread-articles): Ignore totally non-existent
 	methods.
+	(gnus-read-active-file): Ditto.
 
 	* gnus-group.el (gnus-group-read-ephemeral-group): Remove superfluous
 	": " from the prompt.

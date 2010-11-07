@@ -1986,7 +1986,9 @@ If SCAN, request a scan of that group as well."
       (while (setq method (pop methods))
 	;; Only do each method once, in case the methods appear more
 	;; than once in this list.
-	(unless (member method methods)
+	(when (and (not (member method methods))
+		   ;; Check whether the backend exists.
+		   (ignore-errors (gnus-get-function method 'open-server)))
 	  (if (or debug-on-error debug-on-quit)
 	      (gnus-read-active-file-1 method force)
 	    (condition-case ()
