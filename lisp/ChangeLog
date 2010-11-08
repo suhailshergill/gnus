@@ -1,6 +1,7 @@
 2010-11-08  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-mailto): New function.
+	(message-mailto): Should accept other parameters.
 
 2010-11-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

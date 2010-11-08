@@ -6552,7 +6552,7 @@ is a function used to switch to and display the mail buffer."
     t))
 
 ;;;###autoload
-(defun message-mailto (url)
+(defun message-mailto (url &rest args)
   "Send a mail message to URL.
 The URL should be on the form \"mailto:<address>?params\"."
   (when (string-match "\\`mailto:" url)
