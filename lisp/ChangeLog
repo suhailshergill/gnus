@@ -1,5 +1,7 @@
 2010-11-08  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-browse-url): Call browse-url-mailto for mailto: links.
+
 	* message.el (message-mailto): New function.
 	(message-mailto): Should accept other parameters.
 	(message-mailto): Remove since it duplicates browse-url-mailto

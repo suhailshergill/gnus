@@ -344,7 +344,7 @@ redirects somewhere else."
      ((not url)
       (message "No link under point"))
      ((string-match "^mailto:" url)
-      (gnus-url-mailto url))
+      (browse-url-mailto url))
      (t
       (browse-url url)))))
 
