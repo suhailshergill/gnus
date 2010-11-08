@@ -6552,31 +6552,6 @@ is a function used to switch to and display the mail buffer."
     t))
 
 ;;;###autoload
-(defun message-mailto (url &rest args)
-  "Send a mail message to URL.
-The URL should be on the form \"mailto:<address>?params\"."
-  (when (string-match "\\`mailto:" url)
-    (setq url (substring url (match-end 0)))
-    (let (to args)
-      (if (string-match "\\?" url)
-	  (setq to (substring url 0 (match-beginning 0))
-		args (substring url (match-end 0)))
-	(setq to url))
-      (if (not args)
-	  (message-mail to)
-	(let ((pairs
-	       (mapcar (lambda (elem)
-			 (let ((key-val (split-string elem "=")))
-			   (list (capitalize (car key-val))
-				 (cadr key-val))))
-		       (split-string args "&")))
-	      subject)
-	  (when (setq subject (assoc "Subject" pairs))
-	    (setq pairs (delq subject pairs)
-		  subject (cadr subject)))
-	  (message-mail to subject pairs))))))
-
-;;;###autoload
 (defun message-news (&optional newsgroups subject)
   "Start editing a news article to be sent."
   (interactive)

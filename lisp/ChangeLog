@@ -2,6 +2,8 @@
 
 	* message.el (message-mailto): New function.
 	(message-mailto): Should accept other parameters.
+	(message-mailto): Remove since it duplicates browse-url-mailto
+	functionality.
 
 2010-11-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
