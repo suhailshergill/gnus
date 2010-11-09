@@ -418,6 +418,7 @@ redirects somewhere else."
 ;; url-cache-extract autoloads url-cache.
 (declare-function url-cache-create-filename "url-cache" (url))
 (autoload 'mm-disable-multibyte "mm-util")
+(autoload 'browse-url-mailto "browse-url")
 
 (defun shr-get-image-data (url)
   "Get image data for URL.

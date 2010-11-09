@@ -1,3 +1,7 @@
+2010-11-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Article Washing): Document gnus-article-treat-non-ascii.
+
 2010-11-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Customizing the IMAP Connection): Remove nnir mention,

@@ -1,5 +1,9 @@
 2010-11-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (browse-url-mailto): Autoload.
+
+	* gnus-art.el (article-treat-non-ascii): New command and keystroke.
+
 	* message.el (message-subject-trailing-was-ask-regexp): A ] in a []
 	regexp doesn't need quoting.
 
