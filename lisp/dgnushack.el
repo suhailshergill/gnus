@@ -35,8 +35,9 @@
 (require 'cl)
 (require 'iswitchb)
 
-(ignore-errors
-  (require 'org-entities))
+(condition-case nil
+    (require 'org-entities)
+  (error nil))
 
 (defvar srcdir (or (getenv "srcdir") "."))
 (defvar loaddir (and load-file-name (file-name-directory load-file-name)))

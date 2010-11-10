@@ -1,5 +1,8 @@
 2010-11-10  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* dgnushack.el: Don't use ignore-errors in the top level form since it
+	is unavailable in XEmacs even if cl is loaded.
+
 	* gnus-art.el (org-entities): Bind it.
 
 2010-11-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
