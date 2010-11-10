@@ -1,5 +1,7 @@
 2010-11-10  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* rfc2047.el (rfc2047-syntax-table): Simplify.
+
 	* lpath.el: Fbind set-char-table-range for XEmacs 21.4 and SXEmacs 22.1.
 
 	* gnus-art.el (article-treat-non-ascii): Use put-char-table instead of
