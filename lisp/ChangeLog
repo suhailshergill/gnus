@@ -1,5 +1,10 @@
 2010-11-10  Katsumi Yamaoka  <yamaoka@jpl.org>
 
+	* lpath.el: Fbind set-char-table-range for XEmacs 21.4 and SXEmacs 22.1.
+
+	* gnus-art.el (article-treat-non-ascii): Use put-char-table instead of
+	set-char-table-range for XEmacs.
+
 	* dgnushack.el: Don't use ignore-errors in the top level form since it
 	is unavailable in XEmacs even if cl is loaded.
 
