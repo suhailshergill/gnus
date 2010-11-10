@@ -5,6 +5,24 @@
 	* gnus-art.el (article-treat-non-ascii): Use put-char-table instead of
 	set-char-table-range for XEmacs.
 
+2010-11-10  Glenn Morris  <rgm@gnu.org>
+
+	* time-date.el (time-to-seconds): Always an alias on Emacs,
+	never a real function.
+	(with-no-warnings): Remove compat stub, now unused.
+	(time-less-p): Doc fix.
+	(time-to-number-of-days): Simplify.
+
+	* smime.el (from): Remove unused declaration.
+
+	* gnus-util.el (with-no-warnings): Remove compat stub, now unused.
+	(gnus-float-time): On Emacs, always an alias.
+
+	* ecomplete.el (with-no-warnings): Remove compat stub, now unused.
+	(ecomplete-add-item): Use float-time on Emacs, else gnus-float-time.
+
+2010-11-10  Katsumi Yamaoka  <yamaoka@jpl.org>
+
 	* dgnushack.el: Don't use ignore-errors in the top level form since it
 	is unavailable in XEmacs even if cl is loaded.
 
