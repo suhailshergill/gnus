@@ -1,3 +1,7 @@
+2010-11-12  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.texi (Article Washing): Fix typo.
+
 2010-11-09  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Article Washing): Document gnus-article-treat-non-ascii.
