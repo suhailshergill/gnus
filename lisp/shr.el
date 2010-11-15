@@ -573,6 +573,11 @@ Return a string with image data."
 	(put-text-property start (point) 'keymap shr-map)
 	(put-text-property start (point) 'shr-alt alt)
 	(put-text-property start (point) 'image-url url)
+	(put-text-property start (point) 'image-displayer
+			   (lambda (url start end)
+			     (url-retrieve url 'shr-image-fetched
+					   (list (current-buffer) start end)
+					   t)))
 	(put-text-property start (point) 'help-echo alt)
 	(setq shr-state 'image)))))
 
