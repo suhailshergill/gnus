@@ -9901,7 +9901,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 	  (save-excursion
 	    (gnus-summary-goto-subject article)
 	    (gnus-summary-mark-article article gnus-canceled-mark)))))
-      (push article articles-to-update-marks))
+      (push article articles-to-update-marks)))
 
     (save-excursion
       (apply 'gnus-summary-remove-process-mark articles-to-update-marks))
@@ -9912,7 +9912,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 
     (gnus-kill-buffer copy-buf)
     (gnus-summary-position-point)
-    (gnus-set-mode-line 'summary))))
+    (gnus-set-mode-line 'summary)))
 
 (defun gnus-summary-copy-article (&optional n to-newsgroup select-method)
   "Copy the current article to some other group.
