@@ -201,7 +201,7 @@ CHARS is a regexp-like character alternative (e.g., \"[)$]\")."
           (let ((alt-text (when (string-match "\\(alt\\|title\\)=\"\\([^\"]+\\)"
                                               parameters)
                             (xml-substitute-special (match-string 2 parameters)))))
-            (gnus-put-text-property start end 'gnus-image-url url)
+            (gnus-put-text-property start end 'image-url url)
             (if (gnus-html-image-url-blocked-p
                  url
                  (if (buffer-live-p gnus-summary-buffer)
@@ -344,7 +344,7 @@ Use ALT-TEXT for the image string."
 (defun gnus-html-browse-image ()
   "Browse the image under point."
   (interactive)
-  (browse-url (get-text-property (point) 'gnus-image-url)))
+  (browse-url (get-text-property (point) 'image-url)))
 
 (defun gnus-html-browse-url ()
   "Browse the image under point."
@@ -415,9 +415,9 @@ Return a string with image data."
   "Put an image with DATA from URL and optional ALT-TEXT."
   (when (gnus-graphic-display-p)
     (let* ((start (text-property-any (point-min) (point-max)
-				     'gnus-image-url url))
+				     'image-url url))
            (end (when start
-                  (next-single-property-change start 'gnus-image-url))))
+                  (next-single-property-change start 'image-url))))
       ;; Image found?
       (when start
         (let* ((image
@@ -459,7 +459,7 @@ Return a string with image data."
 					    'gnus-alt-text alt-text)
                     (when url
                       (gnus-put-text-property start (point)
-					      'gnus-image-url url))
+					      'image-url url))
                     (gnus-add-image 'external image)
                     t)
                 ;; Bad image, try to show something else
