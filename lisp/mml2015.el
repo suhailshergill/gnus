@@ -941,6 +941,7 @@ Whether the passphrase is cached at all is controlled by
   (let* ((inhibit-redisplay t)
 	 (context (epg-make-context))
 	 (boundary (mml-compute-boundary cont))
+	 (sender (message-options-get 'message-sender))
 	 signer-key
 	 (signers
 	  (or (message-options-get 'mml2015-epg-signers)
@@ -950,8 +951,8 @@ Whether the passphrase is cached at all is controlled by
 		   (epa-select-keys context "\
 Select keys for signing.
 If no one is selected, default secret key is used.  "
-				    mml2015-signers t)
-		 (if mml2015-signers
+				    (cons sender mml2015-signers) t)
+		 (if (or sender mml2015-signers)
 		     (delq nil
 			   (mapcar
 			    (lambda (signer)
@@ -965,7 +966,7 @@ If no one is selected, default secret key is used.  "
 					    signer)))
 				(error "No secret key for %s" signer))
 			      signer-key)
-			    mml2015-signers)))))))
+			    (cons sender mml2015-signers))))))))
 	 signature micalg)
     (epg-context-set-armor context t)
     (epg-context-set-textmode context t)
