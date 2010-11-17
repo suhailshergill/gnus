@@ -1,3 +1,8 @@
+2010-11-17  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-run-imap): Reverse the article list for each group
+	rather than the whole list.
+
 2010-11-17  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-image-displayer): Protect function against non-existent
