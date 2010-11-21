@@ -5,6 +5,8 @@
 	had gotten lost somewhere.
 	(nnimap-request-accept-article): Keep track of examined groups, and
 	unselect the group before APPENDing to read-only groups.
+	(nnimap-request-move-article): Clear flags before moving so that they
+	can be re-set later.
 
 2010-11-20  Katsumi Yamaoka  <yamaoka@jpl.org>
 
