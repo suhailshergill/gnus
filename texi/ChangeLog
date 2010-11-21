@@ -1,3 +1,7 @@
+2010-11-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Server Commands): Document gnus-server-show-server.
+
 2010-11-18  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (Misc Article): Document gnus-inhibit-images.

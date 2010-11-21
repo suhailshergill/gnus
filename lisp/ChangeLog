@@ -1,5 +1,7 @@
 2010-11-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-srvr.el (gnus-server-show-server): New command and keystroke.
+
 	* nnimap.el (nnimap-get-capabilities): Refactor out.
 	(nnimap-open-connection): Re-request capabilities after STARTTLS.
 
