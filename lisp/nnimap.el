@@ -727,12 +727,16 @@ textual parts.")
 (deffoo nnimap-request-rename-group (group new-name &optional server)
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer (nnimap-buffer)
-      ;; Make sure we don't have this group open read/write by asking
-      ;; to examine a mailbox that doesn't exist.  This seems to be
-      ;; the only way that allows us to reliably go back to unselected
-      ;; state on Courier.
+      (nnimap-unselect-group)
       (car (nnimap-command "RENAME %S %S"
 			   (utf7-encode group t) (utf7-encode new-name t))))))
+
+(defun nnimap-unselect-group ()
+  ;; Make sure we don't have this group open read/write by asking
+  ;; to examine a mailbox that doesn't exist.  This seems to be
+  ;; the only way that allows us to reliably go back to unselected
+  ;; state on Courier.
+  (nnimap-command "EXAMINE DOES.NOT.EXIST"))
 
 (deffoo nnimap-request-expunge-group (group &optional server)
   (when (nnimap-possibly-change-group group server)

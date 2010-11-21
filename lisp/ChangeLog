@@ -1,3 +1,9 @@
+2010-11-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-unselect-group): Made into its own function.
+	(nnimap-request-rename-group): Unselect group before renaming.  This
+	had gotten lost somewhere.
+
 2010-11-20  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-gravatar.el (gnus-gravatar-transform-address): Decode name again.
