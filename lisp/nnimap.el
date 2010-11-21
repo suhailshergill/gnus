@@ -125,7 +125,7 @@ textual parts.")
 
 (defstruct nnimap
   group process commands capabilities select-result newlinep server
-  last-command-time greeting)
+  last-command-time greeting examined)
 
 (defvar nnimap-object nil)
 
@@ -867,6 +867,7 @@ textual parts.")
     (erase-buffer)
     (unless (equal group (nnimap-group nnimap-object))
       (setf (nnimap-group nnimap-object) nil)
+      (setf (nnimap-examined nnimap-object) group)
       (nnimap-send-command "EXAMINE %S" (utf7-encode group t)))
     (let ((sequence
 	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
@@ -940,6 +941,10 @@ textual parts.")
       (nnimap-add-cr)
       (setq message (buffer-substring-no-properties (point-min) (point-max)))
       (with-current-buffer (nnimap-buffer)
+	;; If we have this group open read-only, then unselect it
+	;; before appending to it.
+	(when (equal (nnimap-examined nnimap-object) group)
+	  (nnimap-unselect-group))
 	(erase-buffer)
 	(setq sequence (nnimap-send-command
 			"APPEND %S {%d}" (utf7-encode group t)
@@ -998,6 +1003,7 @@ textual parts.")
 	(with-current-buffer (nnimap-buffer)
 	  (setf (nnimap-group nnimap-object) nil)
 	  (dolist (group groups)
+	    (setf (nnimap-examined nnimap-object) group)
 	    (push (list (nnimap-send-command "EXAMINE %S" (utf7-encode group t))
 			group)
 		  sequences))
@@ -1056,6 +1062,7 @@ textual parts.")
 		active (cdr (assq 'active params))
 		uidvalidity (cdr (assq 'uidvalidity params))
 		modseq (cdr (assq 'modseq params)))
+	  (setf (nnimap-examined nnimap-object) group)
 	  (if (and qresyncp
 		   uidvalidity
 		   modseq)
