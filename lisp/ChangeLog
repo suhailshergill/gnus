@@ -1,5 +1,7 @@
 2010-11-22  Julien Danjou  <julien@danjou.info>
 
+	* color-lab.el: New file.
+
 	* gnus-art.el (gnus-url-mailto): Do not downcase args.
 
 2010-11-21  Andrew Cohen  <cohen@andy.bu.edu>
