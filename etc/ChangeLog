@@ -1,3 +1,7 @@
+2010-11-22  Julien Danjou  <julien@danjou.info>
+
+	* post-receive: Use commiter name and email address.
+
 2010-09-24  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* post-receive: Use the emailprefix again.

@@ -3,8 +3,8 @@
 # modified: 2010-09-01 and on by tzz@lifelogs.com
 
 # Use the email address of the author of the last commit.
-export USER_EMAIL=$(git log -1 --format=format:%ae HEAD)
-export USER_NAME=$(git log -1 --format=format:%an HEAD)
+export USER_EMAIL=$(git log -1 --format=format:%ce HEAD)
+export USER_NAME=$(git log -1 --format=format:%cn HEAD)
 
 # the remainder is the standard git-core post-receive-email with some changes:
 
