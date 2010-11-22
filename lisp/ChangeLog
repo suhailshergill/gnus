@@ -580,9 +580,7 @@
 
 2010-10-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* shr.el (shr-tag-span): Drop colorisation of regions since we don't
-	control the background color.
-	(shr-tag-img): Ignore very small web bug type images.
+	* shr.el (shr-tag-img): Ignore very small web bug type images.
 	(shr-put-image): Add help-echo alt texts to the images.
 	(shr-tag-video): Show the video poster image.
 
