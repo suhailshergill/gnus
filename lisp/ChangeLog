@@ -1,5 +1,7 @@
 2010-11-22  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-tag-font): Add.
+
 	* shr-color.el: New file.
 
 	* color-lab.el: New file.

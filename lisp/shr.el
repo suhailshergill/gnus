@@ -525,6 +525,14 @@ START, and END."
       (let ((overlay (make-overlay start (point))))
 	(overlay-put overlay 'face (cons 'foreground-color color))))))
 
+(defun shr-tag-font (cont)
+  (let ((start (point))
+        (color (cdr (assq :color cont))))
+    (shr-generic cont)
+    (when color
+      (let ((overlay (make-overlay start (point))))
+	(overlay-put overlay 'face (cons 'foreground-color color))))))
+
 (defun shr-parse-style (style)
   (when style
     (let ((plist nil))
