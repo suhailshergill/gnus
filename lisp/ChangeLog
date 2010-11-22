@@ -1,5 +1,7 @@
 2010-11-22  Julien Danjou  <julien@danjou.info>
 
+	* shr-color.el: New file.
+
 	* color-lab.el: New file.
 
 	* gnus-art.el (gnus-url-mailto): Do not downcase args.
