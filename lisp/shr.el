@@ -520,7 +520,9 @@ START, and END."
 (autoload 'shr-color-visible "shr-color")
 (defun shr-tag-color-check (fg &optional bg)
   "Check that FG is visible on BG."
-  (shr-color-visible (or bg (frame-parameter nil 'background-color)) fg (not bg)))
+  (shr-color-visible (or (shr-color->hexadecimal bg)
+                         (frame-parameter nil 'background-color))
+                     (shr-color->hexadecimal fg) (not bg)))
 
 (defun shr-tag-insert-color-overlay (color start end)
   (when color

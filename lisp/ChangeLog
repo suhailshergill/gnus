@@ -1,5 +1,11 @@
 2010-11-22  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-tag-color-check): Convert colors to hexadecimal with
+	shr-color->hexadecimal.
+
+	* shr-color.el (shr-color->hexadecimal): Add converting functions for
+	RGB() or HSL() color representation.
+
 	* shr.el (shr-tag-font): Add.
 	(shr-tag-color-check): New function to get better colors.
 	(shr-tag-insert-color-overlay): Factorize code between tag-font and

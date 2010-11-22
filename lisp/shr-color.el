@@ -45,6 +45,55 @@ absolute value without any unit."
   :group 'shr
   :type 'integer)
 
+(defun shr-color-relative-to-absolute (number)
+  "Convert a relative NUMBER to absolute. If NUMBER is absolute, return NUMBER.
+This will convert \"80 %\" to 204, \"100 %\" to 255 but \"123\" to \"123\"."
+  (let ((string-length (- (length number) 1)))
+    ;; Is this a number with %?
+    (if (eq (elt number string-length) ?%)
+        (/ (* (string-to-number (substring number 0 string-length)) 255) 100)
+      (string-to-number number))))
+
+(defun shr-color-hsl-to-rgb-fractions (h s l)
+  "Convert H S L to fractional RGB values."
+  (let (m1 m2)
+    (if (<= l 0.5)
+        (setq m2 (* l (+ s 1)))
+        (setq m2 (- (+ l s) (* l s))))
+    (setq m1 (- (* l 2) m2))
+    (list (rainbow-hue-to-rgb m1 m2 (+ h (/ 1 3.0)))
+	  (rainbow-hue-to-rgb m1 m2 h)
+	  (rainbow-hue-to-rgb m1 m2 (- h (/ 1 3.0))))))
+
+(defun shr-color->hexadecimal (color)
+  "Convert any color format to hexadecimal representation.
+Like rgb() or hsl()."
+  (when color
+    (cond ((or (string-match
+                "rgb(\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*)"
+                color)
+               (string-match
+                "rgba(\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*[0-9]*\.?[0-9]+\s*%?\s*)"
+                color))
+           (format "#%02X%02X%02X"
+                   (shr-color-relative-to-absolute (match-string-no-properties 1 color))
+                   (shr-color-relative-to-absolute (match-string-no-properties 2 color))
+                   (shr-color-relative-to-absolute (match-string-no-properties 3 color))))
+          ((or (string-match
+                "hsl(\s*\\([0-9]\\{1,3\\}\\)\s*,\s*\\([0-9]\\{1,3\\}\\)\s*%\s*,\s*\\([0-9]\\{1,3\\}\\)\s*%\s*)"
+                color)
+               (string-match
+                "hsla(\s*\\([0-9]\\{1,3\\}\\)\s*,\s*\\([0-9]\\{1,3\\}\\)\s*%\s*,\s*\\([0-9]\\{1,3\\}\\)\s*%\s*,\s*[0-9]*\.?[0-9]+\s*%?\s*)"
+                color))
+           (let ((h (/ (string-to-number (match-string-no-properties 1 color)) 360.0))
+                 (s (/ (string-to-number (match-string-no-properties 2 color)) 100.0))
+                 (l (/ (string-to-number (match-string-no-properties 3 color)) 100.0)))
+             (destructuring-bind (r g b)
+                 (rainbow-hsl-to-rgb-fractions h s l)
+               (format "#%02X%02X%02X" (* r 255) (* g 255) (* b 255)))))
+          (t
+           color))))
+
 (defun set-minimum-interval (val1 val2 min max interval &optional fixed)
   "Set minimum interval between VAL1 and VAL2 to INTERVAL.
 The values are bound by MIN and MAX.
