@@ -1,3 +1,8 @@
+2010-11-23  Julien Danjou  <julien@danjou.info>
+
+	* shr-color.el (shr-color-hsl-to-rgb-fractions): Use shr-color-hue-to-rgb.
+	(shr-color->hexadecimal): Call shr-color-hsl-to-rgb-fractions.
+
 2010-11-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-color->hexadecimal): Autoload.
