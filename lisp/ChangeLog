@@ -1,3 +1,11 @@
+2010-11-23  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnheader.el (nnheader-parse-head): Bug fix.  Properly position
+	point when parsing headers.
+
+	* nnspool.el (nnspool-insert-nov-head): Bug fix.  Make sure point
+	is positioned properly when parsing headers.
+
 2010-11-23  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-parse-style): Replace \n with space in style parsing.
