@@ -8,6 +8,8 @@
 
 2010-11-23  Julien Danjou  <julien@danjou.info>
 
+	* shr-color.el (shr-color->hexadecimal): Add support for color names.
+
 	* shr.el (shr-parse-style): Replace \n with space in style parsing.
 
 	* shr-color.el (shr-color-hsl-to-rgb-fractions): Use shr-color-hue-to-rgb.
