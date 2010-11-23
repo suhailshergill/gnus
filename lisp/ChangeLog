@@ -1,3 +1,8 @@
+2010-11-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-insert-color-overlay): Split stuff like
+	"#444444 !important" to find the real colour.
+
 2010-11-23  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnheader.el (nnheader-parse-head): Bug fix.  Properly position
