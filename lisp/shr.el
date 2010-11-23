@@ -518,6 +518,7 @@ START, and END."
   (shr-fontize-cont cont 'strike-through))
 
 (autoload 'shr-color-visible "shr-color")
+(autoload 'shr-color->hexadecimal "shr-color")
 (defun shr-tag-color-check (fg &optional bg)
   "Check that FG is visible on BG."
   (shr-color-visible (or (shr-color->hexadecimal bg)
