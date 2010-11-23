@@ -1,5 +1,7 @@
 2010-11-23  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-parse-style): Replace \n with space in style parsing.
+
 	* shr-color.el (shr-color-hsl-to-rgb-fractions): Use shr-color-hue-to-rgb.
 	(shr-color->hexadecimal): Call shr-color-hsl-to-rgb-fractions.
 
