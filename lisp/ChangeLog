@@ -1,3 +1,7 @@
+2010-11-24  Łukasz Stelmach  <lukasz.stelmach@iem.pw.edu.pl>  (tiny change)
+
+	* message.el (message-goto-body): Go after <#secure.
+
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-insert-color-overlay): Replace deprecated syntax.
