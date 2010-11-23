@@ -8,6 +8,8 @@
 
 2010-11-23  Julien Danjou  <julien@danjou.info>
 
+	* color-lab.el (boundp): Bind float-pi for Emacs < 23.3.
+
 	* shr-color.el (shr-color->hexadecimal): Add support for color names.
 
 	* shr.el (shr-parse-style): Replace \n with space in style parsing.
