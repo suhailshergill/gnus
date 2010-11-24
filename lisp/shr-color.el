@@ -318,8 +318,8 @@ If FIXED is t, then val1 will not be touched."
 
 (defun shr-color-visible (bg fg &optional fixed-background)
   "Check that BG and FG colors are visible if they are drawn on each other.
-Return t if they are. If they are too similar, two new colors are
-returned instead.
+Return (bg fg) if they are. If they are too similar, two new
+colors are returned instead.
 If FIXED-BACKGROUND is set, and if the color are not visible, a
 new background color will not be computed. Only the foreground
 color will be adapted to be visible on BG."
