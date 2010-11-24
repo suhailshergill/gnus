@@ -745,6 +745,9 @@ text will be inserted at start."
   (shr-ensure-newline)
   (insert (make-string shr-width shr-hr-line) "\n"))
 
+(defun shr-tag-title (cont)
+  (shr-heading cont 'bold 'underline))
+
 (defun shr-tag-font (cont)
   (let ((start (point))
         (color (cdr (assq :color cont))))
