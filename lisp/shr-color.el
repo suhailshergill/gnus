@@ -337,11 +337,14 @@ color will be adapted to be visible on BG."
       (let ((Ls (set-minimum-interval (car bg-lab) (car fg-lab) 0 100
                                       shr-color-visible-luminance-min
                                       fixed-background)))
-        (setcar bg-lab (car Ls))
+        (unless fixed-background
+          (setcar bg-lab (car Ls)))
         (setcar fg-lab (cadr Ls))
         (list
-         (apply 'format "#%02x%02x%02x"
-                (mapcar (lambda (x) (* (max (min 1 x) 0) 255)) (apply 'lab->rgb bg-lab)))
+         (if fixed-background
+             bg
+           (apply 'format "#%02x%02x%02x"
+                  (mapcar (lambda (x) (* (max (min 1 x) 0) 255)) (apply 'lab->rgb bg-lab))))
          (apply 'format "#%02x%02x%02x"
                 (mapcar (lambda (x) (* (max (min 1 x) 0) 255)) (apply 'lab->rgb fg-lab))))))))
 

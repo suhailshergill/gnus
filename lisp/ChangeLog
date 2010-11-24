@@ -1,3 +1,8 @@
+2010-11-24  Julien Danjou  <julien@danjou.info>
+
+	* shr-color.el (shr-color-visible): Really return original background
+	if fixed.
+
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-color-check): Protect against non-existant colour names.
