@@ -2,7 +2,6 @@
 
 	* message.el (message-goto-body): Use called-interactively-p.
 	(message-in-body-p): message-goto-body returns point.
-	(message-goto-body): Really return point.
 
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
