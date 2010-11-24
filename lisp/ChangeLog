@@ -1,3 +1,7 @@
+2010-11-24  Julien Danjou  <julien@danjou.info>
+
+	* message.el (message-goto-body): Use called-interactively-p.
+
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-util.el (mm-enable-multibyte): Use `to' instead of t.  This fixes

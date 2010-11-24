@@ -3091,10 +3091,10 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
   (interactive)
   (message-position-on-field "Summary" "Subject"))
 
-(defun message-goto-body (&optional interactivep)
+(defun message-goto-body ()
   "Move point to the beginning of the message body."
-  (interactive (list t))
-  (when (and interactivep
+  (interactive)
+  (when (and (called-interactively-p)
 	     (looking-at "[ \t]*\n"))
     (expand-abbrev))
   (goto-char (point-min))
