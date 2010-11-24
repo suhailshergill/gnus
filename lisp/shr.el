@@ -524,10 +524,10 @@ ones, in case fg and bg are nil."
   (when fg
     (let ((bg
            (dolist (overlay (overlays-in start end))
-             (let ((background (plist-get (overlay-get overlay 'face) :background)))
+             (let ((background (plist-get (overlay-get overlay 'face)
+					  :background)))
                (when background
                  (return background))))))
-      (message (format "BG FOUND: %s" bg))
       (let ((new-colors (shr-color-check fg bg)))
         (when new-colors
           (overlay-put (make-overlay start end) 'face
@@ -596,6 +596,8 @@ text will be inserted at start."
 		     (cadr elem))
 	    (let ((name (replace-regexp-in-string "^ +\\| +$" "" (car elem)))
 		  (value (replace-regexp-in-string "^ +\\| +$" "" (cadr elem))))
+	      (when (string-match " *!important\\'" value)
+		(setq value (substring value 0 (match-beginning 0))))
 	      (push (cons (intern name obarray)
 			  value)
 		    plist)))))
