@@ -802,9 +802,11 @@ text will be inserted at start."
 	 (header (cdr (assq 'thead cont)))
 	 (body (or (cdr (assq 'tbody cont)) cont))
 	 (footer (cdr (assq 'tfoot cont)))
+         (bgcolor (cdr (assq :bgcolor cont)))
 	 (nheader (if header (shr-max-columns header)))
 	 (nbody (if body (shr-max-columns body)))
 	 (nfooter (if footer (shr-max-columns footer))))
+    (shr-insert-background-overlay bgcolor (point))
     (shr-tag-table-1
      (nconc
       (if caption `((tr (td ,@caption))))
