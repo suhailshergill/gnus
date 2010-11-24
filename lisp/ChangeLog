@@ -1,3 +1,7 @@
+2010-11-24  Julien Danjou  <julien@danjou.info>
+
+	* color-lab.el: Fix all expt calls to use float type.
+
 2010-11-24  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-insert-color-overlay): Pass rgb(rrr, ggg, bbb) type color
