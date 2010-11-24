@@ -13,6 +13,8 @@
 
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-insert-background-overlay): Fix typo.
+
 	* shr-color.el (shr-color-visible): Fix docstring.
 
 	* shr.el (shr-tag-table): Add bgcolor support.

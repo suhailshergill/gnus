@@ -535,7 +535,7 @@ ones, in case fg and bg are nil."
 
 (defun shr-insert-background-overlay (bg start)
   "Insert an overlay with background color BG at START.
-The overlay has read-advance set to t, so it will be used when
+The overlay has rear-advance set to t, so it will be used when
 text will be inserted at start."
   (when bg
     (let ((new-colors (shr-color-check nil bg)))
