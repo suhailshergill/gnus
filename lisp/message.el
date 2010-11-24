@@ -3099,8 +3099,7 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
     (expand-abbrev))
   (goto-char (point-min))
   (or (search-forward (concat "\n" mail-header-separator "\n") nil t)
-      (search-forward-regexp "[^:]+:\\([^\n]\\|\n[ \t]\\)+\n\n" nil t))
-  (while (looking-at "^<#secure") (forward-line 1)))
+      (search-forward-regexp "[^:]+:\\([^\n]\\|\n[ \t]\\)+\n\n" nil t)))
 
 (defun message-in-body-p ()
   "Return t if point is in the message body."
