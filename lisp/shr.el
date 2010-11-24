@@ -201,7 +201,10 @@ redirects somewhere else."
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
     (when (consp style)
-      (shr-insert-color-overlay (cdr (assq 'color style)) start (point)))))
+      (shr-insert-background-overlay (cdr (assq 'background-color style))
+                                     start)
+      (shr-insert-foreground-overlay (cdr (assq 'color style))
+                                     start (point)))))
 
 (defun shr-generic (cont)
   (dolist (sub cont)
@@ -494,22 +497,61 @@ START, and END."
 
 (autoload 'shr-color-visible "shr-color")
 (autoload 'shr-color->hexadecimal "shr-color")
-(defun shr-color-check (fg &optional bg)
-  "Check that FG is visible on BG."
-  (let ((hex-color (shr-color->hexadecimal fg)))
-    (when hex-color
-      (shr-color-visible (or (shr-color->hexadecimal bg)
-			     (frame-parameter nil 'background-color))
-			 hex-color (not bg)))))
 
-(defun shr-insert-color-overlay (color start end)
-  (when color
-    (let ((new-color (cadr (shr-color-check color))))
-      (when new-color
-	(overlay-put (make-overlay start end) 'face
-		     (list :foreground new-color))))))
+(defun shr-color-check (fg bg)
+  "Check that FG is visible on BG.
+Returns (fg bg) with corrected values.
+Returns nil if the colors that would be used are the default
+ones, in case fg and bg are nil."
+  (when (or fg bg)
+    (let ((fixed (cond ((null fg) 'fg)
+                       ((null bg) 'bg))))
+      ;; Convert colors to hexadecimal, or set them to default.
+      (let ((fg (or (shr-color->hexadecimal fg)
+                    (frame-parameter nil 'foreground-color)))
+            (bg (or (shr-color->hexadecimal bg)
+                    (frame-parameter nil 'background-color))))
+        (cond ((eq fixed 'bg)
+               ;; Only return the new fg
+               (list nil (cadr (shr-color-visible bg fg t))))
+              ((eq fixed 'fg)
+               ;; Invert args and results and return only the new bg
+               (list (cadr (shr-color-visible fg bg t)) nil))
+              (t
+               (shr-color-visible bg fg)))))))
+
+(defun shr-insert-foreground-overlay (fg start end)
+  (when fg
+    (let ((bg
+           (dolist (overlay (overlays-in start end))
+             (let ((background (plist-get (overlay-get overlay 'face) :background)))
+               (when background
+                 (return background))))))
+      (message (format "BG FOUND: %s" bg))
+      (let ((new-colors (shr-color-check fg bg)))
+        (when new-colors
+          (overlay-put (make-overlay start end) 'face
+                       (list :foreground (cadr new-colors))))))))
+
+(defun shr-insert-background-overlay (bg start)
+  "Insert an overlay with background color BG at START.
+The overlay has read-advance set to t, so it will be used when
+text will be inserted at start."
+  (when bg
+    (let ((new-colors (shr-color-check nil bg)))
+      (when new-colors
+        (overlay-put (make-overlay start start nil nil t) 'face
+                     (list :background (car new-colors)))))))
 
 ;;; Tag-specific rendering rules.
+
+(defun shr-tag-body (cont)
+  (let ((start (point))
+        (fgcolor (cdr (assq :fgcolor cont)))
+        (bgcolor (cdr (assq :bgcolor cont))))
+    (shr-insert-background-overlay bgcolor start)
+    (shr-generic cont)
+    (shr-insert-foreground-overlay fgcolor start (point))))
 
 (defun shr-tag-p (cont)
   (shr-ensure-paragraph)
@@ -707,7 +749,7 @@ START, and END."
   (let ((start (point))
         (color (cdr (assq :color cont))))
     (shr-generic cont)
-    (shr-insert-color-overlay color start (point))))
+    (shr-insert-foreground-overlay color start (point))))
 
 ;;; Table rendering algorithm.
 
