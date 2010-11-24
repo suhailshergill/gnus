@@ -1,3 +1,13 @@
+2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-move-article): It's no longer necessary to
+	clear marks before moving, since they're synced from the Gnus side
+	first.
+
+	* gnus-sum.el (gnus-summary-push-marks-to-backend): New function.
+	(gnus-summary-move-article): Copy over all marks before moving, so that
+	IMAP doesn't think a new article has arrived.
+
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
 	* message.el (message-goto-body): Use called-interactively-p.

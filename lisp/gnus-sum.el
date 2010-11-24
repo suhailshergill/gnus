@@ -9705,6 +9705,9 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 		  articles)
     (while articles
       (setq article (pop articles))
+      ;; Set any marks that may have changed in the summary buffer.
+      (when gnus-preserve-marks
+	(gnus-summary-push-marks-to-backend article))
       (let ((gnus-newsgroup-original-name gnus-newsgroup-name)
 	    (gnus-article-original-subject
 	     (mail-header-subject
@@ -9920,6 +9923,25 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
     (gnus-kill-buffer copy-buf)
     (gnus-summary-position-point)
     (gnus-set-mode-line 'summary)))
+
+(defun gnus-summary-push-marks-to-backend (article)
+  (let ((add nil)
+	(delete nil)
+	(marks gnus-article-mark-lists))
+    (if (memq article gnus-newsgroup-unreads)
+	(push 'read add)
+      (push 'read delete))
+    (while marks
+      (when (eq (gnus-article-mark-to-type (cdar marks)) 'list)
+	(if (memq article (symbol-value
+			   (intern (format "gnus-newsgroup-%s"
+					   (caar marks)))))
+	    (push (cdar marks) add)
+	  (push (cdar marks) delete)))
+      (pop marks))
+    (gnus-request-set-mark gnus-newsgroup-name
+			   `(((,article) add ,add)
+			     ((,article) del ,delete)))))
 
 (defun gnus-summary-copy-article (&optional n to-newsgroup select-method)
   "Copy the current article to some other group.
