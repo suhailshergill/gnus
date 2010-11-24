@@ -1,5 +1,8 @@
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-goto-body): Remove the <#secure special-casing,
+	which is too special.
+
 	* shr.el (shr-parse-style): Drop !important from styles.
 
 2010-11-24  Daniel Schoepe  <daniel.schoepe@googlemail.com>  (tiny change)
