@@ -1,5 +1,8 @@
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-util.el (mm-enable-multibyte): Use `to' instead of t.  This fixes
+	Fixes something or other in Emacs 23, and is backwards compatible.
+
 	* message.el (message-goto-body): Remove the <#secure special-casing,
 	which is too special.
 
