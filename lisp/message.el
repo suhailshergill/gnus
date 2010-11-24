@@ -3103,7 +3103,7 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
 
 (defun message-in-body-p ()
   "Return t if point is in the message body."
-  (let ((body (save-excursion (message-goto-body) (point))))
+  (let ((body (save-excursion (message-goto-body))))
     (>= (point) body)))
 
 (defun message-goto-eoh ()
