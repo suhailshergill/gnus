@@ -3092,14 +3092,17 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
   (message-position-on-field "Summary" "Subject"))
 
 (defun message-goto-body ()
-  "Move point to the beginning of the message body."
+  "Move point to the beginning of the message body.
+Return point."
   (interactive)
   (when (and (called-interactively-p)
 	     (looking-at "[ \t]*\n"))
     (expand-abbrev))
   (goto-char (point-min))
   (or (search-forward (concat "\n" mail-header-separator "\n") nil t)
-      (search-forward-regexp "[^:]+:\\([^\n]\\|\n[ \t]\\)+\n\n" nil t)))
+      (search-forward-regexp "[^:]+:\\([^\n]\\|\n[ \t]\\)+\n\n" nil t))
+  (while (looking-at "^<#secure") (forward-line 1))
+  (point))
 
 (defun message-in-body-p ()
   "Return t if point is in the message body."
