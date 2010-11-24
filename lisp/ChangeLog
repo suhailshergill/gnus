@@ -1,3 +1,11 @@
+2010-11-24  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* color-lab.el: Add coding cookie.
+	(float-pi): Use eval-and-compile.
+
+	* dgnushack.el (dgnushack-compile): Exclude shr-color.el from being
+	compiled for Emacsen having no `libxml-parse-html-region' support.
+
 2010-11-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-insert-color-overlay): Split stuff like
