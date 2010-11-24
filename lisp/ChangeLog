@@ -1,5 +1,9 @@
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-cache.el (gnus-summary-insert-cached-articles): Use it.
+
+	* gnus-sum.el (gnus-summary-include-articles): New function.
+
 	* message.el (message-goto-body): called-interactively-p needs a
 	parameter, so use `any'.
 
