@@ -1,5 +1,8 @@
 2010-11-24  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-goto-body): called-interactively-p needs a
+	parameter, so use `any'.
+
 	* nnimap.el (nnimap-request-move-article): It's no longer necessary to
 	clear marks before moving, since they're synced from the Gnus side
 	first.
