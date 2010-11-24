@@ -7,6 +7,8 @@
 
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
+	* message.el (message-goto-body): Skip <#secure.
+
 	* shr.el (shr-insert-color-overlay): Replace deprecated syntax.
 	(shr-tag-body): Add background support.
 	(shr-descend): Add background support.
