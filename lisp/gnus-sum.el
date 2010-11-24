@@ -11232,6 +11232,7 @@ with that article."
 		  (mail-header-subject (gnus-data-header (car data)))))
 		(t nil)))
 	 (end-point (save-excursion
+		      (goto-char (gnus-data-pos (car data)))
 		      (if (gnus-summary-go-to-next-thread)
 			  (point) (point-max))))
 	 articles)

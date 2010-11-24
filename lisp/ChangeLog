@@ -1,3 +1,10 @@
+2010-11-24  Daniel Schoepe  <daniel.schoepe@googlemail.com>  (tiny change)
+
+	* gnus-sum.el (gnus-summary-articles-in-thread): Fix a bug that causes
+	this function to return incorrect results when calling it with an
+	explicit article argument different from
+	(gnus-summary-article-number).
+
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-insert-color-overlay): Replace deprecated syntax.
