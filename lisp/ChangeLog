@@ -1,5 +1,7 @@
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-insert-color-overlay): Replace deprecated syntax.
+
 	* shr-color.el (shr-color-visible): Really return original background
 	if fixed.
 

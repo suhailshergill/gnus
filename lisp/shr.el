@@ -507,7 +507,7 @@ START, and END."
     (let ((new-color (cadr (shr-color-check color))))
       (when new-color
 	(overlay-put (make-overlay start end) 'face
-		     (cons 'foreground-color new-color))))))
+		     (list :foreground new-color))))))
 
 ;;; Tag-specific rendering rules.
 
