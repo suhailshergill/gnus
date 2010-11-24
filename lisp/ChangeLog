@@ -14,6 +14,7 @@
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-tag-table): Add bgcolor support.
+	(shr-render-td): Add bgcolor support.
 
 	* message.el (message-goto-body): Use called-interactively-p.
 	(message-in-body-p): message-goto-body returns point.

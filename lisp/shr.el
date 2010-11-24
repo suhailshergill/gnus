@@ -953,6 +953,7 @@ text will be inserted at start."
     (let ((cache (cdr (assoc (cons width cont) shr-content-cache))))
       (if cache
 	  (insert cache)
+        (shr-insert-background-overlay (cdr (assq :bgcolor cont)) (point))
 	(let ((shr-width width)
 	      (shr-indentation 0))
 	  (shr-generic cont))
