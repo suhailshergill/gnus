@@ -520,14 +520,17 @@ ones, in case fg and bg are nil."
               (t
                (shr-color-visible bg fg)))))))
 
+(defun shr-get-background (pos)
+  "Return background color at POS."
+  (dolist (overlay (overlays-in start (1+ start)))
+    (let ((background (plist-get (overlay-get overlay 'face)
+                                 :background)))
+      (when background
+        (return background)))))
+
 (defun shr-insert-foreground-overlay (fg start end)
   (when fg
-    (let ((bg
-           (dolist (overlay (overlays-in start end))
-             (let ((background (plist-get (overlay-get overlay 'face)
-					  :background)))
-               (when background
-                 (return background))))))
+    (let ((bg (shr-get-background start)))
       (let ((new-colors (shr-color-check fg bg)))
         (when new-colors
           (overlay-put (make-overlay start end) 'face
@@ -949,45 +952,48 @@ text will be inserted at start."
     (nreverse trs)))
 
 (defun shr-render-td (cont width fill)
-  (with-temp-buffer
-    (let ((cache (cdr (assoc (cons width cont) shr-content-cache))))
-      (if cache
-	  (insert cache)
-        (shr-insert-background-overlay (cdr (assq :bgcolor cont)) (point))
-	(let ((shr-width width)
-	      (shr-indentation 0))
-	  (shr-generic cont))
-	(delete-region
-	 (point)
-	 (+ (point)
-	    (skip-chars-backward " \t\n")))
-	(push (cons (cons width cont) (buffer-string))
-	      shr-content-cache)))
-    (goto-char (point-min))
-    (let ((max 0))
-      (while (not (eobp))
-	(end-of-line)
-	(setq max (max max (current-column)))
-	(forward-line 1))
-      (when fill
-	(goto-char (point-min))
-	;; If the buffer is totally empty, then put a single blank
-	;; line here.
-	(if (zerop (buffer-size))
-	    (insert (make-string width ? ))
-	  ;; Otherwise, fill the buffer.
-	  (while (not (eobp))
-	    (end-of-line)
-	    (when (> (- width (current-column)) 0)
-	      (insert (make-string (- width (current-column)) ? )))
-	    (forward-line 1))))
-      (if fill
-	  (list max
-		(count-lines (point-min) (point-max))
-		(split-string (buffer-string) "\n")
-		(shr-collect-overlays))
-	(list max
-	      (shr-natural-width))))))
+  (let ((background (shr-get-background (point))))
+    (with-temp-buffer
+      (let ((cache (cdr (assoc (cons width cont) shr-content-cache))))
+        (if cache
+            (insert cache)
+          (shr-insert-background-overlay (or (cdr (assq :bgcolor cont))
+                                             background)
+                                         (point))
+          (let ((shr-width width)
+                (shr-indentation 0))
+            (shr-generic cont))
+          (delete-region
+           (point)
+           (+ (point)
+              (skip-chars-backward " \t\n")))
+          (push (cons (cons width cont) (buffer-string))
+                shr-content-cache)))
+      (goto-char (point-min))
+      (let ((max 0))
+        (while (not (eobp))
+          (end-of-line)
+          (setq max (max max (current-column)))
+          (forward-line 1))
+        (when fill
+          (goto-char (point-min))
+          ;; If the buffer is totally empty, then put a single blank
+          ;; line here.
+          (if (zerop (buffer-size))
+              (insert (make-string width ? ))
+            ;; Otherwise, fill the buffer.
+            (while (not (eobp))
+              (end-of-line)
+              (when (> (- width (current-column)) 0)
+                (insert (make-string (- width (current-column)) ? )))
+              (forward-line 1))))
+        (if fill
+            (list max
+                  (count-lines (point-min) (point-max))
+                  (split-string (buffer-string) "\n")
+                  (shr-collect-overlays))
+          (list max
+                (shr-natural-width)))))))
 
 (defun shr-natural-width ()
   (goto-char (point-min))

@@ -14,11 +14,14 @@
 2010-11-24  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-insert-background-overlay): Fix typo.
+	(shr-render-td): Copy the background before rendering.
 
 	* shr-color.el (shr-color-visible): Fix docstring.
 
 	* shr.el (shr-tag-table): Add bgcolor support.
 	(shr-render-td): Add bgcolor support.
+	(shr-get-background): Add.
+	(shr-insert-foreground-overlay): Use shr-get-background.
 
 	* message.el (message-goto-body): Use called-interactively-p.
 	(message-in-body-p): message-goto-body returns point.
