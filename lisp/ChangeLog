@@ -1,5 +1,7 @@
 2010-11-25  Julien Danjou  <julien@danjou.info>
 
+	* color.el: Rename from color-lab.el
+
 	* gnus-sum.el (gnus-summary-widget-forward): Add, and bind to [tab].
 
 2010-11-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
