@@ -258,7 +258,7 @@ Like rgb() or hsl()."
             (l (/ (string-to-number (match-string-no-properties 3 color)) 100.0)))
         (destructuring-bind (r g b)
             (shr-color-hsl-to-rgb-fractions h s l)
-          (format "#%02X%02X%02X" (* r 255) (* g 255) (* b 255)))))
+          (color-rgb->hex r g b))))
      ;; Color names
      ((cdr (assoc-string color shr-color-html-colors-alist t)))
      ;; Unrecognized color :(

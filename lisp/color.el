@@ -34,6 +34,23 @@
   (unless (boundp 'float-pi)
     (defconst float-pi (* 4 (atan 1)) "The value of Pi (3.1415926...).")))
 
+(defun color-rgb->hex  (red green blue)
+  "Return hexadecimal notation for RED GREEN BLUE color.
+RED GREEN BLUE must be values between [0,1]."
+  (format "#%02x%02x%02x"
+          (* red 255) (* green 255) (* blue 255)))
+
+(defun color-complement (color)
+  "Return the color that is the complement of COLOR."
+  (let ((color (color-rgb->normalize color)))
+    (list (- 1.0 (car color))
+          (- 1.0 (cadr color))
+          (- 1.0 (caddr color)))))
+
+(defun color-complement-hex (color)
+  "Return the color that is the complement of COLOR, in hexadecimal format."
+  (apply 'color-rgb->hex (color-complement color)))
+
 (defun color-rgb->hsv (red green blue)
   "Convert RED GREEN BLUE values to HSV representation.
 Hue is in radian. Saturation and values are between 0 and 1."
@@ -63,10 +80,10 @@ Hue is in radian. Saturation and values are between 0 and 1."
 
 (defun color-rgb->hsl (red green blue)
   "Convert RED GREEN BLUE colors to their HSL representation.
-RED, GREEN and BLUE must be between 0 and 255."
-  (let* ((r (/ red 255.0))
-         (g (/ green 255.0))
-         (b (/ blue 255.0))
+RED, GREEN and BLUE must be between [0,1]."
+  (let* ((r red)
+         (g green)
+         (b blue)
          (max (max r g b))
          (min (min r g b))
          (delta (- max min))
@@ -91,7 +108,7 @@ RED, GREEN and BLUE must be between 0 and 255."
 
 (defun color-rgb->xyz (red green blue)
   "Converts RED GREEN BLUE colors to CIE XYZ representation.
-RED, BLUE and GREEN must be between 0 and 1."
+RED, BLUE and GREEN must be between [0,1]."
   (let ((r (if (<= red 0.04045)
                (/ red 12.95)
              (expt (/ (+ red 0.055) 1.055) 2.4)))
