@@ -1605,6 +1605,13 @@ textual parts.")
   (save-excursion
     (forward-line 1)
     (let ((end (point)))
+      ;; Unfold quoted {num} lines, if they exist.
+      (when (search-backward "}" nil t)
+	(save-excursion
+	  (save-restriction
+	    (narrow-to-region (point-min) end)
+	    (goto-char (point-min))
+	    (nnimap-unfold-quoted-lines))))
       (forward-line -1)
       (when (not (bobp))
 	(forward-line -1)
