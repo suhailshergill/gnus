@@ -928,7 +928,6 @@ textual parts.")
     flags))
 
 (deffoo nnimap-request-set-mark (group actions &optional server)
-  (debug)
   (when (nnimap-possibly-change-group group server)
     (let (sequence)
       (with-current-buffer (nnimap-buffer)
