@@ -7,6 +7,13 @@
 	(nnimap-request-move-article): Use the UID returned, if any.
 	(nnimap-get-groups): Reimplement to work with folded lines.
 	(nnimap-find-uid-response): The UID is the last element in the list.
+	(nnimap-request-set-mark): Extend syntax with 'set.
+
+	* nnml.el (nnml-request-set-mark): Ditto.
+
+	* nnfolder.el (nnfolder-request-set-mark): Ditto.
+
+	* nntp.el (nntp-request-set-mark): Ditto.
 
 2010-11-25  Katsumi Yamaoka  <yamaoka@jpl.org>
 

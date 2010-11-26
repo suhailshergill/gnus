@@ -1190,15 +1190,19 @@ This command does not work if you use short group names."
       (let ((range (nth 0 action))
 	    (what  (nth 1 action))
 	    (marks (nth 2 action)))
-	(assert (or (eq what 'add) (eq what 'del)) nil
-		"Unknown request-set-mark action: %s" what)
 	(dolist (mark marks)
-	  (setq nnfolder-marks (gnus-update-alist-soft
-			    mark
-			    (funcall (if (eq what 'add) 'gnus-range-add
-				       'gnus-remove-from-range)
-				     (cdr (assoc mark nnfolder-marks)) range)
-			    nnfolder-marks)))))
+	  (setq nnfolder-marks
+		(gnus-update-alist-soft
+		 mark
+		 (cond
+		  ((eq what 'add)
+		   (gnus-range-add (cdr (assoc mark nnfolder-marks)) range)
+		  ((eq what 'del)
+		   (gnus-remove-from-range
+		    (cdr (assoc mark nnfolder-marks)) range))
+		  ((eq what 'set)
+		   range)))
+		 nnfolder-marks)))))
     (nnfolder-save-marks group server))
   nil)
 

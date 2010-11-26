@@ -1037,15 +1037,20 @@ Use the nov database for the current group if available."
       (let ((range (nth 0 action))
 	    (what  (nth 1 action))
 	    (marks (nth 2 action)))
-	(assert (or (eq what 'add) (eq what 'del)) nil
+	(assert (or (eq what 'add) (eq what 'del) (eq what 'set)) nil
 		"Unknown request-set-mark action: %s" what)
 	(dolist (mark marks)
-	  (setq nnml-marks (gnus-update-alist-soft
-			    mark
-			    (funcall (if (eq what 'add) 'gnus-range-add
-				       'gnus-remove-from-range)
-				     (cdr (assoc mark nnml-marks)) range)
-			    nnml-marks)))))
+	  (setq nnml-marks
+		(gnus-update-alist-soft
+		 mark
+		 (cond
+		  ((eq what 'add)
+		   (gnus-range-add (cdr (assoc mark nnml-marks)) range)
+		  ((eq what 'del)
+		   (gnus-remove-from-range (cdr (assoc mark nnml-marks)) range))
+		  ((eq what 'set)
+		   range)))
+		 nnml-marks)))))
     (nnml-save-marks group server))
   nil)
 

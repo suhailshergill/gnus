@@ -1122,15 +1122,18 @@ command whose response triggered the error."
       (let ((range (nth 0 action))
 	    (what  (nth 1 action))
 	    (marks (nth 2 action)))
-	(assert (or (eq what 'add) (eq what 'del)) nil
-		"Unknown request-set-mark action: %s" what)
 	(dolist (mark marks)
-	  (setq nntp-marks (gnus-update-alist-soft
-			    mark
-			    (funcall (if (eq what 'add) 'gnus-range-add
-				       'gnus-remove-from-range)
-				     (cdr (assoc mark nntp-marks)) range)
-			    nntp-marks)))))
+	  (setq nntp-marks
+		(gnus-update-alist-soft
+		 mark
+		 (cond
+		  ((eq what 'add)
+		   (gnus-range-add (cdr (assoc mark nntp-marks)) range)
+		  ((eq what 'del)
+		   (gnus-remove-from-range (cdr (assoc mark nntp-marks)) range))
+		  ((eq what 'set)
+		   range)))
+		 nntp-marks)))))
     (nntp-save-marks group server))
   nil)
 
