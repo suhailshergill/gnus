@@ -1,5 +1,7 @@
 2010-11-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr-color.el: Require cl when compiling.
+
 	* nnheader.el (nnheader-update-marks-actions): Fix typo in last
 	checkin.
 
