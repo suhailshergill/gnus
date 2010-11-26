@@ -1186,23 +1186,7 @@ This command does not work if you use short group names."
     (nnfolder-open-server server))
   (unless nnfolder-marks-is-evil
     (nnfolder-open-marks group server)
-    (dolist (action actions)
-      (let ((range (nth 0 action))
-	    (what  (nth 1 action))
-	    (marks (nth 2 action)))
-	(dolist (mark marks)
-	  (setq nnfolder-marks
-		(gnus-update-alist-soft
-		 mark
-		 (cond
-		  ((eq what 'add)
-		   (gnus-range-add (cdr (assoc mark nnfolder-marks)) range)
-		  ((eq what 'del)
-		   (gnus-remove-from-range
-		    (cdr (assoc mark nnfolder-marks)) range))
-		  ((eq what 'set)
-		   range)))
-		 nnfolder-marks)))))
+    (setq nnfolder-marks (nnheader-update-marks-actions nnfolder-marks actions))
     (nnfolder-save-marks group server))
   nil)
 

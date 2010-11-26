@@ -1033,24 +1033,7 @@ Use the nov database for the current group if available."
   (nnml-possibly-change-directory group server)
   (unless nnml-marks-is-evil
     (nnml-open-marks group server)
-    (dolist (action actions)
-      (let ((range (nth 0 action))
-	    (what  (nth 1 action))
-	    (marks (nth 2 action)))
-	(assert (or (eq what 'add) (eq what 'del) (eq what 'set)) nil
-		"Unknown request-set-mark action: %s" what)
-	(dolist (mark marks)
-	  (setq nnml-marks
-		(gnus-update-alist-soft
-		 mark
-		 (cond
-		  ((eq what 'add)
-		   (gnus-range-add (cdr (assoc mark nnml-marks)) range)
-		  ((eq what 'del)
-		   (gnus-remove-from-range (cdr (assoc mark nnml-marks)) range))
-		  ((eq what 'set)
-		   range)))
-		 nnml-marks)))))
+    (setq nnml-marks (nnheader-update-marks-actions nnml-marks actions))
     (nnml-save-marks group server))
   nil)
 

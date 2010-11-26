@@ -1,5 +1,13 @@
 2010-11-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnheader.el (nnheader-update-marks-actions): Refactor out.
+
+	* nntp.el (nntp-request-set-mark): Use it.
+
+	* nnfolder.el (nnfolder-request-set-mark): Ditto.
+
+	* nnml.el (nnml-request-set-mark): Ditto.
+
 	* nnimap.el (nnimap-last-response-string): Remove the unfolding -- it
 	introduces regressions in article selection.
 	(nnimap-find-uid-response): New function.

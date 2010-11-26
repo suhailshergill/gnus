@@ -1118,22 +1118,7 @@ command whose response triggered the error."
 	     nntp-marks-file-name)
     (nntp-possibly-create-directory group server)
     (nntp-open-marks group server)
-    (dolist (action actions)
-      (let ((range (nth 0 action))
-	    (what  (nth 1 action))
-	    (marks (nth 2 action)))
-	(dolist (mark marks)
-	  (setq nntp-marks
-		(gnus-update-alist-soft
-		 mark
-		 (cond
-		  ((eq what 'add)
-		   (gnus-range-add (cdr (assoc mark nntp-marks)) range)
-		  ((eq what 'del)
-		   (gnus-remove-from-range (cdr (assoc mark nntp-marks)) range))
-		  ((eq what 'set)
-		   range)))
-		 nntp-marks)))))
+    (setq nntp-marks (nnheader-update-marks-actions nntp-marks actions))
     (nntp-save-marks group server))
   nil)
 
