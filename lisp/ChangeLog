@@ -1,5 +1,7 @@
 2010-11-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmaildir.el (nnmaildir-request-set-mark): Be explicit about 'set.
+
 	* nnheader.el (nnheader-update-marks-actions): Refactor out.
 
 	* nntp.el (nntp-request-set-mark): Use it.
