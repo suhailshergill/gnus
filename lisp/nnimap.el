@@ -1028,7 +1028,10 @@ textual parts.")
 	    (separator (read (current-buffer)))
 	    (group (read (current-buffer))))
 	(unless (member '%NoSelect flags)
-	  (push group groups))))
+	  (push (if (stringp group)
+		    group
+		  (format "%s" group))
+		groups))))
     (nreverse groups)))
 
 (deffoo nnimap-request-list (&optional server)
