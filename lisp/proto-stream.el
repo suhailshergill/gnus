@@ -113,7 +113,7 @@ command to switch on STARTTLS otherwise."
     (if (not capability-command)
 	(list stream greeting nil)
       (let* ((capabilities
-	      (proto-stream-capabilities stream capability-command eoc))
+	      (proto-stream-command stream capability-command eoc))
 	     (starttls-command
 	      (funcall (cadr (memq :starttls-function parameters))
 		       capabilities)))
@@ -135,27 +135,24 @@ command to switch on STARTTLS otherwise."
 	    (delete-process stream)
 	    (setq stream (starttls-open-stream name buffer host service))
 	    (proto-stream-get-response stream start eoc))
-	  (setq start (with-current-buffer buffer (point-max)))
-	  (process-send-string stream starttls-command)
-	  (proto-stream-get-response stream start eoc)
+	  (proto-stream-command stream starttls-command eoc)
 	  (if (fboundp 'open-gnutls-stream)
 	      (gnutls-negotiate stream nil)
 	    (starttls-negotiate stream))
 	  ;; Re-get the capabilities, since they may have changed
 	  ;; after switching to TLS.
-	  (setq start (with-current-buffer buffer (point-max)))
-	  (process-send-string stream capability-command)
-	  (list stream greeting (proto-stream-get-response stream start eoc)))
+	  (list stream greeting
+		(proto-stream-command stream capability-command eoc)))
 	 ((eq (cadr (memq :type parameters)) 'starttls)
 	  (delete-process stream)
 	  nil)
 	 (t
 	  (list stream greeting capabilities)))))))
 
-(defun proto-stream-capabilities (stream command end-of-command)
-  (let ((start (with-current-buffer (process-buffer stream) (point-max))))
+(defun proto-stream-command (stream command eoc)
+  (let ((start (with-current-buffer buffer (point-max))))
     (process-send-string stream command)
-    (proto-stream-get-response stream start end-of-command)))
+    (proto-stream-get-response stream start eoc)))
 
 (defun proto-stream-get-response (stream start end-of-command)
   (with-current-buffer (process-buffer stream)
@@ -210,9 +207,8 @@ command to switch on STARTTLS otherwise."
 		   stream start (proto-stream-eoc parameters))))
     (list stream greeting
 	  (and capability-command
-	       (proto-stream-capabilities
-		stream capability-command
-		(proto-stream-eoc parameters))))))
+	       (proto-stream-command
+		stream capability-command (proto-stream-eoc parameters))))))
 
 (defun proto-stream-eoc (parameters)
   (or (cadr (memq :end-of-command parameters))

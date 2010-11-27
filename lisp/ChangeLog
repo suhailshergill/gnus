@@ -4,6 +4,7 @@
 	(proto-stream-open-starttls): De-duplicate the starttls code.
 	(proto-stream-open-starttls): Folded back into the main function.
 	(proto-stream-open-network): Fix typo in the gnutls path.
+	(proto-stream-command): Refactor out.
 
 	* nntp.el (nntp-open-connection): Fix the STARTTLS command syntax.
 
