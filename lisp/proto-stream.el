@@ -80,7 +80,7 @@ query server for capabilities.  For instance, for IMAP this is
 is the response to the capaibility command.  It should return nil
 if it turns out that the server doesn't support STARTTLS, or the
 command to switch on STARTTLS otherwise."
-  (let ((type (or (cadr (memq :type parameters)) 'stream)))
+  (let ((type (or (cadr (memq :type parameters)) 'network)))
     (when (and (eq type 'starttls)
 	       (fboundp 'open-gnutls-stream))
       (setq type 'network))

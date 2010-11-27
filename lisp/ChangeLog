@@ -1,5 +1,14 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (open-proto-stream): Use network, not stream.
+
+	* nntp.el (nntp-open-connection): Use proto-streams for the relevant
+	connections types.
+	(nntp-open-network-stream): Removed.
+	(nntp-open-ssl-stream): Removed.
+	(nntp-open-tls-stream): Removed.
+	(nntp-ssl-program): Removed.
+
 	* nnimap.el (nnimap-open-connection): Check for "OK" from the greeting.
 
 2010-11-27  Andrew Cohen  <cohen@andy.bu.edu>
