@@ -44,7 +44,7 @@
 ;;  (lambda (capabilities)
 ;;    (if (not (string-match "STARTTLS" capabilities))
 ;;        nil
-;;      "1 STARTTLS")))
+;;      "1 STARTTLS\r\n")))
 
 ;;; Code:
 
