@@ -63,9 +63,10 @@
 If nnimap-stream is `ssl', this will default to `imaps'.  If not,
 it will default to `imap'.")
 
-(defvoo nnimap-stream 'ssl
+(defvoo nnimap-stream 'undecided
   "How nnimap will talk to the IMAP server.
-Values are `ssl', `network', `starttls' or `shell'.")
+Values are `ssl', `network', `starttls' or `shell'.
+The default is to try `ssl' first, and then `network'.")
 
 (defvoo nnimap-shell-program (if (boundp 'imap-shell-program)
 				 (if (listp imap-shell-program)
@@ -302,6 +303,19 @@ textual parts.")
 	    (nnimap-send-command "NOOP")))))))
 
 (defun nnimap-open-connection (buffer)
+  (let ((stream
+	 (if (eq nnimap-stream 'undecided)
+	     (loop for type in '(ssl network)
+		   for stream = (let ((nnimap-stream type))
+				  (nnimap-open-connection-1 buffer))
+		   while (eq stream 'no-connect)
+		   finally (return stream))
+	   (nnimap-open-connection-1 buffer))))
+    (if (eq stream 'no-connect)
+	nil
+      stream)))
+
+(defun nnimap-open-connection-1 (buffer)
   (unless nnimap-keepalive-timer
     (setq nnimap-keepalive-timer (run-at-time (* 60 15) (* 60 15)
 					      'nnimap-keepalive)))
@@ -341,8 +355,10 @@ textual parts.")
 	       "1 STARTTLS\r\n")))
 	(setf (nnimap-process nnimap-object) stream)
 	(if (not stream)
-	    (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
-			     nnimap-address port nnimap-stream)
+	    (progn
+	      (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
+			       nnimap-address port nnimap-stream)
+	      'no-connect)
 	  (gnus-set-process-query-on-exit-flag stream nil)
 	  (if (not (string-match "[*.] OK" greeting))
 	      (nnheader-report 'nnimap "%s" greeting)
