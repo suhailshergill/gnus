@@ -17,6 +17,8 @@
 
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection): Fix typo in STARTTLS command.
+
 	* proto-stream.el: New library to provide protocol-specific
 	TLS/STARTTLS connections for IMAP, NNTP, SMTP, POP3 and similar
 	protocols.

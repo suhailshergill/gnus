@@ -119,13 +119,13 @@ command to switch on STARTTLS otherwise."
 	    ;; Otherwise, just return this plain network connection.
 	    (list stream greeting capabilities)))
 	 ((fboundp 'open-gnutls-stream)
-	  (setq start (with-current-buffer buffer (point)))
+	  (setq start (with-current-buffer buffer (point-max)))
 	  (process-send-string stream starttls-command)
 	  (proto-stream-get-response stream start)
 	  (gnutls-negotiate stream nil)
 	  ;; Re-get the capabilities, since they may have changed
 	  ;; after switching to TLS.
-	  (setq start (with-current-buffer buffer (point)))
+	  (setq start (with-current-buffer buffer (point-max)))
 	  (process-send-string stream capability-command)
 	  (list stream greeting (proto-stream-get-response stream start)))
 	 (t
@@ -133,7 +133,7 @@ command to switch on STARTTLS otherwise."
 	  (proto-stream-open-starttls name buffer host service parameters)))))))
 
 (defun proto-stream-capabilities (stream command)
-  (let ((start (with-current-buffer (process-buffer stream) (point))))
+  (let ((start (with-current-buffer (process-buffer stream) (point-max))))
     (process-send-string stream command)
     (proto-stream-get-response stream start)))
 

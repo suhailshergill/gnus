@@ -338,7 +338,7 @@ textual parts.")
 	     (if (not (string-match "STARTTLS" capabilities))
 		 ;; Not a STARTTLS-capable server.
 		 nil
-	       "1 STARTTLS")))
+	       "1 STARTTLS\r\n")))
 	(setf (nnimap-process nnimap-object) stream)
 	(if (not stream)
 	    (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
@@ -1042,7 +1042,7 @@ textual parts.")
 		   uidvalidity
 		   modseq)
 	      (push
-	       (list (nnimap-send-command "EXAMINE %S (QRESYNC (%s %s))"
+	       (list (nnimap-send-command "EXAMINE %S (QRESYNC  (%s %s))"
 					  (utf7-encode group t)
 					  uidvalidity modseq)
 		     'qresync
