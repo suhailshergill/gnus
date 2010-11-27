@@ -1,5 +1,7 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* color.el (color-lab->srgb): Fix function call name.
+
 	* proto-stream.el (proto-stream-open-tls): Delete output from openssl
 	if we're using tls.el.
 	(proto-stream-open-network): If we don't have gnutls-cli or gnutls

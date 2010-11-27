@@ -196,7 +196,7 @@ none is set, `color-d65-xyz' is used."
 
 (defun color-lab->srgb (L a b)
   "Converts CIE L*a*b* to RGB."
-  (apply 'color-xyz->rgb (color-lab->xyz L a b)))
+  (apply 'color-xyz->srgb (color-lab->xyz L a b)))
 
 (defun color-cie-de2000 (color1 color2 &optional kL kC kH)
   "Computes the CIEDE2000 color distance between COLOR1 and COLOR2.
