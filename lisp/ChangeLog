@@ -3,6 +3,8 @@
 	* nnimap.el (nnimap-stream): Change default to `undecided'.
 	(nnimap-open-connection): If `nnimap-stream' is `undecided', try ssl
 	first, and then network.
+	(nnimap-open-connection-1): Respect nnimap-server-port.
+	(nnimap-open-connection): Be more backwards-compatible.
 
 	* proto-stream.el (proto-stream-always-use-starttls): New variable.
 	(proto-stream-open-starttls): De-duplicate the starttls code.

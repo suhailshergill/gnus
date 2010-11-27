@@ -303,6 +303,11 @@ textual parts.")
 	    (nnimap-send-command "NOOP")))))))
 
 (defun nnimap-open-connection (buffer)
+  ;; Be backwards-compatible -- the earlier value of nnimap-stream was
+  ;; `ssl' when nnimap-server-port was nil.  Sort of.
+  (when (and nnimap-server-port
+	     (eq nnimap-stream 'undecided))
+    (setq nnimap-stream 'ssl))
   (let ((stream
 	 (if (eq nnimap-stream 'undecided)
 	     (loop for type in '(ssl network)
@@ -341,6 +346,8 @@ textual parts.")
 	     (t
 	      (error "Unknown stream type: %s" nnimap-stream))))
 	   connection-result login-result credentials)
+      (when nnimap-server-port
+	(push (format "%s" nnimap-server-port) ports))
       (destructuring-bind (stream greeting capabilities)
 	  (open-proto-stream
 	   "*nnimap*" (current-buffer) nnimap-address (car (last ports))
@@ -367,8 +374,6 @@ textual parts.")
 	    (setf (nnimap-capabilities nnimap-object)
 		  (mapcar #'upcase
 			  (split-string capabilities)))
-	    (when nnimap-server-port
-	      (push (format "%s" nnimap-server-port) ports))
 	    (unless (equal connection-result "PREAUTH")
 	      (if (not (setq credentials
 			     (if (eq nnimap-authenticator 'anonymous)
