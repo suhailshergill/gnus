@@ -1,5 +1,8 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-open-tls): Delete output from openssl
+	if we're using tls.el.
+
 	* nntp.el (nntp-open-connection): Switch on STARTTLS on supported
 	servers.
 

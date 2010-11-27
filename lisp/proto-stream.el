@@ -165,13 +165,23 @@ command to switch on STARTTLS otherwise."
 	(buffer-substring start (point))))))
 
 (defun proto-stream-open-tls (name buffer host service parameters)
-  (proto-stream-capability-open
-   (with-current-buffer buffer (point))
-   (funcall (if (fboundp 'open-gnutls-stream)
-		'open-gnutls-stream
-	      'open-tls-stream)
-	    name buffer host service)
-   parameters))
+  (with-current-buffer buffer
+    (let ((start (point-max))
+	  (stream
+	   (funcall (if (fboundp 'open-gnutls-stream)
+			'open-gnutls-stream
+		      'open-tls-stream)
+		    name buffer host service)))
+      ;; If we're using tls.el, we have to delete the output from
+      ;; openssl/gnutls-cli.
+      (unless (fboundp 'open-gnutls-stream)
+	(proto-stream-get-response
+	 stream start (proto-stream-eoc parameters))
+	(goto-char (point-min))
+	(when (re-search-forward (proto-stream-eoc parameters) nil t)
+	  (goto-char (match-beginning 0))
+	  (delete-region (point-min) (line-beginning-position))))
+      (proto-stream-capability-open start stream parameters))))
 
 (defun proto-stream-open-shell (name buffer host service parameters)
   (proto-stream-capability-open
@@ -198,7 +208,7 @@ command to switch on STARTTLS otherwise."
 
 (defun proto-stream-eoc (parameters)
   (or (cadr (memq :end-of-command parameters))
-      "\n"))
+      "\r\n"))
 
 (provide 'proto-stream)
 
