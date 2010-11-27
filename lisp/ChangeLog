@@ -1,3 +1,20 @@
+2010-11-27  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el: Fix typos.
+	(nnir-retrieve-headers-override-function): Rename variable to reflect
+	new semantics.
+	(nnir-article-group, nnir-article-number, nnir-article-rsv): New helper
+	macros.
+	(nnir-request-article, nnir-request-move-article): Use them.
+	(nnir-categorize): New function.
+	(nnir-run-query): Use it.
+	(nnir-retrieve-headers): Rewrite to batch header retrieval.
+	(nnir-run-gmane): nnir-retrieve-headers now returns the headers already
+	sorted.
+	(nnir-group-full-name): Use gnus-group-full-name instead.
+	(nnir-artlist-artitem-group, nnir-artlist-artitem-number)
+	(nnir-artlist-artitem-rsv, nnir-sort-groups-by-server): Obsolete.
+
 2010-11-26  Julien Danjou  <julien@danjou.info>
 
 	* color.el: Rename various rgb functions to srgb.
