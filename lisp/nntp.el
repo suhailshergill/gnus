@@ -1272,7 +1272,14 @@ password contained in '~/.nntp-authinfo'."
 		    (car (open-proto-stream
 			  "nntpd" pbuffer nntp-address nntp-port-number
 			  :type (cadr
-				 (assoc nntp-open-connection-function map))))
+				 (assoc nntp-open-connection-function map))
+			  :end-of-command "^\\([2345]\\|[.]\\).*\n"
+			  :capability-command "CAPABILITIES\r\n"
+			  :starttls-function
+			  (lambda (capabilities)
+			    (if (not (string-match "STARTTLS" capabilities))
+				nil
+			      "STARTTLS"))))
 		  (funcall nntp-open-connection-function pbuffer)))
 	    (error nil)
 	    (quit

@@ -72,6 +72,9 @@ values:
 :type -- either `network', `tls', `shell' or `starttls'.  If
 omitted, the default is `network'.
 
+:end-of-command -- a regexp saying what the end of a command is.
+This defaults to \"\\n\".
+
 :capability-command -- a string representing the command used to
 query server for capabilities.  For instance, for IMAP this is
 \"1 CAPABILITY\\r\\n\".
@@ -99,11 +102,13 @@ command to switch on STARTTLS otherwise."
   (let* ((start (with-current-buffer buffer (point)))
 	 (stream (open-network-stream name buffer host service))
 	 (capability-command (cadr (memq :capability-command parameters)))
-	 (greeting (proto-stream-get-response stream start)))
+	 (greeting (proto-stream-get-response
+		    stream start (proto-stream-eoc parameters))))
     (if (not capability-command)
 	(list stream greeting nil)
       (let* ((capabilities
-	      (proto-stream-capabilities stream capability-command))
+	      (proto-stream-capabilities stream capability-command
+					 (proto-stream-eoc parameters)))
 	     (starttls-command
 	      (funcall (cadr (memq :starttls-function parameters))
 		       capabilities)))
@@ -121,21 +126,22 @@ command to switch on STARTTLS otherwise."
 	 ((fboundp 'open-gnutls-stream)
 	  (setq start (with-current-buffer buffer (point-max)))
 	  (process-send-string stream starttls-command)
-	  (proto-stream-get-response stream start)
+	  (proto-stream-get-response stream start (proto-stream-eoc parameters))
 	  (gnutls-negotiate stream nil)
 	  ;; Re-get the capabilities, since they may have changed
 	  ;; after switching to TLS.
 	  (setq start (with-current-buffer buffer (point-max)))
 	  (process-send-string stream capability-command)
-	  (list stream greeting (proto-stream-get-response stream start)))
+	  (list stream greeting (proto-stream-get-response
+				 stream start (proto-stream-eoc parameters))))
 	 (t
 	  (delete-process stream)
 	  (proto-stream-open-starttls name buffer host service parameters)))))))
 
-(defun proto-stream-capabilities (stream command)
+(defun proto-stream-capabilities (stream command end-of-command)
   (let ((start (with-current-buffer (process-buffer stream) (point-max))))
     (process-send-string stream command)
-    (proto-stream-get-response stream start)))
+    (proto-stream-get-response stream start end-of-command)))
 
 (defun proto-stream-open-starttls (name buffer host service parameters)
   (proto-stream-capability-open
@@ -143,13 +149,13 @@ command to switch on STARTTLS otherwise."
    (starttls-open-stream name buffer host service)
    parameters))
 
-(defun proto-stream-get-response (stream start)
+(defun proto-stream-get-response (stream start end-of-command)
   (with-current-buffer (process-buffer stream)
     (save-excursion
       (goto-char start)
       (while (and (memq (process-status stream)
 			'(open run))
-		  (not (search-forward "\n" nil t)))
+		  (not (re-search-forward end-of-command nil t)))
 	(accept-process-output stream 0 50)
 	(goto-char start))
       (if (= start (point))
@@ -182,10 +188,17 @@ command to switch on STARTTLS otherwise."
 
 (defun proto-stream-capability-open (start stream parameters)
   (let ((capability-command (cadr (memq :capability-command parameters)))
-	(greeting (proto-stream-get-response stream start)))
+	(greeting (proto-stream-get-response
+		   stream start (proto-stream-eoc parameters))))
     (list stream greeting
 	  (and capability-command
-	       (proto-stream-capabilities stream capability-command)))))
+	       (proto-stream-capabilities
+		stream capability-command
+		(proto-stream-eoc parameters))))))
+
+(defun proto-stream-eoc (parameters)
+  (or (cadr (memq :end-of-command parameters))
+      "\n"))
 
 (provide 'proto-stream)
 

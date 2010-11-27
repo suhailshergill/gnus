@@ -1,6 +1,10 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-open-connection): Switch on STARTTLS on supported
+	servers.
+
 	* proto-stream.el (open-proto-stream): Use network, not stream.
+	(open-proto-stream): Add a way to specify what the end of a command is.
 
 	* nntp.el (nntp-open-connection): Use proto-streams for the relevant
 	connections types.
