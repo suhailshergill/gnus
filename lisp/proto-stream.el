@@ -149,10 +149,28 @@ command to switch on STARTTLS otherwise."
     (proto-stream-get-response stream start end-of-command)))
 
 (defun proto-stream-open-starttls (name buffer host service parameters)
-  (proto-stream-capability-open
-   (with-current-buffer buffer (point))
-   (starttls-open-stream name buffer host service)
-   parameters))
+  (let* ((start (with-current-buffer buffer (point-max)))
+	 (stream (starttls-open-stream name buffer host service))
+	 (greeting (proto-stream-get-response
+		    stream start (proto-stream-eoc parameters)))
+	 (capabilities
+	  (proto-stream-capabilities
+	   stream
+	   (cadr (memq :capability-command parameters))
+	   (proto-stream-eoc parameters)))
+	 (starttls-command
+	  (funcall (cadr (memq :starttls-function parameters))
+		   capabilities)))
+    (setq start (with-current-buffer buffer (point-max)))
+    (process-send-string stream starttls-command)
+    (proto-stream-get-response stream start (proto-stream-eoc parameters))
+    (starttls-negotiate stream)
+    ;; Re-get the capabilities, since they may have changed
+    ;; after switching to TLS.
+    (setq start (with-current-buffer buffer (point-max)))
+    (process-send-string stream capability-command)
+    (list stream greeting (proto-stream-get-response
+			   stream start (proto-stream-eoc parameters)))))
 
 (defun proto-stream-get-response (stream start end-of-command)
   (with-current-buffer (process-buffer stream)

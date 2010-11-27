@@ -1279,7 +1279,7 @@ password contained in '~/.nntp-authinfo'."
 			  (lambda (capabilities)
 			    (if (not (string-match "STARTTLS" capabilities))
 				nil
-			      "STARTTLS"))))
+			      "STARTTLS\r\n"))))
 		  (funcall nntp-open-connection-function pbuffer)))
 	    (error nil)
 	    (quit

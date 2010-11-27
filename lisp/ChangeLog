@@ -1,5 +1,10 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-open-connection): Fix the STARTTLS command syntax.
+
+	* proto-stream.el (proto-stream-open-starttls): Actually implement the
+	starttls.el STARTTLS.
+
 	* color.el (color-lab->srgb): Fix function call name.
 
 	* proto-stream.el (proto-stream-open-tls): Delete output from openssl
