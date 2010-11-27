@@ -15,6 +15,14 @@
 	(nnir-artlist-artitem-group, nnir-artlist-artitem-number)
 	(nnir-artlist-artitem-rsv, nnir-sort-groups-by-server): Obsolete.
 
+2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* proto-stream.el: New library to provide protocol-specific
+	TLS/STARTTLS connections for IMAP, NNTP, SMTP, POP3 and similar
+	protocols.
+
+	* nnimap.el (nnimap-open-connection): Use it.
+
 2010-11-26  Julien Danjou  <julien@danjou.info>
 
 	* color.el: Rename various rgb functions to srgb.
