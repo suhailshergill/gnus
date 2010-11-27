@@ -108,13 +108,12 @@ command to switch on STARTTLS otherwise."
   (let* ((start (with-current-buffer buffer (point)))
 	 (stream (open-network-stream name buffer host service))
 	 (capability-command (cadr (memq :capability-command parameters)))
-	 (greeting (proto-stream-get-response
-		    stream start (proto-stream-eoc parameters))))
+	 (eoc (proto-stream-eoc parameters))
+	 (greeting (proto-stream-get-response stream start eoc)))
     (if (not capability-command)
 	(list stream greeting nil)
       (let* ((capabilities
-	      (proto-stream-capabilities stream capability-command
-					 (proto-stream-eoc parameters)))
+	      (proto-stream-capabilities stream capability-command eoc))
 	     (starttls-command
 	      (funcall (cadr (memq :starttls-function parameters))
 		       capabilities)))
@@ -134,10 +133,19 @@ command to switch on STARTTLS otherwise."
 	      (executable-find "gnutls-cli"))
 	  (unless (fboundp 'open-gnutls-stream)
 	    (delete-process stream)
-	    (setq stream nil))
-	  (proto-stream-open-starttls name buffer host service
-				      stream capabilities starttls-command
-				      greeting (proto-stream-eoc parameters)))
+	    (setq stream (starttls-open-stream name buffer host service))
+	    (proto-stream-get-response stream start eoc))
+	  (setq start (with-current-buffer buffer (point-max)))
+	  (process-send-string stream starttls-command)
+	  (proto-stream-get-response stream start eoc)
+	  (if (fboundp 'open-gnutls-stream)
+	      (gnutls-negotiate stream nil)
+	    (starttls-negotiate stream))
+	  ;; Re-get the capabilities, since they may have changed
+	  ;; after switching to TLS.
+	  (setq start (with-current-buffer buffer (point-max)))
+	  (process-send-string stream capability-command)
+	  (list stream greeting (proto-stream-get-response stream start eoc)))
 	 ((eq (cadr (memq :type parameters)) 'starttls)
 	  (delete-process stream)
 	  nil)
@@ -148,25 +156,6 @@ command to switch on STARTTLS otherwise."
   (let ((start (with-current-buffer (process-buffer stream) (point-max))))
     (process-send-string stream command)
     (proto-stream-get-response stream start end-of-command)))
-
-(defun proto-stream-open-starttls (name buffer host service stream
-					capabilities starttls-command
-					greeting eoc)
-  (let ((start (with-current-buffer buffer (point-max))))
-    (unless stream
-      (setq stream (starttls-open-stream name buffer host service))
-      (proto-stream-get-response stream start eoc)
-      (setq start (with-current-buffer buffer (point-max))))
-    (process-send-string stream starttls-command)
-    (proto-stream-get-response stream start eoc)
-    (if (fboundp 'open-gnutls-stream)
-	(gnutls-negotiate stream nil)
-      (starttls-negotiate stream))
-    ;; Re-get the capabilities, since they may have changed
-    ;; after switching to TLS.
-    (setq start (with-current-buffer buffer (point-max)))
-    (process-send-string stream capability-command)
-    (list stream greeting (proto-stream-get-response stream start eoc))))
 
 (defun proto-stream-get-response (stream start end-of-command)
   (with-current-buffer (process-buffer stream)

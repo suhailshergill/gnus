@@ -2,6 +2,8 @@
 
 	* proto-stream.el (proto-stream-always-use-starttls): New variable.
 	(proto-stream-open-starttls): De-duplicate the starttls code.
+	(proto-stream-open-starttls): Folded back into the main function.
+	(proto-stream-open-network): Fix typo in the gnutls path.
 
 	* nntp.el (nntp-open-connection): Fix the STARTTLS command syntax.
 
