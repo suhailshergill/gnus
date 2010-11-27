@@ -1,3 +1,7 @@
+2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-open-connection): Check for "OK" from the greeting.
+
 2010-11-27  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el: Fix typos.

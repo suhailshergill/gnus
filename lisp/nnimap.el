@@ -344,7 +344,7 @@ textual parts.")
 	    (nnheader-report 'nnimap "Unable to contact %s:%s via %s"
 			     nnimap-address port nnimap-stream)
 	  (gnus-set-process-query-on-exit-flag stream nil)
-	  (if (not (string-match "[*.] \\([A-Z0-9]+\\)" greeting))
+	  (if (not (string-match "[*.] OK" greeting))
 	      (nnheader-report 'nnimap "%s" greeting)
 	    ;; Store the greeting (for debugging purposes).
 	    (setf (nnimap-greeting nnimap-object) greeting)
