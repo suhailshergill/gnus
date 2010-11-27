@@ -1,5 +1,7 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-always-use-starttls): New variable.
+
 	* nntp.el (nntp-open-connection): Fix the STARTTLS command syntax.
 
 	* proto-stream.el (proto-stream-open-starttls): Actually implement the

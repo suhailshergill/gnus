@@ -54,6 +54,12 @@
 (require 'starttls)
 (require 'format-spec)
 
+(defcustom proto-stream-always-use-starttls t
+  "If non-nil, always try to upgrade network connections with STARTTLS."
+  :version "24.1"
+  :type 'boolean
+  :group 'comm)
+
 (declare-function gnutls-negotiate "gnutls"
 		  (proc type &optional priority-string trustfiles keyfiles))
 
@@ -113,7 +119,8 @@ command to switch on STARTTLS otherwise."
 	      (funcall (cadr (memq :starttls-function parameters))
 		       capabilities)))
 	(cond
-	 ((not starttls-command)
+	 ((or (not starttls-command)
+	      (not proto-stream-always-use-starttls))
 	  ;; If this server doesn't support STARTTLS, but we have
 	  ;; requested it explicitly, then close the connection and
 	  ;; return nil.
