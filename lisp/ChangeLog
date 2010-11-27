@@ -2,6 +2,8 @@
 
 	* proto-stream.el (proto-stream-open-tls): Delete output from openssl
 	if we're using tls.el.
+	(proto-stream-open-network): If we don't have gnutls-cli or gnutls
+	built in, then don't try to establish a STARTTLS connection.
 
 	* nntp.el (nntp-open-connection): Switch on STARTTLS on supported
 	servers.

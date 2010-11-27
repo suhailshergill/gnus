@@ -134,9 +134,14 @@ command to switch on STARTTLS otherwise."
 	  (process-send-string stream capability-command)
 	  (list stream greeting (proto-stream-get-response
 				 stream start (proto-stream-eoc parameters))))
-	 (t
+	 ((executable-find "gnutls-cli")
 	  (delete-process stream)
-	  (proto-stream-open-starttls name buffer host service parameters)))))))
+	  (proto-stream-open-starttls name buffer host service parameters))
+	 ((eq (cadr (memq :type parameters)) 'starttls)
+	  (delete-process stream)
+	  nil)
+	 (t
+	  (list stream greeting capabilities)))))))
 
 (defun proto-stream-capabilities (stream command end-of-command)
   (let ((start (with-current-buffer (process-buffer stream) (point-max))))
