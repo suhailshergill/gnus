@@ -150,7 +150,7 @@ command to switch on STARTTLS otherwise."
 	  (list stream greeting capabilities)))))))
 
 (defun proto-stream-command (stream command eoc)
-  (let ((start (with-current-buffer buffer (point-max))))
+  (let ((start (with-current-buffer (process-buffer stream) (point-max))))
     (process-send-string stream command)
     (proto-stream-get-response stream start eoc)))
 
