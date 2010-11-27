@@ -20,6 +20,8 @@
 	* proto-stream.el: New library to provide protocol-specific
 	TLS/STARTTLS connections for IMAP, NNTP, SMTP, POP3 and similar
 	protocols.
+	(open-proto-stream): Complete the documentation.
+	(proto-stream-open-network): Fix some typos.
 
 	* nnimap.el (nnimap-open-connection): Use it.
 

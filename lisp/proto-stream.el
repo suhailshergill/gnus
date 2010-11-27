@@ -34,6 +34,18 @@
 ;; tedious, so this library provides a single entry point, and hides
 ;; much of the ugliness.
 
+;; Usage example:
+
+;; (open-proto-stream
+;;  "*nnimap*" buffer address port
+;;  :type 'network
+;;  :capability-command "1 CAPABILITY\r\n"
+;;  :starttls-function
+;;  (lambda (capabilities)
+;;    (if (not (string-match "STARTTLS" capabilities))
+;;        nil
+;;      "1 STARTTLS")))
+
 ;;; Code:
 
 (eval-when-compile
@@ -42,17 +54,32 @@
 (require 'starttls)
 (require 'format-spec)
 
+(declare-function gnutls-negotiate "gnutls"
+		  (proc type &optional priority-string trustfiles keyfiles))
+
 ;;;###autoload
 (defun open-proto-stream (name buffer host service &rest parameters)
   "Open a network stream to HOST.
 The first four parameters have the same meaning as in
-`open-network-stream'.  The PARAMETERS is a keyword list that can
-have the following values:
+`open-network-stream'.  The function returns a list where the
+first element is the stream, the second element is the greeting
+the server replied with after connecting, and the third element
+is a string representing the capabilities of the server (if any).
+
+The PARAMETERS is a keyword list that can have the following
+values:
 
 :type -- either `network', `tls', `shell' or `starttls'.  If
 omitted, the default is `network'.
 
-:capability-command -- a function that takes a stream parameter"
+:capability-command -- a string representing the command used to
+query server for capabilities.  For instance, for IMAP this is
+\"1 CAPABILITY\\r\\n\".
+
+:starttls-function -- a function that takes one parameter, which
+is the response to the capaibility command.  It should return nil
+if it turns out that the server doesn't support STARTTLS, or the
+command to switch on STARTTLS otherwise."
   (let ((type (or (cadr (memq :type parameters)) 'stream)))
     (when (and (eq type 'starttls)
 	       (fboundp 'open-gnutls-stream))
@@ -69,17 +96,17 @@ omitted, the default is `network'.
 	    greeting capabilities))))
 
 (defun proto-stream-open-network (name buffer host service parameters)
-  (let ((start (with-current-buffer buffer (point)))
-	(stream (open-network-stream name buffer host service))
-	(capability-command (cadr (memq :capability-command parameters)))
-	(greeting (proto-stream-get-response stream start)))
+  (let* ((start (with-current-buffer buffer (point)))
+	 (stream (open-network-stream name buffer host service))
+	 (capability-command (cadr (memq :capability-command parameters)))
+	 (greeting (proto-stream-get-response stream start)))
     (if (not capability-command)
 	(list stream greeting nil)
       (let* ((capabilities
 	      (proto-stream-capabilities stream capability-command))
 	     (starttls-command
 	      (funcall (cadr (memq :starttls-function parameters))
-		       stream capabilities)))
+		       capabilities)))
 	(cond
 	 ((not starttls-command)
 	  ;; If this server doesn't support STARTTLS, but we have
@@ -106,7 +133,7 @@ omitted, the default is `network'.
 	  (proto-stream-open-starttls name buffer host service parameters)))))))
 
 (defun proto-stream-capabilities (stream command)
-  (let ((start (with-current-buffer buffer (point))))
+  (let ((start (with-current-buffer (process-buffer stream) (point))))
     (process-send-string stream command)
     (proto-stream-get-response stream start)))
 
@@ -150,7 +177,7 @@ omitted, the default is `network'.
 		     (cadr (memq :shell-command parameters))
 		     (format-spec-make
 		      ?s host
-		      ?p port))))
+		      ?p service))))
    parameters))
 
 (defun proto-stream-capability-open (start stream parameters)

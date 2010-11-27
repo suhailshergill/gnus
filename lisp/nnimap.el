@@ -45,7 +45,7 @@
 (require 'tls)
 (require 'parse-time)
 (require 'nnmail)
-(require 'meta-stream)
+(require 'proto-stream)
 
 (eval-when-compile
   (require 'gnus-sum))
@@ -334,7 +334,7 @@ textual parts.")
 	   :shell-command nnimap-shell-program
 	   :capability-command "1 CAPABILITY\r\n"
 	   :starttls-function
-	   (lambda (stream capabilities)
+	   (lambda (capabilities)
 	     (if (not (string-match "STARTTLS" capabilities))
 		 ;; Not a STARTTLS-capable server.
 		 nil
