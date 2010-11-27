@@ -1,6 +1,7 @@
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* proto-stream.el (proto-stream-always-use-starttls): New variable.
+	(proto-stream-open-starttls): De-duplicate the starttls code.
 
 	* nntp.el (nntp-open-connection): Fix the STARTTLS command syntax.
 
