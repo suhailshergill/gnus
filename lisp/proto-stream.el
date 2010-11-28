@@ -54,7 +54,7 @@
 (require 'starttls)
 (require 'format-spec)
 
-(defcustom proto-stream-always-use-starttls t
+(defcustom proto-stream-always-use-starttls (fboundp 'open-gnutls-stream)
   "If non-nil, always try to upgrade network connections with STARTTLS."
   :version "24.1"
   :type 'boolean

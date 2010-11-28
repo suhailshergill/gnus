@@ -4,6 +4,8 @@
 	TLS upgrades we don't really care about the identity of the peer.
 	(proto-stream-open-network): Force starttls.el to use gnutls-cli, since
 	that what we've checked for.
+	(proto-stream-always-use-starttls): Only default to t if
+	open-gnutls-stream exists.
 
 	* nntp.el (nntp-open-connection): Report what the connection error is.
 
@@ -44,10 +46,10 @@
 
 	* nntp.el (nntp-open-connection): Use proto-streams for the relevant
 	connections types.
-	(nntp-open-network-stream): Removed.
-	(nntp-open-ssl-stream): Removed.
-	(nntp-open-tls-stream): Removed.
-	(nntp-ssl-program): Removed.
+	(nntp-open-network-stream): Remove.
+	(nntp-open-ssl-stream): Remove.
+	(nntp-open-tls-stream): Remove.
+	(nntp-ssl-program): Remove.
 
 	* nnimap.el (nnimap-open-connection): Check for "OK" from the greeting.
 
