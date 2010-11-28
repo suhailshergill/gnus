@@ -1,5 +1,7 @@
 2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-open-network): Add some comments.
+
 	* nntp.el (nntp-open-connection): Provide a :success condition.
 
 	* nnimap.el (nnimap-open-connection-1): Ditto.

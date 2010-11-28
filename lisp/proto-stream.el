@@ -123,18 +123,20 @@ command to switch on STARTTLS otherwise."
 	      (funcall (cadr (memq :starttls-function parameters))
 		       capabilities)))
 	(cond
-	 ((or (not starttls-command)
-	      (and (not (eq type 'starttls))
-		   (not proto-stream-always-use-starttls)))
 	  ;; If this server doesn't support STARTTLS, but we have
 	  ;; requested it explicitly, then close the connection and
 	  ;; return nil.
+	 ((or (not starttls-command)
+	      (and (not (eq type 'starttls))
+		   (not proto-stream-always-use-starttls)))
 	  (if (eq type 'starttls)
 	      (progn
 		(delete-process stream)
 		nil)
 	    ;; Otherwise, just return this plain network connection.
 	    (list stream greeting capabilities)))
+	 ;; We have some kind of STARTTLS support, so we try to
+	 ;; upgrade the connection opportunistically.
 	 ((or (fboundp 'open-gnutls-stream)
 	      (executable-find "gnutls-cli"))
 	  (unless (fboundp 'open-gnutls-stream)
@@ -178,9 +180,12 @@ command to switch on STARTTLS otherwise."
 	    ;; after switching to TLS.
 	    (list stream greeting
 		  (proto-stream-command stream capability-command eoc))))
+	 ;; We don't have STARTTLS support available, but the caller
+	 ;; requested a STARTTLS connection, so we give up.
 	 ((eq (cadr (memq :type parameters)) 'starttls)
 	  (delete-process stream)
 	  nil)
+	 ;; Fall back on using a plain network stream.
 	 (t
 	  (list stream greeting capabilities)))))))
 
