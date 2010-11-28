@@ -135,14 +135,14 @@ command to switch on STARTTLS otherwise."
 	      (executable-find "gnutls-cli"))
 	  (unless (fboundp 'open-gnutls-stream)
 	    (delete-process stream)
-	    (let ((starttls-extra-arguments
-		   (if (and starttls-use-gnutls
-			    (not (eq type 'starttls)))
-		       ;; When doing opportunistic TLS upgrades we
-		       ;; don't really care about the identity of the
-		       ;; peer.
-		       (cons "--insecure" starttls-extra-arguments)
-		     starttls-extra-arguments)))
+	    (let* ((starttls-use-gnutls t)
+		   (starttls-extra-arguments
+		    (if (eq type 'starttls)
+			;; When doing opportunistic TLS upgrades we
+			;; don't really care about the identity of the
+			;; peer.
+			(cons "--insecure" starttls-extra-arguments)
+		      starttls-extra-arguments)))
 	      (setq stream (starttls-open-stream name buffer host service)))
 	    (proto-stream-get-response stream start eoc))
 	  (proto-stream-command stream starttls-command eoc)
