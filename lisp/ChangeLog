@@ -1,5 +1,10 @@
 2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-open-network): When doing opportunistic
+	TLS upgrades we don't really care about the identity of the peer.
+
+	* nntp.el (nntp-open-connection): Report what the connection error is.
+
 	* proto-stream.el (open-protocol-stream): Renamed from
 	open-proto-stream.
 

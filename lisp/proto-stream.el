@@ -109,6 +109,7 @@ command to switch on STARTTLS otherwise."
 	 (stream (open-network-stream name buffer host service))
 	 (capability-command (cadr (memq :capability-command parameters)))
 	 (eoc (proto-stream-eoc parameters))
+	 (type (cadr (memq :type parameters)))
 	 (greeting (proto-stream-get-response stream start eoc)))
     (if (not capability-command)
 	(list stream greeting nil)
@@ -119,11 +120,12 @@ command to switch on STARTTLS otherwise."
 		       capabilities)))
 	(cond
 	 ((or (not starttls-command)
-	      (not proto-stream-always-use-starttls))
+	      (and (not (eq type 'starttls))
+		   (not proto-stream-always-use-starttls)))
 	  ;; If this server doesn't support STARTTLS, but we have
 	  ;; requested it explicitly, then close the connection and
 	  ;; return nil.
-	  (if (eq (cadr (memq :type parameters)) 'starttls)
+	  (if (eq type 'starttls)
 	      (progn
 		(delete-process stream)
 		nil)
@@ -133,7 +135,15 @@ command to switch on STARTTLS otherwise."
 	      (executable-find "gnutls-cli"))
 	  (unless (fboundp 'open-gnutls-stream)
 	    (delete-process stream)
-	    (setq stream (starttls-open-stream name buffer host service))
+	    (let ((starttls-extra-arguments
+		   (if (and starttls-use-gnutls
+			    (not (eq type 'starttls)))
+		       ;; When doing opportunistic TLS upgrades we
+		       ;; don't really care about the identity of the
+		       ;; peer.
+		       (cons "--insecure" starttls-extra-arguments)
+		     starttls-extra-arguments)))
+	      (setq stream (starttls-open-stream name buffer host service)))
 	    (proto-stream-get-response stream start eoc))
 	  (proto-stream-command stream starttls-command eoc)
 	  (if (fboundp 'open-gnutls-stream)

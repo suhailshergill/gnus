@@ -1262,7 +1262,7 @@ password contained in '~/.nntp-authinfo'."
 		`(lambda ()
 		   (nntp-kill-buffer ,pbuffer)))))
 	 (process
-	  (condition-case ()
+	  (condition-case err
 	      (let ((coding-system-for-read nntp-coding-system-for-read)
 		    (coding-system-for-write nntp-coding-system-for-write)
 		    (map '((nntp-open-network-stream network)
@@ -1281,7 +1281,8 @@ password contained in '~/.nntp-authinfo'."
 				nil
 			      "STARTTLS\r\n"))))
 		  (funcall nntp-open-connection-function pbuffer)))
-	    (error nil)
+	    (error
+	     (nnheader-report 'nntp "%s" err))
 	    (quit
 	     (message "Quit opening connection to %s" nntp-address)
 	     (nntp-kill-buffer pbuffer)
