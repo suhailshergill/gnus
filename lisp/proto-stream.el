@@ -66,7 +66,7 @@
 
 ;;;###autoload
 (defun open-protocol-stream (name buffer host service &rest parameters)
-  "Open a network stream to HOST.
+  "Open a network stream to HOST, upgrading to STARTTLS if possible.
 The first four parameters have the same meaning as in
 `open-network-stream'.  The function returns a list where the
 first element is the stream, the second element is the greeting
@@ -77,7 +77,9 @@ The PARAMETERS is a keyword list that can have the following
 values:
 
 :type -- either `network', `tls', `shell' or `starttls'.  If
-omitted, the default is `network'.
+omitted, the default is `network'.  `network' will be
+opportunistically upgraded to STARTTLS if both the server and
+Emacs supports it.
 
 :end-of-command -- a regexp saying what the end of a command is.
 This defaults to \"\\n\".
