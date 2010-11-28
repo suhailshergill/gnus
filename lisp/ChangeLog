@@ -1,5 +1,8 @@
 2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection-1): Always upgrade to STARTTLS (for
+	backwards compatibility).
+
 	* proto-stream.el (proto-stream-open-network): When doing opportunistic
 	TLS upgrades we don't really care about the identity of the peer.
 	(proto-stream-open-network): Force starttls.el to use gnutls-cli, since

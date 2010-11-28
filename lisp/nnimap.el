@@ -345,6 +345,7 @@ textual parts.")
 	      '("143" "993" "imap" "imaps"))
 	     (t
 	      (error "Unknown stream type: %s" nnimap-stream))))
+	   (proto-stream-always-use-starttls t)
 	   connection-result login-result credentials)
       (when nnimap-server-port
 	(push (format "%s" nnimap-server-port) ports))
