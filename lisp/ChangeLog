@@ -8,6 +8,8 @@
 	open-gnutls-stream exists.
 	(proto-stream-open-network): If STARTTLS failed, then just open a
 	normal connection.
+	(proto-stream-open-network): Wait until the greeting before doing
+	STARTTLS.
 
 	* nntp.el (nntp-open-connection): Report what the connection error is.
 

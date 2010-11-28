@@ -135,6 +135,7 @@ command to switch on STARTTLS otherwise."
 	      (executable-find "gnutls-cli"))
 	  (unless (fboundp 'open-gnutls-stream)
 	    (delete-process stream)
+	    (setq start (with-current-buffer buffer (point-max)))
 	    (let* ((starttls-use-gnutls t)
 		   (starttls-extra-arguments
 		    (if (eq type 'starttls)
