@@ -40,6 +40,7 @@
 ;;  "*nnimap*" buffer address port
 ;;  :type 'network
 ;;  :capability-command "1 CAPABILITY\r\n"
+;;  :success " OK "
 ;;  :starttls-function
 ;;  (lambda (capabilities)
 ;;    (if (not (string-match "STARTTLS" capabilities))
