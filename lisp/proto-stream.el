@@ -36,7 +36,7 @@
 
 ;; Usage example:
 
-;; (open-proto-stream
+;; (open-protocol-stream
 ;;  "*nnimap*" buffer address port
 ;;  :type 'network
 ;;  :capability-command "1 CAPABILITY\r\n"
@@ -64,7 +64,7 @@
 		  (proc type &optional priority-string trustfiles keyfiles))
 
 ;;;###autoload
-(defun open-proto-stream (name buffer host service &rest parameters)
+(defun open-protocol-stream (name buffer host service &rest parameters)
   "Open a network stream to HOST.
 The first four parameters have the same meaning as in
 `open-network-stream'.  The function returns a list where the

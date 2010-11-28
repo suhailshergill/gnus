@@ -1,3 +1,8 @@
+2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* proto-stream.el (open-protocol-stream): Renamed from
+	open-proto-stream.
+
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-stream): Change default to `undecided'.

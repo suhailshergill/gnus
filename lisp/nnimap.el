@@ -349,7 +349,7 @@ textual parts.")
       (when nnimap-server-port
 	(push (format "%s" nnimap-server-port) ports))
       (destructuring-bind (stream greeting capabilities)
-	  (open-proto-stream
+	  (open-protocol-stream
 	   "*nnimap*" (current-buffer) nnimap-address (car (last ports))
 	   :type nnimap-stream
 	   :shell-command nnimap-shell-program

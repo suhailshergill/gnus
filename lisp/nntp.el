@@ -1269,7 +1269,7 @@ password contained in '~/.nntp-authinfo'."
 			   (nntp-open-ssl-stream tls)
 			   (nntp-open-tls-stream tls))))
 		(if (assoc nntp-open-connection-function map)
-		    (car (open-proto-stream
+		    (car (open-protocol-stream
 			  "nntpd" pbuffer nntp-address nntp-port-number
 			  :type (cadr
 				 (assoc nntp-open-connection-function map))
