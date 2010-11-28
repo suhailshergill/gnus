@@ -81,6 +81,9 @@ omitted, the default is `network'.
 :end-of-command -- a regexp saying what the end of a command is.
 This defaults to \"\\n\".
 
+:success -- a regexp saying whether the STARTTLS command was
+successful or not.  For instance, for NNTP this is \"^3\".
+
 :capability-command -- a string representing the command used to
 query server for capabilities.  For instance, for IMAP this is
 \"1 CAPABILITY\\r\\n\".
@@ -110,7 +113,8 @@ command to switch on STARTTLS otherwise."
 	 (capability-command (cadr (memq :capability-command parameters)))
 	 (eoc (proto-stream-eoc parameters))
 	 (type (cadr (memq :type parameters)))
-	 (greeting (proto-stream-get-response stream start eoc)))
+	 (greeting (proto-stream-get-response stream start eoc))
+	 success)
     (if (not capability-command)
 	(list stream greeting nil)
       (let* ((capabilities
@@ -138,7 +142,7 @@ command to switch on STARTTLS otherwise."
 	    (setq start (with-current-buffer buffer (point-max)))
 	    (let* ((starttls-use-gnutls t)
 		   (starttls-extra-arguments
-		    (if (eq type 'starttls)
+		    (if (not (eq type 'starttls))
 			;; When doing opportunistic TLS upgrades we
 			;; don't really care about the identity of the
 			;; peer.
@@ -146,23 +150,34 @@ command to switch on STARTTLS otherwise."
 		      starttls-extra-arguments)))
 	      (setq stream (starttls-open-stream name buffer host service)))
 	    (proto-stream-get-response stream start eoc))
-	  (proto-stream-command stream starttls-command eoc)
-	  (if (fboundp 'open-gnutls-stream)
-	      (gnutls-negotiate stream nil)
-	    (unless (starttls-negotiate stream)
-	      (delete-process stream)
-	      (setq stream nil)))
-	  (when (or (null stream)
-		    (not (memq (process-status stream)
-			       '(open run))))
-	    ;; It didn't successfully negotiate STARTTLS, so we reopen
-	    ;; the connection.
-	    (setq stream (open-network-stream name buffer host service))
-	    (proto-stream-get-response stream start eoc))
-	  ;; Re-get the capabilities, since they may have changed
-	  ;; after switching to TLS.
-	  (list stream greeting
-		(proto-stream-command stream capability-command eoc)))
+	  (if (not
+	       (string-match
+		(cadr (memq :success parameters))
+		(proto-stream-command stream starttls-command eoc)))
+	      ;; We got an error back from the STARTTLS command.
+	      (progn
+		(if (eq type 'starttls)
+		    (progn
+		      (delete-process stream)
+		      nil)
+		  (list stream greeting capabilities)))
+	    ;; The server said it was OK to start doing STARTTLS negotiations.
+	    (if (fboundp 'open-gnutls-stream)
+		(gnutls-negotiate stream nil)
+	      (unless (starttls-negotiate stream)
+		(delete-process stream)
+		(setq stream nil)))
+	    (when (or (null stream)
+		      (not (memq (process-status stream)
+				 '(open run))))
+	      ;; It didn't successfully negotiate STARTTLS, so we reopen
+	      ;; the connection.
+	      (setq stream (open-network-stream name buffer host service))
+	      (proto-stream-get-response stream start eoc))
+	    ;; Re-get the capabilities, since they may have changed
+	    ;; after switching to TLS.
+	    (list stream greeting
+		  (proto-stream-command stream capability-command eoc))))
 	 ((eq (cadr (memq :type parameters)) 'starttls)
 	  (delete-process stream)
 	  nil)

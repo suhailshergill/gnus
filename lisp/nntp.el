@@ -1275,6 +1275,7 @@ password contained in '~/.nntp-authinfo'."
 				 (assoc nntp-open-connection-function map))
 			  :end-of-command "^\\([2345]\\|[.]\\).*\n"
 			  :capability-command "CAPABILITIES\r\n"
+			  :success "^3"
 			  :starttls-function
 			  (lambda (capabilities)
 			    (if (not (string-match "STARTTLS" capabilities))

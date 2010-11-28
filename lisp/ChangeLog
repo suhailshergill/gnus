@@ -1,5 +1,12 @@
 2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-open-connection): Provide a :success condition.
+
+	* nnimap.el (nnimap-open-connection-1): Ditto.
+
+	* proto-stream.el (proto-stream-open-network): See what the response to
+	the STARTTLS command is.
+
 	* nnimap.el (nnimap-open-connection-1): Always upgrade to STARTTLS (for
 	backwards compatibility).
 	(nnimap-open-connection-1): Really respect nnimap-server-port.
