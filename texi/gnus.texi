@@ -14453,7 +14453,9 @@ functions is also affected by commonly understood variables
 @findex nntp-open-network-stream
 @item nntp-open-network-stream
 This is the default, and simply connects to some port or other on the
-remote system.
+remote system.  If both Emacs and the server supports it, the
+connection will be upgraded to an encrypted @acronym{STARTTLS}
+connection automatically.
 
 @findex nntp-open-tls-stream
 @item nntp-open-tls-stream
@@ -14887,12 +14889,17 @@ typical port would be @code{"imap"} or @code{"imaps"}.
 How @code{nnimap} should connect to the server.  Possible values are:
 
 @table @code
+@item undecided
+This is the default, and this first tries the @code{ssl} setting, and
+then tries the @code{network} setting.
+
 @item ssl
-This is the default, and this uses standard
-@acronym{TLS}/@acronym{SSL} connection.
+This uses standard @acronym{TLS}/@acronym{SSL} connections.
 
 @item network
-Non-encrypted and unsafe straight socket connection.
+Non-encrypted and unsafe straight socket connection, but will upgrade
+to encrypted @acronym{STARTTLS} if both Emacs and the server
+supports it.
 
 @item starttls
 Encrypted @acronym{STARTTLS} over the normal @acronym{IMAP} port.
