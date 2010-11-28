@@ -6,6 +6,8 @@
 	that what we've checked for.
 	(proto-stream-always-use-starttls): Only default to t if
 	open-gnutls-stream exists.
+	(proto-stream-open-network): If STARTTLS failed, then just open a
+	normal connection.
 
 	* nntp.el (nntp-open-connection): Report what the connection error is.
 

@@ -148,7 +148,16 @@ command to switch on STARTTLS otherwise."
 	  (proto-stream-command stream starttls-command eoc)
 	  (if (fboundp 'open-gnutls-stream)
 	      (gnutls-negotiate stream nil)
-	    (starttls-negotiate stream))
+	    (unless (starttls-negotiate stream)
+	      (delete-process stream)
+	      (setq stream nil)))
+	  (when (or (null stream)
+		    (not (memq (process-status stream)
+			       '(open run))))
+	    ;; It didn't successfully negotiate STARTTLS, so we reopen
+	    ;; the connection.
+	    (setq stream (open-network-stream name buffer host service))
+	    (proto-stream-get-response stream start eoc))
 	  ;; Re-get the capabilities, since they may have changed
 	  ;; after switching to TLS.
 	  (list stream greeting
