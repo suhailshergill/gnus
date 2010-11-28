@@ -202,7 +202,7 @@
   :type '(alist)
   :group 'nnir)
 
-(defcustom nnir-ignored-newsgroups nil
+(defcustom nnir-ignored-newsgroups ""
   "*A regexp to match newsgroups in the active file that should
   be skipped when searching."
   :type '(regexp)
