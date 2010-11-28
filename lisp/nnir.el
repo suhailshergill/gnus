@@ -202,6 +202,12 @@
   :type '(alist)
   :group 'nnir)
 
+(defcustom nnir-ignored-newsgroups nil
+  "*A regexp to match newsgroups in the active file that should
+  be skipped when searching."
+  :type '(regexp)
+  :group 'nnir)
+
 (defcustom nnir-imap-default-search-key "Whole message"
   "*The default IMAP search key for an nnir search. Must be one of
   the keys in `nnir-imap-search-arguments'. To use raw imap queries
@@ -1498,8 +1504,8 @@ server is of form 'backend:name'."
       (let ((cur (current-buffer))
 	    name)
 	(goto-char (point-min))
-	(unless (string= gnus-ignored-newsgroups "")
-	  (delete-matching-lines gnus-ignored-newsgroups))
+	(unless (string= nnir-ignored-newsgroups "")
+	  (delete-matching-lines nnir-ignored-newsgroups))
 	(while (not (eobp))
 	  (ignore-errors
 	    (push (mm-string-as-unibyte

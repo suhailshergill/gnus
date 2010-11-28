@@ -1,3 +1,8 @@
+2010-11-28  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-ignored-newsgroups): New variable.
+	(nnir-get-active): Use it.
+
 2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* proto-stream.el (proto-stream-open-network): Add some comments.
