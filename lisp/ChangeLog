@@ -1,3 +1,8 @@
+2010-11-29  Binjo  <binjo.cn@gmail.com>  (tiny change)
+
+	* nnimap.el (nnimap-open-connection-1): w32 open-network-stream doesn't
+	seem to accept strings-with-numbers as port numbers,
+
 2010-11-29  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* gnus-sum.el (gnus-summary-delete-article): If delete fails don't
