@@ -1508,15 +1508,35 @@ server is of form 'backend:name'."
 	(goto-char (point-min))
 	(unless (string= nnir-ignored-newsgroups "")
 	  (delete-matching-lines nnir-ignored-newsgroups))
-	(while (not (eobp))
-	  (ignore-errors
-	    (push (mm-string-as-unibyte
-		   (let ((p (point)))
-		     (skip-chars-forward "^ \t\\\\")
-		     (setq name (buffer-substring (+ p 1) (- (point) 1)))
-		     (gnus-group-full-name name method)))
-		  groups))
-	  (forward-line))))
+	(if (eq (car method) 'nntp)
+	    (while (not (eobp))
+	      (ignore-errors
+		(push (mm-string-as-unibyte
+		       (gnus-group-full-name
+			(buffer-substring
+			 (point)
+			 (progn
+			   (skip-chars-forward "^ \t")
+			   (point))) method))
+		      groups))
+	      (forward-line))
+	  (while (not (eobp))
+	    (ignore-errors
+	      (push (mm-string-as-unibyte
+		     (if (eq (char-after) ?\")
+			 (gnus-group-full-name (read cur) method)
+		       (let ((p (point)) (name ""))
+			 (skip-chars-forward "^ \t\\\\")
+			 (setq name (buffer-substring p (point)))
+			 (while (eq (char-after) ?\\)
+			   (setq p (1+ (point)))
+			   (forward-char 2)
+			   (skip-chars-forward "^ \t\\\\")
+			   (setq name (concat name (buffer-substring
+						    p (point)))))
+			 (gnus-group-full-name name method))))
+		    groups))
+	    (forward-line)))))
     groups))
 
 ;; The end.

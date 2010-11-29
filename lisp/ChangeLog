@@ -2,6 +2,7 @@
 
 	* nnir.el (nnir-request-move-article): Bail out if original group
 	doesn't support article moves.
+	(nnir-get-active): Improve active list retrieval.
 
 2010-11-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
