@@ -279,7 +279,8 @@ redirects somewhere else."
 		(eq (preceding-char) ? )
 		(eq (following-char) ? )
 		(aref fill-find-break-point-function-table (preceding-char))
-		(aref (char-category-set (preceding-char)) ?>)))
+		(and (not (equal (preceding-char) ?'))
+		     (aref (char-category-set (preceding-char)) ?>))))
       (backward-char 1))
     (if failed
 	;; There's no breakable point, so we give it up.

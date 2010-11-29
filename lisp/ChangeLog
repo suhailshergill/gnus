@@ -1,3 +1,7 @@
+2010-11-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-find-fill-point): Don't break before apostrophes.
+
 2010-11-29  Binjo  <binjo.cn@gmail.com>  (tiny change)
 
 	* nnimap.el (nnimap-open-connection-1): w32 open-network-stream doesn't
