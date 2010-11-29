@@ -1,3 +1,10 @@
+2010-11-29  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* nnir.el (nnir-run-gmane): Use mm-delete-duplicates instead of
+	delete-dups that is not available in XEmacs 21.4.
+
+	* mm-util.el (mm-delete-duplicates): Add comment.
+
 2010-11-28  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-ignored-newsgroups): New variable.

@@ -1385,7 +1385,7 @@ Tested with Namazu 2.0.6 on a GNU/Linux system."
 		      (string-to-number (match-string 2 xref)) xscore)
 		     artlist)))))
 	    (forward-line 1)))
-	(apply 'vector (nreverse (delete-dups artlist))))
+	(apply 'vector (nreverse (mm-delete-duplicates artlist))))
     (message "Can't search non-gmane nntp groups")
     nil))
 
