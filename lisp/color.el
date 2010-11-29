@@ -53,7 +53,7 @@ RED GREEN BLUE must be values between 0 and 1 inclusively."
 
 (defun color-rgb->hsv (red green blue)
   "Convert RED GREEN BLUE values to HSV representation.
-Hue is in radian. Saturation and values are between 0 and 1
+Hue is in radians. Saturation and values are between 0 and 1
 inclusively."
    (let* ((r (float red))
 	 (g (float green))
