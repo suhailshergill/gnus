@@ -1,3 +1,8 @@
+2010-11-29  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-request-move-article): Bail out if original group
+	doesn't support article moves.
+
 2010-11-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-find-fill-point): Don't break before apostrophes.

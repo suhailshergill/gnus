@@ -488,8 +488,7 @@ The category key for a member of the sequence is obtained
 as `(keyfunc member)' and the corresponding element is just
 `member'. If `valuefunc' is non-nil, the element of the list
 is `(valuefunc member)'."
-  `(if (null ,sequence)
-       nil
+  `(unless (null ,sequence)
      (let (value)
        (mapcar
 	(lambda (member)
@@ -642,6 +641,9 @@ is `(valuefunc member)'."
 	 (artsubject (mail-header-subject
 		      (gnus-data-header
 		       (assoc article (gnus-data-list nil))))))
+    (unless (gnus-check-backend-function
+	     'request-move-article artfullgroup)
+      (error "The group %s does not support article moving" artfullgroup))
     (setq gnus-newsgroup-original-name artfullgroup)
     (string-match "^\\[[0-9]+:.+/[0-9]+\\] " artsubject)
     (setq gnus-article-original-subject (substring artsubject (match-end 0)))
