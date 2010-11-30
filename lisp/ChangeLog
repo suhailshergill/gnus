@@ -1,3 +1,10 @@
+2010-11-30  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* shr.el (shr-char-breakable-p, shr-char-nospace-p)
+	(shr-char-kinsoku-bol-p, shr-char-kinsoku-eol-p): New macros.
+	(shr-insert): Use them.
+	(shr-find-fill-point): Work better for kinsoku chars and apostrophes.
+
 2010-11-29  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-request-move-article): Bail out if original group
