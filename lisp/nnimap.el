@@ -346,7 +346,7 @@ textual parts.")
 	     (t
 	      (error "Unknown stream type: %s" nnimap-stream))))
 	   (proto-stream-always-use-starttls t)
-	   connection-result login-result credentials)
+           login-result credentials)
       (when nnimap-server-port
 	(setq ports (append ports (list nnimap-server-port))))
       (destructuring-bind (stream greeting capabilities)
@@ -367,14 +367,14 @@ textual parts.")
 			       nnimap-address port nnimap-stream)
 	      'no-connect)
 	  (gnus-set-process-query-on-exit-flag stream nil)
-	  (if (not (string-match "[*.] OK" greeting))
+	  (if (not (gnus-string-match-p "[*.] \\(OK\\|PREAUTH\\)" greeting))
 	      (nnheader-report 'nnimap "%s" greeting)
 	    ;; Store the greeting (for debugging purposes).
 	    (setf (nnimap-greeting nnimap-object) greeting)
 	    (setf (nnimap-capabilities nnimap-object)
 		  (mapcar #'upcase
 			  (split-string capabilities)))
-	    (unless (equal connection-result "PREAUTH")
+	    (unless (gnus-string-match-p "[*.] PREAUTH" greeting)
 	      (if (not (setq credentials
 			     (if (eq nnimap-authenticator 'anonymous)
 				 (list "anonymous"

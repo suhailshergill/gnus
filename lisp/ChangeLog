@@ -1,6 +1,7 @@
 2010-11-30  Julien Danjou  <julien@danjou.info>
 
 	* nnimap.el (nnimap-open-connection-1): Use gnus-string-match-p.
+	(nnimap-open-connection-1): Fix PREAUTH.
 
 	* gnus-gravatar.el (gnus-gravatar-size): Set gnus-gravatar-size to nil.
 
