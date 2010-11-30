@@ -1,3 +1,8 @@
+2010-11-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* proto-stream.el (open-protocol-stream): All starttls connections are
+	handled by the network handler.
+
 2010-11-30  Julien Danjou  <julien@danjou.info>
 
 	* nnimap.el (nnimap-open-connection-1): Use gnus-string-match-p.

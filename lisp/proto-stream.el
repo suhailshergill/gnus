@@ -96,11 +96,11 @@ is the response to the capaibility command.  It should return nil
 if it turns out that the server doesn't support STARTTLS, or the
 command to switch on STARTTLS otherwise."
   (let ((type (or (cadr (memq :type parameters)) 'network)))
-    (when (and (eq type 'starttls)
-	       (fboundp 'open-gnutls-stream))
+    (cond
+     ((eq type 'starttls)
       (setq type 'network))
-    (when (eq type 'ssl)
-      (setq type 'tls))
+     ((eq type 'ssl)
+      (setq type 'tls)))
     (destructuring-bind (stream greeting capabilities)
 	(funcall (intern (format "proto-stream-open-%s" type) obarray)
 		 name buffer host service parameters)
