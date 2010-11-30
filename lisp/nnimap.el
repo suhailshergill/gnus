@@ -358,9 +358,7 @@ textual parts.")
 	   :success " OK "
 	   :starttls-function
 	   (lambda (capabilities)
-	     (if (not (string-match "STARTTLS" capabilities))
-		 ;; Not a STARTTLS-capable server.
-		 nil
+	     (when (gnus-string-match-p "STARTTLS" capabilities)
 	       "1 STARTTLS\r\n")))
 	(setf (nnimap-process nnimap-object) stream)
 	(if (not stream)
