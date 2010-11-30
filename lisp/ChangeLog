@@ -1,3 +1,7 @@
+2010-11-30  Julien Danjou  <julien@danjou.info>
+
+	* gnus-gravatar.el (gnus-gravatar-size): Set gnus-gravatar-size to nil.
+
 2010-11-30  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-char-breakable-p, shr-char-nospace-p)

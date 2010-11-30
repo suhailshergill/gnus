@@ -31,8 +31,9 @@
   "Gnus Gravatar."
   :group 'gnus-visual)
 
-(defcustom gnus-gravatar-size 32
-  "How big should gravatars be displayed."
+(defcustom gnus-gravatar-size nil
+  "How big should gravatars be displayed.
+If nil, default to `gravatar-size'."
   :type 'integer
   :version "24.1"
   :group 'gnus-gravatar)
@@ -60,7 +61,7 @@
                (mail-encode-encoded-word-string
                 (or (mail-fetch-field header) "")))
              (mail-fetch-field header))))
-	  (gravatar-size gnus-gravatar-size)
+	  (gravatar-size (or gnus-gravatar-size gravatar-size))
 	  name)
       (dolist (address addresses)
 	(when (setq name (cdr address))
