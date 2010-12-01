@@ -515,14 +515,9 @@ This is used by `message-kill-buffer'."
   :group 'message-buffers
   :type 'boolean)
 
-(defvar gnus-local-organization)
 (defcustom message-user-organization
-  (or (and (boundp 'gnus-local-organization)
-	   (stringp gnus-local-organization)
-	   gnus-local-organization)
-      (getenv "ORGANIZATION")
-      t)
-  "*String to be used as an Organization header.
+  (or (getenv "ORGANIZATION") t)
+  "String to be used as an Organization header.
 If t, use `message-user-organization-file'."
   :group 'message-headers
   :type '(choice string

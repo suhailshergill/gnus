@@ -1,5 +1,9 @@
 2010-12-01  Julien Danjou  <julien@danjou.info>
 
+	* message.el (message-user-organization): Do not use gnus-local-organization.
+
+	* gnus.el: Remove gnus-local-organization.
+
 	* gnus-msg.el: Remove nastygram thing.
 
 2010-12-01  Teodor Zlatanov  <tzz@lifelogs.com>
