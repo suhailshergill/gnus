@@ -1307,24 +1307,6 @@ See `gnus-summary-mail-forward' for ARG."
   (interactive "P")
   (gnus-summary-mail-forward arg t))
 
-(defvar gnus-nastygram-message
-  "The following article was inappropriately posted to %s.\n\n"
-  "Format string to insert in nastygrams.
-The current group name will be inserted at \"%s\".")
-
-(defun gnus-summary-mail-nastygram (n)
-  "Send a nastygram to the author of the current article."
-  (interactive "P")
-  (when (or gnus-expert-user
-	    (gnus-y-or-n-p
-	     "Really send a nastygram to the author of the current article? "))
-    (let ((group gnus-newsgroup-name))
-      (gnus-summary-reply-with-original n)
-      (set-buffer gnus-message-buffer)
-      (message-goto-body)
-      (insert (format gnus-nastygram-message group))
-      (message-send-and-exit))))
-
 (defun gnus-summary-mail-crosspost-complaint (n)
   "Send a complaint about crossposting to the current article(s)."
   (interactive "P")
