@@ -87,9 +87,12 @@ Set image category to CATEGORY."
         (let ((real-name (car address))
               (mail-address (cadr address)))
           (when (if real-name
-		    (re-search-forward (concat (regexp-quote real-name) "\\|"
-					       (regexp-quote mail-address))
-				       nil t)
+		    (re-search-forward
+		     (concat (gnus-replace-in-string
+			      (regexp-quote real-name) "[\t ]+" "[\t\n ]+")
+			     "\\|"
+			     (regexp-quote mail-address))
+		     nil t)
 		  (search-forward mail-address nil t))
 	    (goto-char (1- (match-beginning 0)))
             ;; If we're on the " quoting the name, go backward
