@@ -71,6 +71,9 @@
 (defmacro rtree-right (node)
   `(cddr ,node))
 
+(defmacro rtree-range (node)
+  `(car ,node))
+
 (defsubst rtree-normalise-range (range)
   (when (numberp range)
     (setq range (cons range range)))
@@ -105,6 +108,18 @@
    (t
     (and (rtree-right tree)
 	 (rtree-memq (rtree-right tree) number)))))
+
+(defun rtree-extract (tree)
+  "Convert TREE to range form."
+  (nconc (and (rtree-left tree)
+	      (rtree-extract (rtree-left tree)))
+	 (list
+	  (if (= (rtree-low tree)
+		 (rtree-high tree))
+	      (rtree-low tree)
+	    (rtree-range tree)))
+	 (and (rtree-right tree)
+	      (rtree-extract (rtree-right tree)))))
 
 (provide 'rtree)
 
