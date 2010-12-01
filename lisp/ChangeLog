@@ -1,3 +1,8 @@
+2010-12-01  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* nnmaildir.el (nnmaildir-request-set-mark): Add article to add-mark
+	funcall.
+
 2010-12-01  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-gravatar.el (gnus-gravatar-insert): Allow LWSP in the middle of
