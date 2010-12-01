@@ -1,6 +1,11 @@
+2010-12-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* rtree.el: New file.
+
 2010-12-01  Julien Danjou  <julien@danjou.info>
 
-	* message.el (message-user-organization): Do not use gnus-local-organization.
+	* message.el (message-user-organization): Do not use
+	gnus-local-organization.
 
 	* gnus.el: Remove gnus-local-organization.
 
