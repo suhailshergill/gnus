@@ -181,7 +181,8 @@
 (eval-when-compile
   (autoload 'nnimap-buffer "nnimap")
   (autoload 'nnimap-command "nnimap")
-  (autoload 'nnimap-possibly-change-group "nnimap"))
+  (autoload 'nnimap-possibly-change-group "nnimap")
+  (autoload 'gnus-registry-action "gnus-registry"))
 
 (nnoo-declare nnir)
 (nnoo-define-basics nnir)
@@ -526,6 +527,7 @@ is `(valuefunc member)'."
 
 (deffoo nnir-open-server (server &optional definitions)
   ;; Just set the server variables appropriately.
+  (add-hook 'gnus-summary-mode-hook 'nnir-mode)
   (nnoo-change-server 'nnir server definitions))
 
 (deffoo nnir-request-group (group &optional server fast info)
@@ -644,9 +646,6 @@ is `(valuefunc member)'."
     (unless (gnus-check-backend-function
 	     'request-move-article artfullgroup)
       (error "The group %s does not support article moving" artfullgroup))
-    (setq gnus-newsgroup-original-name artfullgroup)
-    (string-match "^\\[[0-9]+:.+/[0-9]+\\] " artsubject)
-    (setq gnus-article-original-subject (substring artsubject (match-end 0)))
     (gnus-request-move-article
      artno
      artfullgroup
@@ -1538,6 +1537,24 @@ server is of form 'backend:name'."
 		    groups))
 	    (forward-line)))))
     groups))
+
+(defun nnir-registry-action (action data-header from &optional to method)
+  "Call `gnus-registry-action' with the original article group."
+  (gnus-registry-action
+   action
+   data-header
+   (nnir-article-group (mail-header-number data-header))
+   to
+   method))
+
+(defun nnir-mode ()
+  (when (eq (car (gnus-find-method-for-group gnus-newsgroup-name)) 'nnir)
+    (remove-hook 'gnus-summary-article-delete-hook 'gnus-registry-action t)
+    (remove-hook 'gnus-summary-article-move-hook 'gnus-registry-action t)
+    (add-hook 'gnus-summary-article-delete-hook 'nnir-registry-action t t)
+    (add-hook 'gnus-summary-article-move-hook 'nnir-registry-action t t)))
+
+
 
 ;; The end.
 (provide 'nnir)

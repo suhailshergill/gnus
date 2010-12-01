@@ -1,3 +1,21 @@
+2010-12-01  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el: Update to handle the registry better.
+	(autoload): Silence byte-compiler.
+	(nnir-open-server): Add a hook for nnir groups.
+	(nnir-request-move-article): Don't mangle the header. Better to use
+	formating variables (which will be added in the future).
+	(nnir-registry-action): Update the registry using the original article
+	group name.
+	(nnir-mode): Install nnir-specific hooks for updating the registry.
+
+	* gnus-sum.el
+	(gnus-article-original-subject,gnus-newsgroup-original-name): Remove
+	obsolete variables.
+	(gnus-summary-move-article): Remove use of obsolete variables.
+	(gnus-summary-local-variables): Make move and delete hooks local to
+	summary buffers.
+
 2010-12-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* rtree.el: New file.
