@@ -26,6 +26,7 @@
 
 (require 'gravatar)
 (require 'gnus-art)
+(require 'mail-extr) ;; Because of binding `mail-extr-disable-voodoo'.
 
 (defgroup gnus-gravatar nil
   "Gnus Gravatar."
@@ -52,30 +53,25 @@ If nil, default to `gravatar-size'."
 
 (defun gnus-gravatar-transform-address (header category &optional force)
   (gnus-with-article-headers
-    (let ((addresses
-           (mail-header-parse-addresses
-            ;; mail-header-parse-addresses does not work (reliably) on
-            ;; decoded headers.
-            (or
-             (ignore-errors
-               (mail-encode-encoded-word-string
-                (or (mail-fetch-field header) "")))
-             (mail-fetch-field header))))
-	  (gravatar-size (or gnus-gravatar-size gravatar-size))
-	  name)
+    (let* ((mail-extr-disable-voodoo t)
+	   (addresses (mail-extract-address-components
+		       (or (mail-fetch-field header) "") t))
+	   (gravatar-size gnus-gravatar-size)
+	   name)
       (dolist (address addresses)
-	(when (setq name (cdr address))
-	  (setcdr address (setq name (mail-decode-encoded-word-string name))))
+	(when (and (setq name (car address))
+		   (string-match "\\` +" name))
+	  (setcar address (setq name (substring name (match-end 0)))))
 	(when (or force
 		  (not (and gnus-gravatar-too-ugly
 			    (or (string-match gnus-gravatar-too-ugly
-					      (car address))
+					      (cadr address))
 				(and name
 				     (string-match gnus-gravatar-too-ugly
 						   name))))))
 	  (ignore-errors
 	    (gravatar-retrieve
-	     (car address)
+	     (cadr address)
 	     'gnus-gravatar-insert
 	     (list header address category))))))))
 
@@ -88,8 +84,8 @@ Set image category to CATEGORY."
       (when (buffer-live-p (current-buffer))
         (gnus-article-goto-header header)
         (mail-header-narrow-to-field)
-        (let ((real-name (cdr address))
-              (mail-address (car address)))
+        (let ((real-name (car address))
+              (mail-address (cadr address)))
           (when (if real-name
 		    (re-search-forward (concat (regexp-quote real-name) "\\|"
 					       (regexp-quote mail-address))
@@ -104,8 +100,7 @@ Set image category to CATEGORY."
             ;; example we were fetching someaddress, and then we change to
             ;; another mail with the same someaddress.
             (unless (memq 'gnus-gravatar (text-properties-at (point)))
-              (let ((inhibit-read-only t)
-                    (point (point)))
+              (let ((point (point)))
                 (unless (featurep 'xemacs)
                   (setq gravatar (append gravatar gnus-gravatar-properties)))
                 (gnus-put-image gravatar nil category)
