@@ -111,15 +111,23 @@
 
 (defun rtree-extract (tree)
   "Convert TREE to range form."
-  (nconc (and (rtree-left tree)
-	      (rtree-extract (rtree-left tree)))
-	 (list
-	  (if (= (rtree-low tree)
-		 (rtree-high tree))
-	      (rtree-low tree)
-	    (rtree-range tree)))
-	 (and (rtree-right tree)
-	      (rtree-extract (rtree-right tree)))))
+  (let ((stack (list tree))
+	result)
+    (while stack
+      (setq tree (pop stack))
+      (while (rtree-right tree)
+	(push tree stack)
+	(let ((a (rtree-right tree)))
+	  (rtree-set-right tree nil)
+	  (setq tree a)))
+      (push (if (= (rtree-low tree)
+		   (rtree-high tree))
+		(rtree-low tree)
+	      (rtree-range tree))
+	    result)
+      (when (rtree-left tree)
+	(push (rtree-left tree) stack)))
+    result))
 
 (provide 'rtree)
 
