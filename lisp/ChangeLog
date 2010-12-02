@@ -1,3 +1,8 @@
+2010-12-02  Julien Danjou  <julien@danjou.info>
+
+	* gnus-win.el (gnus-configure-windows): Remove Gnus 3.x setting
+	support.
+
 2010-12-01  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el: Update to handle the registry better.
