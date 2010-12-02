@@ -265,6 +265,15 @@
 	(setq tree (rtree-left tree))))
     result))
 
+(defun rtree-length (tree)
+  "Return the number of numbers stored in TREE."
+  (if (null tree)
+      0
+    (+ (rtree-length (rtree-left tree))
+       (1+ (- (rtree-high tree)
+	      (rtree-low tree)))
+       (rtree-length (rtree-right tree)))))
+
 (provide 'rtree)
 
 ;;; rtree.el ends here
