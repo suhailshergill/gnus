@@ -249,18 +249,8 @@ See the Gnus manual for an explanation of the syntax used.")
 
 (defun gnus-configure-frame (split &optional window)
   "Split WINDOW according to SPLIT."
-  (let ((current-window
-	 (or (get-buffer-window (current-buffer)) (selected-window))))
-    (unless window
-      (setq window current-window))
+  (let ((window (or window (get-buffer-window (current-buffer)) (selected-window))))
     (select-window window)
-    ;; This might be an old-style buffer config.
-    (when (vectorp split)
-      (setq split (append split nil)))
-    (when (or (consp (car split))
-	      (vectorp (car split)))
-      (push 1.0 split)
-      (push 'vertical split))
     ;; The SPLIT might be something that is to be evaled to
     ;; return a new SPLIT.
     (while (and (not (assq (car split) gnus-window-to-buffer))
