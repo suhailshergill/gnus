@@ -171,6 +171,33 @@
 	  (rtree-set-right tree new-node)
 	  (setq tree nil))))))))
 
+(defun rtree-delq (tree number)
+  "Remove NUMBER from TREE."
+  (while tree
+    (cond
+     ((< number (rtree-low tree))
+      (setq tree (rtree-left tree)))
+     ((> number (rtree-low tree))
+      (setq tree (rtree-right tree)))
+     ;; The number is in this node.
+     (t
+      (cond
+       ;; The only entry; delete the node.
+       ((= (rtree-low tree) (rtree-high tree))
+	(cond
+	 ((and (rtree-left tree)
+	       (rtree-right tree))
+	  )))
+       ;; The lowest in the range; just adjust.
+       ((= number (rtree-low tree))
+	(rtree-set-low tree (1+ number)))
+       ;; The highest in the range; just adjust.
+       ((= number (rtree-high tree))
+	(rtree-set-high tree (1- number)))
+       ;; We have to split this range.
+       (t
+	))))))
+
 (defun rtree-extract (tree)
   "Convert TREE to range form."
   (let (stack result)
