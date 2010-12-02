@@ -98,16 +98,15 @@
     node))
 
 (defun rtree-memq (tree number)
-  (cond
-   ((and (>= number (rtree-low tree))
-	 (<= number (rtree-high tree)))
-    t)
-   ((< number (rtree-low tree))
-    (and (rtree-left tree)
-	 (rtree-memq (rtree-left tree) number)))
-   (t
-    (and (rtree-right tree)
-	 (rtree-memq (rtree-right tree) number)))))
+  "Return non-nil if NUMBER is present in TREE."
+  (while (and tree
+	      (not (and (>= number (rtree-low tree))
+			(<= number (rtree-high tree)))))
+    (setq tree
+	  (if (< number (rtree-low tree))
+	      (rtree-left tree)
+	    (rtree-right tree))))
+  tree)
 
 (defun rtree-extract (tree)
   "Convert TREE to range form."
