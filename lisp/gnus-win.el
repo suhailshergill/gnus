@@ -249,7 +249,8 @@ See the Gnus manual for an explanation of the syntax used.")
 
 (defun gnus-configure-frame (split &optional window)
   "Split WINDOW according to SPLIT."
-  (let ((window (or window (get-buffer-window (current-buffer)) (selected-window))))
+  (let* ((current-window (or (get-buffer-window (current-buffer)) (selected-window)))
+         (window (or window current-window)))
     (select-window window)
     ;; The SPLIT might be something that is to be evaled to
     ;; return a new SPLIT.
