@@ -1,3 +1,7 @@
+2010-12-02  Julien Danjou  <julien@danjou.info>
+
+	* gnus.texi (Archived Messages): Remove gnus-outgoing-message-group.
+
 2010-11-28  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Customizing the IMAP Connection): Note the new defaults.

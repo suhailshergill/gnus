@@ -1,5 +1,7 @@
 2010-12-02  Julien Danjou  <julien@danjou.info>
 
+	* gnus-msg.el: Mark gnus-outgoing-message-group as obsolete.
+
 	* gnus-win.el (gnus-configure-windows): Remove Gnus 3.x setting
 	support.
 
