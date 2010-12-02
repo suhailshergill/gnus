@@ -1,3 +1,17 @@
+2010-12-02  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-summary-line-format): New variable.
+	(nnir-mode): Use it.
+	(nnir-artlist-*,nnir-aritem-*): Reimplement as macros.
+	(nnir-article-ids): Reimplement as defsubst.
+	(nnir-retrieve-headers): Don't mangle the subject header.
+	(nnir-run-imap): Use 100 as RSV score.
+	(nnir-run-find-grep): Fix for full server searching.
+	(nnir-run-gmane): Better restriction to gmane groups.
+
+	* gnus-sum.el (gnus-summary-line-format-alist): Add specs for nnir
+	summary buffers.
+
 2010-12-02  Julien Danjou  <julien@danjou.info>
 
 	* gnus-win.el (gnus-configure-frame): Remove old compatibility code.

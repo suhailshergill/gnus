@@ -209,6 +209,20 @@
   :type '(regexp)
   :group 'nnir)
 
+(defcustom nnir-summary-line-format nil
+  "*The format specification of the lines in an nnir summary buffer.
+
+All the items from `gnus-summary-line-format' are available, along
+with three items unique to nnir summary buffers:
+
+%Z    Search retrieval score value (integer)
+%G    Article original full group name (string)
+%g    Article original short group name (string)
+
+If nil this will use `gnus-summary-line-format'."
+  :type '(regexp)
+  :group 'nnir)
+
 (defcustom nnir-imap-default-search-key "Whole message"
   "*The default IMAP search key for an nnir search. Must be one of
   the keys in `nnir-imap-search-arguments'. To use raw imap queries
@@ -466,6 +480,29 @@ result, `gnus-retrieve-headers' will be called instead.")
 
 ;;; Helper macros
 
+;; Data type article list.
+
+(defmacro nnir-artlist-length (artlist)
+  "Returns number of articles in artlist."
+  `(length ,artlist))
+
+(defmacro nnir-artlist-article (artlist n)
+  "Returns from ARTLIST the Nth artitem (counting starting at 1)."
+  `(when (> ,n 0)
+     (elt ,artlist (1- ,n))))
+
+(defmacro nnir-artitem-group (artitem)
+  "Returns the group from the ARTITEM."
+  `(elt ,artitem 0))
+
+(defmacro nnir-artitem-number (artitem)
+  "Returns the number from the ARTITEM."
+  `(elt ,artitem 1))
+
+(defmacro nnir-artitem-rsv (artitem)
+  "Returns the Retrieval Status Value (RSV, score) from the ARTITEM."
+  `(elt ,artitem 2))
+
 (defmacro nnir-article-group (article)
   "Returns the group for ARTICLE"
   `(nnir-artitem-group (nnir-artlist-article nnir-artlist ,article)))
@@ -478,9 +515,9 @@ result, `gnus-retrieve-headers' will be called instead.")
   "Returns the rsv for ARTICLE"
   `(nnir-artitem-rsv (nnir-artlist-article nnir-artlist ,article)))
 
-(defmacro nnir-article-ids (article)
+(defsubst nnir-article-ids (article)
   "Returns the pair `(nnir id . real id)' of ARTICLE"
-  `(cons ,article (nnir-article-number ,article)))
+  (cons article (nnir-article-number article)))
 
 (defmacro nnir-categorize (sequence keyfunc &optional valuefunc)
   "Sorts a sequence into categories and returns a list of the form
@@ -596,11 +633,11 @@ is `(valuefunc member)'."
 		   (art (car (rassoc artno articleids))))
 	      (when art
 		(mail-header-set-number novitem art)
-		(mail-header-set-subject
-		 novitem
-		 (format "[%d: %s/%d] %s"
-			 (nnir-article-rsv art) artgroup artno
-			 (mail-header-subject novitem)))
+		;; (mail-header-set-subject
+		;;  novitem
+		;;  (format "[%d: %s/%d] %s"
+		;; 	 (nnir-article-rsv art) artgroup artno
+		;; 	 (mail-header-subject novitem)))
 		(push novitem headers))
 	      (forward-line 1)))))
       (setq headers
@@ -742,7 +779,7 @@ details on the language and supported extensions"
 						    (nnir-imap-make-query
 						     criteria qstring)))))
 		      (mapc
-		       (lambda (artnum) (push (vector group artnum 1) artlist)
+		       (lambda (artnum) (push (vector group artnum 100) artlist)
 			 (setq arts (1+ arts)))
 		       (and (car result)
 			    (delete 0 (mapcar #'string-to-number
@@ -1264,6 +1301,7 @@ Tested with Namazu 2.0.6 on a GNU/Linux system."
 	 (directory (cadr (assoc sym (cddr method))))
 	 (regexp (cdr (assoc 'query query)))
 	 (grep-options (cdr (assoc 'grep-options query)))
+	 (grouplist (or grouplist (nnir-get-active server)))
 	 artlist)
     (unless directory
       (error "No directory found in method specification of server %s"
@@ -1343,7 +1381,7 @@ Tested with Namazu 2.0.6 on a GNU/Linux system."
 ;; gmane interface
 (defun nnir-run-gmane (query srv &optional groups)
   "Run a search against a gmane back-end server."
-  (if (gnus-string-match-p "gmane" srv)
+  (if (gnus-string-match-p "gmane.org$" srv)
       (let* ((case-fold-search t)
 	     (qstring (cdr (assq 'query query)))
 	     (server (cadr (gnus-server-to-method srv)))
@@ -1462,28 +1500,6 @@ server is of form 'backend:name'."
     (nnir-open-server server)))
 
 
-;; Data type article list.
-
-(defun nnir-artlist-length (artlist)
-  "Returns number of articles in artlist."
-  (length artlist))
-
-(defun nnir-artlist-article (artlist n)
-  "Returns from ARTLIST the Nth artitem (counting starting at 1)."
-  (elt artlist (1- n)))
-
-(defun nnir-artitem-group (artitem)
-  "Returns the group from the ARTITEM."
-  (elt artitem 0))
-
-(defun nnir-artitem-number (artitem)
-  "Returns the number from the ARTITEM."
-  (elt artitem 1))
-
-(defun nnir-artitem-rsv (artitem)
-  "Returns the Retrieval Status Value (RSV, score) from the ARTITEM."
-  (elt artitem 2))
-
 
 ;; unused?
 (defun nnir-artlist-groups (artlist)
@@ -1549,6 +1565,8 @@ server is of form 'backend:name'."
 
 (defun nnir-mode ()
   (when (eq (car (gnus-find-method-for-group gnus-newsgroup-name)) 'nnir)
+    (setq gnus-summary-line-format
+	  (or nnir-summary-line-format gnus-summary-line-format))
     (remove-hook 'gnus-summary-article-delete-hook 'gnus-registry-action t)
     (remove-hook 'gnus-summary-article-move-hook 'gnus-registry-action t)
     (add-hook 'gnus-summary-article-delete-hook 'nnir-registry-action t t)
