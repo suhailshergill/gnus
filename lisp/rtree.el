@@ -65,6 +65,12 @@
 (defmacro rtree-high (node)
   `(cdar ,node))
 
+(defmacro rtree-set-low (node number)
+  `(setcar (car ,node) ,number))
+
+(defmacro rtree-set-high (node number)
+  `(setcdr (car ,node) ,number))
+
 (defmacro rtree-left (node)
   `(cadr ,node))
 
@@ -107,6 +113,55 @@
 	      (rtree-left tree)
 	    (rtree-right tree))))
   tree)
+
+(defun rtree-add (tree number)
+  "Add NUMBER to TREE."
+  (while tree
+    (cond
+     ;; It's already present, so we don't have to do anything.
+     ((and (>= number (rtree-low tree))
+	   (<= number (rtree-high tree)))
+      (setq tree nil))
+     ;; Extend the low range.
+     ((= number (1- (rtree-low tree)))
+      (rtree-set-low tree number)
+      ;; Check whether we need to merge this node with the child.
+      (when (and (rtree-left tree)
+		 (= (rtree-high (rtree-left tree)) (1- number)))
+	;; Extend the range to the low from the child.
+	(rtree-set-low tree (rtree-low (rtree-left tree)))
+	;; The child can't have a right child, so just transplant the
+	;; child's left tree to our left tree.
+	(rtree-set-left tree (rtree-left (rtree-left tree))))
+      (setq tree nil))
+     ;; Extend the high range.
+     ((= number (1+ (rtree-high tree)))
+      (rtree-set-high tree number)
+      ;; Check whether we need to merge this node with the child.
+      (when (and (rtree-right tree)
+		 (= (rtree-low (rtree-right tree)) (1+ number)))
+	;; Extend the range to the high from the child.
+	(rtree-set-high tree (rtree-high (rtree-right tree)))
+	;; The child can't have a left child, so just transplant the
+	;; child's left right to our right tree.
+	(rtree-set-right tree (rtree-right (rtree-right tree))))
+      (setq tree nil))
+     ((< number (rtree-low tree))
+      (if (rtree-left tree)
+	  (setq tree (rtree-left tree))
+	(let ((new-node (rtree-make-node)))
+	  (rtree-set-low new-node number)
+	  (rtree-set-high new-node number)
+	  (rtree-set-left tree new-node)
+	  (setq tree nil))))
+     (t
+      (if (rtree-right tree)
+	  (setq tree (rtree-right tree))
+	(let ((new-node (rtree-make-node)))
+	  (rtree-set-low new-node number)
+	  (rtree-set-high new-node number)
+	  (rtree-set-right tree new-node)
+	  (setq tree nil)))))))
 
 (defun rtree-extract (tree)
   "Convert TREE to range form."
