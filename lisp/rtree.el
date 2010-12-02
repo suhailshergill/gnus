@@ -197,7 +197,7 @@
 		(setq parent successor
 		      successor (rtree-left successor)))
 	      ;; We now have the leftmost child of our right child.
-	      (rtree-set-range (rtree-range successor))
+	      (rtree-set-range tree (rtree-range successor))
 	      ;; Transplant the child (if any) to the parent.
 	      (rtree-set-left parent (rtree-right successor))))
 	   (t
@@ -230,7 +230,7 @@
 	      (let ((predecessor (rtree-left tree)))
 		(while (rtree-right predecessor)
 		  (setq predecessor (rtree-right predecessor)))
-		(rtree-set-right predecessor new-mode)))
+		(rtree-set-right predecessor new-node)))
 	     ((rtree-left tree)
 	      (rtree-set-right new-node tree)
 	      (rtree-set-left new-node (rtree-left tree))
