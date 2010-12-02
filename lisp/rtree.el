@@ -172,31 +172,80 @@
 	  (setq tree nil))))))))
 
 (defun rtree-delq (tree number)
-  "Remove NUMBER from TREE."
-  (while tree
-    (cond
-     ((< number (rtree-low tree))
-      (setq tree (rtree-left tree)))
-     ((> number (rtree-low tree))
-      (setq tree (rtree-right tree)))
-     ;; The number is in this node.
-     (t
+  "Remove NUMBER from TREE destructively.  Returns the new tree."
+  (let ((result tree)
+	prev)
+    (while tree
       (cond
-       ;; The only entry; delete the node.
-       ((= (rtree-low tree) (rtree-high tree))
-	(cond
-	 ((and (rtree-left tree)
-	       (rtree-right tree))
-	  )))
-       ;; The lowest in the range; just adjust.
-       ((= number (rtree-low tree))
-	(rtree-set-low tree (1+ number)))
-       ;; The highest in the range; just adjust.
-       ((= number (rtree-high tree))
-	(rtree-set-high tree (1- number)))
-       ;; We have to split this range.
+       ((< number (rtree-low tree))
+	(setq prev tree
+	      tree (rtree-left tree)))
+       ((> number (rtree-high tree))
+	(setq prev tree
+	      tree (rtree-right tree)))
+       ;; The number is in this node.
        (t
-	))))))
+	(cond
+	 ;; The only entry; delete the node.
+	 ((= (rtree-low tree) (rtree-high tree))
+	  (cond
+	   ;; Two children.  Replace with successor value.
+	   ((and (rtree-left tree) (rtree-right tree))
+	    (let ((parent tree)
+		  (successor (rtree-right tree)))
+	      (while (rtree-left successor)
+		(setq parent successor
+		      successor (rtree-left successor)))
+	      ;; We now have the leftmost child of our right child.
+	      (rtree-set-range (rtree-range successor))
+	      ;; Transplant the child (if any) to the parent.
+	      (rtree-set-left parent (rtree-right successor))))
+	   (t
+	    (let ((rest (or (rtree-left tree)
+			    (rtree-right tree))))
+	      ;; One or zero children.  Remove the node.
+	      (cond
+	       ((null prev)
+		(setq result rest))
+	       ((eq (rtree-left prev) tree)
+		(rtree-set-left prev rest))
+	       (t
+		(rtree-set-right prev rest)))))))
+	 ;; The lowest in the range; just adjust.
+	 ((= number (rtree-low tree))
+	  (rtree-set-low tree (1+ number)))
+	 ;; The highest in the range; just adjust.
+	 ((= number (rtree-high tree))
+	  (rtree-set-high tree (1- number)))
+	 ;; We have to split this range.
+	 (t
+	  (let ((new-node (rtree-make-node)))
+	    (rtree-set-low new-node (rtree-low tree))
+	    (rtree-set-high new-node (1- number))
+	    (rtree-set-low tree (1+ number))
+	    (cond
+	     ;; Two children; insert the new node as the predecessor
+	     ;; node.
+	     ((and (rtree-left tree) (rtree-right tree))
+	      (let ((predecessor (rtree-left tree)))
+		(while (rtree-right predecessor)
+		  (setq predecessor (rtree-right predecessor)))
+		(rtree-set-right predecessor new-mode)))
+	     ((rtree-left tree)
+	      (rtree-set-right new-node tree)
+	      (rtree-set-left new-node (rtree-left tree))
+	      (rtree-set-left tree nil)
+	      (cond
+	       ((null prev)
+		(setq result new-node))
+	       ((eq (rtree-left prev) tree)
+		(rtree-set-left prev new-node))
+	       (t
+		(rtree-set-right prev new-node))))
+	     (t
+	      (rtree-set-left tree new-node))))))
+	(setq tree nil))))
+    result))
 
 (defun rtree-extract (tree)
   "Convert TREE to range form."
