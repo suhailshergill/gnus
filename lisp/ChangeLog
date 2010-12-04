@@ -1,3 +1,7 @@
+2010-12-04  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-categorize): Replace mapcar with mapc.
+
 2010-12-03  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el: Rearrange code to allow macros to be autoloaded by

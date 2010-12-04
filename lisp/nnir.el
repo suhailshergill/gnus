@@ -269,7 +269,7 @@ as `(keyfunc member)' and the corresponding element is just
 is `(valuefunc member)'."
   `(unless (null ,sequence)
      (let (value)
-       (mapcar
+       (mapc
 	(lambda (member)
 	  (let ((y (,keyfunc member))
 		(x ,(if valuefunc
