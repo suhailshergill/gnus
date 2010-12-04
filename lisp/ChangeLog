@@ -1,3 +1,7 @@
+2010-12-04  Adam Sjøgren  <asjo@koldfront.dk>
+
+	* shr.el (shr-urlify): Display the title in <a> tags.
+
 2010-12-04  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-categorize): Replace mapcar with mapc.

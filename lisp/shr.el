@@ -544,10 +544,10 @@ START, and END."
 
 (autoload 'widget-convert-button "wid-edit")
 
-(defun shr-urlify (start url)
+(defun shr-urlify (start url &optional title)
   (widget-convert-button
    'url-link start (point)
-   :help-echo url
+   :help-echo (if title (format "%s (%s)" title url) url)
    :keymap shr-map
    url)
   (put-text-property start (point) 'shr-url url))
@@ -669,10 +669,11 @@ text will be inserted at start."
 
 (defun shr-tag-a (cont)
   (let ((url (cdr (assq :href cont)))
+        (title (cdr (assq :title cont)))
 	(start (point))
 	shr-start)
     (shr-generic cont)
-    (shr-urlify (or shr-start start) url)))
+    (shr-urlify (or shr-start start) url title)))
 
 (defun shr-tag-object (cont)
   (let ((start (point))
