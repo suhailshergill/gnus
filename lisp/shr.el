@@ -547,7 +547,7 @@ START, and END."
 (defun shr-urlify (start url &optional title)
   (widget-convert-button
    'url-link start (point)
-   :help-echo (if title (format "%s (%s)" title url) url)
+   :help-echo (if title (format "%s (%s)" url title) url)
    :keymap shr-map
    url)
   (put-text-property start (point) 'shr-url url))
