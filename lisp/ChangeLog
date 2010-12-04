@@ -1,5 +1,8 @@
 2010-12-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-show-article): Reverse the meanings of `C-u
+	C-u g' and `C-u g' so that `C-u g' does what it traditionally did.
+
 	* shr.el (shr-urlify): Show the URL before the title to avoid
 	misleading URLs.
 
