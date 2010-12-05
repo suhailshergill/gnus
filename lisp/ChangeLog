@@ -1,5 +1,8 @@
 2010-12-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-snarf-error-message): nnheader-report takes a format
+	string as the parameter.
+
 	* gnus.el (gnus-valid-select-methods): Allow nnimap to respool.
 
 	* shr.el (shr-stylesheet): New dynamic variable for cascading the
