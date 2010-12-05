@@ -1,7 +1,7 @@
 2010-12-05  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-run-gmane): Use more careful test for gmane nntp
-	server. 
+	server.
 
 2010-12-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
