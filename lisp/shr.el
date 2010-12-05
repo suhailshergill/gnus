@@ -201,10 +201,12 @@ redirects somewhere else."
     (if (fboundp function)
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
-    (when shr-stylesheet
-      (shr-colorize-region start (point)
-			   (cdr (assq 'color shr-stylesheet))
-			   (cdr (assq 'background-color shr-stylesheet))))))
+    (let ((color (cdr (assq 'color shr-stylesheet)))
+	  (background (cdr (assq 'background-color
+				 shr-stylesheet))))
+      (when (and shr-stylesheet
+		 (or color background))
+	(shr-colorize-region start (point) color background)))))
 
 (defun shr-generic (cont)
   (dolist (sub cont)
