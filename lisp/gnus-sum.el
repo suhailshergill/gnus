@@ -9934,7 +9934,7 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 
         ;;;!!!Why is this necessary?
 	(set-buffer gnus-summary-buffer)
-	
+
 	(when (eq action 'move)
 	  (save-excursion
 	    (gnus-summary-goto-subject article)
