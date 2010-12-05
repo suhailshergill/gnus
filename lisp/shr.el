@@ -591,16 +591,52 @@ ones, in case fg and bg are nil."
 	   (shr-color-check fg (or bg
 				   (frame-parameter nil 'background-color)))))
       (when new-colors
-	(overlay-put (make-overlay start end) 'face
-		     (list :foreground (cadr new-colors)
-			   :background (and bg (car new-colors))))))))
+	(shr-put-color start end :foreground (cadr new-colors))
+	(when bg
+	  (shr-put-color start end :background (car new-colors)))))))
+
+;; Put a color in the region, but avoid putting colors on on blank
+;; text at the start of the line, and the newline at the end, to avoid
+;; ugliness.  Also, don't overwrite any existing color information,
+;; since this can be called recursively, and we want the "inner" color
+;; to win.
+(defun shr-put-color (start end type color)
+  (save-excursion
+    (goto-char start)
+    (while (< (point) end)
+      (when (bolp)
+	(skip-chars-forward " "))
+      (when (> (line-end-position) (point))
+	(shr-put-color-1 (point) (min (line-end-position) end) type color))
+      (if (< (line-end-position) end)
+	  (forward-line 1)
+	(goto-char end)))))
+
+(defun shr-put-color-1 (start end type color)
+  (let* ((old-props (get-text-property start 'face))
+	 (do-put (not (memq type old-props)))
+	 change)
+    (while (< start end)
+      (setq change (next-single-property-change start 'face nil end))
+      (when do-put
+	(put-text-property start change 'face
+			   (nconc (list type color) old-props)))
+      (setq old-props (get-text-property change 'face))
+      (setq do-put (not (memq type old-props)))
+      (setq start change))
+    (when (and do-put
+	       (> end start))
+      (put-text-property start end 'face
+			 (nconc (list type color old-props))))))
 
 ;;; Tag-specific rendering rules.
 
 (defun shr-tag-body (cont)
-  (let ((start (point))
-        (fgcolor (cdr (assq :fgcolor cont)))
-        (bgcolor (cdr (assq :bgcolor cont))))
+  (let* ((start (point))
+	 (fgcolor (cdr (assq :fgcolor cont)))
+	 (bgcolor (cdr (assq :bgcolor cont)))
+	 (shr-stylesheet (list (cons :color fgcolor)
+			       (cons :background-color bgcolor))))
     (shr-generic cont)
     (shr-colorize-region start (point) fgcolor bgcolor)))
 

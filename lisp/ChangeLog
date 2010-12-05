@@ -7,6 +7,8 @@
 	(shr-render-td): Background setting should be taken care of on a higher
 	level.
 	(shr-tag-body): Use post-hoc colorizations.
+	(shr-tag-body): Set up a style sheet based on bgcolor/fgcolor.
+	(shr-put-color-1): Don't overwrite old colors.
 
 	* gnus-util.el (gnus-output-to-mail): Require nnmail before using
 	nnmail variables.
