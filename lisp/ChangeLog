@@ -1,5 +1,13 @@
 2010-12-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-stylesheet): New dynamic variable for cascading the
+	styles.
+	(shr-colorize-region): New function.
+	(shr-insert-background-overlay): Remove.
+	(shr-render-td): Background setting should be taken care of on a higher
+	level.
+	(shr-tag-body): Use post-hoc colorizations.
+
 	* gnus-util.el (gnus-output-to-mail): Require nnmail before using
 	nnmail variables.
 
