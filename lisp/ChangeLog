@@ -1,5 +1,7 @@
 2010-12-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-valid-select-methods): Allow nnimap to respool.
+
 	* shr.el (shr-stylesheet): New dynamic variable for cascading the
 	styles.
 	(shr-colorize-region): New function.
