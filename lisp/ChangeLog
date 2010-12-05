@@ -9,6 +9,8 @@
 	(shr-tag-body): Use post-hoc colorizations.
 	(shr-tag-body): Set up a style sheet based on bgcolor/fgcolor.
 	(shr-put-color-1): Don't overwrite old colors.
+	(shr-colorize-region): When the background color isn't explicit, use
+	a fixed background.
 
 	* gnus-util.el (gnus-output-to-mail): Require nnmail before using
 	nnmail variables.

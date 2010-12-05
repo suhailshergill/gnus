@@ -587,9 +587,7 @@ ones, in case fg and bg are nil."
 
 (defun shr-colorize-region (start end fg &optional bg)
   (when fg
-    (let ((new-colors
-	   (shr-color-check fg (or bg
-				   (frame-parameter nil 'background-color)))))
+    (let ((new-colors (shr-color-check fg bg)))
       (when new-colors
 	(shr-put-color start end :foreground (cadr new-colors))
 	(when bg
