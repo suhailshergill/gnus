@@ -1,5 +1,8 @@
 2010-12-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-respool-article): The completion function
+	expects a list instead of an alist.
+
 	* nntp.el (nntp-snarf-error-message): nnheader-report takes a format
 	string as the parameter.
 

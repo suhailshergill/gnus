@@ -10004,7 +10004,7 @@ current group into whatever groups they are destined to.  In the
 latter case, they will be copied into the relevant groups."
   (interactive
    (list current-prefix-arg
-	 (let* ((methods (gnus-methods-using 'respool))
+	 (let* ((methods (mapcar #'car (gnus-methods-using 'respool)))
 		(methname
 		 (symbol-name (or gnus-summary-respool-default-method
 				  (car (gnus-find-method-for-group
