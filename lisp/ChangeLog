@@ -1,3 +1,8 @@
+2010-12-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-util.el (gnus-output-to-mail): Require nnmail before using
+	nnmail variables.
+
 2010-12-05  Bjørn Mork  <bjorn@mork.no>
 
 	* nnimap.el (nnimap-process-expiry-targets): Avoid downloading articles
