@@ -201,8 +201,8 @@ redirects somewhere else."
     (if (fboundp function)
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
-    (let ((color (cdr (assq 'color shr-stylesheet)))
-	  (background (cdr (assq 'background-color
+    (let ((color (cdr (assq :color shr-stylesheet)))
+	  (background (cdr (assq :background-color
 				 shr-stylesheet))))
       (when (and shr-stylesheet
 		 (or color background))
@@ -586,7 +586,10 @@ ones, in case fg and bg are nil."
                (shr-color-visible bg fg)))))))
 
 (defun shr-colorize-region (start end fg &optional bg)
-  (when fg
+  "Colorize region from START to END.
+Use foreground color FG and background color BG.
+Apply color check via `shr-color-check'."
+  (when (or fg bg)
     (let ((new-colors (shr-color-check fg bg)))
       (when new-colors
 	(shr-put-color start end :foreground (cadr new-colors))

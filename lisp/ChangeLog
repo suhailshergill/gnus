@@ -2,6 +2,8 @@
 
 	* shr.el (shr-render-td): Render td content with shr-descend, so style
 	will be applied to <td> too.
+	(shr-descend): Fix stylesheet color retrieval.
+	(shr-colorize-region): Render background even if fg is not set.
 
 2010-12-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
