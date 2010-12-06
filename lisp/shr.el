@@ -202,12 +202,11 @@ redirects somewhere else."
     (if (fboundp function)
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
-    (let ((color (cdr (assq 'color shr-stylesheet)))
-	  (background (cdr (assq 'background-color shr-stylesheet))))
-      (when (and style
-		 shr-stylesheet
-		 (or color background))
-	(shr-colorize-region start (point) color background)))))
+    ;; If style is set, then this node has set the color.
+    (when style
+      (shr-colorize-region start (point)
+			   (cdr (assq 'color shr-stylesheet))
+			   (cdr (assq 'background-color shr-stylesheet))))))
 
 (defun shr-generic (cont)
   (dolist (sub cont)
@@ -843,7 +842,9 @@ ones, in case fg and bg are nil."
          (shr-stylesheet (nconc (list (cons 'color color))
 				shr-stylesheet)))
     (shr-generic cont)
-    (shr-colorize-region start (point) color nil)))
+    (when color
+      (shr-colorize-region start (point) color
+			   (cdr (assq 'background-color shr-stylesheet))))))
 
 ;;; Table rendering algorithm.
 
