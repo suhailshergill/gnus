@@ -586,7 +586,7 @@ ones, in case fg and bg are nil."
                (shr-color-visible bg fg)))))))
 
 (defun shr-colorize-region (start end fg &optional bg)
-  (when fg
+  (when (or fg bg)
     (let ((new-colors (shr-color-check fg bg)))
       (when new-colors
 	(shr-put-color start end :foreground (cadr new-colors))
@@ -633,8 +633,8 @@ ones, in case fg and bg are nil."
   (let* ((start (point))
 	 (fgcolor (cdr (assq :fgcolor cont)))
 	 (bgcolor (cdr (assq :bgcolor cont)))
-	 (shr-stylesheet (list (cons :color fgcolor)
-			       (cons :background-color bgcolor))))
+	 (shr-stylesheet (list (cons 'color fgcolor)
+			       (cons 'background-color bgcolor))))
     (shr-generic cont)
     (shr-colorize-region start (point) fgcolor bgcolor)))
 
