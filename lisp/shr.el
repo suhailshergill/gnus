@@ -638,6 +638,9 @@ ones, in case fg and bg are nil."
     (shr-generic cont)
     (shr-colorize-region start (point) fgcolor bgcolor)))
 
+(defun shr-tag-style (cont)
+  )
+
 (defun shr-tag-p (cont)
   (shr-ensure-paragraph)
   (shr-indent)

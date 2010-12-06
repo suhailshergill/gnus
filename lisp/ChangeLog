@@ -5,6 +5,7 @@
 	(shr-tag-font): Actually let the styles be inherited instead of
 	overwriting them.
 	(shr-tag-font): Get the background color right.
+	(shr-tag-style): Ignore all <style> tags for the moment.
 
 	* gnus-int.el (gnus-request-thread): Rework to take a header instead of
 	a Message-ID to avoid having nnimap depend on gnus-sum.
