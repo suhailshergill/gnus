@@ -194,17 +194,19 @@ redirects somewhere else."
 	(style (cdr (assq :style (cdr dom))))
 	(shr-stylesheet shr-stylesheet)
 	(start (point)))
-    (when (and style
-	       (string-match "color" style))
-      (setq shr-stylesheet (nconc (shr-parse-style style)
-				  shr-stylesheet)))
+    (when style
+      (if (string-match "color" style)
+	  (setq shr-stylesheet (nconc (shr-parse-style style)
+				      shr-stylesheet))
+	(setq style nil)))
     (if (fboundp function)
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
     (let ((color (cdr (assq 'color shr-stylesheet)))
 	  (background (cdr (assq 'background-color
 				 shr-stylesheet))))
-      (when (and shr-stylesheet
+      (when (and style
+		 shr-stylesheet
 		 (or color background))
 	(shr-colorize-region start (point) color background)))))
 

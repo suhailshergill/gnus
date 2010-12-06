@@ -1,3 +1,8 @@
+2010-12-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-descend): Only colorise something if we have a node that
+	sets colors.
+
 2010-12-06  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-render-td): Render td content with shr-descend, so style
