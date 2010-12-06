@@ -849,7 +849,7 @@ Apply color check via `shr-color-check'."
   (let* ((start (point))
          (color (cdr (assq :color cont)))
          (shr-stylesheet (if color
-                             `((color . ,fgcolor) ,@shr-stylesheet)
+                             `((color . ,color) ,@shr-stylesheet)
                            shr-stylesheet)))
     (shr-generic cont)))
 
