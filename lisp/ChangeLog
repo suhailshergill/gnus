@@ -4,6 +4,8 @@
 	will be applied to <td> too.
 	(shr-colorize-region): Colorize region even if we only have a background.
 	(shr-tag-body): Fix color and background color inheritance.
+	Do not recolorize after shr-generic.
+	(shr-tag-font): Let shr-generic colorize via inheritance.
 
 2010-12-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 

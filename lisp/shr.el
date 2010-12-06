@@ -635,8 +635,7 @@ ones, in case fg and bg are nil."
 	 (bgcolor (cdr (assq :bgcolor cont)))
 	 (shr-stylesheet (list (cons 'color fgcolor)
 			       (cons 'background-color bgcolor))))
-    (shr-generic cont)
-    (shr-colorize-region start (point) fgcolor bgcolor)))
+    (shr-generic cont)))
 
 (defun shr-tag-p (cont)
   (shr-ensure-paragraph)
@@ -837,10 +836,10 @@ ones, in case fg and bg are nil."
   (shr-heading cont 'bold 'underline))
 
 (defun shr-tag-font (cont)
-  (let ((start (point))
-        (color (cdr (assq :color cont))))
-    (shr-generic cont)
-    (shr-colorize-region start (point) color)))
+  (let* ((start (point))
+         (color (cdr (assq :color cont)))
+         (shr-stylesheet (list (cons 'color color))))
+    (shr-generic cont)))
 
 ;;; Table rendering algorithm.
 
