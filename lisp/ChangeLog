@@ -4,6 +4,8 @@
 	will be applied to <td> too.
 	(shr-descend): Fix stylesheet color retrieval.
 	(shr-colorize-region): Render background even if fg is not set.
+	(shr-tag-body, shr-tag-font): Enhance stylesheet with tag information.
+	(shr-descend): Simplify colorize.
 
 2010-12-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 

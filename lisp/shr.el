@@ -195,18 +195,19 @@ redirects somewhere else."
 	(shr-stylesheet shr-stylesheet)
 	(start (point)))
     (when (and style
+               ;; HACK: we only parse if there's color information, since
+               ;; that's the only thing we are rendering.
 	       (string-match "color" style))
       (setq shr-stylesheet (nconc (shr-parse-style style)
 				  shr-stylesheet)))
+    ;; Render content
     (if (fboundp function)
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
-    (let ((color (cdr (assq :color shr-stylesheet)))
-	  (background (cdr (assq :background-color
-				 shr-stylesheet))))
-      (when (and shr-stylesheet
-		 (or color background))
-	(shr-colorize-region start (point) color background)))))
+    ;; Apply style
+    (shr-colorize-region start (point)
+                         (cdr (assq 'color shr-stylesheet))
+                         (cdr (assq 'background-color shr-stylesheet)))))
 
 (defun shr-generic (cont)
   (dolist (sub cont)
@@ -636,10 +637,15 @@ Apply color check via `shr-color-check'."
   (let* ((start (point))
 	 (fgcolor (cdr (assq :fgcolor cont)))
 	 (bgcolor (cdr (assq :bgcolor cont)))
-	 (shr-stylesheet (list (cons :color fgcolor)
-			       (cons :background-color bgcolor))))
-    (shr-generic cont)
-    (shr-colorize-region start (point) fgcolor bgcolor)))
+         (shr-stylesheet (if fgcolor
+                             (if bgcolor
+                                 `((color . ,fgcolor)
+                                   (background-color . ,bgcolor) ,@shr-stylesheet)
+                               `((color . ,fgcolor) ,@shr-stylesheet))
+                           (if bgcolor
+                               `((background-color . ,bgcolor) ,@shr-stylesheet)
+                             shr-stylesheet))))
+    (shr-generic cont)))
 
 (defun shr-tag-p (cont)
   (shr-ensure-paragraph)
@@ -840,10 +846,12 @@ Apply color check via `shr-color-check'."
   (shr-heading cont 'bold 'underline))
 
 (defun shr-tag-font (cont)
-  (let ((start (point))
-        (color (cdr (assq :color cont))))
-    (shr-generic cont)
-    (shr-colorize-region start (point) color)))
+  (let* ((start (point))
+         (color (cdr (assq :color cont)))
+         (shr-stylesheet (if color
+                             `((color . ,fgcolor) ,@shr-stylesheet)
+                           shr-stylesheet)))
+    (shr-generic cont)))
 
 ;;; Table rendering algorithm.
 
