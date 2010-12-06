@@ -1040,7 +1040,7 @@ ones, in case fg and bg are nil."
 	  (insert cache)
 	(let ((shr-width width)
 	      (shr-indentation 0))
-	  (shr-generic cont))
+	  (shr-descend (cons 'td cont)))
 	(delete-region
 	 (point)
 	 (+ (point)

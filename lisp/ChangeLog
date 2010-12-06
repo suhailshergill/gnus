@@ -1,3 +1,8 @@
+2010-12-06  Julien Danjou  <julien@danjou.info>
+
+	* shr.el (shr-render-td): Render td content with shr-descend, so style
+	will be applied to <td> too.
+
 2010-12-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-find-fill-point): Don't regard apostrophe as kinsoku-bol.
