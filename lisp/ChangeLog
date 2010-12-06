@@ -2,6 +2,8 @@
 
 	* shr.el (shr-tag-font): Colorize the region.
 	(shr-tag-body): Ditto.
+	(shr-tag-font): Actually let the styles be inherited instead of
+	overwriting them.
 
 	* gnus-int.el (gnus-request-thread): Rework to take a header instead of
 	a Message-ID to avoid having nnimap depend on gnus-sum.

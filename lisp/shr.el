@@ -203,8 +203,7 @@ redirects somewhere else."
 	(funcall function (cdr dom))
       (shr-generic (cdr dom)))
     (let ((color (cdr (assq 'color shr-stylesheet)))
-	  (background (cdr (assq 'background-color
-				 shr-stylesheet))))
+	  (background (cdr (assq 'background-color shr-stylesheet))))
       (when (and style
 		 shr-stylesheet
 		 (or color background))
@@ -841,7 +840,8 @@ ones, in case fg and bg are nil."
 (defun shr-tag-font (cont)
   (let* ((start (point))
          (color (cdr (assq :color cont)))
-         (shr-stylesheet (list (cons 'color color))))
+         (shr-stylesheet (nconc (list (cons 'color color))
+				shr-stylesheet)))
     (shr-generic cont)
     (shr-colorize-region start (point) color nil)))
 
