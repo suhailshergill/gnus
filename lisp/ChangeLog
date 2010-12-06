@@ -1,9 +1,12 @@
 2010-12-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-tag-font): Colorize the region.
+	(shr-tag-body): Ditto.
+
 	* gnus-int.el (gnus-request-thread): Rework to take a header instead of
 	a Message-ID to avoid having nnimap depend on gnus-sum.
 
-	* shr.el (shr-descend): Only colorise something if we have a node that
+	* shr.el (shr-descend): Only colorize something if we have a node that
 	sets colors.
 
 2010-12-06  Julien Danjou  <julien@danjou.info>
