@@ -942,8 +942,7 @@ ones, in case fg and bg are nil."
 	      `((tr (td (table (tbody ,@body)))))
 	    body)))))
     (when bgcolor
-      (shr-colorize-region start (point)
-			   nil
+      (shr-colorize-region start (point) (cdr (assq 'color shr-stylesheet))
 			   bgcolor))))
 
 (defun shr-find-elements (cont type)

@@ -2,6 +2,7 @@
 
 	* shr.el (shr-tag-table-1): Use bg/gfcolor specs on tables.
 	(shr-render-td): Handle td style="" better.
+	(shr-tag-table): Use the color from the style sheet.
 
 2010-12-07  Andrew Cohen  <cohen@andy.bu.edu>
 
