@@ -656,17 +656,14 @@ Add an entry here when adding a new search engine.")
        article)
     (save-excursion
       (let ((artfullgroup (nnir-article-group article))
-	    (artno (nnir-article-number article))
-	    ;; Bug?
-	    ;; Why must we bind nntp-server-buffer here?  It won't
-	    ;; work if `buf' is used, say.  (Of course, the set-buffer
-	    ;; line below must then be updated, too.)
-	    (nntp-server-buffer (or to-buffer nntp-server-buffer)))
-	(set-buffer nntp-server-buffer)
-	(erase-buffer)
+	    (artno (nnir-article-number article)))
 	(message "Requesting article %d from group %s"
 		 artno artfullgroup)
-	(gnus-request-article artno artfullgroup nntp-server-buffer)
+	(if to-buffer
+	    (with-current-buffer to-buffer
+	      (let ((gnus-article-decode-hook nil))
+		(gnus-request-article-this-buffer artno artfullgroup)))
+	  (gnus-request-article artno artfullgroup))
 	(cons artfullgroup artno)))))
 
 (deffoo nnir-request-move-article (article group server accept-form
