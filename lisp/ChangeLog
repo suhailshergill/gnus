@@ -1,3 +1,7 @@
+2010-12-07  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-run-gmane): Restore sub-optimal test for gmane server.
+
 2010-12-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* mm-util.el (mm-extra-numeric-entities): New variable.
