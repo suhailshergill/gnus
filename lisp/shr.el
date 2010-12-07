@@ -1052,7 +1052,8 @@ ones, in case fg and bg are nil."
     (let ((bgcolor (cdr (assq :bgcolor cont)))
 	  (fgcolor (cdr (assq :fgcolor cont)))
 	  (style (cdr (assq :style cont)))
-	  (shr-stylesheet shr-stylesheet))
+	  (shr-stylesheet shr-stylesheet)
+	  overlays)
       (when style
 	(setq style (and (string-match "color" style)
 			 (shr-parse-style style))))
@@ -1064,7 +1065,17 @@ ones, in case fg and bg are nil."
 	(setq shr-stylesheet (append style shr-stylesheet)))
       (let ((cache (cdr (assoc (cons width cont) shr-content-cache))))
 	(if cache
-	    (insert cache)
+	    (progn
+	      (insert (car cache))
+	      (let ((end (length (car cache))))
+		(dolist (overlay (cadr cache))
+		  (let ((new-overlay
+			 (make-overlay (1+ (- end (nth 0 overlay)))
+				       (1+ (- end (nth 1 overlay)))))
+			(properties (nth 2 overlay)))
+		    (while properties
+		      (overlay-put new-overlay
+				   (pop properties) (pop properties)))))))
 	  (let ((shr-width width)
 		(shr-indentation 0))
 	    (shr-descend (cons 'td cont)))
@@ -1072,7 +1083,8 @@ ones, in case fg and bg are nil."
 	   (point)
 	   (+ (point)
 	      (skip-chars-backward " \t\n")))
-	  (push (cons (cons width cont) (buffer-string))
+	  (push (list (cons width cont) (buffer-string)
+		      (shr-overlays-in-region (point-min) (point-max)))
 		shr-content-cache)))
       (goto-char (point-min))
       (let ((max 0))
