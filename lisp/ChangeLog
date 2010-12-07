@@ -1,3 +1,7 @@
+2010-12-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-tag-table-1): Use bg/gfcolor specs on tables.
+
 2010-12-07  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-run-gmane): Restore sub-optimal test for gmane server.
