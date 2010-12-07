@@ -30,8 +30,8 @@
      '(Info-index
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
        bookmark-get-bookmark-record bookmark-make-record-default
-       bookmark-prop-get display-time-event-handler epg-check-configuration
-       find-coding-system frame-device gnutls-negotiate
+       bookmark-prop-get completion-at-point display-time-event-handler
+       epg-check-configuration find-coding-system frame-device gnutls-negotiate
        libxml-parse-html-region recenter-top-bottom rmail-swap-buffers-maybe
        shr-insert-document w3-do-setup w3-parse-buffer w3-prepare-buffer
        w3-region w3m-detect-meta-charset w3m-region))
@@ -57,9 +57,9 @@
    '(bookmark-default-handler
      bookmark-get-bookmark-record bookmark-make-record-default
      bookmark-prop-get clear-string codepage-setup coding-system-from-name
-     cp-supported-codepages create-image delete-overlay detect-coding-string
-     display-time-event-handler epg-check-configuration event-click-count
-     event-end event-start find-coding-systems-for-charsets
+     completion-at-point cp-supported-codepages create-image delete-overlay
+     detect-coding-string display-time-event-handler epg-check-configuration
+     event-click-count event-end event-start find-coding-systems-for-charsets
      find-coding-systems-region find-coding-systems-string find-image
      float-time gnutls-negotiate help-buffer ido-completing-read image-size
      image-type-available-p insert-image libxml-parse-html-region
