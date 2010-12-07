@@ -898,8 +898,8 @@ ones, in case fg and bg are nil."
 	 (footer (cdr (assq 'tfoot cont)))
          (bgcolor (cdr (assq :bgcolor cont)))
 	 (start (point))
-	 (shr-stylesheet (nconc (list (cons 'color bgcolor)
-				      shr-stylesheet)))
+	 (shr-stylesheet (nconc (list (cons 'background-color bgcolor))
+				shr-stylesheet))
 	 (nheader (if header (shr-max-columns header)))
 	 (nbody (if body (shr-max-columns body)))
 	 (nfooter (if footer (shr-max-columns footer))))
@@ -1052,13 +1052,17 @@ ones, in case fg and bg are nil."
   (with-temp-buffer
     (let ((bgcolor (cdr (assq :bgcolor cont)))
 	  (fgcolor (cdr (assq :fgcolor cont)))
+	  (style (cdr (assq :style cont)))
 	  (shr-stylesheet shr-stylesheet))
+      (when style
+	(setq style (and (string-match "color" style)
+			 (shr-parse-style style))))
       (when bgcolor
-	(setq shr-stylesheet (nconc (list 'background-color bgcolor)
-				    shr-stylesheet)))
+	(setq style (nconc (list (cons 'background-color bgcolor)) style)))
       (when fgcolor
-	(setq shr-stylesheet (nconc (list 'background-color fgcolor)
-				    shr-stylesheet)))
+	(setq style (nconc (list (cons 'color fgcolor)) style)))
+      (when style
+	(setq shr-stylesheet (append style shr-stylesheet)))
       (let ((cache (cdr (assoc (cons width cont) shr-content-cache))))
 	(if cache
 	    (insert cache)
@@ -1089,8 +1093,11 @@ ones, in case fg and bg are nil."
 	      (when (> (- width (current-column)) 0)
 		(insert (make-string (- width (current-column)) ? )))
 	      (forward-line 1))))
-	(when (or bgcolor fgcolor)
-	  (shr-colorize-region (point-min) (point-max) fgcolor bgcolor))
+	(when style
+	  (shr-colorize-region
+	   (point-min) (point-max)
+	   (cdr (assq 'color shr-stylesheet))
+	   (cdr (assq 'background-color shr-stylesheet))))
 	(if fill
 	    (list max
 		  (count-lines (point-min) (point-max))
