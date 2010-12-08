@@ -1,3 +1,8 @@
+2010-12-08  Robert Pluim  <rpluim@gmail.com>  (tiny change)
+
+	* gnus-demon.el (gnus-demon-init): Call run-with-timer with time as
+	argument, not t. XEmacs does not support that.
+
 2010-12-08  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-retrieve-headers): Use rassq when comparing article
