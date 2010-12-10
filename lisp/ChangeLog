@@ -1,3 +1,7 @@
+2010-12-10  Julien Danjou  <julien@danjou.info>
+
+	* message.el (message-bogus-recipient-p): Set address to "" if nil.
+
 2010-12-10  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-request-expire-articles): Ignore expiry except for

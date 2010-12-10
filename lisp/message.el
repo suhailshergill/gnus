@@ -4305,9 +4305,10 @@ matching entry in `message-bogus-addresses'."
   ;; FIXME: How about "foo@subdomain", when the MTA adds ".domain.tld"?
   (let (found)
     (mapc (lambda (address)
-	    (setq address (cadr address))
+	    (setq address (or (cadr address) ""))
 	    (when
-		(or (not
+		(or (string= "" address)
+                    (not
 		     (or
 		      (not (string-match "@" address))
 		      (string-match
@@ -4321,7 +4322,7 @@ matching entry in `message-bogus-addresses'."
 					       "\\|")
 				  message-bogus-addresses)))
 			   (string-match re address))))
-			 (push address found)))
+              (push address found)))
 	  ;;
 	  (mail-extract-address-components recipients t))
     found))
