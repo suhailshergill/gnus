@@ -1,5 +1,8 @@
 2010-12-10  Julien Danjou  <julien@danjou.info>
 
+	* gnus-gravatar.el (gnus-gravatar-transform-address): Fix error when
+	email address is nil.
+
 	* message.el (message-bogus-recipient-p): Set address to "" if nil.
 
 2010-12-10  Andrew Cohen  <cohen@andy.bu.edu>
