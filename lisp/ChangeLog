@@ -1,3 +1,8 @@
+2010-12-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* proto-stream.el (proto-stream-open-network-only): New function to
+	have a way to specify non-STARTTLS upgrade connections.
+
 2010-12-10  Julien Danjou  <julien@danjou.info>
 
 	* gnus-gravatar.el (gnus-gravatar-transform-address): Fix error when
