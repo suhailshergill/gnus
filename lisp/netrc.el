@@ -34,18 +34,6 @@
 ;;; .netrc and .authinfo rc parsing
 ;;;
 
-(defalias 'netrc-point-at-eol
-  (if (fboundp 'point-at-eol)
-      'point-at-eol
-    'line-end-position))
-(eval-when-compile
-  ;; This is unnecessary in the compiled version as it is a macro.
-  (if (fboundp 'bound-and-true-p)
-      (defalias 'netrc-bound-and-true-p 'bound-and-true-p)
-    (defmacro netrc-bound-and-true-p (var)
-      "Return the value of symbol VAR if it is bound, else nil."
-      `(and (boundp (quote ,var)) ,var))))
-
 (defgroup netrc nil
  "Netrc configuration."
  :group 'comm)
