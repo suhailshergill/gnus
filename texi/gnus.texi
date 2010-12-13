@@ -1321,11 +1321,18 @@ but I thought it would be nice to have two of these.  This variable is
 more meant for setting some ground rules, while the other variable is
 used more for user fiddling.  By default this variable makes all new
 groups that come from mail back ends (@code{nnml}, @code{nnbabyl},
-@code{nnfolder}, @code{nnmbox}, @code{nnmh}, and @code{nnmaildir})
-subscribed.  If you don't like that, just set this variable to
-@code{nil}.
+@code{nnfolder}, @code{nnmbox}, @code{nnmh}, @code{nnimap}, and
+@code{nnmaildir}) subscribed.  If you don't like that, just set this
+variable to @code{nil}.
 
-New groups that match this regexp are subscribed using
+@vindex gnus-auto-subscribed-categories
+As if that wasn't enough, @code{gnus-auto-subscribed-categories} also
+allows you to specify that new groups should be subcribed based on the
+category their select methods belong to.  The default is @samp{(mail
+post-mail)}, meaning that all new groups from mail-like backends
+should be subscribed automatically.
+
+New groups that match these variables are subscribed using
 @code{gnus-subscribe-options-newsgroup-method}.
 
 

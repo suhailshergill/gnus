@@ -341,6 +341,15 @@ hierarchy in its entirety."
   :group 'gnus-group-new
   :type 'boolean)
 
+(defcustom gnus-auto-subscribed-categories '(mail post-mail)
+  "*New groups from methods of these categories will be subscribed automatically.
+Note that this variable only deals with new groups.  It has no
+effect whatsoever on old groups.  The default is to automatically
+subscribe all groups from mail-like backends."
+  :version "24.1"
+  :group 'gnus-group-new
+  :type '(repeat symbol))
+
 (defcustom gnus-auto-subscribed-groups
   "^nnml\\|^nnfolder\\|^nnmbox\\|^nnmh\\|^nnbabyl\\|^nnmaildir\\|^nnimap"
   "*All new groups that match this regexp will be subscribed automatically.
@@ -1157,6 +1166,11 @@ for new groups, and subscribe the new groups as zombies."
   (cond
    ((and gnus-options-subscribe
 	 (string-match gnus-options-subscribe group))
+    'subscribe)
+   ((let ((do-subscribe nil))
+      (dolist (category gnus-auto-subscribed-categories)
+	(when (gnus-member-of-valid category group)
+	  (setq do-subscribe t))))
     'subscribe)
    ((and gnus-auto-subscribed-groups
 	 (string-match gnus-auto-subscribed-groups group))
