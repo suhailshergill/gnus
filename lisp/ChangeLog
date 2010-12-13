@@ -1,5 +1,8 @@
 2010-12-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-agent.el (gnus-agentize): Don't create the queue group
+	automatically on startup.  It'll be created later, if needed.
+
 	* gnus-start.el (gnus-auto-subscribed-groups): Add nnimap to the list
 	of automatically subscribed groups.
 	(gnus-auto-subscribed-categories): New variable.
