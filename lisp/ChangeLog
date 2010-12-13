@@ -1,5 +1,8 @@
 2010-12-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-matches-options-n): Fix typo in last change.
+	(gnus-1): Don't create the nndrafts group twice.
+
 	* gnus-agent.el (gnus-agentize): Don't create the queue group
 	automatically on startup.  It'll be created later, if needed.
 

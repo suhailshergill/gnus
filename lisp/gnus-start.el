@@ -798,11 +798,10 @@ prompt the user for the name of an NNTP server to use."
 
 	  (when gnus-agent
 	    (gnus-request-create-group "queue" '(nndraft "")))
-	  (gnus-request-create-group "drafts" '(nndraft ""))
+	  (gnus-start-draft-setup)
 	  ;; Do the actual startup.
 	  (gnus-setup-news nil level dont-connect)
 	  (gnus-run-hooks 'gnus-setup-news-hook)
-	  (gnus-start-draft-setup)
 	  ;; Generate the group buffer.
 	  (gnus-group-list-groups level)
 	  (gnus-group-first-unread-group)
