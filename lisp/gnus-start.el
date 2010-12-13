@@ -796,10 +796,10 @@ prompt the user for the name of an NNTP server to use."
 	  (when (or gnus-slave gnus-use-dribble-file)
 	    (gnus-dribble-read-file))
 
-	  ;; Do the actual startup.
-	  (if gnus-agent
-	      (gnus-request-create-group "queue" '(nndraft "")))
+	  (when gnus-agent
+	    (gnus-request-create-group "queue" '(nndraft "")))
 	  (gnus-request-create-group "drafts" '(nndraft ""))
+	  ;; Do the actual startup.
 	  (gnus-setup-news nil level dont-connect)
 	  (gnus-run-hooks 'gnus-setup-news-hook)
 	  (gnus-start-draft-setup)
@@ -1160,7 +1160,8 @@ for new groups, and subscribe the new groups as zombies."
    ((let ((do-subscribe nil))
       (dolist (category gnus-auto-subscribed-categories)
 	(when (gnus-member-of-valid category group)
-	  (setq do-subscribe t))))
+	  (setq do-subscribe t)))
+      do-subscribe)
     'subscribe)
    ((and gnus-auto-subscribed-groups
 	 (string-match gnus-auto-subscribed-groups group))
