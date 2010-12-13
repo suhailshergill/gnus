@@ -2,6 +2,7 @@
 
 	* netrc.el (netrc-point-at-eol): Remove the unused netrc-point-at-old
 	and netrc-bound-and-true-p bindings.
+	(netrc-parse): Cache the netrc contents.
 
 	* gnus-start.el (gnus-matches-options-n): Fix typo in last change.
 	(gnus-1): Don't create the nndrafts group twice.

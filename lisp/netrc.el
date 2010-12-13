@@ -46,12 +46,15 @@
 (defvar netrc-services-file "/etc/services"
   "The name of the services file.")
 
+(defvar netrc-cache nil)
+
 (defun netrc-parse (&optional file)
   (interactive "fFile to Parse: ")
   "Parse FILE and return a list of all entries in the file."
   (unless file
     (setq file netrc-file))
   (if (listp file)
+      ;; We got already parsed contents; just return it.
       file
     (when (file-exists-p file)
       (with-temp-buffer
@@ -59,7 +62,16 @@
 			"password" "account" "macdef" "force"
 			"port"))
 	      alist elem result pair)
-          (insert-file-contents file)
+          (if (and netrc-cache
+		   (equal (car netrc-cache) (nth 5 (file-attributes file))))
+	      ;; Store the contents of the file heavily encrypted in memory.
+	      (insert (base64-decode-string (rot13-string (cdr netrc-cache))))
+	    (insert-file-contents file)
+	    (when (string-match "\\.gpg\\'" file)
+	      (setq netrc-cache (cons (nth 5 (file-attributes file))
+				      (rot13-string
+				       (base64-encode-string
+					(buffer-string)))))))
 	  (goto-char (point-min))
 	  ;; Go through the file, line by line.
 	  (while (not (eobp))
