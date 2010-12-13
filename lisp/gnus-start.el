@@ -820,7 +820,6 @@ prompt the user for the name of an NNTP server to use."
       (gnus-subscribe-group "nndraft:drafts" nil '(nndraft ""))))
   (unless (equal (gnus-group-get-parameter "nndraft:drafts" 'gnus-dummy t)
 		 '((gnus-draft-mode)))
-    (gnus-message 3 "Setting up drafts group")
     (gnus-group-set-parameter
      "nndraft:drafts" 'gnus-dummy '((gnus-draft-mode)))))
 
