@@ -785,10 +785,9 @@ prompt the user for the name of an NNTP server to use."
 		    (gnus-start-news-server (and arg (not level))))))
 	(if (and (not dont-connect)
 		 (not did-connect))
+	    ;; Couldn't connect to the server, so bail out.
 	    (gnus-group-quit)
 	  (gnus-run-hooks 'gnus-startup-hook)
-	  ;; NNTP server is successfully open.
-
 	  ;; Find the current startup file name.
 	  (setq gnus-current-startup-file
 		(gnus-make-newsrc-file gnus-startup-file))
