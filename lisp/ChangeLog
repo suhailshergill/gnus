@@ -4,6 +4,7 @@
 	of automatically subscribed groups.
 	(gnus-auto-subscribed-categories): New variable.
 	(gnus-matches-options-n): Use it.
+	(gnus-default-subscribed-newsgroups): Remove unused variable.
 
 2010-12-13  Andrew Cohen  <cohen@andy.bu.edu>
 

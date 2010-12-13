@@ -2,6 +2,8 @@
 
 	* gnus.texi (Filtering New Groups): Mention
 	gnus-auto-subscribed-categories.
+	(The First Time): Removed, since default-subscribed-newsgroups has been
+	removed.
 
 2010-12-06  Tassilo Horn  <tassilo@member.fsf.org>
 

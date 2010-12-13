@@ -86,14 +86,6 @@ If a file with the `.el' or `.elc' suffixes exists, it will be read instead."
   :group 'gnus-start
   :type '(choice file (const nil)))
 
-(defcustom gnus-default-subscribed-newsgroups nil
-  "List of newsgroups to subscribe, when a user runs Gnus the first time.
-The value should be a list of strings.
-If it is t, Gnus will not do anything special the first time it is
-started; it'll just use the normal newsgroups subscription methods."
-  :group 'gnus-start
-  :type '(choice (repeat string) (const :tag "Nothing special" t)))
-
 (defcustom gnus-use-dribble-file t
   "*Non-nil means that Gnus will use a dribble file to store user updates.
 If Emacs should crash without saving the .newsrc files, complete
