@@ -815,7 +815,8 @@ prompt the user for the name of an NNTP server to use."
   (gnus-request-create-group "drafts" '(nndraft ""))
   (unless (gnus-group-entry "nndraft:drafts")
     (let ((gnus-level-default-subscribed 1))
-      (gnus-subscribe-group "nndraft:drafts" nil '(nndraft ""))))
+      (gnus-subscribe-group "nndraft:drafts" nil '(nndraft "")))
+    (setcar (gnus-group-entry "nndraft:drafts") 0))
   (unless (equal (gnus-group-get-parameter "nndraft:drafts" 'gnus-dummy t)
 		 '((gnus-draft-mode)))
     (gnus-group-set-parameter
