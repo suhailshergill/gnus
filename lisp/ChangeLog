@@ -1,3 +1,8 @@
+2010-12-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-auto-subscribed-groups): Add nnimap to the list
+	of automatically subscribed groups.
+
 2010-12-13  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-run-imap): Return article list in order of increasing

@@ -342,7 +342,7 @@ hierarchy in its entirety."
   :type 'boolean)
 
 (defcustom gnus-auto-subscribed-groups
-  "^nnml\\|^nnfolder\\|^nnmbox\\|^nnmh\\|^nnbabyl\\|^nnmaildir"
+  "^nnml\\|^nnfolder\\|^nnmbox\\|^nnmh\\|^nnbabyl\\|^nnmaildir\\|^nnimap"
   "*All new groups that match this regexp will be subscribed automatically.
 Note that this variable only deals with new groups.  It has no effect
 whatsoever on old groups.
