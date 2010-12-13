@@ -2,6 +2,8 @@
 
 	* gnus-start.el (gnus-matches-options-n): Fix typo in last change.
 	(gnus-1): Don't create the nndrafts group twice.
+	(gnus-setup-news): There's no need to read the active file here, since
+	that's done again later on a per-backend basis.
 
 	* gnus-agent.el (gnus-agentize): Don't create the queue group
 	automatically on startup.  It'll be created later, if needed.

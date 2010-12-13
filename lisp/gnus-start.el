@@ -796,12 +796,12 @@ prompt the user for the name of an NNTP server to use."
 	  (when (or gnus-slave gnus-use-dribble-file)
 	    (gnus-dribble-read-file))
 
-	  (when gnus-agent
-	    (gnus-request-create-group "queue" '(nndraft "")))
-	  (gnus-start-draft-setup)
 	  ;; Do the actual startup.
 	  (gnus-setup-news nil level dont-connect)
 	  (gnus-run-hooks 'gnus-setup-news-hook)
+	  (when gnus-agent
+	    (gnus-request-create-group "queue" '(nndraft "")))
+	  (gnus-start-draft-setup)
 	  ;; Generate the group buffer.
 	  (gnus-group-list-groups level)
 	  (gnus-group-first-unread-group)
@@ -994,27 +994,8 @@ If LEVEL is non-nil, the news will be set up at level LEVEL."
     (when (or (null gnus-read-active-file)
 	      (eq gnus-read-active-file 'some))
       (gnus-update-active-hashtb-from-killed))
-
-    ;; Validate agent covered methods now that gnus-server-alist has
-    ;; been initialized.
-    ;; NOTE: This is here for one purpose only.  By validating the
-    ;; agentized server's, it converts the old 5.10.3, and earlier,
-    ;; format to the current format.  That enables the agent code
-    ;; within gnus-read-active-file to function correctly.
-    (if gnus-agent
-        (gnus-agent-read-servers-validate))
-
-    ;; Read the active file and create `gnus-active-hashtb'.
-    ;; If `gnus-read-active-file' is nil, then we just create an empty
-    ;; hash table.  The partial filling out of the hash table will be
-    ;; done in `gnus-get-unread-articles'.
-    (and gnus-read-active-file
-	 (not level)
-	 (gnus-read-active-file nil dont-connect))
-
     (unless gnus-active-hashtb
       (setq gnus-active-hashtb (gnus-make-hashtable 4096)))
-
     ;; Initialize the cache.
     (when gnus-use-cache
       (gnus-cache-open))
