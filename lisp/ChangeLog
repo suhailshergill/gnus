@@ -1,3 +1,7 @@
+2010-12-14  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* dgnushack.el (rot13-string): New macro for XEmacs.  netrc.el uses it.
+
 2010-12-13  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-run-gmane): Better check for gmane groups: error out if
