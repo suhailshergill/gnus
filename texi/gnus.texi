@@ -21337,7 +21337,7 @@ this command periodically, say every four hours.
 
 @node The hyrex Engine
 @subsubsection The hyrex Engine
-FIXME: Add documentation.
+This engine is obsolete.
 
 @node Customizations
 @subsubsection Custimozations
