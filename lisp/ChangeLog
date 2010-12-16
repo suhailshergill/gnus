@@ -1,5 +1,8 @@
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-schedule-image-fetching): Make sure the HTML
+	fetching stops when Gnus exits.
+
 	* nnfolder.el (nnfolder-save-all-buffers): Refactor out into its own
 	function.
 	(nnfolder-request-expire-articles): Save all the buffers after doing
