@@ -1,3 +1,10 @@
+2010-12-16  Daiki Ueno  <ueno@unixuser.org>
+
+	* auth-source.el (auth-source-gpg-encrypt-to): New variable to set the
+	list of recipient keys, or use symmetric encryption if not a list.
+	(auth-source-create): Use it to make `epa-file-encrypt-to' local for an
+	EPA override, replacing the call to `netrc-store-data'.
+
 2010-12-16  Dan Davison  <dandavison7@gmail.com>  (tiny change)
 
 	* gnus-srvr.el: Avoid passing nil regexp argument to
