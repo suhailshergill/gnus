@@ -2512,6 +2512,15 @@ the command to be executed.
 @section Foreign Groups
 @cindex foreign groups
 
+If you recall how to subscribe to servers (@pxref{Finding the News})
+you will remember that @code{gnus-secondary-select-methods} and
+@code{gnus-select-method} let you write a definition in Emacs Lisp of
+what servers you want to see when you start up.  The alternate
+approach is to use foreign servers and groups.  ``Foreign'' here means
+they are not coming from the select methods.  All foreign server
+configuration and subscriptions are stored only in the
+@file{~/.newsrc.eld} file.
+
 Below are some group mode commands for making and editing general foreign
 groups, as well as commands to ease the creation of a few
 special-purpose groups.  All these commands insert the newly created
