@@ -1,5 +1,7 @@
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-subscribe-newsgroup): Notify the backend.
+
 	* gnus-group.el (gnus-group-kill-group): Notify the backend that the
 	group has been killed.
 	(gnus-group-yank-group): Ditto.
