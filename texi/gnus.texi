@@ -12631,11 +12631,6 @@ if (using @kbd{G r} in the group buffer) to something
 nice---@samp{misc-mail-september-1995}, or whatever.  New messages will
 continue to be stored in the old (now empty) group.
 
-That's the default method of archiving sent messages.  Gnus offers a
-different way for the people who don't like the default method.  In that
-case you should set @code{gnus-message-archive-group} to @code{nil};
-this will disable archiving.
-
 @table @code
 @item gnus-gcc-mark-as-read
 @vindex gnus-gcc-mark-as-read
