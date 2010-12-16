@@ -1,3 +1,8 @@
+2010-12-16  Dan Davison  <dandavison7@gmail.com>  (tiny change)
+
+	* gnus-srvr.el: Avoid passing nil regexp argument to
+	delete-matching-lines.
+
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-html.el (gnus-html-schedule-image-fetching): Make sure the HTML
