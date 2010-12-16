@@ -1,5 +1,8 @@
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-push-marks-to-backend): Fix the logic for
+	copying read-ness to the backends.
+
 	* nnimap.el (nnimap-quirk): New function.
 	(nnimap-retrieve-group-data-early): Use it.
 	(nnimap-quirks): New alist.
