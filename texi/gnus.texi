@@ -12620,9 +12620,6 @@ messages in one file per month:
           (concat "mail." (format-time-string "%Y-%m")))))
 @end lisp
 
-@c (XEmacs 19.13 doesn't have @code{format-time-string}, so you'll have to
-@c use a different value for @code{gnus-message-archive-group} there.)
-
 Now, when you send a message off, it will be stored in the appropriate
 group.  (If you want to disable storing for just one particular message,
 you can just remove the @code{Gcc} header that has been inserted.)  The
