@@ -1541,7 +1541,11 @@ textual parts.")
 		      (not (re-search-backward
 			    (format "^%d .*\n" sequence)
 			    (if nnimap-streaming
-				(max (point-min) (- (point) 500))
+				(max (point-min)
+				     (- (point) 500)
+				     (save-excursion
+				       (forward-line -1)
+				       (point)))
 			      (point-min))
 			    t)))
 	    (when messagep
