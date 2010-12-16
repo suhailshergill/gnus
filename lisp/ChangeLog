@@ -1,3 +1,14 @@
+2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnfolder.el (nnfolder-save-all-buffers): Refactor out into its own
+	function.
+	(nnfolder-request-expire-articles): Save all the buffers after doing
+	expiry.
+
+	* nnmail.el (nnmail-expiry-target-group): Revert the "all articles are
+	the last article", since that led to serious performance regressions
+	when expiring nnml groups.
+
 2010-12-16  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el: Improve customizations.
