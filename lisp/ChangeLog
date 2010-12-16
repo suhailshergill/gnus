@@ -1,3 +1,7 @@
+2010-12-16  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* lpath.el: Bind epa-file-encrypt-to for Emacs 22 and XEmacs.
+
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-wait-for-response): Fix the end-point calculation
