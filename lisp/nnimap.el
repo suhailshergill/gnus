@@ -907,7 +907,8 @@ textual parts.")
 		    '((subscribe "SUBSCRIBE")
 		      (unsubscribe "UNSUBSCRIBE")))))
       (when command
-	(nnimap-command "%s %S" command (utf7-encode group t))))))
+	(with-current-buffer (nnimap-buffer)
+	  (nnimap-command "%s %S" (cadr command) (utf7-encode group t)))))))
 
 (deffoo nnimap-request-set-mark (group actions &optional server)
   (when (nnimap-possibly-change-group group server)
