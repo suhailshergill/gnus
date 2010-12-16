@@ -900,6 +900,15 @@ textual parts.")
 	(push flag flags)))
     flags))
 
+(deffoo nnimap-request-update-group-status (group status &optional server)
+  (when (nnimap-possibly-change-group nil server)
+    (let ((command (assoc
+		    status
+		    '((subscribe "SUBSCRIBE")
+		      (unsubscribe "UNSUBSCRIBE")))))
+      (when command
+	(nnimap-command "%s %S" command (utf7-encode group t))))))
+
 (deffoo nnimap-request-set-mark (group actions &optional server)
   (when (nnimap-possibly-change-group group server)
     (let (sequence)

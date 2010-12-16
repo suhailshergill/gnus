@@ -992,7 +992,8 @@ how new groups will be entered into the group buffer."
 		;; mechanism for new group subscription.
 		(gnus-call-subscribe-functions
 		 gnus-browse-subscribe-newsgroup-method
-		 group)))
+		 group)
+		(gnus-request-update-group-status group 'subscribe)))
 	    (delete-char 1)
 	    (insert (let ((lvl (gnus-group-level group)))
 		      (cond

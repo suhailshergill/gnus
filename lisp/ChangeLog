@@ -1,5 +1,16 @@
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-kill-group): Notify the backend that the
+	group has been killed.
+	(gnus-group-yank-group): Ditto.
+
+	* gnus-srvr.el (gnus-browse-unsubscribe-group): Ditto.
+
+	* nnimap.el (nnimap-request-update-group-status): New function.
+
+	* gnus-int.el (gnus-request-update-group-status): New interface
+	function.
+
 	* gnus-sum.el (gnus-summary-push-marks-to-backend): Fix the logic for
 	copying read-ness to the backends.
 
