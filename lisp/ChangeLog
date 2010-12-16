@@ -1,3 +1,7 @@
+2010-12-16  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el: Improve customizations.
+
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-start.el (gnus-subscribe-newsgroup): Notify the backend.
