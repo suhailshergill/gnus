@@ -1,3 +1,7 @@
+2010-12-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-group.el (gnus-group-delete-articles): New command.
+
 2010-12-17  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-mode): Make sure 'gnus-registry-install is bound.
