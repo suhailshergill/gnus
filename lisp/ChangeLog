@@ -1,3 +1,7 @@
+2010-12-17  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-mode): Make sure 'gnus-registry-install is bound.
+
 2010-12-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-retrieve-headers): Remove CRLF from the headers.
