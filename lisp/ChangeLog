@@ -5,6 +5,11 @@
 
 	* nnir.el (nnir-get-active): Ignore nnir-ignored-newsgroups if null.
 
+2010-12-17  Julien Danjou  <julien@danjou.info>
+
+	* gravatar.el (gravatar-retrieve-synchronously): New function.
+	(gravatar-get-data): Make more robust.
+
 2010-12-16  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* lpath.el: Bind epa-file-encrypt-to for Emacs 22 and XEmacs.
