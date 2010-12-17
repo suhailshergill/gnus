@@ -4,6 +4,10 @@
 
 2010-12-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-get-newsgroup-headers): Revert the last change
+	here, since it's up to the backends to do CRLF removal if their
+	protocol has it.
+
 	* nnimap.el (nnimap-retrieve-headers): Remove CRLF from the headers.
 
 2010-12-17  Julien Danjou  <julien@danjou.info>
