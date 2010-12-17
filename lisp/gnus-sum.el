@@ -6262,6 +6262,7 @@ The resulting hash table is returned, or nil if no Xrefs were found."
                               gnus-newsgroup-ignored-charsets)))
     (with-current-buffer nntp-server-buffer
       ;; Translate all TAB characters into SPACE characters.
+      (nnheader-remove-cr-followed-by-lf)
       (subst-char-in-region (point-min) (point-max) ?\t ?  t)
       (subst-char-in-region (point-min) (point-max) ?\r ?  t)
       (ietf-drums-unfold-fws)

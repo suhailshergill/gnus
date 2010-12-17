@@ -2,6 +2,7 @@
 
 	* gnus-sum.el (gnus-summary-refer-thread): Simplify code. Restore
 	gnus-use-agent.
+	(gnus-get-newsgroup-headers): Avoid unwanted spaces at eol.
 
 	* nnir.el (nnir-get-active): Ignore nnir-ignored-newsgroups if null.
 
