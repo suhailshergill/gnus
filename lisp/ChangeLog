@@ -1,3 +1,8 @@
+2010-12-20  David Engster  <deng@eml.cc>
+
+	* mm-view.el (mm-view-pkcs7-decrypt): If mml-smime-use is set to 'epg,
+	use EPG to decrypt S/MIME messages instead of openssl.
+
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-request-group): Avoid double SELECT on `M-g'.

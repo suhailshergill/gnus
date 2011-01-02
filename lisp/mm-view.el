@@ -683,17 +683,23 @@
 (defun mm-view-pkcs7-decrypt (handle &optional from)
   (insert-buffer-substring (mm-handle-buffer handle))
   (goto-char (point-min))
-  (insert "MIME-Version: 1.0\n")
-  (mm-insert-headers "application/pkcs7-mime" "base64" "smime.p7m")
-  (smime-decrypt-region
-   (point-min) (point-max)
-   (if (= (length smime-keys) 1)
-       (cadar smime-keys)
-     (smime-get-key-by-email
-      (gnus-completing-read
-       "Decipher using key"
-       smime-keys nil nil nil (car-safe (car-safe smime-keys)))))
-   from)
+  (if (eq mml-smime-use 'epg)
+      ;; Use EPG/gpgsm
+      (let ((part (base64-decode-string (buffer-string))))
+	(erase-buffer)
+	(insert (epg-decrypt-string (epg-make-context 'CMS) part)))
+    ;; Use openssl
+    (insert "MIME-Version: 1.0\n")
+    (mm-insert-headers "application/pkcs7-mime" "base64" "smime.p7m")
+    (smime-decrypt-region
+     (point-min) (point-max)
+     (if (= (length smime-keys) 1)
+	 (cadar smime-keys)
+       (smime-get-key-by-email
+	(gnus-completing-read
+	 "Decipher using key"
+	 smime-keys nil nil nil (car-safe (car-safe smime-keys)))))
+     from))
   (goto-char (point-min))
   (while (search-forward "\r\n" nil t)
     (replace-match "\n"))
