@@ -1,3 +1,8 @@
+2011-01-02  Wang Diancheng  <dcwang@kingbase.com.cn>  (tiny change)
+
+	* nnml.el (nnml-request-article): Allow requesting by Message-ID to
+	work when using a compressed nnml folder.
+
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-select-newsgroup): Don't propagate marks to
