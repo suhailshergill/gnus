@@ -1,5 +1,8 @@
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-kill-group): Don't try to update the group
+	status is the group clearly is unreachable.
+
 	* auth-source.el (auth-source-create): Add the optional second
 	parameter to `local-variable-p' to be compatible with XEmacs.
 
