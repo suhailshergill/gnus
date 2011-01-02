@@ -1,5 +1,9 @@
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-login): Prefer AUTH=CRAM-MD5, if it's available.
+	This avoids sending passwords in plain text over non-encrypted
+	channels.
+
 	* shr.el (shr-rescale-image): Display all GIF images as animated images.
 
 	* nnimap.el (nnimap-login): Refactored out into own function, and

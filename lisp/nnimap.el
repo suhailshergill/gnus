@@ -411,15 +411,6 @@ textual parts.")
 
 (defun nnimap-login (user password)
   (cond
-   ((not (nnimap-capability "LOGINDISABLED"))
-    (nnimap-command "LOGIN %S %S" user password))
-   ((nnimap-capability "AUTH=PLAIN")
-    (nnimap-command
-     "AUTHENTICATE PLAIN %s"
-     (base64-encode-string
-      (format "\000%s\000%s"
-	      (nnimap-quote-specials user)
-	      (nnimap-quote-specials password)))))
    ((nnimap-capability "AUTH=CRAM-MD5")
     (erase-buffer)
     (let ((sequence (nnimap-send-command "AUTHENTICATE CRAM-MD5"))
@@ -432,7 +423,16 @@ textual parts.")
 		 (rfc2104-hash 'md5 64 16 password
 			       (base64-decode-string challenge))))
 	"\r\n"))
-      (nnimap-wait-for-response sequence)))))
+      (nnimap-wait-for-response sequence)))
+   ((not (nnimap-capability "LOGINDISABLED"))
+    (nnimap-command "LOGIN %S %S" user password))
+   ((nnimap-capability "AUTH=PLAIN")
+    (nnimap-command
+     "AUTHENTICATE PLAIN %s"
+     (base64-encode-string
+      (format "\000%s\000%s"
+	      (nnimap-quote-specials user)
+	      (nnimap-quote-specials password)))))))
 
 (defun nnimap-quote-specials (string)
   (with-temp-buffer
