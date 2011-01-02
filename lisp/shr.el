@@ -1,6 +1,6 @@
 ;;; shr.el --- Simple HTML Renderer
 
-;; Copyright (C) 2010 Free Software Foundation, Inc.
+;; Copyright (C) 2010, 2011 Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
 ;; Keywords: html
@@ -115,11 +115,10 @@ cid: URL as the argument.")
 
 ;;;###autoload
 (defun shr-insert-document (dom)
-  (unless (integerp shr-width)
-    (set (make-local-variable 'shr-width) (window-width)))
   (setq shr-content-cache nil)
   (let ((shr-state nil)
-	(shr-start nil))
+	(shr-start nil)
+	(shr-width (or shr-width (window-width))))
     (shr-descend (shr-transform-dom dom))))
 
 (defun shr-copy-url ()
