@@ -74,8 +74,12 @@ fit these criteria."
   :type 'character)
 
 (defcustom shr-width fill-column
-  "Frame width to use for rendering."
-  :type 'integer
+  "Frame width to use for rendering.
+May either be an integer specifying a fixed width in characters,
+or nil, meaning that the full width of the window should be
+used."
+  :type '(choice (integer :tag "Fixed width in characters")
+		 (const   :tag "Use the width of the window" nil))
   :group 'shr)
 
 (defvar shr-content-function nil
@@ -111,6 +115,8 @@ cid: URL as the argument.")
 
 ;;;###autoload
 (defun shr-insert-document (dom)
+  (unless (integerp shr-width)
+    (set (make-local-variable 'shr-width) (window-width)))
   (setq shr-content-cache nil)
   (let ((shr-state nil)
 	(shr-start nil))
