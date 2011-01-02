@@ -1,5 +1,7 @@
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-group): Avoid double SELECT on `M-g'.
+
 	* gnus-group.el (gnus-group-kill-group): Don't try to update the group
 	status is the group clearly is unreachable.
 
