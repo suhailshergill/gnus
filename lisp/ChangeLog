@@ -69,6 +69,10 @@
 
 	* gnus-util.el (gnus-rescale-image): Revert last change.
 
+2010-12-17  Chong Yidong  <cyd@stupidchicken.com>
+
+	* binhex.el: Improve commentary (Bug#7482).
+
 2010-12-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-group.el (gnus-group-delete-articles): New command.
