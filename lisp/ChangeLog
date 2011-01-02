@@ -1,3 +1,7 @@
+2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* mm-view.el (mml-smime): Require.
+
 2010-12-20  David Engster  <deng@eml.cc>
 
 	* mm-view.el (mm-view-pkcs7-decrypt): If mml-smime-use is set to 'epg,
