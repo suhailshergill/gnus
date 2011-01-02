@@ -1,5 +1,9 @@
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-login): Refactored out into own function, and
+	implement CRAM-MD5.
+	(nnimap-wait-for-line): Refactored out.
+
 	* mm-view.el (mml-smime): Require.
 
 2010-12-20  David Engster  <deng@eml.cc>
