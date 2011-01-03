@@ -1,3 +1,7 @@
+2011-01-02  Karl Fogel  <kfogel@red-bean.com>
+
+	* gnus-msg.el (gnus-message-replyencrypt): Default to `t'.
+
 2011-01-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-login): Prefer AUTH=CRAM-MD5, if it's available.
