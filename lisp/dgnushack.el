@@ -201,10 +201,11 @@
 	  (error nil))
 	(defmacro rot13-string (string)
 	  "Return ROT13 encryption of STRING."
-	  `(with-temp-buffer
-	     (insert ,string)
-	     (translate-region (point-min) (point-max) ,rot13-display-table)
-	     (buffer-string))))
+	  `(let ((string ,string))
+	     (with-temp-buffer
+	       (insert string)
+	       (translate-region (point-min) (point-max) ,rot13-display-table)
+	       (buffer-string)))))
     (if (and (emacs-version>= 21 5)
 	     (not (featurep 'sxemacs)))
 	(autoload 'setenv "process" nil t)

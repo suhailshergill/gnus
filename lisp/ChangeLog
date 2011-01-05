@@ -1,3 +1,7 @@
+2011-01-05  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* dgnushack.el (rot13-string): Fix the way to get the argument.
+
 2011-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* flow-fill.el (fill-flowed-encode): Do encoding citation-aware.
