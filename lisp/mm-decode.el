@@ -1370,7 +1370,7 @@ Use CMD as the process."
   (setq handles (reverse handles))
   (dolist (disc (reverse mm-discouraged-alternatives))
     (dolist (handle (copy-sequence handles))
-      (when (string-match disc (mm-handle-media-type elem))
+      (when (string-match disc (mm-handle-media-type handle))
 	(setq handles (nconc (delete handle handles) (list handle))))))
   ;; Remove empty parts.
   (dolist (handle (copy-sequence handles))
