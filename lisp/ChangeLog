@@ -1,5 +1,9 @@
 2011-01-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-int.el (gnus-request-accept-article): Don't try to update marks
+	and stuff if the backend didn't return the article number.  This fixes
+	an Exchange-related nnimap bug.
+
 	* gnus-sum.el (gnus-summary-next-article): Remove hack to reselect
 	group window, because it does the wrong thing when a separate frame
 	displays the group buffer.
