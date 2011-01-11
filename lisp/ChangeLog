@@ -1,5 +1,8 @@
 2011-01-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-preferred-alternative-precedence): Discourage
+	showing empty parts.
+
 	* gnus-int.el (gnus-request-accept-article): Don't try to update marks
 	and stuff if the backend didn't return the article number.  This fixes
 	an Exchange-related nnimap bug.
