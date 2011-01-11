@@ -1,7 +1,8 @@
 2011-01-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-next-article): Remove hack to reselect
-	group window.
+	group window, because it does the wrong thing when a separate frame
+	displays the group buffer.
 
 	* proto-stream.el (open-protocol-stream): Protect against the low-level
 	transport functions returning nil.
