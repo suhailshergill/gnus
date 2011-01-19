@@ -7898,13 +7898,16 @@ url is put as the `gnus-button-url' overlay property on the button."
 (defun gnus-button-push (marker-and-entry)
   ;; Push button starting at MARKER.
   (save-excursion
-    (let ((marker (car marker-and-entry))
-          (entry (cadr marker-and-entry))
-          (inhibit-point-motion-hooks t))
+    (let* ((marker (car marker-and-entry))
+           (entry (cadr marker-and-entry))
+           (regexp (car entry))
+           (inhibit-point-motion-hooks t))
       (goto-char marker)
       ;; This is obviously true, or something bad is happening :)
       ;; But we need it to have the match-data
-      (when (looking-at (car entry))
+      (when (looking-at (or (if (symbolp regexp)
+                                (symbol-value regexp)
+                              regexp)))
         (let ((fun (nth 3 entry))
               (args (or (and (eq (car entry) 'gnus-button-url-regexp)
                              (get-char-property marker 'gnus-button-url))
