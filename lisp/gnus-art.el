@@ -4413,7 +4413,6 @@ commands:
   (gnus-update-format-specifications nil 'article-mode)
   (set (make-local-variable 'page-delimiter) gnus-page-delimiter)
   (set (make-local-variable 'gnus-page-broken) nil)
-  (make-local-variable 'gnus-button-marker-list)
   (make-local-variable 'gnus-article-current-summary)
   (make-local-variable 'gnus-article-mime-handles)
   (make-local-variable 'gnus-article-decoded-p)
@@ -4435,10 +4434,6 @@ commands:
   (set-syntax-table gnus-article-mode-syntax-table)
   (mm-enable-multibyte)
   (gnus-run-mode-hooks 'gnus-article-mode-hook))
-
-(defvar gnus-button-marker-list nil
-  "Regexp matching any of the regexps from `gnus-button-alist'.
-Internal variable.")
 
 (defun gnus-article-setup-buffer ()
   "Initialize the article buffer."
@@ -4483,8 +4478,6 @@ Internal variable.")
 	  (setq gnus-article-mime-handle-alist nil)
 	  (buffer-disable-undo)
 	  (setq buffer-read-only t)
-	  ;; This list just keeps growing if we don't reset it.
-	  (setq gnus-button-marker-list nil)
 	  (unless (eq major-mode 'gnus-article-mode)
 	    (gnus-article-mode))
 	  (setq truncate-lines gnus-article-truncate-lines)
@@ -7726,28 +7719,16 @@ It does this by highlighting everything after
   "Say whether PROP exists in the region."
   (text-property-not-all b e prop nil))
 
-(defun gnus-article-add-buttons (&optional force)
+(defun gnus-article-add-buttons ()
   "Find external references in the article and make buttons of them.
 \"External references\" are things like Message-IDs and URLs, as
 specified by `gnus-button-alist'."
-  (interactive (list 'force))
+  (interactive)
   (gnus-with-article-buffer
     (let ((inhibit-point-motion-hooks t)
 	  (case-fold-search t)
 	  (alist gnus-button-alist)
 	  beg entry regexp)
-      ;; Remove all old markers.
-      (let (marker entry new-list)
-	(while (setq marker (pop gnus-button-marker-list))
-	  (if (or (< marker (point-min)) (>= marker (point-max)))
-	      (push marker new-list)
-	    (goto-char marker)
-	    (when (setq entry (gnus-button-entry))
-	      (put-text-property (match-beginning (nth 1 entry))
-				 (match-end (nth 1 entry))
-				 'gnus-callback nil))
-	    (set-marker marker nil)))
-	(setq gnus-button-marker-list new-list))
       ;; We skip the headers.
       (article-goto-body)
       (setq beg (point))
@@ -7764,11 +7745,10 @@ specified by `gnus-button-alist'."
 	      ;; That optional form returned non-nil, so we add the
 	      ;; button.
 	      (setq from (set-marker (make-marker) from))
-	      (push from gnus-button-marker-list)
 	      (unless (and (eq (car entry) 'gnus-button-url-regexp)
 			   (gnus-article-extend-url-button from start end))
 		(gnus-article-add-button start end
-					 'gnus-button-push from)
+					 'gnus-button-push (list from entry))
 		(gnus-put-text-property
 		 start end
 		 'gnus-string (buffer-substring-no-properties
@@ -7915,41 +7895,35 @@ url is put as the `gnus-button-url' overlay property on the button."
     (let ((gnus-article-mime-handle-alist-1 gnus-article-mime-handle-alist))
       (gnus-set-mode-line 'article))))
 
-(defun gnus-button-entry ()
-  ;; Return the first entry in `gnus-button-alist' matching this place.
-  (let ((alist gnus-button-alist)
-	(entry nil))
-    (while alist
-      (setq entry (pop alist))
-      (if (looking-at (eval (car entry)))
-	  (setq alist nil)
-	(setq entry nil)))
-    entry))
-
-(defun gnus-button-push (marker)
+(defun gnus-button-push (marker-and-entry)
   ;; Push button starting at MARKER.
   (save-excursion
-    (goto-char marker)
-    (let* ((entry (gnus-button-entry))
-	   (inhibit-point-motion-hooks t)
-	   (fun (nth 3 entry))
-	   (args (or (and (eq (car entry) 'gnus-button-url-regexp)
-			  (get-char-property marker 'gnus-button-url))
-		     (mapcar (lambda (group)
-			       (let ((string (match-string group)))
-				 (set-text-properties
-				  0 (length string) nil string)
-				 string))
-			     (nthcdr 4 entry)))))
-      (cond
-       ((fboundp fun)
-	(apply fun args))
-       ((and (boundp fun)
-	     (fboundp (symbol-value fun)))
-	(apply (symbol-value fun) args))
-       (t
-	(gnus-message 1 "You must define `%S' to use this button"
-		      (cons fun args)))))))
+    (let ((marker (car marker-and-entry))
+          (entry (cadr marker-and-entry))
+          (inhibit-point-motion-hooks t))
+      (goto-char marker)
+      ;; This is obviously true, or something bad is happening :)
+      ;; But we need it to have the match-data
+      (when (looking-at (car entry))
+        (let ((fun (nth 3 entry))
+              (args (or (and (eq (car entry) 'gnus-button-url-regexp)
+                             (get-char-property marker 'gnus-button-url))
+                        (mapcar (lambda (group)
+                                  (let ((string (match-string group)))
+                                    (set-text-properties
+                                     0 (length string) nil string)
+                                    string))
+                                (nthcdr 4 entry)))))
+
+          (cond
+           ((fboundp fun)
+            (apply fun args))
+           ((and (boundp fun)
+                 (fboundp (symbol-value fun)))
+            (apply (symbol-value fun) args))
+           (t
+            (gnus-message 1 "You must define `%S' to use this button"
+                          (cons fun args)))))))))
 
 (defun gnus-parse-news-url (url)
   (let (scheme server port group message-id articles)

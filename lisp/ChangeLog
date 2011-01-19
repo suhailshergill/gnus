@@ -1,6 +1,8 @@
 2011-01-19  Julien Danjou  <julien@danjou.info>
 
 	* gnus-art.el (gnus-article-add-buttons): Simplify condition.
+	(gnus-button-push): Remove gnus-button-entry function, it fails heavily
+	if you have the same regexp several times.
 
 2011-01-15  Glenn Morris  <rgm@gnu.org>
 
