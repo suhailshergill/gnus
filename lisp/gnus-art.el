@@ -7758,8 +7758,7 @@ specified by `gnus-button-alist'."
 	  (let ((start (match-beginning (nth 1 entry)))
 		(end (match-end (nth 1 entry)))
 		(from (match-beginning 0)))
-	    (when (and (or (eq t (nth 2 entry))
-			   (eval (nth 2 entry)))
+	    (when (and (eval (nth 2 entry))
 		       (not (gnus-button-in-region-p
 			     start end 'gnus-callback)))
 	      ;; That optional form returned non-nil, so we add the
