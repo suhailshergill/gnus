@@ -1,5 +1,9 @@
 2011-01-20  Julien Danjou  <julien@danjou.info>
 
+	* gnus-art.el (gnus-mime-inline-part): Use mm-display-inline rather
+	than mm-insert-inline to insert inline part: this respect
+	mm-inline-media-tests displayers.
+
 	* mm-view.el (mm-display-shell-script-inline): New function.
 
 	* mm-decode.el (mm-inline-media-tests): Add x-shellscript and x-sh.
