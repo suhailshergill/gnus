@@ -1,3 +1,9 @@
+2011-01-20  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* mm-util.el (mm-find-buffer-file-coding-system): Don't forget to kill
+	the temp buffer.
+	* message.el (message-mailer-swallows-blank-line): Use with-temp-buffer.
+
 2011-01-20  Julien Danjou  <julien@danjou.info>
 
 	* mm-decode.el (mm-inline-media-tests): Add text/x-sh.
