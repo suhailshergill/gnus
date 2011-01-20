@@ -237,6 +237,8 @@ before the external MIME handler is invoked."
      (lambda (handle) (fboundp 'diff-mode)))
     ("application/emacs-lisp" mm-display-elisp-inline identity)
     ("application/x-emacs-lisp" mm-display-elisp-inline identity)
+    ("application/x-shellscript" mm-display-shell-script-inline identity)
+    ("application/x-sh" mm-display-shell-script-inline identity)
     ("text/dns" mm-display-dns-inline identity)
     ("text/org" mm-display-org-inline identity)
     ("text/html"

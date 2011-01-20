@@ -1,5 +1,9 @@
 2011-01-20  Julien Danjou  <julien@danjou.info>
 
+	* mm-view.el (mm-display-shell-script-inline): New function.
+
+	* mm-decode.el (mm-inline-media-tests): Add x-shellscript and x-sh.
+
 	* mm-uu.el (mm-uu-type-alist): Add org block.
 	(mm-uu-org-src-code-block-extract): New function.
 
