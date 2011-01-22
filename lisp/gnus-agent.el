@@ -731,7 +731,8 @@ Optional arg GROUP-NAME allows to specify another group."
      (concat "^" (regexp-quote mail-header-separator) "\n"))
     (replace-match "\n")
     (gnus-agent-insert-meta-information 'mail)
-    (gnus-request-accept-article "nndraft:queue" nil t t)))
+    (gnus-request-accept-article "nndraft:queue" nil t t)
+    (gnus-group-update-group "nndraft:queue" t)))
 
 (defun gnus-agent-insert-meta-information (type &optional method)
   "Insert meta-information into the message that says how it's to be posted.

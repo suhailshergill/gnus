@@ -1,3 +1,10 @@
+2011-01-22  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-draft.el (gnus-group-send-queue): Update the queue group in the
+	group buffer after sending the queue.
+
+	* gnus-agent.el (gnus-agent-send-mail): Ditto.
+
 2011-01-22  Julien Danjou  <julien@danjou.info>
 
 	* mailcap.el (mailcap-mime-extensions): Rename text/org to text/x-org.
