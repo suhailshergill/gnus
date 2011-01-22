@@ -73,8 +73,8 @@
 
 2011-01-13  Chong Yidong  <cyd@stupidchicken.com>
 
-	* message.el (message-tool-bar-gnome): Tweak tool-bar items.  Add
-	:vert-only tags.
+	* message.el (message-tool-bar-gnome): Tweak tool-bar items.
+	Add :vert-only tags.
 	(message-mail): New arg RETURN-ACTION.
 	(message-return-action): New var.
 	(message-bury): Use it.
@@ -89,8 +89,8 @@
 	* nnimap.el (nnimap-convert-partial-article): Protect against
 	zero-length body parts.
 
-	* mm-decode.el (mm-preferred-alternative-precedence): Discourage
-	showing empty parts.
+	* mm-decode.el (mm-preferred-alternative-precedence):
+	Discourage showing empty parts.
 
 	* gnus-int.el (gnus-request-accept-article): Don't try to update marks
 	and stuff if the backend didn't return the article number.  This fixes
@@ -366,8 +366,8 @@
 
 2010-12-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* gnus-sum.el (gnus-summary-enter-digest-group): Mention
-	gnus-auto-select-on-ephemeral-exit.
+	* gnus-sum.el (gnus-summary-enter-digest-group):
+	Mention gnus-auto-select-on-ephemeral-exit.
 
 	* proto-stream.el (proto-stream-open-network-only): Fix the calling
 	convention of the network-only option.
@@ -608,8 +608,8 @@
 	(nnir-mode): Install nnir-specific hooks for updating the registry.
 
 	* gnus-sum.el
-	(gnus-article-original-subject,gnus-newsgroup-original-name): Remove
-	obsolete variables.
+	(gnus-article-original-subject,gnus-newsgroup-original-name):
+	Remove obsolete variables.
 	(gnus-summary-move-article): Remove use of obsolete variables.
 	(gnus-summary-local-variables): Make move and delete hooks local to
 	summary buffers.
@@ -725,7 +725,7 @@
 
 	* nntp.el (nntp-open-connection): Report what the connection error is.
 
-	* proto-stream.el (open-protocol-stream): Renamed from
+	* proto-stream.el (open-protocol-stream): Rename from
 	open-proto-stream.
 
 2010-11-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
@@ -1009,8 +1009,8 @@
 
 	* shr.el (shr-parse-style): Replace \n with space in style parsing.
 
-	* shr-color.el (shr-color-hsl-to-rgb-fractions): Use
-	shr-color-hue-to-rgb.
+	* shr-color.el (shr-color-hsl-to-rgb-fractions):
+	Use shr-color-hue-to-rgb.
 	(shr-color->hexadecimal): Call shr-color-hsl-to-rgb-fractions.
 
 2010-11-23  Lars Magne Ingebrigtsen  <larsi@gnus.org>
@@ -2130,12 +2130,13 @@
 	* nnimap.el (gnutls-negotiate): Silence the byte compiler.
 
 	* gnus-art.el, gnus-cache.el, gnus-fun.el, gnus-group.el:
-	gnus-picon.el, gnus-spec.el, gnus-sum.el, gnus-util.el, gnus.el:
-	hashcash.el, imap.el, mail-source.el, message.el, mm-bodies.el:
-	mm-decode.el, mm-extern.el, mm-util.el, mm-view.el, mml-smime.el:
-	mml.el, mml1991.el, mml2015.el, nnfolder.el, nnheader.el, nnmail.el:
-	nnmaildir.el, nnrss.el, nntp.el, pgg-parse.el, pgg.el, rfc1843.el:
-	sieve-manage.el, smime.el, spam.el: Fix comment for declare-function.
+	* gnus-picon.el, gnus-spec.el, gnus-sum.el, gnus-util.el, gnus.el:
+	* hashcash.el, imap.el, mail-source.el, message.el, mm-bodies.el:
+	* mm-decode.el, mm-extern.el, mm-util.el, mm-view.el, mml-smime.el:
+	* mml.el, mml1991.el, mml2015.el, nnfolder.el, nnheader.el, nnmail.el:
+	* nnmaildir.el, nnrss.el, nntp.el, pgg-parse.el, pgg.el, rfc1843.el:
+	* sieve-manage.el, smime.el, spam.el:
+	Fix comment for declare-function.
 
 2010-10-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
