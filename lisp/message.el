@@ -4172,7 +4172,6 @@ not have PROP."
     (nreverse regions)))
 
 (defcustom message-bogus-addresses
-  ;; '("noreply" "nospam" "invalid")
   '("noreply" "nospam" "invalid" "@@" "[^[:ascii:]].*@" "[ \t]")
   "List of regexps of potentially bogus mail addresses.
 See `message-check-recipients' how to setup checking.
