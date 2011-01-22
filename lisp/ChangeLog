@@ -1,5 +1,8 @@
 2011-01-22  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-check-recipients): Display the encoded version of
+	the bogus address if they differ.
+
 	* gnus-draft.el (gnus-group-send-queue): Really refresh the queue group
 	after sending.
 

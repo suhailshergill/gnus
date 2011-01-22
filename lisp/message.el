@@ -4337,7 +4337,17 @@ This function could be useful in `message-setup-hook'."
 	    (and bog
 		 (not (y-or-n-p
 		       (format
-			"Address `%s' might be bogus.  Continue? " bog)))
+			"Address `%s'%s might be bogus.  Continue? "
+			bog
+			;; If the encoded version of the email address
+			;; is different from the unencoded version,
+			;; then we likely have invisible characters or
+			;; the like.  Display the encoded version,
+			;; too.
+			(let ((encoded (rfc2047-encode-string bog)))
+			  (if (string= encoded bog)
+			      ""
+			    (format " (%s)" encoded))))))
 		 (error "Bogus address"))))))))
 
 (custom-add-option 'message-setup-hook 'message-check-recipients)
