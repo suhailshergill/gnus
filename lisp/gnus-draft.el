@@ -222,7 +222,7 @@ Obeys the standard process/prefix convention."
 		   (format "Sending message %d of %d..."
 			   (- total (length articles)) total)))
 	      (gnus-draft-send article))))))
-    (gnus-group-update-group "nndraft:queue" t)))
+    (gnus-group-refresh-group "nndraft:queue")))
 
 ;;;###autoload
 (defun gnus-draft-reminder ()

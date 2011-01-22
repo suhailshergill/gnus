@@ -1,5 +1,12 @@
 2011-01-22  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-draft.el (gnus-group-send-queue): Really refresh the queue group
+	after sending.
+
+	* gnus-agent.el (gnus-agent-send-mail): Ditto.
+
+	* gnus-group.el (gnus-group-refresh-group): New convenience function.
+
 	* gnus-draft.el (gnus-group-send-queue): Update the queue group in the
 	group buffer after sending the queue.
 
