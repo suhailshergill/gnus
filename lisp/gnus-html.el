@@ -408,8 +408,7 @@ Use ALT-TEXT for the image string."
       (let ((data (buffer-substring (point) (point-max))))
         (with-current-buffer buffer
           (let ((inhibit-read-only t))
-            (gnus-html-put-image data (car image) (cadr image)))))))
-  (kill-buffer (current-buffer)))
+            (gnus-html-put-image data (car image) (cadr image))))))))
 
 (defun gnus-html-get-image-data (url)
   "Get image data for URL.
