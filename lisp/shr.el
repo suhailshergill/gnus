@@ -467,7 +467,8 @@ redirects somewhere else."
 		  (inhibit-read-only t))
 	      (delete-region start end)
 	      (goto-char start)
-	      (shr-put-image data alt))))))))
+	      (shr-put-image data alt)))))))
+  (kill-buffer (current-buffer)))
 
 (defun shr-put-image (data alt)
   (if (display-graphic-p)
