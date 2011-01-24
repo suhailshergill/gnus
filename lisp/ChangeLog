@@ -1,3 +1,8 @@
+2011-01-24  Julien Danjou  <julien@danjou.info>
+
+	* shr.el: Use defface to create shr-tag-h[1-6] faces to fontify h[1-6]
+	tags.
+
 2011-01-24  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-art.el (gnus-article-read-summary-keys): Don't call disabled
