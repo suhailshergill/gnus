@@ -2,6 +2,10 @@
 
 	* message.texi (IDNA): Explain what it is.
 
+2011-01-24  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (The Empty Backend): Document nnnil (bug #7653).
+
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Archived Messages): Remove outdated text.
