@@ -655,12 +655,11 @@ ones, in case fg and bg are nil."
       (while (not (eobp))
 	(end-of-line)
 	(when (and (< (setq current-column (current-column)) width)
-		   (not (get-text-property (point) 'display)))
-	  (put-text-property
-	   (point) (1+ (point)) 'display
-	   (concat (propertize (make-string (- width current-column) ? )
-			       'face (list :background color))
-		   "\n")))
+		   (not (overlays-at (point))))
+	  (let ((overlay (make-overlay (point) (1+ (point)))))
+	    (overlay-put overlay 'before-string
+			 (propertize (make-string (- width current-column) ? )
+				     'face (list :background color)))))
 	(forward-line 1)))))
 
 (defun shr-put-color-1 (start end type color)

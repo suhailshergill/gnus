@@ -2,6 +2,8 @@
 
 	* shr.el (shr-expand-newlines): Proof of concept implemantation of boxy
 	backgrounds.
+	(shr-expand-newlines): Switch to using overlays to enable kill'n'yank
+	in a more sensible manner.
 
 2011-01-24  Teodor Zlatanov  <tzz@lifelogs.com>
 
