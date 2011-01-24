@@ -113,7 +113,7 @@ Set image category to CATEGORY."
 		  (let ((point (point)))
 		    (unless (featurep 'xemacs)
 		      (setq gravatar (append gravatar gnus-gravatar-properties)))
-		    (gnus-put-image gravatar nil category)
+		    (gnus-put-image gravatar (buffer-substring (point) (1+ point)) category)
 		    (put-text-property point (point) 'gnus-gravatar address)
 		    (gnus-add-wash-type category)
 		    (gnus-add-image category gravatar)))))))

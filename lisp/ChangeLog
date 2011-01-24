@@ -2,6 +2,8 @@
 
 	* gnus-gravatar.el (gnus-gravatar-insert): Don't move point around
 	in the article buffer.
+	(gnus-gravatar-insert): Use blank space from the current buffer to
+	avoid breaking text properties.  This makes X-Sent updating work again.
 
 	* gravatar.el (gravatar-retrieve): Be silent when retrieving.
 
