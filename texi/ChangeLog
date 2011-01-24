@@ -1,3 +1,7 @@
+2011-01-24  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* message.texi (IDNA): Explain what it is.
+
 2010-12-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Archived Messages): Remove outdated text.
