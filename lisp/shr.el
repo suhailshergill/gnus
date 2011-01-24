@@ -642,7 +642,26 @@ ones, in case fg and bg are nil."
 	(shr-put-color-1 (point) (min (line-end-position) end) type color))
       (if (< (line-end-position) end)
 	  (forward-line 1)
-	(goto-char end)))))
+	(goto-char end)))
+    (when (eq type :background)
+      (shr-expand-newlines start end color))))
+
+(defun shr-expand-newlines (start end color)
+  (save-restriction
+    (narrow-to-region start end)
+    (let ((width (shr-natural-width))
+	  column)
+      (goto-char (point-min))
+      (while (not (eobp))
+	(end-of-line)
+	(when (and (< (setq current-column (current-column)) width)
+		   (not (get-text-property (point) 'display)))
+	  (put-text-property
+	   (point) (1+ (point)) 'display
+	   (concat (propertize (make-string (- width current-column) ? )
+			       'face (list :background color))
+		   "\n")))
+	(forward-line 1)))))
 
 (defun shr-put-color-1 (start end type color)
   (let* ((old-props (get-text-property start 'face))
