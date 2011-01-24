@@ -1,5 +1,8 @@
 2011-01-24  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-gravatar.el (gnus-gravatar-insert): Don't move point around
+	in the article buffer.
+
 	* gravatar.el (gravatar-retrieve): Be silent when retrieving.
 
 2011-01-23  Lars Ingebrigtsen  <larsi@gnus.org>
