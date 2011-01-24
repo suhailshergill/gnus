@@ -1,5 +1,8 @@
 2011-01-24  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-read-summary-keys): Don't call disabled
+	commands.
+
 	* gnus-gravatar.el (gnus-gravatar-insert): Don't move point around
 	in the article buffer.
 	(gnus-gravatar-insert): Use blank space from the current buffer to
