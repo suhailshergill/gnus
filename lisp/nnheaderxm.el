@@ -1,7 +1,6 @@
 ;;; nnheaderxm.el --- making Gnus backends work under XEmacs
 
-;; Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2008, 2009,
-;;      2010, 2011 Free Software Foundation, Inc.
+;; Copyright (C) 1996-2011 Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
 ;; Keywords: news
