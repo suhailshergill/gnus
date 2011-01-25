@@ -124,7 +124,7 @@ textual parts.")
 
 (defstruct nnimap
   group process commands capabilities select-result newlinep server
-  last-command-time greeting examined)
+  last-command-time greeting examined stream-type)
 
 (defvar nnimap-object nil)
 
@@ -350,7 +350,7 @@ textual parts.")
            login-result credentials)
       (when nnimap-server-port
 	(setq ports (append ports (list nnimap-server-port))))
-      (destructuring-bind (stream greeting capabilities)
+      (destructuring-bind (stream greeting capabilities stream-type)
 	  (open-protocol-stream
 	   "*nnimap*" (current-buffer) nnimap-address (car (last ports))
 	   :type nnimap-stream
@@ -362,6 +362,7 @@ textual parts.")
 	     (when (gnus-string-match-p "STARTTLS" capabilities)
 	       "1 STARTTLS\r\n")))
 	(setf (nnimap-process nnimap-object) stream)
+	(setf (nnimap-stream-type nnimap-object) stream-type)
 	(if (not stream)
 	    (progn
 	      (nnheader-report 'nnimap "Unable to contact %s:%s via %s"

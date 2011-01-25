@@ -1,3 +1,11 @@
+2011-01-25  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-open-connection-1): Store the actual stream type
+	used.
+
+	* proto-stream.el: Alter the interface functions to also return the
+	actual stream type used: network or tls.
+
 2011-01-25  Julien Danjou  <julien@danjou.info>
 
 	* mm-view.el (mm-display-shell-script-inline): Fix typo in docstring.
