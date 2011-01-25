@@ -1,3 +1,11 @@
+2011-01-25  Julien Danjou  <julien@danjou.info>
+
+	* mm-view.el (mm-display-shell-script-inline): Fix typo in docstring.
+	(mm-display-javascript-inline): New function.
+
+	* mm-decode.el (mm-inline-media-tests): Add application/javascript
+	viewing function.
+
 2011-01-25  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-expand-newlines): Fix variable name.
