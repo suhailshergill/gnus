@@ -412,6 +412,12 @@ textual parts.")
 
 (defun nnimap-login (user password)
   (cond
+   ;; Prefer plain LOGIN if it's enabled (since it requires fewer
+   ;; round trips than CRAM-MD5, and it's less likely to be buggy),
+   ;; and we're using an encrypted connection.
+   ((and (not (nnimap-capability "LOGINDISABLED"))
+	 (eq (nnimap-stream-type nnimap-object) 'tls))
+    (nnimap-command "LOGIN %S %S" user password))
    ((nnimap-capability "AUTH=CRAM-MD5")
     (erase-buffer)
     (let ((sequence (nnimap-send-command "AUTHENTICATE CRAM-MD5"))
