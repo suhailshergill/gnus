@@ -5,6 +5,8 @@
 	next article at once.
 	(article-lapsed-string): Refactor out and allow specifying how many
 	segments you want.
+	(gnus-article-setup-buffer): Start updating the lapsed header directly.
+	(gnus-article-update-lapsed-header): New variable.
 
 	* shr.el: Revert change that made headings use different-sized faces.
 	The Emacs display engine isn't advanced enough that, for instance,
