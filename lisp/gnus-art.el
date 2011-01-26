@@ -3500,7 +3500,7 @@ should replace the \"Date:\" one, or should be added below it."
 
 (defun article-make-date-line (date type)
   "Return a DATE line of TYPE."
-  (unless (memq type '(local ut original user iso8601 lapsed english))
+  (unless (memq type '(local ut original user iso8601 lapsed english date-lapsed))
     (error "Unknown conversion type: %s" type))
   (condition-case ()
       (let ((time (date-to-time date)))
@@ -3548,47 +3548,10 @@ should replace the \"Date:\" one, or should be added below it."
 		     (/ (% (abs tz) 3600) 60)))))
 	 ;; Do an X-Sent lapsed format.
 	 ((eq type 'lapsed)
-	  ;; If the date is seriously mangled, the timezone functions are
-	  ;; liable to bug out, so we ignore all errors.
-	  (let* ((now (current-time))
-		 (real-time (subtract-time now time))
-		 (real-sec (and real-time
-				(+ (* (float (car real-time)) 65536)
-				   (cadr real-time))))
-		 (sec (and real-time (abs real-sec)))
-		 num prev)
-	    (cond
-	     ((null real-time)
-	      "X-Sent: Unknown")
-	     ((zerop sec)
-	      "X-Sent: Now")
-	     (t
-	      (concat
-	       "X-Sent: "
-	       ;; This is a bit convoluted, but basically we go
-	       ;; through the time units for years, weeks, etc,
-	       ;; and divide things to see whether that results
-	       ;; in positive answers.
-	       (mapconcat
-		(lambda (unit)
-		  (if (zerop (setq num (ffloor (/ sec (cdr unit)))))
-		      ;; The (remaining) seconds are too few to
-		      ;; be divided into this time unit.
-		      ""
-		    ;; It's big enough, so we output it.
-		    (setq sec (- sec (* num (cdr unit))))
-		    (prog1
-			(concat (if prev ", " "") (int-to-string
-						   (floor num))
-				" " (symbol-name (car unit))
-				(if (> num 1) "s" ""))
-		      (setq prev t))))
-		article-time-units "")
-	       ;; If dates are odd, then it might appear like the
-	       ;; article was sent in the future.
-	       (if (> real-sec 0)
-		   " ago"
-		 " in the future"))))))
+	  (concat "X-Sent: " (article-lapsed-string time)))
+	 ;; A combined date/lapsed format.
+	 ((eq type 'date-lapsed)
+	  (concat "Date: " (article-lapsed-string time 3)))
 	 ;; Display the date in proper English
 	 ((eq type 'english)
 	  (let ((dtime (decode-time time)))
@@ -3610,8 +3573,56 @@ should replace the \"Date:\" one, or should be added below it."
 	     (format "%02d" (nth 2 dtime))
 	     ":"
 	     (format "%02d" (nth 1 dtime)))))))
-    (error
+    (foo
      (format "Date: %s (from Gnus)" date))))
+
+(defun article-lapsed-string (time &optional max-segments)
+  ;; If the date is seriously mangled, the timezone functions are
+  ;; liable to bug out, so we ignore all errors.
+  (let* ((now (current-time))
+	 (real-time (subtract-time now time))
+	 (real-sec (and real-time
+			(+ (* (float (car real-time)) 65536)
+			   (cadr real-time))))
+	 (sec (and real-time (abs real-sec)))
+	 (segments 0)
+	 num prev)
+    (unless max-segments
+      (setq max-segments (length article-time-units)))
+    (cond
+     ((null real-time)
+      "X-Sent: Unknown")
+     ((zerop sec)
+      "X-Sent: Now")
+     (t
+      (concat
+       "X-Sent: "
+       ;; This is a bit convoluted, but basically we go
+       ;; through the time units for years, weeks, etc,
+       ;; and divide things to see whether that results
+       ;; in positive answers.
+       (mapconcat
+	(lambda (unit)
+	  (if (or (zerop (setq num (ffloor (/ sec (cdr unit)))))
+		  (>= segments max-segments))
+	      ;; The (remaining) seconds are too few to
+	      ;; be divided into this time unit.
+	      ""
+	    ;; It's big enough, so we output it.
+	    (setq sec (- sec (* num (cdr unit))))
+	    (prog1
+		(concat (if prev ", " "") (int-to-string
+					   (floor num))
+			" " (symbol-name (car unit))
+			(if (> num 1) "s" ""))
+	      (setq prev t
+		    segments (1+ segments)))))
+	article-time-units "")
+       ;; If dates are odd, then it might appear like the
+       ;; article was sent in the future.
+       (if (> real-sec 0)
+	   " ago"
+	 " in the future"))))))
 
 (defun article-date-local (&optional highlight)
   "Convert the current article date to the local timezone."

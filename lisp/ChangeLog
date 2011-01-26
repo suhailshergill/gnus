@@ -3,6 +3,8 @@
 	* gnus-art.el (gnus-article-next-page): When the last line of the
 	article is displayed, scroll down once more instead of going to the
 	next article at once.
+	(article-lapsed-string): Refactor out and allow specifying how many
+	segments you want.
 
 	* shr.el: Revert change that made headings use different-sized faces.
 	The Emacs display engine isn't advanced enough that, for instance,
