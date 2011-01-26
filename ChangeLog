@@ -847,8 +847,7 @@
 	* xemacs.mak: New NMAKE file to support build and install on
 	Windows NT.
 
-	Copyright (C) 1999-2011
-    Free Software Foundation, Inc.
+  Copyright (C) 1999-2011 Free Software Foundation, Inc.
 
   This file is part of GNU Emacs.
 
