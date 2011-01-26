@@ -1,5 +1,9 @@
 2011-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-next-page): When the last line of the
+	article is displayed, scroll down once more instead of going to the
+	next article at once.
+
 	* shr.el: Revert change that made headings use different-sized faces.
 	The Emacs display engine isn't advanced enough that, for instance,
 	tables can comfortably use differntly-sized faces.
