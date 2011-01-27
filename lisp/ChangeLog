@@ -1,3 +1,8 @@
+2011-01-27  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-put-color): Don't do the box padding in tables, since
+	they're already padded.
+
 2011-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-art.el (gnus-article-next-page): When the last line of the
