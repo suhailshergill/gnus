@@ -1041,7 +1041,8 @@ If no one is selected, default secret key is used.  "
   (let ((inhibit-redisplay t)
 	(context (epg-make-context))
 	(config (epg-configuration))
-	(sender (message-options-get 'message-sender))
+	(sender (when mml2015-sign-with-sender
+                  (message-options-get 'message-sender)))
 	(recipients (message-options-get 'mml2015-epg-recipients))
 	cipher signers
 	(boundary (mml-compute-boundary cont))

@@ -1,6 +1,7 @@
 2011-01-27  Julien Danjou  <julien@danjou.info>
 
 	* mml2015.el (mml2015-epg-sign): Add and use mml2015-sign-with-sender.
+	(mml2015-epg-encrypt): Use mml2015-sign-with-sender.
 
 2011-01-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
