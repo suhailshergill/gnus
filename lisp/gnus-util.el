@@ -38,6 +38,8 @@
 (eval-when-compile
   (require 'cl))
 
+(require 'time-date)
+
 (defcustom gnus-completing-read-function 'gnus-emacs-completing-read
   "Function use to do completing read."
   :version "24.1"
