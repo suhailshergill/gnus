@@ -3674,19 +3674,27 @@ function and want to see what the date was before converting."
   "Function to be run from a timer to update the lapsed time line."
   (save-match-data
     (let (deactivate-mark)
-      (save-excursion
+      (save-window-excursion
 	(ignore-errors
 	 (walk-windows
 	  (lambda (w)
 	    (set-buffer (window-buffer w))
 	    (when (eq major-mode 'gnus-article-mode)
-	      (let ((mark (point-marker)))
+	      (let ((mark (point-marker))
+		    (old-point (point)))
 		(goto-char (point-min))
 		(when (re-search-forward "^X-Sent:\\|^Date:" nil t)
+		  ;; If the point is on the Date line, then use that
+		  ;; absolute position.  Otherwise, use the mark.
+		  ;; This will ensure that point stays at the "same
+		  ;; place".
+		  (when (or (< old-point (match-beginning 0))
+			    (> old-point (line-end-position)))
+		    (setq old-point nil))
 		  (if gnus-treat-date-combined-lapsed
 		      (article-date-combined-lapsed t)
 		    (article-date-lapsed t)))
-		(goto-char (marker-position mark))
+		(goto-char (or old-point (marker-position mark)))
 		(move-marker mark nil))))
 	  nil 'visible))))))
 
