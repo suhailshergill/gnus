@@ -3689,10 +3689,16 @@ function and want to see what the date was before converting."
 		  ;; This will ensure that point stays at the "same
 		  ;; place".
 		  (when (or (< old-point (match-beginning 0))
-			    (> old-point (line-end-position)))
+			    (> old-point (progn
+					   (forward-line 1)
+					   (while (and (not (eobp))
+						       (looking-at "X-Sent:\\|Date:"))
+					     (forward-line))
+					   (point))))
 		    (setq old-point nil))
-		  (if gnus-treat-date-combined-lapsed
-		      (article-date-combined-lapsed t)
+		  (when gnus-treat-date-combined-lapsed
+		    (article-date-combined-lapsed t))
+		  (when gnus-treat-date-lapsed
 		    (article-date-lapsed t)))
 		(goto-char (or old-point (marker-position mark)))
 		(move-marker mark nil))))

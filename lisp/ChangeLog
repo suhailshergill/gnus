@@ -2,6 +2,9 @@
 
 	* gnus-art.el (article-update-date-lapsed): Ensure that point stays at
 	the "same place" even if point is on the line being replaced.
+	(article-update-date-lapsed): Allow updating both the combined lapsed
+	and the lapsed headers.
+	(article-update-date-lapsed): Skip past all the X-Sent/Date headers.
 
 2011-01-27  Julien Danjou  <julien@danjou.info>
 
