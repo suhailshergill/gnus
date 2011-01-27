@@ -1,5 +1,8 @@
 2011-01-27  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-util.el (float-time): If float-time is bound, always use it on
+	all Emacsen.  It's unclear why the subrp check was there.
+
 	* shr.el (shr-put-color): Don't do the box padding in tables, since
 	they're already padded.
 
