@@ -1,5 +1,8 @@
 2011-01-27  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-draft.el (gnus-draft-clear-marks): New function to be run as an
+	exit hook to nix out all data on readedness on group exit.
+
 	* gnus-util.el (float-time): If float-time is bound, always use it on
 	all Emacsen.  It's unclear why the subrp check was there.
 	(time-date): Require to make some autoload issues on XEmacs go away.
