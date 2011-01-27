@@ -3570,8 +3570,20 @@ should replace the \"Date:\" one, or should be added below it."
 	  (concat "X-Sent: " (article-lapsed-string time)))
 	 ;; A combined date/lapsed format.
 	 ((eq type 'combined-lapsed)
-	  (concat (article-make-date-line date 'original)
-		  " (" (article-lapsed-string time 3) ")"))
+	  (let ((date-string (article-make-date-line date 'original))
+		(segments 3)
+		lapsed-string)
+	    (while (and
+		    (setq lapsed-string
+			  (concat " (" (article-lapsed-string time segments) ")"))
+		    (> (+ (length date-string)
+			  (length lapsed-string))
+		       (+ fill-column 10))
+		    (> segments 0))
+	      (setq segments (1- segments)))
+	    (if (> segments 0)
+		(concat date-string lapsed-string)
+	      date-string)))
 	 ;; Display the date in proper English
 	 ((eq type 'english)
 	  (let ((dtime (decode-time time)))

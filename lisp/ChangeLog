@@ -5,6 +5,8 @@
 	(article-update-date-lapsed): Allow updating both the combined lapsed
 	and the lapsed headers.
 	(article-update-date-lapsed): Skip past all the X-Sent/Date headers.
+	(article-make-date-line): Limit the number of segments dynamically to
+	avoid too-long lines.
 
 2011-01-27  Julien Danjou  <julien@danjou.info>
 
