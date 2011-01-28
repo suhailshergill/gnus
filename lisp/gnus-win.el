@@ -437,11 +437,7 @@ should have point."
 	type buffer win buf)
     (while (and (setq split (pop stack))
 		all-visible)
-      ;; Be backwards compatible.
-      (when (vectorp split)
-	(setq split (append split nil)))
-      (when (or (consp (car split))
-		(vectorp (car split)))
+      (when (consp (car split))
 	(push 1.0 split)
 	(push 'vertical split))
       ;; The SPLIT might be something that is to be evaled to
@@ -473,6 +469,7 @@ should have point."
       all-visible)))
 
 (defun gnus-window-top-edge (&optional window)
+  "Return the top coordinate of WINDOW."
   (nth 1 (window-edges window)))
 
 (defun gnus-remove-some-windows ()
