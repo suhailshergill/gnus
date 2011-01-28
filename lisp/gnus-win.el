@@ -38,9 +38,6 @@
   :group 'gnus-windows
   :type 'boolean)
 
-(defvar gnus-window-configuration nil
-  "Obsolete variable.  See `gnus-buffer-configuration'.")
-
 (defcustom gnus-window-min-width 2
   "*Minimum width of Gnus buffers."
   :group 'gnus-windows
@@ -220,12 +217,6 @@ See the Gnus manual for an explanation of the syntax used.")
       (ignore-errors
 	(delete-frame (car gnus-created-frames))))
     (pop gnus-created-frames)))
-
-(defun gnus-window-configuration-element (list)
-  (while (and list
-	      (not (assq (car list) gnus-window-configuration)))
-    (pop list))
-  (cadr (assq (car list) gnus-window-configuration)))
 
 ;;;###autoload
 (defun gnus-add-configuration (conf)
