@@ -1,5 +1,8 @@
 2011-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-wait-for-response): Wait for results in a more
+	secure manner.
+
 	* gnus-art.el (article-update-date-lapsed): Try to avoid having point
 	move around by not using save-window-excursion.  It seems to work...
 
