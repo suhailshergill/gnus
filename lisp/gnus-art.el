@@ -3442,8 +3442,8 @@ possible values."
 	    (setq date (get-text-property (match-beginning 0) 'original-date))
 	    (delete-region (point-at-bol) (progn
 					    (gnus-article-forward-header)
-					    (point)))
-	    (article-transform-date date type bface eface)))))))
+					    (point))))
+	  (article-transform-date date type bface eface))))))
 
 (defun article-transform-date (date type bface eface)
   (dolist (this-type (cond
