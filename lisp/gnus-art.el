@@ -1018,6 +1018,8 @@ on parts -- for instance, adding Vcard info to a database."
   (let ((types '(ut local english lapsed combined-lapsed
 		    iso8601 original user-defined))
 	default)
+    ;; Try to respect the legacy `gnus-treat-date-*' variables, if
+    ;; they're set.
     (dolist (type types)
       (let ((variable (intern (format "gnus-treat-date-%s" type))))
 	(when (and (boundp variable)
@@ -1028,6 +1030,7 @@ on parts -- for instance, adding Vcard info to a database."
 	       (memq 'lapsed default))
       (setq default (delq 'lapsed default)))
     (or default
+	;; If they weren't set, we default to `combined-lapsed'.
 	'(combined-lapsed)))
   "A list of Date header formats to display.
 Valid formats are `ut' (universal time), `local' (local time
