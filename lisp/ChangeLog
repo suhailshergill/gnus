@@ -1,5 +1,9 @@
 2011-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-read-active-for-groups): Read the active files
+	thoroughly for all backends that have no known groups.  This should
+	allow new nnml methods to retrieve mail.
+
 	* gnus-group.el (gnus-group-jump-to-group): Allow jumping to groups
 	that Gnus doesn't know exists again.
 
