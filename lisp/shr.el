@@ -1055,8 +1055,11 @@ ones, in case fg and bg are nil."
 	  ;; possibly.
 	  (dotimes (i (- height (length lines)))
 	    (end-of-line)
-	    (insert (make-string (string-width (car lines)) ? )
-		    shr-table-vertical-line)
+	    (let ((start (point)))
+	      (insert (make-string (string-width (car lines)) ? )
+		      shr-table-vertical-line)
+	      (when (nth 4 column)
+		(shr-put-color start (1- (point)) :background (nth 4 column))))
 	    (forward-line 1)))))
     (shr-insert-table-ruler widths)))
 
@@ -1183,7 +1186,8 @@ ones, in case fg and bg are nil."
 	    (list max
 		  (count-lines (point-min) (point-max))
 		  (split-string (buffer-string) "\n")
-		  (shr-collect-overlays))
+		  (shr-collect-overlays)
+		  (cdr (assq 'background-color shr-stylesheet)))
 	  (list max
 		(shr-natural-width)))))))
 
