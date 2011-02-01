@@ -1743,6 +1743,8 @@ If SCAN, request a scan of that group as well."
 (defun gnus-read-active-for-groups (method infos early-data)
   (with-current-buffer nntp-server-buffer
     (cond
+     ;; Finish up getting the data from the methods that have -early
+     ;; methods.
      ((and
        (gnus-check-backend-function 'finish-retrieve-group-infos (car method))
        infos
@@ -1750,6 +1752,7 @@ If SCAN, request a scan of that group as well."
 	   (gnus-online method)))
       (gnus-finish-retrieve-group-infos method infos early-data)
       (gnus-agent-save-active method))
+     ;; Most backends have -retrieve-groups.
      ((and (gnus-check-backend-function 'retrieve-groups (car method))
 	   infos)
       (when (gnus-check-backend-function 'request-scan (car method))
@@ -1759,8 +1762,11 @@ If SCAN, request a scan of that group as well."
 	 (dolist (info infos (nreverse groups))
 	   (push (gnus-group-real-name (gnus-info-group info)) groups))
 	 method)))
+     ;; All backends have -request-list.
      ((gnus-check-backend-function 'request-list (car method))
       (gnus-read-active-file-1 method nil infos))
+     ;; Unless nnvirtual and friends, where we request each group, one
+     ;; by one.
      (t
       (dolist (info infos)
 	(gnus-activate-group (gnus-info-group info) nil nil method t))))))
