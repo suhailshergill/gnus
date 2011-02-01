@@ -2,6 +2,8 @@
 
 	* gnus-art.el (article-date-ut): Protect against articles with no Date
 	header.
+	(article-update-date-lapsed): Don't use current-column to find the
+	horizontal position.  It's fragile in the presence of \003 characters.
 
 	* gnus-start.el (gnus-read-active-file-1): Remove dead parameter infos.
 
