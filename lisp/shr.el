@@ -1173,12 +1173,12 @@ ones, in case fg and bg are nil."
 	      (end-of-line)
 	      (when (> (- width (current-column)) 0)
 		(insert (make-string (- width (current-column)) ? )))
-	      (forward-line 1))))
-	(when style
-	  (shr-colorize-region
-	   (point-min) (point-max)
-	   (cdr (assq 'color shr-stylesheet))
-	   (cdr (assq 'background-color shr-stylesheet))))
+	      (forward-line 1)))
+	  (when style
+	    (shr-colorize-region
+	     (point-min) (point-max)
+	     (cdr (assq 'color shr-stylesheet))
+	     (cdr (assq 'background-color shr-stylesheet)))))
 	(if fill
 	    (list max
 		  (count-lines (point-min) (point-max))

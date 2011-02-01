@@ -1,5 +1,8 @@
 2011-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-render-td): Only do colours at the final rendering.
+	Should be slightly faster.
+
 	* gnus-art.el (article-date-ut): Protect against articles with no Date
 	header.
 	(article-update-date-lapsed): Don't use current-column to find the
