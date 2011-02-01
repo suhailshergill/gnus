@@ -1700,6 +1700,8 @@ If SCAN, request a scan of that group as well."
 		    'retrieve-group-data-early (car method)))
 	      (when (gnus-check-backend-function 'request-scan (car method))
 		(gnus-request-scan nil method))
+	      ;; Store the token we get back from -early so that we
+	      ;; can pass it to -finish later.
 	      (setcar (nthcdr 3 elem)
 		      (gnus-retrieve-group-data-early method infos)))))))
 
