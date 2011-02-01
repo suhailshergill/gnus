@@ -1,5 +1,8 @@
 2011-02-01  Julien Danjou  <julien@danjou.info>
 
+	* mm-uu.el (mm-uu-type-alist): Add support for git format-patch diff
+	format.
+
 	* mm-decode.el (mm-inline-media-tests): Do not check for diff-mode it's
 	standard in Emacs nowadays.
 
