@@ -1764,7 +1764,7 @@ If SCAN, request a scan of that group as well."
 	 method)))
      ;; All backends have -request-list.
      ((gnus-check-backend-function 'request-list (car method))
-      (gnus-read-active-file-1 method nil infos))
+      (gnus-read-active-file-1 method nil))
      ;; Unless nnvirtual and friends, where we request each group, one
      ;; by one.
      (t
@@ -1995,7 +1995,7 @@ If SCAN, request a scan of that group as well."
 	       (message "Quit reading the active file")
 	       nil))))))))
 
-(defun gnus-read-active-file-1 (method force &optional infos)
+(defun gnus-read-active-file-1 (method force)
   (let (where mesg)
     (setq where (nth 1 method)
 	  mesg (format "Reading active file%s via %s..."
