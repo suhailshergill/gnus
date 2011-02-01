@@ -1,5 +1,8 @@
 2011-02-01  Julien Danjou  <julien@danjou.info>
 
+	* mm-decode.el (mm-inline-media-tests): Do not check for diff-mode it's
+	standard in Emacs nowadays.
+
 	* color.el (color-gradient): Add a color-gradient function.
 
 2011-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
