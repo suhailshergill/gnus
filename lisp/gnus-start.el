@@ -1762,10 +1762,10 @@ If SCAN, request a scan of that group as well."
 	 (dolist (info infos (nreverse groups))
 	   (push (gnus-group-real-name (gnus-info-group info)) groups))
 	 method)))
-     ;; All backends have -request-list.
+     ;; Virtually all backends have -request-list.
      ((gnus-check-backend-function 'request-list (car method))
       (gnus-read-active-file-1 method nil))
-     ;; Unless nnvirtual and friends, where we request each group, one
+     ;; Except nnvirtual and friends, where we request each group, one
      ;; by one.
      (t
       (dolist (info infos)
