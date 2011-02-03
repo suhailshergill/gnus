@@ -1,5 +1,8 @@
 2011-02-03  Julien Danjou  <julien@danjou.info>
 
+	* gnus.el (gnus-summary-line-format): Add missing semi-colon for
+	user-date in docstring.
+
 	* gnus-art.el (gnus-article-jump-to-part): Remove useless sit-for.
 
 	* gnus.el (gnus-summary-line-format): Mention &user-date format in
