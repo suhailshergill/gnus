@@ -1,3 +1,8 @@
+2011-02-03  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-read-active-for-groups): This function is never
+	called with a nil `infos', so clean that up.
+
 2011-02-03  Julien Danjou  <julien@danjou.info>
 
 	* message.el (message-setup-1): Always generate References first.
