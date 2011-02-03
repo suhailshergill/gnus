@@ -1,6 +1,7 @@
 2011-02-03  Julien Danjou  <julien@danjou.info>
 
 	* message.el (message-setup-1): Always generate References first.
+	(message-mail): Return the return value of message-setup, not always t.
 
 	* gnus.el (gnus-summary-line-format): Add missing semi-colon for
 	user-date in docstring.

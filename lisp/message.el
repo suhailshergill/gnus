@@ -6582,9 +6582,7 @@ is a function used to switch to and display the mail buffer."
       (dolist (h other-headers other-headers)
  	(if (stringp (car h)) (setcar h (intern (capitalize (car h)))))))
      yank-action send-actions continue switch-function
-     return-action)
-    ;; FIXME: Should return nil if failure.
-    t))
+     return-action)))
 
 ;;;###autoload
 (defun message-news (&optional newsgroups subject)
