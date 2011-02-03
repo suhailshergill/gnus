@@ -1,3 +1,8 @@
+2011-02-03  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-request-accept-article): Give an error message if
+	the APPEND wasn't successful.
+
 2011-02-03  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* gnus-start.el (gnus-get-unread-articles): Fix the call to methods
