@@ -6459,7 +6459,7 @@ are not included."
        (message-headers-to-generate
         (append message-required-news-headers
                 message-required-headers)
-        (append message-generate-headers-first '(References))
+        message-generate-headers-first
         '(Lines Subject))))
     (when (message-mail-p)
       (when message-default-mail-headers
