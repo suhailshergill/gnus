@@ -1014,24 +1014,7 @@ on parts -- for instance, adding Vcard info to a database."
   :group 'gnus-article-mime
   :type '(repeat (cons :format "%v" (string :tag "MIME type") function)))
 
-(defcustom gnus-article-date-headers
-  (let ((types '(ut local english lapsed combined-lapsed
-		    iso8601 original user-defined))
-	default)
-    ;; Try to respect the legacy `gnus-treat-date-*' variables, if
-    ;; they're set.
-    (dolist (type types)
-      (let ((variable (intern (format "gnus-treat-date-%s" type))))
-	(when (and (boundp variable)
-		   (symbol-value variable))
-	  (push type default))))
-    (when (and (or (not (boundp (intern "gnus-article-date-lapsed-new-header")))
-		   (not (symbol-value (intern "gnus-article-date-lapsed-new-header"))))
-	       (memq 'lapsed default))
-      (setq default (delq 'lapsed default)))
-    (or default
-	;; If they weren't set, we default to `combined-lapsed'.
-	'(combined-lapsed)))
+(defcustom gnus-article-date-headers '(combined-lapsed)
   "A list of Date header formats to display.
 Valid formats are `ut' (universal time), `local' (local time
 zone), `english' (readable English), `lapsed' (elapsed time),
