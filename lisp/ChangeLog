@@ -2,6 +2,8 @@
 
 	* message.el (message-setup-1): Always generate References first.
 	(message-mail): Return the return value of message-setup, not always t.
+	(message-setup-1): Insert mail-header-separator with read-only and
+	intangible properties set.
 
 	* gnus.el (gnus-summary-line-format): Add missing semi-colon for
 	user-date in docstring.

@@ -6444,7 +6444,9 @@ are not included."
          (funcall message-default-headers)
        message-default-headers))
     (or (bolp) (insert ?\n)))
-  (insert mail-header-separator "\n")
+  (let ((message-forbidden-properties nil))
+    (insert (propertize (concat mail-header-separator "\n")
+                        'read-only t 'rear-nonsticky t 'intangible t)))
   (forward-line -1)
   ;; If a crash happens while replying, the auto-save file would *not* have a
   ;; `References:' header if `message-generate-headers-first' was nil.
