@@ -1,3 +1,12 @@
+2011-02-03  Julien Danjou  <julien@danjou.info>
+
+	* gnus.el (gnus-summary-line-format): Mention &user-date format in
+	docstring.
+
+	* gnus.el (gnus-user-date-format-alist): Change default value. Use
+	defcustom, with type and group. Move from gnus-util.el. Rename to
+	gnus-summary-user-date-format-alist.
+
 2011-02-03  Glenn Morris  <rgm@gnu.org>
 
 	* nnimap.el (gnus-fetch-headers): Declare.
