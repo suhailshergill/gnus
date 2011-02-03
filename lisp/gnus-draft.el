@@ -257,7 +257,8 @@ Obeys the standard process/prefix convention."
       (gnus-setup-message 'forward
 	(let ((article narticle))
 	  (message-mail)
-	  (erase-buffer)
+          (let ((inhibit-read-only t))
+            (erase-buffer))
 	  (if (not (gnus-request-restore-buffer article group))
 	      (error "Couldn't restore the article")
 	    (when (and restore
