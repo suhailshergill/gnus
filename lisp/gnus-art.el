@@ -3628,15 +3628,25 @@ function and want to see what the date was before converting."
 	   (set-buffer (window-buffer w))
 	   (when (eq major-mode 'gnus-article-mode)
 	     (let ((old-line (count-lines (point-min) (point)))
-		   (old-column (- (point) (line-beginning-position))))
+		   (old-column (- (point) (line-beginning-position)))
+		   (window-start
+		    (window-start (get-buffer-window (current-buffer)))))
 	       (goto-char (point-min))
 	       (while (re-search-forward "^Date:" nil t)
 		 (let ((type (get-text-property (match-beginning 0)
 						'gnus-date-type)))
 		   (when (memq type '(lapsed combined-lapsed user-format))
+		     (unless (= window-start
+				(save-excursion
+				  (forward-line 1)
+				  (point)))
+		       (setq window-start nil))
 		     (save-excursion
 		       (article-date-ut type t (match-beginning 0)))
-		     (forward-line 1))))
+		     (forward-line 1)
+		     (when window-start
+		       (set-window-start (get-buffer-window (current-buffer))
+					 (point))))))
 	       (goto-char (point-min))
 	       (when (> old-column 0)
 		 (setq old-line (1- old-line)))
