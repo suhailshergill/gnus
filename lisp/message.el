@@ -897,11 +897,7 @@ variable isn't used."
   ;; create a dependence to `gnus.el'.
   :type 'sexp)
 
-;; FIXME: This should be a temporary workaround until someone implements a
-;; proper solution.  If a crash happens while replying, the auto-save file
-;; will *not* have a `References:' header if `message-generate-headers-first'
-;; is nil.  See: http://article.gmane.org/gmane.emacs.gnus.general/51138
-(defcustom message-generate-headers-first '(references)
+(defcustom message-generate-headers-first nil
   "Which headers should be generated before starting to compose a message.
 If t, generate all required headers.  This can also be a list of headers to
 generate.  The variables `message-required-news-headers' and
@@ -913,7 +909,6 @@ will not have a visible effect for those headers."
   :group 'message-headers
   :link '(custom-manual "(message)Message Headers")
   :type '(choice (const :tag "None" nil)
-		 (const :tag "References" '(references))
 		 (const :tag "All" t)
 		 (repeat (sexp :tag "Header"))))
 
@@ -6451,28 +6446,31 @@ are not included."
     (or (bolp) (insert ?\n)))
   (insert mail-header-separator "\n")
   (forward-line -1)
-  (when (message-news-p)
-    (when message-default-news-headers
-      (insert message-default-news-headers)
-      (or (bolp) (insert ?\n)))
-    (when message-generate-headers-first
+  ;; If a crash happens while replying, the auto-save file would *not* have a
+  ;; `References:' header if `message-generate-headers-first' was nil.
+  ;; Therefore, always generate it first.
+  (let ((message-generate-headers-first
+         (append message-generate-headers-first '(References))))
+    (when (message-news-p)
+      (when message-default-news-headers
+        (insert message-default-news-headers)
+        (or (bolp) (insert ?\n)))
       (message-generate-headers
        (message-headers-to-generate
-	(append message-required-news-headers
-		message-required-headers)
-	message-generate-headers-first
-	'(Lines Subject)))))
-  (when (message-mail-p)
-    (when message-default-mail-headers
-      (insert message-default-mail-headers)
-      (or (bolp) (insert ?\n)))
-    (when message-generate-headers-first
+        (append message-required-news-headers
+                message-required-headers)
+        (append message-generate-headers-first '(References))
+        '(Lines Subject))))
+    (when (message-mail-p)
+      (when message-default-mail-headers
+        (insert message-default-mail-headers)
+        (or (bolp) (insert ?\n)))
       (message-generate-headers
        (message-headers-to-generate
-	(append message-required-mail-headers
-		message-required-headers)
-	message-generate-headers-first
-	'(Lines Subject)))))
+        (append message-required-mail-headers
+                message-required-headers)
+        message-generate-headers-first
+        '(Lines Subject)))))
   (run-hooks 'message-signature-setup-hook)
   (message-insert-signature)
   (save-restriction
