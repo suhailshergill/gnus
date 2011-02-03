@@ -4874,8 +4874,6 @@ General format specifiers can also be used.  See Info node
     (when (zerop parts)
       (error "No such part"))
     (pop-to-buffer gnus-article-buffer)
-    ;; FIXME: why is it necessary?
-    (sit-for 0)
     (or n
 	(setq n (if (= parts 1)
 		    1
