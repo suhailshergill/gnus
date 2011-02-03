@@ -3631,7 +3631,8 @@ function and want to see what the date was before converting."
 		   (old-column (- (point) (line-beginning-position))))
 	       (goto-char (point-min))
 	       (while (re-search-forward "^Date:" nil t)
-		 (let ((type (get-text-property (match-beginning 0) 'gnus-date-type)))
+		 (let ((type (get-text-property (match-beginning 0)
+						'gnus-date-type)))
 		   (when (memq type '(lapsed combined-lapsed user-format))
 		     (save-excursion
 		       (article-date-ut type t (match-beginning 0)))
