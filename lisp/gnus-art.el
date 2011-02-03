@@ -7336,9 +7336,6 @@ as a symbol to FUN."
 
 (defvar gnus-button-handle-describe-prefix "^\\(C-h\\|<?[Ff]1>?\\)")
 
-;; FIXME: Maybe we should merge some of the functions that do quite similar
-;; stuff?
-
 (defun gnus-button-handle-describe-function (url)
   "Call `describe-function' when pushing the corresponding URL button."
   (describe-function
