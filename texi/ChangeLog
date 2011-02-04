@@ -1,3 +1,24 @@
+2011-02-04  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* overrides.texi: New file to set or clear WEBHACKDEVEL.
+
+	* sieve.texi: Use WEBHACKDEVEL.
+
+	* sasl.texi: Use WEBHACKDEVEL.
+
+	* pgg.texi: Use WEBHACKDEVEL.
+
+	* message.texi: Use WEBHACKDEVEL.
+
+	* gnus.texi: Use WEBHACKDEVEL.
+
+	* emacs-mime.texi: Use WEBHACKDEVEL.
+
+	* auth.texi: Use WEBHACKDEVEL.
+
+	* Makefile.in (webhack, nowebhack): Hacks to produce for-the-web
+	manuals.
+
 2011-02-03  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Article Date): Remove mention of gnus-stop-date-timer,
