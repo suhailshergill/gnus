@@ -19,6 +19,10 @@
 	* Makefile.in (webhack, nowebhack): Hacks to produce for-the-web
 	manuals.
 
+2011-02-04  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi: Add DEVEL header (suggested by Andreas Schwab).
+
 2011-02-03  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Article Date): Remove mention of gnus-stop-date-timer,
