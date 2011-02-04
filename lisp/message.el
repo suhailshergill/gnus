@@ -129,6 +129,17 @@
   :group 'message-buffers
   :type '(choice function (const nil)))
 
+(defcustom message-cite-style nil
+  "The overall style to be used when yanking cited text.
+Values are either `traditional' (cited text first),
+`top-post' (cited text at the bottom), or nil (don't override the
+individual message variables)."
+  :version "24.1"
+  :group 'message-various
+  :type '(choice (const :tag "None" :value nil)
+		 (const :tag "Traditional" :value traditional)
+		 (const :tag "Top-post" :value top-post)))
+
 (defcustom message-fcc-handler-function 'message-output
   "*A function called to save outgoing articles.
 This function will be called with the name of the file to store the
@@ -6444,9 +6455,8 @@ are not included."
          (funcall message-default-headers)
        message-default-headers))
     (or (bolp) (insert ?\n)))
-  (let ((message-forbidden-properties nil))
-    (insert (propertize (concat mail-header-separator "\n")
-                        'read-only t 'rear-nonsticky t 'intangible t)))
+  (insert (propertize (concat mail-header-separator "\n")
+		      'read-only t 'rear-nonsticky t 'intangible t))
   (forward-line -1)
   ;; If a crash happens while replying, the auto-save file would *not* have a
   ;; `References:' header if `message-generate-headers-first' was nil.
