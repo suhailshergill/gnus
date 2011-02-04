@@ -7484,7 +7484,8 @@ is for the internal use."
       ;; We first set up a normal mail buffer.
       (unless (message-mail-user-agent)
 	(set-buffer (get-buffer-create " *message resend*"))
-	(erase-buffer))
+	(let ((inhibit-read-only t))
+	  (erase-buffer)))
       (let ((message-this-is-mail t)
 	    message-generate-hashcash
 	    message-setup-hook)
@@ -7501,7 +7502,8 @@ is for the internal use."
 	(insert "Resent-"))
       (widen)
       (forward-line)
-      (delete-region (point) (point-max))
+      (let ((inhibit-read-only t))
+	(delete-region (point) (point-max)))
       (setq beg (point))
       ;; Insert the message to be resent.
       (insert-buffer-substring cur)
