@@ -2,6 +2,8 @@
 
 	* message.el (message-setup-1): Don't bind the constant
 	-forbidden-properties.
+	(message-setup-1): Revert previous change, since it needs to bind the
+	props to insert them.
 
 2011-02-03  Lars Ingebrigtsen  <larsi@gnus.org>
 

@@ -2819,7 +2819,7 @@ message composition doesn't break too bad."
   :link '(custom-manual "(message)Various Message Variables")
   :type 'boolean)
 
-(defconst message-forbidden-properties
+(defvar message-forbidden-properties
   ;; No reason this should be clutter up customize.  We make it a
   ;; property list (rather than a list of property symbols), to be
   ;; directly useful for `remove-text-properties'.
@@ -6455,8 +6455,9 @@ are not included."
          (funcall message-default-headers)
        message-default-headers))
     (or (bolp) (insert ?\n)))
-  (insert (propertize (concat mail-header-separator "\n")
-		      'read-only t 'rear-nonsticky t 'intangible t))
+  (let ((message-forbidden-properties nil))
+    (insert (propertize (concat mail-header-separator "\n")
+			'read-only t 'rear-nonsticky t 'intangible t)))
   (forward-line -1)
   ;; If a crash happens while replying, the auto-save file would *not* have a
   ;; `References:' header if `message-generate-headers-first' was nil.
