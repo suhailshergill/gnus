@@ -1,3 +1,26 @@
+2011-02-04  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el: Bring in assoc and eioeio libraries.
+	(secrets-enabled): New variable to track the status of the Secrets API.
+	(auth-source-backend): New EIOEIO class to represent a backend.
+	(auth-source-creation-defaults): New variable to set prompt defaults
+	during token creation (see the `auth-source-search' docstring for
+	details).
+	(auth-sources): Simplify to allow a simple string as a netrc backend
+	spec.
+	(auth-source-backend-parse): Parse a backend from an `auth-sources' spec.
+	(auth-source-backend-parse-parameters): Fill in the backend parameters.
+	(auth-source-search): Main auth-source API entry point.
+	(auth-source-delete): Wrapper around `auth-source-search' for deletion.
+	(auth-source-search-collection): Helper function for searching.
+	(auth-source-netrc-parse, auth-source-netrc-normalize)
+	(auth-source-netrc-search, auth-source-netrc-create): Netrc backend.
+	Supports search, create, and delete.
+	(auth-source-secrets-search, auth-source-secrets-create): Secrets API
+	backend stubs.
+	(auth-source-user-or-password): Call `auth-source-search' but it's not
+	ready yet.
+
 2011-02-04  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-setup-1): Remove the read-only stuff, since it
