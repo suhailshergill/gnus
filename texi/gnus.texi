@@ -329,7 +329,11 @@ developing GNU and promoting software freedom.''
 
 
 @titlepage
+@ifset DEVEL
+@title Gnus Manual (development version)
+@else
 @title Gnus Manual
+@end ifset
 
 @author by Lars Magne Ingebrigtsen
 @page
