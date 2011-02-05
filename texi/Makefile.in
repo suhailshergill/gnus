@@ -25,11 +25,9 @@ LOGO=gnus-logo
 
 all: $(INFO_DEPS)
 
+# please modify this for all the web manual targets
 webhack: clean
-	echo '@set WEBHACKDEVEL' > overrides.texi
-
-nowebhack: clean
-	echo '@clear WEBHACKDEVEL' > overrides.texi
+	$(MAKE) pdf MAKEINFO_OPTS="-DWEBHACKDEVEL $(MAKEINFO_OPTS)"
 
 most: texi2latex.elc latex latexps
 

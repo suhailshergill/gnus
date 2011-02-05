@@ -1,6 +1,6 @@
 \input texinfo                  @c -*-texinfo-*-
 
-@include overrides.texi
+@include gnus-overrides.texi
 
 @setfilename auth
 @settitle Emacs auth-source Library @value{VERSION}

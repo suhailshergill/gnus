@@ -1,6 +1,6 @@
 \input texinfo
 
-@include overrides.texi
+@include gnus-overrides.texi
 
 @setfilename gnus
 @settitle Gnus Manual
