@@ -1,3 +1,10 @@
+2011-02-06  Michael Albinus  <michael.albinus@gmx.de>
+
+	* auth-source.el (top): Require 'eieio unconditionally.  Autoload
+	`secrets-get-attributes' instead of `secrets-get-attribute'.
+	(auth-source-secrets-search): Limit search when `max' is greater than
+	number of results.
+
 2011-02-06  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth-source.el (auth-source-secrets-search): Add examples.
