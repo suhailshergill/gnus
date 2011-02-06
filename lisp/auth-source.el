@@ -1035,7 +1035,6 @@ MODE can be \"login\" or \"password\"."
           (when (member "login" mode)
             (push (funcall (plist-get :user choice)) found)))
           (setq found (if listy found (car-safe found)))))
-
         found))
 
 (provide 'auth-source)
