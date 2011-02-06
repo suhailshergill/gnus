@@ -179,6 +179,9 @@ can get pretty complex."
   :type `(repeat :tag "Authentication Sources"
                  (choice
                   (string :tag "Just a file")
+                  (const :tag "Default Secrets API Collection" 'default)
+                  (const :tag "Login Secrets API Collection" "secrets:login")
+                  (const :tag "Temp Secrets API Collection" "secrets:session")
                   (list :tag "Source definition"
                         (const :format "" :value :source)
                         (choice :tag "Authentication backend choice"
@@ -266,18 +269,27 @@ If the value is not a list, symmetric encryption will be used."
 
 ;; (setq auth-sources '((:source "~/.authinfo.gpg" :host t :protocol t)))
 
+;; (auth-source-backend-parse "myfile.gpg")
+;; (auth-source-backend-parse 'default)
+;; (auth-source-backend-parse "secrets:login")
+
 (defun auth-source-backend-parse (entry)
   "Creates an auth-source-backend from an ENTRY in `auth-sources'."
   (auth-source-backend-parse-parameters
    entry
    (cond
-    ((stringp entry)                   ; just a file name
-     (auth-source-backend
-      entry
-      :source entry
-      :type 'netrc
-      :search-function 'auth-source-netrc-search
-      :create-function 'auth-source-netrc-create))
+    ;; take 'default and recurse to get it as a Secrets API default collection
+    ;; matching any user, host, and protocol
+    ((eq entry 'default)
+     (auth-source-backend-parse '(:source (:secrets default))))
+    ;; take secrets:XYZ and recurse to get it as Secrets API collection "XYZ"
+    ;; matching any user, host, and protocol
+    ((and (stringp entry) (string-match "^secrets:\\(.+\\)" entry))
+     (auth-source-backend-parse `(:source (:secrets ,(match-string 1 entry)))))
+    ;; take just a file name and recurse to get it as a netrc file
+    ;; matching any user, host, and protocol
+    ((stringp entry)
+     (auth-source-backend-parse `(:source ,entry)))
 
     ;; a file name with parameters
     ((stringp (plist-get entry :source))
@@ -290,9 +302,11 @@ If the value is not a list, symmetric encryption will be used."
 
     ;; the Secrets API.  We require the package, in order to have a
     ;; defined value for `secrets-enabled'.
-    ((and (listp (plist-get entry :source))
-          (require 'secrets nil t)
-          secrets-enabled)
+    ((and
+      (not (null (plist-get entry :source))) ; the source must not be nil
+      (listp (plist-get entry :source))      ; and it must be a list
+          (require 'secrets nil t)           ; and we must load the Secrets API
+          secrets-enabled)                   ; and that API must be enabled
 
      ;; the source is either the :secrets key in ENTRY or
      ;; if that's missing or nil, it's "session"
@@ -313,10 +327,13 @@ If the value is not a list, symmetric encryption will be used."
         :create-function 'auth-source-secrets-create)))
 
     ;; none of them
-    (t (auth-source-backend
-        "Empty"
-        :source ""
-        :type 'ignore)))))
+    (t
+     (auth-source-do-debug
+      "auth-source-backend-parse: invalid backend spec: %S" entry)
+     (auth-source-backend
+      "Empty"
+      :source ""
+      :type 'ignore)))))
 
 (defun auth-source-backend-parse-parameters (entry backend)
   "Fills in the extra auth-source-backend parameters of ENTRY.
@@ -457,12 +474,13 @@ exception for :max 0, which see above.
 
 The token's :secret key can hold a function.  In that case you
 must call it to obtain the actual value."
-  (let ((backends (mapcar 'auth-source-backend-parse auth-sources))
-        (max (or max 1))
-        (keys (remove :create (remove :delete (remove :max
-                      (loop for i below (length spec) by 2
-                            collect (nth i spec))))))
-        filtered-backends accessor-key found-here found goal)
+  (let* ((backends (mapcar 'auth-source-backend-parse auth-sources))
+         (max (or max 1))
+         (ignored-keys '(:create :delete :max))
+         (keys (loop for i below (length spec) by 2
+                     unless (memq (nth i spec) ignored-keys)
+                     collect (nth i spec)))
+         filtered-backends accessor-key found-here found goal)
     (assert (or (eq t create) (listp create)) t
             "Invalid auth-source :create parameter (must be nil, t, or a list)")
 
@@ -805,11 +823,11 @@ See `auth-source-search' for details on SPEC."
                                     ;; prepend a space
                                     (if (zerop (length add)) "" " ")
                                     ;; remap auth-source tokens to netrc
-                                    (cond
-                                     ((eq r 'user) "login")
-                                     ((eq r 'host) "machine")
-                                     ((eq r 'secret) "password")
-                                     ((eq r 'protocol) "port")
+                                    (case r
+                                     ('user "login")
+                                     ('host "machine")
+                                     ('secret "password")
+                                     ('protocol "port")
                                      (t (symbol-name r)))
                                     ;; the value will be printed in %S format
                                     data))))))
@@ -840,167 +858,94 @@ See `auth-source-search' for details on SPEC."
 
 ;;; Backend specific parsing: Secrets API backend
 
+;;; (let ((auth-sources '(default))) (auth-source-search :max 1 :create t))
+;;; (let ((auth-sources '(default))) (auth-source-search :max 1 :delete t))
+;;; (let ((auth-sources '(default))) (auth-source-search :max 1))
+;;; (let ((auth-sources '("secrets:login"))) (auth-source-search :max 1))
+
 (defun* auth-source-secrets-search (&rest
                                     spec
-                                    &key backend create
+                                    &key backend create delete label
                                     type max host user protocol
                                     &allow-other-keys)
-  (debug spec))
+  "Search the Secrets API; spec is like `auth-source'.
+
+The :label key specifies the item's label.  It is the only key
+that can specify a substring.  Any :label value besides a string
+will allow any label.
+
+All other search keys must match exactly.  If you need substring
+matching, do a wider search and narrow it down yourself.
+
+You'll get back all the properties of the token as a plist.
+
+TODO: Example."
+
+  ;; TODO
+  (assert (not create) nil
+          "The Secrets API auth-source backend doesn't support creation yet")
+  ;; TODO
+  ;; (secrets-delete-item coll elt)
+  (assert (not delete) nil
+          "The Secrets API auth-source backend doesn't support deletion yet")
+
+  (let* ((coll (oref backend source))
+         (max (or max 5000))     ; sanity check: default to stop at 5K
+         (ignored-keys '(:create :delete :max :backend :label))
+         (search-keys (loop for i below (length spec) by 2
+                            unless (memq (nth i spec) ignored-keys)
+                            collect (nth i spec)))
+         ;; build a search spec without the ignored keys
+         ;; if a search key is nil or t (match anything), we skip it
+         (search-spec (mapcan (lambda (k) (if (or (null (plist-get spec k))
+                                             (eq t (plist-get spec k)))
+                                         nil
+                                       (list k (plist-get spec k))))
+                              search-keys))
+         ;; needed keys (always including host, login, protocol, and secret)
+         (returned-keys (remove-duplicates (append
+                                            '(:host :login :protocol :secret)
+                                            search-keys)))
+         (items (loop for item in (apply 'secrets-search-items coll search-spec)
+                      unless (and (stringp label)
+                                  (not (string-match label item)))
+                      collect item))
+         ;; TODO: respect max in `secrets-search-items', not after the fact
+         (items (subseq items 0 max))
+         ;; convert the item name to a full plist
+         (items (mapcar (lambda (item)
+                          (nconc
+                           ;; make an entry for the secret (password) element
+                           (list
+                            :secret
+                            (lexical-let ((v (secrets-get-secret coll item)))
+                              (lambda () v)))
+                           ;; rewrite the entry from ((k1 v1) (k2 v2)) to plist
+                           (mapcan (lambda (entry)
+                                     (list (car entry) (cdr entry)))
+                                   (secrets-get-attributes coll item))))
+                        items))
+         ;; ensure each item has each key in `returned-keys'
+         (items (mapcar (lambda (plist)
+                          (nconc
+                           (mapcan (lambda (req)
+                                     (if (plist-get plist req)
+                                         nil
+                                       (list req nil)))
+                                   returned-keys)
+                           plist))
+                        items)))
+    items))
 
 (defun* auth-source-secrets-create (&rest
                                     spec
                                     &key backend type max host user protocol
                                     &allow-other-keys)
+  ;; TODO
+  ;; (apply 'secrets-create-item (auth-get-source entry) name passwd spec)
   (debug spec))
 
 ;;; older API
-
-(defun auth-source-retrieve (mode entry &rest spec)
-  "Retrieve MODE credentials according to SPEC from ENTRY."
-  (catch 'no-password
-    (let ((host (plist-get spec :host))
-          (user (plist-get spec :user))
-          (prot (plist-get spec :protocol))
-          (source (plist-get entry :source))
-          result)
-      (cond
-       ;; Secret Service API.
-       ((consp source)
-        (let ((coll (auth-get-source entry))
-              item)
-          ;; Loop over candidates with a matching host attribute.
-          (dolist (elt (secrets-search-items coll :host host) item)
-            (when (and (or (not user)
-                           (string-equal
-                            user (secrets-get-attribute coll elt :user)))
-                       (or (not prot)
-                           (string-equal
-                            prot (secrets-get-attribute coll elt :protocol))))
-              (setq item elt)
-              (return elt)))
-          ;; Compose result.
-          (when item
-            (setq result
-                  (mapcar (lambda (m)
-                            (if (string-equal "password" m)
-                                (or (secrets-get-secret coll item)
-                                    ;; When we do not find a password,
-                                    ;; we return nil anyway.
-                                    (throw 'no-password nil))
-                              (or (secrets-get-attribute coll item :user)
-                                  user)))
-                          (if (consp mode) mode (list mode)))))
-          (if (consp mode) result (car result))))
-       ;; Anything else is netrc.
-       (t
-        (let ((search (list source (list host) (list (format "%s" prot))
-                            (auth-source-protocol-defaults prot))))
-          (setq result
-                (mapcar (lambda (m)
-                          (if (string-equal "password" m)
-                              (or (apply
-                                   'netrc-machine-user-or-password m search)
-                                  ;; When we do not find a password, we
-                                  ;; return nil anyway.
-                                  (throw 'no-password nil))
-                            (or (apply
-                                 'netrc-machine-user-or-password m search)
-                                user)))
-                        (if (consp mode) mode (list mode)))))
-        (if (consp mode) result (car result)))))))
-
-(defun auth-source-create (mode entry &rest spec)
-  "Create interactively credentials according to SPEC in ENTRY.
-Return structure as specified by MODE."
-  (let* ((host (plist-get spec :host))
-         (user (plist-get spec :user))
-         (prot (plist-get spec :protocol))
-         (source (plist-get entry :source))
-         (name (concat (if user (format "%s@" user))
-                       host
-                       (if prot (format ":%s" prot))))
-         result)
-    (setq result
-          (mapcar
-           (lambda (m)
-             (cons
-              m
-              (cond
-               ((equal "password" m)
-                (let ((passwd (read-passwd
-                               (format "Password for %s on %s: " prot host))))
-                  (cond
-                   ;; Secret Service API.
-                   ((consp source)
-                    (apply
-                     'secrets-create-item
-                     (auth-get-source entry) name passwd spec))
-                   (t)) ;; netrc not implemented yes.
-                  passwd))
-               ((equal "login" m)
-                (or user
-                    (read-string
-		     (format "User name for %s on %s (default %s): " prot host
-			     (user-login-name))
-		     nil nil (user-login-name))))
-               (t
-                "unknownuser"))))
-           (if (consp mode) mode (list mode))))
-    ;; Allow the source to save the data.
-    (cond
-     ((consp source)
-      ;; Secret Service API -- not implemented.
-      )
-     (t
-      ;; netrc interface.
-      (when (y-or-n-p (format "Do you want to save this password in %s? "
-                              source))
-	;; the code below is almost same as `netrc-store-data' except
-	;; the `epa-file-encrypt-to' hack (see bug#7487).
-	(with-temp-buffer
-	  (when (file-exists-p source)
-	    (insert-file-contents source))
-	  (when auth-source-gpg-encrypt-to
-	    ;; making `epa-file-encrypt-to' local to this buffer lets
-	    ;; epa-file skip the key selection query (see the
-	    ;; `local-variable-p' check in `epa-file-write-region').
-	    (unless (local-variable-p 'epa-file-encrypt-to (current-buffer))
-	      (make-local-variable 'epa-file-encrypt-to))
-	    (if (listp auth-source-gpg-encrypt-to)
-		(setq epa-file-encrypt-to auth-source-gpg-encrypt-to)))
-	  (goto-char (point-max))
-	  (unless (bolp)
-	    (insert "\n"))
-	  (insert (format "machine %s login %s password %s port %s\n"
-			  host
-			  (or user (cdr (assoc "login" result)))
-			  (cdr (assoc "password" result))
-			  prot))
-	  (write-region (point-min) (point-max) source nil 'silent)))))
-    (if (consp mode)
-        (mapcar #'cdr result)
-      (cdar result))))
-
-(defun auth-source-delete (entry &rest spec)
-  "Delete credentials according to SPEC in ENTRY."
-  (let ((host (plist-get spec :host))
-        (user (plist-get spec :user))
-        (prot (plist-get spec :protocol))
-        (source (plist-get entry :source)))
-    (cond
-     ;; Secret Service API.
-     ((consp source)
-      (let ((coll (auth-get-source entry)))
-        ;; Loop over candidates with a matching host attribute.
-        (dolist (elt (secrets-search-items coll :host host))
-          (when (and (or (not user)
-                         (string-equal
-                          user (secrets-get-attribute coll elt :user)))
-                     (or (not prot)
-                         (string-equal
-                          prot (secrets-get-attribute coll elt :protocol))))
-            (secrets-delete-item coll elt)))))
-     (t)))) ;; netrc not implemented yes.
 
 (defun auth-source-forget-user-or-password
   (mode host protocol &optional username)
@@ -1024,9 +969,14 @@ Return structure as specified by MODE."
 ;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other" "tzz")
 ;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other" "joe")))
 
+;; deprecate this interface
+(make-obsolete 'auth-source-user-or-password 'auth-source-search "Emacs 24.1")
+
 (defun auth-source-user-or-password
   (mode host protocol &optional username create-missing delete-existing)
   "Find MODE (string or list of strings) matching HOST and PROTOCOL.
+
+DEPRECATED in favor of `auth-source-search'!
 
 USERNAME is optional and will be used as \"login\" in a search
 across the Secret Service API (see secrets.el) if the resulting
@@ -1046,7 +996,7 @@ stored in the password database which matches best (see
 
 MODE can be \"login\" or \"password\"."
   (auth-source-do-debug
-   "auth-source-user-or-password: get %s for %s (%s) + user=%s"
+   "auth-source-user-or-password: DEPRECATED get %s for %s (%s) + user=%s"
    mode host protocol username)
   (let* ((listy (listp mode))
          (mode (if listy mode (list mode)))
@@ -1055,6 +1005,12 @@ MODE can be \"login\" or \"password\"."
                   (format "%s %s:%s" mode host protocol)))
          (search (list :host host :protocol protocol))
          (search (if username (append search (list :user username)) search))
+         (search (if create-missing
+                     (append search (list :create t))
+                   search))
+         (search (if delete-existing
+                     (append search (list :delete t))
+                   search))
          (found (if (not delete-existing)
                     (gethash cname auth-source-cache)
                   (remhash cname auth-source-cache)
@@ -1062,7 +1018,7 @@ MODE can be \"login\" or \"password\"."
     (if found
         (progn
           (auth-source-do-debug
-           "auth-source-user-or-password: cached %s=%s for %s (%s) + %s"
+           "auth-source-user-or-password: DEPRECATED cached %s=%s for %s (%s) + %s"
            mode
            ;; don't show the password
            (if (and (member "password" mode) auth-source-hide-passwords)
@@ -1070,55 +1026,17 @@ MODE can be \"login\" or \"password\"."
              found)
            host protocol username)
           found)                        ; return the found data
-      ;; else, if not found
-      (let ((choices (apply 'auth-source-search search)))
-        (dolist (choice choices)
-          (if delete-existing
-              (apply 'auth-source-delete choice search)
-            (setq found (apply 'auth-source-retrieve mode choice search)))
-          (and found (return found)))
+      ;; else, if not found, search with a max of 1
+      (let ((choice (nth 0 (apply 'auth-source-search
+                                  (nconc '(:max 1) search)))))
+        (when choice
+          (when (member "password" mode)
+            (push (funcall (plist-get :secret choice)) found))
+          (when (member "login" mode)
+            (push (funcall (plist-get :user choice)) found)))
+          (setq found (if listy found (car-safe found)))))
 
-        ;; We haven't found something, so we will create it interactively.
-        (when (and (not found) create-missing)
-          (setq found (apply 'auth-source-create
-                             mode (if choices
-                                      (car choices)
-                                    (car auth-sources))
-                             search)))
-
-        ;; Cache the result.
-        (when found
-          (auth-source-do-debug
-           "auth-source-user-or-password: found %s=%s for %s (%s) + %s"
-           mode
-           ;; don't show the password
-           (if (and (member "password" mode) auth-source-hide-passwords)
-               "SECRET" found)
-           host protocol username)
-          (setq found (if listy found (car-safe found)))
-          (when auth-source-do-cache
-            (puthash cname found auth-source-cache)))
-
-        found))))
-
-(defun auth-source-protocol-defaults (protocol)
-  "Return a list of default ports and names for PROTOCOL."
-  (cdr-safe (assoc protocol auth-source-protocols)))
-
-(defun auth-source-user-or-password-imap (mode host)
-  (auth-source-user-or-password mode host 'imap))
-
-(defun auth-source-user-or-password-pop3 (mode host)
-  (auth-source-user-or-password mode host 'pop3))
-
-(defun auth-source-user-or-password-ssh (mode host)
-  (auth-source-user-or-password mode host 'ssh))
-
-(defun auth-source-user-or-password-sftp (mode host)
-  (auth-source-user-or-password mode host 'sftp))
-
-(defun auth-source-user-or-password-smtp (mode host)
-  (auth-source-user-or-password mode host 'smtp))
+        found))
 
 (provide 'auth-source)
 
