@@ -43,12 +43,12 @@
 (require 'netrc)
 (require 'assoc)
 (eval-when-compile (require 'cl))
-(eval-when-compile (require 'eieio))
+(require 'eieio)
 
 (autoload 'secrets-create-item "secrets")
 (autoload 'secrets-delete-item "secrets")
 (autoload 'secrets-get-alias "secrets")
-(autoload 'secrets-get-attribute "secrets")
+(autoload 'secrets-get-attributes "secrets")
 (autoload 'secrets-get-secret "secrets")
 (autoload 'secrets-list-collections "secrets")
 (autoload 'secrets-search-items "secrets")
@@ -305,8 +305,8 @@ If the value is not a list, symmetric encryption will be used."
     ((and
       (not (null (plist-get entry :source))) ; the source must not be nil
       (listp (plist-get entry :source))      ; and it must be a list
-          (require 'secrets nil t)           ; and we must load the Secrets API
-          secrets-enabled)                   ; and that API must be enabled
+      (require 'secrets nil t)               ; and we must load the Secrets API
+      secrets-enabled)                       ; and that API must be enabled
 
      ;; the source is either the :secrets key in ENTRY or
      ;; if that's missing or nil, it's "session"
@@ -861,6 +861,7 @@ See `auth-source-search' for details on SPEC."
 ;;; (let ((auth-sources '(default))) (auth-source-search :max 1 :create t))
 ;;; (let ((auth-sources '(default))) (auth-source-search :max 1 :delete t))
 ;;; (let ((auth-sources '(default))) (auth-source-search :max 1))
+;;; (let ((auth-sources '(default))) (auth-source-search))
 ;;; (let ((auth-sources '("secrets:login"))) (auth-source-search :max 1))
 ;;; (let ((auth-sources '("secrets:login"))) (auth-source-search :max 1 :signon_realm "https://git.gnus.org/Git"))
 
@@ -930,7 +931,7 @@ login:
                                   (not (string-match label item)))
                       collect item))
          ;; TODO: respect max in `secrets-search-items', not after the fact
-         (items (subseq items 0 max))
+         (items (subseq items 0 (min (length items) max)))
          ;; convert the item name to a full plist
          (items (mapcar (lambda (item)
                           (nconc
