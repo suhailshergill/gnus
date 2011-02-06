@@ -1,3 +1,7 @@
+2011-02-06  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el (auth-source-secrets-search): Add examples.
+
 2011-02-06  Julien Danjou  <julien@danjou.info>
 
 	* message.el (message-setup-1): Handle message-generate-headers-first
