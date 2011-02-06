@@ -5,16 +5,16 @@
 	(auth-source-secrets-search): Limit search when `max' is greater than
 	number of results.
 
-2011-02-06  Teodor Zlatanov  <tzz@lifelogs.com>
-
-	* auth-source.el (auth-source-secrets-search): Add examples.
-
 2011-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nntp.el (nntp-finish-retrieve-group-infos): Protect against the first
 	part not returning any data.
 
 	* proto-stream.el (open-protocol-stream): Document the return value.
+
+2011-02-06  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el (auth-source-secrets-search): Add examples.
 
 2011-02-06  Julien Danjou  <julien@danjou.info>
 
