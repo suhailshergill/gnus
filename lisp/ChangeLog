@@ -1,3 +1,7 @@
+2011-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* proto-stream.el (open-protocol-stream): Document the return value.
+
 2011-02-06  Julien Danjou  <julien@danjou.info>
 
 	* message.el (message-setup-1): Handle message-generate-headers-first
