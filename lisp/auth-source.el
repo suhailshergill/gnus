@@ -862,6 +862,7 @@ See `auth-source-search' for details on SPEC."
 ;;; (let ((auth-sources '(default))) (auth-source-search :max 1 :delete t))
 ;;; (let ((auth-sources '(default))) (auth-source-search :max 1))
 ;;; (let ((auth-sources '("secrets:login"))) (auth-source-search :max 1))
+;;; (let ((auth-sources '("secrets:login"))) (auth-source-search :max 1 :signon_realm "https://git.gnus.org/Git"))
 
 (defun* auth-source-secrets-search (&rest
                                     spec
@@ -879,7 +880,25 @@ matching, do a wider search and narrow it down yourself.
 
 You'll get back all the properties of the token as a plist.
 
-TODO: Example."
+Here's an example that looks for the first item in the 'login'
+Secrets collection:
+
+ \(let ((auth-sources '(\"secrets:login\")))
+    (auth-source-search :max 1)
+
+Here's another that looks for the first item in the 'login'
+Secrets collection whose label contains 'gnus':
+
+ \(let ((auth-sources '(\"secrets:login\")))
+    (auth-source-search :max 1 :label \"gnus\")
+
+And this one looks for the first item in the 'login' Secrets
+collection that's a Google Chrome entry for the git.gnus.org site
+login:
+
+ \(let ((auth-sources '(\"secrets:login\")))
+    (auth-source-search :max 1 :signon_realm \"https://git.gnus.org/Git\"))
+"
 
   ;; TODO
   (assert (not create) nil
