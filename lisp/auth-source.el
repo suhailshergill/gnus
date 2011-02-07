@@ -96,8 +96,6 @@
                     :custom function
                     :documentation "The search function.")))
 
-;;(auth-source-backend "netrc" :type 'netrc)
-
 (defcustom auth-source-protocols '((imap "imap" "imaps" "143" "993")
                                    (pop3 "pop3" "pop" "pop3s" "110" "995")
                                    (ssh  "ssh" "22")
@@ -934,7 +932,7 @@ login:
          (items (subseq items 0 (min (length items) max)))
          ;; convert the item name to a full plist
          (items (mapcar (lambda (item)
-                          (nconc
+                          (append
                            ;; make an entry for the secret (password) element
                            (list
                             :secret
@@ -947,7 +945,7 @@ login:
                         items))
          ;; ensure each item has each key in `returned-keys'
          (items (mapcar (lambda (plist)
-                          (nconc
+                          (append
                            (mapcan (lambda (req)
                                      (if (plist-get plist req)
                                          nil
@@ -989,6 +987,8 @@ login:
 ;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other" "tzz")
 ;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other" "joe")))
 
+;;; (auth-source-user-or-password '("login" "password") "imap.myhost.com" t "tzz")
+
 ;; deprecate this interface
 (make-obsolete 'auth-source-user-or-password 'auth-source-search "Emacs 24.1")
 
@@ -1018,6 +1018,7 @@ MODE can be \"login\" or \"password\"."
   (auth-source-do-debug
    "auth-source-user-or-password: DEPRECATED get %s for %s (%s) + user=%s"
    mode host protocol username)
+
   (let* ((listy (listp mode))
          (mode (if listy mode (list mode)))
          (cname (if username
@@ -1048,13 +1049,18 @@ MODE can be \"login\" or \"password\"."
           found)                        ; return the found data
       ;; else, if not found, search with a max of 1
       (let ((choice (nth 0 (apply 'auth-source-search
-                                  (nconc '(:max 1) search)))))
+                                  (append '(:max 1) search)))))
         (when choice
-          (when (member "password" mode)
-            (push (funcall (plist-get :secret choice)) found))
-          (when (member "login" mode)
-            (push (funcall (plist-get :user choice)) found)))
-          (setq found (if listy found (car-safe found)))))
+          (dolist (m mode)
+            (cond
+             ((equal "password" m)
+              (push (if (plist-get choice :secret)
+                      (funcall (plist-get choice :secret))
+                    nil) found))
+             ((equal "login" m)
+              (push (plist-get choice :user) found)))))
+        (setq found (nreverse found))
+        (setq found (if listy found (car-safe found)))))
 
         found))
 

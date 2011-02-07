@@ -1,3 +1,10 @@
+2011-02-07  Teodor Zlatanov  <tzlatanov@jumptrading.com>
+
+	* auth-source.el (auth-source-secrets-search)
+	(auth-source-user-or-password): Use `append' instead of `nconc'.
+	(auth-source-user-or-password): Build return list better and protect
+	against nil :secret.
+
 2011-02-06  Michael Albinus  <michael.albinus@gmx.de>
 
 	* auth-source.el (top): Require 'eieio unconditionally.  Autoload
