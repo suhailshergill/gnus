@@ -969,30 +969,54 @@ textual parts.")
       (nnimap-add-cr)
       (setq message (buffer-substring-no-properties (point-min) (point-max)))
       (with-current-buffer (nnimap-buffer)
-	;; If we have this group open read-only, then unselect it
-	;; before appending to it.
-	(when (equal (nnimap-examined nnimap-object) group)
-	  (nnimap-unselect-group))
-	(erase-buffer)
-	(setq sequence (nnimap-send-command
-			"APPEND %S {%d}" (utf7-encode group t)
-			(length message)))
-	(unless nnimap-streaming
-	  (nnimap-wait-for-connection "^[+]"))
-	(process-send-string (get-buffer-process (current-buffer)) message)
-	(process-send-string (get-buffer-process (current-buffer))
-			     (if (nnimap-newlinep nnimap-object)
-				 "\n"
-			       "\r\n"))
-	(let ((result (nnimap-get-response sequence)))
-	  (if (not (nnimap-ok-p result))
-	      (progn
-		(nnheader-report 'nnimap "%s" result)
-		nil)
-	    (cons group
-		  (or (nnimap-find-uid-response "APPENDUID" (car result))
-		      (nnimap-find-article-by-message-id
-		       group message-id)))))))))
+	(when (setq message (nnimap-quirk "OK Gimap " 'append message))
+	  ;; If we have this group open read-only, then unselect it
+	  ;; before appending to it.
+	  (when (equal (nnimap-examined nnimap-object) group)
+	    (nnimap-unselect-group))
+	  (erase-buffer)
+	  (setq sequence (nnimap-send-command
+			  "APPEND %S {%d}" (utf7-encode group t)
+			  (length message)))
+	  (unless nnimap-streaming
+	    (nnimap-wait-for-connection "^[+]"))
+	  (process-send-string (get-buffer-process (current-buffer)) message)
+	  (process-send-string (get-buffer-process (current-buffer))
+			       (if (nnimap-newlinep nnimap-object)
+				   "\n"
+				 "\r\n"))
+	  (let ((result (nnimap-get-response sequence)))
+	    (if (not (nnimap-ok-p result))
+		(progn
+		  (nnheader-report 'nnimap "%s" result)
+		  nil)
+	      (cons group
+		    (or (nnimap-find-uid-response "APPENDUID" (car result))
+			(nnimap-find-article-by-message-id
+			 group message-id))))))))))
+
+(defun nnimap-quirk (greeting-match type data)
+  (when (and (nnimap-greeting nnimap-object)
+	     (string-match "OK Gimap " (nnimap-greeting nnimap-object))
+	     (eq type 'append)
+	     (string-match "\000" data))
+    (let ((choice (gnus-multiple-choice
+		   "Message contains NUL characters.  Delete, continue, abort? "
+		   '((?d "Delete NUL characters")
+		     (?c "Try to APPEND the message as is")
+		     (?a "Abort")))))
+      (cond
+       ((eq choice ?a)
+	(nnheader-report 'nnimap "Aborted APPEND due to NUL characters"))
+       ((eq choice ?c)
+	data)
+       (t
+	(with-temp-buffer
+	  (insert data)
+	  (goto-char (point-min))
+	  (while (search-forward "\000" nil t)
+	    (replace-match "" t t))
+	  (buffer-string)))))))
 
 (defun nnimap-ok-p (value)
   (and (consp value)
