@@ -1226,33 +1226,33 @@ textual parts.")
 	     (completep (and start-article
 			     (= start-article 1)))
 	     (active (or (gnus-active group)
-			 (cdr (assq 'active (gnus-info-params info))))))
+			 (cdr (assq 'active (gnus-info-params info)))))
+	     new-active)
 	(when uidnext
 	  (setq high (1- uidnext)))
 	;; First set the active ranges based on high/low.
-	(if (or completep
-		(not (gnus-active group)))
-	    (gnus-set-active group
-			     (cond
-			      (active
-			       (cons (min (or low (car active))
-					  (car active))
-				     (max (or high (cdr active))
-					  (cdr active))))
-			      ((and low high)
-			       (cons low high))
-			      (uidnext
-			       ;; No articles in this group.
-			       (cons uidnext (1- uidnext)))
-			      (start-article
-			       (cons start-article (1- start-article)))
-			      (t
-			       ;; No articles and no uidnext.
-			       nil)))
-	  (gnus-set-active
-	   group
-	   (cons (car active)
-		 (or high (1- uidnext)))))
+	(setq new-active
+	      (if (or completep
+		      (not (gnus-active group)))
+		  (cond
+		   (active
+		    (cons (min (or low (car active))
+			       (car active))
+			  (max (or high (cdr active))
+			       (cdr active))))
+		   ((and low high)
+		    (cons low high))
+		   (uidnext
+		    ;; No articles in this group.
+		    (cons uidnext (1- uidnext)))
+		   (start-article
+		    (cons start-article (1- start-article)))
+		   (t
+		    ;; No articles and no uidnext.
+		    nil))
+		(cons (car active)
+		      (or high (1- uidnext)))))
+	(gnus-set-active group new-active)
 	;; See whether this is a read-only group.
 	(unless (eq permanent-flags 'not-scanned)
 	  (gnus-group-set-parameter

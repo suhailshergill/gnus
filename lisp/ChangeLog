@@ -1,3 +1,7 @@
+2011-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-update-info): Refactor slightly.
+
 2011-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nntp.el (nntp-finish-retrieve-group-infos): Protect against the first
