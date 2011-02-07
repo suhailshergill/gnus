@@ -969,7 +969,7 @@ textual parts.")
       (nnimap-add-cr)
       (setq message (buffer-substring-no-properties (point-min) (point-max)))
       (with-current-buffer (nnimap-buffer)
-	(when (setq message (nnimap-quirk "OK Gimap " 'append message))
+	(when (setq message (nnimap-process-quirk "OK Gimap " 'append message))
 	  ;; If we have this group open read-only, then unselect it
 	  ;; before appending to it.
 	  (when (equal (nnimap-examined nnimap-object) group)
@@ -995,7 +995,7 @@ textual parts.")
 			(nnimap-find-article-by-message-id
 			 group message-id))))))))))
 
-(defun nnimap-quirk (greeting-match type data)
+(defun nnimap-process-quirk (greeting-match type data)
   (when (and (nnimap-greeting nnimap-object)
 	     (string-match "OK Gimap " (nnimap-greeting nnimap-object))
 	     (eq type 'append)
