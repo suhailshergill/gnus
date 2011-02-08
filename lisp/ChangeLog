@@ -1,5 +1,8 @@
 2011-02-08  Julien Danjou  <julien@danjou.info>
 
+	* shr.el (shr-tag-body): Add support for text attribute in body
+	markups.
+
 	* message.el (message-options): Make message-options a local variable.
 
 2011-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
