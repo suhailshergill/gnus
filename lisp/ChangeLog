@@ -1,3 +1,19 @@
+2011-02-08  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* mail-source.el: Autoload `auth-source-search'.
+	(mail-source-keyword-map): Note order matters.
+	(mail-source-set-1): Get all the mail-source source values and
+	defaults and search auth-source on those if needed.  This can all
+	probably be simplified.
+
+	* nnimap.el: Autoload `auth-source-search'.
+	(nnimap-credentials): Use it.
+	(nnimap-open-connection-1): Ask for the virtual server and physical
+	address in one shot.
+
+	* nntp.el: Autoload `auth-source-search'.
+	(nntp-send-authinfo): Use it.  Note TODO.
+
 2011-02-08  Julien Danjou  <julien@danjou.info>
 
 	* message.el (message-options): Make message-options a local variable.
