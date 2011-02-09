@@ -39,6 +39,7 @@
 
 ;;; Code:
 
+(require 'password-cache)
 (require 'gnus-util)
 (require 'netrc)
 (require 'assoc)
@@ -124,11 +125,12 @@
 (defvar auth-source-creation-defaults nil
   "Defaults for creating token values.  Usually let-bound.")
 
-(defvar auth-source-cache (make-hash-table :test 'equal)
-  "Cache for auth-source data")
+(make-obsolete 'auth-source-hide-passwords nil "Emacs 24.1")
+
+(defvar auth-source-magic "auth-source-magic ")
 
 (defcustom auth-source-do-cache t
-  "Whether auth-source should cache information."
+  "Whether auth-source should cache information with `password-cache'."
   :group 'auth-source
   :version "23.2" ;; No Gnus
   :type `boolean)
@@ -150,13 +152,6 @@ If the value is a function, debug messages are logged by calling
           (const :tag "Log using `message' to the *Messages* buffer" t)
           (function :tag "Function that takes arguments like `message'")
           (const :tag "Don't log anything" nil)))
-
-(defcustom auth-source-hide-passwords t
-  "Whether auth-source should hide passwords in log messages.
-Only relevant if `auth-source-debug' is not nil."
-  :group 'auth-source
-  :version "23.2" ;; No Gnus
-  :type `boolean)
 
 (defcustom auth-sources '("~/.authinfo.gpg" "~/.authinfo")
   "List of authentication sources.
@@ -478,57 +473,71 @@ must call it to obtain the actual value."
          (keys (loop for i below (length spec) by 2
                      unless (memq (nth i spec) ignored-keys)
                      collect (nth i spec)))
-         filtered-backends accessor-key found-here found goal)
-    (assert (or (eq t create) (listp create)) t
-            "Invalid auth-source :create parameter (must be nil, t, or a list)")
+         (found (auth-source-recall spec))
+         filtered-backends accessor-key found-here goal)
 
-    (setq filtered-backends (copy-list backends))
-    (dolist (backend backends)
-      (dolist (key keys)
-        ;; ignore invalid slots
-        (condition-case signal
-            (unless (eval `(auth-source-search-collection
-                            (plist-get spec key)
-                            (oref backend ,key)))
-              (setq filtered-backends (delq backend filtered-backends))
-              (return))
-          (invalid-slot-name))))
+    (if (and found auth-source-do-cache)
+        (auth-source-do-debug
+         "auth-source-search: found %d CACHED results matching %S"
+         (length found) spec)
 
-    (auth-source-do-debug
-     "auth-source-search: found %d backends matching %S"
-     (length filtered-backends) spec)
+      (assert
+       (or (eq t create) (listp create)) t
+       "Invalid auth-source :create parameter (must be nil, t, or a list)")
 
-    ;; (debug spec "filtered" filtered-backends)
-    (setq goal max)
-    (dolist (backend filtered-backends)
-      (setq found-here (apply
-                        (slot-value backend 'search-function)
-                        :backend backend
-                        :create create
-                        :delete delete
-                        spec))
-
-      ;; if max is 0, as soon as we find something, return it
-      (when (and (zerop max) (> 0 (length found-here)))
-        (return t))
-
-      ;; decrement the goal by the number of new results
-      (decf goal (length found-here))
-      ;; and append the new results to the full list
-      (setq found (append found found-here))
+      (setq filtered-backends (copy-list backends))
+      (dolist (backend backends)
+        (dolist (key keys)
+          ;; ignore invalid slots
+          (condition-case signal
+              (unless (eval `(auth-source-search-collection
+                              (plist-get spec key)
+                              (oref backend ,key)))
+                (setq filtered-backends (delq backend filtered-backends))
+                (return))
+            (invalid-slot-name))))
 
       (auth-source-do-debug
-       "auth-source-search: found %d results (max %d/%d) in %S matching %S"
-       (length found-here) max goal backend spec)
+       "auth-source-search: found %d backends matching %S"
+       (length filtered-backends) spec)
 
-      ;; return full list if the goal is 0 or negative
-      (when (zerop (max 0 goal))
-        (return found))
+      ;; (debug spec "filtered" filtered-backends)
+      (setq goal max)
+      (dolist (backend filtered-backends)
+        (setq found-here (apply
+                          (slot-value backend 'search-function)
+                          :backend backend
+                          :create create
+                          :delete delete
+                          spec))
 
-      ;; change the :max parameter in the spec to the goal
-      (setq spec (plist-put spec :max goal)))
-    found))
+        ;; if max is 0, as soon as we find something, return it
+        (when (and (zerop max) (> 0 (length found-here)))
+          (return t))
 
+        ;; decrement the goal by the number of new results
+        (decf goal (length found-here))
+        ;; and append the new results to the full list
+        (setq found (append found found-here))
+
+        (auth-source-do-debug
+         "auth-source-search: found %d results (max %d/%d) in %S matching %S"
+         (length found-here) max goal backend spec)
+
+        ;; return full list if the goal is 0 or negative
+        (when (zerop (max 0 goal))
+          (return found))
+
+        ;; change the :max parameter in the spec to the goal
+        (setq spec (plist-put spec :max goal)))
+
+      (when (and found auth-source-do-cache)
+        (auth-source-remember spec found)))
+
+      found))
+
+;;; (auth-source-search :max 1)
+;;; (funcall (plist-get (nth 0 (auth-source-search :max 1)) :secret))
 ;;; (auth-source-search :host "nonesuch" :type 'netrc :K 1)
 ;;; (auth-source-search :host "nonesuch" :type 'secrets)
 
@@ -552,6 +561,73 @@ Returns the deleted entries."
       (eq value t)
       (equal collection value)
       (member value collection)))
+
+(defun auth-source-forget-all-cached ()
+  "Forget all cached auth-source data."
+  (interactive)
+  (loop for sym being the symbols of password-data
+        ;; when the symbol name starts with auth-source-magic
+        when (string-match (concat "^" auth-source-magic)
+                           (symbol-name sym))
+        ;; remove that key
+        do (password-cache-remove (symbol-name sym))))
+
+(defun auth-source-remember (spec found)
+  "Remember FOUND search results for SPEC."
+  (password-cache-add
+   (concat auth-source-magic (format "%S" spec)) found))
+
+(defun auth-source-recall (spec)
+  "Recall FOUND search results for SPEC."
+  (password-read-from-cache
+   (concat auth-source-magic (format "%S" spec))))
+
+(defun auth-source-forget (spec)
+  "Forget any cached data matching SPEC exactly.
+
+This is the same SPEC you passed to `auth-source-search'.
+Returns t or nil for forgotten or not found."
+  (password-cache-remove (concat auth-source-magic (format "%S" spec))))
+
+;;; (loop for sym being the symbols of password-data when (string-match (concat "^" auth-source-magic) (symbol-name sym)) collect (symbol-name sym))
+
+;;; (auth-source-remember '(:host "wedd") '(4 5 6))
+;;; (auth-source-remember '(:host "xedd") '(1 2 3))
+;;; (auth-source-recall '(:host "xedd"))
+;;; (auth-source-recall '(:host t))
+;;; (auth-source-forget+ :host t)
+
+(defun* auth-source-forget+ (&rest spec &allow-other-keys)
+  "Forget any cached data matching SPEC.  Returns forgotten count.
+
+This is not a full `auth-source-search' spec but works similarly.
+For instance, \(:host \"myhost\" \"yourhost\") would find all the
+cached data that was found with a search for those two hosts,
+while \(:host t) would find all host entries."
+  (let ((count 0)
+        sname)
+    (loop for sym being the symbols of password-data
+          ;; when the symbol name matches with auth-source-magic
+          when (and (setq sname (symbol-name sym))
+                    (string-match (concat "^" auth-source-magic "\\(.+\\)")
+                                  sname)
+                    ;; and the spec matches what was stored in the cache
+                    (auth-source-specmatchp spec (read (match-string 1 sname))))
+          ;; remove that key
+          do (progn
+               (password-cache-remove sname)
+               (incf count)))
+    count))
+
+(defun auth-source-specmatchp (spec stored)
+  (let ((keys (loop for i below (length spec) by 2
+                   collect (nth i spec))))
+    (not (eq
+          (dolist (key keys)
+            (unless (auth-source-search-collection (plist-get stored key)
+                                                   (plist-get spec key))
+              (return 'no)))
+          'no))))
 
 ;;; Backend specific parsing: netrc/authinfo backend
 
@@ -965,32 +1041,13 @@ login:
 
 ;;; older API
 
-(defun auth-source-forget-user-or-password
-  (mode host protocol &optional username)
-  "Remove cached authentication token."
-  (interactive "slogin/password: \nsHost: \nsProtocol: \n") ;for testing
-  (remhash
-   (if username
-       (format "%s %s:%s %s" mode host protocol username)
-     (format "%s %s:%s" mode host protocol))
-   auth-source-cache))
-
-(defun auth-source-forget-all-cached ()
-  "Forget all cached auth-source authentication tokens."
-  (interactive)
-  (setq auth-source-cache (make-hash-table :test 'equal)))
-
-;; (progn
-;;   (auth-source-forget-all-cached)
-;;   (list
-;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other")
-;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other" "tzz")
-;;    (auth-source-user-or-password '("login" "password") "imap.myhost.com" "other" "joe")))
-
 ;;; (auth-source-user-or-password '("login" "password") "imap.myhost.com" t "tzz")
 
-;; deprecate this interface
-(make-obsolete 'auth-source-user-or-password 'auth-source-search "Emacs 24.1")
+;; deprecate the old interface
+(make-obsolete 'auth-source-user-or-password
+               'auth-source-search "Emacs 24.1")
+(make-obsolete 'auth-source-forget-user-or-password
+               'auth-source-forget "Emacs 24.1")
 
 (defun auth-source-user-or-password
   (mode host protocol &optional username create-missing delete-existing)
@@ -1032,17 +1089,18 @@ MODE can be \"login\" or \"password\"."
          (search (if delete-existing
                      (append search (list :delete t))
                    search))
-         (found (if (not delete-existing)
-                    (gethash cname auth-source-cache)
-                  (remhash cname auth-source-cache)
-                  nil)))
+         ;; (found (if (not delete-existing)
+         ;;            (gethash cname auth-source-cache)
+         ;;          (remhash cname auth-source-cache)
+         ;;          nil)))
+         (found nil))
     (if found
         (progn
           (auth-source-do-debug
            "auth-source-user-or-password: DEPRECATED cached %s=%s for %s (%s) + %s"
            mode
            ;; don't show the password
-           (if (and (member "password" mode) auth-source-hide-passwords)
+           (if (and (member "password" mode) t)
                "SECRET"
              found)
            host protocol username)

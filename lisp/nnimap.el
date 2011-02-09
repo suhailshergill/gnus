@@ -47,7 +47,7 @@
 (require 'nnmail)
 (require 'proto-stream)
 
-(autoload 'auth-source-forget-user-or-password "auth-source")
+(autoload 'auth-source-forget+ "auth-source")
 (autoload 'auth-source-search "auth-source")
 
 (nnoo-declare nnimap)
@@ -397,9 +397,7 @@ textual parts.")
 		  (dolist (host (list (nnoo-current-server 'nnimap)
 				      nnimap-address))
 		    (dolist (port ports)
-		      (dolist (element '("login" "password"))
-			(auth-source-forget-user-or-password
-			 element host port))))
+                      (auth-source-forget+ :host host :protocol port)))
 		  (delete-process (nnimap-process nnimap-object))
 		  (setq nnimap-object nil))))
 	    (when nnimap-object

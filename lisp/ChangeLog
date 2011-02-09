@@ -1,3 +1,25 @@
+2011-02-09  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* nnimap.el: Autoload `auth-source-forget+'.
+	(nnimap-open-connection-1): Use it if the connection fails.
+
+	* auth-source.el: Require `password-cache'.
+	(auth-source-hide-passwords, auth-source-cache): Remove and mark
+	obsolete.
+	(auth-source-magic): Marker for `password-cache' keys.
+	(auth-source-do-cache): Update docstring.
+	(auth-source-search): Use and check cache.
+	(auth-source-forget-all-cached, auth-source-remember)
+	(auth-source-recall, auth-source-forget, auth-source-forget+)
+	(auth-source-specmatchp): Caching support functions.
+	(auth-source-forget-user-or-password, auth-source-forget-all-cached):
+	Remove and obsolete.
+	(auth-source-user-or-password): Remove caching to further discourage
+	using it.  Always hide passwords.
+
+	* password-cache.el (password-cache-remove): Accept secrets that are
+	not strings.
+
 2011-02-08  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* mail-source.el: Autoload `auth-source-search'.
