@@ -1,3 +1,8 @@
+2011-02-09  Julien Danjou  <julien@danjou.info>
+
+	* message.el (message-options): Make message-options really buffer
+	local.
+
 2011-02-08  Julien Danjou  <julien@danjou.info>
 
 	* shr.el (shr-tag-body): Add support for text attribute in body
