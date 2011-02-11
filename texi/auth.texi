@@ -112,6 +112,10 @@ The @code{user} is the user name.  It's known as @var{:user} in
 @code{auth-source-search} queries.  You can also use @code{login} and
 @code{account}.
 
+Spaces are always OK as far as auth-source is concerned (but other
+programs may not like them).  Just put the data in quotes, escaping
+quotes as you'd expect with @code{\}.
+
 All these are optional.  You could just say (but we don't recommend
 it, we're just showing that it's possible)
 
