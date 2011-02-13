@@ -105,7 +105,7 @@ DELAY is a string, giving the length of the time.  Possible values are:
 						  (append deadline nil))))
 	   ;; If this time has passed already, add a day.
 	   (when (< deadline (gnus-float-time))
-	     (setq deadline (+ 3600 deadline))) ;3600 secs/day
+	     (setq deadline (+ 86400 deadline))) ; 86400 secs/day
 	   ;; Convert seconds to date header.
 	   (setq deadline (message-make-date
 			   (seconds-to-time deadline))))
