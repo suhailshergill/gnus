@@ -1,6 +1,7 @@
 2011-02-13  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* gnus-delay.el (gnus-delay-article) Fix number of seconds per day.
+	Improve prompt.
 
 2011-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
 

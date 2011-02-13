@@ -78,7 +78,7 @@ DELAY is a string, giving the length of the time.  Possible values are:
   time, then the deadline is tomorrow, else today."
   (interactive
    (list (read-string
-	  "Target date (YYYY-MM-DD) or length of delay (units in [mhdwMY]): "
+	  "Target date (YYYY-MM-DD), time (hh:mm), or length of delay (units in [mhdwMY]): "
 	  gnus-delay-default-delay)))
   (let (num unit days year month day hour minute deadline)
     (cond ((string-match
