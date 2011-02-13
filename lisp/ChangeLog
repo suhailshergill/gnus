@@ -1,3 +1,7 @@
+2011-02-13  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* imap.el: Remove file.  All the functionality is in nnimap.el.
+
 2011-02-10  Stefan Monnier  <monnier@iro.umontreal.ca>
 
 	* message.el (message-bury): Don't pop up a new window when selected
