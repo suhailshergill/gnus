@@ -10,6 +10,9 @@
 
 2011-02-14  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (article-update-date-lapsed): Don't bug out when updating
+	multiple headers.
+
 	* nnimap.el (nnimap-inhibit-logging): New variable.
 	(nnimap-log-command): Don't log login commands.
 
