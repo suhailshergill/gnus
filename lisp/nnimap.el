@@ -1565,6 +1565,7 @@ textual parts.")
 (defvar nnimap-sequence 0)
 
 (defun nnimap-send-command (&rest args)
+  (setf (nnimap-last-command-time nnimap-object) (current-time))
   (process-send-string
    (get-buffer-process (current-buffer))
    (nnimap-log-command
@@ -1588,7 +1589,6 @@ textual parts.")
 
 (defun nnimap-command (&rest args)
   (erase-buffer)
-  (setf (nnimap-last-command-time nnimap-object) (current-time))
   (let* ((sequence (apply #'nnimap-send-command args))
 	 (response (nnimap-get-response sequence)))
     (if (equal (caar response) "OK")
