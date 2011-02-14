@@ -1,5 +1,8 @@
 2011-02-14  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-retrieve-group-data-early): Reinstate the two-part
+	async code again so that we can debug it properly.
+
 	* message.el (message-reply): Take an optional switch-buffer parameter
 	so that Gnus window confs are respected better.
 
