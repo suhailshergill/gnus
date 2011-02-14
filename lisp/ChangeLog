@@ -3,6 +3,10 @@
 	* auth-source.el (auth-source-backend-parse-parameters): Don't rely on
 	`plist-get' to accept non-list parameters (XEmacs issue).  Fix
 	docstring.
+	(auth-source-secrets-search): Use `delete-dups', `append mapcar', and
+	`butlast' instead of `remove-duplicates', `mapcan', and `subseq'.
+	(auth-sources, auth-source-backend-parse, auth-source-secrets-search):
+	Login collection is "Login" and not "login".
 
 2011-02-14  Lars Ingebrigtsen  <larsi@gnus.org>
 
