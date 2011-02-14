@@ -1,5 +1,10 @@
 2011-02-14  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-exit-no-update): Restore the group conf
+	before killing the buffers so that a non-full window conf gets handled
+	correctly.
+	(gnus-summary-exit): Ditto.
+
 	* nntp.el (nntp-retrieve-group-data-early): Reinstate the two-part
 	async code again so that we can debug it properly.
 
