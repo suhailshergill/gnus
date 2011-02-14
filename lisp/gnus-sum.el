@@ -7170,6 +7170,7 @@ If FORCE (the prefix), also save the .newsrc file(s)."
   (let* ((group gnus-newsgroup-name)
 	 (quit-config (gnus-group-quit-config gnus-newsgroup-name))
 	 (gnus-group-is-exiting-p t)
+	 (article-buffer gnus-article-buffer)
 	 (mode major-mode)
 	 (group-point nil)
 	 (buf (current-buffer)))
@@ -7236,11 +7237,11 @@ If FORCE (the prefix), also save the .newsrc file(s)."
 
       ;; If we have several article buffers, we kill them at exit.
       (unless gnus-single-article-buffer
-	(when (gnus-buffer-live-p gnus-article-buffer)
-	  (with-current-buffer gnus-article-buffer
+	(when (gnus-buffer-live-p article-buffer)
+	  (with-current-buffer article-buffer
 	    ;; Don't kill sticky article buffers
 	    (unless (eq major-mode 'gnus-sticky-article-mode)
-	      (gnus-kill-buffer gnus-article-buffer)
+	      (gnus-kill-buffer article-buffer)
 	      (setq gnus-article-current nil))))
 	(gnus-kill-buffer gnus-original-article-buffer))
 
