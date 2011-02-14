@@ -1123,7 +1123,7 @@ If VERY-WIDE, make a very wide reply."
 	    (insert headers))
 	  (goto-char (point-max)))
 	(mml-quote-region (point) (point-max))
-	(message-reply nil wide)
+	(message-reply nil wide 'switch-to-buffer)
 	(when yank
 	  (gnus-inews-yank-articles yank))
 	(gnus-summary-handle-replysign)))))
