@@ -4,6 +4,7 @@
 	before killing the buffers so that a non-full window conf gets handled
 	correctly.
 	(gnus-summary-exit): Ditto.
+	(gnus-summary-read-group-1): Ditto.
 
 	* nntp.el (nntp-retrieve-group-data-early): Reinstate the two-part
 	async code again so that we can debug it properly.

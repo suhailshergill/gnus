@@ -4067,6 +4067,7 @@ If NO-DISPLAY, don't generate a summary buffer."
 	;; gnus-summary-prepare-hook since kill processing may not
 	;; work with hidden articles.
 	(gnus-summary-maybe-hide-threads)
+	(gnus-configure-windows 'summary)
 	(when kill-buffer
 	  (gnus-kill-or-deaden-summary kill-buffer))
 	(gnus-summary-auto-select-subject)
@@ -4076,7 +4077,6 @@ If NO-DISPLAY, don't generate a summary buffer."
 		 gnus-newsgroup-unreads
 		 gnus-auto-select-first)
 	    (progn
-	      (gnus-configure-windows 'summary)
 	      (let ((art (gnus-summary-article-number)))
 		(unless (and (not gnus-plugged)
 			     (or (memq art gnus-newsgroup-undownloaded)
