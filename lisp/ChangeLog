@@ -1,5 +1,10 @@
 2011-02-14  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-propagate-marks): Default to nil.
+
+	* gnus-start.el (gnus-use-backend-marks): Removed, since it duplicates
+	(gnus-summary-exit): Ditto.gnus-propagate-marks.
+
 	* gnus-sum.el (gnus-summary-exit-no-update): Restore the group conf
 	before killing the buffers so that a non-full window conf gets handled
 	correctly.
