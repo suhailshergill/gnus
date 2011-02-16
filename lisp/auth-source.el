@@ -808,14 +808,17 @@ See `auth-source-search' for details on SPEC."
     (when (and create
                (= 0 (length results)))
 
-      ;; create based on the spec
-      (apply (slot-value backend 'create-function) spec)
-      ;; turn off the :create key
-      (setq spec (plist-put spec :create nil))
-      ;; run the search again to get the updated data
-      ;; the result will be returned, even if the search fails
-      (setq results (apply 'auth-source-netrc-search spec)))
+      ;; create based on the spec and record the value
+      (setq results (or
+                     ;; if the user did not want to create the entry
+                     ;; in the file, it will be returned
+                     (apply (slot-value backend 'create-function) spec)
+                     ;; if not, we do the search again without :create
+                     ;; to get the updated data.
 
+                     ;; the result will be returned, even if the search fails
+                     (apply 'auth-source-netrc-search
+                            (plist-put spec :create nil)))))
     results))
 
 ;;; (auth-source-search :host "nonesuch" :type 'netrc :max 1 :create t)
@@ -833,7 +836,9 @@ See `auth-source-search' for details on SPEC."
          (file (oref backend source))
          (add "")
          ;; `valist' is an alist
-         valist)
+         valist
+         ;; `artificial' will be returned if no creation is needed
+         artificial)
 
     ;; only for base required elements (defined as function parameters):
     ;; fill in the valist with whatever data we may have from the search
@@ -902,6 +907,14 @@ See `auth-source-search' for details on SPEC."
                        nil nil default))
                      (t data))))
 
+        (when data
+          (setq artificial (plist-put artificial
+                                      (intern (concat ":" (symbol-name r)))
+                                      (if (eq r 'secret)
+                                          (lexical-let ((data data))
+                                            (lambda () data))
+                                        data))))
+
         ;; when r is not an empty string...
         (when (and (stringp data)
                    (< 0 (length data)))
@@ -935,14 +948,17 @@ See `auth-source-search' for details on SPEC."
       (goto-char (point-max))
 
       ;; ask AFTER we've successfully opened the file
-      (when (y-or-n-p (format "Add to file %s: line [%s]" file add))
-        (unless (bolp)
-          (insert "\n"))
-        (insert add "\n")
-        (write-region (point-min) (point-max) file nil 'silent)
-        (auth-source-do-debug
-         "auth-source-netrc-create: wrote 1 new line to %s"
-         file)))))
+      (if (y-or-n-p (format "Add to file %s: line [%s]" file add))
+          (progn
+            (unless (bolp)
+              (insert "\n"))
+            (insert add "\n")
+            (write-region (point-min) (point-max) file nil 'silent)
+            (auth-source-do-debug
+             "auth-source-netrc-create: wrote 1 new line to %s"
+             file)
+            nil)
+        (list artificial)))))
 
 ;;; Backend specific parsing: Secrets API backend
 
