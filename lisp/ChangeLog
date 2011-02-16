@@ -4,6 +4,9 @@
 	result when the user doesn't want to write to the file.
 	(auth-source-netrc-search): Expect a synthetic result and proceed
 	accordingly.
+	(auth-source-cache-expiry): New variable to override
+	`password-cache-expiry'.
+	(auth-source-remember): Use it.
 
 	* nnimap.el (nnimap-credentials): Remove the `inhibit-create'
 	parameter.  Create entry if necessary by using :create t.

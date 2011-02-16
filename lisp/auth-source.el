@@ -61,6 +61,18 @@
   :version "23.1" ;; No Gnus
   :group 'gnus)
 
+;;;###autoload
+(defcustom auth-source-cache-expiry 7200
+  "How many seconds passwords are cached, or nil to disable
+expiring.  Overrides `password-cache-expiry' through a
+let-binding."
+  :group 'auth-source
+  :type '(choice (const :tag "Never" nil)
+                 (const :tag "All Day" 86400)
+                 (const :tag "2 Hours" 7200)
+                 (const :tag "30 Minutes" 1800)
+                 (integer :tag "Seconds")))
+
 (defclass auth-source-backend ()
   ((type :initarg :type
          :initform 'netrc
@@ -588,8 +600,9 @@ Returns the deleted entries."
 
 (defun auth-source-remember (spec found)
   "Remember FOUND search results for SPEC."
-  (password-cache-add
-   (concat auth-source-magic (format "%S" spec)) found))
+  (let ((password-cache-expiry auth-source-cache-expiry))
+    (password-cache-add
+     (concat auth-source-magic (format "%S" spec)) found)))
 
 (defun auth-source-recall (spec)
   "Recall FOUND search results for SPEC."
