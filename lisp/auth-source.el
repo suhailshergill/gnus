@@ -44,7 +44,12 @@
 (require 'netrc)
 (require 'assoc)
 (eval-when-compile (require 'cl))
-(require 'eieio)
+(ignore-errors
+  (or (require 'eieio))
+  ;; gnus-fallback-lib/ from gnus/lisp/gnus-fallback-lib
+  (load "gnus-fallback-lib/eieio/eieio"))
+(unless (featurep 'eieio)
+  (error "eieio not found in `load-path' or gnus-fallback-lib/ directory."))
 
 (autoload 'secrets-create-item "secrets")
 (autoload 'secrets-delete-item "secrets")

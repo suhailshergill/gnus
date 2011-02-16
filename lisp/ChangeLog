@@ -1,3 +1,22 @@
+2011-02-16  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-fallback-lib/eieio/eieio.el: Copy from Emacs.
+
+	* gnus-fallback-lib/eieio/eieio-speedbar.el: Copy from Emacs.
+
+	* gnus-fallback-lib/eieio/eieio-opt.el: Copy from Emacs.
+
+	* gnus-fallback-lib/eieio/eieio-datadebug.el: Copy from Emacs.
+
+	* gnus-fallback-lib/eieio/eieio-custom.el: Copy from Emacs.
+
+	* gnus-fallback-lib/eieio/eieio-comp.el: Copy from Emacs.
+
+	* gnus-fallback-lib/eieio/eieio-base.el: Copy from Emacs.
+
+	* auth-source.el: Load EIEIO from "gnus-fallback-lib/eieio" if
+	necessary.
+
 2011-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-propagate-marks): Change default to t again, since
