@@ -384,9 +384,10 @@ textual parts.")
                                ;; Look for the credentials based on
                                ;; the virtual server name and the address
                                (nnimap-credentials
-                                (list
-                                 nnimap-address
-                                 (nnoo-current-server 'nnimap))
+				(gnus-delete-duplicates
+				 (list
+				  nnimap-address
+				  (nnoo-current-server 'nnimap)))
                                 ports))))
 		  (setq nnimap-object nil)
 		(let ((nnimap-inhibit-logging t))
