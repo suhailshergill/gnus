@@ -3,6 +3,8 @@
 	* auth-source.el: Bind load-path when loading EIEIO from
 	"gnus-fallback-lib/eieio"; don't pass more than two args, that XEmacs
 	21.4 doesn't support, to `require'.
+	(auth-source-secrets-search): Use mm-delete-duplicates instead of
+	delete-dups that is not available in XEmacs 21.4.
 
 2011-02-16  Raphael Kubo da Costa  <kubito@gmail.com>  (tiny change)
 
