@@ -1,3 +1,8 @@
+2011-02-17  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* auth-source.el: Bind load-path when loading EIEIO from
+	"gnus-fallback-lib/eieio".
+
 2011-02-16  Raphael Kubo da Costa  <kubito@gmail.com>  (tiny change)
 
 	* auth-source.el: Correctly load EIEIO from "gnus-fallback-lib/eieio"
