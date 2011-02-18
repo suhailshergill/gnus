@@ -1,3 +1,8 @@
+2011-02-18  Antoine Levitt  <antoine.levitt@gmail.com>  (tiny change)
+
+	* gnus-art.el (gnus-article-prepare): Run gnus-article-prepare-hook
+	later so that bbdb can hook in easier.
+
 2011-02-18  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* auth-source.el (auth-source-search): Don't try to create credentials
