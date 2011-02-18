@@ -1,3 +1,8 @@
+2011-02-18  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: Fix $(( bug.  Note that the user name and address are
+	incorrect if the last commit was on a branch.
+
 2010-11-22  Julien Danjou  <julien@danjou.info>
 
 	* post-receive: Use commiter name and email address.

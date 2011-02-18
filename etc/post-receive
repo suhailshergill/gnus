@@ -3,6 +3,7 @@
 # modified: 2010-09-01 and on by tzz@lifelogs.com
 
 # Use the email address of the author of the last commit.
+# This fails if the commit is on a branch.
 export USER_EMAIL=$(git log -1 --format=format:%ce HEAD)
 export USER_NAME=$(git log -1 --format=format:%cn HEAD)
 
@@ -183,7 +184,7 @@ generate_email()
 	# that we can build from the parameters
 	describe=$(git describe $rev 2>/dev/null)
 	if [ -z "$describe" ]; then
-		describe=$((git log --format="%s" $oldrev...$newrev | perl -e'@p = <>; chomp @p; print "=", scalar @p, "= ", join(" ; ", @p)') 2>/dev/null)
+		describe=$( (git log --format="%s" $oldrev...$newrev | perl -e'@p = <>; chomp @p; print "=", scalar @p, "= ", join(" ; ", @p)') 2>/dev/null)
 	fi
 
 	if [ -z "$describe" ]; then
