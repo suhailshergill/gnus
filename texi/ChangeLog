@@ -7,11 +7,13 @@
 
 2011-02-14  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* auth.texi (Help for users): Login collection is "Login" and not "login".
+	* auth.texi (Help for users):
+	Login collection is "Login" and not "login".
 
 2011-02-11  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* auth.texi (Overview, Help for users, Help for developers): Update docs.
+	* auth.texi (Overview, Help for users, Help for developers):
+	Update docs.
 	(Help for users): Talk about spaces.
 
 2011-02-05  Teodor Zlatanov  <tzz@lifelogs.com>
@@ -87,7 +89,7 @@
 
 2010-12-15  Andrew Cohen  <cohen@andy.bu.edu>
 
-	* gnus.texi (The hyrex Engine): Say that this engine as obsolete.
+	* gnus.texi (The hyrex Engine): Say that this engine is obsolete.
 
 2010-12-14  Andrew Cohen  <cohen@andy.bu.edu>
 
@@ -101,9 +103,9 @@
 
 2010-12-13  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* gnus.texi (Filtering New Groups): Mention
-	gnus-auto-subscribed-categories.
-	(The First Time): Removed, since default-subscribed-newsgroups has been
+	* gnus.texi (Filtering New Groups):
+	Mention gnus-auto-subscribed-categories.
+	(The First Time): Remove, since default-subscribed-newsgroups has been
 	removed.
 
 2010-12-06  Tassilo Horn  <tassilo@member.fsf.org>
@@ -169,7 +171,7 @@
 	* gnus.texi (Finding the News): Remove references to obsoletes
 	variables `gnus-nntp-server' and `gnus-secondary-servers'.
 
-2010-10-22  Juanma Barranquero  <lekktu@gmail.com>
+2010-10-24  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus.texi (Group Parameters, Buttons): Fix typos.
 
