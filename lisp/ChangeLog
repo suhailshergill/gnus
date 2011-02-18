@@ -4,6 +4,8 @@
 	if the caller doesn't want that.
 	(auth-source-search): If we don't find a match, don't bug out on
 	non-bound variables.
+	(auth-source-search): Only ask a single backend to create the
+	credentials.
 
 	* nnimap.el (nnimap-log-command): Add a newline to the inhibited
 	logging.
