@@ -277,15 +277,16 @@ textual parts.")
     (current-buffer)))
 
 (defun nnimap-credentials (address ports)
-  (let* ((found (nth 0 (auth-source-search :max 1
-                                           :host address
-                                           :port ports
-                                           :create t)))
-         (user (plist-get found :user))
-         (secret (plist-get found :secret))
-         (secret (if (functionp secret) (funcall secret) secret)))
+  (let ((found (nth 0 (auth-source-search :max 1
+					  :host address
+					  :port ports
+					  :create t))))
     (if found
-        (list user secret)
+        (list (plist-get found :user)
+	      (let ((secret (plist-get found :secret)))
+		(if (functionp secret)
+		    (funcall secret)
+		  secret)))
       nil)))
 
 (defun nnimap-keepalive ()
@@ -1588,7 +1589,7 @@ textual parts.")
     (goto-char (point-max))
     (insert (format-time-string "%H:%M:%S") " "
 	    (if nnimap-inhibit-logging
-		"(inhibited)"
+		"(inhibited)\n"
 	      command)))
   command)
 

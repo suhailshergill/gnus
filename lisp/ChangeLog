@@ -1,3 +1,9 @@
+2011-02-18  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-log-command): Add a newline to the inhibited
+	logging.
+	(nnimap-credentials): Protect against auth-source-search returning nil.
+
 2011-02-17  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* auth-source.el (auth-source-search): Do a two-phase search, one with
