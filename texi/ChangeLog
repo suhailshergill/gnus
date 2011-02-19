@@ -1,3 +1,13 @@
+2011-02-19  Eli Zaretskii  <eliz@gnu.org>
+
+	* auth.texi: Sync @dircategory with Emacs/info/dir.
+	* emacs-mime.texi: Sync @dircategory with Emacs/info/dir.
+	* gnus.texi: Sync @dircategory with Emacs/info/dir.
+	* message.texi: Sync @dircategory with Emacs/info/dir.
+	* pgg.texi: Sync @dircategory with Emacs/info/dir.
+	* sasl.texi: Sync @dircategory with Emacs/info/dir.
+	* sieve.texi: Sync @dircategory with Emacs/info/dir.
+
 2011-02-17  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth.texi (Help for users): Use :port instead of :protocol for all
