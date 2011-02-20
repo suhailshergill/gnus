@@ -1,3 +1,7 @@
+2011-02-20  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Window Layout): Document layout names.
+
 2011-02-19  Eli Zaretskii  <eliz@gnu.org>
 
 	* auth.texi: Sync @dircategory with Emacs/info/dir.
