@@ -7,6 +7,11 @@
 	* nnfolder.el (nnfolder-save-buffer): Don't let-bind copyright-update,
 	in case it's not yet loaded.
 
+2011-02-20  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-wait-for-response): Ensure that we get the entire
+	line we're waiting for.
+
 2011-02-19  Darren Hoo  <darren.hoo@gmail.com>  (tiny change)
 
 	* gnus-art.el (gnus-article-next-page-1): Because customized mode-line
