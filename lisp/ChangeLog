@@ -1,3 +1,7 @@
+2011-02-21  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
+
+	* gnus.el: No Gnus v0.11 is released.
+
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-next-article): Add a kludge to reselect the
