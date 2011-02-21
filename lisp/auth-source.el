@@ -510,7 +510,7 @@ must call it to obtain the actual value."
                      unless (memq (nth i spec) ignored-keys)
                      collect (nth i spec)))
          (found (auth-source-recall spec))
-         filtered-backends accessor-key found-here goal matches)
+         filtered-backends accessor-key found-here goal matches backend)
 
     (if (and found auth-source-do-cache)
         (auth-source-do-debug
