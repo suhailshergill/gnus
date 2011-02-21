@@ -1,5 +1,9 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-next-article): Add a kludge to reselect the
+	summary buffer before reading going to the next buffer.  This avoids
+	putting the point in the group buffer if you `C-g' the command.
+
 	* auth-source.el (auth-source-netrc-parse): Add an in-memory netrc
 	cache (for now) to make ~/.authinfo.gpg files usable.
 
