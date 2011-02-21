@@ -696,7 +696,7 @@ while \(:host t) would find all host entries."
   (mapcar (lambda (value)
 	    (if (numberp value)
 		(format "%s" value)
-	      port))
+	      value))
 	  values))
 
 (defvar auth-source-netrc-cache nil)
