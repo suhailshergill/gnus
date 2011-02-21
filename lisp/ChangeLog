@@ -1,5 +1,8 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection-1): Revert last change, since
+	auth-source now accepts numbers.
+
 	* auth-source.el (auth-source-netrc-parse): Accept a number as the port
 	spec, too.
 	(auth-source-ensure-strings): New function.
