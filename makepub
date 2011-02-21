@@ -24,15 +24,18 @@ echo -e "$date  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>\n\n\t* gnus.el: 
 cat lisp/ChangeLog >> /tmp/changelog
 mv /tmp/changelog lisp/ChangeLog
 
-git commit -m "$name v$version is released"
+git commit -a -m "$name v$version is released"
 
 # Then update the sources to the next version.
 
-sed "s/$name v0\.[0-9]*/$name v$version/" texi/gnus.texi > g.texi.tmp
+sed "s/$name v[.0-9]*/$name v$next_version/" texi/gnus.texi > g.texi.tmp
 mv g.texi.tmp texi/gnus.texi
-sed "s/$name v0\.[0-9]*/$name v$version/" texi/message.texi > m.texi.tmp
+sed "s/$name v[.0-9]*/$name v$next_version/" texi/message.texi > m.texi.tmp
 mv m.texi.tmp texi/message.texi
+sed "s/defconst gnus-version-number \"$version\"/defconst gnus-version-number \"$next_version\"/" lisp/gnus.el > g.el.tmp
+mv g.el.tmp lisp/gnus.el
 
 tversion=`echo $next_version | sed 's/[.]/-/g'`
 
 git tag -a "$initial$tversion" -m "$name v$next_version is begun"
+git commit -a -m "$name v$next_version is begun"
