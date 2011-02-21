@@ -1,5 +1,7 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-update-date-headers): Doc fix.
+
 	* nnimap.el (nnimap-open-connection-1): auth-source expects strings as
 	port numbers, so make sure it gets that if nnimap-server-port is
 	explicit.

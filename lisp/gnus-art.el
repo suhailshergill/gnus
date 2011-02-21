@@ -1040,7 +1040,7 @@ Some of these headers are updated automatically.  See
 	  (item :tag "User-defined" :value 'user-defined)))
 
 (defcustom gnus-article-update-date-headers 1
-  "How often to update the date header.
+  "A number that says how often to update the date header (in seconds).
 If nil, don't update it at all."
   :version "24.1"
   :group 'gnus-article-headers
