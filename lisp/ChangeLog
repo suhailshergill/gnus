@@ -2,6 +2,8 @@
 
 	* nntp.el (nntp-finish-retrieve-group-infos): Add a kludge to use the
 	given method as in the group name if we're using an extended method.
+	(nntp-finish-retrieve-group-infos): Wait for the end of the LIST ACTIVE
+	command, if we're using that, instead of waiting for the beginning.
 
 	* gnus-start.el (gnus-get-unread-articles): Extend the methods so that
 	we're sure to get unique server names, and we don't output two async

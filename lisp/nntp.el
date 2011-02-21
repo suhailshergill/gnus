@@ -808,7 +808,11 @@ command whose response triggered the error."
 		      (progn
 			(goto-char last-point)
 			;; Count replies.
-			(while (re-search-forward "^[0-9]" nil t)
+			(while (re-search-forward
+				(if nntp-server-list-active-group
+				    "^[.]"
+				  "^[0-9]")
+				nil t)
 			  (incf received))
 			(setq last-point (point))
 			(< received count)))
