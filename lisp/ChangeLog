@@ -1,5 +1,8 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-finish-retrieve-group-infos): Add a kludge to use the
+	given method as in the group name if we're using an extended method.
+
 	* gnus-start.el (gnus-get-unread-articles): Extend the methods so that
 	we're sure to get unique server names, and we don't output two async
 	commands in the same buffer.  This fixes an NNTP hang for some users.
