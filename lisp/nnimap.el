@@ -351,7 +351,7 @@ textual parts.")
 	   (proto-stream-always-use-starttls t)
            login-result credentials)
       (when nnimap-server-port
-	(setq ports (append ports (list nnimap-server-port))))
+	(setq ports (append ports (list (format "%s" nnimap-server-port)))))
       (destructuring-bind (stream greeting capabilities stream-type)
 	  (open-protocol-stream
 	   "*nnimap*" (current-buffer) nnimap-address (car (last ports))
