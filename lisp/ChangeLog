@@ -1,5 +1,9 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (auth-source-netrc-parse): Accept a number as the port
+	spec, too.
+	(auth-source-ensure-strings): New function.
+
 	* gnus-art.el (gnus-article-update-date-headers): Doc fix.
 	(gnus-article-setup-buffer): Always restart the date timer so that user
 	changes to the frequency is respected.

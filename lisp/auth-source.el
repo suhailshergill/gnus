@@ -690,6 +690,15 @@ while \(:host t) would find all host entries."
 
 ;;; Backend specific parsing: netrc/authinfo backend
 
+(defun auth-source-ensure-strings (values)
+  (unless (listp values)
+    (setq values (list values)))
+  (mapcar (lambda (value)
+	    (if (numberp value)
+		(format "%s" value)
+	      port))
+	  values))
+
 (defvar auth-source-netrc-cache nil)
 
 ;;; (auth-source-netrc-parse "~/.authinfo.gpg")
@@ -703,6 +712,7 @@ Note that the MAX parameter is used so we can exit the parse early."
       ;; We got already parsed contents; just return it.
       file
     (when (file-exists-p file)
+      (setq port (auth-source-ensure-strings port))
       (with-temp-buffer
         (let ((tokens '("machine" "host" "default" "login" "user"
                         "password" "account" "macdef" "force"
