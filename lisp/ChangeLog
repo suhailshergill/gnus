@@ -1,5 +1,7 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nnfolder.el (copyright-update): Define for the compiler.
+
 	* auth-source.el (auth-source-search): Fix unbound variable.
 
 2011-02-19  Glenn Morris  <rgm@gnu.org>
