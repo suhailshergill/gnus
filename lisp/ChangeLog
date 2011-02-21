@@ -1,3 +1,9 @@
+2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-get-unread-articles): Extend the methods so that
+	we're sure to get unique server names, and we don't output two async
+	commands in the same buffer.  This fixes an NNTP hang for some users.
+
 2011-02-21  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
 
 	* gnus.el: No Gnus v0.11 is released.
