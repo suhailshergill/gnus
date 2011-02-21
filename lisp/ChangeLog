@@ -1,5 +1,8 @@
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (auth-source-netrc-parse): Add an in-memory netrc
+	cache (for now) to make ~/.authinfo.gpg files usable.
+
 	* nnfolder.el (copyright-update): Define for the compiler.
 
 	* auth-source.el (auth-source-search): Fix unbound variable.
