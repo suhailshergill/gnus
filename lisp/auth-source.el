@@ -177,13 +177,14 @@ If the value is a function, debug messages are logged by calling
           (function :tag "Function that takes arguments like `message'")
           (const :tag "Don't log anything" nil)))
 
-(defcustom auth-sources '("~/.authinfo.gpg" "~/.authinfo")
+(defcustom auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")
   "List of authentication sources.
 
 The default will get login and password information from
 \"~/.authinfo.gpg\", which you should set up with the EPA/EPG
 packages to be encrypted.  If that file doesn't exist, it will
-try the unencrypted version \"~/.authinfo\".
+try the unencrypted version \"~/.authinfo\" and the famous
+\"~/.netrc\" file.
 
 See the auth.info manual for details.
 

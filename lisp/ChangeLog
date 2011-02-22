@@ -1,3 +1,7 @@
+2011-02-22  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el (auth-sources): Search ~/.netrc as well by default.
+
 2011-02-22  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-imap-search-arguments,nnir-imap-default-search-key):
