@@ -1191,8 +1191,6 @@ gnus-killed-list:
 
 *  handle 480/381 authinfo requests separately.
 
-*  include the texi/dir file in the distribution.
-
 *  command to display all dormant articles.
 
 *  gnus-auto-select-next makeover - list of things it should do.
