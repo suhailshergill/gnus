@@ -1200,9 +1200,6 @@ gnus-killed-list:
 *  a score match type that adds scores matching on From if From has
  replied to something someone else has said.
 
-* One command to edit the original version if an article, and one to
- edit the displayed version.
-
 * `T v' - make all process-marked articles the children of the
  current article.
 
