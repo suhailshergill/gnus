@@ -1,3 +1,7 @@
+2011-02-22  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
+
+	* gnus.el: No Gnus v0.13 is released.
+
 2011-02-21  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-open-connection-1): Revert last change, since
