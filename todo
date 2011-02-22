@@ -1221,9 +1221,6 @@ gnus-killed-list:
 * gnus-article-highlight-limit, to disable highlighting in big
  articles.
 
-* Editing an article should put the article to be edited in a
- special, unique buffer.
-
 * A command to send a mail to the admin-address group param.
 
 * Allow Gnus Agent scoring to use normal score files.
