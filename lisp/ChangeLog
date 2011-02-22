@@ -1,5 +1,8 @@
 2011-02-22  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-msg.el (gnus-inews-add-send-actions): Restore the winconf name
+	after exit.
+
 	* gnus-sum.el (gnus-summary-show-article): When called with t as the
 	value, show the raw article.
 
