@@ -1186,9 +1186,6 @@ gnus-killed-list:
 *  command to open a digest group, and copy all the articles there
  to the current group.
 
-*  a variable to disable article body highlights if there's more than
- X characters in the body.
-
 *  handle 480/381 authinfo requests separately.
 
 *  command to display all dormant articles.
