@@ -1118,9 +1118,6 @@ gnus-killed-list:
 
  [Done by `gnus-refer-article-method'?]
 
-*  make it possible to cancel articles using the select method for
- the current group.
-
 *  a new variable to control which selection commands should be
  unselecting.  `first', `best', `next', `prev', `next-unread',
  `prev-unread' are candidates.
