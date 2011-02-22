@@ -483,8 +483,6 @@ exceeding lisp nesting on huge groups.
 *  fuzzy simplifying should strip all non-alpha-numerical info from
  subject lines.
 
-*  gnus-soup-brew-soup-with-high-scores.
-
 *  nntp-ping-before-connect
 
 *  command to check whether NOV is evil.  "list overview.fmt".
@@ -1248,8 +1246,6 @@ gnus-killed-list:
 * gnus-summary-limit-include-cached is slow when there are many
  articles in the cache, since it regenerates big parts of the
  summary buffer for each article.
-
-* Implement gnus-batch-brew-soup.
 
 * Group parameters and summary commands for un/subscribing to mailing
  lists.
