@@ -1154,9 +1154,6 @@ gnus-killed-list:
 	     (yes-or-no-p "New mail has arrived.  Quit Gnus anyways? ")
 	     (y-or-n-p "Are you sure you want to quit Gnus? "))))
 
-*  all commands that react to the process mark should push the
- current process mark set onto the stack.
-
 *  gnus-article-hide-pgp Selv ville jeg nok ha valgt ,Ae(B slette den
  dersom teksten matcher
       "\\(This\s+\\)?[^ ]+ has been automatically signed by"
@@ -1175,8 +1172,6 @@ gnus-killed-list:
 
 *  gnus-article-highlight-limit that says when not to highlight
  (long) articles.
-
-*  nn*-spool-methods
 
 * Interrupting the agent fetching of articles should save articles.
  Have the Agent write out articles, one by one, as it retrieves
