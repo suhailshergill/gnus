@@ -1125,9 +1125,6 @@ gnus-killed-list:
  unselecting.  `first', `best', `next', `prev', `next-unread',
  `prev-unread' are candidates.
 
-*  be able to select groups that have no articles in them to be able
- to post in them (using the current select method).
-
 *  `x' should retain any sortings that have been performed.
 
 *  allow the user to specify the precedence of the secondary marks.
