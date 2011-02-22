@@ -1238,9 +1238,6 @@ gnus-killed-list:
 * Propagate all group properties (marks, article numbers, etc) up to
  the topics for displaying.
 
-* `n' in the group buffer with topics should go to the next group
- with unread articles, even if that group is hidden in a topic.
-
 * gnus-posting-styles doesn't work in drafts.
 
 * gnus-summary-limit-include-cached is slow when there are many
