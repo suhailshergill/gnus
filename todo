@@ -1055,19 +1055,6 @@ gnus-killed-list:
 *  when doing `-request-accept-article', the backends should do the
  nnmail duplicate checking.
 
-*  In addition, I would love it if I could configure message-tab so
- that it could call `bbdb-complete-name' in other headers.  So,
- some sort of interface like
-
- (setq message-tab-alist       '((message-header-regexp
- message-expand-group)         ("^\\(To\\|[cC]c\\|[bB]cc\\)"
- bbdb-complete-name)))
-
- then you could run the relevant function to complete the
- information in the header
-
- [Done using `message-completion-alist'?]
-
 *  cache the newsgroups file locally to avoid reloading it all the
  time.
 
