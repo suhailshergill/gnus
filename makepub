@@ -39,8 +39,7 @@ tversion=`echo $next_version | sed 's/[.]/-/g'`
 
 git tag -a "$initial$tversion" -m "$name v$next_version is released"
 
-git push
-git push tag "$initial$tversion"
+git push && git push tag "$initial$tversion"
 
 # Increase the number, yet again, to start the next development cycle.
 
@@ -59,3 +58,4 @@ sed "s/defconst gnus-version-number \"$version\"/defconst gnus-version-number \"
 mv g.el.tmp lisp/gnus.el
 
 git commit -a -m "$name v$next_version is begun"
+git push
