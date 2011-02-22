@@ -1,3 +1,10 @@
+2011-02-22  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* nnir.el (nnir-imap-search-arguments,nnir-imap-default-search-key):
+	Lower case names of search constraints.
+	(nnir-run-query): Cache and reuse search constraints for all imap
+	servers.
+
 2011-02-22  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-msg.el (gnus-inews-add-send-actions): Restore the winconf name
