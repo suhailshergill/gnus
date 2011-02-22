@@ -1073,10 +1073,6 @@ gnus-killed-list:
 
 *  a command to import a buffer into a group.
 
-*  nnweb should allow fetching by Message-ID from servers.
-
- [Done?]
-
 *  point in the article buffer doesn't always go to the beginning of
  the buffer when selecting new articles.
 
