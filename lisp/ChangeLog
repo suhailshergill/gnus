@@ -1,6 +1,22 @@
 2011-02-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* auth-source.el (auth-sources): Search ~/.netrc as well by default.
+	* auth-source.el: Don't load netrc.el.
+	(auth-sources): Search ~/.netrc as well by default.
+	(auth-source-debug): Add 'trivia option for extra output.
+	(auth-source-do-trivia): Use it.
+	(auth-source-search): Simplify logic to use
+	`auth-source-search-backends'.  Use `auth-source-do-trivia' where
+	appropriate.  Don't keep a running count at this level.  Layer :create
+	and :delete options appropriately on the first and second passes.
+	Don't track the backend with the search results.
+	(auth-source-search-backends): New function to search a list of
+	backends for a processed spec.
+	(auth-source-netrc-parse): Cache all netrc files, making
+	auth-source-netrc-cache an alist keyed by the file name and using the
+	file mtime as the caching criterion.  Keep the obfuscated data secret
+	with a lexical bind.
+	(auth-source-netrc-search): Don't calculate the length of the results
+	unnecessarily.
 
 2011-02-22  Andrew Cohen  <cohen@andy.bu.edu>
 

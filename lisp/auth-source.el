@@ -42,7 +42,6 @@
 (require 'password-cache)
 (require 'mm-util)
 (require 'gnus-util)
-(require 'netrc)
 (require 'assoc)
 (eval-when-compile (require 'cl))
 (eval-and-compile
@@ -174,6 +173,8 @@ If the value is a function, debug messages are logged by calling
   :type `(choice
           :tag "auth-source debugging mode"
           (const :tag "Log using `message' to the *Messages* buffer" t)
+          (const :tag "Log all trivia with `message' to the *Messages* buffer"
+                 trivia)
           (function :tag "Function that takes arguments like `message'")
           (const :tag "Don't log anything" nil)))
 
@@ -265,6 +266,11 @@ If the value is not a list, symmetric encryption will be used."
 ;; (let ((auth-source-debug nil)) (auth-source-do-debug "hello"))
 (defun auth-source-do-debug (&rest msg)
   (when auth-source-debug
+    (apply 'auth-source-do-warn msg)))
+
+(defun auth-source-do-trivia (&rest msg)
+  (when (or (eq auth-source-debug 'trivia)
+            (functionp auth-source-debug))
     (apply 'auth-source-do-warn msg)))
 
 (defun auth-source-do-warn (&rest msg)
@@ -511,7 +517,7 @@ must call it to obtain the actual value."
                      unless (memq (nth i spec) ignored-keys)
                      collect (nth i spec)))
          (found (auth-source-recall spec))
-         filtered-backends accessor-key found-here goal matches backend)
+         filtered-backends accessor-key backend)
 
     (if (and found auth-source-do-cache)
         (auth-source-do-debug
@@ -520,7 +526,7 @@ must call it to obtain the actual value."
 
       (assert
        (or (eq t create) (listp create)) t
-       "Invalid auth-source :create parameter (must be nil, t, or a list): %s %s")
+       "Invalid auth-source :create parameter (must be t or a list): %s %s")
 
       (setq filtered-backends (copy-sequence backends))
       (dolist (backend backends)
@@ -534,66 +540,64 @@ must call it to obtain the actual value."
                 (return))
             (invalid-slot-name))))
 
-      (auth-source-do-debug
+      (auth-source-do-trivia
        "auth-source-search: found %d backends matching %S"
        (length filtered-backends) spec)
 
       ;; (debug spec "filtered" filtered-backends)
-      (setq goal max)
       ;; First go through all the backends without :create, so we can
       ;; query them all.
-      (let ((uspec (copy-sequence spec)))
-	(plist-put uspec :create nil)
-	(dolist (backend filtered-backends)
-	  (let ((match (apply
-			(slot-value backend 'search-function)
-			:backend backend
-			uspec)))
-	    (when match
-	      (push (list backend match) matches)))))
+      (setq found (auth-source-search-backends filtered-backends
+                                               spec
+                                               ;; to exit early
+                                               max
+                                               ;; create and delete
+                                               nil delete))
+
+      (auth-source-do-debug
+       "auth-source-search: found %d results (max %d) matching %S"
+       (length found) max spec)
+
       ;; If we didn't find anything, then we allow the backend(s) to
       ;; create the entries.
       (when (and create
-		 (not matches))
-	(dolist (backend filtered-backends)
-	  (unless matches
-	    (let ((match (apply
-			  (slot-value backend 'search-function)
-			  :backend backend
-			  :create create
-			  :delete delete
-			  spec)))
-	      (when match
-		(push (list backend match) matches))))))
+                 (not found))
+        (setq found (auth-source-search-backends filtered-backends
+                                                 spec
+                                                 ;; to exit early
+                                                 max
+                                                 ;; create and delete
+                                                 create delete))
+        (auth-source-do-warn
+         "auth-source-search: CREATED %d results (max %d) matching %S"
+         (length found) max spec))
 
-      (setq backend (caar matches)
-	    found-here (cadar matches))
+      (when (and found auth-source-do-cache)
+        (auth-source-remember spec found)))
 
-      (block nil
-	;; if max is 0, as soon as we find something, return it
-	(when (and (zerop max) (> 0 (length found-here)))
-	  (return t))
+      found))
 
-	;; decrement the goal by the number of new results
-	(decf goal (length found-here))
-	;; and append the new results to the full list
-	(setq found (append found found-here))
-
-	(auth-source-do-debug
-	 "auth-source-search: found %d results (max %d/%d) in %S matching %S"
-	 (length found-here) max goal backend spec)
-
-	;; return full list if the goal is 0 or negative
-	(when (zerop (max 0 goal))
-	  (return found))
-
-	;; change the :max parameter in the spec to the goal
-	(setq spec (plist-put spec :max goal))
-
-	(when (and found auth-source-do-cache)
-	  (auth-source-remember spec found))))
-
-    found))
+(defun auth-source-search-backends (backends spec max create delete)
+  (let (matches)
+    (dolist (backend filtered-backends)
+      (when (> max (length matches))   ; when we need more matches...
+        (let ((bmatches (apply
+                         (slot-value backend 'search-function)
+                         :backend backend
+                         ;; note we're overriding whatever the spec
+                         ;; has for :create and :delete
+                         :create create
+                         :delete delete
+                         spec)))
+          (when bmatches
+            (auth-source-do-trivia
+             "auth-source-search-backend: got %d (max %d) in %s:%s matching %S"
+             (length bmatches) max
+             (slot-value backend :type)
+             (slot-value backend :source)
+             spec)
+            (setq matches (append matches bmatches))))))
+    matches))
 
 ;;; (auth-source-search :max 1)
 ;;; (funcall (plist-get (nth 0 (auth-source-search :max 1)) :secret))
@@ -715,25 +719,35 @@ Note that the MAX parameter is used so we can exit the parse early."
     (when (file-exists-p file)
       (setq port (auth-source-ensure-strings port))
       (with-temp-buffer
-        (let ((tokens '("machine" "host" "default" "login" "user"
-                        "password" "account" "macdef" "force"
-                        "port" "protocol"))
-              (max (or max 5000))       ; sanity check: default to stop at 5K
-              (modified 0)
-              alist elem result pair)
-	  (if (and auth-source-netrc-cache
-		   (equal (car auth-source-netrc-cache)
-			  (nth 5 (file-attributes file))))
-	      (insert (base64-decode-string
-		       (rot13-string (cdr auth-source-netrc-cache))))
-	    (insert-file-contents file)
-	    (when (string-match "\\.gpg\\'" file)
-	      ;; Store the contents of the file heavily encrypted in memory.
-	      (setq auth-source-netrc-cache
-		    (cons (nth 5 (file-attributes file))
-			  (rot13-string
-			   (base64-encode-string
-			    (buffer-string)))))))
+        (let* ((tokens '("machine" "host" "default" "login" "user"
+                         "password" "account" "macdef" "force"
+                         "port" "protocol"))
+               (max (or max 5000))       ; sanity check: default to stop at 5K
+               (modified 0)
+               (cached (cdr-safe (assoc file auth-source-netrc-cache)))
+               (cached-mtime (plist-get cached :mtime))
+               (cached-secrets (plist-get cached :secret))
+               alist elem result pair)
+
+          (if (and (functionp cached-secrets)
+                   (equal cached-mtime
+                          (nth 5 (file-attributes file))))
+              (progn
+                (auth-source-do-trivia
+                 "auth-source-netrc-parse: using CACHED file data for %s"
+                 file)
+                (insert (funcall cached-secrets)))
+            (insert-file-contents file)
+            ;; cache all netrc files (used to be just .gpg files)
+            ;; Store the contents of the file heavily encrypted in memory.
+            ;; (note for the irony-impaired: they are just obfuscated)
+            (aput 'auth-source-netrc-cache file
+                  (list :mtime (nth 5 (file-attributes file))
+                        :secret (lexical-let ((v (rot13-string
+                                                  (base64-encode-string
+                                                   (buffer-string)))))
+                                  (lambda () (base64-decode-string
+                                         (rot13-string v)))))))
           (goto-char (point-min))
           ;; Go through the file, line by line.
           (while (and (not (eobp))
@@ -879,7 +893,7 @@ See `auth-source-search' for details on SPEC."
 
     ;; if we need to create an entry AND none were found to match
     (when (and create
-               (= 0 (length results)))
+               (not results))
 
       ;; create based on the spec and record the value
       (setq results (or
