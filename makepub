@@ -39,7 +39,7 @@ tversion=`echo $next_version | sed 's/[.]/-/g'`
 
 git tag -a "$initial$tversion" -m "$name v$next_version is released"
 
-git push && git push tag "$initial$tversion"
+git push && git push master tag "$initial$tversion"
 
 # Increase the number, yet again, to start the next development cycle.
 
