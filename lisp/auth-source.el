@@ -579,7 +579,7 @@ must call it to obtain the actual value."
 
 (defun auth-source-search-backends (backends spec max create delete)
   (let (matches)
-    (dolist (backend filtered-backends)
+    (dolist (backend backends)
       (when (> max (length matches))   ; when we need more matches...
         (let ((bmatches (apply
                          (slot-value backend 'search-function)
@@ -922,7 +922,6 @@ See `auth-source-search' for details on SPEC."
          (required (append base-required create-extra))
          (file (oref backend source))
          (add "")
-         (show "")
          ;; `valist' is an alist
          valist
          ;; `artificial' will be returned if no creation is needed
@@ -953,63 +952,29 @@ See `auth-source-search' for details on SPEC."
     ;; for each required element
     (dolist (r required)
       (let* ((data (aget valist r))
+             ;; take the first element if the data is a list
+             (data (if (listp data)
+                       (nth 0 data)
+                     data))
+             ;; this is the default to be offered
              (given-default (aget auth-source-creation-defaults r))
-             ;; the defaults are simple
+             ;; the default supplementals are simple: for the user,
+             ;; try (user-login-name), otherwise take given-default
              (default (cond
                        ((and (not given-default) (eq r 'user))
                         (user-login-name))
-                       ;; note we need this empty string
-                       ((and (not given-default) (eq r 'port))
-                        "")
-                       (t given-default)))
-             ;; the prompt's default string depends on the data so far
-             (default-string (if (and default (< 0 (length default)))
-                                 (format " (default %s)" default)
-                               " (no default)"))
-             ;; the prompt should also show what's entered so far
-             (user-value (aget valist 'user))
-             (host-value (aget valist 'host))
-             (port-value (aget valist 'port))
-             ;; note this handles lists by just printing them
-             ;; later we allow the user to use completing-read to pick
-             (info-so-far (concat (if user-value
-                                      (format "%s@" user-value)
-                                    "[USER?]")
-                                  (if host-value
-                                      (format "%s" host-value)
-                                    "[HOST?]")
-                                  (if port-value
-                                      ;; this distinguishes protocol between
-                                      (if (zerop (length port-value))
-                                          "" ; 'entered as "no default"' vs.
-                                        (format ":%s" port-value)) ; given
-                                    ;; and this is when the protocol is unknown
-                                    "[PORT?]"))))
+                       (t given-default))))
 
-        ;; now prompt if the search SPEC did not include a required key;
-        ;; take the result and put it in `data' AND store it in `valist'
-        (aput 'valist r
-              (setq data
-                    (cond
-                     ((and (null data) (eq r 'secret))
-                      ;; special case prompt for passwords
-                      (read-passwd (format "Password for %s: " info-so-far)))
-                     ((null data)
-                      (read-string
-                       (format "Enter %s for %s%s: "
-                               r info-so-far default-string)
-                       nil nil default))
-                     ((listp data)
-                      (completing-read
-                       (format "Enter %s for %s (TAB to see the choices): "
-                               r info-so-far)
-                       data
-                       nil              ; no predicate
-                       t                ; require a match
-                       ;; note the default is nil, but if the user
-                       ;; hits RET we'll get "", which is handled OK later
-                       nil))
-                     (t data))))
+        ;; store the data, prompting for the password if needed
+        (setq data
+              (cond
+               ((and (null data) (eq r 'secret))
+                ;; special case prompt for passwords
+                (read-passwd (format "Password for %s@%s:%s: "
+                                     (or (aget valist 'user) "[any user]")
+                                     (or (aget valist 'host) "[any host]")
+                                     (or (aget valist 'port) "[any port]"))))
+               (t data)))
 
         (when data
           (setq artificial (plist-put artificial
@@ -1022,7 +987,9 @@ See `auth-source-search' for details on SPEC."
         ;; when r is not an empty string...
         (when (and (stringp data)
                    (< 0 (length data)))
-          (let ((printer (lambda (hide)
+          ;; this function is not strictly necessary but I think it
+          ;; makes the code clearer -tzz
+          (let ((printer (lambda ()
                            ;; append the key (the symbol name of r)
                            ;; and the value in r
                            (format "%s%s %S"
@@ -1030,17 +997,14 @@ See `auth-source-search' for details on SPEC."
                                    (if (zerop (length add)) "" " ")
                                    ;; remap auth-source tokens to netrc
                                    (case r
-                                     ('user "login")
-                                     ('host "machine")
+                                     ('user   "login")
+                                     ('host   "machine")
                                      ('secret "password")
-                                     ('port "port") ; redundant but clearer
+                                     ('port   "port") ; redundant but clearer
                                      (t (symbol-name r)))
                                    ;; the value will be printed in %S format
-                                   (if (and hide (eq r 'secret))
-                                       "HIDDEN_SECRET"
-                                     data)))))
-            (setq add (concat add (funcall printer nil)))
-            (setq show (concat show (funcall printer t)))))))
+                                   data))))
+            (setq add (concat add (funcall printer)))))))
 
     (with-temp-buffer
       (when (file-exists-p file)
@@ -1057,17 +1021,35 @@ See `auth-source-search' for details on SPEC."
       (goto-char (point-max))
 
       ;; ask AFTER we've successfully opened the file
-      (if (y-or-n-p (format "Add to file %s: line [%s]" file show))
+      (let (done k)
+        (while (not done)
+          (setq k (read-char-choice
+                   (format "Add to file %s? %s: "
+                           file
+                           "(y)es/(n)o but use it/(e)dit line/(s)kip file")
+                   '(?y ?n ?e ?s)))
+          (case k
+            (?y (setq done t))
+            (?n (setq add ""
+                      done t))
+            (?s (setq add ""
+                      done 'skip))
+            (?e (setq add (read-string "Line to add: " add)))
+            (t nil)))
+
+        (when (< 0 (length add))
           (progn
             (unless (bolp)
               (insert "\n"))
             (insert add "\n")
             (write-region (point-min) (point-max) file nil 'silent)
-            (auth-source-do-debug
+            (auth-source-do-warn
              "auth-source-netrc-create: wrote 1 new line to %s"
              file)
-            nil)
-        (list artificial)))))
+            nil))
+
+        (when (eq done t)
+          (list artificial))))))
 
 ;;; Backend specific parsing: Secrets API backend
 

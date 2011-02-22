@@ -17,6 +17,8 @@
 	with a lexical bind.
 	(auth-source-netrc-search): Don't calculate the length of the results
 	unnecessarily.
+	(auth-source-search-backends): Fix bug.
+	(auth-source-netrc-create): Rework prompts.
 
 2011-02-22  Andrew Cohen  <cohen@andy.bu.edu>
 
