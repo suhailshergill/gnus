@@ -1,3 +1,8 @@
+2011-02-23  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-retrieve-group-data-early): Don't do QRESYNC the
+	first time you use the new Gnus.
+
 2011-02-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth-source.el: Don't load netrc.el.
