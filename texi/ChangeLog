@@ -1,3 +1,7 @@
+2011-02-23  Glenn Morris  <rgm@gnu.org>
+
+	* gnus.texi: Standardize some Emacs/XEmacs terminology.
+
 2011-02-22  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth.texi (Help for users): Mention ~/.netrc is also searched by
