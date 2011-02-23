@@ -3880,11 +3880,9 @@ respectively."
   :version "24.1"
   :group 'gnus-summary-format
   :type '(alist :key-type sexp :value-type string))
-(make-obsolete-variable 'gnus-user-date-format-alist
-                        'gnus-summary-user-date-format-alist "24.1")
 
 (defun gnus-user-date (messy-date)
-  "Format the messy-date according to `gnus-summary-user-date-format-alist'.
+  "Format the messy-date according to `gnus-user-date-format-alist'.
 Returns \"  ?  \" if there's bad input or if another error occurs.
 Input should look like this: \"Sun, 14 Oct 2001 13:34:39 +0200\"."
   (condition-case ()
@@ -3893,7 +3891,7 @@ Input should look like this: \"Sun, 14 Oct 2001 13:34:39 +0200\"."
 	     ;;If we don't find something suitable we'll use this one
 	     (my-format "%b %d '%y"))
 	(let* ((difference (- now messy-date))
-	       (templist gnus-summary-user-date-format-alist)
+	       (templist gnus-user-date-format-alist)
 	       (top (eval (caar templist))))
 	  (while (if (numberp top) (< top difference) (not top))
 	    (progn
