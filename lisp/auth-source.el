@@ -977,16 +977,19 @@ See `auth-source-search' for details on SPEC."
                                      (or
                                       (auth-source-netrc-element-or-first
                                        (aget valist 'user))
+                                      (plist-get artificial :user)
                                       "[any user]")
                                      (or
                                       (auth-source-netrc-element-or-first
                                        (aget valist 'host))
+                                      (plist-get artificial :host)
                                       "[any host]")
                                      (or
                                       (auth-source-netrc-element-or-first
                                        (aget valist 'port))
+                                      (plist-get artificial :port)
                                       "[any port]"))))
-               (t data)))
+               (t (or data default))))
 
         (when data
           (setq artificial (plist-put artificial
