@@ -1,5 +1,8 @@
 2011-02-23  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-user-date-format-alist): Renamed back again from
+	-summary- since it's a user-visible variable.
+
 	* nnimap.el (nnimap-retrieve-group-data-early): Don't do QRESYNC the
 	first time you use the new Gnus.
 

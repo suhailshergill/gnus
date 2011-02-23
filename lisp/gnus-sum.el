@@ -3853,7 +3853,7 @@ This function is intended to be used in
 	  ((< c (* 1000 10000)) (format "%1.1fM" (/ c (* 1024.0 1024))))
 	  (t (format "%dM" (/ c (* 1024.0 1024)))))))
 
-(defcustom gnus-summary-user-date-format-alist
+(defcustom gnus-user-date-format-alist
   '(((gnus-seconds-today) . "Today, %H:%M")
     ((+ 86400 (gnus-seconds-today)) . "Yesterday, %H:%M")
     (604800 . "%A %H:%M")               ; That's one week
