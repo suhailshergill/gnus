@@ -908,6 +908,11 @@ See `auth-source-search' for details on SPEC."
                             (plist-put spec :create nil)))))
     results))
 
+(defun auth-source-netrc-element-or-first (v)
+  (if (listp v)
+      (nth 0 v)
+    v))
+
 ;;; (auth-source-search :host "nonesuch" :type 'netrc :max 1 :create t)
 ;;; (auth-source-search :host "nonesuch" :type 'netrc :max 1 :create t :create-extra-keys '((A "default A") (B)))
 
@@ -953,9 +958,7 @@ See `auth-source-search' for details on SPEC."
     (dolist (r required)
       (let* ((data (aget valist r))
              ;; take the first element if the data is a list
-             (data (if (listp data)
-                       (nth 0 data)
-                     data))
+             (data (auth-source-netrc-element-or-first data))
              ;; this is the default to be offered
              (given-default (aget auth-source-creation-defaults r))
              ;; the default supplementals are simple: for the user,
@@ -971,9 +974,18 @@ See `auth-source-search' for details on SPEC."
                ((and (null data) (eq r 'secret))
                 ;; special case prompt for passwords
                 (read-passwd (format "Password for %s@%s:%s: "
-                                     (or (aget valist 'user) "[any user]")
-                                     (or (aget valist 'host) "[any host]")
-                                     (or (aget valist 'port) "[any port]"))))
+                                     (or
+                                      (auth-source-netrc-element-or-first
+                                       (aget valist 'user))
+                                      "[any user]")
+                                     (or
+                                      (auth-source-netrc-element-or-first
+                                       (aget valist 'host))
+                                      "[any host]")
+                                     (or
+                                      (auth-source-netrc-element-or-first
+                                       (aget valist 'port))
+                                      "[any port]"))))
                (t data)))
 
         (when data

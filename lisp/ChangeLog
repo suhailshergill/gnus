@@ -2,6 +2,10 @@
 
 	* auth-source.el (auth-source-netrc-create): Use `read-char' instead of
 	`read-char-choice' for backwards compatibility.
+	(auth-source-netrc-element-or-first): New function to DTRT for
+	parameter extraction.
+	(auth-source-netrc-create): Use it and fix multiple parameter print
+	bug.
 
 2011-02-23  Lars Ingebrigtsen  <larsi@gnus.org>
 
