@@ -864,6 +864,7 @@ prompt the user for the name of an NNTP server to use."
 			       (gnus-get-buffer-create
 				(file-name-nondirectory dribble-file)))
       (set (make-local-variable 'file-precious-flag) t)
+      (setq buffer-save-without-query t)
       (erase-buffer)
       (setq buffer-file-name dribble-file)
       (auto-save-mode t)

@@ -1,5 +1,9 @@
 2011-02-23  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-dribble-read-file): Set
+	buffer-save-without-query, since we always want to save the dribble
+	file, probably.
+
 	* nnmail.el (nnmail-article-group): Allow a final "" split to work on
 	nnimap.
 
