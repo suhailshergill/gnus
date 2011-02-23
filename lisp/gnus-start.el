@@ -1717,8 +1717,8 @@ If SCAN, request a scan of that group as well."
 			  gnus-secondary-select-methods))
       (when (and (not (assoc method type-cache))
 		 (gnus-check-backend-function 'request-list (car method)))
-       (with-current-buffer nntp-server-buffer
-         (gnus-read-active-file-1 method nil))))
+	(with-current-buffer nntp-server-buffer
+	  (gnus-read-active-file-1 method nil))))
 
     ;; Do the rest of the retrieval.
     (dolist (elem type-cache)
