@@ -442,13 +442,6 @@ FRONT-ADVANCE and REAR-ADVANCE are ignored."
   (unless (fboundp 'match-string-no-properties)
     (defalias 'match-string-no-properties 'match-string))
 
-  (defalias 'gnus-x-color-values
-	(if (fboundp 'x-color-values)
-	    'x-color-values
-	  (lambda (color)
-	    (color-instance-rgb-components
-	     (make-color-instance color)))))
-
   (unless (fboundp 'char-width)
     (defalias 'char-width (lambda (ch) 1))))
 

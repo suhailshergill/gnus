@@ -310,7 +310,8 @@ dgnushack-compile."
 		 ;; lpath.el binds it.
 		 (not (eq (symbol-function 'libxml-parse-html-region)
 			  'ignore)))
-      (setq files (delete "shr-color.el" (delete "shr.el" files))))
+      (dolist (file '("color.el" "shr-color.el" "shr.el"))
+	(setq files (delete file files))))
 
     (dolist (file files)
       (setq file (expand-file-name file srcdir))

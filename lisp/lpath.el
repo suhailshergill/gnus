@@ -73,18 +73,18 @@
      w3m-detect-meta-charset w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
-     buffer-display-table completion-styles completion-styles-alist
-     cursor-in-non-selected-windows default-enable-multibyte-characters
-     default-file-name-coding-system epa-file-encrypt-to eudc-protocol
-     filladapt-mode gnus-agent-expire-current-dirs help-xref-stack-item
-     idna-program installation-directory iswitchb-mode iswitchb-temp-buflist
-     line-spacing mark-active mouse-selection-click-count
-     mouse-selection-click-count-buffer ps-print-color-p rmail-default-file
-     rmail-default-rmail-file rmail-insert-mime-forwarded-message-function
-     show-trailing-whitespace smtpmail-default-smtp-server
-     temporary-file-directory tool-bar-mode transient-mark-mode url-version
-     w3-meta-charset-content-type-regexp w3m-link-map
-     w3-meta-content-type-charset-regexp))
+     buffer-display-table buffer-save-without-query completion-styles
+     completion-styles-alist cursor-in-non-selected-windows
+     default-enable-multibyte-characters default-file-name-coding-system
+     epa-file-encrypt-to eudc-protocol filladapt-mode
+     gnus-agent-expire-current-dirs help-xref-stack-item idna-program
+     installation-directory iswitchb-mode iswitchb-temp-buflist line-spacing
+     mark-active mouse-selection-click-count mouse-selection-click-count-buffer
+     ps-print-color-p rmail-default-file rmail-default-rmail-file
+     rmail-insert-mime-forwarded-message-function show-trailing-whitespace
+     smtpmail-default-smtp-server temporary-file-directory tool-bar-mode
+     transient-mark-mode url-version w3-meta-charset-content-type-regexp
+     w3m-link-map w3-meta-content-type-charset-regexp))
 
   (when (or (and (= emacs-major-version 21) (= emacs-minor-version 4))
 	    (featurep 'sxemacs))
