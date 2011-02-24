@@ -152,6 +152,12 @@ let-binding."
 
 (make-obsolete 'auth-source-hide-passwords nil "Emacs 24.1")
 
+(defcustom auth-source-never-save nil
+  "If set, auth-source will never ask to save."
+  :group 'auth-source
+  :version "23.2" ;; No Gnus
+  :type `boolean)
+
 (defvar auth-source-magic "auth-source-magic ")
 
 (defcustom auth-source-do-cache t
@@ -1074,21 +1080,40 @@ See `auth-source-search' for details on SPEC."
       (goto-char (point-max))
 
       ;; ask AFTER we've successfully opened the file
-      (let ((prompt (format "Add to file %s? %s: "
+      (let ((prompt (format "Save auth info to file %s? %s: "
                             file
-                            "(y)es/(n)o but use it/(e)dit line/(s)kip file"))
-            done k)
+                            "y/n/N/e/?"))
+            (done auth-source-never-save)
+            (bufname "*auth-source Help*")
+            k)
         (while (not done)
 	  (message "%s" prompt)
           (setq k (read-char))
           (case k
             (?y (setq done t))
+            (?? (with-output-to-temp-buffer bufname
+                  (princ
+                   (concat "(y)es, save\n"
+                           "(n)o but use the info\n"
+                           "(N)o and don't ask to save again\n"
+                           "(e)dit the line."))
+                  (set-buffer bufname)
+                  (help-mode)
+                  (help-print-return-message)))
             (?n (setq add ""
                       done t))
-            (?s (setq add ""
-                      done 'skip))
+            (?N (setq add ""
+                      done t
+                      auth-source-never-save t))
             (?e (setq add (read-string "Line to add: " add)))
             (t nil)))
+
+        (when (get-buffer-window bufname)
+          (delete-window (get-buffer-window bufname)))
+
+        ;; make sure the info is not saved
+        (when auth-source-never-save
+          (setq add ""))
 
         (when (< 0 (length add))
           (progn

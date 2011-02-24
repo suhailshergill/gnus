@@ -8,6 +8,8 @@
 	user-login-name.  Use `auth-source-creation-prompts' and some default
 	prompts for user, host, port, and password (the default generic prompt
 	remains ugly).
+	(auth-source-never-save): Add customizable option to never save info.
+	(auth-source-netrc-create): Use it and improve save prompts.
 
 2011-02-24  Katsumi Yamaoka  <yamaoka@jpl.org>
 
