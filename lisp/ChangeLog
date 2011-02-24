@@ -1,3 +1,14 @@
+2011-02-24  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el (auth-source-creation-prompts): New variable to manage
+	creation-time prompts.
+	(auth-source-search): Document it.
+	(auth-source-format-prompt): Add utility function.
+	(auth-source-netrc-create): Don't default the user name to
+	user-login-name.  Use `auth-source-creation-prompts' and some default
+	prompts for user, host, port, and password (the default generic prompt
+	remains ugly).
+
 2011-02-23  Julien Danjou  <julien@danjou.info>
 
 	* gnus-art.el (article-make-date-line): Ignore errors if time is
