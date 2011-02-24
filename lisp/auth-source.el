@@ -1087,19 +1087,20 @@ See `auth-source-search' for details on SPEC."
             (bufname "*auth-source Help*")
             k)
         (while (not done)
-	  (message "%s" prompt)
+          (message "%s" prompt)
           (setq k (read-char))
           (case k
             (?y (setq done t))
-            (?? (with-output-to-temp-buffer bufname
-                  (princ
-                   (concat "(y)es, save\n"
-                           "(n)o but use the info\n"
-                           "(N)o and don't ask to save again\n"
-                           "(e)dit the line."))
-                  (set-buffer bufname)
-                  (help-mode)
-                  (help-print-return-message)))
+            (?? (save-excursion
+                  (with-output-to-temp-buffer bufname
+                    (princ
+                     (concat "(y)es, save\n"
+                             "(n)o but use the info\n"
+                             "(N)o and don't ask to save again\n"
+                             "(e)dit the line\n"
+                             "(?) for help as you can see.\n"))
+                  (set-buffer standard-output)
+                  (help-mode))))
             (?n (setq add ""
                       done t))
             (?N (setq add ""
