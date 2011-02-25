@@ -152,11 +152,15 @@ let-binding."
 
 (make-obsolete 'auth-source-hide-passwords nil "Emacs 24.1")
 
-(defcustom auth-source-never-save nil
-  "If set, auth-source will never ask to save."
+(defcustom auth-source-save-behavior 'ask
+  "If set, auth-source will respect it for save behavior."
   :group 'auth-source
   :version "23.2" ;; No Gnus
-  :type `boolean)
+  :type `(choice
+          :tag "auth-source new token save behavior"
+          (const :tag "Always save" t)
+          (const :tag "Never save" nil)
+          (const :tag "Ask" ask)))
 
 (defvar auth-source-magic "auth-source-magic ")
 
@@ -1083,7 +1087,7 @@ See `auth-source-search' for details on SPEC."
       (let ((prompt (format "Save auth info to file %s? %s: "
                             file
                             "y/n/N/e/?"))
-            (done auth-source-never-save)
+            (done (not (eq auth-source-save-behavior 'ask)))
             (bufname "*auth-source Help*")
             k)
         (while (not done)
@@ -1105,7 +1109,7 @@ See `auth-source-search' for details on SPEC."
                       done t))
             (?N (setq add ""
                       done t
-                      auth-source-never-save t))
+                      auth-source-save-behavior nil))
             (?e (setq add (read-string "Line to add: " add)))
             (t nil)))
 
@@ -1113,7 +1117,7 @@ See `auth-source-search' for details on SPEC."
           (delete-window (get-buffer-window bufname)))
 
         ;; make sure the info is not saved
-        (when auth-source-never-save
+        (when (null auth-source-save-behavior)
           (setq add ""))
 
         (when (< 0 (length add))
