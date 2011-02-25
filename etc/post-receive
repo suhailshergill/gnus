@@ -182,9 +182,13 @@ generate_email()
 	# Email parameters
 	# The email subject will contain the best description of the ref
 	# that we can build from the parameters
-	describe=$(git describe $rev 2>/dev/null)
-	if [ -z "$describe" ]; then
-		describe=$( (git log --format="%s" $oldrev...$newrev | perl -e'@p = <>; chomp @p; print "=", scalar @p, "= ", join(" ; ", @p)') 2>/dev/null)
+	describe_commit=$( (git log --format="%s" $oldrev...$newrev | perl -e'@p = <>; chomp @p; print "=", scalar @p, "= ", join(" ; ", @p)') 2>/dev/null)
+	describe_last=$(git describe $rev 2>/dev/null)
+
+	if [ -z "$describe_last" ]; then
+	    describe=$describe_commit
+        else
+            describe="$describe_last $describe_commit"
 	fi
 
 	if [ -z "$describe" ]; then

@@ -1,3 +1,8 @@
+2011-02-25  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: Always show the commit messages and the "git describe"
+	output.
+
 2011-02-18  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* post-receive: Fix $(( bug.  Note that the user name and address are
