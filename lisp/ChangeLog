@@ -1,3 +1,8 @@
+2011-02-25  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-demon.el (gnus-demon-init): run-with-timer should be called with
+	numerical parameters.
+
 2011-02-24  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth-source.el (auth-source-creation-prompts): New variable to manage
