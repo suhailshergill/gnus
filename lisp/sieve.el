@@ -126,6 +126,7 @@ require \"fileinto\";
     (define-key map "f" 'sieve-edit-script)
     (define-key map "o" 'sieve-edit-script-other-window)
     (define-key map "r" 'sieve-remove)
+    (define-key map "q" 'sieve-manage-quit)
     (define-key map [(down-mouse-2)] 'sieve-edit-script)
     (define-key map [(down-mouse-3)] 'sieve-manage-mode-menu)
     map)
@@ -147,6 +148,11 @@ require \"fileinto\";
 (put 'sieve-manage-mode 'mode-class 'special)
 
 ;; Commands used in sieve-manage mode:
+
+(defun sieve-manage-quit ()
+  "Quit."
+  (interactive)
+  (kill-buffer (current-buffer)))
 
 (defun sieve-activate (&optional pos)
   (interactive "d")

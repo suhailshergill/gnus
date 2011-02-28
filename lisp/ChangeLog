@@ -11,6 +11,8 @@
 	(sieve-manage-mode): Do not set mode name manually, change mode-name to
 	(sieve-refresh-scriptlist): Use substitute-command-keys."Sieve-manage".
 	Remove commented code about cvs.
+	(sieve-manage-quit): New function.
+	(sieve-manage-mode-map): Bind 'q' to sieve-manage-quit.
 
 2011-02-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
