@@ -7,6 +7,7 @@
 	(sieve-upload): Use substitute-command-keys.
 	(sieve-edit-script): Use substitute-command-keys.
 	(sieve-refresh-scriptlist): Use substitute-command-keys.
+	(sieve-manage-mode-map): Define keymap properly.
 
 2011-02-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

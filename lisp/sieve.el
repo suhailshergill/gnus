@@ -104,35 +104,32 @@ require \"fileinto\";
 
 ;; Sieve-manage mode:
 
-(defvar sieve-manage-mode-map nil
+(defvar sieve-manage-mode-map
+  (let ((map (make-sparse-keymap)))
+    ;; various
+    (define-key map "?" 'sieve-help)
+    (define-key map "h" 'sieve-help)
+    (define-key map "q" 'sieve-bury-buffer)
+    ;; activating
+    (define-key map "m" 'sieve-activate)
+    (define-key map "u" 'sieve-deactivate)
+    (define-key map "\M-\C-?" 'sieve-deactivate-all)
+    ;; navigation keys
+    (define-key map "\C-p" 'sieve-prev-line)
+    (define-key map [up] 'sieve-prev-line)
+    (define-key map "\C-n" 'sieve-next-line)
+    (define-key map [down] 'sieve-next-line)
+    (define-key map " " 'sieve-next-line)
+    (define-key map "n" 'sieve-next-line)
+    (define-key map "p" 'sieve-prev-line)
+    (define-key map "\C-m" 'sieve-edit-script)
+    (define-key map "f" 'sieve-edit-script)
+    (define-key map "o" 'sieve-edit-script-other-window)
+    (define-key map "r" 'sieve-remove)
+    (define-key map [(down-mouse-2)] 'sieve-edit-script)
+    (define-key map [(down-mouse-3)] 'sieve-manage-mode-menu)
+    map)
   "Keymap for `sieve-manage-mode'.")
-
-(if sieve-manage-mode-map
-    ()
-  (setq sieve-manage-mode-map (make-sparse-keymap))
-  (suppress-keymap sieve-manage-mode-map)
-  ;; various
-  (define-key sieve-manage-mode-map "?" 'sieve-help)
-  (define-key sieve-manage-mode-map "h" 'sieve-help)
-  (define-key sieve-manage-mode-map "q" 'sieve-bury-buffer)
-  ;; activating
-  (define-key sieve-manage-mode-map "m" 'sieve-activate)
-  (define-key sieve-manage-mode-map "u" 'sieve-deactivate)
-  (define-key sieve-manage-mode-map "\M-\C-?" 'sieve-deactivate-all)
-  ;; navigation keys
-  (define-key sieve-manage-mode-map "\C-p" 'sieve-prev-line)
-  (define-key sieve-manage-mode-map [up] 'sieve-prev-line)
-  (define-key sieve-manage-mode-map "\C-n" 'sieve-next-line)
-  (define-key sieve-manage-mode-map [down] 'sieve-next-line)
-  (define-key sieve-manage-mode-map " " 'sieve-next-line)
-  (define-key sieve-manage-mode-map "n" 'sieve-next-line)
-  (define-key sieve-manage-mode-map "p" 'sieve-prev-line)
-  (define-key sieve-manage-mode-map "\C-m" 'sieve-edit-script)
-  (define-key sieve-manage-mode-map "f" 'sieve-edit-script)
-  (define-key sieve-manage-mode-map "o" 'sieve-edit-script-other-window)
-  (define-key sieve-manage-mode-map "r" 'sieve-remove)
-  (define-key sieve-manage-mode-map [(down-mouse-2)] 'sieve-edit-script)
-  (define-key sieve-manage-mode-map [(down-mouse-3)] 'sieve-manage-mode-menu))
 
 (easy-menu-define sieve-manage-mode-menu sieve-manage-mode-map
   "Sieve Menu."
