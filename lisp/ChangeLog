@@ -1,3 +1,10 @@
+2011-02-28  Julien Danjou  <julien@danjou.info>
+
+	* sieve.el (sieve-buffer-script-name): New local variable to store
+	sieve script name.
+	(sieve-edit-script): Store sieve script name.
+	(sieve-upload): Use sieve script name when uploading.
+
 2011-02-27  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-group.el (gnus-import-other-newsrc-file): New function.

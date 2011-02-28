@@ -98,6 +98,9 @@ require \"fileinto\";
 
 (defvar sieve-manage-buffer nil)
 (defvar sieve-buffer-header-end nil)
+(defvar sieve-buffer-script-name nil
+  "The real script name of the buffer.")
+(make-local-variable 'sieve-buffer-script-name)
 
 ;; Sieve-manage mode:
 
@@ -204,6 +207,7 @@ require \"fileinto\";
       (switch-to-buffer (get-buffer-create "template.siv"))
       (insert sieve-template))
     (sieve-mode)
+    (setq sieve-buffer-script-name name)
     (message "Press C-c C-l to upload script to server.")))
 
 (defmacro sieve-change-region (&rest body)
@@ -363,12 +367,12 @@ Server  : " server ":" (or port "2000") "
 ;;;###autoload
 (defun sieve-upload (&optional name)
   (interactive)
-  (unless name
-    (setq name (buffer-name)))
   (when (or (get-buffer sieve-buffer) (call-interactively 'sieve-manage))
     (let ((script (buffer-string)) err)
       (with-current-buffer (get-buffer sieve-buffer)
-	(setq err (sieve-manage-putscript name script sieve-manage-buffer))
+	(setq err (sieve-manage-putscript
+                   (or name sieve-buffer-script-name (buffer-name))
+                   script sieve-manage-buffer))
 	(if (sieve-manage-ok-p err)
 	    (message (concat
 		      "Sieve upload done.  Use `C-c RET' to manage scripts."))
