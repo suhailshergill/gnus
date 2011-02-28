@@ -208,7 +208,9 @@ require \"fileinto\";
       (insert sieve-template))
     (sieve-mode)
     (setq sieve-buffer-script-name name)
-    (message "Press C-c C-l to upload script to server.")))
+    (message
+     (substitute-command-keys
+      "Press \\[sieve-upload] to upload script to server."))))
 
 (defmacro sieve-change-region (&rest body)
   "Turns off sieve-region before executing BODY, then re-enables it after.
@@ -341,13 +343,18 @@ Server  : " server ":" (or port "2000") "
     ;; get list of script names and print them
     (let ((scripts (sieve-manage-listscripts sieve-manage-buffer)))
       (if (null scripts)
-	  (insert (format (concat "No scripts on server, press RET on %s to "
-				  "create a new script.\n") sieve-new-script))
-	(insert (format (concat "%d script%s on server, press RET on a script "
-				"name edits it, or\npress RET on %s to create "
-				"a new script.\n") (length scripts)
-				(if (eq (length scripts) 1) "" "s")
-				sieve-new-script)))
+	  (insert
+           (substitute-command-keys
+            (format
+             "No scripts on server, press \\[sieve-edit-script] on %s to create a new script.\n"
+             sieve-new-script)))
+	(insert
+         (substitute-command-keys
+          (format (concat "%d script%s on server, press \\[sieve-edit-script] on a script "
+                          "name edits it, or\npress \\[sieve-edit-script] on %s to create "
+                          "a new script.\n") (length scripts)
+                          (if (eq (length scripts) 1) "" "s")
+                          sieve-new-script))))
       (save-excursion
 	(sieve-insert-scripts (list sieve-new-script))
 	(sieve-insert-scripts scripts)))
@@ -374,8 +381,8 @@ Server  : " server ":" (or port "2000") "
                    (or name sieve-buffer-script-name (buffer-name))
                    script sieve-manage-buffer))
 	(if (sieve-manage-ok-p err)
-	    (message (concat
-		      "Sieve upload done.  Use `C-c RET' to manage scripts."))
+	    (message (substitute-command-keys
+		      "Sieve upload done.  Use \\[sieve-manage] to manage scripts."))
 	  (message "Sieve upload failed: %s" (nth 2 err)))))))
 
 ;;;###autoload
