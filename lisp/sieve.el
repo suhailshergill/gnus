@@ -138,18 +138,13 @@ require \"fileinto\";
     ["Activate script" sieve-activate t]
     ["Deactivate script" sieve-deactivate t]))
 
-(define-derived-mode sieve-manage-mode fundamental-mode "SIEVE"
+(define-derived-mode sieve-manage-mode fundamental-mode "Sieve-manage"
   "Mode used for sieve script management."
-  (setq mode-name "SIEVE")
   (buffer-disable-undo (current-buffer))
   (setq truncate-lines t)
   (easy-menu-add sieve-manage-mode-menu sieve-manage-mode-map))
 
 (put 'sieve-manage-mode 'mode-class 'special)
-
-;; This is necessary to allow correct handling of \\[cvs-mode-diff-map]
-;; in substitute-command-keys.
-;(fset 'sieve-manage-mode-map sieve-manage-mode-map)
 
 ;; Commands used in sieve-manage mode:
 
