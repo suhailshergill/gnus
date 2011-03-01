@@ -1,3 +1,8 @@
+2011-03-01  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* git.gnus.org/gnus-cgit.png: Add icon.
+	* git.gnus.org/index.html: Use it.
+
 2010-04-20  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* git.gnus.org/index.html: Tell about the cgit repository.
