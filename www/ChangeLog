@@ -1,6 +1,10 @@
+2011-03-02  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* git.gnus.org/index.html: Adjust icon to gnus-icon.png.
+
 2011-03-02  Adam Sjøgren  <asjo@koldfront.dk>
 
-	* git.gnus.org/gnus-cgit.png: Add icon.
+	* git.gnus.org/gnus-icon.png: Add icon.
 
 2011-03-01  Adam Sjøgren  <asjo@koldfront.dk>
 
