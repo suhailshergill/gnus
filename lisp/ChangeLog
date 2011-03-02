@@ -1,5 +1,7 @@
 2011-03-02  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* password-cache.el (password-in-cache-p): Add autoload.
+
 	* message.el (message-options): Make buffer-local two ways to attempt
 	to fix a XEmacs bug.
 
