@@ -1,6 +1,10 @@
-2011-03-01  Adam Sjøgren  <asjo@koldfront.dk>
+2011-03-02  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* git.gnus.org/gnus-cgit.png: Add icon.
+
+2011-03-01  Adam Sjøgren  <asjo@koldfront.dk>
+
+	* git.gnus.org/gnus-cgit.png: Add logo.
 	* git.gnus.org/index.html: Use it.  Add information about the
 	gnus-html.git repository.
 
