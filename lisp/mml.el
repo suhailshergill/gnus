@@ -461,13 +461,11 @@ If MML is non-nil, return the buffer up till the correspondent mml tag."
 (defvar mml-boundary nil)
 (defvar mml-base-boundary "-=-=")
 (defvar mml-multipart-number 0)
-(defvar message-options)
 
 (defun mml-generate-mime ()
   "Generate a MIME message based on the current MML document."
   (let ((cont (mml-parse))
-	(mml-multipart-number mml-multipart-number)
-	(message-options (if (boundp 'message-options) message-options)))
+	(mml-multipart-number mml-multipart-number))
     (if (not cont)
 	nil
       (mm-with-multibyte-buffer
