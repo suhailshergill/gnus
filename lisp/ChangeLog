@@ -1,3 +1,8 @@
+2011-03-04  Daiki Ueno  <ueno@unixuser.org>
+
+	* mml.el (mml-generate-mime): Bind `message-options', which is now
+	buffer-local, around `mm-with-multibyte-buffer'.
+
 2011-03-03  Tassilo Horn  <tassilo@member.fsf.org>
 
 	* nnimap.el (nnimap-parse-flags): Add a workaround for FETCH lines with
