@@ -18,6 +18,10 @@
 
 2011-03-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-group-change-level): Allow putting foreign groups
+	onto the list of killed groups, too.  This makes killed nnimap groups,
+	for instance, more reliably not reappear.
+
 	* nnimap.el (nnimap-request-thread): Don't bug out when we can't find
 	the parent.
 
