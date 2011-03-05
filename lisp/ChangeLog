@@ -1,3 +1,13 @@
+2011-03-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el (gnus-valid-select-methods): Mark nnimap as a backend that
+	really have server-side marks.
+
+	* gnus-sum.el (gnus-propagate-marks): Change default back to nil again,
+	since most backends do not usefully have server-side marks.
+	(gnus-update-read-articles): Propagate marks to all backends that
+	really have server-side marks.
+
 2011-03-05  Antoine Levitt  <antoine.levitt@gmail.com>
 
 	* message.el (message-cite-reply-position, message-cite-style): New

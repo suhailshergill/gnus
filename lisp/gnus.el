@@ -1606,7 +1606,8 @@ slower."
     ("nnweb" none)
     ("nnrss" none)
     ("nnagent" post-mail)
-    ("nnimap" post-mail address prompt-address physical-address respool)
+    ("nnimap" post-mail address prompt-address physical-address respool
+     server-marks)
     ("nnmaildir" mail respool address)
     ("nnnil" none))
   "*An alist of valid select methods.
