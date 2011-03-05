@@ -12437,8 +12437,8 @@ UNREAD is a sorted list."
 	    ;; Propagate the read marks to the backend.
 	    (when (and (or gnus-propagate-marks
 			   (gnus-method-option-p
-			    'server-marks
-			    (gnus-find-method-for-group group)))
+			    (gnus-find-method-for-group group)
+			    'server-marks))
 		       (gnus-check-backend-function 'request-set-mark group))
 	      (let ((del (gnus-remove-from-range (gnus-info-read info) read))
 		    (add (gnus-remove-from-range read (gnus-info-read info))))
