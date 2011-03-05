@@ -1,3 +1,9 @@
+2011-03-05  Antoine Levitt  <antoine.levitt@gmail.com>
+
+	* message.el (message-cite-reply-position, message-cite-style): New
+	variables.
+	(message-yank-original): Use the new citation styles.
+
 2011-03-04  Daiki Ueno  <ueno@unixuser.org>
 
 	* message.el (message-options): Revert 22da67af (workaround for XEmacs
