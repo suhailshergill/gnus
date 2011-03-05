@@ -18,6 +18,9 @@
 
 2011-03-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-request-thread): Don't bug out when we can't find
+	the parent.
+
 	* gnus-sum.el (gnus-update-read-articles): Fix typo.
 
 	* gnus.el (gnus-valid-select-methods): Mark nnimap as a backend that
