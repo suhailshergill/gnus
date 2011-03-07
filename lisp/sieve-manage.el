@@ -275,7 +275,8 @@ Valid states are `closed', `initial', `nonauth', and `auth'.")
   (with-current-buffer buffer
     (let* ((auth-info (auth-source-search :host sieve-manage-server
                                           :port "sieve"
-                                          :max 1))
+                                          :max 1
+                                          :create t))
            (user-name (plist-get (nth 0 auth-info) :user))
            (user-password (plist-get (nth 0 auth-info) :secret))
            (user-password (if (functionp user-password)
