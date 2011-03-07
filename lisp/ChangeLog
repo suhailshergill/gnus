@@ -1,6 +1,8 @@
 2011-03-07  Julien Danjou  <julien@danjou.info>
 
 	* sieve-manage.el (sieve-sasl-auth): Create auth-info if not found.
+	(sieve-sasl-auth): Check that auth-source-search did return something,
+	or just return an empty string.
 
 2011-03-05  Antoine Levitt  <antoine.levitt@gmail.com>
 
