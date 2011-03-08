@@ -279,11 +279,14 @@ textual parts.")
     (current-buffer)))
 
 (defun nnimap-credentials (address ports)
-  (let ((found (nth 0 (auth-source-search :max 1
-					  :host address
-					  :port ports
-					  :require '(:user :secret)
-					  :create t))))
+  (let* ((auth-source-creation-prompts
+          '((user  . "IMAP user at %h: ")
+            (secret . "IMAP password for %u@%h: ")))
+         (found (nth 0 (auth-source-search :max 1
+                                           :host address
+                                           :port ports
+                                           :require '(:user :secret)
+                                           :create t))))
     (if found
         (list (plist-get found :user)
 	      (let ((secret (plist-get found :secret)))

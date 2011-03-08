@@ -3,6 +3,7 @@
 	* nnimap.el (nnimap-credentials): Keep the :save-function as the third
 	parameter in the credentials.
 	(nnimap-open-connection-1): Use it after a successful login.
+	(nnimap-credentials): Add IMAP-specific user and password prompt.
 
 	* auth-source.el (auth-source-search): Add :require parameter, taking a
 	list.  Document it and the :save-function return token.  Pass :require
