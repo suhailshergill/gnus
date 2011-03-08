@@ -1,3 +1,23 @@
+2011-03-08  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* nnimap.el (nnimap-credentials): Keep the :save-function as the third
+	parameter in the credentials.
+	(nnimap-open-connection-1): Use it after a successful login.
+
+	* auth-source.el (auth-source-search): Add :require parameter, taking a
+	list.  Document it and the :save-function return token.  Pass :require
+	down.  Change the CREATED message from a warning to a debug statement.
+	(auth-source-search-backends): Pass :require down.
+	(auth-source-netrc-search): Pass :require down.
+	(auth-source-netrc-parse): Use :require, if it's given, as a filter.
+	Change save prompt to indicate all modifications saved here are
+	deletions.
+	(auth-source-netrc-create): Take user login name as default in user
+	prompt.  Move all the save functionality to a lexically bound function
+	under the :save-function token in the returned list.
+	(auth-source-netrc-saver): New function, intended to be wrapped for
+	:save-function.
+
 2011-03-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-table-horizontal-line): Change the defaults for the table
