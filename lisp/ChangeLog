@@ -15,7 +15,8 @@
 	deletions.
 	(auth-source-netrc-create): Take user login name as default in user
 	prompt.  Move all the save functionality to a lexically bound function
-	under the :save-function token in the returned list.
+	under the :save-function token in the returned list.  Set up clearer
+	default prompts for user, host, port, and secret.
 	(auth-source-netrc-saver): New function, intended to be wrapped for
 	:save-function.
 

@@ -1056,10 +1056,10 @@ See `auth-source-search' for details on SPEC."
                                          "[any port]"))))
              (prompt (or (aget auth-source-creation-prompts r)
                          (case r
-                           ('secret "%p password for user %u, host %h: ")
-                           ('user "%p user name: ")
-                           ('host "%p host name for user %u: ")
-                           ('port "%p port for user %u and host %h: "))
+                           (secret "%p password for %u@%h: ")
+                           (user "%p user name for %h: ")
+                           (host "%p host name for user %u: ")
+                           (port "%p port for %u@%h: "))
                          (format "Enter %s (%%u@%%h:%%p): " r)))
              (prompt (auth-source-format-prompt
                       prompt
