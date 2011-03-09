@@ -769,7 +769,26 @@ while \(:host t) would find all host entries."
               (return 'no)))
           'no))))
 
-;;; Backend specific parsing: netrc/authinfo backend
+;;; (auth-source-pick-first-password :host "z.lifelogs.com")
+;;; (auth-source-pick-first-password :port "imap")
+(defun auth-source-pick-first-password (&rest spec)
+  "Pick the first secret found from applying SPEC to `auth-source-search'."
+  (let* ((result (nth 0 (apply 'auth-source-search (plist-put spec :max 1))))
+         (secret (plist-get result :secret)))
+
+    (if (functionp secret)
+        (funcall secret)
+      secret)))
+
+;; (auth-source-format-prompt "test %u %h %p" '((?u "user") (?h "host")))
+(defun auth-source-format-prompt (prompt alist)
+  "Format PROMPT using %x (for any character x) specifiers in ALIST."
+  (dolist (cell alist)
+    (let ((c (nth 0 cell))
+          (v (nth 1 cell)))
+      (when (and c v)
+        (setq prompt (replace-regexp-in-string (format "%%%c" c) v prompt)))))
+  prompt)
 
 (defun auth-source-ensure-strings (values)
   (unless (listp values)
@@ -779,6 +798,8 @@ while \(:host t) would find all host entries."
 		(format "%s" value)
 	      value))
 	  values))
+
+;;; Backend specific parsing: netrc/authinfo backend
 
 (defvar auth-source-netrc-cache nil)
 
@@ -997,17 +1018,6 @@ See `auth-source-search' for details on SPEC."
   (if (listp v)
       (nth 0 v)
     v))
-
-;; (auth-source-format-prompt "test %u %h %p" '((?u "user") (?h "host")))
-
-(defun auth-source-format-prompt (prompt alist)
-  "Format PROMPT using %x (for any character x) specifiers in ALIST."
-  (dolist (cell alist)
-    (let ((c (nth 0 cell))
-          (v (nth 1 cell)))
-      (when (and c v)
-        (setq prompt (replace-regexp-in-string (format "%%%c" c) v prompt)))))
-  prompt)
 
 ;;; (auth-source-search :host "nonesuch" :type 'netrc :max 1 :create t)
 ;;; (auth-source-search :host "nonesuch" :type 'netrc :max 1 :create t :create-extra-keys '((A "default A") (B)))
