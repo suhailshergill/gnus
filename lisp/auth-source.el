@@ -296,6 +296,34 @@ If the value is not a list, symmetric encryption will be used."
    msg))
 
 
+;;; (auth-source-read-char-choice "enter choice? " '(?a ?b ?q))
+(defun auth-source-read-char-choice (prompt choices)
+  "Read one of CHOICES by `read-char-choice', or `read-char'.
+`dropdown-list' support is disabled because it doesn't work reliably.
+Only one of CHOICES will be returned.  The PROMPT is augmented
+with \"[a/b/c] \" if CHOICES is '\(?a ?b ?c\)."
+  (when choices
+    (let* ((prompt-choices
+            (apply 'concat (loop for c in choices
+                                 collect (format "%c/" c))))
+           (prompt-choices (concat "[" (substring prompt-choices 0 -1) "] "))
+           (full-prompt (concat prompt prompt-choices))
+           k)
+
+      (while (not (memq k choices))
+        (setq k (cond
+                 ((and nil (require 'dropdown-list nil t))
+                  (let* ((blank (fill (copy-sequence prompt) ?.))
+                         (dlc (cons (format "%s %c" prompt (car choices))
+                                    (loop for c in (cdr choices)
+                                          collect (format "%s %c" blank c)))))
+                    (nth (dropdown-list dlc) choices)))
+                 ((fboundp 'read-char-choice)
+                  (read-char-choice full-prompt choices))
+                 (t (message "%s" full-prompt)
+                    (setq k (read-char))))))
+      k)))
+
 ;; (auth-source-pick nil :host "any" :port 'imap :user "joe")
 ;; (auth-source-pick t :host "any" :port 'imap :user "joe")
 ;; (setq auth-sources '((:source (:secrets default) :host t :port t :user "joe")
@@ -1136,15 +1164,12 @@ Respects `auth-source-save-behavior'."
     (goto-char (point-min))
 
     ;; ask AFTER we've successfully opened the file
-    (let ((prompt (format "Save auth info to file %s? %s: "
-                          file
-                          "y/n/N/e/?"))
+    (let ((prompt (format "Save auth info to file %s? " file))
           (done (not (eq auth-source-save-behavior 'ask)))
           (bufname "*auth-source Help*")
           k)
       (while (not done)
-        (message "%s" prompt)
-        (setq k (read-char))
+        (setq k (auth-source-read-char-choice prompt '(?y ?n ?N ?e ??)))
         (case k
           (?y (setq done t))
           (?? (save-excursion

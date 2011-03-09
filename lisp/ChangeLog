@@ -1,3 +1,11 @@
+2011-03-09  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el (auth-source-read-char-choice): New function to read a
+	character choice using `dropdown-list', `read-char-choice', or
+	`read-char'.  It appends "[a/b/c] " to the prompt if the choices were
+	'(?a ?b ?c).  The `dropdown-list' support is disabled for now.
+	(auth-source-netrc-saver): Use it.
+
 2011-03-08  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* nnimap.el (nnimap-credentials): Keep the :save-function as the third
