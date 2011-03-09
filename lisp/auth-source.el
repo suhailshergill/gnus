@@ -44,7 +44,6 @@
 (require 'gnus-util)
 (require 'assoc)
 (eval-when-compile (require 'cl))
-(eval-when-compile (require 'dropdown-list nil t))
 (eval-and-compile
   (or (ignore-errors (require 'eieio))
       ;; gnus-fallback-lib/ from gnus/lisp/gnus-fallback-lib
@@ -313,12 +312,6 @@ with \"[a/b/c] \" if CHOICES is '\(?a ?b ?c\)."
 
       (while (not (memq k choices))
         (setq k (cond
-                 ((and nil (featurep 'dropdown-list))
-                  (let* ((blank (fill (copy-sequence prompt) ?.))
-                         (dlc (cons (format "%s %c" prompt (car choices))
-                                    (loop for c in (cdr choices)
-                                          collect (format "%s %c" blank c)))))
-                    (nth (dropdown-list dlc) choices)))
                  ((fboundp 'read-char-choice)
                   (read-char-choice full-prompt choices))
                  (t (message "%s" full-prompt)
