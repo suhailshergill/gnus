@@ -65,12 +65,13 @@
      image-type-available-p insert-image libxml-parse-html-region
      mail-abbrevs-setup make-mode-line-mouse-map make-network-process
      mouse-minibuffer-check mouse-movement-p mouse-scroll-subr overlay-lists
-     pgg-display-output-buffer posn-point posn-window put-image read-event
-     recenter-top-bottom rmail-msg-restore-non-pruned-header
-     rmail-swap-buffers-maybe select-safe-coding-system shr-insert-document
-     sort-coding-systems track-mouse ucs-to-char url-generic-parse-url
-     url-insert-file-contents vcard-pretty-print w3-parse-buffer
-     w3m-detect-meta-charset w3m-region window-edges))
+     pgg-display-output-buffer posn-point posn-window put-image
+     read-char-choice read-event recenter-top-bottom
+     rmail-msg-restore-non-pruned-header rmail-swap-buffers-maybe
+     select-safe-coding-system shr-insert-document sort-coding-systems
+     track-mouse ucs-to-char url-generic-parse-url url-insert-file-contents
+     vcard-pretty-print w3-parse-buffer w3m-detect-meta-charset w3m-region
+     window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table buffer-save-without-query completion-styles

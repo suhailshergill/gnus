@@ -1,3 +1,7 @@
+2011-03-14  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	lpath.el: Fbind read-char-choice for XEmacs.
+
 2011-03-13  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth-source.el (auth-source-netrc-create): Show the default in the
