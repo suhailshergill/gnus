@@ -1452,8 +1452,8 @@ textual parts.")
   ;; Change \Delete etc to %Delete, so that the reader can read it.
   (subst-char-in-region (point-min) (point-max)
 			?\\ ?% t)
-  ;; Remove any MODSEQ entries in the buffer, because they may
-  ;; contain numbers that are too large for 32-bit Emacsen.
+  ;; Remove any MODSEQ entries in the buffer, because they may contain
+  ;; numbers that are too large for 32-bit Emacsen.
   (while (re-search-forward " MODSEQ ([0-9]+)" nil t)
     (replace-match "" t t))
   (goto-char (point-min))
@@ -1496,9 +1496,9 @@ textual parts.")
 			    (match-string 1)))
 		 (goto-char start)
 		 (setq highestmodseq
-		       (and (search-forward "HIGHESTMODSEQ "
+		       (and (re-search-forward "HIGHESTMODSEQ \\([0-9]+\\)"
 					    (or end (point-min)) t)
-			    (read (current-buffer))))
+			    (match-string 1)))
 		 (goto-char end)
 		 (forward-line -1))
 	       ;; The UID FETCH FLAGS was successful.
