@@ -648,8 +648,8 @@
 
 2011-02-13  Tassilo Horn  <tassilo@member.fsf.org>  (tiny change)
 
-	* nnimap.el (nnimap-request-accept-article, nnimap-process-quirk): Fix
-	Gcc processing on imap.
+	* nnimap.el (nnimap-request-accept-article, nnimap-process-quirk):
+	Fix Gcc processing on imap.
 
 2011-02-13  Teodor Zlatanov  <tzz@lifelogs.com>
 
