@@ -1,5 +1,15 @@
 2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-elide-ellipsis): Document the format specs in the
+	ellipsis.
+
+2011-03-15  Reiner Steib  <Reiner.Steib@gmx.de>
+
+	* message.el (message-elide-region): Allow the ellipsis to say how many
+	lines were removed.
+
+2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
 	* gnus-win.el (gnus-configure-frame): Protect against trying to restore
 	window configurations containing buffers that are now dead.
 
