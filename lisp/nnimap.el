@@ -1674,6 +1674,8 @@ textual parts.")
 	    (goto-char (point-max)))
           openp)
       (quit
+       (when debug-on-quit
+	 (debug "Quit"))
        ;; The user hit C-g while we were waiting: kill the process, in case
        ;; it's a gnutls-cli process that's stuck (tends to happen a lot behind
        ;; NAT routers).

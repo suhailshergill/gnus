@@ -1,3 +1,13 @@
+2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-int.el (gnus-open-server): Ditto.
+
+	* gnus-start.el (gnus-activate-group): Give a backtrace if
+	debug-on-quit is set and the user hits `C-g'.
+	(gnus-read-active-file): Ditto.
+
+	* gnus-group.el (gnus-group-read-ephemeral-group): Ditto.
+
 2011-03-15  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* message.el (message-yank-original): Use cond instead of CL case.
