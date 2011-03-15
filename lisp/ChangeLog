@@ -1,5 +1,8 @@
 2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-win.el (gnus-configure-frame): Protect against trying to restore
+	window configurations containing buffers that are now dead.
+
 	* nnimap.el (nnimap-parse-flags): Remove all MODSEQ entries before
 	parsing to avoid integer overflows.
 	(nnimap-parse-flags): Simplify the last change.
