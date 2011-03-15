@@ -1,3 +1,8 @@
+2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-parse-flags): Remove all MODSEQ entries before
+	parsing to avoid integer overflows.
+
 2011-03-15  Nelson Ferreira  <nelson.ferreira@ieee.org>  (tiny change)
 
 	* gnus-art.el (gnus-article-treat-body-boundary): Fix boundary width on

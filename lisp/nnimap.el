@@ -1505,20 +1505,14 @@ textual parts.")
 		(setq start end))
 	    (setq start (point))
 	    (goto-char end))
+	  ;; Remove any MODSEQ entries in the buffer, because they may
+	  ;; contain numbers that are too large for 32-bit Emacsen.
+	  (save-excursion
+	    (while (re-search-forward " MODSEQ ([0-9]+)" nil t)
+	      (replace-match "" t t)))
 	  (while (re-search-forward "^\\* [0-9]+ FETCH " start t)
 	    (let ((p (point)))
-	      ;; FIXME: For FETCH lines like "* 2971 FETCH (FLAGS (%Recent) UID
-	      ;; 12509 MODSEQ (13419098521433281274))" we get an
-	      ;; overflow-error.  The handler simply deletes that large number
-	      ;; and reads again.  But maybe there's a better fix...
-	      (setq elems (condition-case nil (read (current-buffer))
-			    (overflow-error
-			     ;; After an overflow-error, point is just after
-			     ;; the too large number.  So delete it and try
-			     ;; again.
-			     (delete-region (point) (progn (backward-word) (point)))
-			     (goto-char p)
-			     (read (current-buffer)))))
+	      (setq elems (read (current-buffer)))
 	      (push (cons (cadr (memq 'UID elems))
 			  (cadr (memq 'FLAGS elems)))
 		    articles)))
