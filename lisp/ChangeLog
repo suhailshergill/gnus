@@ -1,3 +1,9 @@
+2011-03-09  Antoine Levitt  <antoine.levitt@gmail.com>
+
+	* gnus-sum.el (gnus-articles-to-read): Use gnus-large-newsgroup as
+	default number of articles to display.
+	(gnus-articles-to-read): Use pretty names for prompt.
+
 2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-int.el (gnus-open-server): Ditto.
