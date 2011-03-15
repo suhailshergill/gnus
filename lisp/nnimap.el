@@ -340,6 +340,7 @@ textual parts.")
 	   (ports
 	    (cond
 	     ((or (eq nnimap-stream 'network)
+		  (eq nnimap-stream 'network-only)
 		  (eq nnimap-stream 'starttls))
 	      (nnheader-message 7 "Opening connection to %s..."
 				nnimap-address)

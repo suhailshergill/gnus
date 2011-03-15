@@ -1,5 +1,7 @@
 2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-open-connection-1): Allow `network-only', too.
+
 	* gssapi.el: New file separated out from imap.el to provide a general
 	Kerberos 5 connection facility for Emacs.
 
