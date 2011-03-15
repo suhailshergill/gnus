@@ -1,6 +1,9 @@
 2011-03-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* message.el (message-elide-ellipsis): Document the format specs in the
+	* gssapi.el: New file separated out from imap.el to provide a general
+	Kerberos 5 connection facility for Emacs.
+
+	* message.el (message-elide-ellipsis): Document the format spec
 	ellipsis.
 
 2011-03-15  Reiner Steib  <Reiner.Steib@gmx.de>
