@@ -2,6 +2,7 @@
 
 	* nnimap.el (nnimap-parse-flags): Remove all MODSEQ entries before
 	parsing to avoid integer overflows.
+	(nnimap-parse-flags): Simplify the last change.
 
 2011-03-15  Nelson Ferreira  <nelson.ferreira@ieee.org>  (tiny change)
 

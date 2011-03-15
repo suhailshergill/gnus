@@ -1452,6 +1452,11 @@ textual parts.")
   ;; Change \Delete etc to %Delete, so that the reader can read it.
   (subst-char-in-region (point-min) (point-max)
 			?\\ ?% t)
+  ;; Remove any MODSEQ entries in the buffer, because they may
+  ;; contain numbers that are too large for 32-bit Emacsen.
+  (while (re-search-forward " MODSEQ ([0-9]+)" nil t)
+    (replace-match "" t t))
+  (goto-char (point-min))
   (let (start end articles groups uidnext elems permanent-flags
 	      uidvalidity vanished highestmodseq)
     (dolist (elem sequences)
@@ -1505,11 +1510,6 @@ textual parts.")
 		(setq start end))
 	    (setq start (point))
 	    (goto-char end))
-	  ;; Remove any MODSEQ entries in the buffer, because they may
-	  ;; contain numbers that are too large for 32-bit Emacsen.
-	  (save-excursion
-	    (while (re-search-forward " MODSEQ ([0-9]+)" nil t)
-	      (replace-match "" t t)))
 	  (while (re-search-forward "^\\* [0-9]+ FETCH " start t)
 	    (let ((p (point)))
 	      (setq elems (read (current-buffer)))
