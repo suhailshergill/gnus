@@ -24,6 +24,11 @@
 	(nnimap-parse-flags): Store HIGHESTMODSEQ as a string, since it may be
 	too large for 32-bit Emacsen.
 
+2011-03-15  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* auth-source.el (auth-source-netrc-create):
+	* message.el (message-yank-original): Fix use of `case'.
+
 2011-03-15  Nelson Ferreira  <nelson.ferreira@ieee.org>  (tiny change)
 
 	* gnus-art.el (gnus-article-treat-body-boundary): Fix boundary width on
