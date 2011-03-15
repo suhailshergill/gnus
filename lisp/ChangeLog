@@ -1,3 +1,8 @@
+2011-03-15  Nelson Ferreira  <nelson.ferreira@ieee.org>  (tiny change)
+
+	* gnus-art.el (gnus-article-treat-body-boundary): Fix boundary width on
+	XEmacs, which was one character too wide.
+
 2011-03-09  Antoine Levitt  <antoine.levitt@gmail.com>
 
 	* gnus-sum.el (gnus-articles-to-read): Use gnus-large-newsgroup as
