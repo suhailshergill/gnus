@@ -1,5 +1,8 @@
 2011-03-16  Julien Danjou  <julien@danjou.info>
 
+	* mm-uu.el (mm-uu-dissect-text-parts): Only dissect handle that are
+	inline.
+
 	* gnus-art.el (article-hide-list-identifiers): Use
 	gnus-group-get-list-identifiers.
 
