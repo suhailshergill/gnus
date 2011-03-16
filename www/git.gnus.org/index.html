@@ -19,23 +19,27 @@ Instructions for checking Gnus out:<p>
 <p>
     <ul>
       <li>Public access:<pre>git clone http://git.gnus.org/gnus.git</pre></li>
-      <li>Committer access (note the SSL certificate is self-signed):<pre>
+      <li>Committer access (note the SSL certificate is signed with CACert.org and you <b>may</b> need to import their certificate bundle):
+        <i>(note: prepend <pre>GIT_SSL_NO_VERIFY=1 </pre> to each of the commands below to disable SSL verification if you can't import the CACert certificates.)</i>
+<pre>
 # this will print lots of debugging info
-GIT_SSL_NO_VERIFY=1 GIT_CURL_VERBOSE=1 git clone https://git.gnus.org/gnus.git
+GIT_CURL_VERBOSE=1 git clone https://git.gnus.org/gnus.git
 
 # this will be less verbose and probably OK
-GIT_SSL_NO_VERIFY=1 git clone https://git.gnus.org/gnus.git
+git clone https://git.gnus.org/gnus.git
 
 # this will be necessary if you have to use a proxy
-GIT_SSL_NO_VERIFY=1 HTTPS_PROXY=proxy.example.com:8080 git clone https://git.gnus.org/gnus.git
+HTTPS_PROXY=proxy.example.com:8080 git clone https://git.gnus.org/gnus.git
 
 # repeat the same steps for https://git.gnus.org/gnus-html.git if you want the HTML pages
 
 cd gnus
-
-# you should do this to tell git not to check the certificate (so GIT_SSL_NO_VERIFY is not needed anymore)
-git config http.sslVerify false
 	</pre>
+
+<pre>
+# if you needed GIT_SSL_NO_VERIFY above, do this to tell git not to check the certificate
+# DO NOT DO THIS UNLESS YOU ABSOLUTELY NEED IT!!!  git config http.sslVerify false
+</pre>
 
 	The committer should also have a <b>~/.netrc</b> file that says
 	<pre>machine git.gnus.org login yourlogin password yourpassword</pre>
