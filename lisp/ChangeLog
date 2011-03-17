@@ -1,5 +1,7 @@
 2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-visit-file): New command.
+
 	* nnimap.el (nnimap-fetch-inbox): Rewrite slightly last patch.
 
 2011-03-17  Bjørn Mork  <bjorn@mork.no>
