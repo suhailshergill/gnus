@@ -1,3 +1,7 @@
+2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-fetch-inbox): Rewrite slightly last patch.
+
 2011-03-17  Bjørn Mork  <bjorn@mork.no>
 
 	* nnimap.el (nnimap-fetch-inbox): Don't download bodies on ver4-capable
