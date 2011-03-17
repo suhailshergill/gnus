@@ -1,5 +1,8 @@
 2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el: Require mouse, which the build bot seems to say is
+	needed.
+
 	* dgnushack.el: Define url-retrieve-synchronously unless not defined.
 
 	* gravatar.el (gravatar-retrieve-synchronously): Use `url-retrieve' on
