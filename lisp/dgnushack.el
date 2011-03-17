@@ -137,14 +137,16 @@
     (autoload 'iswitchb-read-buffer "iswitchb")
     (autoload 'netrc-credentials "netrc")
     (defalias 'x-defined-colors 'ignore)
-    (unless (fboundp 'url-retrieve-synchronously)
-      (defalias 'url-retrieve-synchronously 'url-retrieve))
     (defalias 'read-color 'ignore)))
 
 (eval-and-compile
   (when (featurep 'xemacs)
     (unless (fboundp 'defadvice)
       (autoload 'defadvice "advice" nil nil 'macro))
+    (unless (boundp 'help-echo-owns-message)
+      (defvar help-echo-owns-message))
+    (unless (fboundp 'url-retrieve-synchronously)
+      (defalias 'url-retrieve-synchronously 'url-retrieve))
     (autoload 'Info-directory "info" nil t)
     (autoload 'Info-index "info" nil t)
     (autoload 'Info-index-next "info" nil t)

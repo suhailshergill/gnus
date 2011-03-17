@@ -1,5 +1,8 @@
 2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el: Bind help-echo-owns-message to avoid a compiler warning
+	on XEmacs.
+
 	* gnus-art.el: Require mouse, which the build bot seems to say is
 	needed.
 
