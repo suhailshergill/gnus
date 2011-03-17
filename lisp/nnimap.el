@@ -1762,11 +1762,13 @@ textual parts.")
     (format "(UID %s%s)"
 	    (format
 	     (if (nnimap-ver4-p)
-		 "BODY.PEEK[HEADER] BODY.PEEK"
+		 "BODY.PEEK"
 	       "RFC822.PEEK"))
 	    (if nnimap-split-download-body-default
 		"[]"
-	      "[1]")))
+	      (if (nnimap-ver4-p)
+		  "[HEADER]"
+		"[1]"))))
    t))
 
 (defun nnimap-split-incoming-mail ()
