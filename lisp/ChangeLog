@@ -1,5 +1,10 @@
 2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el: Define url-retrieve-synchronously unless not defined.
+
+	* gravatar.el (gravatar-retrieve-synchronously): Use `url-retrieve' on
+	XEmacs, since it doesn't have url-retrieve-synchronously.
+
 	* time-date.el (format-seconds): Use assoc instead of assoc-string,
 	since assoc-string doesn't exist in XEmacs.
 

@@ -137,6 +137,8 @@
     (autoload 'iswitchb-read-buffer "iswitchb")
     (autoload 'netrc-credentials "netrc")
     (defalias 'x-defined-colors 'ignore)
+    (unless (fboundp 'url-retrieve-synchronously)
+      (defalias 'url-retrieve-synchronously 'url-retrieve))
     (defalias 'read-color 'ignore)))
 
 (eval-and-compile
