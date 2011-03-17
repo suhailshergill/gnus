@@ -17,6 +17,7 @@ contrib/on-loginfo
 contrib/request-assign.future
 etc/Makefile
 lisp/*.elc
+lisp/*.rej
 lisp/Makefile
 lisp/TAGS
 lisp/auto-autoloads.el
