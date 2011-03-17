@@ -1,3 +1,8 @@
+2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* time-date.el (format-seconds): Use assoc instead of assoc-string,
+	since assoc-string doesn't exist in XEmacs.
+
 2011-03-17  Antoine Levitt  <antoine.levitt@gmail.com>
 
 	* gnus-group.el (gnus-group-list-ticked): New function.
