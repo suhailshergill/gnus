@@ -1,5 +1,8 @@
 2011-03-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* time-date.el (format-seconds): Use assoc instead of assoc-string to
+	avoid warning on XEmacs.
+
 	* dgnushack.el: Bind help-echo-owns-message to avoid a compiler warning
 	on XEmacs.
 

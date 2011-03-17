@@ -310,7 +310,7 @@ This function does not work for SECONDS greater than `most-positive-fixnum'."
       (unless (string-equal spec "%")
         (or (setq match (assoc (downcase spec) units))
             (error "Bad format specifier: `%s'" spec))
-        (if (assoc-string spec usedunits t)
+        (if (assoc (downcase spec) usedunits)
             (error "Multiple instances of specifier: `%s'" spec))
         (if (string-equal (car match) "z")
             (setq zeroflag t)
