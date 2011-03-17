@@ -44,6 +44,8 @@ COMMIT_STRING = $(CODENAME)Gnus v$(VERSION) is released.
 
 all: lick info
 
+warn: all
+
 lick:
 	cd lisp && $(MAKE) EMACS="$(EMACS)" lispdir="$(lispdir)" all
 
