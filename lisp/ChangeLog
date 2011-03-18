@@ -1,3 +1,7 @@
+2011-03-18  Julien Danjou  <julien@danjou.info>
+
+	* gnus-util.el (gnus-buffer-live-p): Simplify gnus-buffer-live-p.
+
 2011-03-17  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
 
 	* gnus.el: No Gnus v0.15 is released.
