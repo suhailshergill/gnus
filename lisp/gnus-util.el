@@ -674,7 +674,7 @@ If N, return the Nth ancestor instead."
 
 (defsubst gnus-buffer-live-p (buffer)
   "Say whether BUFFER is alive or not."
-  (buffer-live-p (get-buffer buffer)))
+  (and buffer (buffer-live-p (get-buffer buffer))))
 
 (defun gnus-horizontal-recenter ()
   "Recenter the current buffer horizontally."
