@@ -572,8 +572,7 @@
       (mm-with-unibyte-buffer
 	(mm-insert-part handle)
 	(mm-decompress-buffer
-	 (or (mail-content-type-get (mm-handle-disposition handle) 'name)
-	     (mail-content-type-get (mm-handle-disposition handle) 'filename))
+         (mm-handle-filename handle)
 	 t t)
 	(unless charset
 	  (setq coding-system (mm-find-buffer-file-coding-system)))
