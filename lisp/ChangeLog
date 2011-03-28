@@ -1,3 +1,9 @@
+2011-03-28  Brian T. Sniffen  <bsniffen@akamai.com>  (tiny change)
+
+	* imap.el (imap-shell-open, imap-process-connection-type): Use
+	imap-process-connection-type for 'shell' streams as well as
+	Kerberos, SSL, other subprocesses.
+
 2011-03-26  Chong Yidong  <cyd@stupidchicken.com>
 
 	* proto-stream.el: Changes preparatory to merging open-protocol-stream
