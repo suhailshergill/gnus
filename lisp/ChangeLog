@@ -1,5 +1,8 @@
 2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-score.el (gnus-score-string): Fix calling convention of
+	`gnus-simplify-buffer-fuzzy' after last patches.
+
 	* gnus-sum.el (gnus-update-marks): Don't send any marks updates to the
 	server for articles we didn't get any headers for.  This is a sanity
 	check.
