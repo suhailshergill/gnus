@@ -1,5 +1,8 @@
 2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-agent.el (gnus-agent-fetch-headers): Don't message if we're not
+	downloading anything.
+
 	* gnus.el (gnus-splash-svg-color-symbols): Removed superfluous `and'.
 
 2011-03-29  Adam Sjøgren  <asjo@koldfront.dk>
