@@ -1,3 +1,12 @@
+2011-03-29  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-unfollowed-groups): Add
+	"archive:sent" to the unfollowed group regex (for the recent Gnus
+	archive:sent-YYYY-MM-DD groups).
+	(gnus-registry-split-fancy-with-parent): Bail out early in sender
+	tracking if there are more than `gnus-registry-max-track-groups'
+	matches.
+
 2011-03-29  Stefan Monnier  <monnier@iro.umontreal.ca>
 
 	* message.el (message--yank-original-internal): New function to do the
