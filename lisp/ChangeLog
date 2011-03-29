@@ -1,5 +1,8 @@
 2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gssapi.el (open-gssapi-stream): Remove the last mentions of the IMAP
+	stuff.
+
 	* gnus-score.el (gnus-score-string): Fix calling convention of
 	`gnus-simplify-buffer-fuzzy' after last patches.
 
