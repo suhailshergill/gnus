@@ -6068,14 +6068,23 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 		    'request-set-mark gnus-newsgroup-name)
 		   (not (gnus-article-unpropagatable-p (cdr type))))
 	  (let* ((old (cdr (assq (cdr type) (gnus-info-marks info))))
-		 (del (gnus-remove-from-range (gnus-copy-sequence old) list))
-		 (add (gnus-remove-from-range
-		       (gnus-copy-sequence list) old)))
+		 ;; Don't do anything about marks for articles we
+		 ;; didn't actually get any headers for.
+		 (existing (gnus-compress-sequence gnus-newsgroup-articles))
+		 (del
+		  (gnus-sorted-range-intersection
+		   existing
+		   (gnus-remove-from-range (gnus-copy-sequence old) list)))
+		 (add
+		  (gnus-sorted-range-intersection
+		   existing
+		   (gnus-remove-from-range
+		    (gnus-copy-sequence list) old))))
 	    (when add
 	      (push (list add 'add (list (cdr type))) delta-marks))
 	    (when del
-	      ;; Don't delete marks from outside the active range.  This
-	      ;; shouldn't happen, but is a sanity check.
+	      ;; Don't delete marks from outside the active range.
+	      ;; This shouldn't happen, but is a sanity check.
 	      (setq del (gnus-sorted-range-intersection
 			 (gnus-active gnus-newsgroup-name) del))
 	      (push (list del 'del (list (cdr type))) delta-marks))))

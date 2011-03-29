@@ -1,3 +1,9 @@
+2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-update-marks): Don't send any marks updates to the
+	server for articles we didn't get any headers for.  This is a sanity
+	check.
+
 2011-03-29  Michael Welsh Duggan  <md5i@md5i.com>
 
 	* nnimap.el (nnimap-open-connection-1): Is the login responds with a
