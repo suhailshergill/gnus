@@ -1110,7 +1110,7 @@ be set in `.emacs' instead."
   (let ((type (plist-get (cdr list) :type))
         (file (plist-get (cdr list) :file))
         (color-symbols (plist-get (cdr list) :color-symbols)))
-    (if (and (string= type "svg"))
+    (if (string= type "svg")
         (let ((data (with-temp-buffer (insert-file file) (buffer-string))))
           (mapc (lambda (rule)
                   (setq data (replace-regexp-in-string

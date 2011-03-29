@@ -1,3 +1,7 @@
+2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el (gnus-splash-svg-color-symbols): Removed superfluous `and'.
+
 2011-03-29  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* gnus.el (gnus-group-startup-message): Prefer svg file and replace
