@@ -1,3 +1,8 @@
+2011-03-29  Julien Danjou  <julien@danjou.info>
+
+	* mm-view.el (mm-display-inline-fontify): Use `set-normal-mode' with
+	local variables disabled rather than `normal-mode'.
+
 2011-03-28  Brian T. Sniffen  <bsniffen@akamai.com>  (tiny change)
 
 	* imap.el (imap-shell-open, imap-process-connection-type): Use
