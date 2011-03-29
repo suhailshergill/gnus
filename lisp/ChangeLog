@@ -1,3 +1,11 @@
+2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-simplify-buffer-fuzzy): Take the regexp explicitly
+	instead of using the global gnus-simplify-subject-fuzzy-regexp.
+	(gnus-simplify-subject-fuzzy): Use the local
+	gnus-simplify-subject-fuzzy-regex instead of the global one.  This
+	makes using this variable in group parameters work.
+
 2011-03-29  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-registry.el (gnus-registry-unfollowed-groups): Add
