@@ -15,6 +15,11 @@
 	nntp-open-plain-stream value.
 	(nntp-open-connection): Recognize that value.
 
+2011-03-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* dgnushack.el: Only do the defcustom compilation thing on XEmacs,
+	where it seems to be needed.
+
 2011-03-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gssapi.el (open-gssapi-stream): Remove the last mentions of the IMAP
