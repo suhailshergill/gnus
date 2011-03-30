@@ -250,7 +250,8 @@ in `defcustom' forms."
 	    (search-forward " 'foo '(byte-code " nil t))
 	(kill-buffer outbuf)))))
 
-(when (dgnushack-emacs-compile-defcustom-p)
+(when (and (featurep 'xemacs)
+	   (dgnushack-emacs-compile-defcustom-p))
   (maybe-fbind '(defined-colors face-attribute))
   (maybe-bind '(idna-program installation-directory)))
 
