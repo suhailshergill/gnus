@@ -8,6 +8,11 @@
 	* mm-view.el (mm-display-inline-fontify): Do not fontify with
 	fundamental-mode.
 
+2011-04-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-get-unread-articles): Don't try to contact denied
+	servers.
+
 2011-03-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-update-marks): Revert intersection change, which
