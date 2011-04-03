@@ -32,7 +32,10 @@
 
 (eval-and-compile
   (require 'nnheader)
-  (require 'network-stream))
+  ;; In Emacs 24, `open-protocol-stream' is an autoloaded alias for
+  ;; `make-network-stream'.
+  (unless (fboundp 'open-protocol-stream)
+    (require 'proto-stream)))
 
 (eval-when-compile
   (require 'cl))
