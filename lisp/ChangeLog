@@ -5,6 +5,8 @@
 	(registry-lookup-breaks-before-lexbind): New method to demonstrate
 	pre-lexbind merge bug.
 	(registry-usage-test): Use it.
+	(initialize-instance, registry-db): Move the non-function initforms
+	back to the class definition.
 
 	* gnus-registry.el (gnus-registry-fixup-registry): New function to
 	fixup the parameters that can be customized by the user between
