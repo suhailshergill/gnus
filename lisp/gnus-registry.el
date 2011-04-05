@@ -218,17 +218,15 @@ the Bit Bucket."
 
 (defun gnus-registry-make-db (&optional file)
   (interactive "fGnus registry persistence file: \n")
-  (registry-db
-   "Gnus Registry"
-   :file (or file gnus-registry-cache-file)
-   :max-hard (or gnus-registry-max-entries
-                 most-positive-fixnum)
-   :max-soft (or gnus-registry-max-pruned-entries
-                 most-positive-fixnum)
-   :precious (append gnus-registry-extra-entries-precious
-                     '())
-   :tracked (append gnus-registry-track-extra
-                    '(mark group keyword))))
+  (gnus-registry-fixup-registry
+   (registry-db
+    "Gnus Registry"
+    :file (or file gnus-registry-cache-file)
+    ;; these parameters are set in `gnus-registry-fixup-registry'
+    :max-hard most-positive-fixnum
+    :max-soft most-positive-fixnum
+    :precious nil
+    :tracked nil)))
 
 (defvar gnus-registry-db (gnus-registry-make-db)
   "*The article registry by Message ID.  See `registry-db'")
@@ -249,7 +247,8 @@ This is not required after changing `gnus-registry-cache-file'."
     (condition-case nil
         (progn
           (gnus-message 5 "Reading Gnus registry from %s..." file)
-          (setq gnus-registry-db (eieio-persistent-read file))
+          (setq gnus-registry-db (gnus-registry-fixup-registry
+                                  (eieio-persistent-read file)))
           (gnus-message 5 "Reading Gnus registry from %s...done" file))
       (error
        (gnus-message
@@ -257,6 +256,22 @@ This is not required after changing `gnus-registry-cache-file'."
         "The Gnus registry could not be loaded from %s, creating a new one"
         file)
        (gnus-registry-remake-db t)))))
+
+(defun gnus-registry-fixup-registry (db)
+  (when db
+    (oset db :precious
+          (append gnus-registry-extra-entries-precious
+                  '()))
+    (oset db :max-hard
+          (or gnus-registry-max-entries
+              most-positive-fixnum))
+    (oset db :max-soft
+          (or gnus-registry-max-pruned-entries
+              most-positive-fixnum))
+    (oset db :tracked
+          (append gnus-registry-track-extra
+                  '(mark group keyword))))
+  db)
 
 (defun gnus-registry-save (&optional file db)
   "Save the registry cache file."
@@ -295,7 +310,7 @@ This is not required after changing `gnus-registry-cache-file'."
   (let ((to (gnus-group-guess-full-name-from-command-method group)))
     (when (and (stringp id) (string-match "\r$" id))
       (setq id (substring id 0 -1)))
-    (gnus-message 7 "Registry: article %s spooled to %s"
+    (gnus-message 7 "Gnus registry: article %s spooled to %s"
                   id
                   to)
     (gnus-registry-handle-action id nil to subject sender)))
@@ -321,6 +336,9 @@ This is not required after changing `gnus-registry-cache-file'."
           (add-to-list 'new (second kv) t)
           (setq entry (cons new
                             (assq-delete-all (first kv) entry))))))
+    (gnus-message 10 "Gnus registry: new entry for %s is %S"
+                  id
+                  entry)
     (registry-insert db id entry)))
 
 ;; Function for nn{mail|imap}-split-fancy: look up all references in
@@ -387,13 +405,14 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
          9
          "%s is looking for matches for reference %s from [%s]"
          log-agent reference refstr)
-        (loop for group in (gnus-registry-get-id-key reference 'group)
-              when (gnus-registry-follow-group-p group)
-              do (gnus-message
-                  7
-                  "%s traced the reference %s from [%s] to group %s"
-                  log-agent reference refstr group)
-              collect group into found))
+        (setq found
+              (loop for group in (gnus-registry-get-id-key reference 'group)
+                    when (gnus-registry-follow-group-p group)
+                    do (gnus-message
+                        7
+                        "%s traced the reference %s from [%s] to group %s"
+                        log-agent reference refstr group)
+                    collect group)))
       ;; filter the found groups and return them
       ;; the found groups are the full groups
       (setq found (gnus-registry-post-process-groups
@@ -481,10 +500,10 @@ possible.  Uses `gnus-registry-split-strategy'."
                                      (> (gethash a freq 0)
                                         (gethash b freq 0))))))))))
 
-      (dolist (group groups)
-        (let ((m1 (gnus-find-method-for-group group))
-              (m2 (or gnus-command-method
-                      (gnus-find-method-for-group gnus-newsgroup-name)))
+    (dolist (group groups)
+      (let ((m1 (gnus-find-method-for-group group))
+            (m2 (or gnus-command-method
+                    (gnus-find-method-for-group gnus-newsgroup-name)))
             (short-name (gnus-group-short-name group)))
         (if (gnus-methods-equal-p m1 m2)
             (progn
@@ -500,14 +519,20 @@ possible.  Uses `gnus-registry-split-strategy'."
            "%s ignored foreign group %s"
            log-agent group))))
 
-      ;; is there just one group?
-      (if (= (length out) 1)
-          out
-        (gnus-message
+    ;; is there just one group?
+    (cond
+     ((= (length out) 1) out)
+     ((null out)
+      (gnus-message
+       5
+       "%s: no matches for %s %s."
+       log-agent out mode key)
+      nil)
+     (t (gnus-message
          5
          "%s: too many extra matches (%s) for %s %s.  Returning none."
          log-agent out mode key)
-        nil)))
+        nil))))
 
 (defun gnus-registry-follow-group-p (group)
   "Determines if a group name should be followed.
@@ -819,6 +844,7 @@ only the last one's marks are returned."
 
     (message "Looking up individual keys (gnus-registry-id-key)")
     (should (equal (gnus-registry-get-id-key "34" 'group) '("togroup")))
+    (should (equal (gnus-registry-get-id-key "34" 'subject) '("subject 4")))
     (message "Trying to insert a duplicate key")
     (should-error (registry-insert db "55" '()))
     (message "Looking up individual keys (gnus-registry-get-or-make-entry)")

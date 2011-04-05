@@ -1,3 +1,16 @@
+2011-04-05  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-fixup-registry): New function to
+	fixup the parameters that can be customized by the user between
+	save/read cycles.
+	(gnus-registry-read): Use it.
+	(gnus-registry-make-db): Use it.
+	(gnus-registry-spool-action, gnus-registry-handle-action): Fix
+	messaging.
+	(gnus-registry--split-fancy-with-parent-internal): Fix loop.
+	(gnus-registry-post-process-groups): Use `cond' for better messaging.
+	(gnus-registry-usage-test): Add subject lookup test.
+
 2011-04-03  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* registry.el: New library to manage gnus-registry-style data.
