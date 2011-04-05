@@ -147,6 +147,15 @@ Returns a alist of the key followed by the entry in a list, not a cons cell."
                (list k (gethash k data))))
            keys))))
 
+(defmethod registry-lookup-breaks-before-lexbind ((db registry-db) keys)
+  "Search for KEYS in the registry-db THIS.
+Returns a alist of the key followed by the entry in a list, not a cons cell."
+  (let ((data (oref db :data)))
+    (delq nil
+          (loop for key in keys
+                when (gethash key data)
+                collect (list key (gethash key data))))))
+
 (defmethod registry-lookup-secondary ((db registry-db) tracksym
                                       &optional create)
   "Search for TRACKSYM in the registry-db THIS.
@@ -345,6 +354,12 @@ Removes only entries without the :precious keys."
     (should (= 58 (caadr (registry-lookup db '(1 58 99)))))
     (message "Grouped individual lookup")
     (should (= 3 (length (registry-lookup db '(1 58 99)))))
+    (message "Individual lookup (breaks before lexbind)")
+    (should (= 58
+               (caadr (registry-lookup-breaks-before-lexbind db '(1 58 99)))))
+    (message "Grouped individual lookup (breaks before lexbind)")
+    (should (= 3
+               (length (registry-lookup-breaks-before-lexbind db '(1 58 99)))))
     (message "Search")
     (should (= n (length (registry-search db :all t))))
     (should (= n (length (registry-search db :member '((sender "me"))))))
