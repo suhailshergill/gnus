@@ -216,6 +216,22 @@ the Bit Bucket."
   :type '(radio (const :format "Unlimited " nil)
                 (integer :format "Maximum number: %v")))
 
+(defun gnus-registry-fixup-registry (db)
+  (when db
+    (oset db :precious
+          (append gnus-registry-extra-entries-precious
+                  '()))
+    (oset db :max-hard
+          (or gnus-registry-max-entries
+              most-positive-fixnum))
+    (oset db :max-soft
+          (or gnus-registry-max-pruned-entries
+              most-positive-fixnum))
+    (oset db :tracked
+          (append gnus-registry-track-extra
+                  '(mark group keyword))))
+  db)
+
 (defun gnus-registry-make-db (&optional file)
   (interactive "fGnus registry persistence file: \n")
   (gnus-registry-fixup-registry
@@ -256,22 +272,6 @@ This is not required after changing `gnus-registry-cache-file'."
         "The Gnus registry could not be loaded from %s, creating a new one"
         file)
        (gnus-registry-remake-db t)))))
-
-(defun gnus-registry-fixup-registry (db)
-  (when db
-    (oset db :precious
-          (append gnus-registry-extra-entries-precious
-                  '()))
-    (oset db :max-hard
-          (or gnus-registry-max-entries
-              most-positive-fixnum))
-    (oset db :max-soft
-          (or gnus-registry-max-pruned-entries
-              most-positive-fixnum))
-    (oset db :tracked
-          (append gnus-registry-track-extra
-                  '(mark group keyword))))
-  db)
 
 (defun gnus-registry-save (&optional file db)
   "Save the registry cache file."

@@ -99,42 +99,42 @@
             :custom float
             :documentation "The registry version.")
    (max-hard :initarg :max-hard
-             :initform 5000000
              :type integer
              :custom integer
              :documentation "Never accept more than this many elements.")
    (max-soft :initarg :max-soft
-             :initform 50000
              :type integer
              :custom integer
              :documentation "Prune as much as possible to get to this size.")
    (tracked :initarg :tracked
-            :initform nil
             :type t
             :documentation "The tracked (indexed) fields, a list of symbols.")
    (precious :initarg :precious
-             :initform nil
              :type t
              :documentation "The precious fields, a list of symbols.")
    (tracker :initarg :tracker
-            :initform (make-hash-table :size 100 :rehash-size 2.0)
-            :type t
+            :type hash-table
             :documentation "The field tracking hashtable.")
    (data :initarg :data
-         :initform (make-hash-table :size 10000 :rehash-size 2.0 :test 'equal)
-         :type t
+         :type hash-table
          :documentation "The data hashtable.")))
 
-;; (defmethod initialize-instance :after ((this registry-db) slots)
-;;   "Set value of data slot of THIS after initialization."
-;;   (with-slots (data tracker max-hard max-soft tracked precious version) this
-;;     (setq data (make-hash-table :size 10000 :rehash-size 2.0 :test 'equal)
-;;           tracker (make-hash-table :size 100 :rehash-size 2.0)
-;;           max-hard 5000000
-;;           max-soft 50000
-;;           tracked nil
-;;           precious nil
-;;           version 0.1)))
+(defmethod initialize-instance :after ((this registry-db) slots)
+  "Set value of data slot of THIS after initialization."
+  ;; 'data' will already be set if read from file, so don't overwrite it.
+  (with-slots (data tracker tracked precious max-soft max-hard) this
+    (unless (member :data slots)
+      (setq data (make-hash-table :size 10000 :rehash-size 2.0 :test 'equal)))
+    (unless (member :tracker slots)
+      (setq tracker (make-hash-table :size 100 :rehash-size 2.0)))
+    (unless (member :max-soft slots)
+      (setq max-soft 50000))
+    (unless (member :max-hard slots)
+      (setq max-hard 5000000))
+    (unless (member :tracked slots)
+      (setq tracked nil))
+    (unless (member :precious slots)
+      (setq precious nil))))
 
 (defmethod registry-lookup ((db registry-db) keys)
   "Search for KEYS in the registry-db THIS.

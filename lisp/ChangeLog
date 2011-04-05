@@ -1,5 +1,8 @@
 2011-04-05  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* registry.el (registry-db, initialize-instance): Set up constructor
+	instead of :initform arguments for the sake of older Emacsen.
+
 	* gnus-registry.el (gnus-registry-fixup-registry): New function to
 	fixup the parameters that can be customized by the user between
 	save/read cycles.
