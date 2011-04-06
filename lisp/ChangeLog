@@ -1,3 +1,9 @@
+2011-04-06  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-post-process-groups)
+	(gnus-registry--split-fancy-with-parent-internal): Fix splitting bugs
+	and provide better messaging.
+
 2011-04-06  David Engster  <dengste@eml.cc>
 
 	* Makefile.in (fail-on-warning): New rule to compile with warnings as
