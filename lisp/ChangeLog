@@ -1,3 +1,14 @@
+2011-04-06  David Engster  <dengste@eml.cc>
+
+	* Makefile.in (fail-on-warning): New rule to compile with warnings as
+	errors.
+
+	* dgnushack.el (dgnushack-compile-error-on-warn): New function to call
+	dgnushack-compile with error-on-warn enabled, and to signal an error if
+	clean compilation failed.
+	(dgnushack-compile): New argument 'error-on-warn'.  If non-nil, compile
+	with `byte-compile-error-on-warn'.  Return nil if errors occured.
+
 2011-04-06  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-registry.el: Don't use ERT if it's not available.  Load it

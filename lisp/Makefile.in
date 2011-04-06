@@ -25,6 +25,9 @@ clean-some:
 warn: clean-some gnus-load.el
 	$(EMACS_COMP) --eval '(dgnushack-compile t)' 2>&1 | egrep -v "variable G|inhibit-point-motion-hooks|coding-system|temp-results|variable gnus|variable nn|scroll-in-place|deactivate-mark|filladapt-mode|byte-code-function-p|print-quoted|ps-right-header|ps-left-header|article-inhibit|print-escape|ssl-program-arguments|message-log-max"
 
+fail-on-warning: clean-some gnus-load.el
+	$(EMACS_COMP) -f dgnushack-compile-error-on-warn
+
 # The "clever" rule is unsafe, since redefined macros are loaded from
 # .elc files, and not the .el file.
 clever some l: gnus-load.el
