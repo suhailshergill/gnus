@@ -130,7 +130,7 @@
          :type hash-table
          :documentation "The data hashtable.")))
 
-(defmethod initialize-instance :after ((this registry-db) slots)
+(defmethod initialize-instance :AFTER ((this registry-db) slots)
   "Set value of data slot of THIS after initialization."
   (with-slots (data tracker) this
     (unless (member :data slots)

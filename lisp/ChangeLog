@@ -1,3 +1,8 @@
+2011-04-06  David Engster  <dengste@eml.cc>
+
+	* registry.el (initialize-instance): Change :after to :AFTER to be
+	compatible with old EIEIO version in XEmacs.
+
 2011-04-06  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-registry.el (gnus-registry-post-process-groups)
