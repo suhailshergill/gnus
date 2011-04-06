@@ -58,10 +58,11 @@
 (eval-when-compile (require 'cl))
 
 (eval-when-compile
-  (when (null (require 'ert nil t))
+  (when (null (ignore-errors (require 'ert)))
     (defmacro* ert-deftest (name () &body docstring-keys-and-body))))
 
-(require 'ert nil t)
+(ignore-errors
+  (require 'ert))
 (require 'gnus)
 (require 'gnus-int)
 (require 'gnus-sum)

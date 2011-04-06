@@ -1,5 +1,10 @@
 2011-04-06  David Engster  <dengste@eml.cc>
 
+	* registry.el, gnus-registry.el: Use `ignore-errors' instead of third
+	argument NOERROR for `require', since XEmacs 21.4 does not support it.
+
+2011-04-06  David Engster  <dengste@eml.cc>
+
 	* registry.el (initialize-instance): Change :after to :AFTER to be
 	compatible with old EIEIO version in XEmacs.
 

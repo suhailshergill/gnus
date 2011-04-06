@@ -78,10 +78,11 @@
 ;;; Code:
 
 (eval-when-compile
-  (when (null (require 'ert nil t))
+  (when (null (ignore-errors (require 'ert)))
     (defmacro* ert-deftest (name () &body docstring-keys-and-body))))
 
-(require 'ert nil t)
+(ignore-errors
+  (require 'ert))
 
 (eval-when-compile (require 'cl))
 (eval-and-compile
