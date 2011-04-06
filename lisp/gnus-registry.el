@@ -61,6 +61,7 @@
   (when (null (require 'ert nil t))
     (defmacro* ert-deftest (name () &body docstring-keys-and-body))))
 
+(require 'ert nil t)
 (require 'gnus)
 (require 'gnus-int)
 (require 'gnus-sum)

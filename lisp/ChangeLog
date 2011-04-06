@@ -1,10 +1,12 @@
 2011-04-06  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* gnus-registry.el: Don't use ERT if it's not available.
+	* gnus-registry.el: Don't use ERT if it's not available.  Load it
+	unconditionally anyway, discarding errors.
 	(gnus-registry-delete-entries): New convenience function.
 	(gnus-registry-import-eld): Import from old .eld registry.
 
-	* registry.el: Don't use ERT if it's not available.
+	* registry.el: Don't use ERT if it's not available.  Load it
+	unconditionally anyway, discarding errors.
 
 	* proto-stream.el (gnutls-negotiate): Revert inadvertent commit of the
 	version from the Claudio Bley GnuTLS patch (extra optional parameters
