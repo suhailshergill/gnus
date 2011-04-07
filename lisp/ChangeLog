@@ -1,3 +1,7 @@
+2011-04-07  David Engster  <dengste@eml.cc>
+
+	* Makefile.in (check, test-registry): New rules for test-suite.
+
 2011-04-06  David Engster  <dengste@eml.cc>
 
 	* registry.el, gnus-registry.el: Use `ignore-errors' instead of third

@@ -1,3 +1,7 @@
+2011-04-07  David Engster  <dengste@eml.cc>
+
+	* Makefile.in (check): New rule for starting test-suite.
+
 2011-04-06  David Engster  <dengste@eml.cc>
 
 	* Makefile.in (lick-fail-on-warning): New rule to compile with warnings

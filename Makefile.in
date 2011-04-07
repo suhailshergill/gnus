@@ -71,6 +71,9 @@ uninstall:
 GNUS-NEWS: texi/gnus-news.texi
 	cd texi && $(MAKE) GNUS-NEWS
 
+check:	
+	cd lisp && $(MAKE) EMACS="$(EMACS)" lispdir="$(lispdir)" check
+
 # Rule for Lars and nobody else.
 some:
 	cd lisp && $(MAKE) EMACS="$(EMACS)" some
