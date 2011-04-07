@@ -1,3 +1,9 @@
+2011-04-07  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-start.el (gnus-gnus-to-newsrc-format): Add a way to run
+	interactively so the newsrc file can contain foreign groups too.
+	Useful for debugging but not much for users.
+
 2011-04-07  David Engster  <dengste@eml.cc>
 
 	* registry.el (registry-usage-test): Only do
