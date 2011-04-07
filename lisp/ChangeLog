@@ -1,5 +1,11 @@
 2011-04-07  David Engster  <dengste@eml.cc>
 
+	* registry.el (registry-usage-test): Only do
+	`registry-lookup-breaks-before-lexbind' testing for Emacs24 with
+	lexical binding.
+
+2011-04-07  David Engster  <dengste@eml.cc>
+
 	* Makefile.in (check, test-registry): New rules for test-suite.
 
 2011-04-06  David Engster  <dengste@eml.cc>
