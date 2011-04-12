@@ -1,3 +1,10 @@
+2011-04-12  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry--split-fancy-with-parent-internal):
+	Fix logic bug.
+	(gnus-registry-post-process-groups): Fix logging of no results and
+	quote sender and subject.
+
 2011-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* proto-stream.el (proto-stream-open-starttls): Only do opportunistic

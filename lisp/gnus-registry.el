@@ -428,9 +428,9 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
      (when (and (null found)
                 (memq 'sender gnus-registry-track-extra)
                 sender
-                (gnus-grep-in-list
-                 sender
-                 gnus-registry-unfollowed-addresses))
+                (not (gnus-grep-in-list
+                      sender
+                      gnus-registry-unfollowed-addresses)))
        (let ((groups (apply
                       'append
                       (mapcar
@@ -564,12 +564,12 @@ possible.  Uses `gnus-registry-split-strategy'."
      ((null out)
       (gnus-message
        5
-       "%s: no matches for %s %s."
-       log-agent out mode key)
+       "%s: no matches for %s '%s'."
+       log-agent mode key)
       nil)
      (t (gnus-message
          5
-         "%s: too many extra matches (%s) for %s %s.  Returning none."
+         "%s: too many extra matches (%s) for %s '%s'.  Returning none."
          log-agent out mode key)
         nil))))
 
