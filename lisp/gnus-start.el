@@ -1724,8 +1724,7 @@ If SCAN, request a scan of that group as well."
     (dolist (elem type-cache)
       (destructuring-bind (method method-type infos early-data) elem
 	(when (and method infos
-		   (not (eq (gnus-server-status method)
-			    'denied)))
+		   (gnus-method-denied-p method))
 	  (let ((updatep (gnus-check-backend-function
 			  'request-update-info (car method))))
 	    ;; See if any of the groups from this method require updating.

@@ -1,3 +1,7 @@
+2011-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-get-unread-articles): Slight cleanup.
+
 2011-04-12  Stig Sandbeck Mathisen  <ssm@fnord.no>  (tiny change)
 
 	* gnus-sum.el (gnus-summary-select-article-buffer): Doc fix.
