@@ -258,7 +258,7 @@ the Bit Bucket."
 This is not required after changing `gnus-registry-cache-file'."
   (interactive (list (y-or-n-p "Remake and CLEAR the Gnus registry? ")))
   (when forsure
-    (gnus-message 1 "Remaking the Gnus registry")
+    (gnus-message 4 "Remaking the Gnus registry")
     (setq gnus-registry-db (gnus-registry-make-db))))
 
 (defun gnus-registry-read ()
