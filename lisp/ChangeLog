@@ -1,3 +1,7 @@
+2011-04-12  Stig Sandbeck Mathisen  <ssm@fnord.no>  (tiny change)
+
+	* gnus-sum.el (gnus-summary-select-article-buffer): Doc fix.
+
 2011-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-registry.el (gnus-registry-remake-db): Put the warning on a
