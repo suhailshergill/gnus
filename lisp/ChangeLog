@@ -1,6 +1,10 @@
 2011-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-start.el (gnus-get-unread-articles): Slight cleanup.
+	(gnus-read-active-for-groups): Don't try to finish getting stuff where
+	we had no early-data returned.
+	(gnus-get-unread-articles): Add a sanity check so that we don't issue
+	two async commands to the same server at the same time.
 
 2011-04-12  Stig Sandbeck Mathisen  <ssm@fnord.no>  (tiny change)
 
