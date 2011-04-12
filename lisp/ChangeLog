@@ -1,5 +1,9 @@
 2011-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-open-starttls): Only do opportunistic
+	STARTTLS upgrades if we have built-in gnutls support.  Upgrades via
+	gnutls-cli are too slow to be done opportunistically.
+
 	* gnus-start.el (gnus-get-unread-articles): Slight cleanup.
 	(gnus-read-active-for-groups): Don't try to finish getting stuff where
 	we had no early-data returned.
