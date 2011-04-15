@@ -1,3 +1,8 @@
+2011-04-15  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry--split-fancy-with-parent-internal):
+	Track by subject first, then sender.
+
 2011-04-14  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-registry.el: Updated gnus-registry docs.
