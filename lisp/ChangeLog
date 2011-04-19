@@ -1,3 +1,7 @@
+2011-04-19  Glenn Morris  <rgm@gnu.org>
+
+	* time-date.el (time-to-days): Remove unused local variables.
+
 2011-04-18  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-registry.el: Eliminate cl functions.
