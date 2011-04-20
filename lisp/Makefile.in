@@ -36,10 +36,13 @@ clever some l: gnus-load.el
 install: install-el-elc list-installed-shadows
 
 # Test rules
-check:	test-registry
+check:	test-registry test-nntp
 
 test-registry:
-	$(EMACS_COMP) -l ert -l gnus-registry.el -f ert-run-tests-batch-and-exit
+	$(EMACS) $(FLAGS) -l ert -l gnus-registry.el -f ert-run-tests-batch-and-exit
+
+test-nntp:
+	$(EMACS) $(FLAGS) -l ert -l tests/gnustest-nntp.el -f ert-run-tests-batch-and-exit
 
 # This entry will never install .el files if there are no .elc files.
 install-el: gnus-load.el
