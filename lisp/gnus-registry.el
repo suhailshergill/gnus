@@ -442,8 +442,10 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
         (gnus-message 9 "%s is looking up %s" log-agent reference)
         (loop for group in (gnus-registry-get-id-key reference 'group)
               when (gnus-registry-follow-group-p group)
-              do (gnus-message 7 "%s traced %s to %s" log-agent reference group)
-              do (push group found)))
+              do
+              (progn
+                (gnus-message 7 "%s traced %s to %s" log-agent reference group)
+                (push group found))))
       ;; filter the found groups and return them
       ;; the found groups are the full groups
       (setq found (gnus-registry-post-process-groups
@@ -468,7 +470,7 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
                          (if gnus-registry-track-extra 7 9)
                          "%s (extra tracking) traced subject '%s' to %s"
                          log-agent subject group)
-                     collect group))
+                    and collect group))
          ;; filter the found groups and return them
          ;; the found groups are NOT the full groups
          (setq found (gnus-registry-post-process-groups
@@ -495,7 +497,7 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
                          (if gnus-registry-track-extra 7 9)
                          "%s (extra tracking) traced sender '%s' to %s"
                          log-agent sender group)
-                     collect group)))
+                     and collect group)))
 
        ;; filter the found groups and return them
        ;; the found groups are NOT the full groups
@@ -525,7 +527,7 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
                              (if gnus-registry-track-extra 7 9)
                              "%s (extra tracking) traced recipient '%s' to %s"
                              log-agent recp group)
-                         collect group)))))
+                        and collect group)))))
 
        ;; filter the found groups and return them
        ;; the found groups are NOT the full groups

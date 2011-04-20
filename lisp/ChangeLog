@@ -1,3 +1,8 @@
+2011-04-20  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el
+	(gnus-registry--split-fancy-with-parent-internal): Fix loop bugs.
+
 2011-04-20  David Engster  <dengste@eml.cc>
 
 	* tests/gnustest-nntp.el: New file for simple NNTP testing.
