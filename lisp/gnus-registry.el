@@ -137,6 +137,16 @@ nnmairix groups are specifically excluded because they are ephemeral."
   :group 'gnus-registry
   :type '(repeat regexp))
 
+(defcustom gnus-registry-ignored-groups
+  '("delayed$" "drafts$" "queue$" "INBOX$" "^nnmairix:" "archive")
+  "List of groups that the Gnus Registry will ignore.
+The group names are matched, they don't have to be fully
+qualified.
+
+nnmairix groups are specifically excluded because they are ephemeral."
+  :group 'gnus-registry
+  :type '(repeat regexp))
+
 (defcustom gnus-registry-install 'ask
   "Whether the registry should be installed."
   :group 'gnus-registry
@@ -341,6 +351,8 @@ This is not required after changing `gnus-registry-cache-file'."
    10
    "gnus-registry-handle-action %S" (list id from to subject sender recipients))
   (let ((db gnus-registry-db)
+        ;; if the group is ignored, set the destination to nil (same as delete)
+        (to (if (gnus-registry-ignore-group-p to) nil to))
         ;; safe if not found
         (entry (gnus-registry-get-or-make-entry id))
         (subject (gnus-string-remove-all-properties
@@ -639,6 +651,18 @@ Consults `gnus-registry-unfollowed-groups' and
        (not (or (gnus-grep-in-list
                  group
                  gnus-registry-unfollowed-groups)
+                (gnus-grep-in-list
+                 group
+                 nnmail-split-fancy-with-parent-ignore-groups)))))
+
+(defun gnus-registry-ignore-group-p (group)
+  "Determines if a group name should be ignored.
+Consults `gnus-registry-ignored-groups' and
+`nnmail-split-fancy-with-parent-ignore-groups'."
+  (and group
+       (not (or (gnus-grep-in-list
+                 group
+                 gnus-registry-ignored-groups)
                 (gnus-grep-in-list
                  group
                  nnmail-split-fancy-with-parent-ignore-groups)))))
