@@ -1,3 +1,11 @@
+2011-04-21  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-ignored-groups): Adjust defaults to
+	match the parameter.
+	(gnus-registry-ignore-group-p): Adjust to take either a group/topic
+	parameter list or a string list in `gnus-registry-ignored-groups'.  Fix
+	logic error.
+
 2011-04-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-expand-url): Protect against null urls.

@@ -138,14 +138,16 @@ nnmairix groups are specifically excluded because they are ephemeral."
   :type '(repeat regexp))
 
 (defcustom gnus-registry-ignored-groups
-  '("delayed$" "drafts$" "queue$" "INBOX$" "^nnmairix:" "archive")
+  (mapcar (lambda (g) (list g t))
+          '("delayed$" "drafts$" "queue$" "INBOX$" "^nnmairix:" "archive"))
   "List of groups that the Gnus Registry will ignore.
 The group names are matched, they don't have to be fully
 qualified.
 
 nnmairix groups are specifically excluded because they are ephemeral."
   :group 'gnus-registry
-  :type '(repeat regexp))
+  :type '(repeat (list regexp (choice (const :tag "Do not ignore" nil)
+                                      (const :tag "Ignore" t)))))
 
 (defcustom gnus-registry-install 'ask
   "Whether the registry should be installed."
@@ -660,12 +662,17 @@ Consults `gnus-registry-unfollowed-groups' and
 Consults `gnus-registry-ignored-groups' and
 `nnmail-split-fancy-with-parent-ignore-groups'."
   (and group
-       (not (or (gnus-grep-in-list
-                 group
-                 gnus-registry-ignored-groups)
-                (gnus-grep-in-list
-                 group
-                 nnmail-split-fancy-with-parent-ignore-groups)))))
+       (or (gnus-grep-in-list
+            group
+            (delq nil (mapcar (lambda (g)
+                                (cond
+                                 ((stringp g) g)
+                                 ((and (listp g) (nth 1 g))
+                                  (nth 0 g))
+                                 (t nil))) gnus-registry-ignored-groups)))
+           (gnus-grep-in-list
+            group
+            nnmail-split-fancy-with-parent-ignore-groups))))
 
 (defun gnus-registry-wash-for-keywords (&optional force)
   "Get the keywords of the current article.
