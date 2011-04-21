@@ -1,4 +1,4 @@
-2011-04-21  Teodor Zlatanov  <tzz@lifelogs.com>
+2011-04-21  Teodor Zlatanov  <tzlatanov@jumptrading.com>
 
 	* gnus-registry.el (gnus-registry-ignored-groups): Remove defcustom.
 	Explain why in comments.
