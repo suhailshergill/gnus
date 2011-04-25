@@ -52,7 +52,8 @@
 (require 'starttls)
 
 (declare-function gnutls-negotiate "gnutls"
-		  (proc type &optional priority-string trustfiles keyfiles))
+                  (proc type host &optional priority-string trustfiles keyfiles
+                        verify-flags verify-error verify-hostname-error))
 
 ;;;###autoload
 (defun open-protocol-stream (name buffer host service &rest parameters)
@@ -186,7 +187,7 @@ PARAMETERS should be a sequence of keywords and values:
 			  (proto-stream-command stream starttls-command eoc))
 	;; The server said it was OK to begin STARTTLS negotiations.
 	(if (fboundp 'open-gnutls-stream)
-	    (gnutls-negotiate stream nil)
+	    (gnutls-negotiate stream nil host)
 	  (unless (starttls-negotiate stream)
 	    (delete-process stream)))
 	(if (memq (process-status stream) '(open run))
