@@ -782,9 +782,6 @@ ones, in case fg and bg are nil."
 (defun shr-tag-u (cont)
   (shr-fontize-cont cont 'underline))
 
-(defun shr-tag-s (cont)
-  (shr-fontize-cont cont 'strike-through))
-
 (defun shr-parse-style (style)
   (when style
     (save-match-data

@@ -2,6 +2,7 @@
 
 	* shr.el (shr-strike-through): New face.
 	(shr-tag-s): Use it to provide <s> support.
+	(shr-tag-s): Remove duplicate definition.
 
 2011-04-25  Teodor Zlatanov  <tzz@lifelogs.com>
 
