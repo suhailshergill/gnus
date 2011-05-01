@@ -264,10 +264,6 @@ Use streaming commands."
     (pop3-quit process)
     message-count))
 
-(autoload 'open-tls-stream "tls")
-(autoload 'starttls-open-stream "starttls")
-(autoload 'starttls-negotiate "starttls") ; avoid warning
-
 (defcustom pop3-stream-type nil
   "*Transport security type for POP3 connexions.
 This may be either nil (plain connexion), `ssl' (use an
