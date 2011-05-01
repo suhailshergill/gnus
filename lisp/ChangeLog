@@ -1,3 +1,8 @@
+2011-05-01  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* gnus-sum.el (gnus-summary-next-article): Don't bug out if the summary
+	buffer has moved to a different frame.
+
 2011-05-01  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-request-article): Use nntp-insert-buffer-substring
