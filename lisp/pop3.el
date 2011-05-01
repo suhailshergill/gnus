@@ -311,7 +311,7 @@ Returns the process associated with the connection."
 	     :return-list t
 	     :starttls-function
 	     (lambda (capabilities)
-	       (and (string-match "STLS" capabilities)
+	       (and (string-match "\\bSTLS\\b" capabilities)
 		    "STLS\r\n"))))
       (when result
 	(let ((response (plist-get (cdr result) :greeting)))
