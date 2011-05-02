@@ -147,6 +147,8 @@
       (defvar help-echo-owns-message))
     (unless (fboundp 'url-retrieve-synchronously)
       (defalias 'url-retrieve-synchronously 'url-retrieve))
+    (unless (fboundp 'url-queue-retrieve)
+      (defalias 'url-queue-retrieve 'url-retrieve))
     (autoload 'Info-directory "info" nil t)
     (autoload 'Info-index "info" nil t)
     (autoload 'Info-index-next "info" nil t)
