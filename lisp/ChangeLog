@@ -1,5 +1,15 @@
 2011-05-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el: Autoload more gnus-agent functions.
+
+	* gnus-art.el (gnus-request-article-this-buffer): Store articles in the
+	agent if we haven't already (bug#8502).
+
+	* gnus-async.el (gnus-async-article-callback): Put prefetched articles
+	into the Agent, too.
+
+	* gnus-agent.el (gnus-agent-store-article): New function.
+
 	* nnheader.el (nnheader-insert-buffer-substring): Renamed from nntp-
 	and moved from that file for reuse.
 
