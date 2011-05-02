@@ -1,5 +1,10 @@
 2011-05-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (gnus-html-schedule-image-fetching): Use
+	url-queue-retrieve, if it exists.
+
+	* shr.el (shr-tag-img): Ditto.
+
 	* gnus.el: Autoload more gnus-agent functions.
 
 	* gnus-art.el (gnus-request-article-this-buffer): Store articles in the
