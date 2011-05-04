@@ -2,6 +2,9 @@
 
 	* registry.el (registry-reindex): Fix percentage message.
 
+	* proto-stream.el (network-stream-open-starttls): Adjust to call
+	`gnutls-negotiate' with :process and :hostname arguments.
+
 2011-05-03  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* shr.el: Add shr-link face for links.
