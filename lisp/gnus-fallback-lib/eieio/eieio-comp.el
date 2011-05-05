@@ -28,7 +28,7 @@
 ;; Byte compiler functions for defmethod.  This will affect the new GNU
 ;; byte compiler for Emacs 19 and better.  This function will be called by
 ;; the byte compiler whenever a `defmethod' is encountered in a file.
-;; It will output a function call to `eieio-defmethod' with the byte
+;; It will output a function call to `eieio--defmethod' with the byte
 ;; compiled function as a parameter.
 
 ;;; Code:
@@ -102,7 +102,7 @@ that is called but rarely.  Argument FORM is the body of the method."
 		     (append (list 'lambda lamparams)
 			     (cdr form))))
 	   (code (byte-compile-byte-code-maker new-one)))
-      (princ "\n(eieio-defmethod '" my-outbuffer)
+      (princ "\n(eieio--defmethod '" my-outbuffer)
       (princ meth my-outbuffer)
       (princ " '(" my-outbuffer)
       (princ key my-outbuffer)
