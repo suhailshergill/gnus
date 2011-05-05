@@ -1,5 +1,7 @@
 2011-05-05  Glenn Morris  <rgm@gnu.org>
 
+	* proto-stream.el (gnutls-negotiate): Fix declarations.
+
 	* gnus-start.el (gnus-propagate-marks): Declare.
 
 2011-05-04  Teodor Zlatanov  <tzz@lifelogs.com>

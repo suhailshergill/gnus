@@ -51,7 +51,7 @@
 (require 'tls)
 (require 'starttls)
 
-(declare-function gnutls-negotiate "gnutls" (&rest spec))
+(declare-function gnutls-negotiate "gnutls" t t) ; defun*
 
 ;;;###autoload
 (defun open-protocol-stream (name buffer host service &rest parameters)
