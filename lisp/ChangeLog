@@ -1,8 +1,7 @@
 2011-05-09  Teodor Zlatanov  <tzz@lifelogs.com>
 
-	* registry.el (registry-full): Add convenience method.
-	(registry-insert): Use it.
-	(registry-full): Fix logic.
+	* registry.el (registry-full): Add convenience method.  Fix logic.
+	(registry-insert): Use it.  Fix logic here too.
 
 	* gnus-registry.el (gnus-registry-insert): Add wrapper that calls
 	`registry-prune' if `registry-full' returns t.

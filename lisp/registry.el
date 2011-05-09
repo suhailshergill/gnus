@@ -274,7 +274,7 @@ Errors out if the key exists already."
     (assert (not (gethash key (oref db :data))) nil
 	    "Key already exists in database")
 
-    (assert (registry-full db)
+    (assert (not (registry-full db))
 	    nil
 	    "registry max-hard size limit reached")
 
