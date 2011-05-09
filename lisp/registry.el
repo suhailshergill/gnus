@@ -263,7 +263,7 @@ With assert non-nil, errors out if the key does not exist already."
 
   (defmethod registry-full ((db registry-db))
     "Checks if registry-db THIS is full."
-    (< (registry-size db)
+    (>= (registry-size db)
        (oref db :max-hard)))
 
   (defmethod registry-insert ((db registry-db) key entry)

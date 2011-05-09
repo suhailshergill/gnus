@@ -2,6 +2,7 @@
 
 	* registry.el (registry-full): Add convenience method.
 	(registry-insert): Use it.
+	(registry-full): Fix logic.
 
 	* gnus-registry.el (gnus-registry-insert): Add wrapper that calls
 	`registry-prune' if `registry-full' returns t.
