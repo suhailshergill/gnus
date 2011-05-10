@@ -314,7 +314,7 @@ Errors out if the key exists already."
 This is the key count of the :data slot."
     (hash-table-count (oref db :data)))
 
-  (defmethod registry-prune ((db registry-db) sortfun)
+  (defmethod registry-prune ((db registry-db) &optional sortfun)
     "Prunes the registry-db object THIS.
 Removes only entries without the :precious keys if it can,
 then removes oldest entries first.

@@ -2,7 +2,7 @@
 
 	* registry.el (registry-prune-hard-candidates)
 	(registry-prune-soft-candidates): Helper methods for registry pruning.
-	(registry-prune): Use them.
+	(registry-prune): Use them.  Make the sort function optional.
 
 2011-05-10  Julien Danjou  <julien@danjou.info>
 
