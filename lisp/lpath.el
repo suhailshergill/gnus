@@ -26,6 +26,7 @@
     (defun netrc-machine-user-or-password (mode authinfo-file-or-list machines
 						ports defaults))
     (defun netrc-parse (file))
+    (defun shr-put-image (data alt))
     (maybe-fbind
      '(Info-index
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
@@ -34,7 +35,7 @@
        epg-check-configuration find-coding-system frame-device gnutls-negotiate
        libxml-parse-html-region recenter-top-bottom rmail-swap-buffers-maybe
        shr-insert-document w3-do-setup w3-parse-buffer w3-prepare-buffer
-       w3-region w3m-detect-meta-charset w3m-region))
+       w3-region w3m-detect-meta-charset w3m-region process-type))
     (maybe-bind
      '(epa-file-encrypt-to w3m-link-map))))
 
@@ -51,6 +52,7 @@
 					      ports defaults))
   (defun netrc-parse (file))
   (defun split-line (&optional arg))
+  (defun shr-put-image (data alt))
   (eval-after-load "rmail"
     '(defun rmail-toggle-header (&optional arg)))
   (maybe-fbind
@@ -71,7 +73,7 @@
      select-safe-coding-system shr-insert-document sort-coding-systems
      track-mouse ucs-to-char url-generic-parse-url url-insert-file-contents
      vcard-pretty-print w3-parse-buffer w3m-detect-meta-charset w3m-region
-     window-edges))
+     window-edges set-network-process-option process-type))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table buffer-save-without-query completion-styles
