@@ -35,7 +35,7 @@
        epg-check-configuration find-coding-system frame-device gnutls-negotiate
        libxml-parse-html-region recenter-top-bottom rmail-swap-buffers-maybe
        shr-insert-document w3-do-setup w3-parse-buffer w3-prepare-buffer
-       w3-region w3m-detect-meta-charset w3m-region process-type))
+       w3-region w3m-detect-meta-charset w3m-region))
     (maybe-bind
      '(epa-file-encrypt-to w3m-link-map))))
 
@@ -67,13 +67,13 @@
      image-type-available-p insert-image libxml-parse-html-region
      mail-abbrevs-setup make-mode-line-mouse-map make-network-process
      mouse-minibuffer-check mouse-movement-p mouse-scroll-subr overlay-lists
-     pgg-display-output-buffer posn-point posn-window put-image
+     pgg-display-output-buffer posn-point posn-window process-type put-image
      read-char-choice read-event recenter-top-bottom
      rmail-msg-restore-non-pruned-header rmail-swap-buffers-maybe
-     select-safe-coding-system shr-insert-document sort-coding-systems
-     track-mouse ucs-to-char url-generic-parse-url url-insert-file-contents
-     vcard-pretty-print w3-parse-buffer w3m-detect-meta-charset w3m-region
-     window-edges set-network-process-option process-type))
+     select-safe-coding-system set-network-process-option shr-insert-document
+     sort-coding-systems track-mouse ucs-to-char url-generic-parse-url
+     url-insert-file-contents vcard-pretty-print w3-parse-buffer
+     w3m-detect-meta-charset w3m-region window-edges))
   (maybe-bind
    '(adaptive-fill-first-line-regexp
      buffer-display-table buffer-save-without-query completion-styles
