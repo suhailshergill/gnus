@@ -916,7 +916,7 @@ Uses `gnus-registry-marks' to find what shortcuts to install."
   "Show the marks for an article by name"
   (let* ((id (mail-header-message-id headers))
          (marks (when id (gnus-registry-get-id-key id 'mark))))
-    (mapconcat (lambda (mark) (symbol-name mark)) marks "")))
+    (mapconcat (lambda (mark) (symbol-name mark)) marks ",")))
 
 (defun gnus-registry-read-mark ()
   "Read a mark name from the user with completion."

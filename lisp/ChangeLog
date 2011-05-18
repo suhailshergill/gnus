@@ -2,7 +2,7 @@
 
 	* gnus-registry.el (gnus-registry-user-format-function-M): Use `mapconcat'.
 	(gnus-registry-user-format-function-M2): Use to see the full text of
-	the marks.
+	the marks.  Make "," the mark text separator.
 
 	* nntp.el (nntp-send-authinfo): Use the "force" token for NNTP
 	authentication with auth-source.
