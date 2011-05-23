@@ -1,3 +1,10 @@
+2011-05-23  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* gnus-cus.el (gnus-agent-customize-category):
+	* gnus-delay.el (gnus-delay-send-queue):
+	* gnus.el (gnus-other-frame):
+	Don't quote lambda expressions with `quote'.
+
 2011-05-20  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-sum.el (gnus-summary-hide-thread): Fix bug where moving to hide
