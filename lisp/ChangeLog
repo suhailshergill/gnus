@@ -1,3 +1,7 @@
+2011-05-24  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-mime-delete-part): Fix mm-handle-filename usage.
+
 2011-05-23  Stefan Monnier  <monnier@iro.umontreal.ca>
 
 	* gnus-cus.el (gnus-agent-customize-category):
