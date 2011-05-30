@@ -1,5 +1,8 @@
 2011-05-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnvirtual.el (nnvirtual-request-article): Bind `gnus-command-method'
+	so that the call chain it correct when we call "upwards".
+
 	* gnus-sum.el (gnus-select-newsgroup): Auto-expiry doesn't make sense
 	in read-only groups.
 
