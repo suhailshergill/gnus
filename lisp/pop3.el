@@ -514,6 +514,8 @@ Otherwise, return the size of the message-id MSG"
   (let ((start pop3-read-point) end)
     (with-current-buffer (process-buffer process)
       (while (not (re-search-forward "^\\.\r\n" nil t))
+	(unless (memq (process-status process) '(open run))
+	  (error "pop3 server closed the connection"))
 	(pop3-accept-process-output process)
 	(goto-char start))
       (setq pop3-read-point (point-marker))

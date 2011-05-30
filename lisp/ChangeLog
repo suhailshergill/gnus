@@ -1,3 +1,7 @@
+2011-05-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* pop3.el (pop3-retr): Error out if the server closes the connection.
+
 2011-05-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-urlify): Use shr-add-font to make underlines be less ugly
