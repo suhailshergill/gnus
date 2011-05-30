@@ -1,5 +1,9 @@
 2011-05-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-transform-headers): Simplify regexp to hopefully
+	avoid regexp overflow.
+	(nnimap-transform-split-mail): Ditto.
+
 	* pop3.el (pop3-retr): Error out if the server closes the connection.
 
 2011-05-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
