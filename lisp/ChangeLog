@@ -1,5 +1,7 @@
 2011-05-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-cite-reply-position): Doc string fix.
+
 	* nnimap.el (nnimap-transform-headers): Simplify regexp to hopefully
 	avoid regexp overflow.
 	(nnimap-transform-split-mail): Ditto.
