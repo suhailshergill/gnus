@@ -319,6 +319,7 @@ Returns the process associated with the connection."
 		(substring response (or (string-match "<" response) 0)
 			   (+ 1 (or (string-match ">" response) -1)))))
 	(pop3-set-process-query-on-exit-flag (car result) nil)
+	(erase-buffer)
 	(car result)))))
 
 ;; Support functions

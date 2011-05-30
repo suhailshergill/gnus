@@ -1,5 +1,8 @@
 2011-05-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* pop3.el (pop3-open-server): Erase the buffer after the greeting,
+	since not doing this seems to lead to a race condition in pop3-logon.
+
 	* nnvirtual.el (nnvirtual-request-article): Bind `gnus-command-method'
 	so that the call chain it correct when we call "upwards".
 
