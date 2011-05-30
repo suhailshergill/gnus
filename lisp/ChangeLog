@@ -1,5 +1,9 @@
 2011-05-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-mark-article-read): It's possible that we
+	want to have `gnus-newsgroup-unselected' kept sorted.  If this isn't
+	done, then unselected articles may be marked as read.
+
 	* pop3.el (pop3-open-server): Erase the buffer after the greeting,
 	since not doing this seems to lead to a race condition in pop3-logon.
 

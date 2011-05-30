@@ -4631,7 +4631,7 @@ This command may read the active file."
 		  (push n gnus-newsgroup-unselected))
 		(setq n (1+ n)))
 	      (setq gnus-newsgroup-unselected
-		    (nreverse gnus-newsgroup-unselected)))))
+		    (sort gnus-newsgroup-unselected '<)))))
       (gnus-activate-group group)
       (gnus-group-make-articles-read group (list article))
       (when (and (gnus-group-auto-expirable-p group)
