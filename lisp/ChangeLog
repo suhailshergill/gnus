@@ -1,3 +1,10 @@
+2011-05-31  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-registry.el (gnus-registry-article-marks-to-chars): Rename from
+	`gnus-registry-user-format-function-M' and declare the latter obsolete.
+	(gnus-registry-article-marks-to-names): Rename from
+	`gnus-registry-user-format-function-M2'.
+
 2011-05-31  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-sum.el (gnus-summary-exit): Make sure to kill article buffer in
