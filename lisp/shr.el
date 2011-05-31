@@ -534,7 +534,7 @@ the URL of the image to the kill buffer instead."
   (if (or (not (fboundp 'imagemagick-types))
 	  (not (get-buffer-window (current-buffer))))
       (create-image data nil t)
-    (let* ((image (create-image data nil t))
+    (let* ((image (create-image data nil t :ascent 100))
 	   (size (image-size image t))
 	   (width (car size))
 	   (height (cdr size))
@@ -553,11 +553,13 @@ the URL of the image to the kill buffer instead."
       (when (> (car size) window-width)
 	(setq image (or
 		     (create-image data 'imagemagick t
-				   :width window-width)
+				   :width window-width
+				   :ascent 100)
 		     image)))
       (when (and (fboundp 'create-animated-image)
 		 (eq (image-type data nil t) 'gif))
-	(setq image (create-animated-image data 'gif t)))
+	(setq image (create-animated-image data 'gif t
+					   :ascent 100)))
       image)))
 
 ;; url-cache-extract autoloads url-cache.
