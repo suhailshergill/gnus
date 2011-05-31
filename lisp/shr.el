@@ -183,14 +183,23 @@ redirects somewhere else."
 	(message "No image under point")
       (message "%s" text))))
 
-(defun shr-browse-image ()
-  "Browse the image under point."
-  (interactive)
+(defun shr-browse-image (&optional copy-url)
+  "Browse the image under point.
+If COPY-URL (the prefix if called interactively) is non-nil, copy
+the URL of the image to the kill buffer instead."
+  (interactive "P")
   (let ((url (get-text-property (point) 'image-url)))
-    (if (not url)
-	(message "No image under point")
+    (cond
+     ((not url)
+      (message "No image under point"))
+     (copy-url
+      (with-temp-buffer
+	(insert url)
+	(copy-region-as-kill (point-min) (point-max))
+	(message "Copied %s" url)))
+     (t
       (message "Browsing %s..." url)
-      (browse-url url))))
+      (browse-url url)))))
 
 (defun shr-insert-image ()
   "Insert the image under point into the buffer."
