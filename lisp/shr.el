@@ -533,7 +533,8 @@ the URL of the image to the kill buffer instead."
 (defun shr-rescale-image (data)
   (if (or (not (fboundp 'imagemagick-types))
 	  (not (get-buffer-window (current-buffer))))
-      (create-image data nil t)
+      (create-image data nil t
+		    :ascent 100)
     (let* ((image (create-image data nil t :ascent 100))
 	   (size (image-size image t))
 	   (width (car size))
