@@ -4,7 +4,8 @@
 	secret tokens should be saved encrypted.
 	(auth-source-netrc-parse, auth-source-netrc-search): Pass the file name
 	to `auth-source-netrc-normalize'.
-	(with-auth-source-epa-overrides): Add convenience macro.
+	(with-auth-source-epa-overrides): Add convenience macro.  Don't depend
+	on the EPA variables being defined.
 	(auth-source-epa-make-gpg-token): Convert text to a "gpg:" token.
 	(auth-source-netrc-normalize): Convert "gpg:" tokens back to text in
 	the lexical-let closure.

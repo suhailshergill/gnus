@@ -956,11 +956,17 @@ Note that the MAX parameter is used so we can exit the parse early."
 
 (defmacro with-auth-source-epa-overrides (&rest body)
   `(let ((file-name-handler-alist
-          ',(remove epa-file-handler file-name-handler-alist))
+          ',(if (boundp 'epa-file-handler)
+                (remove (symbol-value 'epa-file-handler)
+                        file-name-handler-alist)
+              file-name-handler-alist))
          (find-file-hook
           ',(remove 'epa-file-find-file-hook find-file-hook))
          (auto-mode-alist
-          ',(remove epa-file-auto-mode-alist-entry auto-mode-alist)))
+          ',(if (boundp 'epa-file-auto-mode-alist-entry)
+                (remove (symbol-value 'epa-file-auto-mode-alist-entry)
+                        auto-mode-alist)
+              auto-mode-alist)))
      ,@body))
 
 (defun auth-source-epa-make-gpg-token (secret file)
