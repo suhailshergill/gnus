@@ -1,5 +1,8 @@
 2011-06-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-open-starttls): Use
+	`gnutls-available-p' to see whether we have built-in support.
+
 	* auth-source.el (auth-source-netrc-create): Don't query the bits that
 	we already know.
 	(auth-source-forget-all-cached): Clear auth-source-netrc-cache, too.

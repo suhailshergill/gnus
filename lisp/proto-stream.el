@@ -51,7 +51,8 @@
 (require 'tls)
 (require 'starttls)
 
-(declare-function gnutls-negotiate "gnutls" t t) ; defun*
+(autoload 'gnutls-negotiate "gnutls")
+(autoload 'open-gnutls-stream "gnutls")
 
 ;;;###autoload
 (defun open-protocol-stream (name buffer host service &rest parameters)
@@ -157,11 +158,13 @@ PARAMETERS should be a sequence of keywords and values:
 			 (proto-stream-command stream
 					       capability-command eoc)))
 	 (resulting-type 'plain)
+	 (builtin-starttls (and (fboundp 'gnutls-available-p)
+				(gnutls-available-p)))
 	 starttls-command)
 
     ;; If we have built-in STARTTLS support, try to upgrade the
     ;; connection.
-    (when (and (or (fboundp 'open-gnutls-stream)
+    (when (and (or builtin-starttls
 		   (and require-tls
 			(executable-find "gnutls-cli")))
 	       capabilities success-string starttls-function
@@ -169,7 +172,7 @@ PARAMETERS should be a sequence of keywords and values:
 		     (funcall starttls-function capabilities)))
       ;; If using external STARTTLS, drop this connection and start
       ;; anew with `starttls-open-stream'.
-      (unless (fboundp 'open-gnutls-stream)
+      (unless builtin-starttls
 	(delete-process stream)
 	(setq start (with-current-buffer buffer (point-max)))
 	(let* ((starttls-use-gnutls t)
@@ -184,7 +187,7 @@ PARAMETERS should be a sequence of keywords and values:
       (when (string-match success-string
 			  (proto-stream-command stream starttls-command eoc))
 	;; The server said it was OK to begin STARTTLS negotiations.
-	(if (fboundp 'open-gnutls-stream)
+	(if builtin-starttls
 	    (gnutls-negotiate :process stream :hostname host)
 	  (unless (starttls-negotiate stream)
 	    (delete-process stream)))
@@ -228,18 +231,20 @@ PARAMETERS should be a sequence of keywords and values:
 
 (defun proto-stream-open-tls (name buffer host service parameters)
   (with-current-buffer buffer
-    (let ((start (point-max))
-	  (stream
-	   (funcall (if (fboundp 'open-gnutls-stream)
-			'open-gnutls-stream
-		      'open-tls-stream)
-		    name buffer host service))
-	  (eoc (plist-get parameters :end-of-command)))
+    (let* ((start (point-max))
+	   (builtin-starttls (and (fboundp 'gnutls-available-p)
+				  (gnutls-available-p)))
+	   (stream
+	    (funcall (if builtin-starttls
+			 'open-gnutls-stream
+		       'open-tls-stream)
+		     name buffer host service))
+	   (eoc (plist-get parameters :end-of-command)))
       (if (null stream)
 	  (list nil nil nil 'plain)
 	;; If we're using tls.el, we have to delete the output from
 	;; openssl/gnutls-cli.
-	(unless (fboundp 'open-gnutls-stream)
+	(unless builtin-starttls
 	  (proto-stream-get-response stream start eoc)
 	  (goto-char (point-min))
 	  (when (re-search-forward eoc nil t)
