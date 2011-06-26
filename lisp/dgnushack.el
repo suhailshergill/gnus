@@ -237,6 +237,7 @@
     (defalias 'overlays-in 'ignore)
     (defalias 'replace-dehighlight 'ignore)
     (defalias 'replace-highlight 'ignore)
+    (defalias 'gnutls-available-p 'ignore)
     (defalias 'w3-coding-system-for-mime-charset 'ignore)))
 
 (defun dgnushack-emacs-compile-defcustom-p ()
