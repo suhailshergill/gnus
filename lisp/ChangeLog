@@ -1,3 +1,8 @@
+2011-06-26  Timo Juhani Lindfors <timo.lindfors@iki.fi>  (tiny change)
+
+	* gnus-msg.el (gnus-summary-reply-to-list-with-original): New command
+	and keystroke.
+
 2011-06-23  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* auth-source.el (auth-source-netrc-cache): Move forward.

@@ -1,3 +1,8 @@
+2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Summary Mail Commands): Document
+	`gnus-summary-reply-to-list-with-original'.
+
 2011-05-31  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.texi (Store custom flags and keywords): Refer to
