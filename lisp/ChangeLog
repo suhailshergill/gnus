@@ -1,3 +1,11 @@
+2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* spam.el (spam-stat): Require in a normal fashion without binding
+	`spam-stat-install-hooks' to avoid compilation warnings.
+
+	* spam-stat.el (spam-stat-install-hooks): Removed.
+	(spam-stat-install-hooks): Don't run automatically.
+
 2011-06-26  Timo Juhani Lindfors <timo.lindfors@iki.fi>  (tiny change)
 
 	* gnus-msg.el (gnus-summary-reply-to-list-with-original): New command
