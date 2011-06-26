@@ -1,5 +1,8 @@
 2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-stop-animations): New function to stop any
+	animations going on at article exit time.
+
 	* gnus-registry.el (gnus-registry-user-format-function-M): Reinstate,
 	since removing it breaks people upgrading.
 
