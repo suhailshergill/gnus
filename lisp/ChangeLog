@@ -2,6 +2,9 @@
 
 	* auth-source.el (with-auth-source-epa-overrides): Fix compilation
 	error with `find-file-hooks' on Emacs 22.
+	(with-auth-source-epa-overrides): Ugly hack to Wrap the
+	`find-file-hook' things in `symbol-value' to avoid compilation warnings
+	on all architectures.
 
 	* spam.el (spam-stat): Require in a normal fashion without binding
 	`spam-stat-install-hooks' to avoid compilation warnings.
