@@ -528,7 +528,7 @@ the URL of the image to the kill buffer instead."
 	    (insert "\n"))
 	  (insert-image image (or alt "*"))
 	  (when (image-animated-p image)
-	    (image-animate image)))
+	    (image-animate image nil 60)))
 	image)
     (insert alt)))
 
