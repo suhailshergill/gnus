@@ -4535,7 +4535,8 @@ commands:
 	(current-buffer)))))
 
 (defun gnus-article-stop-animations ()
-  (dolist (timer timer-list)
+  (dolist (timer (and (boundp 'timer-list)
+		      timer-list))
     (when (eq (aref timer 5) 'image-animate-timeout)
       (cancel-timer timer))))
 

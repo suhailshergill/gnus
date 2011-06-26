@@ -1,5 +1,7 @@
 2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el: Make the timer warning go away on XEmacs.
+
 	* gnus-art.el (gnus-article-stop-animations): New function to stop any
 	animations going on at article exit time.
 
