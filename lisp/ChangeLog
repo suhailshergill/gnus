@@ -1,5 +1,8 @@
 2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* auth-source.el (with-auth-source-epa-overrides): Fix compilation
+	error with `find-file-hooks' on Emacs 22.
+
 	* spam.el (spam-stat): Require in a normal fashion without binding
 	`spam-stat-install-hooks' to avoid compilation warnings.
 
