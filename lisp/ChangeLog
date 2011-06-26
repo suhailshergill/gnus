@@ -1,5 +1,8 @@
 2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-registry.el (gnus-registry-user-format-function-M): Reinstate,
+	since removing it breaks people upgrading.
+
 	* shr.el (shr-put-image): Use the new interface for animating images.
 	(shr-put-image): Animate for 60 seconds.
 
