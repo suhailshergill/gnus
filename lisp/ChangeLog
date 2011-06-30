@@ -1,5 +1,8 @@
 2011-06-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-read-ephemeral-emacs-bug-group): Take an optional
+	quit window configuration.
+
 	* auth-source.el (epg-context-set-passphrase-callback): Remove
 	duplicate autoload.
 
