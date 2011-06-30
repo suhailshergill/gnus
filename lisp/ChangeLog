@@ -1,3 +1,7 @@
+2011-06-30  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* nnmh.el (nnmh-request-list-1): Work on MS Windows.
+
 2011-06-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-point-in-header-p): Tweak the function to default
@@ -54,7 +58,7 @@
 	* spam-stat.el (spam-stat-install-hooks): Removed.
 	(spam-stat-install-hooks): Don't run automatically.
 
-2011-06-26  Timo Juhani Lindfors <timo.lindfors@iki.fi>  (tiny change)
+2011-06-26  Timo Juhani Lindfors  <timo.lindfors@iki.fi>  (tiny change)
 
 	* gnus-msg.el (gnus-summary-reply-to-list-with-original): New command
 	and keystroke.
