@@ -3,6 +3,9 @@
 	* auth-source.el: Autoload EPA/EPG functions.
 	(auth-source-netrc-use-gpg-tokens): Clarify that it should not be
 	changed when EPA/EPG is not available.
+	(auth-source-backend): Rename "arg" member to "data".
+	(auth-source-backend-parse, auth-source-plstore-search)
+	(auth-source-plstore-create): Use it.
 
 2011-06-30  Andrew Cohen  <cohen@andy.bu.edu>
 

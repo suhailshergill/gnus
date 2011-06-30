@@ -127,9 +127,9 @@ let-binding."
          :type t
          :custom string
          :documentation "The backend protocol.")
-   (arg :initarg :arg
-	:initform nil
-	:documentation "The backend arg.")
+   (data :initarg :arg
+         :initform nil
+         :documentation "Internal backend data.")
    (create-function :initarg :create-function
                     :initform ignore
                     :type function
@@ -413,7 +413,7 @@ with \"[a/b/c] \" if CHOICES is '\(?a ?b ?c\)."
 	  :type 'plstore
 	  :search-function 'auth-source-plstore-search
 	  :create-function 'auth-source-plstore-create
-	  :arg (plstore-open (plist-get entry :source)))
+	  :data (plstore-open (plist-get entry :source)))
        (auth-source-backend
 	(plist-get entry :source)
 	:source (plist-get entry :source)
@@ -1539,7 +1539,7 @@ authentication tokens:
   (assert (not delete) nil
           "The PLSTORE auth-source backend doesn't support deletion yet")
 
-  (let* ((store (oref backend arg))
+  (let* ((store (oref backend data))
          (max (or max 5000))     ; sanity check: default to stop at 5K
          (ignored-keys '(:create :delete :max :backend :require))
          (search-keys (loop for i below (length spec) by 2
@@ -1718,15 +1718,15 @@ authentication tokens:
 	    (setq artificial (plist-put artificial
 					(intern (concat ":" (symbol-name r)))
 					data))))))
-    (plstore-put (oref backend arg)
+    (plstore-put (oref backend data)
 		 (sha1 (format "%s@%s:%s"
 			       (plist-get artificial :user)
 			       (plist-get artificial :host)
 			       (plist-get artificial :port)))
 		 artificial secret-artificial)
     (if (y-or-n-p (format "Save auth info to file %s? "
-			  (plstore-get-file (oref backend arg))))
-	(plstore-save (oref backend arg)))))
+			  (plstore-get-file (oref backend data))))
+	(plstore-save (oref backend data)))))
 
 ;;; older API
 
