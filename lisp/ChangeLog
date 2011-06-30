@@ -3,6 +3,17 @@
 	* nnimap.el (nnimap-split-incoming-mail): If `nnimap-split-fancy' is
 	non-nil, and `nnimap-split-methods' is nil, use the former.
 
+2011-06-30  Daiki Ueno  <ueno@unixuser.org>
+
+	* plstore.el (plstore-revert): New function.
+	(plstore-open): Use it; hide the buffer from user.
+
+2011-06-30  Daiki Ueno  <ueno@unixuser.org>
+
+	* auth-source.el (auth-source-backend): New member "arg".
+	(auth-source-backend-parse): Handle new backend 'plstore.
+	* plstore.el: New file.
+
 2011-06-30  Glenn Morris  <rgm@gnu.org>
 
 	* mm-util.el (mm-charset-synonym-alist): Move definition before use.
