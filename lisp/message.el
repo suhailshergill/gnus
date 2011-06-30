@@ -3469,8 +3469,8 @@ Message buffers and is not meant to be called directly."
 (defun message-point-in-header-p ()
   "Return t if point is in the header."
   (save-excursion
-    (not (re-search-backward
-	  (concat "^" (regexp-quote mail-header-separator) "\n") nil t))))
+    (re-search-forward
+     (concat "^" (regexp-quote mail-header-separator) "\n") nil t)))
 
 (defun message-do-auto-fill ()
   "Like `do-auto-fill', but don't fill in message header."
