@@ -4,6 +4,8 @@
 	to saying that we're not in the headers if there is no separator at
 	all.  This makes it possible to use the Message version of `M-q' in
 	buffers with no headers (bug#7987).
+	(message-point-in-header-p): Fix last checkin to work with an empty
+	mail-header-separator, too.
 
 	* auth-source.el (auth-source-netrc-saver): If the user says "don't ask
 	again, save the choice via customize.
