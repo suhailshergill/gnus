@@ -1,5 +1,7 @@
 2011-06-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el: Autoload sha1 on XEmacs.
+
 	* gnus-group.el (gnus-read-ephemeral-emacs-bug-group): Take an optional
 	quit window configuration.
 

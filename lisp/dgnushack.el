@@ -172,6 +172,7 @@
     (autoload 'customize-set-variable "cus-edit" nil t)
     (autoload 'customize-variable "cus-edit" nil t)
     (autoload 'debug "debug" nil t)
+    (autoload 'sha1 "sha1")
     (if (featurep 'mule)
 	(unless (locate-library "mule-ccl")
 	  (autoload 'define-ccl-program "ccl" nil nil 'macro))
