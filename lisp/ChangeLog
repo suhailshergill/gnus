@@ -1,3 +1,8 @@
+2011-06-30  Andrew Cohen  <cohen@andy.bu.edu>
+
+	* gnus-art.el (gnus-request-article-this-buffer): Use existing function
+	`gnus-refer-article-methods'.
+
 2011-06-30  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth-source.el: Require EPA and EPG.
