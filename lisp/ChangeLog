@@ -1,3 +1,14 @@
+2011-06-30  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el: Require EPA and EPG.
+	(auth-source-passphrase-alist): New variable.
+	(auth-source-passphrase-callback-function)
+	(auth-source-token-passphrase-callback-function): Callbacks for the
+	netrc field encryption (GPG tokens).
+	(auth-source-epa-extract-gpg-token, auth-source-epa-make-gpg-token):
+	Symmetric encryption and decryption of the netrc GPG tokens.
+	(auth-source-netrc-normalize): Use them, simplifying the closure.
+
 2011-06-30  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* dgnushack.el (dgnushack-compile): Don't compile plstore.el unless epg
