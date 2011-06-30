@@ -1,3 +1,8 @@
+2011-06-30  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* dgnushack.el (dgnushack-compile): Don't compile plstore.el unless epg
+	is available.
+
 2011-06-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-split-incoming-mail): If `nnimap-split-fancy' is
