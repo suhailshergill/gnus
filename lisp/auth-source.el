@@ -80,7 +80,6 @@
 (autoload 'epg-context-set-passphrase-callback "epg")
 (autoload 'epg-decrypt-string "epg")
 (autoload 'epg-context-set-armor "epg")
-(autoload 'epg-context-set-passphrase-callback "epg")
 (autoload 'epg-encrypt-string "epg")
 
 (defvar secrets-enabled)
