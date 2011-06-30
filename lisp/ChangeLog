@@ -1,3 +1,9 @@
+2011-06-30  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el: Autoload EPA/EPG functions.
+	(auth-source-netrc-use-gpg-tokens): Clarify that it should not be
+	changed when EPA/EPG is not available.
+
 2011-06-30  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* gnus-art.el (gnus-request-article-this-buffer): Use existing function

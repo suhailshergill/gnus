@@ -43,8 +43,6 @@
 (require 'mm-util)
 (require 'gnus-util)
 (require 'assoc)
-(require 'epa)
-(require 'epg)
 
 (eval-when-compile (require 'cl))
 (eval-and-compile
@@ -74,6 +72,16 @@
 (autoload 'plstore-put "plstore")
 (autoload 'plstore-save "plstore")
 (autoload 'plstore-get-file "plstore")
+
+(autoload 'epa-passphrase-callback-function "epa")
+
+(autoload 'epg-context-operation "epg")
+(autoload 'epg-make-context "epg")
+(autoload 'epg-context-set-passphrase-callback "epg")
+(autoload 'epg-decrypt-string "epg")
+(autoload 'epg-context-set-armor "epg")
+(autoload 'epg-context-set-passphrase-callback "epg")
+(autoload 'epg-encrypt-string "epg")
 
 (defvar secrets-enabled)
 
@@ -181,7 +189,8 @@ let-binding."
 
 (defcustom auth-source-netrc-use-gpg-tokens 'never
   "Set this to tell auth-source when to create GPG password
-tokens in netrc files.  It's either an alist or `never'."
+tokens in netrc files.  It's either an alist or `never'.
+Note that if EPA/EPG is not available, this should NOT be used."
   :group 'auth-source
   :version "23.2" ;; No Gnus
   :type `(choice
