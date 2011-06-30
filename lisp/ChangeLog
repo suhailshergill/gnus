@@ -1,3 +1,8 @@
+2011-06-30  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* auth-source.el (auth-source-netrc-saver): If the user says "don't ask
+	again, save the choice via customize.
+
 2011-06-29  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-send-mail-function): Add `sendmail-query-once'.
