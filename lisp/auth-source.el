@@ -70,6 +70,7 @@
 (autoload 'plstore-open "plstore")
 (autoload 'plstore-find "plstore")
 (autoload 'plstore-put "plstore")
+(autoload 'plstore-delete "plstore")
 (autoload 'plstore-save "plstore")
 (autoload 'plstore-get-file "plstore")
 
@@ -1533,11 +1534,6 @@ authentication tokens:
                                     type max host user port
                                     &allow-other-keys)
   "Search the PLSTORE; spec is like `auth-source'."
-
-  ;; TODO
-  (assert (not delete) nil
-          "The PLSTORE auth-source backend doesn't support deletion yet")
-
   (let* ((store (oref backend data))
          (max (or max 5000))     ; sanity check: default to stop at 5K
          (ignored-keys '(:create :delete :max :backend :require))
@@ -1561,6 +1557,7 @@ authentication tokens:
 					       '(:host :login :port :secret)
 					       search-keys)))
          (items (plstore-find store search-spec))
+	 (item-names (mapcar #'car items))
          (items (butlast items (- (length items) max)))
          ;; convert the item to a full plist
          (items (mapcar (lambda (item)
@@ -1584,9 +1581,10 @@ authentication tokens:
                                           returned-keys))
                            plist))
                         items)))
-    ;; if we need to create an entry AND none were found to match
-    (when (and create
-               (not items))
+    (cond
+     ;; if we need to create an entry AND none were found to match
+     ((and create
+	   (not items))
 
       ;; create based on the spec and record the value
       (setq items (or
@@ -1599,6 +1597,11 @@ authentication tokens:
                      ;; the result will be returned, even if the search fails
                      (apply 'auth-source-plstore-search
                             (plist-put spec :create nil)))))
+     ((and delete
+	   item-names)
+      (dolist (item-name item-names)
+	(plstore-delete store item-name))
+      (plstore-save store)))
     items))
 
 (defun* auth-source-plstore-create (&rest spec
