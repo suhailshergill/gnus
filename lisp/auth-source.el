@@ -74,8 +74,6 @@
 (autoload 'plstore-save "plstore")
 (autoload 'plstore-get-file "plstore")
 
-(autoload 'epa-passphrase-callback-function "epa")
-
 (autoload 'epg-context-operation "epg")
 (autoload 'epg-make-context "epg")
 (autoload 'epg-context-set-passphrase-callback "epg")
@@ -1006,25 +1004,7 @@ Note that the MAX parameter is used so we can exit the parse early."
 
 (defvar auth-source-passphrase-alist nil)
 
-(defun auth-source-passphrase-callback-function (context key-id handback
-                                                         &optional sym-detail)
-  "Exactly like `epa-passphrase-callback-function' but takes an
-extra SYM-DETAIL parameter which will be printed at the end of
-the symmetric passphrase prompt, and assumes symmetric
-encryption."
-  (read-passwd
-   (format "Passphrase for symmetric encryption%s%s: "
-           ;; Add the file name to the prompt, if any.
-           (if (stringp handback)
-               (format " for %s" handback)
-             "")
-           (if (stringp sym-detail)
-               sym-detail
-             ""))
-   (eq (epg-context-operation context) 'encrypt)))
-
 (defun auth-source-token-passphrase-callback-function (context key-id file)
-  (if (eq key-id 'SYM)
       (let* ((file (file-truename file))
              (entry (assoc file auth-source-passphrase-alist))
              passphrase)
@@ -1036,14 +1016,13 @@ encryption."
               (unless entry
                 (setq entry (list file))
                 (push entry auth-source-passphrase-alist))
-              (setq passphrase (auth-source-passphrase-callback-function context
-                                                                         key-id
-                                                                         file
-                                                                         " tokens"))
+              (setq passphrase
+                    (read-passwd
+                     (format "Passphrase for %s tokens: " file)
+                     t))
               (setcdr entry (lexical-let ((p (copy-sequence passphrase)))
                               (lambda () p)))
-              passphrase)))
-    (epa-passphrase-callback-function context key-id file)))
+              passphrase))))
 
 ;; (auth-source-epa-extract-gpg-token "gpg:LS0tLS1CRUdJTiBQR1AgTUVTU0FHRS0tLS0tClZlcnNpb246IEdudVBHIHYxLjQuMTEgKEdOVS9MaW51eCkKCmpBMEVBd01DT25qMjB1ak9rZnRneVI3K21iNm9aZWhuLzRad3cySkdlbnVaKzRpeEswWDY5di9icDI1U1dsQT0KPS9yc2wKLS0tLS1FTkQgUEdQIE1FU1NBR0UtLS0tLQo=" "~/.netrc")
 (defun auth-source-epa-extract-gpg-token (secret file)
