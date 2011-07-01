@@ -102,6 +102,9 @@ let-binding."
                  (const :tag "30 Minutes" 1800)
                  (integer :tag "Seconds")))
 
+;;; The slots below correspond with the `auth-source-search' spec,
+;;; so a backend with :host set, for instance, would match only
+;;; searches for that host.  Normally they are nil.
 (defclass auth-source-backend ()
   ((type :initarg :type
          :initform 'netrc
