@@ -420,6 +420,7 @@ It creates an autoload function for CNAME's constructor."
     (load-library (car (cdr (symbol-function cname))))))
 
 (defun eieio-defclass (cname superclasses slots options-and-doc)
+  ;; FIXME: Most of this should be moved to the `defclass' macro.
   "Define CNAME as a new subclass of SUPERCLASSES.
 SLOTS are the slots residing in that class definition, and options or
 documentation OPTIONS-AND-DOC is the toplevel documentation for this class.
@@ -1139,6 +1140,17 @@ a string."
 
 ;;; CLOS methods and generics
 ;;
+
+(put 'eieio--defalias 'byte-hunk-handler
+     #'byte-compile-file-form-defalias) ;;(get 'defalias 'byte-hunk-handler)
+(defun eieio--defalias (name body)
+  "Like `defalias', but with less side-effects.
+More specifically, it has no side-effects at all when the new function
+definition is the same (`eq') as the old one."
+  (unless (and (fboundp name)
+               (eq (symbol-function name) body))
+    (defalias name body)))
+
 (defmacro defgeneric (method args &optional doc-string)
   "Create a generic function METHOD.
 DOC-STRING is the base documentation for this class.  A generic
@@ -1147,7 +1159,21 @@ is appropriate to use.  Uses `defmethod' to create methods, and calls
 `defgeneric' for you.  With this implementation the ARGS are
 currently ignored.  You can use `defgeneric' to apply specialized
 top level documentation to a method."
-  `(eieio-defgeneric (quote ,method) ,doc-string))
+  `(eieio--defalias ',method
+                    (eieio--defgeneric-init-form ',method ,doc-string)))
+
+(defun eieio--defgeneric-init-form (method doc-string)
+  "Form to use for the initial definition of a generic."
+  (cond
+   ((or (not (fboundp method))
+        (eq 'autoload (car-safe (symbol-function method))))
+    ;; Make sure the method tables are installed.
+    (eieiomt-install method)
+    ;; Construct the actual body of this function.
+    (eieio-defgeneric-form method doc-string))
+   ((generic-p method) (symbol-function method))           ;Leave it as-is.
+   (t (error "You cannot create a generic/method over an existing symbol: %s"
+             method))))
 
 (defun eieio-defgeneric-form (method doc-string)
   "The lambda form that would be used as the function defined on METHOD.
@@ -1200,29 +1226,28 @@ IMPL is the symbol holding the method implementation."
 	(if (not (eieio-object-p (car local-args)))
 	    ;; Not an object.  Just signal.
 	    (signal 'no-method-definition
-                    (list ,(list 'quote method) local-args))
+                    (list ',method local-args))
 
 	  ;; We do have an object.  Make sure it is the right type.
 	  (if ,(if (eq class eieio-default-superclass)
-		   nil ; default superclass means just an obj.  Already asked.
+		   nil  ; default superclass means just an obj.  Already asked.
 		 `(not (child-of-class-p (aref (car local-args) object-class)
-					 ,(list 'quote class)))
-		 )
+					 ',class)))
 
 	      ;; If not the right kind of object, call no applicable
 	      (apply 'no-applicable-method (car local-args)
-		     ,(list 'quote method) local-args)
+		     ',method local-args)
 
 	    ;; It is ok, do the call.
 	    ;; Fill in inter-call variables then evaluate the method.
-	    (let ((scoped-class ,(list 'quote class))
+	    (let ((scoped-class ',class)
 		  (eieio-generic-call-next-method-list nil)
 		  (eieio-generic-call-key method-primary)
-		  (eieio-generic-call-methodname ,(list 'quote method))
+		  (eieio-generic-call-methodname ',method)
 		  (eieio-generic-call-arglst local-args)
 		  )
-	      (apply ,(list 'quote impl) local-args)
-	      ;(,impl local-args)
+	      (apply #',impl local-args)
+              ;;(,impl local-args)
 	      )))))))
 
 (defsubst eieio-defgeneric-reset-generic-form-primary-only-one (method)
@@ -1236,26 +1261,6 @@ IMPL is the symbol holding the method implementation."
 		  (car entry)
 		  (cdr entry)
 		  ))))
-
-(defun eieio-defgeneric (method doc-string)
-  "Engine part to `defgeneric' macro defining METHOD with DOC-STRING."
-  (if (and (fboundp method) (not (generic-p method))
-	   (or (byte-code-function-p (symbol-function method))
-	       (not (eq 'autoload (car (symbol-function method)))))
-	   )
-      (error "You cannot create a generic/method over an existing symbol: %s"
-	     method))
-  ;; Don't do this over and over.
-  (unless (fboundp 'method)
-    ;; This defun tells emacs where the first definition of this
-    ;; method is defined.
-    `(defun ,method nil)
-    ;; Make sure the method tables are installed.
-    (eieiomt-install method)
-    ;; Apply the actual body of this function.
-    (fset method (eieio-defgeneric-form method doc-string))
-    ;; Return the method
-    'method))
 
 (defun eieio-unbind-method-implementations (method)
   "Make the generic method METHOD have no implementations.
@@ -1292,12 +1297,17 @@ Summary:
   (let* ((key (if (keywordp (car args)) (pop args)))
 	 (params (car args))
 	 (arg1 (car params))
-	 (class (if (consp arg1) (nth 1 arg1))))
-    `(eieio--defmethod ',method ',key ',class
-                       (lambda ,(if (consp arg1)
-                               (cons (car arg1) (cdr params))
-                             params)
-                         ,@(cdr args)))))
+         (fargs (if (consp arg1)
+                   (cons (car arg1) (cdr params))
+                 params))
+	 (class (if (consp arg1) (nth 1 arg1)))
+         (code `(lambda ,fargs ,@(cdr args))))
+    `(progn
+       ;; Make sure there is a generic and the byte-compiler sees it.
+       (defgeneric ,method ,args
+         ,(or (documentation code)
+              (format "Generically created method `%s'." method)))
+       (eieio--defmethod ',method ',key ',class #',code))))
 
 (defun eieio--defmethod (method kind argclass code)
   "Work part of the `defmethod' macro defining METHOD with ARGS."
@@ -1317,11 +1327,11 @@ Summary:
 		 method-static)
 		;; Primary key
                (t method-primary))))
-    ;; make sure there is a generic
-    (eieio-defgeneric
-     method
-     (or (documentation code)
-         (format "Generically created method `%s'." method)))
+    ;; Make sure there is a generic (when called from defclass).
+    (eieio--defalias
+     method (eieio--defgeneric-init-form
+             method (or (documentation code)
+                        (format "Generically created method `%s'." method))))
     ;; create symbol for property to bind to.  If the first arg is of
     ;; the form (varname vartype) and `vartype' is a class, then
     ;; that class will be the type symbol.  If not, then it will fall
