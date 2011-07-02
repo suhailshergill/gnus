@@ -1,5 +1,8 @@
 2011-07-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-msg.el (gnus-configure-posting-styles): Don't try to select dead
+	summary buffers.
+
 	* message.el (message-get-reply-headers): Delete all duplicates,
 	instead of the first.
 	(message-get-reply-headers): Ensure that we have progress while
