@@ -1466,6 +1466,8 @@ If YANK is non-nil, include the original article."
     (goto-char (point-min))
     (re-search-forward (concat "^" (regexp-quote mail-header-separator) "$"))
     (forward-line 1)
+    (insert (format "Package: %s\n" gnus-bug-package))
+    (insert (format "Version: %s\n" (gnus-continuum-version)))
     (insert "\n")
     (insert (gnus-version) "\n"
 	    (emacs-version) "\n")

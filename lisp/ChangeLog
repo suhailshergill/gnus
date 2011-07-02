@@ -2,6 +2,7 @@
 
 	* gnus-msg.el (gnus-bug): Give the Version and Package headers to
 	debbugs with the X-Debbugs-Package and X-Debbugs-Version headers.
+	Bring the pseudo-headers back too.
 
 2011-07-01  Daiki Ueno  <ueno@unixuser.org>
 
