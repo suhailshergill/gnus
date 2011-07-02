@@ -1,3 +1,9 @@
+2011-07-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-msg.el (gnus-configure-posting-styles): Get the local
+	gnus-posting-style value from the summary buffer to make it easier to
+	make that a per-buffer conf.
+
 2011-07-02  Andrew Cohen  <cohen@andy.bu.edu>
 
 	* nnir.el (nnir-run-imap): Allow halting a search when an article is

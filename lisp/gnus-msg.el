@@ -1799,7 +1799,8 @@ this is a reply."
   "Configure posting styles according to `gnus-posting-styles'."
   (unless gnus-inhibit-posting-styles
     (let ((group (or group-name gnus-newsgroup-name ""))
-	  (styles gnus-posting-styles)
+	  (styles (with-current-buffer gnus-summary-buffer
+		    gnus-posting-styles))
 	  style match attribute value v results
 	  filep name address element)
       ;; If the group has a posting-style parameter, add it at the end with a
