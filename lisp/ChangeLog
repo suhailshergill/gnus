@@ -1,3 +1,8 @@
+2011-07-02  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-msg.el (gnus-bug): Give the Version and Package headers to
+	debbugs with the X-Debbugs-Package and X-Debbugs-Version headers.
+
 2011-07-01  Daiki Ueno  <ueno@unixuser.org>
 
 	* auth-source.el (auth-source-token-passphrase-callback-function):
