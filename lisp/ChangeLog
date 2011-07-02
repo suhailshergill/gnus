@@ -1,5 +1,7 @@
 2011-07-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-list-debbugs): New command.
+
 	* gnus-group.el (gnus-bug-group-download-format-alist): Get the
 	mboxstat instead of the maintbox, since the stat seems to be fuller.
 
