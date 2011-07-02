@@ -6798,7 +6798,8 @@ want to get rid of this query permanently.")))
 	(while s
 	  (let ((address (car (pop s))))
 	    (while (assoc address s)
-	      (setq recipients (delq (assoc address s) recipients))))))
+	      (setq recipients (delq (assoc address s) recipients)
+		    s (delq (assoc address s) s))))))
 
       ;; Remove hierarchical lists that are contained within each other,
       ;; if message-hierarchical-addresses is defined.
