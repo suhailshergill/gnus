@@ -1,5 +1,8 @@
 2011-07-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-get-reply-headers): Delete all duplicates,
+	instead of the first.
+
 	* gnus-msg.el (gnus-configure-posting-styles): Get the local
 	gnus-posting-style value from the summary buffer to make it easier to
 	make that a per-buffer conf.
