@@ -1,3 +1,7 @@
+2011-07-03  Wolfgang Jenkner  <wjenkner@inode.at>  (tiny change)
+
+	* pop3.el (pop3-open-server): Use :end-of-capability.
+
 2011-07-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-group.el (gnus-read-ephemeral-emacs-bug-group): Make sure that
