@@ -1,3 +1,8 @@
+2011-07-03  Dave Abrahams  <dave@boostpro.com>  (tiny change)
+
+	* gnus.texi (Startup Files): Clarify that we're talking about numbered
+	backups, and not actual vc (bug#8975).
+
 2011-06-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Summary Mail Commands): Document
