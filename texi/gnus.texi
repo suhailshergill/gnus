@@ -1214,7 +1214,7 @@ Some handy pre-fab functions are:
 
 @item gnus-subscribe-zombies
 @vindex gnus-subscribe-zombies
-Make all new groups zombies (@pxref {Group Levels}).  This is the
+Make all new groups zombies (@pxref{Group Levels}).  This is the
 default.  You can browse the zombies later (with @kbd{A z}) and either
 kill them all off properly (with @kbd{S z}), or subscribe to them
 (with @kbd{u}).
