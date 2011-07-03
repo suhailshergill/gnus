@@ -1,5 +1,8 @@
 2011-07-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-read-ephemeral-bug-group): Bind the coding
+	systems to binary before writing and reading the mbox files.
+
 	* gnus.el (gnus-summary-line-format): Link to the info node for %U
 	instead of trying to list them all (bug#8978).
 

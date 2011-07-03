@@ -2437,7 +2437,9 @@ the bug number, and browsing the URL must return mbox output."
 		     (cdr (assoc 'emacs gnus-bug-group-download-format-alist))))
   (when (stringp number)
     (setq number (string-to-number number)))
-  (let ((tmpfile (mm-make-temp-file "gnus-temp-group-")))
+  (let ((tmpfile (mm-make-temp-file "gnus-temp-group-"))
+	(coding-system-for-write 'binary)
+	(coding-system-for-read 'binary))
     (with-temp-file tmpfile
       (url-insert-file-contents (format mbox-url number))
       (goto-char (point-min))
