@@ -1,3 +1,8 @@
+2011-07-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el (gnus-summary-line-format): Link to the info node for %U
+	instead of trying to list them all (bug#8978).
+
 2011-07-03  Wolfgang Jenkner  <wjenkner@inode.at>  (tiny change)
 
 	* pop3.el (pop3-open-server): Use :end-of-capability.
