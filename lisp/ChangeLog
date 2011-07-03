@@ -1,5 +1,8 @@
 2011-07-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-read-ephemeral-emacs-bug-group): Make sure that
+	the id is always a number.
+
 	* dgnushack.el (debbugs-summary-mode): Shut up compiler about debbugs.
 
 	* gnus-group.el (gnus-read-ephemeral-emacs-bug-group): Hook into
