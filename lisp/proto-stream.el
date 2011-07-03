@@ -94,6 +94,10 @@ PARAMETERS should be a sequence of keywords and values:
 :end-of-command specifies a regexp matching the end of a command.
   If non-nil, it defaults to \"\\n\".
 
+:end-of-capability specifies a regexp matching the end of the
+  response to the command specified for :capability-command.
+  It defaults to the regexp specified for :end-of-command.
+
 :success specifies a regexp matching a message indicating a
   successful STARTTLS negotiation.  For instance, the default
   should be \"^3\" for an NNTP connection.
@@ -151,12 +155,15 @@ PARAMETERS should be a sequence of keywords and values:
 	 (success-string     (plist-get parameters :success))
 	 (capability-command (plist-get parameters :capability-command))
 	 (eoc                (plist-get parameters :end-of-command))
+ 	 (eo-capa            (or (plist-get parameters :end-of-capability)
+ 				 eoc))
 	 ;; Return (STREAM GREETING CAPABILITIES RESULTING-TYPE)
 	 (stream (open-network-stream name buffer host service))
 	 (greeting (proto-stream-get-response stream start eoc))
 	 (capabilities (when capability-command
 			 (proto-stream-command stream
-					       capability-command eoc)))
+					       capability-command
+					       (or eo-capa eoc))))
 	 (resulting-type 'plain)
 	 (builtin-starttls (and (fboundp 'gnutls-available-p)
 				(gnutls-available-p)))
@@ -200,7 +207,7 @@ PARAMETERS should be a sequence of keywords and values:
 	    (proto-stream-get-response stream start eoc)))
 	;; Re-get the capabilities, which may have now changed.
 	(setq capabilities
-	      (proto-stream-command stream capability-command eoc))))
+	      (proto-stream-command stream capability-command eo-capa))))
 
     ;; If TLS is mandatory, close the connection if it's unencrypted.
     (and require-tls
