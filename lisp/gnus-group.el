@@ -2471,7 +2471,12 @@ the bug number, and browsing the URL must return mbox output."
   (gnus-read-ephemeral-bug-group
    number
    (cdr (assoc 'emacs gnus-bug-group-download-format-alist))
-   window-conf))
+   window-conf)
+  (when (boundp 'debbugs-summary-mode)
+    (with-current-buffer (window-buffer (selected-window))
+      (debbugs-summary-mode 1)
+      (set (make-local-variable 'debbugs-bug-number)
+	   (string-to-number number)))))
 
 (defun gnus-group-jump-to-group (group &optional prompt)
   "Jump to newsgroup GROUP.

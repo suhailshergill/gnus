@@ -129,6 +129,8 @@
 (defalias 'efs-re-read-dir 'ignore)
 (defalias 'ange-ftp-re-read-dir 'ignore)
 (defalias 'define-mail-user-agent 'ignore)
+(defalias 'debbugs-summary-mode 'ignore)
+(defvar debbugs-bug-number nil)
 
 (eval-and-compile
   (unless (featurep 'xemacs)
