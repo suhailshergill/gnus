@@ -1,3 +1,8 @@
+2011-07-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Subscription Methods): Link to "Group Levels" to explain
+	zombies.
+
 2011-07-03  Dave Abrahams  <dave@boostpro.com>  (tiny change)
 
 	* gnus.texi (Startup Files): Clarify that we're talking about numbered

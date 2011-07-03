@@ -1214,9 +1214,10 @@ Some handy pre-fab functions are:
 
 @item gnus-subscribe-zombies
 @vindex gnus-subscribe-zombies
-Make all new groups zombies.  This is the default.  You can browse the
-zombies later (with @kbd{A z}) and either kill them all off properly
-(with @kbd{S z}), or subscribe to them (with @kbd{u}).
+Make all new groups zombies (@pxref {Group Levels}).  This is the
+default.  You can browse the zombies later (with @kbd{A z}) and either
+kill them all off properly (with @kbd{S z}), or subscribe to them
+(with @kbd{u}).
 
 @item gnus-subscribe-randomly
 @vindex gnus-subscribe-randomly
@@ -2360,6 +2361,7 @@ empty subscribed groups and unsubscribed groups, too.  Type @kbd{l} to
 go back to showing nonempty subscribed groups again.  Thus, unsubscribed
 groups are hidden, in a way.
 
+@cindex zombie groups
 Zombie and killed groups are similar to unsubscribed groups in that they
 are hidden by default.  But they are different from subscribed and
 unsubscribed groups in that Gnus doesn't ask the news server for
