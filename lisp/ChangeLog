@@ -1,3 +1,9 @@
+2011-07-02  Daiki Ueno  <ueno@unixuser.org>
+
+	* auth-source.el (auth-source-token-passphrase-callback-function):
+	Reindent.
+	(epg-context-operation): Remove unnecessary autoload.
+
 2011-07-02  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.el (gnus-list-debbugs): New command.
