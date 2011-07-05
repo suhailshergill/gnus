@@ -1302,6 +1302,10 @@ subscribing these groups.
 @code{gnus-subscribe-options-newsgroup-method} is used instead.  This
 variable defaults to @code{gnus-subscribe-alphabetically}.
 
+The ``options -n'' format is very simplistic.  The syntax above is all
+that is supports -- you can force-subscribe hierarchies, or you can
+deny hierarchies, and that's it.
+
 @vindex gnus-options-not-subscribe
 @vindex gnus-options-subscribe
 If you don't want to mess with your @file{.newsrc} file, you can just

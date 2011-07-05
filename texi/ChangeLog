@@ -1,6 +1,7 @@
 2011-07-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Expiring Mail): Document gnus-auto-expirable-marks.
+	(Filtering New Groups): Clarify how simple the "options -n" format is.
 
 2011-07-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
