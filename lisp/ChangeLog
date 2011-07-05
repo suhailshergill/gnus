@@ -1,3 +1,7 @@
+2011-07-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* pop3.el (pop3-open-server): -ERR is a valid response to CAPA.
+
 2011-07-05  Daiki Ueno  <ueno@unixuser.org>
 
 	* gnus-start.el (gnus-get-unread-articles): Don't connect to the
