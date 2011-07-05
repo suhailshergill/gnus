@@ -1,3 +1,8 @@
+2011-07-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el (gnus-refer-article-method): Remove mention of nnspool, which
+	no longer is much used.
+
 2011-04-03  Kan-Ru Chen  <kanru@kanru.info>
 
 	* nnir.el (nnir-notmuch-program, nnir-notmuch-additional-switches)
