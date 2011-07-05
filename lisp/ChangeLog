@@ -1,5 +1,7 @@
 2011-07-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-text-html-renderer): Doc fix.
+
 	* gnus-msg.el (gnus-bug): Fix the MML tag.
 
 	* pop3.el (pop3-open-server): -ERR is a valid response to CAPA.
