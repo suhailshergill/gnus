@@ -1,5 +1,9 @@
 2011-07-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-msg.el (gnus-bug): Don't insert user variables.  It usually
+	isn't very interesting any more, and it leaks potentially secret data.
+	(gnus-debug): Removed.
+
 	* gnus-art.el (gnus-ignored-headers): Removed obsolete and non-working
 	use of :custom-show.
 
