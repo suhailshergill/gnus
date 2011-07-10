@@ -1,5 +1,7 @@
 2011-07-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el (debbugs-gnu-summary-mode): Update compat names, too.
+
 	* gnus-group.el (gnus-read-ephemeral-emacs-bug-group): `debbugs-*'
 	renamed to `debbugs-gnu-*'.
 
