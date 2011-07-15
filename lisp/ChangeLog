@@ -1,5 +1,7 @@
 2011-07-15  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (debbugs-gnu): Renamed from debbugs-emacs.
+
 	* message.el (message-reply): Work around mysterious bug where
 	`message-mode' seems to overwrite the locally bound `subject' variable.
 
