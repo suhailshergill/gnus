@@ -1,5 +1,8 @@
 2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-refer-thread): When inserting new headers,
+	keep track of which ones are unread (bug#9061).
+
 	* gnus.el (gnus-refer-article-method): Allow entering any sexp
 	(bug#9055).
 

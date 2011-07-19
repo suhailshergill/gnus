@@ -8982,29 +8982,35 @@ variable."
 	 (gnus-summary-ignore-duplicates t)
 	 (gnus-read-all-available-headers t)
 	 (limit (if limit (prefix-numeric-value limit)
-		  gnus-refer-thread-limit)))
+		  gnus-refer-thread-limit))
+	 (new-headers
+	  (if (gnus-check-backend-function
+	       'request-thread gnus-newsgroup-name)
+	      (gnus-request-thread header gnus-newsgroup-name)
+	    (let* ((last (if (numberp limit)
+			     (min (+ (mail-header-number header)
+				     limit)
+				  gnus-newsgroup-highest)
+			   gnus-newsgroup-highest))
+		   (subject (gnus-simplify-subject
+			     (mail-header-subject header)))
+		   (refs (split-string (or (mail-header-references header)
+					   "")))
+		   (gnus-parse-headers-hook
+		    (lambda () (goto-char (point-min))
+		      (keep-lines
+		       (regexp-opt (append refs (list id subject)))))))
+	      (gnus-fetch-headers (list last) (if (numberp limit)
+						  (* 2 limit) limit) t)))))
+    (dolist (header new-headers)
+      (when (member (mail-header-number header) gnus-newsgroup-unselected)
+	(push (mail-header-number header) gnus-newsgroup-unreads)
+	(setq gnus-newsgroup-unselected
+	      (delete (mail-header-number header) gnus-newsgroup-unselected))))
     (setq gnus-newsgroup-headers
 	  (gnus-delete-duplicate-headers
 	   (gnus-merge
-	    'list gnus-newsgroup-headers
-	    (if (gnus-check-backend-function
-		 'request-thread gnus-newsgroup-name)
-		(gnus-request-thread header gnus-newsgroup-name)
-	      (let* ((last (if (numberp limit)
-			       (min (+ (mail-header-number header)
-				       limit)
-				    gnus-newsgroup-highest)
-			     gnus-newsgroup-highest))
-		     (subject (gnus-simplify-subject
-			       (mail-header-subject header)))
-		     (refs (split-string (or (mail-header-references header)
-					     "")))
-		     (gnus-parse-headers-hook
-		      (lambda () (goto-char (point-min))
-			(keep-lines
-			 (regexp-opt (append refs (list id subject)))))))
-		(gnus-fetch-headers (list last) (if (numberp limit)
-						    (* 2 limit) limit) t)))
+	    'list gnus-newsgroup-headers new-headers
 	    'gnus-article-sort-by-number)))
     (gnus-summary-limit-include-thread id)))
 
