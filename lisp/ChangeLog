@@ -1,5 +1,8 @@
 2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-article-show-images): Allow working if using w3m
+	(bug#9041).
+
 	* gnus-html.el (mm-util): Require (bug#9073).
 
 	* gnus-sum.el (gnus-delete-duplicate-headers): New function.
