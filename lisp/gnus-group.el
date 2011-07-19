@@ -2298,11 +2298,14 @@ Return the name of the group if selection was successful."
      `(-1 nil (,group
 	       ,gnus-level-default-subscribed nil nil ,method
 	       ,(cons
-		 (if quit-config
-		     (cons 'quit-config quit-config)
+		 (cond
+		  (quit-config
+		   (cons 'quit-config quit-config))
+		  ((assq gnus-current-window-configuration
+			 gnus-buffer-configuration)
 		   (cons 'quit-config
 			 (cons gnus-summary-buffer
-			       gnus-current-window-configuration)))
+			       gnus-current-window-configuration))))
 		 parameters)))
      gnus-newsrc-hashtb)
     (push method gnus-ephemeral-servers)
