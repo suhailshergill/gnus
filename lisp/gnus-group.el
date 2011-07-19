@@ -1008,10 +1008,10 @@ Pre-defined symbols include `gnus-group-tool-bar-gnome' and
   '((gnus-group-post-news "mail/compose")
     ;; Some useful agent icons?  I don't use the agent so agent users should
     ;; suggest useful commands:
-    (gnus-agent-toggle-plugged "disconnect" t
+    (gnus-agent-toggle-plugged "unplugged" t
 			       :help "Gnus is currently unplugged.  Click to work online."
      			       :visible (and gnus-agent (not gnus-plugged)))
-    (gnus-agent-toggle-plugged "connect" t
+    (gnus-agent-toggle-plugged "plugged" t
 			       :help "Gnus is currently plugged.  Click to work offline."
      			       :visible (and gnus-agent gnus-plugged))
     ;; FIXME: gnus-agent-toggle-plugged (in gnus-agent-group-make-menu-bar)

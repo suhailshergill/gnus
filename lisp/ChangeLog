@@ -2,6 +2,8 @@
 
 	* gnus-group.el (gnus-group-read-ephemeral-group): Make sure we don't
 	enter invalid buffer configurations into the quit form (bug#9107).
+	(gnus-group-tool-bar-gnome): Replace connect/disconnect with
+	unplugged/plugged.
 
 	* gnus-sum.el (gnus-summary-refer-thread): When inserting new headers,
 	keep track of which ones are unread (bug#9061).
