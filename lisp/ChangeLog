@@ -1,5 +1,8 @@
 2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-refer-article-method): Allow entering any sexp
+	(bug#9055).
+
 	* gnus-art.el (gnus-article-show-images): Allow working if using w3m
 	(bug#9041).
 
