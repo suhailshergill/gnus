@@ -6562,7 +6562,10 @@ This is meant to be called in `gnus-article-internal-prepare-hook'."
 (defun gnus-summary-insert-subject (id &optional old-header use-old-header)
   "Find article ID and insert the summary line for that article.
 OLD-HEADER can either be a header or a line number to insert
-the subject line on."
+the subject line on.
+If USE-OLD-HEADER is non-nil, then OLD-HEADER should be a header,
+and OLD-HEADER will be used when the summary line is inserted,
+too, instead of trying to fetch new headers."
   (let* ((line (and (numberp old-header) old-header))
 	 (old-header (and (vectorp old-header) old-header))
 	 (header (cond ((and old-header use-old-header)

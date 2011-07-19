@@ -3,6 +3,7 @@
 	* gnus-sum.el (gnus-delete-duplicate-headers): New function.
 	(gnus-summary-refer-thread): Use it to remove duplicates in the
 	un-threaded view (bug#9053).
+	(gnus-summary-insert-subject): Document USE-OLD-HEADER (bug#9070).
 
 2011-07-07  Kan-Ru Chen  <kanru@kanru.info>
 
