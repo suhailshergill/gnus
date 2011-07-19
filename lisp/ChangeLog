@@ -1,3 +1,9 @@
+2011-07-07  Kan-Ru Chen  <kanru@kanru.info>
+
+	* nnir.el (nnir-read-server-parm): Use default value from global
+	variable.  Without this the default search engine parameters aren't
+	used at all.
+
 2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-unique-id): Don't use the undocumented return
