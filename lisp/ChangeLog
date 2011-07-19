@@ -1,3 +1,9 @@
+2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-delete-duplicate-headers): New function.
+	(gnus-summary-refer-thread): Use it to remove duplicates in the
+	un-threaded view (bug#9053).
+
 2011-07-07  Kan-Ru Chen  <kanru@kanru.info>
 
 	* nnir.el (nnir-read-server-parm): Use default value from global
