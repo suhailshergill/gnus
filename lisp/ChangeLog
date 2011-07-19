@@ -1,3 +1,8 @@
+2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-unique-id): Don't use the undocumented return
+	value from (random t) (bug#9118).
+
 2011-07-16  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-auto-save-directory): If the ~/Mail directory
