@@ -1,5 +1,7 @@
 2011-07-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-html.el (mm-util): Require (bug#9073).
+
 	* gnus-sum.el (gnus-delete-duplicate-headers): New function.
 	(gnus-summary-refer-thread): Use it to remove duplicates in the
 	un-threaded view (bug#9053).
