@@ -1,5 +1,9 @@
 2011-07-20  Andrew Cohen  <cohen@andy.bu.edu>
 
+	* nnimap.el (nnimap-make-thread-query): New utility function to format
+	an imap thread search query.
+	(nnimap-request-thread): Use it.
+
 	* gnus-sum.el (gnus-handle-ephemeral-exit): Ensure we are setting the
 	right select-method if we are not going back to the group buffer.
 
