@@ -1,6 +1,8 @@
 2011-07-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-insert-new-articles): Clean up slightly.
+	(gnus-summary-insert-new-articles): Protect against servers that are
+	down.
 
 2011-07-29  Daniel Dehennin  <daniel.dehennin@baby-gnu.org>
 

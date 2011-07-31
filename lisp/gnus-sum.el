@@ -12854,10 +12854,11 @@ If ALL is a number, fetch this number of articles."
   (let ((old (sort (mapcar 'car gnus-newsgroup-data) '<))
 	(old-high gnus-newsgroup-highest)
 	(nnmail-fetched-sources (list t))
+	(new-active (gnus-activate-group gnus-newsgroup-name 'scan))
 	i new)
-    (setq gnus-newsgroup-active
-	  (gnus-copy-sequence
-	   (gnus-activate-group gnus-newsgroup-name 'scan)))
+    (unless new-active
+      (error "Couldn't fetch new data"))
+    (setq gnus-newsgroup-active (gnus-copy-sequence new-active))
     (setq i (cdr gnus-newsgroup-active)
 	  gnus-newsgroup-highest i)
     (while (> i old-high)
