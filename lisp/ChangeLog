@@ -1,4 +1,4 @@
-2011-07-31  Marcus Harnisch  <marcus.harnisch@gmx.net>
+2011-07-31  Marcus Harnisch  <marcus.harnisch@gmx.net>  (tiny change)
 
 	* gnus-art.el (gnus-article-stop-animations): Use `elt' instead of
 	`aref' for XEmacs compatibiltiy.
