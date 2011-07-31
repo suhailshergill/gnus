@@ -1,3 +1,8 @@
+2011-07-31  Dave Abrahams  <dave@boostpro.com>  (tiny change)
+
+	* gnus-sum.el (gnus-summary-refer-thread): Since lambdas aren't
+	closures, quote the form properly (bug#9194).
+
 2011-07-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-insert-new-articles): Clean up slightly.

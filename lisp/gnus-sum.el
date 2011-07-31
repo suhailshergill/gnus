@@ -9015,9 +9015,9 @@ non-numeric or nil fetch the number specified by the
 		   (refs (split-string (or (mail-header-references header)
 					   "")))
 		   (gnus-parse-headers-hook
-		    (lambda () (goto-char (point-min))
+		    `(lambda () (goto-char (point-min))
 		      (keep-lines
-		       (regexp-opt (append refs (list id subject)))))))
+		       (regexp-opt ',(append refs (list id subject)))))))
 	      (gnus-fetch-headers (list last) (if (numberp limit)
 						  (* 2 limit) limit) t)))))
     (when (listp new-headers)
