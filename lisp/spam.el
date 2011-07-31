@@ -1582,29 +1582,29 @@ to find it out)."
     (let* ((data-header (or prepared-data-header
                             (spam-fetch-article-header article))))
       (if (arrayp data-header)
-        (cond
-         ((equal field 'number)
-          (mail-header-number data-header))
-         ((equal field 'from)
-          (mail-header-from data-header))
-         ((equal field 'message-id)
-          (mail-header-message-id data-header))
-         ((equal field 'subject)
-          (mail-header-subject data-header))
-         ((equal field 'references)
-          (mail-header-references data-header))
-         ((equal field 'date)
-          (mail-header-date data-header))
-         ((equal field 'xref)
-          (mail-header-xref data-header))
-         ((equal field 'extra)
-          (mail-header-extra data-header))
-         (t
-          (gnus-error
-           5
-           "spam-fetch-field-fast: unknown field %s requested"
-           field)
-          nil))
+	  (cond
+	   ((equal field 'number)
+	    (mail-header-number data-header))
+	   ((equal field 'from)
+	    (mail-header-from data-header))
+	   ((equal field 'message-id)
+	    (mail-header-message-id data-header))
+	   ((equal field 'subject)
+	    (mail-header-subject data-header))
+	   ((equal field 'references)
+	    (mail-header-references data-header))
+	   ((equal field 'date)
+	    (mail-header-date data-header))
+	   ((equal field 'xref)
+	    (mail-header-xref data-header))
+	   ((equal field 'extra)
+	    (mail-header-extra data-header))
+	   (t
+	    (gnus-error
+	     5
+	     "spam-fetch-field-fast: unknown field %s requested"
+	     field)
+	    nil))
         (gnus-message 6 "Article %d has a nil data header" article)))))
 
 (defun spam-fetch-field-from-fast (article &optional prepared-data-header)
