@@ -1,3 +1,8 @@
+2011-07-31  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnmaildir.el (nnmaildir-request-accept-article): Don't call
+	`unix-sync' unless it's defined.
+
 2011-07-31  Marcus Harnisch  <marcus.harnisch@gmx.net>  (tiny change)
 
 	* gnus-art.el (gnus-article-stop-animations): Use `elt' instead of
