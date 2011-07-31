@@ -1,3 +1,8 @@
+2011-07-31  Marcus Harnisch  <marcus.harnisch@gmx.net>
+
+	* gnus-art.el (gnus-article-stop-animations): Use `elt' instead of
+	`aref' for XEmacs compatibiltiy.
+
 2011-07-31  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* spam.el (spam-fetch-field-fast): Rewrite slightly for clarity.
