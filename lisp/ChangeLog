@@ -2,6 +2,7 @@
 
 	* nnir.el (nnir-search-thread): Position point on referring article
 	line.
+	(nnir-warp-to-article): Clean up summary buffers.
 
 	* nnimap.el (nnimap-request-thread): Whitespace fix.
 

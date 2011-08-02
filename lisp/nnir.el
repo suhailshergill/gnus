@@ -767,11 +767,18 @@ Add an entry here when adding a new search engine.")
 (deffoo nnir-warp-to-article ()
   (let* ((cur (if (> (gnus-summary-article-number) 0)
 		  (gnus-summary-article-number)
-		(error "This is not a real article.")))
-	 (gnus-newsgroup-name (nnir-article-group cur))
-         (backend-number (nnir-article-number cur)))
-    (gnus-summary-read-group-1 gnus-newsgroup-name t t gnus-summary-buffer
-			       nil (list backend-number))))
+		(error "This is not a real article")))
+	 (backend-article-group (nnir-article-group cur))
+         (backend-article-number (nnir-article-number cur))
+	 (quit-config (gnus-ephemeral-group-p gnus-newsgroup-name)))
+    ;; first exit from the nnir summary buffer.
+    (gnus-summary-exit)
+    ;; and if the nnir summary buffer in turn came from another
+    ;; summary buffer we have to clean that summary up too.
+    (when (eq (cdr quit-config) 'summary)
+      (gnus-summary-exit))
+    (gnus-summary-read-group-1 backend-article-group t t  nil
+			       nil (list backend-article-number))))
 
 (nnoo-define-skeleton nnir)
 
