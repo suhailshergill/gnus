@@ -1659,7 +1659,8 @@ server is of form 'backend:name'."
 	       (cons 'server (gnus-method-to-server
 			      (gnus-find-method-for-group
 			       gnus-newsgroup-name))))))
-    (gnus-group-make-nnir-group nil parm)))
+    (gnus-group-make-nnir-group nil parm)
+    (gnus-summary-goto-subject (gnus-id-to-article (mail-header-id header)))))
 
 ;; unused?
 (defun nnir-artlist-groups (artlist)

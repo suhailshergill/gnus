@@ -1566,7 +1566,7 @@ textual parts.")
 		  (articles &optional limit force-new dependencies))
 
 (deffoo nnimap-request-thread (header &optional group server)
-  (if gnus-refer-thread-use-nnir 
+  (if gnus-refer-thread-use-nnir
       (nnir-search-thread header)
     (when (nnimap-possibly-change-group group server)
       (let* ((cmd (nnimap-make-thread-query header))
