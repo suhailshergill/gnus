@@ -1387,6 +1387,7 @@ Respects `auth-source-save-behavior'.  Uses
                 (insert "\n"))
               (insert add "\n")
               (write-region (point-min) (point-max) file nil 'silent)
+	      (set-file-modes file #o0600)
               (auth-source-do-debug
                "auth-source-netrc-create: wrote 1 new line to %s"
                file)

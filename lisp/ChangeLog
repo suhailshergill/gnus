@@ -1,3 +1,8 @@
+2011-08-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* auth-source.el (auth-source-netrc-saver): Make the .authinfo file
+	non-world-readable.
+
 2011-08-17  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* nndraft.el (nndraft-update-unread-articles): Don't send delayed
