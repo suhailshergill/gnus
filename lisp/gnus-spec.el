@@ -90,6 +90,11 @@ text properties. This is only needed on XEmacs, as Emacs does this anyway."
 (declare-function gnus-summary-from-or-to-or-newsgroups "gnus-sum"
                   (header gnus-tmp-from))
 
+(defmacro gnus-lrm-string-p (string)
+  `(eq (aref ,string (1- (length ,string))) ?\x200e))
+
+(defvar gnus-lrm-string (propertize (string ?\x200e) 'invisible t))
+
 (defun gnus-summary-line-format-spec ()
   (insert gnus-tmp-unread gnus-tmp-replied
 	  gnus-tmp-score-char gnus-tmp-indentation)
@@ -103,7 +108,9 @@ text properties. This is only needed on XEmacs, as Emacs does this anyway."
 		       (gnus-summary-from-or-to-or-newsgroups
 			gnus-tmp-header gnus-tmp-from))))
 		(if (> (length val) 23)
-		    (substring val 0 23)
+		    (if (gnus-lrm-string-p val)
+			(concat (substring val 0 23) gnus-lrm-string)
+		      (substring val 0 23))
 		  val))
 	      gnus-tmp-closing-bracket))
      (point))
@@ -351,13 +358,17 @@ Return a list of updated types."
 	`(if (> (,length-fun ,el) ,max)
 	     ,(if (< max-width 0)
 		  `(,substring-fun ,el (- (,length-fun ,el) ,max))
-		`(,substring-fun ,el 0 ,max))
+		`(if (gnus-lrm-string-p ,el)
+		     (concat (,substring-fun ,el 0 ,max) ,gnus-lrm-string)
+		   (,substring-fun ,el 0 ,max)))
 	   ,el)
       `(let ((val (eval ,el)))
 	 (if (> (,length-fun val) ,max)
 	     ,(if (< max-width 0)
 		  `(,substring-fun val (- (,length-fun val) ,max))
-		`(,substring-fun val 0 ,max))
+		`(if (gnus-lrm-string-p val)
+		     (concat (,substring-fun val 0 ,max) ,gnus-lrm-string)
+		   (,substring-fun val 0 ,max)))
 	   val)))))
 
 (defun gnus-tilde-cut-form (el cut-width)
