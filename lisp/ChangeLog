@@ -1,5 +1,9 @@
 2011-08-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-is-yours-p): Allow disabling canlock checking
+	(bug#9295).
+	(message-shoot-gnksa-feet): Add `canlock-verify'.
+
 	* auth-source.el (auth-source-netrc-saver): Make the .authinfo file
 	non-world-readable.
 
