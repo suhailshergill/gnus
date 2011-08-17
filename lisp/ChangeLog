@@ -1,5 +1,8 @@
 2011-08-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-spec.el (gnus-lrm-string): Use 8206 instead of ?\x200e to make
+	things work in Emacs 22 and XEmacs, too.
+
 	* gnus-sum.el (gnus-summary-from-or-to-or-newsgroups): LRM-ify the
 	default From.
 

@@ -91,9 +91,13 @@ text properties. This is only needed on XEmacs, as Emacs does this anyway."
                   (header gnus-tmp-from))
 
 (defmacro gnus-lrm-string-p (string)
-  `(eq (aref ,string (1- (length ,string))) ?\x200e))
+  (if (fboundp 'string-mark-left-to-rigth)
+      `(eq (aref ,string (1- (length ,string))) 8206)
+    nil))
 
-(defvar gnus-lrm-string (propertize (string ?\x200e) 'invisible t))
+(defvar gnus-lrm-string (if (ignore-errors (string 8206))
+			    (propertize (string 8206) 'invisible t)
+			  ""))
 
 (defun gnus-summary-line-format-spec ()
   (insert gnus-tmp-unread gnus-tmp-replied
