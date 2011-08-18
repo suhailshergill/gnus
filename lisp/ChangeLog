@@ -14,6 +14,9 @@
 
 2011-08-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-clear-data): Add a y-or-n query, since it's
+	a pretty destructive command.
+
 	* nnmail.el (nnmail-extra-headers): Clarify slightly (bug#9302).
 
 2011-08-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
