@@ -12,6 +12,10 @@
 	`gnus-registry-get-id-key' since `gnus-registry-fetch-groups' isn't
 	available anymore.
 
+2011-08-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnmail.el (nnmail-extra-headers): Clarify slightly (bug#9302).
+
 2011-08-17  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-fix-before-sending): Make a different warning
