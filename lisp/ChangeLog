@@ -1,3 +1,8 @@
+2011-08-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-transform-headers): Protect against (NIL ...)
+	bodystructures (bug#9314).
+
 2011-08-19  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-art.el (gnus-insert-mime-button, gnus-mime-display-alternative):
