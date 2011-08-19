@@ -12,6 +12,11 @@
 	`gnus-registry-get-id-key' since `gnus-registry-fetch-groups' isn't
 	available anymore.
 
+2011-08-12  Simon Josefsson  <simon@josefsson.org>
+
+	* starttls.el (starttls-any-program-available): Define as obsolete
+	function.
+
 2011-08-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-util.el (gnus-y-or-n-p): Reinstate the message-clearing y-or-n-p
