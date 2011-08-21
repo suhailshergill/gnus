@@ -1842,7 +1842,7 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
       ;; and fetch the mail from each.
       (while (setq source (pop fetching-sources))
 	(when (setq new
-		    (condition-case (cond)
+		    (condition-case cond
 			(mail-source-fetch
 			 source
 			 (gnus-byte-compile
