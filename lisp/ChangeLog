@@ -1,5 +1,9 @@
 2011-08-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-expire-articles): When expiring articles,
+	just ignore groups that can't be opened instead of erroring out
+	(bug#9225).
+
 	* gnus-art.el (gnus-article-update-date-headers): Flip the default to
 	nil since some many people are fuddy-duddies.
 
