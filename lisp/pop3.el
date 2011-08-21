@@ -178,7 +178,7 @@ Use streaming commands."
 
 (defun pop3-wait-for-messages (process count total-size)
   (while (< (pop3-number-of-responses total-size) count)
-    (unless (gnus-process-live-p process)
+    (unless (memq (process-status process) '(open run))
       (error "pop3 process died"))
     (when total-size
       (message "pop3 retrieved %dKB (%d%%)"

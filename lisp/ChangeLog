@@ -1,5 +1,7 @@
 2011-08-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* pop3.el (pop3-wait-for-messages): Don't use Gnus functions here.
+
 	* gnus-util.el (gnus-process-live-p): Copy over compat function.
 
 	* pop3.el (pop3-wait-for-messages): If the pop3 process dies, stop
