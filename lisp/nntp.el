@@ -261,6 +261,8 @@ See `nnml-marks-is-evil' for more information.")
 					  (const :format "" "password")
 					  (string :format "Password: %v")))))))
 
+(make-obsolete 'nntp-authinfo-file nil "Emacs 24.1")
+
 
 
 (defvoo nntp-connection-timeout nil
