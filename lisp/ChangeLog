@@ -1,5 +1,8 @@
 2011-08-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnmail.el (nnmail-get-new-mail-1): If one mail source bugs out,
+	continue on and do the clean-up phase (bug#9188).
+
 	* gnus-sum.el (gnus-summary-expire-articles): When expiring articles,
 	just ignore groups that can't be opened instead of erroring out
 	(bug#9225).
