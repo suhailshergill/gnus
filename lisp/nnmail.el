@@ -1856,7 +1856,7 @@ See the Info node `(gnus)Fancy Mail Splitting' for more details."
 				    (nnmail-get-split-group orig-file
 							    ',source)))
 			      ',(intern (format "%s-active-number" method))))))
-		      (error
+		      ((error quit)
 		       (message "Mail source %s failed: %s" source cond)
 		       0)))
 	  (incf total new)
