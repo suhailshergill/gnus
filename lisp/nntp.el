@@ -430,6 +430,9 @@ be restored and the command retried."
 
 (defun nntp-kill-buffer (buffer)
   (when (buffer-name buffer)
+    (let ((process (get-buffer-process buffer)))
+      (when process
+	(delete-process process)))
     (kill-buffer buffer)
     (nnheader-init-server-buffer)))
 

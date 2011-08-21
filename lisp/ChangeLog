@@ -1,3 +1,8 @@
+2011-08-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nntp.el (nntp-kill-buffer): Kill the process before killing the
+	buffer to avoid warnings.
+
 2011-08-20  Simon Josefsson  <simon@josefsson.org>
 
 	* gnus-agent.el (gnus-agent-expire-done-message): Use %.f as format
