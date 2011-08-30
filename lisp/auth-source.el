@@ -80,6 +80,8 @@
 (autoload 'epg-context-set-armor "epg")
 (autoload 'epg-encrypt-string "epg")
 
+(autoload 'help-mode "help-mode" nil t)
+
 (defvar secrets-enabled)
 
 (defgroup auth-source nil
