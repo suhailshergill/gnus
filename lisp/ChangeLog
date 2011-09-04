@@ -1,5 +1,8 @@
 2011-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-home-directory): Add warning about setting in .gnus.el
+	(bug#9405).
+
 	* gnus-score.el (gnus-summary-increase-score): Doc clarification
 	(bug#9421).
 
