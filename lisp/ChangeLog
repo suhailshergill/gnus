@@ -1,5 +1,8 @@
 2011-09-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-spec.el (gnus-face-0): Make all the face specs into defcustoms
+	(bug#9425).
+
 	* gnus-art.el (gnus-treatment-function-alist): Remove CRs as the first
 	thing (bug#9426).
 
