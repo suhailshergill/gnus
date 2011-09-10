@@ -1590,7 +1590,9 @@ commands will still require prompting."
   :type 'boolean)
 
 (defcustom gnus-interactive-exit t
-  "*If non-nil, require your confirmation when exiting Gnus."
+  "*If non-nil, require your confirmation when exiting Gnus.
+If `quiet', update any active summary buffers automatically
+first before exiting."
   :group 'gnus-exit
   :type 'boolean)
 

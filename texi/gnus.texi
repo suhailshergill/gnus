@@ -22256,8 +22256,9 @@ is @code{t} by default.
 
 @item gnus-interactive-exit
 @vindex gnus-interactive-exit
-Require confirmation before exiting Gnus.  This variable is @code{t} by
-default.
+If non-@code{nil}, require a confirmation when exiting Gnus.  If
+@code{quiet}, update any active summary buffers automatically without
+querying.  The default value is @code{t}.
 @end table
 
 

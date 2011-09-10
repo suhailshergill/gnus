@@ -1,6 +1,9 @@
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.el (gnus-article-mark-lists): Remove `recent'.
+	(gnus-interactive-exit): Extend to `quiet'.
+
+	* gnus-sum.el (gnus-offer-save-summaries): Use it.
 
 	* gnus-art.el (gnus-treat-hide-citation-maybe): Add more doc to the
 	string.

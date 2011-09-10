@@ -12582,12 +12582,16 @@ UNREAD is a sorted list."
     ;; Go through all these summary buffers and offer to save them.
     (when buffers
       (save-excursion
-	(map-y-or-n-p
-	 "Update summary buffer %s? "
-	 (lambda (buf)
-	   (switch-to-buffer buf)
-	   (gnus-summary-exit))
-	 buffers)))))
+	(if (eq gnus-interactive-exit 'quiet)
+	    (dolist (buffer buffers)
+	      (switch-to-buffer buf)
+	      (gnus-summary-exit))
+	  (map-y-or-n-p
+	   "Update summary buffer %s? "
+	   (lambda (buf)
+	     (switch-to-buffer buf)
+	     (gnus-summary-exit))
+	   buffers))))))
 
 (defun gnus-summary-setup-default-charset ()
   "Setup newsgroup default charset."
