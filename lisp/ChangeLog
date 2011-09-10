@@ -1,5 +1,8 @@
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* plstore.el (plstore--get-buffer): Silence compiler warnings by
+	renaming function arguments from `this'.
+
 	* gnus-sum.el (gnus-newsgroup-recent): Removed.
 
 	* gnus-spec.el (gnus-lrm-string-p): `bidi-string-mark-left-to-right'
