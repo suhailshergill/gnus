@@ -12584,7 +12584,7 @@ UNREAD is a sorted list."
       (save-excursion
 	(if (eq gnus-interactive-exit 'quiet)
 	    (dolist (buffer buffers)
-	      (switch-to-buffer buf)
+	      (switch-to-buffer buffer)
 	      (gnus-summary-exit))
 	  (map-y-or-n-p
 	   "Update summary buffer %s? "
