@@ -860,7 +860,7 @@ claim them."
 			    name
 			  (mm-decode-coding-string
 			   name
-			   (inline (gnus-group-name-charset method name t)))))))
+			   (inline (gnus-group-name-charset method name)))))))
 	     (list 'gnus-group name)
 	     )))
 	(switch-to-buffer (current-buffer)))

@@ -1193,7 +1193,7 @@ The following commands are available:
   (unless (eq major-mode 'gnus-group-mode)
     (gnus-group-mode)))
 
-(defun gnus-group-name-charset (method group &optional always-charset-p)
+(defun gnus-group-name-charset (method group)
   (unless method
     (setq method (gnus-find-method-for-group group)))
   (when (stringp method)
@@ -1201,9 +1201,7 @@ The following commands are available:
   (if (eq (car method) 'nnimap)
       ;; IMAP groups should not be encoded, since they do the encoding
       ;; in utf7 in the protocol.
-      (if always-charset-p
-	  'utf-7
-	nil)
+      'utf-8
     (let ((item (or (assoc method gnus-group-name-charset-method-alist)
 		    (and (consp method)
 			 (assoc (list (car method) (cadr method))

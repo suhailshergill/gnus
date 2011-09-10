@@ -1,5 +1,9 @@
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el: Redo the charset handling.  Let Gnus encode the names, as
+	it does with all other backends, but decode the names immediately after
+	getting them.
+
 	* gnus-group.el (gnus-group-name-charset): Always return `utf-7' when
 	decoding nnimap groups.
 
