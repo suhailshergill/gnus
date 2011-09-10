@@ -4069,7 +4069,7 @@ If DONT-SCAN is non-nil, scan non-activated groups as well."
 	    (gnus-group-update-group group nil t))
 	(if (eq (gnus-server-status (gnus-find-method-for-group group))
 		'denied)
-	    (gnus-error 3 "Server denied access")
+	    (gnus-error 3 "Server previously determined to be down; not retrying")
 	  (gnus-error 3 "%s error: %s" group (gnus-status-message group)))))
     (when beg
       (goto-char beg))
