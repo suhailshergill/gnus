@@ -1,5 +1,8 @@
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-name-charset): Always return `utf-7' when
+	decoding nnimap groups.
+
 	* gnus.el (gnus-variable-list): Don't save `gnus-format-specs' in the
 	newsrc file.  It doesn't seem like an important optimisation any more.
 
