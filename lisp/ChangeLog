@@ -1,7 +1,9 @@
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-article-mark-lists): Remove `recent'.
+
 	* gnus-art.el (gnus-treat-hide-citation-maybe): Add more doc to the
-	string. 
+	string.
 
 	* plstore.el (plstore--get-buffer): Silence compiler warnings by
 	renaming function arguments from `this'.
