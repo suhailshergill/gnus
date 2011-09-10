@@ -1,3 +1,7 @@
+2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-msg.el (gnus-summary-mail-forward): Minuscule doc fix.
+
 2011-09-10  Tetsuo Tsukamoto  <tt.tetsuo.tsukamoto@gmail.com>  (tiny change)
 
 	* nnrss.el (nnrss-retrieve-groups): Decode the charset before looking
