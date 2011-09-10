@@ -2,6 +2,7 @@
 
 	* gnus-spec.el (gnus-lrm-string-p): `bidi-string-mark-left-to-right'
 	has been renamed.
+	(gnus-lrm-string-p): Include RLM and PDF, too.
 
 	* gnus-int.el (gnus-open-server): Make the "denied" message clearer
 	(bug#9225).
