@@ -1,3 +1,7 @@
+2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi: Remove mentions of `recent', which are now obsolete.
+
 2011-07-05  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Expiring Mail): Document gnus-auto-expirable-marks.
