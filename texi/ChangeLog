@@ -2,6 +2,7 @@
 
 	* gnus.texi (Listing Groups): Explain `gnus-group-list-limit'.
 	(Finding the News): Doc clarification.
+	(Terminology): Mention naming.
 
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

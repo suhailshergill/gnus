@@ -28576,18 +28576,21 @@ confusing.
 @item native
 @cindex native
 Gnus will always use one method (and back end) as the @dfn{native}, or
-default, way of getting news.
+default, way of getting news.  Groups from the native select method
+have names like @samp{gnu.emacs.gnus}.
 
 @item foreign
 @cindex foreign
-You can also have any number of foreign groups active at the same time.
-These are groups that use non-native non-secondary back ends for getting
-news.
+You can also have any number of foreign groups active at the same
+time.  These are groups that use non-native non-secondary back ends
+for getting news.  Foreign groups have names like
+@samp{nntp+news.gmane.org:gmane.emacs.gnus.devel}.
 
 @item secondary
 @cindex secondary
-Secondary back ends are somewhere half-way between being native and being
-foreign, but they mostly act like they are native.
+Secondary back ends are somewhere half-way between being native and
+being foreign, but they mostly act like they are native, but they, too
+have names like @samp{nntp+news.gmane.org:gmane.emacs.gnus.devel}.
 
 @item article
 @cindex article
