@@ -1011,7 +1011,7 @@ The @code{gnus-select-method} variable says where Gnus should look for
 news.  This variable should be a list where the first element says
 @dfn{how} and the second element says @dfn{where}.  This method is your
 native method.  All groups not fetched with this method are
-foreign groups.
+secondary or foreign groups.
 
 For instance, if the @samp{news.somewhere.edu} @acronym{NNTP} server is where
 you want to get your daily dosage of news from, you'd say:
