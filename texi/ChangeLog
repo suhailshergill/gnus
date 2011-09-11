@@ -1,3 +1,7 @@
+2011-09-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Listing Groups): Explain `gnus-group-list-limit'.
+
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi: Remove mentions of `recent', which are now obsolete.

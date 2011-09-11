@@ -3335,8 +3335,12 @@ List all groups with ticked articles (@code{gnus-group-list-ticked}).
 @item A /
 @kindex A / (Group)
 @findex gnus-group-list-limit
-List groups limited within the current selection
-(@code{gnus-group-list-limit}).
+Further limit groups within the current selection
+(@code{gnus-group-list-limit}).  If you've first limited to groups
+with dormant articles with @kbd{A ?}, you can then further limit with
+@kbd{A / c}, which will then limit to groups with cached articles,
+giving you the groups that have both dormant articles and cached
+articles.
 
 @item A f
 @kindex A f (Group)

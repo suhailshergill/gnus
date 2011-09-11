@@ -1,5 +1,8 @@
 2011-09-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-list-limit): Explain what the command
+	does.
+
 	* gnus-sum.el (gnus-fetch-headers): Bump message level.
 
 2011-09-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
