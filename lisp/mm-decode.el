@@ -195,7 +195,7 @@ before the external MIME handler is invoked."
     ("image/tiff"
      mm-inline-image
      (lambda (handle)
-       (mm-valid-and-fit-image-p 'tiff handle)) )
+       (mm-valid-and-fit-image-p 'tiff handle)))
     ("image/xbm"
      mm-inline-image
      (lambda (handle)
