@@ -1,5 +1,9 @@
 2011-09-20  Julien Danjou  <julien@danjou.info>
 
+	* password-cache.el (password-cache-remove): Remove entries even if the
+	value is nil, so that password with a nil value (negative caching) is
+	possible to invalidate.
+
 	* auth-source.el (auth-source-format-cache-entry): New function.
 
 2011-09-20  Katsumi Yamaoka  <yamaoka@jpl.org>
