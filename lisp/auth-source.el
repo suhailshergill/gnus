@@ -1188,8 +1188,6 @@ See `auth-source-search' for details on SPEC."
 
     ;; for each required element
     (dolist (r required)
-      (if (eq r 'secret)
-          (debug))
       (let* ((data (aget valist r))
              ;; take the first element if the data is a list
              (data (or (auth-source-netrc-element-or-first data)
