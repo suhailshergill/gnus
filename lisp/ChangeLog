@@ -3,6 +3,8 @@
 	* auth-source.el (auth-source-netrc-create): Use default value for
 	password if specified. Evaluate default.
 	(auth-source-plstore-create): Ditto.
+	(auth-source-plstore-create, auth-source-netrc-create): Fix default
+	value evaluation.
 
 	* password-cache.el (password-cache-remove): Remove entries even if the
 	value is nil, so that password with a nil value (negative caching) is
