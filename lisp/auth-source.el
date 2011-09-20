@@ -1256,7 +1256,7 @@ See `auth-source-search' for details on SPEC."
                                            (setq ret (cdr item))
                                            (setq check nil)))))
                                     (t 'never)))
-                                  (plain (or (eval default) read-passwd prompt)))
+                                  (plain (or (eval default) (read-passwd prompt))))
                              ;; ask if we don't know what to do (in which case
                              ;; auth-source-netrc-use-gpg-tokens must be a list)
                              (unless gpg-encrypt
@@ -1681,12 +1681,12 @@ authentication tokens:
         (setq data (or data
                        (if (eq r 'secret)
                            (or (eval default) (read-passwd prompt))
-                         (if stringp default
-                           (read-string (if (string-match ": *\\'" prompt)
-                                            (concat (substring prompt 0 (match-beginning 0))
-                                                    " (default " default "): ")
-                                          (concat prompt "(default " default ") "))
-                                        nil nil default)
+                         (if (stringp default)
+                             (read-string (if (string-match ": *\\'" prompt)
+                                              (concat (substring prompt 0 (match-beginning 0))
+                                                      " (default " default "): ")
+                                            (concat prompt "(default " default ") "))
+                                          nil nil default)
                            (eval default)))))
 
         (when data

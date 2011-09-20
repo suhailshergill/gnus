@@ -5,6 +5,8 @@
 	(auth-source-plstore-create): Ditto.
 	(auth-source-plstore-create, auth-source-netrc-create): Fix default
 	value evaluation.
+	(auth-source-netrc-create): Typo fix.
+	(auth-source-plstore-create): Ditto.
 
 	* password-cache.el (password-cache-remove): Remove entries even if the
 	value is nil, so that password with a nil value (negative caching) is
