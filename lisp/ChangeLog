@@ -1,5 +1,8 @@
 2011-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-indent-citation): Really make sure there's a
+	newline at the end.
+
 	* nnimap.el (nnimap-parse-flags): Make regexp less prone to overflows.
 	Fix suggested by John Wiegley.
 

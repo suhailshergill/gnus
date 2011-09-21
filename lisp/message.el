@@ -3723,7 +3723,7 @@ However, if `message-yank-prefix' is non-nil, insert that prefix on each line."
       (message-delete-line))
     ;; Delete blank lines at the end of the buffer.
     (goto-char (point-max))
-    (unless (eolp)
+    (unless (eq (preceding-char) ?\n)
       (insert "\n"))
     (while (and (zerop (forward-line -1))
 		(looking-at "$"))
