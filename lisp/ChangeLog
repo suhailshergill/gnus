@@ -1,5 +1,9 @@
 2011-09-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnimap.el (nnimap-map-port): New function to connect to 993 instead
+	of "imaps" to word around Windows problems.
+	(nnimap-open-connection-1): Use it.
+
 	* message.el (message-indent-citation): Revert last change which made
 	`F' not work.
 
