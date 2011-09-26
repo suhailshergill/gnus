@@ -427,6 +427,15 @@ FRONT-ADVANCE and REAR-ADVANCE are ignored."
   (defalias 'gnus-window-edges 'window-pixel-edges)
   (defalias 'gnus-assq-delete-all 'gnus-xmas-assq-delete-all)
 
+  (unless (fboundp 'member-ignore-case)
+    (defun member-ignore-case (elt list)
+      (while (and list
+		  (not (and (stringp (car list))
+			    (eq t (compare-strings elt 0 nil (car list)
+						   0 nil t)))))
+	(setq list (cdr list)))
+      list))
+
   (unless (boundp 'standard-display-table)
     (setq standard-display-table nil))
 
