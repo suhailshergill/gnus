@@ -1,3 +1,8 @@
+2011-09-26  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* mml.el (mml-generate-mime-1): Don't alter the contents if we're
+	computing the boundary.
+
 2011-09-22  Kan-Ru Chen  <kanru@kanru.info>
 
 	* ecomplete.el (ecomplete-display-matches): Use a local keymap to
