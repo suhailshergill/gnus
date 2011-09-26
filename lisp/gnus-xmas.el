@@ -430,9 +430,8 @@ FRONT-ADVANCE and REAR-ADVANCE are ignored."
   (unless (fboundp 'member-ignore-case)
     (defun member-ignore-case (elt list)
       (while (and list
-		  (not (and (stringp (car list))
-			    (eq t (compare-strings elt 0 nil (car list)
-						   0 nil t)))))
+		  (or (not (stringp (car list)))
+		      (not (string= (downcase elt) (downcase (car list))))))
 	(setq list (cdr list)))
       list))
 
