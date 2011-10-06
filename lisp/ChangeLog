@@ -1,3 +1,8 @@
+2011-10-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-win.el (gnus-configure-windows): Protect against reading
+	ephemeral groups outside of Gnus.
+
 2011-10-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-tag-img): Don't get images displayed in tables.
