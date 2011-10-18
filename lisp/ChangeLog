@@ -8,10 +8,10 @@
 	the registry is installed.  Set it to nil when it's unloaded.
 	(gnus-registry-install-p): Provide user guidance for the initial value
 	of `gnus-registry-install' when it's 'ask, otherwise return its value.
-	* nnregistry.el (nnregistry-open-server, nnregistry-server-opened): Use
-	`gnus-registry-enabled' instead of `gnus-registry-install'.
-	* nnmairix.el (nnmairix-determine-original-group-from-registry): Use
-	`gnus-registry-enabled' instead of `gnus-registry-install'.
+	* nnregistry.el (nnregistry-open-server, nnregistry-server-opened):
+	Use `gnus-registry-enabled' instead of `gnus-registry-install'.
+	* nnmairix.el (nnmairix-determine-original-group-from-registry):
+	Use `gnus-registry-enabled' instead of `gnus-registry-install'.
 	* nnir.el (nnir-mode): Use `gnus-registry-enabled' instead of
 	`gnus-registry-install'.
 	From Dave Abrahams <dave@boostpro.com>.
@@ -23,7 +23,7 @@
 	* mml1991.el (mml1991-epg-find-usable-key): Skip the whole key if the
 	primary key is marked as disabled.
 
-2011-10-17  Christian von Roques <roques@mti.ag> (tiny change)
+2011-10-17  Christian von Roques  <roques@mti.ag>  (tiny change)
 
 	* mml2015.el (mml2015-epg-find-usable-key): Skip the whole key if the
 	primary key is marked as disabled.
