@@ -1638,7 +1638,7 @@ search in raw mode."
 
 (defun nnmairix-determine-original-group-from-registry (mid)
   "Try to determinale original group for message-id MID from the registry."
-  (when (bound-and-true-p gnus-registry-enabled)
+  (when (gnus-bound-and-true-p gnus-registry-enabled)
     (unless (string-match "^<" mid)
       (set mid (concat "<" mid)))
     (unless (string-match ">$" mid)
