@@ -1,16 +1,22 @@
+2011-10-20  Chong Yidong  <cyd@gnu.org>
+
+	* gnus-cite.el (gnus-message-citation-mode): Doc fix (in Emacs 24,
+	calling a minor mode from Lisp with nil arg enables it, so we have to
+	make the working a bit ambiguous here).
+
 2011-10-18  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-util.el (gnus-bound-and-true-p): Macro for XEmacs compatibility.
 	* nnir.el (nnir-mode): Use it.
-	* nnmairix.el (nnmairix-determine-original-group-from-registry): Use
-	it.
+	* nnmairix.el (nnmairix-determine-original-group-from-registry):
+	Use it.
 
 	* nnir.el (gnus-registry-enabled): Defvar to keep the compiler happy.
 	* nnmairix.el (gnus-registry-enabled): Ditto.
 
-2011-10-17  Teodor Zlatanov  <tzz@lifelogs.com>
+2011-10-17  Dave Abrahams  <dave@boostpro.com>
 
-	* gnus-registry.el (gnus-registry-enabled): Add new variable.
+	* gnus-registry.el (gnus-registry-enabled): Add new variable. (Bug#9691)
 	(gnus-registry-install-shortcuts): Set `gnus-registry-install' to 'ask
 	only while we need to find out if it should be t or nil.
 	(gnus-registry-initialize): Don't set `gnus-registry-install' to t.
@@ -24,7 +30,6 @@
 	Use `gnus-registry-enabled' instead of `gnus-registry-install'.
 	* nnir.el (nnir-mode): Use `gnus-registry-enabled' instead of
 	`gnus-registry-install'.
-	From Dave Abrahams <dave@boostpro.com>.
 
 2011-10-17  Daiki Ueno  <ueno@unixuser.org>
 
