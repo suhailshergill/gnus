@@ -14068,13 +14068,11 @@
 	(mml-secure-cache-passphrase): New user option.
 	(mml-secure-passphrase-cache-expiry): New user option.
 
-2006-07-24  Daiki Ueno  <ueno@unixuser.org>
+2006-07-24  David Smith  <davidsmith@acm.org>  (tiny change)
+	    Andreas Vögele  <andreas@altroot.de>   (tiny change)
 
-	* pgg-def.el (pgg-truncate-key-identifier): Truncate the key ID to 8
-	letters from the end.  Thanks to "David Smith" <davidsmith@acm.org> and
-	andreas@altroot.de (Andreas Vögele).
-
-	FIXME: Use `tiny change'?
+	* pgg-def.el (pgg-truncate-key-identifier):
+	Truncate the key ID to 8 letters from the end.
 
 2006-07-19  Andreas Seltenreich  <uwi7@rz.uni-karlsruhe.de>
 
@@ -21039,7 +21037,7 @@
 
 	* dns.el (dns-read-type): Add support for SVR.  (small patch)
 
-2004-05-20  Teodor Zlatanov  <tzz@lifelogs.com>
+2004-05-20  Adam Sjøgren  <asjo@koldfront.dk>
 
 	* spam.el (spam-use-crm114, spam-crm114, spam-crm114-program)
 	(spam-crm114-header, spam-crm114-spam-switch)
@@ -21056,7 +21054,8 @@
 	(spam-crm114-unregister-spam-routine)
 	(spam-crm114-register-ham-routine)
 	(spam-crm114-unregister-ham-routine): Add CRM114 support.
-	From asjo@koldfront.dk (Adam Sjøgren).
+
+2004-05-20  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus.el: Add spam-use-crm114.
 
@@ -21200,10 +21199,13 @@
 
 2004-05-18  Reiner Steib  <Reiner.Steib@gmx.de>
 
+	* gnus-picon.el (gnus-picon-insert-glyph):
+	Add optional `nostring' argument.
+
+2004-05-18  Jesper Harder  <harder@ifa.au.dk>
+
 	* gnus-picon.el (gnus-picon-style): New variable.
-	(gnus-picon-insert-glyph): Add optional `nostring' argument.
 	(gnus-picon-transform-address): Support `gnus-picon-style'.
-	From Jesper Harder <harder@ifa.au.dk>.
 
 2004-05-18  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -21472,13 +21474,10 @@
 	* spam-stat.el (spam-stat-score-buffer): Simplify mapcar usage.
 	Use mapc when appropriate.
 
-2004-04-22  Teodor Zlatanov  <tzz@lifelogs.com>
-
-	FIXME: Make separate entries for each person.
-
-	From Dan Christensen <jdc@uwo.ca>, asjo@koldfront.dk (Adam
-	Sjøgren), Wes Hardaker <wes@hardakers.net>, and Michael Shields
-	<shields@msrl.com>:
+2004-04-22  Dan Christensen  <jdc@uwo.ca>
+	    Adam Sjøgren  <asjo@koldfront.dk>
+	    Wes Hardaker  <wes@hardakers.net>
+	    Michael Shields  <shields@msrl.com>
 
 	* spam.el (spam-necessary-extra-headers): Get the extra headers we
 	may need for spam sorting and scoring.
