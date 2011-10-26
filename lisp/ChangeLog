@@ -1,3 +1,8 @@
+2011-10-26  Daiki Ueno  <ueno@unixuser.org>
+
+	* mml.el (mml-quote-region): Quote <#secure> tag.
+	(mml-generate-mime-1): Unquote <#secure> tag.
+
 2011-10-20  Chong Yidong  <cyd@gnu.org>
 
 	* gnus-cite.el (gnus-message-citation-mode): Doc fix (in Emacs 24,
