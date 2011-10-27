@@ -1,10 +1,13 @@
 2011-10-27  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* gnus-fallback-lib/json.el: Add for XEmacs and Emacs 22 support.
+
 	* gnus-sync.el: Add LeSync synchronization backend and logic to read
 	and save against it.  Group subscriptions, read marks, other marks,
 	subscription levels, topic names, and topic offsets (the group's
 	position within the topic) are saved.  This is an experimental backend
-	and may change significantly.
+	and may change significantly.  Load json.el from the gnus-fallback-lib
+	if it's not available otherwise.
 
 2011-10-26  Stefan Monnier  <monnier@iro.umontreal.ca>
 

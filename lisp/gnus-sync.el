@@ -83,7 +83,18 @@
 ;;; Code:
 
 (eval-when-compile (require 'cl))
-(require 'json)
+(eval-and-compile
+  (or (ignore-errors (progn
+                       (require 'json)))
+      ;; gnus-fallback-lib/ from gnus/lisp/gnus-fallback-lib
+      (ignore-errors
+        (let ((load-path (cons (expand-file-name
+                                "gnus-fallback-lib"
+                                (file-name-directory (locate-library "gnus")))
+                               load-path)))
+          (require 'json)))
+      (error
+       "json not found in `load-path' or gnus-fallback-lib/ directory.")))
 (require 'gnus)
 (require 'gnus-start)
 (require 'gnus-util)
