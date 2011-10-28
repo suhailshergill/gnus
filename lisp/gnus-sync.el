@@ -660,7 +660,7 @@ With a prefix, FORCE is set and all groups will be saved."
                    (gnus-message
                     2 "gnus-sync-save: nothing to save to the LeSync backend")
                    nil)))
-      (mapcar (apply-partially 'gnus-sync-lesync-post-save-group-entry url)
+      (mapcar (lambda (e) (gnus-sync-lesync-post-save-group-entry url e))
               sync)))
    ((stringp gnus-sync-backend)
     (gnus-message 7 "gnus-sync-save: saving to backend %s" gnus-sync-backend)

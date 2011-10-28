@@ -8,6 +8,7 @@
 	position within the topic) are saved.  This is an experimental backend
 	and may change significantly.  Load json.el from the gnus-fallback-lib
 	if it's not available otherwise.
+	(gnus-sync-save): Don't use `apply-partially' because of XEmacs.
 
 2011-10-26  Stefan Monnier  <monnier@iro.umontreal.ca>
 
