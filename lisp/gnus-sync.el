@@ -219,6 +219,7 @@ KVDATA must be an alist."
   (null list))
 
 ; (gnus-sync-lesync-setup "http://lesync.info:5984/tzz" "tzzadmin" "mypassword" "mysalt" t t)
+; (gnus-sync-lesync-setup "http://lesync.info:5984/tzz")
 
 (defun gnus-sync-lesync-setup (url &optional user password salt reader admin)
   (interactive "sEnter URL to set up: ")
@@ -231,14 +232,16 @@ When SALT is nil, a random one will be generated using `random'."
          (security-object (concat url "/_security"))
          (user-record `((names . [,user]) (roles . [])))
          (couch-user-name (format "org.couchdb.user:%s" user))
-         (salt (or salt (sha1 (random t))))
-         (couch-user-record `((_id . ,couch-user-name)
-                              (type . user)
-                              (name . ,(format "%s" user))
-                              (roles . [])
-                              (password_sha . ,(sha1
-                                                (format "%s%s" password salt)))
-                              (salt . ,(format "%s" salt))))
+         (salt (or salt (sha1 (format "%s" (random t)))))
+         (couch-user-record
+          `((_id . ,couch-user-name)
+            (type . user)
+            (name . ,(format "%s" user))
+            (roles . [])
+            (salt . ,salt)
+            (password_sha . ,(when password
+                               (sha1
+                                (format "%s%s" password salt))))))
          (rev (progn
                 (gnus-sync-lesync-find-prop 'rev design-url design-url)
                 (gnus-sync-lesync-get-prop 'rev design-url)))
@@ -257,6 +260,70 @@ When SALT is nil, a random one will be generated using `random'."
   }
   send('['+tosend.join(',') + ']');
 }")
+;; <key>read</key>
+;; <dict>
+;;   <key>de.alt.fan.ipod</key>
+;;   <array>
+;;       <integer>1</integer>
+;;       <integer>2</integer>
+;;       <dict>
+;;           <key>start</key>
+;;           <integer>100</integer>
+;;           <key>length</key>
+;;           <integer>100</integer>
+;;       </dict>
+;;   </array>
+;; </dict>
+         (xmlplistread-func "function(head, req) {
+  var row;
+  start({ 'headers': { 'Content-Type': 'text/xml' } });
+
+  send('<dict>');
+  send('<key>read</key>');
+  send('<dict>');
+  while(row = getRow())
+  {
+    var read = row.value.read;
+    if (read && read[0] && read[0] == 'invlist')
+    {
+      send('<key>'+row.key+'</key>');
+      //send('<invlist>'+read+'</invlist>');
+      send('<array>');
+
+      var from = 0;
+      var flip = false;
+
+      for (var i = 1; i < read.length && read[i]; i++)
+      {
+        var cur = read[i];
+        if (flip)
+        {
+          if (from == cur-1)
+          {
+            send('<integer>'+read[i]+'</integer>');
+          }
+          else
+          {
+            send('<dict>');
+            send('<key>start</key>');
+            send('<integer>'+from+'</integer>');
+            send('<key>end</key>');
+            send('<integer>'+(cur-1)+'</integer>');
+            send('</dict>');
+          }
+
+        }
+        flip = ! flip;
+        from = cur;
+      }
+      send('</array>');
+    }
+  }
+
+  send('</dict>');
+  send('</dict>');
+}
+")
          (subs-func "function(doc){emit([doc._id, doc.source], doc._rev);}")
          (revs-func "function(doc){emit(doc._id, doc._rev);}")
          (bytimesubs-func "function(doc)
@@ -283,7 +350,8 @@ When SALT is nil, a random one will be generated using `random'."
                     design-url
                     nil
                     `(,@(when rev (list (cons '_rev rev)))
-                      (lists . ((latest . ,latest-func)))
+                      (lists . ((latest . ,latest-func)
+                                (xmlplistread . ,xmlplistread-func)))
                       (views . ((subs . ((map . ,subs-func)))
                                 (revs . ((map . ,revs-func)))
                                 (bytimesubs . ((map . ,bytimesubs-func)))

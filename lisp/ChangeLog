@@ -1,3 +1,9 @@
+2011-10-29  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-sync.el (gnus-sync-lesync-setup): Fix salt when user setup is
+	not needed.  Provide xmlplistread list function to produce XML plist
+	output for non-Gnus LeSync clients.
+
 2011-10-27  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-fallback-lib/json.el: Add for XEmacs and Emacs 22 support.
