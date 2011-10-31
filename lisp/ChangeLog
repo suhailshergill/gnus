@@ -1,3 +1,11 @@
+2011-10-31  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* nnregistry.el: Remove unnecessary `gnus-registry-enabled' defvar.
+	* nnir.el: Ditto.
+	* nnmairix.el: Ditto.
+
+	* gnus-registry.el (gnus-registry-enabled): Default to nil.
+
 2011-10-29  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-sync.el (gnus-sync-lesync-setup): Fix salt when user setup is
