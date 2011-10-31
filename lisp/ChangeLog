@@ -1,5 +1,7 @@
 2011-10-31  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* gnus-sync.el: Improve docs about CouchDB admins.
+
 	* gnus-util.el (gnus-bound-and-true-dumber-p): Define new, slower, dumb
 	function because `gnus-bound-and-true-p' doesn't work well in XEmacs
 	for reasons unknown.

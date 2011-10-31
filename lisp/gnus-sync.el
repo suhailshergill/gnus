@@ -44,13 +44,16 @@
 
 ;; What's a LeSync server?
 
-;; 1. install CouchDB, set up a real admin user, and create a
+;; 1. install CouchDB, set up a real server admin user, and create a
 ;; database, e.g. "tzz" and save the URL,
 ;; e.g. http://lesync.info:5984/tzz
 
 ;; 2. run `M-: (gnus-sync-lesync-setup "http://lesync.info:5984/tzz" "tzzadmin" "mypassword" "mysalt" t t)'
+
 ;;    (If you run it more than once, you have to remove the entry from
-;;    _users yourself.  This is intentional.)
+;;    _users yourself.  This is intentional.  This sets up a database
+;;    admin for the "tzz" database, distinct from the server admin
+;;    user in (1) above.)
 
 ;; That's it, you can start using http://lesync.info:5984/tzz in your
 ;; gnus-sync-backend as a LeSync backend.  Fan fiction about the
