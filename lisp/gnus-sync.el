@@ -69,8 +69,9 @@
 
 ;; TODO:
 
-;; - after gnus-sync-read, the message counts are wrong.  So it's not
-;;   run automatically, you have to call it with M-x gnus-sync-read
+;; - after gnus-sync-read, the message counts look wrong until you do
+;;   `g'.  So it's not run automatically, you have to call it with M-x
+;;   gnus-sync-read
 
 ;; - use gnus-after-set-mark-hook and gnus-before-update-mark-hook to
 ;;   catch the mark updates
