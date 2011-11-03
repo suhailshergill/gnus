@@ -31,16 +31,13 @@
 ;; ...or any other file Tramp and Emacs can handle...
 
 ;; (setq gnus-sync-backend "/remote:/path.gpg" ; will use Tramp+EPA if loaded
-;;       gnus-sync-global-vars `(gnus-newsrc-last-checked-date)
-;;       gnus-sync-newsrc-groups `("nntp" "nnrss")
-;;       gnus-sync-newsrc-offsets `(2 3))
-
+;;       gnus-sync-global-vars '(gnus-newsrc-last-checked-date)
+;;       gnus-sync-newsrc-groups '("nntp" "nnrss"))
+;;       gnus-sync-newsrc-offsets '(2 3))
 ;; against a LeSync server (beware the vampire LeSync, who knows your newsrc)
 
-;; (setq gnus-sync-backend '(lesync "http://lesync.info/sync.php")
-;;       gnus-sync-global-vars `(gnus-newsrc-last-checked-date)
-;;       gnus-sync-newsrc-groups `("nntp" "nnrss")
-;;       gnus-sync-newsrc-offsets `(2 3))
+;; (setq gnus-sync-backend '(lesync "http://lesync.info:5984/tzz")
+;;       gnus-sync-newsrc-groups '("nntp" "nnrss"))
 
 ;; What's a LeSync server?
 
