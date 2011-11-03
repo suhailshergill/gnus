@@ -6,6 +6,10 @@
 
 	* message.el (message-send-and-exit): Document `arg'.
 
+2011-11-03  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* nnimap.el (nnimap-open-connection-1): Use tcp-keealive if possible.
+
 2011-11-02  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-sync.el: More commentary about `gnus-sync-read' issues.
