@@ -4009,11 +4009,13 @@ entail asking the server for the groups."
 	(gnus-activate-foreign-newsgroups level))
     (gnus-group-get-new-news)))
 
-(defun gnus-group-get-new-news (&optional arg)
+(defun gnus-group-get-new-news (&optional arg one-level)
   "Get newly arrived articles.
 If ARG is a number, it specifies which levels you are interested in
 re-scanning.  If ARG is non-nil and not a number, this will force
-\"hard\" re-reading of the active files from all servers."
+\"hard\" re-reading of the active files from all servers.
+If ONE-LEVEL is not nil, then re-scan only the specified level,
+otherwise all levels below ARG will be scanned too."
   (interactive "P")
   (require 'nnmail)
   (let ((gnus-inhibit-demon t)
@@ -4027,7 +4029,7 @@ re-scanning.  If ARG is non-nil and not a number, this will force
     (unless gnus-slave
       (gnus-master-read-slave-newsrc))
 
-    (gnus-get-unread-articles arg)
+    (gnus-get-unread-articles arg nil one-level)
 
     ;; If the user wants it, we scan for new groups.
     (when (eq gnus-check-new-newsgroups 'always)

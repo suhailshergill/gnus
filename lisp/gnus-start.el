@@ -1606,7 +1606,7 @@ If SCAN, request a scan of that group as well."
 
 ;; Go though `gnus-newsrc-alist' and compare with `gnus-active-hashtb'
 ;; and compute how many unread articles there are in each group.
-(defun gnus-get-unread-articles (&optional level dont-connect)
+(defun gnus-get-unread-articles (&optional level dont-connect one-level)
   (setq gnus-server-method-cache nil)
   (require 'gnus-agent)
   (let* ((newsrc (cdr gnus-newsrc-alist))
@@ -1663,7 +1663,7 @@ If SCAN, request a scan of that group as well."
 	(push (setq method-group-list (list method method-type nil nil))
 	      type-cache))
       ;; Only add groups that need updating.
-      (if (<= (gnus-info-level info)
+      (if (funcall (if one-level #'= #'<=) (gnus-info-level info)
 	      (if (eq (cadr method-group-list) 'foreign)
 		  foreign-level
 		alevel))
