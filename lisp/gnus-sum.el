@@ -5864,7 +5864,7 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 				 (gnus-group-real-name gnus-newsgroup-name))
 				number default)
 			     (format
-			      "How many articles from %s (%d available): "
+			      "How many articles from %s (%d default): "
 			      (gnus-group-decoded-name
 			       (gnus-group-real-name gnus-newsgroup-name))
 			      default))
