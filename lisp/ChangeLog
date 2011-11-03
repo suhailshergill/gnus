@@ -2,6 +2,10 @@
 
 	* gnus-sync.el: More commentary about setup.
 
+2011-11-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (message-send-and-exit): Document `arg'.
+
 2011-11-02  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* gnus-sync.el: More commentary about `gnus-sync-read' issues.
