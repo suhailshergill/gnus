@@ -1,3 +1,8 @@
+2011-11-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* auth.texi (GnuPG and EasyPG Assistant Configuration):
+	* gnus.texi (Customizations): Spelling fix.
+
 2011-10-31  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (Other Gnus Versions): Remove.

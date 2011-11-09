@@ -5,6 +5,10 @@
 	(spam-check-BBDB): Use it.
 	(spam-enter-ham-BBDB): Use it.
 
+2011-11-09  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* smime.el (smime-draw-buffer): Spelling fix.
+
 2011-10-31  Peter Münster  <pmrb@free.fr>  (tiny change)
 
 	* gnus-group.el (gnus-group-get-new-news): New parameter `one-level'
@@ -19749,7 +19753,7 @@
 2004-10-05  Jesper Harder  <harder@ifa.au.dk>
 
 	* nnsoup.el (nnsoup-read-active-file): Use dolist, mapc or last
-	where approriate.
+	where appropriate.
 
 	* nnml.el (nnml-generate-active-info): do.
 
