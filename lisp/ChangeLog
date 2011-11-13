@@ -1,7 +1,8 @@
 2011-11-09  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* spam.el: Move BBDB autoloads.
-	(spam-exists-in-BBDB-p): New function to do the BBDB search directly in BBDB 2 and 3.
+	(spam-exists-in-BBDB-p): New function to do the BBDB search directly in
+	BBDB 2 and 3.
 	(spam-check-BBDB): Use it.
 	(spam-enter-ham-BBDB): Use it.
 
