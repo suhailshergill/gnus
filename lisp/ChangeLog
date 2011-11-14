@@ -1,3 +1,9 @@
+2011-11-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-topic.el (gnus-group-prepare-topics):
+	* gnus-uu.el (gnus-extract-view):
+	* gnus-win.el (gnus-use-frames-on-any-display): Spelling fix.
+
 2011-11-09  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* spam.el: Move BBDB autoloads.
