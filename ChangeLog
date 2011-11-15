@@ -1,3 +1,7 @@
+2011-11-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* etc/gnus-tut.txt (<lars-doc6@eyesore.no>): Spelling fix.
+
 2011-04-07  David Engster  <dengste@eml.cc>
 
 	* Makefile.in (check): New rule for starting test-suite.

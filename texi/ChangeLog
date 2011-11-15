@@ -1,3 +1,13 @@
+2011-11-15  Juanma Barranquero  <lekktu@gmail.com>
+
+	* gnus.texi (Sending or Not Sending): Fix typo.
+
+2011-11-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* emacs-mime.texi (Flowed text):
+	* gnus-faq.texi (FAQ 4-15):
+	* gnus.texi (Sticky Articles, Diary Summary Line Format): Spelling fix.
+
 2011-11-09  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* auth.texi (GnuPG and EasyPG Assistant Configuration):
