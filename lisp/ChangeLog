@@ -1,6 +1,10 @@
 2011-11-16  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus-agent.el (gnus-agent-expire-unagentized-dirs):
+	* gnus-sum.el (gnus-summary-make-menu-bar):
+	* gnus-uu.el (gnus-uu-decode-postscript)
+	(gnus-uu-decode-postscript-and-save):
+	* mailcap.el (mailcap-print-command):
 	* registry.el (registry-lookup, registry-lookup-breaks-before-lexbind):
 	Fix typos.
 
