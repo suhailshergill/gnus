@@ -1,3 +1,9 @@
+2011-11-16  Juanma Barranquero  <lekktu@gmail.com>
+
+	* gnus-agent.el (gnus-agent-expire-unagentized-dirs):
+	* registry.el (registry-lookup, registry-lookup-breaks-before-lexbind):
+	Fix typos.
+
 2011-11-15  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus-art.el (gnus-article-part-wrapper):
