@@ -1,3 +1,13 @@
+2011-11-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-srvr.el (gnus-server-copy-server):
+	* gnus.el (gnus-sloppily-equal-method-parameters):
+	* html2text.el (html2text-format-tag-list):
+	* message.el (message-narrow-to-head):
+	* nndiary.el:
+	* nnmairix.el (nnmairix-determine-original-group-from-registry):
+	Spelling fix.
+
 2011-11-16  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus-agent.el (gnus-agent-expire-unagentized-dirs):

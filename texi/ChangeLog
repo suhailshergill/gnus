@@ -1,3 +1,8 @@
+2011-11-17  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus.texi (Contributors):
+	* pgg.texi (Architecture): Spelling fix.
+
 2011-11-15  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus.texi (Sending or Not Sending): Fix typo.
