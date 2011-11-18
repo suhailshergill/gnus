@@ -1,3 +1,8 @@
+2011-11-18  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-sum.el (gnus-auto-select-subject):
+	* spam-report.el (spam-report-resend): Spelling fix.
+
 2011-11-17  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-agent.el (gnus-agent-get-undownloaded-list):
