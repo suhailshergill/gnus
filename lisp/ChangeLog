@@ -1,3 +1,16 @@
+2011-11-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* nnmail.el (nnmail-get-new-mail-1): Remove unused local variables.
+
+	* color.el:
+	* gnus-agent.el (gnus-agent-possibly-alter-active):
+	* gnus-dired.el (gnus-dired-print):
+	* mail-parse.el:
+	* nnmairix.el (nnmairix-request-group):
+	* shr.el (shr-image-displayer):
+	* sieve-manage.el:
+	* spam.el (spam-autodetect-recheck-messages): Spelling fix.
+
 2011-11-18  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-sum.el (gnus-auto-select-subject):

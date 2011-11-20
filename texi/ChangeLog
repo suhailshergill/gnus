@@ -1,3 +1,8 @@
+2011-11-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus.texi (Score File Syntax):
+	* message.texi (Various Message Variables): Spelling fix.
+
 2011-11-17  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus.texi (Contributors):
