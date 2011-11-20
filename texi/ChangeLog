@@ -1,3 +1,15 @@
+2011-11-20  Juanma Barranquero  <lekktu@gmail.com>
+
+	* gnus-coding.texi (Gnus Maintenance Guide):
+	Rename from "Gnus Maintainance Guide".
+	* gnus-news.texi: Fix typos.
+
+2011-11-20  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-news.texi (Changes in group mode):
+	* gnus.texi (The imap Engine, The gmane Engine)
+	(Extending the Spam package): Spelling fix.
+
 2011-11-19  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus.texi (Score File Syntax):
