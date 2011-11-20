@@ -1,6 +1,10 @@
 2011-11-20  Juanma Barranquero  <lekktu@gmail.com>
 
-	* mm-util.el (mm-charset-after): Fix typo.
+	* mm-util.el (mm-charset-after):
+	* nnir.el (nnir-run-hyrex):
+	* ntlm.el (ntlm-build-auth-request, ntlm-build-auth-response)
+	(ntlm-get-password-hashes, ntlm-md4hash):
+	* smime.el: Fix typo.
 
 2011-11-20  Paul Eggert  <eggert@cs.ucla.edu>
 
