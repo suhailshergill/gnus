@@ -1,5 +1,8 @@
 2011-11-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el (fboundp): Define `with-demoted-errors' for Emacsen that
+	doesn't have it.
+
 	* mm-view.el (mm-display-inline-fontify): Make the font-lock variables
 	buffer-local instead of binding them to avoid warnings.  Also demote
 	errors (bug#10063).
