@@ -557,7 +557,7 @@ This is to be used around code which is not expected to signal an error
 but which should be robust in the unexpected case that an error is signaled."
     (declare (debug t) (indent 0))
     (let ((err (make-symbol "err")))
-      `(condition-case-no-debug ,err
+      `(condition-case ,err
 	   (progn ,@body)
 	 (error (message "Error: %S" ,err) nil)))))
 
