@@ -2,11 +2,6 @@
 
 # modified: 2010-09-01 and on by tzz@lifelogs.com
 
-# Use the email address of the author of the last commit.
-# This fails if the commit is on a branch.
-export USER_EMAIL=$(git log -1 --format=format:%ce HEAD)
-export USER_NAME=$(git log -1 --format=format:%cn HEAD)
-
 # the remainder is the standard git-core post-receive-email with some changes:
 
 # - USER_EMAIL and USER_NAME are used in the header
@@ -214,6 +209,11 @@ generate_email()
 
 generate_email_header()
 {
+
+        # Use the email address of the author of the last commit.
+        export USER_EMAIL=$(git log -1 $short_refname --format=format:%ce HEAD)
+        export USER_NAME=$(git log -1 $short_refname --format=format:%cn HEAD)
+
 	# --- Email (all stdout will be the email)
 	# Generate header
 	cat <<-EOF

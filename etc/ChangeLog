@@ -1,3 +1,7 @@
+2011-11-22  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* post-receive: Get the user name and e-mail correctly.
+
 2011-02-25  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* post-receive: Always show the commit messages and the "git describe"
