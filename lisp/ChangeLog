@@ -1,3 +1,9 @@
+2011-11-24  Glenn Morris  <rgm@gnu.org>
+
+	* binhex.el (binhex-begin-line): Give it basic doc-string.
+
+	* starttls.el, tls.el: Fix case of "GnuTLS".
+
 2011-11-24  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus-group.el (gnus-group-highlight): Fix typo.

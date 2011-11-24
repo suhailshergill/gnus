@@ -1,3 +1,7 @@
+2011-11-24  Glenn Morris  <rgm@gnu.org>
+
+	* gnus.texi, smtpmail.texi: Fix case of "GnuTLS".
+
 2011-11-22  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-refcard.tex: Spelling fix; remove trailing whitespace.
