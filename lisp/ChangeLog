@@ -1,3 +1,13 @@
+2011-11-25  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* color.el (color-rgb-to-hsl):
+	* gmm-utils.el (gmm-tool-bar-style):
+	* gnus-group.el (gnus-group-prepare-flat):
+	* gnus-topic.el (gnus-topic-prepare-topic):
+	* mm-decode.el (mm-discouraged-alternatives):
+	* rfc2047.el (rfc2047-encode-1):
+	* starttls.el: Spelling fix.
+
 2011-11-24  Glenn Morris  <rgm@gnu.org>
 
 	* binhex.el (binhex-begin-line): Give it basic doc-string.
@@ -3073,7 +3083,7 @@
 2011-01-28  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-select-newsgroup): Don't try to alter the active
-	data if the group is unactivated.
+	data if the group is deactivated.
 
 2011-01-28  Julien Danjou  <julien@danjou.info>
 
