@@ -1,3 +1,7 @@
+2011-11-26  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-start.el (gnus-newsrc-to-gnus-format): Spelling fix.
+
 2011-11-25  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* color.el (color-rgb-to-hsl):
