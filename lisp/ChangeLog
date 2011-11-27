@@ -1,5 +1,6 @@
 2011-11-27  Paul Eggert  <eggert@cs.ucla.edu>
 
+	* gnus-group.el (gnus-group-prepare-flat):
 	* mm-bodies.el (mm-encode-body):
 	* mml.el (mml-preview):
 	* nnml.el (nnml-request-compact-group):
@@ -3094,7 +3095,7 @@
 2011-01-28  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-select-newsgroup): Don't try to alter the active
-	data if the group is deactivated.
+	data if the group is inactive.
 
 2011-01-28  Julien Danjou  <julien@danjou.info>
 
