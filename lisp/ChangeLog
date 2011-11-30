@@ -1,3 +1,8 @@
+2011-11-30  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-article-browse-html-parts): Convert link file names
+	for Cygwin.
+
 2011-11-27  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-group.el (gnus-group-prepare-flat):
