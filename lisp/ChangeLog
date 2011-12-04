@@ -1,3 +1,20 @@
+2011-12-04  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-fun.el (gnus-fun-ppm-change-string):
+	* gnus-msg.el (gnus-inews-do-gcc):
+	* gnus-sum.el (gnus-summary-find-for-reselect):
+	* gnus.el (gnus-summary-cancelled):
+	* message.el (message-cancel-hook, message-send-news)
+	* nndiary.el (nndiary-headers, nndiary-parse-schedule-value):
+	* nnir.el (nnir-run-hyrex):
+	* nntp.el (nntp-with-open-group-function):
+	* pgg.el (pgg-pending-timers): Spelling fix.
+
+2011-12-04  Chong Yidong  <cyd@gnu.org>
+
+	* message.el (message-pop-to-buffer): Partially revert 2011-11-30
+	change (Bug#10200).
+
 2011-12-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* compface.el (uncompface):

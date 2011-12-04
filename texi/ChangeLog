@@ -1,3 +1,7 @@
+2011-12-04  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* message.el (Insertion Variables): Spelling fix.
+
 2011-11-27  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus.texi (Propagating marks, Red Gnus): Spelling fix.
