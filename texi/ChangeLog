@@ -1,3 +1,7 @@
+2011-12-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus.texi (Article Washing): Spelling fix.
+
 2011-12-04  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* message.el (Insertion Variables): Spelling fix.

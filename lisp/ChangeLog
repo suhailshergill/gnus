@@ -1,3 +1,7 @@
+2011-12-05  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* netrc.el (netrc-credentials): Spelling fix.
+
 2011-12-04  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-fun.el (gnus-fun-ppm-change-string):
