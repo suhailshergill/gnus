@@ -1,3 +1,7 @@
+2011-12-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* plstore.el (plstore--insert-buffer): Spelling fix.
+
 2011-12-09  Tassilo Horn  <tassilo@member.fsf.org>
 
 	* message.el (message-valid-fqdn-regexp): Update with newly approved
@@ -3954,7 +3958,7 @@
 	(autoload): Silence byte-compiler.
 	(nnir-open-server): Add a hook for nnir groups.
 	(nnir-request-move-article): Don't mangle the header.  Better to use
-	formating variables (which will be added in the future).
+	formatting variables (which will be added in the future).
 	(nnir-registry-action): Update the registry using the original article
 	group name.
 	(nnir-mode): Install nnir-specific hooks for updating the registry.
@@ -23310,7 +23314,7 @@
 	(gnus-xmas-completing-read): Removed.
 	(gnus-xmas-open-network-stream): Removed.
 
-	* gnus-ems.el (gnus-mode-line-modified): Don't conditionalise on
+	* gnus-ems.el (gnus-mode-line-modified): Don't conditionalize on
 	XEmacs version.
 
 	* dns.el (dns-make-network-process): Use `open-network-stream'

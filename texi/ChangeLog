@@ -1,3 +1,9 @@
+2011-12-12  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* emacs-mime.texi (Display Customization):
+	* gnus-faq.texi (FAQ 6-3):
+	* gnus.texi (Sieve Commands, Other Decode Variables): Spelling fix.
+
 2011-12-06  Juanma Barranquero  <lekktu@gmail.com>
 
 	* gnus-faq.texi (FAQ 2-1, FAQ 3-8, FAQ 4-14, FAQ 9-1): Fix typos.
