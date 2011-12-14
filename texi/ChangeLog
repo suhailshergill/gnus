@@ -1,3 +1,7 @@
+2011-12-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus.texi (Using MIME, Score File Syntax): Spelling fix.
+
 2011-12-12  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* emacs-mime.texi (Display Customization):

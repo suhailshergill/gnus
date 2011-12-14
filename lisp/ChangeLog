@@ -1,3 +1,10 @@
+2011-12-14  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-group.el (gnus-group-tool-bar):
+	* gnus-sum.el (gnus-summary-tool-bar):
+	* message.el (message-tool-bar):
+	* rfc2231.el (rfc2231-parse-string): Spelling fix.
+
 2011-12-12  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* plstore.el (plstore--insert-buffer): Spelling fix.
