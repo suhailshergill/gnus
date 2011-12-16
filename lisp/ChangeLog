@@ -1,3 +1,8 @@
+2011-12-15  Juri Linkov  <juri@jurta.org>
+
+	* mm-decode.el (mm-inline-media-tests): Add missing
+	`mm-handle-media-subtype'.
+
 2011-12-14  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-group.el (gnus-group-tool-bar):
