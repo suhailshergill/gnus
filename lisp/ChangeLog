@@ -1,3 +1,11 @@
+2011-12-19  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus-art.el (gnus-split-methods):
+	* gnus-msg.el (gnus-configure-posting-styles):
+	* gnus-spec.el (gnus-parse-simple-format):
+	* gnus-win.el (gnus-configure-frame, gnus-all-windows-visible-p):
+	* message.el (message-do-actions): Spelling fix.
+
 2011-12-15  Juri Linkov  <juri@jurta.org>
 
 	* mm-decode.el (mm-inline-media-tests): Add missing
