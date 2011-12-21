@@ -1,3 +1,7 @@
+2011-12-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* auth.texi (Help for developers): Spelling fix.
+
 2011-12-14  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus.texi (Using MIME, Score File Syntax): Spelling fix.

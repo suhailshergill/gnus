@@ -1,3 +1,8 @@
+2011-12-21  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* nndiary.el (nndiary-parse-schedule-value, nndiary-parse-schedule):
+	* ntlm.el (ntlm-smb-dohash): Spelling fix.
+
 2011-12-19  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* gnus-art.el (gnus-split-methods):
