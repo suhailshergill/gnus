@@ -1,3 +1,14 @@
+2011-12-30  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus.texi (Filtering New Groups, Score File Format): Spelling fix.
+
+2011-12-28  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* gnus.texi (Mail Source Customization, Mail Back End Variables):
+	Use octal notation for file permissions, which are normally
+	thought of in octal.
+	(Mail Back End Variables): Use more-plausible modes in example.
+
 2011-12-21  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* auth.texi (Help for developers): Spelling fix.
