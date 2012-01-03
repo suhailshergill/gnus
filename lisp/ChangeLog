@@ -1,5 +1,10 @@
 2012-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-demon.el (gnus-demon-time-to-step): Ressurect function lost in
+	2010.
+	(gnus-demon-init): Use it to compute the time if time is on the form
+	"04:23".
+
 	* gnus-topic.el (gnus-topic-history): Define `gnus-topic-history'.
 
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Check the connection
