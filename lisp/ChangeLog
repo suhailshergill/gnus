@@ -1,3 +1,8 @@
+2012-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-finish-retrieve-group-infos): Check the connection
+	status in the correct buffer.
+
 2012-01-03  Leo  <sdl.web@gmail.com>  (tiny change)
 
 	* gnus-topic.el (gnus-topic-goto-next-group): Don't move point around
