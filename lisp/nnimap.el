@@ -1,6 +1,6 @@
 ;;; nnimap.el --- IMAP interface for Gnus
 
-;; Copyright (C) 2010-2011 Free Software Foundation, Inc.
+;; Copyright (C) 2010-2012 Free Software Foundation, Inc.
 
 ;; Author: Lars Magne Ingebrigtsen <larsi@gnus.org>
 ;;         Simon Josefsson <simon@josefsson.org>
@@ -1620,8 +1620,9 @@ textual parts.")
                        (nnimap-command  "UID SEARCH %s" cmd))))
         (when result
           (gnus-fetch-headers
-           (and (car result) (delete 0 (mapcar #'string-to-number
-                                               (cdr (assoc "SEARCH" (cdr result))))))
+           (and (car result)
+		(delete 0 (mapcar #'string-to-number
+				  (cdr (assoc "SEARCH" (cdr result))))))
            nil t))))))
 
 (defun nnimap-possibly-change-group (group server)
