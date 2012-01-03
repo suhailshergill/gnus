@@ -1,6 +1,6 @@
 2012-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
-	* gnus-demon.el (gnus-demon-time-to-step): Ressurect function lost in
+	* gnus-demon.el (gnus-demon-time-to-step): Resurrect function lost in
 	2010.
 	(gnus-demon-init): Use it to compute the time if time is on the form
 	"04:23".
