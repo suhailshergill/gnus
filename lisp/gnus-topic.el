@@ -1,6 +1,6 @@
 ;;; gnus-topic.el --- a folding minor mode for Gnus group buffers
 
-;; Copyright (C) 1995-2011 Free Software Foundation, Inc.
+;; Copyright (C) 1995-2012 Free Software Foundation, Inc.
 
 ;; Author: Ilja Weis <kult@uni-paderborn.de>
 ;;	Lars Magne Ingebrigtsen <larsi@gnus.org>
@@ -1301,6 +1301,8 @@ When used interactively, PARENT will be the topic under point."
 ;;     region, the behavior of move or remove is not right.
 ;;  2. Can't process on several marked groups with a same name,
 ;;     because gnus-group-marked only keeps one copy.
+
+(defvar gnus-topic-history nil)
 
 (defun gnus-topic-move-group (n topic &optional copyp)
   "Move the next N groups to TOPIC.

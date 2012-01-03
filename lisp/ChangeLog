@@ -1,5 +1,7 @@
 2012-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-topic.el (gnus-topic-history): Define `gnus-topic-history'.
+
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Check the connection
 	status in the correct buffer.
 
