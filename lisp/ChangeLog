@@ -1,5 +1,8 @@
 2012-01-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-rescale-image): Add :ascent 100 to the rescaled picture,
+	too.
+
 	* nntp.el (nntp-retrieve-group-data-early): Use it.
 
 2012-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
