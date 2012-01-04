@@ -1,4 +1,11 @@
+2012-01-04  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nntp.el (nntp-retrieve-group-data-early): Use it.
+
 2012-01-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nntp.el (nntp-retrieval-in-progress): New variable.
+	(nntp-make-process-buffer): Make it buffer-local.
 
 	* gnus-demon.el (gnus-demon-time-to-step): Resurrect function lost in
 	2010.
