@@ -1,4 +1,4 @@
-2012-01-04  Wolfgang Jenkner  <wjenkner@inode.at>
+2012-01-04  Wolfgang Jenkner  <wjenkner@inode.at>  (tiny change)
 
 	* gnus-agent.el (gnus-agent-load-local): Recompute
 	gnus-agent-article-local on changing method.
