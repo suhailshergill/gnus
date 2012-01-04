@@ -20,7 +20,7 @@
 	* nnimap.el (nnimap-finish-retrieve-group-infos): Check the connection
 	status in the correct buffer.
 
-2012-01-03  Leo  <sdl.web@gmail.com>  (tiny change)
+2012-01-03  Leo  <sdl.web@gmail.com>
 
 	* gnus-topic.el (gnus-topic-goto-next-group): Don't move point around
 	when opening topics (bug#10407).
@@ -12198,7 +12198,7 @@
 	* gnus-art.el (gnus-button-mid-or-mail-heuristic-alist): Add "alpine".
 	(gnus-treat-body-boundary): Don't test window-system.
 
-2007-10-28  Leo  <sdl.web@gmail.com>  (tiny change)
+2007-10-28  Leo  <sdl.web@gmail.com>
 
 	* gnus-art.el (gnus-treat-emphasize): Don't test window-system.
 
