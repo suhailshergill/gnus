@@ -1332,7 +1332,8 @@ textual parts.")
 	     (cdr (assq 'uidvalidity (gnus-info-params info)))))
 	(and old-uidvalidity
 	     (not (equal old-uidvalidity uidvalidity))
-	     (> start-article 1)))
+             (or (not start-article)
+                 (> start-article 1))))
       (gnus-group-remove-parameter info 'uidvalidity)
       (gnus-group-remove-parameter info 'modseq))
      ;; We have the data needed to update.
