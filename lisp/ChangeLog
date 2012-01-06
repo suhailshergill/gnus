@@ -1,5 +1,8 @@
 2012-01-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-read-ephemeral-group): Doc clarification
+	(bug#9692).
+
 	* gnus-agent.el (gnus-agent-store-article): Tell the Agent when the
 	article was fetched, so that it can be expired later (bug#9958).
 	(gnus-agent-summary-fetch-series): Add doc string.
