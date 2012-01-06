@@ -1229,8 +1229,9 @@ Optional arg ALL, if non-nil, means to fetch all articles."
             (cond (gnus-agent-mark-unread-after-downloaded
                    (setq gnus-newsgroup-downloadable
                          (delq article gnus-newsgroup-downloadable))
-
-                   (gnus-summary-mark-article article gnus-unread-mark))
+		   (when (and (not (member article gnus-newsgroup-dormant))
+			      (not (member article gnus-newsgroup-marked)))
+		     (gnus-summary-mark-article article gnus-unread-mark)))
                   (was-marked-downloadable
                    (gnus-summary-set-agent-mark article t)))
             (when (gnus-summary-goto-subject article nil t)
