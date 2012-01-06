@@ -1,5 +1,9 @@
 2012-01-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-mark-article-as-unread): Mark articles as
+	read, and then mark them as unread only when the unread mark is used.
+	This makes `C-- T k' actually work, even though it's confusing.
+
 	* gnus-win.el (gnus-all-windows-visible-p): Ensure that the buffer is
 	alive before we try to find its window.
 
