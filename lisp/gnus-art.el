@@ -3240,9 +3240,16 @@ always hide."
 Point is left at the beginning of the narrowed-to region."
   (narrow-to-region
    (goto-char (point-min))
-   (if (search-forward "\n\n" nil 1)
-       (1- (point))
-     (point-max)))
+   (cond
+    ;; Absolutely no headers displayed.
+    ((looking-at "\n")
+     (point))
+    ;; Normal headers.
+    ((search-forward "\n\n" nil 1)
+     (1- (point)))
+    ;; Nothing but headers.
+    (t
+     (point-max))))
   (goto-char (point-min)))
 
 (defun article-goto-body ()
