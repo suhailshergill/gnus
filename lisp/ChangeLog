@@ -1,3 +1,8 @@
+2012-01-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-win.el (gnus-all-windows-visible-p): Ensure that the buffer is
+	alive before we try to find its window.
+
 2012-01-06  Brian Sniffen  <bsniffen@akamai.com>  (tiny change)
 
 	* mm-decode.el (mm-display-external): Use a longer timeout for the
