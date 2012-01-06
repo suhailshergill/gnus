@@ -2785,10 +2785,11 @@ summary buffer."
 	       (or how (setq how gnus-article-browse-delete-temp))
 	       (if (eq how 'ask)
 		   (let ((files (length gnus-article-browse-html-temp-list)))
-		     (gnus-y-or-n-p (format
-				     "Delete all %s temporary HTML file%s? "
-				     files
-				     (if (> files 1) "s" ""))))
+		     (gnus-y-or-n-p
+		      (if (= files 1)
+			  "Delete the temporary HTML file? "
+			(format "Delete all %s temporary HTML files? "
+				files))))
 		 how)))
     (dolist (file gnus-article-browse-html-temp-list)
       (cond ((file-directory-p file)
