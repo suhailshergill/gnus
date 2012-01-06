@@ -1145,9 +1145,7 @@ For example:
 		  (display . all))
      (\"mail\\\\.me\" (gnus-use-scoring  t))
      (\"list\\\\..*\" (total-expire . t)
-		  (broken-reply-to . t)))
-
-The first clause that matches the group name will be used."
+		  (broken-reply-to . t)))"
   :version "22.1"
   :group 'gnus-group-various
   :type '(repeat (cons regexp
