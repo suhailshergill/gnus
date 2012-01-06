@@ -1,3 +1,8 @@
+2012-01-06  Brian Sniffen  <bsniffen@akamai.com>  (tiny change)
+
+	* mm-decode.el (mm-display-external): Use a longer timeout for the
+	deletion to allow slow programs to display the file.
+
 2012-01-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-art.el (gnus-article-browse-delete-temp-files): Fix up the
