@@ -2,6 +2,7 @@
 
 	* gnus-agent.el (gnus-agent-store-article): Tell the Agent when the
 	article was fetched, so that it can be expired later (bug#9958).
+	(gnus-agent-summary-fetch-series): Add doc string.
 
 	* nntp.el (nntp-retrieve-groups): Refuse to do retrieval when an async
 	retrieval is happening.

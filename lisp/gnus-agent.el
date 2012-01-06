@@ -1181,6 +1181,7 @@ downloadable."
     (gnus-summary-position-point)))
 
 (defun gnus-agent-summary-fetch-series ()
+  "Fetch the process-marked articles into the Agent."
   (interactive)
   (when gnus-newsgroup-processable
     (setq gnus-newsgroup-downloadable
