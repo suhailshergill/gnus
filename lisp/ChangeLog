@@ -1,5 +1,8 @@
 2012-01-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-retrieve-groups): Refuse to do retrieval when an async
+	retrieval is happening.
+
 	* gnus.el (gnus-parameters): Doc fix.
 
 2012-01-06  Dave Abrahams  <dave@boostpro.com>  (tiny change)
