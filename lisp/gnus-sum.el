@@ -9032,7 +9032,8 @@ non-numeric or nil fetch the number specified by the
               'gnus-article-sort-by-number)))
       (setq gnus-newsgroup-articles
       	    (gnus-sorted-nunion gnus-newsgroup-articles (nreverse article-ids)))
-      (gnus-summary-limit-include-thread id))))
+      (gnus-summary-limit-include-thread id)))
+  (gnus-summary-show-thread))
 
 (defun gnus-summary-refer-article (message-id)
   "Fetch an article specified by MESSAGE-ID."
