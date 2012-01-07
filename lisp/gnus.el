@@ -3859,13 +3859,14 @@ The function `gnus-group-find-parameter' will do that for you."
 	  ;; The car is regexp matching for matching the group name.
 	  (when (string-match (car head) group)
 	    ;; The cdr is the parameters.
-	    (setq result (gnus-group-parameter-value (cdr head)
-						     symbol allow-list))
-	    (when result
-	      ;; Expand if necessary.
-	      (if (and (stringp result) (string-match "\\\\[0-9&]" result))
-		  (setq result (gnus-expand-group-parameter (car head)
-							    result group))))))
+	    (let ((this-result
+		   (gnus-group-parameter-value (cdr head) symbol allow-list t)))
+	      (when this-result
+		(setq result (car this-result))
+		;; Expand if necessary.
+		(if (and (stringp result) (string-match "\\\\[0-9&]" result))
+		    (setq result (gnus-expand-group-parameter
+				  (car head) result group)))))))
 	;; Done.
 	result))))
 
