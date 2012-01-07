@@ -1,5 +1,8 @@
 2012-01-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-interactively-view-part): Use `completing-read',
+	since ido doesn't work on symbols (bug#9632).
+
 	* gnus.el (gnus-group-fast-parameter): Use the same precedence rules
 	when getting a single value as when getting all the values.  This means
 	that atoms like `gcc-self' work cumulatively, like variable settings,
