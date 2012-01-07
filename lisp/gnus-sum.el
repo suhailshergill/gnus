@@ -3931,7 +3931,11 @@ Input should look like this: \"Sun, 14 Oct 2001 13:34:39 +0200\"."
   "Start reading news in newsgroup GROUP.
 If SHOW-ALL is non-nil, already read articles are also listed.
 If NO-ARTICLE is non-nil, no article is selected initially.
-If NO-DISPLAY, don't generate a summary buffer."
+If NO-DISPLAY, don't generate the summary buffer contents.
+If KILL-BUFFER, it should be a buffer that's killed once the new
+summary buffer has been generated.
+If BACKWARD, move point to the previous group in the group buffer
+If SELECT-ARTICLES, only select those articles from GROUP."
   (let (result)
     (while (and group
 		(null (setq result

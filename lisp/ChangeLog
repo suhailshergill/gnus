@@ -1,5 +1,8 @@
 2012-01-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-read-group): Document more parameters
+	(bug#9693).
+
 	* mm-decode.el (mm-interactively-view-part): Use `completing-read',
 	since ido doesn't work on symbols (bug#9632).
 
