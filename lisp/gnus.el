@@ -3876,7 +3876,9 @@ If SYMBOL, return the value of that symbol in the group parameters.
 
 If you call this function inside a loop, consider using the faster
 `gnus-group-fast-parameter' instead."
-  (with-current-buffer gnus-group-buffer
+  (with-current-buffer (if (buffer-live-p gnus-group-buffer)
+			   gnus-group-buffer
+			 (current-buffer))
     (if symbol
 	(gnus-group-fast-parameter group symbol allow-list)
       (nconc

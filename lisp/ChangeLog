@@ -4,6 +4,8 @@
 	when getting a single value as when getting all the values.  This means
 	that atoms like `gcc-self' work cumulatively, like variable settings,
 	instead of getting the value from the last matching clause.
+	(gnus-group-find-parameter): Protect against the group buffer not
+	existing (bug#9585).
 
 2012-01-06  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
