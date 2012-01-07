@@ -1,3 +1,9 @@
+2012-01-07  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* gnus-sync.el (gnus-sync-newsrc-groups): Quote normally.
+	(gnus-sync-lesync-pre-save-group-entry): Remove invalid invlists.
+	(gnus-sync-lesync-normalize-group-entry): Ignore a few more keys.
+
 2012-01-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-read-group): Document more parameters

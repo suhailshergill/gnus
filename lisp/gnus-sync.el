@@ -105,7 +105,7 @@
   :version "24.1"
   :group 'gnus)
 
-(defcustom gnus-sync-newsrc-groups `("nntp" "nnrss")
+(defcustom gnus-sync-newsrc-groups '("nntp" "nnrss")
   "List of groups to be synchronized in the gnus-newsrc-alist.
 The group names are matched, they don't have to be fully
 qualified.  Typically you would choose all of these.  That's the
@@ -488,10 +488,22 @@ Updates `gnus-sync-lesync-props-hash'."
       ;; the read marks
       ,(cons 'read (gnus-sync-range2invlist (nth 2 nentry)))
       ;; the other marks
-      ,@(mapcar (lambda (mark-entry)
-                  (cons (car mark-entry)
-                        (gnus-sync-range2invlist (cdr mark-entry))))
-                (nth 3 nentry)))))
+      ,@(delq nil (mapcar (lambda (mark-entry)
+                            (gnus-message 12 "%s: prep param %s in %s"
+                                          loc
+                                          (car mark-entry)
+                                          (nth 3 nentry))
+                            (if (listp (cdr mark-entry))
+                                (cons (car mark-entry)
+                                      (gnus-sync-range2invlist
+                                       (cdr mark-entry)))
+                              (progn    ; else this is not a list
+                                (gnus-message 9 "%s: non-list param %s in %s"
+                                              loc
+                                              (car mark-entry)
+                                              (nth 3 nentry))
+                                nil)))
+                          (nth 3 nentry))))))
 
 (defun gnus-sync-lesync-post-save-group-entry (url entry)
   (let* ((loc "gnus-sync-lesync-post-save-group-entry")
@@ -666,8 +678,8 @@ unwanted groups via the LeSync URL."
         (cond
          ((eq k 'read)
           (push (cons k (gnus-sync-invlist2range val)) ret))
-         ;; we already know the name
-         ((eq k '_id)
+         ;; we ignore these parameters
+         ((member k '(_id subscribe-all _deleted_conflicts))
           nil)
          ((eq k '_rev)
           (push (cons 'rev val) ret))
