@@ -1,5 +1,8 @@
 2012-01-10  Teodor Zlatanov  <tzz@lifelogs.com>
 
+	* nntp.el (nntp-send-authinfo): Query `auth-source-search' with the
+	logical server name in addition to the actual machine address.
+
 	* auth-source.el (auth-source-user-and-password): Add convenience
 	wrapper to search by just host and optionally user.
 
