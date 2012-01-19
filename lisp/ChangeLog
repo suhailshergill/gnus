@@ -1,3 +1,8 @@
+2012-01-19  Julien Danjou  <julien@danjou.info>
+
+	* color.el (color-name-to-rgb): Use the white color to find the max
+	color component value and return correctly computed values.
+
 2012-01-10  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* nntp.el (nntp-send-authinfo): Query `auth-source-search' with the
