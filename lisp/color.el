@@ -55,7 +55,7 @@ displayed.  If FRAME is omitted or nil, use the selected frame.
 If FRAME cannot display COLOR, return nil."
   ;; `colors-values' maximum value is either 65535 or 65280 depending on the
   ;; display system. So we use a white conversion to get the max value.
-  (let ((valmax (car (color-values "#ffffff"))))
+  (let ((valmax (float (car (color-values "#ffffff")))))
     (mapcar (lambda (x) (/ x valmax)) (color-values color frame))))
 
 (defun color-rgb-to-hex  (red green blue)

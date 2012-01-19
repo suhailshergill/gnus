@@ -2,6 +2,7 @@
 
 	* color.el (color-name-to-rgb): Use the white color to find the max
 	color component value and return correctly computed values.
+	(color-name-to-rgb): Add missing float conversion for max value.
 
 2012-01-10  Teodor Zlatanov  <tzz@lifelogs.com>
 
