@@ -141,23 +141,21 @@ inclusive."
          (min (min r g b))
          (delta (- max min))
          (l (/ (+ max min) 2.0)))
-    (list
-     (if (< (- max min) 1e-8)
-         0
-       (* 2 float-pi
-          (/ (cond ((= max r)
-                    (+ (/ (- g b) delta) (if (< g b) 6 0)))
-                   ((= max g)
-		    (+ (/ (- b r) delta) 2))
-                   (t
-                    (+ (/ (- r g) delta) 4)))
-             6)))
-     (if (= max min)
-         0
-       (if (> l 0.5)
-           (/ delta (- 2 (+ max min)))
-         (/ delta (+ max min))))
-     l)))
+    (if (= delta 0)
+	(list 0.0 0.0 l)
+      (let* ((s (if (<= l 0.5) (/ delta (+ max min))
+		  (/ delta (- 2.0 max min))))
+	     (rc (/ (- max r) delta))
+	     (gc (/ (- max g) delta))
+	     (bc (/ (- max b) delta))
+	     (h  (mod
+		  (/
+		   (cond
+		    ((= r max)      (- bc gc))
+		    ((= g max)      (+ 2.0 rc (- bc)))
+		    (t              (+ 4.0 gc (- rc))))
+		   6.0) 1.0)))
+	(list h s l)))))
 
 (defun color-srgb-to-xyz (red green blue)
   "Convert RED GREEN BLUE colors from the sRGB color space to CIE XYZ.

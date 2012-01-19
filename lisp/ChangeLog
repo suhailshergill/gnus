@@ -1,3 +1,7 @@
+2012-01-24  Julien Danjou  <julien@danjou.info>
+
+	* color.el (color-rgb-to-hsl): Fix value computing.
+
 2012-01-21  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-decode.el (mm-interactively-view-part): Fix prompt.
