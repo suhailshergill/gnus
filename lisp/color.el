@@ -339,6 +339,82 @@ returned by `color-srgb-to-lab' or `color-xyz-to-lab'."
                  (expt (/ ΔH′ (* Sh kH)) 2.0)
                  (* Rt (/ ΔC′ (* Sc kC)) (/ ΔH′ (* Sh kH)))))))))
 
+(defun color-clamp (value)
+  "Make sure VALUE is a number between 0.0 and 1.0 inclusive."
+  (min 1.0 (max 0.0 value)))
+
+(defun color-saturate-hsl (H S L percent)
+  "Return a color PERCENT more saturated than the one defined in
+H S L color-space.
+
+Return a list (HUE, SATURATION, LUMINANCE), where HUE is in radians
+and both SATURATION and LUMINANCE are between 0.0 and 1.0,
+inclusive."
+  (list H (color-clamp (+ S (/ percent 100.0))) L))
+
+(defun color-saturate-name (name percent)
+  "Short hand to saturate COLOR by PERCENT.
+
+See `color-saturate-hsl'."
+  (apply 'color-rgb-to-hex
+	 (apply 'color-hsl-to-rgb
+		(apply 'color-saturate-hsl
+		       (append
+			(apply 'color-rgb-to-hsl
+			       (color-name-to-rgb name))
+			(list percent))))))
+
+(defun color-desaturate-hsl (H S L percent)
+  "Return a color PERCENT less saturated than the one defined in
+H S L color-space.
+
+Return a list (HUE, SATURATION, LUMINANCE), where HUE is in radians
+and both SATURATION and LUMINANCE are between 0.0 and 1.0,
+inclusive."
+  (color-saturate-hsl H S L (- percent)))
+
+(defun color-desaturate-name (name percent)
+  "Short hand to desaturate COLOR by PERCENT.
+
+See `color-desaturate-hsl'."
+  (color-saturate-name name (- percent)))
+
+(defun color-lighten-hsl (H S L percent)
+  "Return a color PERCENT lighter than the one defined in
+H S L color-space.
+
+Return a list (HUE, SATURATION, LUMINANCE), where HUE is in radians
+and both SATURATION and LUMINANCE are between 0.0 and 1.0,
+inclusive."
+  (list H S (color-clamp (+ L (/ percent 100.0)))))
+
+(defun color-lighten-name (name percent)
+  "Short hand to saturate COLOR by PERCENT.
+
+See `color-lighten-hsl'."
+  (apply 'color-rgb-to-hex
+	 (apply 'color-hsl-to-rgb
+		(apply 'color-lighten--hsl
+		       (append
+			(apply 'color-rgb-to-hsl
+			       (color-name-to-rgb name))
+			(list percent))))))
+
+(defun color-darken-hsl (H S L percent)
+  "Return a color PERCENT darker than the one defined in
+H S L color-space.
+
+Return a list (HUE, SATURATION, LUMINANCE), where HUE is in radians
+and both SATURATION and LUMINANCE are between 0.0 and 1.0,
+inclusive."
+  (color-lighten-hsl H S L (- percent)))
+
+(defun color-darken-name (name percent)
+  "Short hand to saturate COLOR by PERCENT.
+
+See `color-darken-hsl'."
+  (color-lighten-name name (- percent)))
+
 (provide 'color)
 
 ;;; color.el ends here
