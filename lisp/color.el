@@ -92,6 +92,34 @@ resulting list."
 	    result))
     (nreverse result)))
 
+(defun color-hue-to-rgb (v1 v2 h)
+  "Compute hue from V1 and V2 H. Internally used by
+`color-hsl-to-rgb'."
+  (cond
+   ((< h (/ 1.0 6))   (+ v1 (* (- v2 v1) h 6.0)))
+   ((< h 0.5)         v2)
+   ((< h (/ 2.0 3))   (+ v1 (* (- v2 v1) (- (/ 2.0 3) h) 6.0)))
+   (t                 v1)))
+
+(defun color-hsl-to-rgb (H S L)
+    "Convert H S L (HUE, SATURATION, LUMINANCE) , where HUE is in
+radians and both SATURATION and LUMINANCE are between 0.0 and
+1.0, inclusive to their RGB representation.
+
+Return a list (RED, GREEN, BLUE) which each be numbers between
+0.0 and 1.0, inclusive."
+
+  (if (= S 0.0)
+      (list L L L)
+    (let* ((m2 (if (<= L 0.5)
+		   (* L (+ 1.0 S))
+		 (- (+ L S) (* L S))))
+	   (m1 (- (* 2.0 L) m2)))
+      (list
+       (color-hue-to-rgb m1 m2 (+ H (/ 1.0 3)))
+       (color-hue-to-rgb m1 m2 H)
+       (color-hue-to-rgb m1 m2 (- H (/ 1.0 3)))))))
+
 (defun color-complement-hex (color)
   "Return the color that is the complement of COLOR, in hexadecimal format."
   (apply 'color-rgb-to-hex (color-complement color)))
