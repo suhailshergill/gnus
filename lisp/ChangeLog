@@ -1,3 +1,9 @@
+2012-01-25  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-summary-line-format-alist): Don't try to
+	macroexpand the nnir things, since they haven't been defined yet, and
+	nnir requires gnus-sum.
+
 2012-01-24  Julien Danjou  <julien@danjou.info>
 
 	* color.el (color-rgb-to-hsl): Fix value computing.
