@@ -1,5 +1,9 @@
 2012-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-move-article): Don't propagate marks to
+	non-server-marks groups.
+	(gnus-group-make-articles-read): Ditto.
+
 	* gnus-srvr.el (gnus-server-prepare): Use it to avoid showing ephemeral
 	methods (bug#9676).
 
