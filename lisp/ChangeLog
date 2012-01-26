@@ -1,3 +1,8 @@
+2012-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnir-search-thread): Autoload to avoid a compilation
+	warning.
+
 2012-01-25  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-line-format-alist): Don't try to
