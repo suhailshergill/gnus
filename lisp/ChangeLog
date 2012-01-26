@@ -1,5 +1,8 @@
 2012-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* proto-stream.el (proto-stream-capability-open): Wait for
+	:end-of-capability, not :end-of-command.
+
 	* gnus-sum.el (gnus-summary-move-article): Don't propagate marks to
 	non-server-marks groups.
 	(gnus-group-make-articles-read): Ditto.

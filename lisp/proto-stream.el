@@ -275,11 +275,13 @@ PARAMETERS should be a sequence of keywords and values:
 
 (defun proto-stream-capability-open (start stream parameters stream-type)
   (let* ((capability-command (plist-get parameters :capability-command))
-	 (eoc 		     (plist-get parameters :end-of-command))
-	 (greeting (proto-stream-get-response stream start eoc)))
+	 (greeting (proto-stream-get-response
+		    stream start
+		    (plist-get parameters :end-of-command))))
     (list stream greeting
 	  (and capability-command
-	       (proto-stream-command stream capability-command eoc))
+	       (proto-stream-command stream capability-command
+				     (plist-get parameters :end-of-capability)))
 	  stream-type)))
 
 (provide 'proto-stream)
