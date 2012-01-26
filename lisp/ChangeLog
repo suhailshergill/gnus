@@ -1,3 +1,8 @@
+2012-01-26  Nick Alcock  <nick.alcock@oracle.com>  (tiny change)
+
+	* gnus.el (gnus-group-find-parameter): Check for liveness of the
+	buffer, not of the string which is its name.
+
 2012-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* proto-stream.el (proto-stream-capability-open): Wait for
