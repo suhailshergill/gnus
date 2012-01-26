@@ -1,3 +1,10 @@
+2012-01-26  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-srvr.el (gnus-server-prepare): Use it to avoid showing ephemeral
+	methods (bug#9676).
+
+	* gnus.el (gnus-method-ephemeral-p): New function.
+
 2012-01-26  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-sum.el (gnus-summary-mode): Force paragraph direction to be
