@@ -3,6 +3,15 @@
 	* gnus-sum.el (gnus-summary-mode): Don't make bidi-paragraph-direction
 	bound globally in old Emacsen and XEmacsen.
 
+2012-01-27  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-get-unread-articles): Clear out "early" methods
+	so that previous errors don't prohibit getting new news.
+
+	* nnimap.el (nnimap-retrieve-group-data-early): Ditto.
+
+	* nntp.el (nntp-retrieve-group-data-early): Ditto.
+
 2012-01-26  Nick Alcock  <nick.alcock@oracle.com>  (tiny change)
 
 	* gnus.el (gnus-group-find-parameter): Check for liveness of the
