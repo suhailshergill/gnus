@@ -1,3 +1,8 @@
+2012-01-27  Elias Pipping  <pipping@lavabit.com>  (tiny change)
+
+	* shr.el (shr-browse-url): Fix the name of the `browse-url-mail'
+	function call.
+
 2012-01-27  Vida Gábor  <vidagabor@gmail.com>  (tiny change)
 
 	* gnus-demon.el (gnus-demon-run-callback, gnus-demon-init): Convert to
