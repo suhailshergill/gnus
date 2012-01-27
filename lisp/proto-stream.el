@@ -280,8 +280,11 @@ PARAMETERS should be a sequence of keywords and values:
 		    (plist-get parameters :end-of-command))))
     (list stream greeting
 	  (and capability-command
-	       (proto-stream-command stream capability-command
-				     (plist-get parameters :end-of-capability)))
+	       (proto-stream-command
+		stream capability-command
+		(or
+		 (plist-get parameters :end-of-capability)
+		 (plist-get parameters :end-of-command))))
 	  stream-type)))
 
 (provide 'proto-stream)
