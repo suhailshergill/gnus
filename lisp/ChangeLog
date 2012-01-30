@@ -1,3 +1,8 @@
+2012-01-30  Philipp Haselwarter  <philipp.haselwarter@gmx.de>  (tiny change)
+
+	* gnus-agent.el (gnus-agent-auto-agentize-methods): Point to the Agent
+	section in the manual.
+
 2012-01-30  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* rfc2047.el (rfc2047-encode-region): Allow not folding the encoded
