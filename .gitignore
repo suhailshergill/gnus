@@ -16,6 +16,7 @@ contrib/gnus-mdrtn.el
 contrib/on-loginfo
 contrib/request-assign.future
 etc/Makefile
+lisp/.gitattributes
 lisp/*.elc
 lisp/*.rej
 lisp/Makefile
