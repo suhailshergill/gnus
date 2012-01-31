@@ -1,5 +1,9 @@
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-archive.el: New file.
+
+	* mm-decode.el (mm-dissect-singlepart): Use it to decode ms-tnef files.
+
 	* mm-util.el (mm-find-buffer-file-coding-system): Comment fix.
 
 	* message.el (message-goto-*): Make all the `message-goto-*' commands
