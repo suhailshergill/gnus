@@ -8,7 +8,7 @@
 @syncodeindex vr cp
 @syncodeindex pg cp
 
-@documentencoding ISO-8859-1
+@documentencoding UTF-8
 
 @copying
 Copyright @copyright{} 1995-2012 Free Software Foundation, Inc.
@@ -8982,7 +8982,7 @@ Translate many non-@acronym{ASCII} characters into their
 @acronym{ASCII} equivalents (@code{gnus-article-treat-non-ascii}).
 This is mostly useful if you're on a terminal that has a limited font
 and doesn't show accented characters, ``advanced'' punctuation, and the
-like.  For instance, @samp{�} is translated into @samp{>>}, and so on.
+like.  For instance, @samp{Â»} is translated into @samp{>>}, and so on.
 
 @item W Y f
 @kindex W Y f (Summary)
@@ -20854,7 +20854,7 @@ then this operator will return @code{false}.
 
 @item !
 @itemx not
-@itemx �
+@itemx Â¬
 This logical operator only takes a single argument.  It returns the
 logical negation of the value of its argument.
 
@@ -22494,7 +22494,7 @@ and so on.  Create as many faces as you wish.  The same goes for the
 @samp{hello} mouse-highlighted with @code{gnus-mouse-face-3}.
 
 @cindex %<<, %>>, guillemets
-@c @cindex %<<, %>>, %�, %�, guillemets
+@c @cindex %<<, %>>, %Â«, %Â», guillemets
 @vindex gnus-balloon-face-0
 Text inside the @samp{%<<} and @samp{%>>} specifiers will get the
 special @code{balloon-help} property set to
@@ -28408,7 +28408,8 @@ New features in No Gnus:
 @subsubsection Ma Gnus
 @cindex Ma Gnus
 
-I'm sure there will be lots of text here.
+I'm sure there will be lots of text here.  It's really spelled 真
+Gnus.
 
 @iftex
 
@@ -30632,5 +30633,5 @@ former).  The manual is unambiguous, but it can be confusing.
 
 @c Local Variables:
 @c mode: texinfo
-@c coding: iso-8859-1
+@c coding: utf-8
 @c End:
