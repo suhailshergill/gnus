@@ -3098,66 +3098,79 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
 (defun message-goto-to ()
   "Move point to the To header."
   (interactive)
+  (push-mark)
   (message-position-on-field "To"))
 
 (defun message-goto-from ()
   "Move point to the From header."
   (interactive)
+  (push-mark)
   (message-position-on-field "From"))
 
 (defun message-goto-subject ()
   "Move point to the Subject header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Subject"))
 
 (defun message-goto-cc ()
   "Move point to the Cc header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Cc" "To"))
 
 (defun message-goto-bcc ()
   "Move point to the Bcc  header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Bcc" "Cc" "To"))
 
 (defun message-goto-fcc ()
   "Move point to the Fcc header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Fcc" "To" "Newsgroups"))
 
 (defun message-goto-reply-to ()
   "Move point to the Reply-To header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Reply-To" "Subject"))
 
 (defun message-goto-newsgroups ()
   "Move point to the Newsgroups header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Newsgroups"))
 
 (defun message-goto-distribution ()
   "Move point to the Distribution header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Distribution"))
 
 (defun message-goto-followup-to ()
   "Move point to the Followup-To header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Followup-To" "Newsgroups"))
 
 (defun message-goto-mail-followup-to ()
   "Move point to the Mail-Followup-To header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Mail-Followup-To" "To"))
 
 (defun message-goto-keywords ()
   "Move point to the Keywords header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Keywords" "Subject"))
 
 (defun message-goto-summary ()
   "Move point to the Summary header."
   (interactive)
+  (push-mark)
   (message-position-on-field "Summary" "Subject"))
 
 (eval-when-compile
@@ -3178,6 +3191,7 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
   (when (and (message-called-interactively-p 'any)
 	     (looking-at "[ \t]*\n"))
     (expand-abbrev))
+  (push-mark)
   (goto-char (point-min))
   (or (search-forward (concat "\n" mail-header-separator "\n") nil t)
       (search-forward-regexp "[^:]+:\\([^\n]\\|\n[ \t]\\)+\n\n" nil t)))
@@ -3198,6 +3212,7 @@ M-RET    `message-newline-and-reformat' (break the line and reformat)."
 If there is no signature in the article, go to the end and
 return nil."
   (interactive)
+  (push-mark)
   (goto-char (point-min))
   (if (re-search-forward message-signature-separator nil t)
       (forward-line 1)
