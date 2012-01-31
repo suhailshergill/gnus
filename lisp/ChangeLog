@@ -16,6 +16,11 @@
 
 	* gnus.el: Ma Gnus v0.1 is released.
 
+2012-01-31  Jim Meyering  <jim@meyering.net>
+
+	* gnus-agent.el (gnus-agent-expire-unagentized-dirs):
+        Correct a comment (insert "not") and hide nominally-doubled "to".
+
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.el (gnus-version): Change name to "Ma Gnus".
