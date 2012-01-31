@@ -1,5 +1,7 @@
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-dissect-singlepart): Check that the decoder exists.
+
 	* mm-archive.el: New file.
 
 	* mm-decode.el (mm-dissect-singlepart): Use it to decode ms-tnef files.

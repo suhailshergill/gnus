@@ -656,8 +656,10 @@ Postpone undisplaying of viewers for types in
 	      t))
     (let ((handle
 	   (mm-make-handle
-	    (mm-copy-to-buffer) ctl cte nil cdl description nil id)))
-      (if (member (car ctl) mm-archive-decoders)
+	    (mm-copy-to-buffer) ctl cte nil cdl description nil id))
+	  (decoder (assoc (car ctl) mm-archive-decoders)))
+      (if (and decoder
+	       (executable-find (cadr decoder)))
 	  (mm-dissect-archive handle)
 	handle))))
 
