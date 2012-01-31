@@ -47,7 +47,7 @@ developing GNU and promoting software freedom.''
 \begin{document}
 
 % Adjust ../Makefile.in if you change the following line:
-\newcommand{\gnusversionname}{No Gnus v0.18}
+\newcommand{\gnusversionname}{Ma Gnus v0.0}
 \newcommand{\gnuschaptername}{}
 \newcommand{\gnussectionname}{}
 
@@ -358,7 +358,7 @@ spool or your mbox file.  All at the same time, if you want to push your
 luck.
 
 @c Adjust ../Makefile.in if you change the following line:
-This manual corresponds to No Gnus v0.18
+This manual corresponds to Ma Gnus v0.0
 
 @ifnottex
 @insertcopying
@@ -392,7 +392,7 @@ people should be empowered to do what they want by using (or abusing)
 the program.
 
 @c Adjust ../Makefile.in if you change the following line:
-This manual corresponds to No Gnus v0.18
+This manual corresponds to Ma Gnus v0.0
 
 @heading Other related manuals
 @itemize
@@ -907,7 +907,8 @@ New Features
 * Quassia Gnus::                Two times two is four, or Gnus 5.6/5.7.
 * Pterodactyl Gnus::            Pentad also starts with P, AKA Gnus 5.8/5.9.
 * Oort Gnus::                   It's big.  It's far out.  Gnus 5.10/5.11.
-* No Gnus::                     Very punny.
+* No Gnus::                     Very punny.  Gnus 5.12/5.13
+* Ma Gnus::                     Celebrating 25 years of Gnus.
 
 Customization
 
@@ -26387,6 +26388,7 @@ renamed it back again to ``Gnus''.  But in mixed case.  ``Gnus'' vs.
 @cindex Pterodactyl Gnus
 @cindex Oort Gnus
 @cindex No Gnus
+@cindex Ma Gnus
 @cindex Gnus versions
 
 The first ``proper'' release of Gnus 5 was done in November 1995 when it
@@ -26415,12 +26417,15 @@ On April 19, 2010 Gnus development was moved to Git.  See
 http://git.gnus.org for details (http://www.gnus.org will be updated
 with the information when possible).
 
+On the January 31th 2012, Ma Gnus was begun.
+
 If you happen upon a version of Gnus that has a prefixed name --
 ``(ding) Gnus'', ``September Gnus'', ``Red Gnus'', ``Quassia Gnus'',
-``Pterodactyl Gnus'', ``Oort Gnus'', ``No Gnus'' -- don't panic.
-Don't let it know that you're frightened.  Back away.  Slowly.  Whatever
-you do, don't run.  Walk away, calmly, until you're out of its reach.
-Find a proper released version of Gnus and snuggle up to that instead.
+``Pterodactyl Gnus'', ``Oort Gnus'', ``No Gnus'', ``Ma Gnus'' -- don't
+panic.  Don't let it know that you're frightened.  Back away.  Slowly.
+Whatever you do, don't run.  Walk away, calmly, until you're out of
+its reach.  Find a proper released version of Gnus and snuggle up to
+that instead.
 
 
 @node Why?
@@ -27023,7 +27028,8 @@ actually are people who are using Gnus.  Who'd'a thunk it!
 * Quassia Gnus::                Two times two is four, or Gnus 5.6/5.7.
 * Pterodactyl Gnus::            Pentad also starts with P, AKA Gnus 5.8/5.9.
 * Oort Gnus::                   It's big.  It's far out.  Gnus 5.10/5.11.
-* No Gnus::                     Very punny.
+* No Gnus::                     Very punny.  Gnus 5.12/5.13.
+* Ma Gnus::                     Celebrating 25 years of Gnus.
 @end menu
 
 These lists are, of course, just @emph{short} overviews of the
@@ -28398,6 +28404,12 @@ New features in No Gnus:
 
 @include gnus-news.texi
 
+@node Ma Gnus
+@subsubsection Ma Gnus
+@cindex Ma Gnus
+
+I'm sure there will be lots of text here.
+
 @iftex
 
 @page
@@ -28901,7 +28913,7 @@ Gnus will work.
 @item
 Try doing an @kbd{M-x gnus-version}.  If you get something that looks
 like @c
-@samp{No Gnus v0.18} @c Adjust ../Makefile.in if you change this line!
+@samp{Ma Gnus v0.0} @c Adjust ../Makefile.in if you change this line!
 @c
 you have the right files loaded.  Otherwise you have some old @file{.el}
 files lying around.  Delete these.

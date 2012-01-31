@@ -1,5 +1,5 @@
 #!/bin/bash
-name="No Gnus"
+name="Ma Gnus"
 
 if [ `whoami` != "larsi" ]; then
     echo "This script is for larsi only"
