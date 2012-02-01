@@ -1765,6 +1765,8 @@ If RECURSIVE, search recursively."
 				  mm-extra-numeric-entities)))
 	     (replace-match (char-to-string char))))
 	 (libxml-parse-html-region (point-min) (point-max))))
+      (unless (bobp)
+	(insert "\n"))
       (mm-handle-set-undisplayer
        handle
        `(lambda ()

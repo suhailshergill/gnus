@@ -1,5 +1,8 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-shr): Make sure that the HTML ends with a newline.
+	Otherwise inserting text into the Gnus buffer can look odd.
+
 	* gnus-art.el (gnus-mime-inline-part): Slight clean-up.
 
 	* mm-archive.el (mm-archive-decoders): Add support for tar.
