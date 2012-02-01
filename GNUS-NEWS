@@ -12,6 +12,9 @@ For older news, see Gnus info node "New Features".
 ** If you have the "tnef" program installed, Gnus will display ms-tnef
    files, aka "winmail.dat".
 
+** Archives (like tar and zip files) will be automatically unpacked,
+   and the files inside the packages will be displayed as MIME parts.
+   
 * For older news, see Gnus info node "New Features".
 
 ----------------------------------------------------------------------
