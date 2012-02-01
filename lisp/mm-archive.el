@@ -51,7 +51,7 @@
 
 (defun mm-archive-list-files (dir)
   (let ((handles nil)
-	type)
+	type disposition)
     (dolist (file (directory-files dir))
       (unless (member file '("." ".."))
 	(with-temp-buffer
@@ -59,6 +59,10 @@
 	    (setq type (mailcap-extension-to-mime (match-string 1 file))))
 	  (unless type
 	    (setq type "application/octet-stream"))
+	  (setq disposition
+		(if (string-match "^image/\\|^text/" type)
+		    "inline"
+		  "attachment"))
 	  (insert (format "Content-type: %s\n" type))
 	  (insert "Content-Transfer-Encoding: 8bit\n\n")
 	  (insert-file-contents (expand-file-name file dir))
@@ -66,7 +70,7 @@
 	   (mm-make-handle (mm-copy-to-buffer)
 			   (list type)
 			   '8bit nil
-			   `("attachment" (filename . ,file))
+			   `(,disposition (filename . ,file))
 			   nil nil nil)
 	   handles))))
     handles))
