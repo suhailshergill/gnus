@@ -30,13 +30,16 @@
 
 (eval-when-compile (require 'cl))
 
+(ignore-errors
+  (require 'help-fns))
+
 (when (and (not (fboundp 'help-function-arglist))
 	   (fboundp 'function-arglist))
   (defun help-function-arglist (def &optional preserve-names)
     (cdr (car (read-from-string (downcase (function-arglist def)))))))
 
 (when (= (length (help-function-arglist 'delete-directory)) 1)
-  (defvar gnus-compat-original-delete-directory 
+  (defvar gnus-compat-original-delete-directory
     (symbol-function 'delete-directory))
   (defun delete-directory (directory &optional recursive)
     (if (not recursive)
