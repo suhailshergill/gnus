@@ -1,5 +1,8 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-start.el (gnus-clean-old-newsrc): New function.
+	(gnus-read-newsrc-file): Use it.
+
 	* mm-archive.el (mm-dissect-archive): Use it to get all file names.
 	Use recursive deletion.
 	(mm-dissect-archive): Add support for zip files.
