@@ -1,5 +1,8 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-compat.el: Redefine `delete-directory' to provide recursive
+	deletion unless already defined.
+
 	* gnus.el (gnus-compat): Require it.
 
 	* gnus-compat.el: New file.

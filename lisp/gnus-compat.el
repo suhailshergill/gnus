@@ -28,11 +28,26 @@
 ;; functions "missing" in other Emacs instances, and redefine other
 ;; functions to work like the Emacs trunk versions.
 
-(provide 'gnus-compat)
+(eval-when-compile (require 'cl))
 
 (when (and (not (fboundp 'help-function-arglist))
 	   (fboundp 'function-arglist))
   (defun help-function-arglist (def &optional preserve-names)
     (cdr (car (read-from-string (downcase (function-arglist def)))))))
+
+(when (= (length (help-function-arglist 'delete-directory)) 1)
+  (defvar gnus-compat-original-delete-directory 
+    (symbol-function 'delete-directory))
+  (defun delete-directory (directory &optional recursive)
+    (if (not recursive)
+	(funcall gnus-compat-original-delete-directory directory)
+      (dolist (file (directory-files directory t))
+	(unless (member (file-name-nondirectory file) '("." ".."))
+	  (if (file-directory-p file)
+	      (delete-directory file t)
+	    (delete-file file))))
+      (delete-directory directory))))
+
+(provide 'gnus-compat)
 
 ;; gnus-compat.el ends here
