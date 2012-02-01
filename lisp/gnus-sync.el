@@ -172,14 +172,11 @@ and `gnus-topic-alist'.  Also see `gnus-variable-list'."
 (defun gnus-sync-lesync-call (url method headers &optional kvdata)
   "Make an access request to URL using KVDATA and METHOD.
 KVDATA must be an alist."
-  ;;(debug (json-encode kvdata))
-  ;; (when (string-match-p "gmane.emacs.devel" url) (debug kvdata))
   (flet ((json-alist-p (list) (gnus-sync-json-alist-p list))) ; temp patch
     (let ((url-request-method method)
           (url-request-extra-headers headers)
           (url-request-data (if kvdata (json-encode kvdata) nil)))
       (with-current-buffer (url-retrieve-synchronously url)
-        ;;(debug (buffer-string))
         (let ((data (gnus-sync-lesync-parse)))
           (gnus-message 12 "gnus-sync-lesync-call: %s URL %s sent %S got %S"
                         method url `((headers . ,headers) (data ,kvdata)) data)
