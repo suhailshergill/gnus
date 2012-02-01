@@ -69,7 +69,7 @@
 		"attachment"))
 	(insert (format "Content-type: %s\n" type))
 	(insert "Content-Transfer-Encoding: 8bit\n\n")
-	(insert-file-contents (expand-file-name file dir))
+	(insert-file-contents file)
 	(push
 	 (mm-make-handle (mm-copy-to-buffer)
 			 (list type)
