@@ -23,7 +23,8 @@
 ;;; Code:
 
 (defvar mm-archive-decoders
-  '(("application/ms-tnef" "tnef" "-f" "-" "-C")))
+  '(("application/ms-tnef" "tnef" "-f" "-" "-C")
+    ("application/x-tar" "tar" "xf" "-" "-C")))
 
 (defun mm-dissect-archive (handle)
   (let ((decoder (cdr (assoc (car (mm-handle-type handle))

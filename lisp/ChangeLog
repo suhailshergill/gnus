@@ -1,5 +1,7 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-archive.el (mm-archive-decoders): Add support for tar.
+
 	* gnus.el (gnus-logo-color-alist): Change the colours for Ma Gnus.
 
 	* nnmail.el (nnmail-extra-headers): Add Cc to the default.
