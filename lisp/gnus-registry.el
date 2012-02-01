@@ -265,7 +265,7 @@ the Bit Bucket."
             (append gnus-registry-track-extra
                     '(mark group keyword)))
       (when (not (equal old (oref db :tracked)))
-        (gnus-message 4 "Reindexing the Gnus registry (tracked change)")
+        (gnus-message 9 "Reindexing the Gnus registry (tracked change)")
         (registry-reindex db))))
   db)
 

@@ -1,5 +1,8 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-registry.el (gnus-registry-fixup-registry): Move the message to
+	a higher level to silence compilation.
+
 	* gnus-art.el (gnus-shr-put-image): Take and pass on a `flags'
 	parameter to allow controlling the scaling.
 
