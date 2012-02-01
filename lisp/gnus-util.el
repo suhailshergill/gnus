@@ -1927,6 +1927,19 @@ Sizes are in pixels."
                    image)))
       image)))
 
+(defun gnus-recursive-directory-files (dir)
+  "Return all regular files below DIR."
+  (let (files)
+    (dolist (file (directory-files dir t))
+      (when (and (not (member (file-name-nondirectory file) '("." "..")))
+		 (file-readable-p file))
+	(cond
+	 ((file-regular-p file)
+	  (push file files))
+	 ((file-directory-p file)
+	  (setq files (append (gnus-recursive-directory-files file) files))))))
+    files))
+
 (defun gnus-list-memq-of-list (elements list)
   "Return non-nil if any of the members of ELEMENTS are in LIST."
   (let ((found nil))
