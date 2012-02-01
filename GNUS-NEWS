@@ -14,6 +14,8 @@ For older news, see Gnus info node "New Features".
 
 ** Archives (like tar and zip files) will be automatically unpacked,
    and the files inside the packages will be displayed as MIME parts.
+
+** shr has a new command `z' that cycles through image sizes.
    
 * For older news, see Gnus info node "New Features".
 
