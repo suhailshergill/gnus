@@ -26,7 +26,7 @@
     (defun netrc-machine-user-or-password (mode authinfo-file-or-list machines
 						ports defaults))
     (defun netrc-parse (file))
-    (defun shr-put-image (data alt))
+    (defun shr-put-image (data alt &optional flags))
     (maybe-fbind
      '(Info-index
        Info-index-next Info-menu bbdb-complete-name bookmark-default-handler
@@ -52,7 +52,7 @@
 					      ports defaults))
   (defun netrc-parse (file))
   (defun split-line (&optional arg))
-  (defun shr-put-image (data alt))
+  (defun shr-put-image (data alt &optional flags))
   (eval-after-load "rmail"
     '(defun rmail-toggle-header (&optional arg)))
   (maybe-fbind
