@@ -5323,9 +5323,8 @@ Compressed files like .gz and .bz2 are decompressed."
 		(or (cdr (assq arg
 			       gnus-summary-show-article-charset-alist))
 		    (mm-read-coding-system "Charset: "))))
-	 (t
-	  (if (mm-handle-undisplayer handle)
-	      (mm-remove-part handle))))
+	 ((mm-handle-undisplayer handle)
+	  (mm-remove-part handle)))
 	(forward-line 2)
         (mm-display-inline handle)
 	(goto-char b)))))
