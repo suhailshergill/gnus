@@ -42,38 +42,32 @@
 		   nil (append (cdr decoder) (list dir))))
 	  `("multipart/mixed"
 	    ,handle
-	    ,@(mm-archive-list-files dir)))
-      (dolist (file (directory-files dir))
-	(unless (member file '("." ".."))
-	  (ignore-errors
-	    (delete-file (expand-file-name file dir)))))
-      (ignore-errors
-	(delete-directory dir)))))
+	    ,@(mm-archive-list-files (gnus-recursive-directory-files dir))))
+      (delete-directory dir t))))
 
-(defun mm-archive-list-files (dir)
+(defun mm-archive-list-files (files)
   (let ((handles nil)
 	type disposition)
-    (dolist (file (directory-files dir))
-      (unless (member file '("." ".."))
-	(with-temp-buffer
-	  (when (string-match "\\.\\([^.]+\\)$" file)
-	    (setq type (mailcap-extension-to-mime (match-string 1 file))))
-	  (unless type
-	    (setq type "application/octet-stream"))
-	  (setq disposition
-		(if (string-match "^image/\\|^text/" type)
-		    "inline"
-		  "attachment"))
-	  (insert (format "Content-type: %s\n" type))
-	  (insert "Content-Transfer-Encoding: 8bit\n\n")
-	  (insert-file-contents (expand-file-name file dir))
-	  (push
-	   (mm-make-handle (mm-copy-to-buffer)
-			   (list type)
-			   '8bit nil
-			   `(,disposition (filename . ,file))
-			   nil nil nil)
-	   handles))))
+    (dolist (file files)
+      (with-temp-buffer
+	(when (string-match "\\.\\([^.]+\\)$" file)
+	  (setq type (mailcap-extension-to-mime (match-string 1 file))))
+	(unless type
+	  (setq type "application/octet-stream"))
+	(setq disposition
+	      (if (string-match "^image/\\|^text/" type)
+		  "inline"
+		"attachment"))
+	(insert (format "Content-type: %s\n" type))
+	(insert "Content-Transfer-Encoding: 8bit\n\n")
+	(insert-file-contents (expand-file-name file dir))
+	(push
+	 (mm-make-handle (mm-copy-to-buffer)
+			 (list type)
+			 '8bit nil
+			 `(,disposition (filename . ,file))
+			 nil nil nil)
+	 handles)))
     handles))
 
 (provide 'mm-archive)

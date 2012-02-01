@@ -1,5 +1,8 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-archive.el (mm-dissect-archive): Use it to get all file names.
+	Use recursive deletion.
+
 	* gnus-util.el (gnus-recursive-directory-files): New function.
 
 	* mm-archive.el (mm-archive-list-files): Inline text and image parts.
