@@ -1,5 +1,9 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-compat): Require it.
+
+	* gnus-compat.el: New file.
+
 	* gnus-start.el (gnus-clean-old-newsrc): New function.
 	(gnus-read-newsrc-file): Use it.
 

@@ -36,6 +36,7 @@
 (require 'wid-edit)
 (require 'mm-util)
 (require 'nnheader)
+(require 'gnus-compat)
 
 ;; These are defined afterwards with gnus-define-group-parameter
 (defvar gnus-ham-process-destinations)
