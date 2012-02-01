@@ -6193,7 +6193,7 @@ Provided for backwards compatibility."
 	     (not gnus-inhibit-hiding))
     (gnus-article-hide-headers)))
 
-(declare-function shr-put-image "shr" (data alt))
+(declare-function shr-put-image "shr" (data alt &optional flags))
 
 (defun gnus-shr-put-image (data alt &optional flags)
   "Put image DATA with a string ALT.  Enable image to be deleted."
