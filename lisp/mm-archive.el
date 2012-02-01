@@ -24,6 +24,7 @@
 
 (defvar mm-archive-decoders
   '(("application/ms-tnef" "tnef" "-f" "-" "-C")
+    ("application/zip" "unzip" "-j" "-x" "%f" "-d")
     ("application/x-gtar-compressed" "tar" "xzf" "-" "-C")
     ("application/x-tar" "tar" "xf" "-" "-C")))
 
@@ -37,9 +38,17 @@
 	(progn
 	  (mm-with-unibyte-buffer
 	    (mm-insert-part handle)
-	    (apply 'call-process-region (point-min) (point-max) (car decoder)
-		   nil (get-buffer-create "*tnef*")
-		   nil (append (cdr decoder) (list dir))))
+	    (if (member "%f" decoder)
+		(let ((file (expand-file-name "mail.zip" dir)))
+		  (write-region (point-min) (point-max) file nil 'silent)
+		  (setq decoder (copy-sequence decoder))
+		  (setcar (member "%f" decoder) file)
+		  (apply 'call-process (car decoder) nil nil nil
+			 (append (cdr decoder) (list dir)))
+		  (delete-file file))
+	      (apply 'call-process-region (point-min) (point-max) (car decoder)
+		     nil (get-buffer-create "*tnef*")
+		     nil (append (cdr decoder) (list dir)))))
 	  `("multipart/mixed"
 	    ,handle
 	    ,@(mm-archive-list-files (gnus-recursive-directory-files dir))))

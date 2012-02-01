@@ -2,6 +2,7 @@
 
 	* mm-archive.el (mm-dissect-archive): Use it to get all file names.
 	Use recursive deletion.
+	(mm-dissect-archive): Add support for zip files.
 
 	* gnus-util.el (gnus-recursive-directory-files): New function.
 
