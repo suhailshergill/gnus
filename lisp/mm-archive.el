@@ -24,6 +24,7 @@
 
 (defvar mm-archive-decoders
   '(("application/ms-tnef" "tnef" "-f" "-" "-C")
+    ("application/x-gtar-compressed" "tar" "xzf" "-" "-C")
     ("application/x-tar" "tar" "xf" "-" "-C")))
 
 (defun mm-dissect-archive (handle)

@@ -1,6 +1,7 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-archive.el (mm-archive-list-files): Inline text and image parts.
+	(mm-archive-decoders): Add tgz support.
 
 	* mm-decode.el (mm-shr): Make sure that the HTML ends with a newline.
 	Otherwise inserting text into the Gnus buffer can look odd.
