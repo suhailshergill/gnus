@@ -118,6 +118,7 @@ cid: URL as the argument.")
   (let ((map (make-sparse-keymap)))
     (define-key map "a" 'shr-show-alt-text)
     (define-key map "i" 'shr-browse-image)
+    (define-key map "z" 'shr-zoom-image)
     (define-key map "I" 'shr-insert-image)
     (define-key map "u" 'shr-copy-url)
     (define-key map "v" 'shr-browse-url)
@@ -212,6 +213,41 @@ the URL of the image to the kill buffer instead."
       (message "Inserting %s..." url)
       (url-retrieve url 'shr-image-fetched
 		    (list (current-buffer) (1- (point)) (point-marker))
+		    t))))
+
+(defun shr-zoom-image ()
+  "Toggle the image size.
+The size will be rotated between the default size, the original
+size, and full-buffer size."
+  (interactive)
+  (let ((url (get-text-property (point) 'image-url))
+	(size (get-text-property (point) 'image-size))
+	(buffer-read-only nil))
+    (if (not url)
+	(message "No image under point")
+      ;; Delete the old picture.
+      (beginning-of-line)
+      (while (get-text-property (point) 'display)
+	(forward-line -1))
+      (forward-line 1)
+      (let ((start (point)))
+	(while (get-text-property (point) 'display)
+	  (forward-line 1))
+	(forward-line -1)
+	(delete-region start (point))
+	(forward-char 1)
+	(put-text-property start (point) 'display nil))
+      (message "Inserting %s..." url)
+      (url-retrieve url 'shr-image-fetched
+		    (list (current-buffer) (1- (point)) (point-marker)
+			  (list (cons 'size
+				      (cond ((or (eq size 'default)
+						 (null size))
+					     'original)
+					    ((eq size 'original)
+					     'full)
+					    ((eq size 'full)
+					     'default)))))
 		    t))))
 
 ;;; Utility functions.
@@ -501,7 +537,7 @@ the URL of the image to the kill buffer instead."
 		    (expand-file-name (file-name-nondirectory url)
 				      directory)))))
 
-(defun shr-image-fetched (status buffer start end)
+(defun shr-image-fetched (status buffer start end &optional flags)
   (when (and (buffer-name buffer)
 	     (not (plist-get status :error)))
     (url-store-in-cache (current-buffer))
@@ -514,27 +550,41 @@ the URL of the image to the kill buffer instead."
 		  (inhibit-read-only t))
 	      (delete-region start end)
 	      (goto-char start)
-	      (funcall shr-put-image-function data alt)))))))
+	      (funcall shr-put-image-function data alt flags)))))))
   (kill-buffer (current-buffer)))
 
-(defun shr-put-image (data alt)
+(defun shr-put-image (data alt &optional flags)
   "Put image DATA with a string ALT.  Return image."
   (if (display-graphic-p)
-      (let ((image (ignore-errors
-                     (shr-rescale-image data))))
+      (let* ((size (cdr (assq 'size flags)))
+	     (start (point))
+	     (image (cond
+		     ((eq size 'original)
+		      (create-image data nil t :ascent 100))
+		     ((eq size 'full)
+		      (ignore-errors
+			(shr-rescale-image data t)))
+		     (t
+		      (ignore-errors
+			(shr-rescale-image data))))))
         (when image
 	  ;; When inserting big-ish pictures, put them at the
 	  ;; beginning of the line.
 	  (when (and (> (current-column) 0)
 		     (> (car (image-size image t)) 400))
 	    (insert "\n"))
-	  (insert-image image (or alt "*"))
+	  (if (eq size 'original)
+	      (insert-sliced-image image (or alt "*") nil 20 1)
+	    (insert-image image (or alt "*")))
+	  (put-text-property start (point) 'image-size size)
 	  (when (image-animated-p image)
 	    (image-animate image nil 60)))
 	image)
     (insert alt)))
 
-(defun shr-rescale-image (data)
+(defun shr-rescale-image (data &optional force)
+  "Rescale DATA, if too big, to fit the current buffer.
+If FORCE, rescale the image anyway."
   (let ((image (create-image data nil t :ascent 100)))
     (if (or (not (fboundp 'imagemagick-types))
 	    (not (get-buffer-window (current-buffer))))
@@ -549,7 +599,8 @@ the URL of the image to the kill buffer instead."
 	     (window-height (truncate (* shr-max-image-proportion
 					 (- (nth 3 edges) (nth 1 edges)))))
 	     scaled-image)
-	(when (> height window-height)
+	(when (or force
+		  (> height window-height))
 	  (setq image (or (create-image data 'imagemagick t
 					:height window-height
 					:ascent 100)

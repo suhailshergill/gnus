@@ -6195,10 +6195,11 @@ Provided for backwards compatibility."
 
 (declare-function shr-put-image "shr" (data alt))
 
-(defun gnus-shr-put-image (data alt)
+(defun gnus-shr-put-image (data alt &optional flags)
   "Put image DATA with a string ALT.  Enable image to be deleted."
   (let ((image (shr-put-image data (propertize (or alt "*")
-					       'gnus-image-category 'shr))))
+					       'gnus-image-category 'shr)
+			      flags)))
     (when image
       (gnus-add-image 'shr image))))
 

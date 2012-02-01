@@ -1,5 +1,11 @@
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (gnus-shr-put-image): Take and pass on a `flags'
+	parameter to allow controlling the scaling.
+
+	* shr.el (shr-zoom-image): New command and keystroke.
+	(shr-put-image): Take a `size' flag to say how to scale the image.
+
 	* gnus-compat.el: Redefine `delete-directory' to provide recursive
 	deletion unless already defined.
 
