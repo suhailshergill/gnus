@@ -29,7 +29,6 @@
 
 (require 'mail-parse)
 (require 'mm-bodies)
-(require 'mm-archive)
 (eval-when-compile (require 'cl)
 		   (require 'term))
 
@@ -654,14 +653,8 @@ Postpone undisplaying of viewers for types in
 	    (if (equal "text/plain" (car ctl))
 		(assoc 'format ctl)
 	      t))
-    (let ((handle
-	   (mm-make-handle
-	    (mm-copy-to-buffer) ctl cte nil cdl description nil id))
-	  (decoder (assoc (car ctl) mm-archive-decoders)))
-      (if (and decoder
-	       (executable-find (cadr decoder)))
-	  (mm-dissect-archive handle)
-	handle))))
+    (mm-make-handle
+     (mm-copy-to-buffer) ctl cte nil cdl description nil id)))
 
 (defun mm-dissect-multipart (ctl from)
   (goto-char (point-min))

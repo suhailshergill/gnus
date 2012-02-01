@@ -56,7 +56,7 @@
 
 (autoload 'gnus-group-make-nnir-group "nnir")
 
-(defcustom gnus-no-groups-message "No news is good news"
+(defcustom gnus-no-groups-message "No Gnus is good news"
   "*Message displayed by Gnus when no groups are available."
   :group 'gnus-start
   :type 'string)

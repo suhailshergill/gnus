@@ -1,7 +1,3 @@
-2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* gnus.texi (Key Index): Change encoding to utf-8.
-
 2012-01-30  Philipp Haselwarter  <philipp.haselwarter@gmx.de>  (tiny change)
 
 	* gnus.texi (Agent Basics): Fix outdated description of

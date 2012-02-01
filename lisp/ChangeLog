@@ -1,29 +1,11 @@
-2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* mm-decode.el (mm-dissect-singlepart): Check that the decoder exists.
-
-	* mm-archive.el: New file.
-
-	* mm-decode.el (mm-dissect-singlepart): Use it to decode ms-tnef files.
-
-	* mm-util.el (mm-find-buffer-file-coding-system): Comment fix.
-
-	* message.el (message-goto-*): Make all the `message-goto-*' commands
-	push the mark before moving point.  This makes it easier to go back to
-	where you came from after editing whatever you jumped to.
-
-2012-01-31  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
-
-	* gnus.el: Ma Gnus v0.1 is released.
-
 2012-01-31  Jim Meyering  <jim@meyering.net>
 
 	* gnus-agent.el (gnus-agent-expire-unagentized-dirs):
         Correct a comment (insert "not") and hide nominally-doubled "to".
 
-2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
+2012-01-31  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
 
-	* gnus.el (gnus-version): Change name to "Ma Gnus".
+	* gnus.el: No Gnus v0.19 is released.
 
 2012-01-30  Philipp Haselwarter  <philipp.haselwarter@gmx.de>  (tiny change)
 
