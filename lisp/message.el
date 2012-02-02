@@ -4707,7 +4707,20 @@ If you always want Gnus to send messages in one piece, set
   "Send the current buffer to `message-send-mail-function'.
 Or, if there's a header that specifies a different method, use
 that instead."
-  (funcall message-send-mail-function))
+  (let ((method (message-field-value "X-Message-SMTP-Method")))
+    (if (not method)
+	(funcall message-send-mail-function)
+      (message-remove-header "X-Message-SMTP-Method")
+      (setq method (split-string method))
+      (cond
+       ((equal (car method) "sendmail")
+	(message-send-mail-with-sendmail))
+       ((equal (car method) "smtp")
+	(let ((smtpmail-smtp-server (nth 1 method))
+	      (smtpmail-smtp-service (nth 2 method)))
+	  (message-smtpmail-send-it)))
+       (t
+	(error "Unknown method %s" method))))))
 
 (defun message-send-mail-with-sendmail ()
   "Send off the prepared buffer with sendmail."

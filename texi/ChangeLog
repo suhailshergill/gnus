@@ -1,3 +1,7 @@
+2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* message.texi (Mail Variables): Document X-Message-SMTP-Method.
+
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Key Index): Change encoding to utf-8.

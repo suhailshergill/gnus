@@ -20,6 +20,11 @@ For older news, see Gnus info node "New Features".
 ** `backtab' in the summary buffer now selects the previous link in
    the article buffer.
 
+** Using the "X-Message-SMTP-Method" header in Message buffers now
+   allows specifying how messages are to be sent.  For example:
+
+   X-Message-SMTP-Method: smtp smtp.fsf.org 587
+   
 * For older news, see Gnus info node "New Features".
 
 ----------------------------------------------------------------------

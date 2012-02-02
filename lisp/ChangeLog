@@ -1,6 +1,8 @@
 2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-multi-smtp-send-mail): New function.
+	(message-multi-smtp-send-mail): Respect the X-Message-SMTP-Method
+	header to implement multi-SMTP functionality.
 
 	* gnus-agent.el (gnus-agent-send-mail-function): Removed.
 	(gnus-agentize): Don't set it.
