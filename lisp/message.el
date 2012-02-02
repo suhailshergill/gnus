@@ -4535,8 +4535,9 @@ This function could be useful in `message-setup-hook'."
 	      (end-of-line)
 	      (insert (format " (%d/%d)" n total))
 	      (widen)
-              (funcall (or message-send-mail-real-function
-                           message-send-mail-function)))
+	      (if message-send-mail-real-function
+		  (funcall message-send-mail-real-function)
+		(message-multi-smtp-send-mail)))
 	    (setq n (+ n 1))
 	    (setq p (pop plist))
 	    (erase-buffer)))
@@ -4690,8 +4691,9 @@ If you always want Gnus to send messages in one piece, set
 ")))
 	      (progn
 		(message "Sending via mail...")
-		(funcall (or message-send-mail-real-function
-			     message-send-mail-function)))
+		(if message-send-mail-real-function
+		    (funcall message-send-mail-real-function)
+		  (message-multi-smtp-send-mail)))
 	    (message-send-mail-partially))
 	  (setq options message-options))
       (kill-buffer tembuf))
@@ -4700,6 +4702,12 @@ If you always want Gnus to send messages in one piece, set
     (push 'mail message-sent-message-via)))
 
 (defvar sendmail-program)
+
+(defun message-multi-smtp-send-mail ()
+  "Send the current buffer to `message-send-mail-function'.
+Or, if there's a header that specifies a different method, use
+that instead."
+  (funcall message-send-mail-function))
 
 (defun message-send-mail-with-sendmail ()
   "Send off the prepared buffer with sendmail."

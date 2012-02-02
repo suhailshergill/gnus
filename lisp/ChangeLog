@@ -1,5 +1,11 @@
 2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* message.el (message-multi-smtp-send-mail): New function.
+
+	* gnus-agent.el (gnus-agent-send-mail-function): Removed.
+	(gnus-agentize): Don't set it.
+	(gnus-agent-send-mail): Don't use it.
+
 	* gnus-sum.el (gnus-summary-widget-backward): New function and
 	keystroke.
 
