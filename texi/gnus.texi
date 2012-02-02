@@ -3028,6 +3028,7 @@ like this in the group parameters:
 @example
 (posting-style
   (name "Funky Name")
+  ("X-Message-SMTP-Method" "smtp smtp.example.org 587")
   ("X-My-Header" "Funky Value")
   (signature "Funky Signature"))
 @end example
@@ -12801,6 +12802,7 @@ So here's a new example:
          (signature-file "~/.work-signature")
          (address "user@@bar.foo")
          (body "You are fired.\n\nSincerely, your boss.")
+         ("X-Message-SMTP-Method" "smtp smtp.example.org 587")
          (organization "Important Work, Inc"))
         ("nnml:.*"
          (From (with-current-buffer gnus-article-buffer
@@ -12814,6 +12816,13 @@ The @samp{nnml:.*} rule means that you use the @code{To} address as the
 if you fill many roles.
 You may also use @code{message-alternative-emails} instead.
 @xref{Message Headers, ,Message Headers, message, Message Manual}.
+
+Of particular interest in the ``work-mail'' style is the
+@samp{X-Message-SMTP-Method} header.  It specifies how to send the
+outgoing email.  You may want to sent certain emails through certain
+@acronym{SMTP} servers due to company policies, for instance.
+@xref{Mail Variables, ,Message Variables, message, Message Manual}.
+
 
 @node Drafts
 @section Drafts

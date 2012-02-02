@@ -1,5 +1,7 @@
 2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.texi (Posting Styles): Mention X-Message-SMTP-Method.
+
 	* message.texi (Mail Variables): Document X-Message-SMTP-Method.
 
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
