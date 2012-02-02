@@ -7586,7 +7586,7 @@ is for the internal use."
   (message "Resending message to %s..." address)
   (save-excursion
     (let ((cur (current-buffer))
-	  beg)
+	  gcc beg)
       ;; We first set up a normal mail buffer.
       (unless (message-mail-user-agent)
 	(set-buffer (get-buffer-create " *message resend*"))
@@ -7599,6 +7599,8 @@ is for the internal use."
       ;; Insert our usual headers.
       (message-generate-headers '(From Date To Message-ID))
       (message-narrow-to-headers)
+      (when (setq gcc (mail-fetch-field "gcc" nil t))
+	(message-remove-header "gcc"))
       ;; Remove X-Draft-From header etc.
       (message-remove-header message-ignored-mail-headers t)
       ;; Rename them all to "Resent-*".
@@ -7640,6 +7642,10 @@ is for the internal use."
 	    message-generate-hashcash
 	    rfc2047-encode-encoded-words)
 	(message-send-mail))
+      (when gcc
+	(message-goto-eoh)
+	(insert "Gcc: " gcc "\n"))
+      (run-hooks 'message-sent-hook)
       (kill-buffer (current-buffer)))
     (message "Resending message to %s...done" address)))
 

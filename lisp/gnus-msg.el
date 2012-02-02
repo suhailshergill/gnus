@@ -163,6 +163,22 @@ if nil, attach files as normal parts."
 		 (const all :tag "Any")
 		 (string :tag "Regexp")))
 
+(defcustom gnus-gcc-self-resent-messages 'no-gcc-self
+  "Like `gcc-self' group parameter, only for unmodified resent messages.
+Applied to messages sent by `gnus-summary-resend-message'.  Non-nil
+value of this variable takes precedence over any existing Gcc header.
+
+If this is `none', no Gcc copy will be made.  If this is t, messages
+resent will be Gcc'd to the current group.  If this is a string, it
+specifies a group to which resent messages will be Gcc'd.  If this is
+nil, Gcc will be done according to existing Gcc header(s), if any.
+If this is `no-gcc-self', resent messages will be Gcc'd to groups that
+existing Gcc header specifies, except for the current group."
+  :version "24.2"
+  :group 'gnus-message
+  :type '(choice (const none) (const t) string (const nil)
+		 (const no-gcc-self)))
+
 (gnus-define-group-parameter
  posting-charset-alist
  :type list
@@ -1264,6 +1280,43 @@ For the \"inline\" alternatives, also see the variable
 	    (set-buffer gnus-original-article-buffer)
 	    (message-forward post)))))))
 
+(defun gnus-summary-resend-message-insert-gcc ()
+  "Insert Gcc header according to `gnus-gcc-self-resent-messages'."
+  (gnus-inews-insert-gcc)
+  (let ((gcc (mapcar
+	      (lambda (group)
+		(mm-encode-coding-string
+		 group
+		 (gnus-group-name-charset (gnus-inews-group-method group)
+					  group)))
+	      (message-unquote-tokens
+	       (message-tokenize-header (mail-fetch-field "gcc" nil t)
+					" ,")))))
+    (message-remove-header "gcc")
+    (when gcc
+      (goto-char (point-max))
+      (cond ((eq gnus-gcc-self-resent-messages  'none))
+	    ((eq gnus-gcc-self-resent-messages t)
+	     (insert "Gcc: \"" gnus-newsgroup-name "\"\n"))
+	    ((stringp gnus-gcc-self-resent-messages)
+	     (insert "Gcc: "
+		     (mm-encode-coding-string
+		      (if (string-match " " gnus-gcc-self-resent-messages)
+			  (concat "\"" gnus-gcc-self-resent-messages "\"")
+			gnus-gcc-self-resent-messages)
+		      (gnus-group-name-charset
+		       (gnus-inews-group-method gnus-gcc-self-resent-messages)
+		       gnus-gcc-self-resent-messages))
+		     "\n"))
+	    ((null gnus-gcc-self-resent-messages)
+	     (insert "Gcc: " (mapconcat 'identity gcc ", ") "\n"))
+	    ((eq gnus-gcc-self-resent-messages 'no-gcc-self)
+	     (when (setq gcc (delete
+			      gnus-newsgroup-name
+			      (delete (concat "\"" gnus-newsgroup-name "\"")
+				      gcc)))
+	       (insert "Gcc: " (mapconcat 'identity gcc ", ") "\n")))))))
+
 (defun gnus-summary-resend-message (address n)
   "Resend the current article to ADDRESS."
   (interactive
@@ -1277,12 +1330,20 @@ For the \"inline\" alternatives, also see the variable
 	    (with-current-buffer gnus-original-article-buffer
 	      (nnmail-fetch-field "to"))))
 	 current-prefix-arg))
-  (dolist (article (gnus-summary-work-articles n))
-    (gnus-summary-select-article nil nil nil article)
-    (with-current-buffer gnus-original-article-buffer
-      (let ((gnus-gcc-externalize-attachments nil))
-	(message-resend address)))
-    (gnus-summary-mark-article-as-forwarded article)))
+  (let ((message-header-setup-hook (copy-sequence message-header-setup-hook))
+	(message-sent-hook (copy-sequence message-sent-hook)))
+    (add-hook 'message-header-setup-hook
+	      'gnus-summary-resend-message-insert-gcc)
+    (add-hook 'message-sent-hook (if gnus-agent
+				     'gnus-agent-possibly-do-gcc
+				   'gnus-inews-do-gcc))
+    (dolist (article (gnus-summary-work-articles n))
+      (gnus-summary-select-article nil nil nil article)
+      (with-current-buffer gnus-original-article-buffer
+	(let ((gnus-gcc-externalize-attachments nil)
+	      (message-inhibit-body-encoding t))
+	  (message-resend address)))
+      (gnus-summary-mark-article-as-forwarded article))))
 
 ;; From: Matthieu Moy <Matthieu.Moy@imag.fr>
 (defun gnus-summary-resend-message-edit ()
@@ -1624,12 +1685,16 @@ this is a reply."
 	      (when (and group-art
 			 ;; FIXME: Should gcc-mark-as-read work when
 			 ;; Gnus is not running?
-			 (gnus-alive-p)
-			 (or gnus-gcc-mark-as-read
-			     (and
-			      (boundp 'gnus-inews-mark-gcc-as-read)
-			      (symbol-value 'gnus-inews-mark-gcc-as-read))))
-		(gnus-group-mark-article-read group (cdr group-art)))
+			 (gnus-alive-p))
+		(if (or gnus-gcc-mark-as-read
+			(and (boundp 'gnus-inews-mark-gcc-as-read)
+			     (symbol-value 'gnus-inews-mark-gcc-as-read)))
+		    (gnus-group-mark-article-read group (cdr group-art))
+		  (with-current-buffer gnus-group-buffer
+		    (let ((gnus-group-marked (list group))
+			  (gnus-get-new-news-hook nil)
+			  (inhibit-read-only t))
+		      (gnus-group-get-new-news-this-group nil t)))))
 	      (setq options message-options)
 	      (with-current-buffer cur (setq message-options options))
 	      (kill-buffer (current-buffer)))))))))

@@ -1,3 +1,14 @@
+2012-02-02  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-msg.el (gnus-gcc-self-resent-messages): New user option.
+	(gnus-summary-resend-message-insert-gcc): New function.
+	(gnus-summary-resend-message): Modify message-header-setup-hook and
+	message-sent-hook to make it work for Gcc.
+	(gnus-inews-do-gcc): Update the number of unread articles of groups
+	that messages are Gcc'd to.
+
+	* message.el (message-resend): Run message-sent-hook to do Gcc.
+
 2012-02-01  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* lpath.el: Fix an XEmacs compilation warning.
