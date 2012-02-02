@@ -36,12 +36,18 @@
 (when (and (not (fboundp 'help-function-arglist))
 	   (fboundp 'function-arglist))
   (defun help-function-arglist (def &optional preserve-names)
+    "Return a formal argument list for the function DEF.
+PRESERVE-NAMES is ignored."
     (cdr (car (read-from-string (downcase (function-arglist def)))))))
 
 (when (= (length (help-function-arglist 'delete-directory)) 1)
   (defvar gnus-compat-original-delete-directory
     (symbol-function 'delete-directory))
-  (defun delete-directory (directory &optional recursive)
+  (defun delete-directory (directory &optional recursive trash)
+    "Delete the directory named DIRECTORY.  Does not follow symlinks.
+If RECURSIVE is non-nil, all files in DIRECTORY are deleted as well.
+TRASH is ignored."
+    (interactive "DDirectory: ")
     (if (not recursive)
 	(funcall gnus-compat-original-delete-directory directory)
       (dolist (file (directory-files directory t))

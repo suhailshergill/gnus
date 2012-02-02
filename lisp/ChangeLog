@@ -1,5 +1,7 @@
 2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-compat.el: More the compat functions more compatible.
+
 	* shr.el (shr-put-image): Remove underlines from sliced images.
 	(shr-zoom-image): Compute the region to be replaced more correctly.
 
