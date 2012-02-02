@@ -1,5 +1,8 @@
 2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-widget-backward): New function and
+	keystroke.
+
 	* gnus-compat.el: More the compat functions more compatible.
 
 	* shr.el (shr-put-image): Remove underlines from sliced images.

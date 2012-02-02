@@ -16,7 +16,10 @@ For older news, see Gnus info node "New Features".
    and the files inside the packages will be displayed as MIME parts.
 
 ** shr has a new command `z' that cycles through image sizes.
-   
+
+** `backtab' in the summary buffer now selects the previous link in
+   the article buffer.
+
 * For older news, see Gnus info node "New Features".
 
 ----------------------------------------------------------------------
