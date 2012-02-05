@@ -1639,7 +1639,7 @@ textual parts.")
   (let ((open-result t))
     (when (and server
 	       (not (nnimap-server-opened server)))
-      (setq open-result (nnimap-open-server server no-reconnect)))
+      (setq open-result (nnimap-open-server server nil no-reconnect)))
     (cond
      ((not open-result)
       nil)
