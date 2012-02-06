@@ -4717,7 +4717,8 @@ that instead."
 	(message-send-mail-with-sendmail))
        ((equal (car method) "smtp")
 	(let ((smtpmail-smtp-server (nth 1 method))
-	      (smtpmail-smtp-service (nth 2 method)))
+	      (smtpmail-smtp-service (nth 2 method))
+	      (smtpmail-smtp-user (or (nth 3 method) smtpmail-smtp-user)))
 	  (message-smtpmail-send-it)))
        (t
 	(error "Unknown method %s" method))))))

@@ -1,3 +1,8 @@
+2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* message.texi (Mail Variables): Mention the optional user parameter
+	for X-Message-SMTP-Method.
+
 2012-02-02  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Posting Styles): Mention X-Message-SMTP-Method.
