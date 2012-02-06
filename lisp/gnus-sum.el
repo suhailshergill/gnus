@@ -2082,7 +2082,7 @@ increase the score of each group you read."
   "g" gnus-summary-show-article
   "s" gnus-summary-isearch-article
   [tab] gnus-summary-widget-forward
-  [backtab] gnus-summary-widget-forward
+  [backtab] gnus-summary-widget-backward
   "P" gnus-summary-print-article
   "S" gnus-sticky-article
   "M" gnus-mailing-list-insinuate
