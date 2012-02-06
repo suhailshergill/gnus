@@ -100,16 +100,6 @@
 
 	* gnus.el: Ma Gnus v0.1 is released.
 
-2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* gnus-sum.el (gnus-handle-ephemeral-exit): Allow exiting from Gnus
-	when just reading a single group from "without" Gnus.
-
-2012-02-06  Chong Yidong  <cyd@gnu.org>
-
-	* gnus-sum.el (gnus-summary-show-thread):
-	next-single-char-property-change never returns nil (Bug#8657).
-
 2012-02-05  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-open-server): Allow switching the nnoo server
