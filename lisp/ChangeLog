@@ -1,6 +1,8 @@
 2012-02-06  Katsumi Yamaoka  <yamaoka@jpl.org>
 
-	* gnus-sum.el (gnus-summary-article-map): Fix typo.
+	* gnus-sum.el (gnus-summary-show-thread):
+	next-single-char-property-change may return nil in XEmacs.
+	(gnus-summary-article-map): Fix typo.
 
 2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
