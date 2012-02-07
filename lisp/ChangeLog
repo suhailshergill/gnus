@@ -1,3 +1,8 @@
+2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-compat.el: Make `help-function-arglist' be compatible on Emacs
+	23.1.
+
 2012-02-07  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-sum.el (gnus-summary-show-thread): Revert last two changes.

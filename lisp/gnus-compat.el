@@ -33,12 +33,31 @@
 (ignore-errors
   (require 'help-fns))
 
+;; XEmacs doesn't have this function.
 (when (and (not (fboundp 'help-function-arglist))
 	   (fboundp 'function-arglist))
   (defun help-function-arglist (def &optional preserve-names)
     "Return a formal argument list for the function DEF.
 PRESERVE-NAMES is ignored."
     (cdr (car (read-from-string (downcase (function-arglist def)))))))
+
+;; Modify this function on Emacs 23.1 and earlier to always return the
+;; right answer.
+(when (and (fboundp 'help-function-arglist)
+	   (eq (help-function-arglist 'car) t))
+  (defvar gnus-compat-original-help-function-arglist
+    (symbol-function 'help-function-arglist))
+  (defun help-function-arglist (def &optional preserve-names)
+    "Return a formal argument list for the function DEF.
+PRESERVE-NAMES is ignored."
+    (let ((orig (funcall gnus-compat-original-help-function-arglist def)))
+      (if (not (eq orig t))
+	  orig
+	;; Built-in subrs have the arglist hidden in the doc string.
+	(let ((doc (documentation def)))
+	  (when (and doc
+		     (string-match "\n\n\\((fn\\( .*\\)?)\\)\\'" doc))
+	    (cdr (car (read-from-string (downcase (match-string 1 doc)))))))))))
 
 (when (= (length (help-function-arglist 'delete-directory)) 1)
   (defvar gnus-compat-original-delete-directory
