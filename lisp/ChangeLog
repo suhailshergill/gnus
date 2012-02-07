@@ -19,6 +19,16 @@
 
 2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-remove-trailing-whitespace): Don't strip whitespace from
+	lines that are narrower than the window width.  Otherwise background
+	"blocks" will look less readable.
+
+2012-02-07  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-sum.el (gnus-summary-show-thread): Revert last two changes.
+
+2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
+
 	* nnimap.el (nnimap-transform-headers): Remove unused variable.
 	(nnimap-transform-headers): Fix parsing BODYSTRUCTURE elements that
 	have newlines within the strings, and where the UID comes after the
