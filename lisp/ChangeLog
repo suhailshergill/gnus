@@ -1,3 +1,8 @@
+2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-insert-document): Add doc string.
+	(shr-visit-file): Ditto.
+
 2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-sum.el (gnus-summary-exit-no-update): Really deaden the summary
