@@ -16,6 +16,7 @@ contrib/gnus-mdrtn.el
 contrib/on-loginfo
 contrib/request-assign.future
 etc/Makefile
+.gitattributes
 lisp/.gitattributes
 lisp/*.elc
 lisp/*.rej
@@ -27,6 +28,7 @@ lisp/gnus-load.el
 lisp/old
 lisp/semantic.cache
 lisp/version
+texi/.gitattributes
 texi/Makefile
 texi/auth
 texi/emacs-mime
