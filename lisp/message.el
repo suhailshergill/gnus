@@ -4702,6 +4702,7 @@ If you always want Gnus to send messages in one piece, set
     (push 'mail message-sent-message-via)))
 
 (defvar sendmail-program)
+(defvar smtpmail-smtp-user)
 
 (defun message-multi-smtp-send-mail ()
   "Send the current buffer to `message-send-mail-function'.
@@ -4716,6 +4717,7 @@ that instead."
        ((equal (car method) "sendmail")
 	(message-send-mail-with-sendmail))
        ((equal (car method) "smtp")
+	(require 'smtpmail)
 	(let ((smtpmail-smtp-server (nth 1 method))
 	      (smtpmail-smtp-service (nth 2 method))
 	      (smtpmail-smtp-user (or (nth 3 method) smtpmail-smtp-user)))

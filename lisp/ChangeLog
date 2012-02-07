@@ -1,3 +1,7 @@
+2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* message.el (smtpmail-smtp-user): Silence compiler warning.
+
 2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-multi-smtp-send-mail): Also allow specifying the
