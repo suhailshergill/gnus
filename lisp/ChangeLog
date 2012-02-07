@@ -15,7 +15,12 @@
 
 2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
 
-	* shr-color.el (shr-color-set-minimum-interval): Renamed to add prefix
+	* nnimap.el (nnimap-transform-headers): Remove unused variable.
+	(nnimap-transform-headers): Fix parsing BODYSTRUCTURE elements that
+	have newlines within the strings, and where the UID comes after the
+	BODYSTRUCTURE element (bug#10537).
+
+	* shr-color.el (shr-color-set-minimum-interval): Rename to add prefix
 	(bug#10732).
 
 	* shr.el (shr-insert-document): Add doc string.
