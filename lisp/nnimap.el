@@ -189,7 +189,7 @@ textual parts.")
 
 (defun nnimap-transform-headers ()
   (goto-char (point-min))
-  (let (article bytes lines size string)
+  (let (article lines size string)
     (block nil
       (while (not (eobp))
 	(while (not (looking-at "\\* [0-9]+ FETCH.+?UID \\([0-9]+\\)"))
@@ -205,8 +205,7 @@ textual parts.")
 	  (setq string (buffer-substring (point) (+ (point) size)))
 	  (delete-region (point) (+ (point) size))
 	  (insert (format "%S" string)))
-	(setq bytes (nnimap-get-length)
-	      lines nil)
+	(setq lines nil)
 	(beginning-of-line)
 	(setq size
 	      (and (re-search-forward "RFC822.SIZE \\([0-9]+\\)"
