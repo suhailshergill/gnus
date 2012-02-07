@@ -15,6 +15,9 @@
 
 2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* shr-color.el (shr-color-set-minimum-interval): Renamed to add prefix
+	(bug#10732).
+
 	* shr.el (shr-insert-document): Add doc string.
 	(shr-visit-file): Ditto.
 	(shr-remove-trailing-whitespace): New function.
