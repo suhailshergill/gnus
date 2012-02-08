@@ -77,6 +77,7 @@ TRASH is ignored."
       (delete-directory directory))))
 
 ;; Emacs 24.0.93
+(require 'url)
 (when (= (length (help-function-arglist 'url-retrieve)) 5)
   (defvar gnus-compat-original-url-retrieve
     (symbol-function 'url-retrieve))
