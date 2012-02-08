@@ -76,6 +76,15 @@ TRASH is ignored."
 	    (delete-file file))))
       (delete-directory directory))))
 
+;; Emacs 24.0.93
+(when (= (length (help-function-arglist 'url-retrieve)) 5)
+  (defvar gnus-compat-original-url-retrieve
+    (symbol-function 'url-retrieve))
+  (defun url-retrieve (url callback &optional cbargs silent inhibit-cookies)
+    "Retrieve URL asynchronously and call CALLBACK with CBARGS when finished."
+    (funcall gnus-compat-original-url-retrieve
+	     url callback cbargs silent)))
+
 (provide 'gnus-compat)
 
 ;; gnus-compat.el ends here

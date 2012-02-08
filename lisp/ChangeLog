@@ -1,3 +1,7 @@
+2012-02-08  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-compat.el: Add a compat for the old `url-retrieve'.
+
 2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-compat.el: Make `help-function-arglist' be compatible on Emacs
