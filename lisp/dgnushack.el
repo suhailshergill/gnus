@@ -150,7 +150,8 @@
     (unless (fboundp 'url-retrieve-synchronously)
       (defalias 'url-retrieve-synchronously 'url-retrieve))
     (unless (fboundp 'url-queue-retrieve)
-      (defun url-queue-retrieve (url callback &optional cbargs silent)
+      (defun url-queue-retrieve (url callback &optional cbargs silent
+				     inhibit-cookies)
 	(url-retrieve url callback cbargs)))
     (autoload 'Info-directory "info" nil t)
     (autoload 'Info-index "info" nil t)

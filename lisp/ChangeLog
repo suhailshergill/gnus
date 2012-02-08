@@ -24,6 +24,8 @@
 
 2012-02-08  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el: Fix XEmacs compilation warning.
+
 	* shr.el: Inhibit getting and sending cookies when fetching pictures.
 
 	* gnus-html.el (gnus-html-schedule-image-fetching): Ditto.
