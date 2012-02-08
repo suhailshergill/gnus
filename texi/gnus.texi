@@ -2885,7 +2885,7 @@ composed messages will be @code{Gcc}'d to the current group.  If
 generated, if @code{(gcc-self . "string")} is present, this string will
 be inserted literally as a @code{gcc} header.  This parameter takes
 precedence over any default @code{Gcc} rules as described later
-(@pxref{Archived Messages}).
+(@pxref{Archived Messages}), with the exception for messages to resend.
 
 @strong{Caveat}: Adding @code{(gcc-self . t)} to the parameter list of
 @code{nntp} groups (or the like) isn't valid.  An @code{nntp} server
@@ -12670,6 +12670,22 @@ and matches the Gcc group name, attach files as external parts; if it is
 @code{all}, attach local files as external parts; if it is other
 non-@code{nil}, the behavior is the same as @code{all}, but it may be
 changed in the future.
+
+@item gnus-gcc-self-resent-messages
+@vindex gnus-gcc-self-resent-messages
+Like the @code{gcc-self} group parameter, applied only for unmodified
+messages that @code{gnus-summary-resend-message} (@pxref{Summary Mail
+Commands}) resends.  Non-@code{nil} value of this variable takes
+precedence over any existing @code{Gcc} header.
+
+If this is @code{none}, no @code{Gcc} copy will be made.  If this is
+@code{t}, messages resent will be @code{Gcc} copied to the current
+group.  If this is a string, it specifies a group to which resent
+messages will be @code{Gcc} copied.  If this is @code{nil}, @code{Gcc}
+will be done according to existing @code{Gcc} header(s), if any.  If
+this is @code{no-gcc-self}, that is the default, resent messages will be
+@code{Gcc} copied to groups that existing @code{Gcc} header specifies,
+except for the current group.
 
 @end table
 
