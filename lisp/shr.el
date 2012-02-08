@@ -189,7 +189,8 @@ redirects somewhere else."
 	     (when (re-search-forward ".utm_.*" nil t)
 	       (replace-match "" t t))
 	     (message "Copied %s" (buffer-string))
-	     (copy-region-as-kill (point-min) (point-max)))))))
+	     (copy-region-as-kill (point-min) (point-max)))))
+       nil t))
      ;; Copy the URL to the kill ring.
      (t
       (with-temp-buffer
@@ -232,7 +233,7 @@ the URL of the image to the kill buffer instead."
       (message "Inserting %s..." url)
       (url-retrieve url 'shr-image-fetched
 		    (list (current-buffer) (1- (point)) (point-marker))
-		    t))))
+		    t t))))
 
 (defun shr-zoom-image ()
   "Toggle the image size.
@@ -545,7 +546,8 @@ size, and full-buffer size."
     (if (not url)
 	(message "No link under point")
       (url-retrieve (shr-encode-url url)
-		    'shr-store-contents (list url directory)))))
+		    'shr-store-contents (list url directory)
+		    nil t))))
 
 (defun shr-store-contents (status url directory)
   (unless (plist-get status :error)
@@ -676,7 +678,7 @@ START, and END.  Note that START and END should be markers."
 		   (delete-region (point) end))))
 	 (url-retrieve url 'shr-image-fetched
 		       (list (current-buffer) start end)
-		       t)))))
+		       t t)))))
 
 (defun shr-heading (cont &rest types)
   (shr-ensure-paragraph)
@@ -986,13 +988,10 @@ ones, in case fg and bg are nil."
 	    (let ((file (url-cache-create-filename (shr-encode-url url))))
 	      (when (file-exists-p file)
 		(delete-file file))))
-	  (funcall
-	   (if (fboundp 'url-queue-retrieve)
-	       'url-queue-retrieve
-	     'url-retrieve)
+	  (url-queue-retrieve
 	   (shr-encode-url url) 'shr-image-fetched
 	   (list (current-buffer) start (set-marker (make-marker) (1- (point))))
-	   t)))
+	   t t)))
 	(when (zerop shr-table-depth) ;; We are not in a table.
 	  (put-text-property start (point) 'keymap shr-map)
 	  (put-text-property start (point) 'shr-alt alt)
