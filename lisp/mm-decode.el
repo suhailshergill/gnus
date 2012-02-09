@@ -945,15 +945,17 @@ external if displayed external."
 			   (condition-case nil
 			       (delete-directory (file-name-directory file))
 			     (error))
-			   (with-current-buffer outbuf
-			     (let ((buffer-read-only nil)
-				   (point (point)))
-			       (forward-line 2)
-			       (mm-insert-inline
-				handle (with-current-buffer buffer
-					 (buffer-string)))
-			       (goto-char point)))
-			   (kill-buffer buffer))
+			   (when (buffer-live-p outbuf)
+			     (with-current-buffer outbuf
+			       (let ((buffer-read-only nil)
+				     (point (point)))
+				 (forward-line 2)
+				 (mm-insert-inline
+				  handle (with-current-buffer buffer
+					   (buffer-string)))
+				 (goto-char point))))
+			   (when (buffer-live-p buffer)
+			     (kill-buffer buffer)))
 			 (message "Displaying %s...done" command)))))
 		(mm-handle-set-external-undisplayer
 		 handle (cons file buffer)))
