@@ -1,6 +1,7 @@
 2012-02-09  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-archive.el (mm-archive-dissect-and-inline): New function.
+	(mm-archive-dissect-and-inline): Fix up the undisplayer.
 
 	* gnus-compat.el: Define `timer-set-function'.
 

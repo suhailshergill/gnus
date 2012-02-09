@@ -80,8 +80,20 @@
     handles))
 
 (defun mm-archive-dissect-and-inline (handle)
-  (dolist (handle (cddr (mm-dissect-archive handle)))
-    (mm-display-inline handle)))
+  (let ((start (point-marker)))
+    (save-restriction
+      (narrow-to-region (point) (point))
+      (dolist (handle (cddr (mm-dissect-archive handle)))
+	(goto-char (point-max))
+	(mm-display-inline handle))
+      (goto-char (point-max))
+      (mm-handle-set-undisplayer
+       handle
+       `(lambda ()
+	  (let ((inhibit-read-only t)
+		(end ,(point-marker)))
+	    (remove-images ,start end)
+	    (delete-region ,start end)))))))
 
 (provide 'mm-archive)
 
