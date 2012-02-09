@@ -1,3 +1,11 @@
+2012-02-09  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-compat.el: Define `timer-set-function'.
+
+	* mm-decode.el (mm-display-external): Output the text from the command
+	in the buffer after the command finished.  This makes text-based
+	commands behave better.
+
 2012-02-08  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-compat.el: Add a compat for the old `url-retrieve'.

@@ -925,46 +925,36 @@ external if displayed external."
 				   shell-command-switch command)
 		    (set-process-sentinel
 		     (get-buffer-process buffer)
-		     (lexical-let ;; Don't use `let'.
-			 ;; Function used to remove temp file and directory.
-			 ((fn `(lambda nil
-				 ;; Don't use `ignore-errors'.
-				 (condition-case nil
-				     (delete-file ,file)
-				   (error))
-				 (condition-case nil
-				     (delete-directory
-				      ,(file-name-directory file))
-				   (error))))
-			  ;; Form uses to kill the process buffer and
-			  ;; remove the undisplayer.
-			  (fm `(progn
-				 (kill-buffer ,buffer)
-				 ,(macroexpand
-				   (list 'mm-handle-set-undisplayer
-					 (list 'quote handle)
-					 nil))))
-			  ;; Message to be issued when the process exits.
-			  (done (format "Displaying %s...done" command))
-			  ;; In particular, the timer object (which is
-			  ;; a vector in Emacs but is a list in XEmacs)
-			  ;; requires that it is lexically scoped.
-			  (timer (run-at-time 30.0 nil 'ignore)))
-		       (if (featurep 'xemacs)
-			   (lambda (process state)
-			     (when (eq 'exit (process-status process))
-			       (if (memq timer itimer-list)
-				   (set-itimer-function timer fn)
-				 (funcall fn))
-			       (ignore-errors (eval fm))
-			       (message "%s" done)))
-			 (lambda (process state)
-			   (when (eq 'exit (process-status process))
-			     (if (memq timer timer-list)
-				 (timer-set-function timer fn)
-			       (funcall fn))
-			     (ignore-errors (eval fm))
-			     (message "%s" done)))))))
+		     (lexical-let ((outbuf outbuf)
+				   (file file)
+				   (buffer buffer)
+				   (command command)
+				   (handle handle))
+		       (run-at-time
+			30.0 nil
+			(lambda ()
+			  (ignore-errors
+			    (delete-file file))
+			  (ignore-errors
+			    (delete-directory (file-name-directory file)))))
+		       (lambda (process state)
+			 (when (eq (process-status process) 'exit)
+			   (condition-case nil
+			       (delete-file file)
+			     (error))
+			   (condition-case nil
+			       (delete-directory (file-name-directory file))
+			     (error))
+			   (with-current-buffer outbuf
+			     (let ((buffer-read-only nil)
+				   (point (point)))
+			       (forward-line 2)
+			       (mm-insert-inline
+				handle (with-current-buffer buffer
+					 (buffer-string)))
+			       (goto-char point)))
+			   (kill-buffer buffer))
+			 (message "Displaying %s...done" command)))))
 		(mm-handle-set-external-undisplayer
 		 handle (cons file buffer)))
 	      (message "Displaying %s..." command))

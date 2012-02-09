@@ -86,6 +86,17 @@ TRASH is ignored."
     (funcall gnus-compat-original-url-retrieve
 	     url callback cbargs silent)))
 
+;; XEmacs
+(when (and (not (fboundp 'timer-set-function))
+	   (fboundp 'set-itimer-function))
+  (defun timer-set-function (timer function &optional args)
+    "Make TIMER call FUNCTION with optional ARGS when triggering."
+    (lexical-let ((function function)
+		  (args args))
+      (set-itimer-function timer
+			   (lambda (process status)
+			     (apply function process status args))))))
+
 (provide 'gnus-compat)
 
 ;; gnus-compat.el ends here
