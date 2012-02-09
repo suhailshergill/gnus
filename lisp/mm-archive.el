@@ -23,14 +23,14 @@
 ;;; Code:
 
 (defvar mm-archive-decoders
-  '(("application/ms-tnef" "tnef" "-f" "-" "-C")
-    ("application/zip" "unzip" "-j" "-x" "%f" "-d")
-    ("application/x-gtar-compressed" "tar" "xzf" "-" "-C")
-    ("application/x-tar" "tar" "xf" "-" "-C")))
+  '(("application/ms-tnef" t "tnef" "-f" "-" "-C")
+    ("application/zip" nil "unzip" "-j" "-x" "%f" "-d")
+    ("application/x-gtar-compressed" nil "tar" "xzf" "-" "-C")
+    ("application/x-tar" nil "tar" "xf" "-" "-C")))
 
 (defun mm-dissect-archive (handle)
-  (let ((decoder (cdr (assoc (car (mm-handle-type handle))
-			     mm-archive-decoders)))
+  (let ((decoder (cddr (assoc (car (mm-handle-type handle))
+			      mm-archive-decoders)))
 	(dir (mm-make-temp-file
 	      (expand-file-name "emm." mm-tmp-directory) 'dir)))
     (set-file-modes dir #o700)
@@ -78,6 +78,10 @@
 			 nil nil nil)
 	 handles)))
     handles))
+
+(defun mm-archive-dissect-and-inline (handle)
+  (dolist (handle (cddr (mm-dissect-archive handle)))
+    (mm-display-inline handle)))
 
 (provide 'mm-archive)
 

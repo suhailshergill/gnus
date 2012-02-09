@@ -249,6 +249,8 @@ before the external MIME handler is invoked."
     ("message/partial" mm-inline-partial identity)
     ("message/external-body" mm-inline-external-body identity)
     ("text/.*" mm-inline-text identity)
+    ("application/x-.?tar\\(-.*\\)?" mm-archive-dissect-and-inline identity)
+    ("application/zip" mm-archive-dissect-and-inline identity)
     ("audio/wav" mm-inline-audio
      (lambda (handle)
        (and (or (featurep 'nas-sound) (featurep 'native-sound))
@@ -298,6 +300,9 @@ before the external MIME handler is invoked."
     "application/pgp-signature" "application/x-pkcs7-signature"
     "application/pkcs7-signature" "application/x-pkcs7-mime"
     "application/pkcs7-mime"
+    "application/x-gtar-compressed"
+    "application/x-tar"
+    "application/zip"
     ;; Mutt still uses this even though it has already been withdrawn.
     "application/pgp")
   "List of media types that are to be displayed inline.
@@ -659,7 +664,9 @@ Postpone undisplaying of viewers for types in
 	    (mm-copy-to-buffer) ctl cte nil cdl description nil id))
 	  (decoder (assoc (car ctl) mm-archive-decoders)))
       (if (and decoder
-	       (executable-find (cadr decoder)))
+	       ;; Do automatic decoding
+	       (cadr decoder)
+	       (executable-find (caddr decoder)))
 	  (mm-dissect-archive handle)
 	handle))))
 

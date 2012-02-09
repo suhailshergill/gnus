@@ -1,5 +1,7 @@
 2012-02-09  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-archive.el (mm-archive-dissect-and-inline): New function.
+
 	* gnus-compat.el: Define `timer-set-function'.
 
 	* mm-decode.el (mm-display-external): Output the text from the command
