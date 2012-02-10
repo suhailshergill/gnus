@@ -1,3 +1,8 @@
+2012-02-09  Juanma Barranquero  <lekktu@gmail.com>
+
+	* gnus.el (gnus-method-ephemeral-p): Move after declaration of defsubst
+	`gnus-sloppily-equal-method-parameters' to avoid a warning.
+
 2012-02-09  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-archive.el (mm-archive-dissect-and-inline): New function.
