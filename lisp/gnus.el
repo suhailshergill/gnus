@@ -2620,11 +2620,11 @@ a string, be sure to use a valid format, see RFC 2616."
     (scored . score) (saved . save)
     (cached . cache) (downloadable . download)
     (unsendable . unsend) (forwarded . forward)
-    (seen . seen)
-    (unexist . unexist)))
+    (seen . seen)))
 
 (defconst gnus-article-special-mark-lists
   '((seen range)
+    (unexist range)
     (killed range)
     (bookmark tuple)
     (uid tuple)

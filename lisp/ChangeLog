@@ -2,6 +2,8 @@
 
 	* gnus.el (gnus-article-mark-lists): Add `unexist' to the list of
 	marks.
+	(gnus-article-special-mark-lists): Put the `unexist' in the special
+	marks list instead.
 
 	* gnus-sum.el (gnus-articles-to-read): Don't include unexisting
 	articles in the list of articles to be selected.
