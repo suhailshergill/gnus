@@ -1,5 +1,8 @@
 2012-02-11  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus.el (gnus-article-mark-lists): Add `unexist' to the list of
+	marks.
+
 	* gnus-sum.el (gnus-articles-to-read): Don't include unexisting
 	articles in the list of articles to be selected.
 
