@@ -1,5 +1,8 @@
 2012-02-11  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-adjust-marked-articles): Add to
+	`gnus-newsgroup-unexist'.
+
 	* gnus.el (gnus-article-mark-lists): Add `unexist' to the list of
 	marks.
 	(gnus-article-special-mark-lists): Put the `unexist' in the special

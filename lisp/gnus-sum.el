@@ -1529,6 +1529,9 @@ This list will always be a subset of gnus-newsgroup-undownloaded.")
 (defvar gnus-newsgroup-seen nil
   "Range of seen articles in the current newsgroup.")
 
+(defvar gnus-newsgroup-unexist nil
+  "Range of unexistent articles in the current newsgroup.")
+
 (defvar gnus-newsgroup-articles nil
   "List of articles in the current newsgroup.")
 
@@ -6023,7 +6026,9 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 			  (and (numberp (car articles))
 			       (> min (car articles)))))
 	    (pop articles))
-	  (set var articles))))))))
+	  (set var articles))
+	 ((eq mark 'unexist)
+	  (set var (cdr marks)))))))))
 
 (defun gnus-update-missing-marks (missing)
   "Go through the list of MISSING articles and remove them from the mark lists."
