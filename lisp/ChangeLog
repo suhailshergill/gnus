@@ -1,3 +1,10 @@
+2012-02-11  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-retrieve-group-data-early): Query for unexisting
+	articles.
+	(nnimap-update-info): Keep track of unexisting articles.
+	(nnimap-update-qresync-info): Ditto.
+
 2012-02-10  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* message.el (message-default-send-mail-function): Made into own

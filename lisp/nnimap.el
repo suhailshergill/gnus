@@ -1238,13 +1238,15 @@ textual parts.")
 		group (nnimap-decode-gnus-group
 		       (gnus-group-real-name (gnus-info-group info)))
 		active (cdr (assq 'active params))
+		unexist (assq 'unexist (gnus-info-marks info))
 		uidvalidity (cdr (assq 'uidvalidity params))
 		modseq (cdr (assq 'modseq params)))
 	  (setf (nnimap-examined nnimap-object) group)
 	  (if (and qresyncp
 		   uidvalidity
 		   active
-		   modseq)
+		   modseq
+		   unexist)
 	      (push
 	       (list (nnimap-send-command "EXAMINE %S (%s (%s %s))"
 					  (utf7-encode group t)
@@ -1263,11 +1265,10 @@ textual parts.")
 		     ;; is read-only or not.
 		     "SELECT"))
 		  start)
-	      (if (and active uidvalidity)
+	      (if (and active uidvalidity unexist)
 		  ;; Fetch the last 100 flags.
 		  (setq start (max 1 (- (cdr active) 100)))
-		(setf (nnimap-initial-resync nnimap-object)
-		      (1+ (nnimap-initial-resync nnimap-object)))
+		(incf (nnimap-initial-resync nnimap-object))
 		(setq start 1))
 	      (push (list (nnimap-send-command "%s %S" command
 					       (utf7-encode group t))
@@ -1444,6 +1445,20 @@ textual parts.")
 		      (setq new-marks (gnus-range-nconcat old-marks new-marks)))
 		    (when new-marks
 		      (push (cons (car type) new-marks) marks)))))
+	      ;; Keep track of non-existing articles.
+	      (let* ((old-unexists (assq 'unexist marks))
+		     (unexists
+		      (if completep
+			  (gnus-range-difference
+			   (gnus-active group)
+			   (gnus-compress-sequence existing))
+			(gnus-add-to-range
+			 (cdr old-unexists)
+			 (gnus-list-range-difference
+			  existing (gnus-active group))))))
+		(if old-unexists
+		    (setcdr old-unexists unexists)
+		  (push (cons 'unexist unexists) marks)))
 	      (gnus-info-set-marks info marks t))))
 	;; Tell Gnus whether there are any \Recent messages in any of
 	;; the groups.
@@ -1487,6 +1502,14 @@ textual parts.")
 		      (gnus-sorted-complement existing new-marks))))
 	(when ticks
 	  (push (cons (car type) ticks) marks)))
+      (gnus-info-set-marks info marks t))
+    ;; Add vanished to the list of unexisting articles.
+    (when vanished
+      (let* ((old-unexists (assq 'unexist marks))
+	     (unexists (gnus-range-add (cdr old-unexists) vanished)))
+	(if old-unexists
+	    (setcdr old-unexists unexists)
+	  (push (cons 'unexist unexists) marks)))
       (gnus-info-set-marks info marks t))))
 
 (defun nnimap-imap-ranges-to-gnus-ranges (irange)
@@ -1539,7 +1562,8 @@ textual parts.")
 
 (defun nnimap-parse-flags (sequences)
   (goto-char (point-min))
-  ;; Change \Delete etc to %Delete, so that the reader can read it.
+  ;; Change \Delete etc to %Delete, so that the Emacs Lisp reader can
+  ;; read it.
   (subst-char-in-region (point-min) (point-max)
 			?\\ ?% t)
   ;; Remove any MODSEQ entries in the buffer, because they may contain
