@@ -1230,7 +1230,8 @@ textual parts.")
       (setf (nnimap-group nnimap-object) nil)
       (setf (nnimap-initial-resync nnimap-object) 0)
       (let ((qresyncp (nnimap-capability "QRESYNC"))
-	    params groups sequences active uidvalidity modseq group)
+	    params groups sequences active uidvalidity modseq group
+	    unexist)
 	;; Go through the infos and gather the data needed to know
 	;; what and how to request the data.
 	(dolist (info infos)
