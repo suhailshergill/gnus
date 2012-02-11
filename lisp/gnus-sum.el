@@ -5674,7 +5674,7 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 	(setq gnus-newsgroup-unselected
 	      (gnus-sorted-difference gnus-newsgroup-unreads articles))
       (setq articles (gnus-articles-to-read group read-all)))
-
+    
     (cond
      ((null articles)
       ;;(gnus-message 3 "Couldn't select newsgroup -- no articles to display")
@@ -5813,6 +5813,7 @@ If SELECT-ARTICLES, only select those articles from GROUP."
   "Find out what articles the user wants to read."
   (let* ((only-read-p t)
 	 (articles
+	  (gnus-list-range-difference
 	  ;; Select all articles if `read-all' is non-nil, or if there
 	  ;; are no unread articles.
 	  (if (or read-all
@@ -5839,7 +5840,8 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 	    (setq only-read-p nil)
 	    (gnus-sorted-nunion
 	     (gnus-sorted-union gnus-newsgroup-dormant gnus-newsgroup-marked)
-	     gnus-newsgroup-unreads)))
+	     gnus-newsgroup-unreads))
+	  (cdr (assq 'unexist (gnus-info-marks (gnus-get-info group))))))
 	 (scored-list (gnus-killed-articles gnus-newsgroup-killed articles))
 	 (scored (length scored-list))
 	 (number (length articles))

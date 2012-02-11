@@ -1,5 +1,8 @@
 2012-02-11  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-articles-to-read): Don't include unexisting
+	articles in the list of articles to be selected.
+
 	* nnimap.el (nnimap-retrieve-group-data-early): Query for unexisting
 	articles.
 	(nnimap-update-info): Keep track of unexisting articles.
