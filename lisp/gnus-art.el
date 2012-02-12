@@ -45,6 +45,7 @@
 (require 'mm-uu)
 (require 'message)
 (require 'mouse)
+(require 'url-queue)
 
 (autoload 'gnus-msg-mail "gnus-msg" nil t)
 (autoload 'gnus-button-mailto "gnus-msg")
@@ -4581,6 +4582,9 @@ commands:
 		      timer-list))
     (when (eq (elt timer 5) 'image-animate-timeout)
       (cancel-timer timer))))
+
+(defun gnus-stop-downloads ()
+  (setq url-queue nil))
 
 ;; Set article window start at LINE, where LINE is the number of lines
 ;; from the head of the article.
