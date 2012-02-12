@@ -24,6 +24,10 @@ For older news, see Gnus info node "New Features".
    allows specifying how messages are to be sent.  For example:
 
    X-Message-SMTP-Method: smtp smtp.fsf.org 587
+
+** Gnus keeps track of non-existent articles for nnimap groups, so
+   that sparse IMAP folders now list a correct number of messages in
+   them.
    
 * For older news, see Gnus info node "New Features".
 
