@@ -1,5 +1,11 @@
 2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-marks-is-evil, nntp-marks-file-name, nntp-marks)
+	(nntp-marks-modtime, nntp-marks-directory, nntp-request-set-mark)
+	(nntp-request-marks, nntp-marks-directory, nntp-marks-changed-p)
+	(nntp-save-marks, nntp-open-marks, nntp-possibly-create-directory)
+	(nntp-server-to-method-cache): Remove.
+
 	* shr.el (shr-rescale-image): Allow viewing large images.
 	(shr-rescale-image): Fix wrong merge.
 
