@@ -1,6 +1,7 @@
 2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-rescale-image): Allow viewing large images.
+	(shr-rescale-image): Fix wrong merge.
 
 2012-02-12  Lars Ingebrigtsen  <larsi@gnus.org>
 
