@@ -1299,7 +1299,7 @@ For the \"inline\" alternatives, also see the variable
     (message-remove-header "gcc")
     (when gcc
       (goto-char (point-max))
-      (cond ((eq gnus-gcc-self-resent-messages  'none))
+      (cond ((eq gnus-gcc-self-resent-messages 'none))
 	    ((eq gnus-gcc-self-resent-messages t)
 	     (insert "Gcc: \"" gnus-newsgroup-name "\"\n"))
 	    ((stringp gnus-gcc-self-resent-messages)
@@ -1336,8 +1336,9 @@ For the \"inline\" alternatives, also see the variable
 	 current-prefix-arg))
   (let ((message-header-setup-hook (copy-sequence message-header-setup-hook))
 	(message-sent-hook (copy-sequence message-sent-hook)))
+    ;; `gnus-summary-resend-message-insert-gcc' must run last.
     (add-hook 'message-header-setup-hook
-	      'gnus-summary-resend-message-insert-gcc)
+	      'gnus-summary-resend-message-insert-gcc t)
     (add-hook 'message-sent-hook (if gnus-agent
 				     'gnus-agent-possibly-do-gcc
 				   'gnus-inews-do-gcc))

@@ -1,3 +1,9 @@
+2012-02-13  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-msg.el (gnus-summary-resend-message): Make
+	gnus-summary-resend-message-insert-gcc be last item in
+	message-header-setup-hook.
+
 2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nnfolder.el (nnfolder-marks-directory, nnfolder-marks-is-evil)
