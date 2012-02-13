@@ -1,5 +1,22 @@
 2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nnfolder.el (nnfolder-marks-directory, nnfolder-marks-is-evil)
+	(nnfolder-marks, nnfolder-marks-file-suffix, nnfolder-marks-modtime):
+	Remove.
+	(nnfolder-open-server): Don't use marks.
+	(nnfolder-request-delete-group): Ditto.
+	(nnfolder-request-rename-group): Ditto.
+	(nnfolder-request-set-mark, nnfolder-request-marks)
+	(nnfolder-group-marks-pathname, nnfolder-marks-changed-p)
+	(nnfolder-save-marks, nnfolder-open-marks): Remove.
+
+	* nnml.el (nnml-marks-is-evil, nnml-marks-file-name, nnml-marks)
+	(nnml-marks-modtime): Remove.
+	(nnml-request-delete-group): Don't use marks.
+	(nnml-request-rename-group): Ditto.
+	(nnml-request-set-mark, nnml-request-marks, nnml-marks-changed-p)
+	(nnml-save-marks, nnml-open-marks): Remove.
+
 	* nntp.el (nntp-marks-is-evil, nntp-marks-file-name, nntp-marks)
 	(nntp-marks-modtime, nntp-marks-directory, nntp-request-set-mark)
 	(nntp-request-marks, nntp-marks-directory, nntp-marks-changed-p)
