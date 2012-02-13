@@ -3,6 +3,8 @@
 	* nnimap.el (nnimap-record-commands): New variable.
 	(nnimap-log-command): Use it.
 	(nnimap-make-process-buffer): Add a space to the process buffer.
+	(nnimap-transform-headers): Don't bug out on header lines containing
+	stuff that look like IMAP length encodings.
 
 	* shr.el (shr-rescale-image): Allow viewing large images.
 
