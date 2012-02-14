@@ -78,12 +78,6 @@
 
 (eval-when-compile (require 'cl))
 
-(eval-when-compile
-  (when (null (ignore-errors (require 'ert)))
-    (defmacro* ert-deftest (name () &body docstring-keys-and-body))))
-
-(ignore-errors
-  (require 'ert))
 (require 'gnus)
 (require 'gnus-int)
 (require 'gnus-sum)
@@ -1077,79 +1071,6 @@ only the last one's marks are returned."
               (setq val (list val)))
             (gnus-registry-set-id-key id key val))))
       (message "Import done, collected %d entries" count))))
-
-(ert-deftest gnus-registry-misc-test ()
-  (should-error (gnus-registry-extract-addresses '("" "")))
-
-  (should (equal '("Ted Zlatanov <tzz@lifelogs.com>"
-                   "noname <ed@you.me>"
-                   "noname <cyd@stupidchicken.com>"
-                   "noname <tzz@lifelogs.com>")
-                 (gnus-registry-extract-addresses
-                  (concat "Ted Zlatanov <tzz@lifelogs.com>, "
-                          "ed <ed@you.me>, " ; "ed" is not a valid name here
-                          "cyd@stupidchicken.com, "
-                          "tzz@lifelogs.com")))))
-
-(ert-deftest gnus-registry-usage-test ()
-  (let* ((n 100)
-         (tempfile (make-temp-file "gnus-registry-persist"))
-         (db (gnus-registry-make-db tempfile))
-         (gnus-registry-db db)
-         back size)
-    (message "Adding %d keys to the test Gnus registry" n)
-    (dotimes (i n)
-      (let ((id (number-to-string i)))
-        (gnus-registry-handle-action id
-                                     (if (>= 50 i) "fromgroup" nil)
-                                     "togroup"
-                                     (when (>= 70 i)
-                                       (format "subject %d" (mod i 10)))
-                                     (when (>= 80 i)
-                                       (format "sender %d" (mod i 10))))))
-    (message "Testing Gnus registry size is %d" n)
-    (should (= n (registry-size db)))
-    (message "Looking up individual keys (registry-lookup)")
-    (should (equal (loop for e
-                         in (mapcar 'cadr
-                                    (registry-lookup db '("20" "83" "72")))
-                         collect (assq 'subject e)
-                         collect (assq 'sender e)
-                         collect (assq 'group e))
-                   '((subject "subject 0") (sender "sender 0") (group "togroup")
-                     (subject) (sender) (group "togroup")
-                     (subject) (sender "sender 2") (group "togroup"))))
-
-    (message "Looking up individual keys (gnus-registry-id-key)")
-    (should (equal (gnus-registry-get-id-key "34" 'group) '("togroup")))
-    (should (equal (gnus-registry-get-id-key "34" 'subject) '("subject 4")))
-    (message "Trying to insert a duplicate key")
-    (should-error (gnus-registry-insert db "55" '()))
-    (message "Looking up individual keys (gnus-registry-get-or-make-entry)")
-    (should (gnus-registry-get-or-make-entry "22"))
-    (message "Saving the Gnus registry to %s" tempfile)
-    (should (gnus-registry-save tempfile db))
-    (setq size (nth 7 (file-attributes tempfile)))
-    (message "Saving the Gnus registry to %s: size %d" tempfile size)
-    (should (< 0 size))
-    (with-temp-buffer
-      (insert-file-contents-literally tempfile)
-      (should (looking-at (concat ";; Object "
-                                  "Gnus Registry"
-                                  "\n;; EIEIO PERSISTENT OBJECT"))))
-    (message "Reading Gnus registry back")
-    (setq back (eieio-persistent-read tempfile))
-    (should back)
-    (message "Read Gnus registry back: %d keys, expected %d==%d"
-             (registry-size back) n (registry-size db))
-    (should (= (registry-size back) n))
-    (should (= (registry-size back) (registry-size db)))
-    (delete-file tempfile)
-    (message "Pruning Gnus registry to 0 by setting :max-soft")
-    (oset db :max-soft 0)
-    (registry-prune db)
-    (should (= (registry-size db) 0)))
-  (message "Done with Gnus registry usage testing."))
 
 ;;;###autoload
 (defun gnus-registry-initialize ()

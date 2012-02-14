@@ -1,3 +1,14 @@
+2012-02-14  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* registry.el (registry-usage-test, registry-persistence-test): Move to
+	tests/gnustest-registry.el.
+
+	* gnus-registry.el (gnus-registry-misc-test)
+	(gnus-registry-usage-test): Move to tests/gnustest-registry.el.
+
+	* tests/gnustest-registry.el: New file with the registry and
+	gnus-registry ERT tests.
+
 2012-02-13  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-msg.el (gnus-summary-resend-message): Make
