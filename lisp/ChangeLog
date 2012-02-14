@@ -2,6 +2,8 @@
 
 	* registry.el (registry-usage-test, registry-persistence-test): Move to
 	tests/gnustest-registry.el.
+	(registry-make-testable-db, registry-match-test)
+	(registry-instantiation-test): Move to tests/gnustest-registry.el.
 
 	* gnus-registry.el (gnus-registry-misc-test)
 	(gnus-registry-usage-test): Move to tests/gnustest-registry.el.

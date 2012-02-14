@@ -367,42 +367,5 @@ Proposes any entries over the max-hard limit minus size * prune-factor."
 			     collect k)))
       (list limit candidates))))
 
-(ert-deftest registry-instantiation-test ()
-  (should (registry-db "Testing")))
-
-(ert-deftest registry-match-test ()
-  (let ((entry '((hello "goodbye" "bye") (blank))))
-
-    (message "Testing :regex matching")
-    (should (registry--match :regex entry '((hello "nye" "bye"))))
-    (should (registry--match :regex entry '((hello "good"))))
-    (should-not (registry--match :regex entry '((hello "nye"))))
-    (should-not (registry--match :regex entry '((hello))))
-
-    (message "Testing :member matching")
-    (should (registry--match :member entry '((hello "bye"))))
-    (should (registry--match :member entry '((hello "goodbye"))))
-    (should-not (registry--match :member entry '((hello "good"))))
-    (should-not (registry--match :member entry '((hello "nye"))))
-    (should-not (registry--match :member entry '((hello)))))
-  (message "Done with matching testing."))
-
-(defun registry-make-testable-db (n &optional name file)
-  (let* ((db (registry-db
-              (or name "Testing")
-              :file (or file "unused")
-              :max-hard n
-              :max-soft 0               ; keep nothing not precious
-              :precious '(extra more-extra)
-              :tracked '(sender subject groups))))
-    (dotimes (i n)
-      (registry-insert db i `((sender "me")
-                              (subject "about you")
-                              (more-extra) ; empty data key should be pruned
-                              ;; first 5 entries will NOT have this extra data
-                              ,@(when (< 5 i) (list (list 'extra "more data")))
-                              (groups ,(number-to-string i)))))
-    db))
-
 (provide 'registry)
 ;;; registry.el ends here

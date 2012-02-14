@@ -34,9 +34,46 @@
 (require 'registry)
 (require 'gnus-registry)
 
+(ert-deftest gnustest-registry-instantiation-test ()
+  (should (registry-db "Testing")))
+
+(ert-deftest gnustest-registry-match-test ()
+  (let ((entry '((hello "goodbye" "bye") (blank))))
+
+    (message "Testing :regex matching")
+    (should (registry--match :regex entry '((hello "nye" "bye"))))
+    (should (registry--match :regex entry '((hello "good"))))
+    (should-not (registry--match :regex entry '((hello "nye"))))
+    (should-not (registry--match :regex entry '((hello))))
+
+    (message "Testing :member matching")
+    (should (registry--match :member entry '((hello "bye"))))
+    (should (registry--match :member entry '((hello "goodbye"))))
+    (should-not (registry--match :member entry '((hello "good"))))
+    (should-not (registry--match :member entry '((hello "nye"))))
+    (should-not (registry--match :member entry '((hello)))))
+  (message "Done with matching testing."))
+
+(defun gnustest-registry-make-testable-db (n &optional name file)
+  (let* ((db (registry-db
+              (or name "Testing")
+              :file (or file "unused")
+              :max-hard n
+              :max-soft 0               ; keep nothing not precious
+              :precious '(extra more-extra)
+              :tracked '(sender subject groups))))
+    (dotimes (i n)
+      (registry-insert db i `((sender "me")
+                              (subject "about you")
+                              (more-extra) ; empty data key should be pruned
+                              ;; first 5 entries will NOT have this extra data
+                              ,@(when (< 5 i) (list (list 'extra "more data")))
+                              (groups ,(number-to-string i)))))
+    db))
+
 (ert-deftest gnustest-registry-usage-test ()
   (let* ((n 100)
-         (db (registry-make-testable-db n)))
+         (db (gnustest-registry-make-testable-db n)))
     (message "size %d" n)
     (should (= n (registry-size db)))
     (message "max-hard test")
@@ -81,7 +118,7 @@
   (let* ((n 100)
          (tempfile (make-temp-file "registry-persistence-"))
          (name "persistence tester")
-         (db (registry-make-testable-db n name tempfile))
+         (db (gnustest-registry-make-testable-db n name tempfile))
          size back)
     (message "Saving to %s" tempfile)
     (eieio-persistent-save db)
