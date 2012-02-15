@@ -1,5 +1,7 @@
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* imap.el: Remove.
+
 	* nntp.el (nntp-coding-system-for-read): Remove.
 	(nntp-coding-system-for-write): Ditto.
 	(nntp-open-connection): Just use `binary' directly.
