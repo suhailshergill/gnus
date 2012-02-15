@@ -663,7 +663,6 @@ Getting News
 * Direct Functions::            Connecting directly to the server.
 * Indirect Functions::          Connecting indirectly to the server.
 * Common Variables::            Understood by several connection functions.
-* NNTP marks::                  Storing marks for @acronym{NNTP} servers.
 
 Getting Mail
 
@@ -1067,10 +1066,6 @@ you would typically set this variable to
 (setq gnus-secondary-select-methods '((nnmbox "")))
 @end lisp
 
-Note: the @acronym{NNTP} back end stores marks in marks files
-(@pxref{NNTP marks}).  This feature makes it easy to share marks between
-several Gnus installations, but may slow down things a bit when fetching
-new articles.  @xref{NNTP marks}, for more information.
 
 
 @node The Server is Down
@@ -4295,12 +4290,11 @@ default is @code{nil} in Emacs, or is the aliasee of the coding system
 named @code{file-name} (a certain coding system of which an alias is
 @code{file-name}) in XEmacs.
 
-The @code{nnml} back end, the @code{nnrss} back end, the @acronym{NNTP}
-marks feature (@pxref{NNTP marks}), the agent, and the cache use
-non-@acronym{ASCII} group names in those files and directories.  This
-variable overrides the value of @code{file-name-coding-system} which
-specifies the coding system used when encoding and decoding those file
-names and directory names.
+The @code{nnml} back end, the @code{nnrss} back end, the agent, and
+the cache use non-@acronym{ASCII} group names in those files and
+directories.  This variable overrides the value of
+@code{file-name-coding-system} which specifies the coding system used
+when encoding and decoding those file names and directory names.
 
 In XEmacs (with the @code{mule} feature), @code{file-name-coding-system}
 is the only means to specify the coding system used to encode and decode
@@ -10819,8 +10813,7 @@ Also @pxref{Group Parameters}.
 @vindex gnus-propagate-marks
 @item gnus-propagate-marks
 If non-@code{nil}, propagate marks to the backends for possible
-storing.  @xref{NNTP marks}, and friends, for a more fine-grained
-sieve.
+storing.
 
 @end table
 
@@ -13765,7 +13758,6 @@ don't update their active files often, this can help.
 * Direct Functions::            Connecting directly to the server.
 * Indirect Functions::          Connecting indirectly to the server.
 * Common Variables::            Understood by several connection functions.
-* NNTP marks::                  Storing marks for @acronym{NNTP} servers.
 @end menu
 
 
@@ -14035,53 +14027,6 @@ A list of switches to pass to @code{nntp-netcat-command}.  The default
 is @samp{()}.
 
 @end table
-
-@node NNTP marks
-@subsubsection NNTP marks
-@cindex storing NNTP marks
-
-Gnus stores marks (@pxref{Marking Articles}) for @acronym{NNTP}
-servers in marks files.  A marks file records what marks you have set
-in a group and each file is specific to the corresponding server.
-Marks files are stored in @file{~/News/marks}
-(@code{nntp-marks-directory}) under a classic hierarchy resembling
-that of a news server, for example marks for the group
-@samp{gmane.discuss} on the news.gmane.org server will be stored in
-the file @file{~/News/marks/news.gmane.org/gmane/discuss/.marks}.
-
-Marks files are useful because you can copy the @file{~/News/marks}
-directory (using rsync, scp or whatever) to another Gnus installation,
-and it will realize what articles you have read and marked.  The data
-in @file{~/News/marks} has priority over the same data in
-@file{~/.newsrc.eld}.
-
-Note that marks files are very much server-specific: Gnus remembers
-the article numbers so if you don't use the same servers on both
-installations things are most likely to break (most @acronym{NNTP}
-servers do not use the same article numbers as any other server).
-However, if you use servers A, B, C on one installation and servers A,
-D, E on the other, you can sync the marks files for A and then you'll
-get synchronization for that server between the two installations.
-
-Using @acronym{NNTP} marks can possibly incur a performance penalty so
-if Gnus feels sluggish, try setting the @code{nntp-marks-is-evil}
-variable to @code{t}.  Marks will then be stored in @file{~/.newsrc.eld}.
-
-Related variables:
-
-@table @code
-
-@item nntp-marks-is-evil
-@vindex nntp-marks-is-evil
-If non-@code{nil}, this back end will ignore any marks files.  The
-default is @code{nil}.
-
-@item nntp-marks-directory
-@vindex nntp-marks-directory
-The directory where marks for nntp groups will be stored.
-
-@end table
-
 
 @node News Spool
 @subsection News Spool
@@ -16173,22 +16118,6 @@ splitting.  It has to create lots of files, and it also generates
 @acronym{NOV} databases for the incoming mails.  This makes it possibly the
 fastest back end when it comes to reading mail.
 
-@cindex self contained nnml servers
-@cindex marks
-When the marks file is used (which it is by default), @code{nnml}
-servers have the property that you may backup them using @code{tar} or
-similar, and later be able to restore them into Gnus (by adding the
-proper @code{nnml} server) and have all your marks be preserved.  Marks
-for a group are usually stored in the @code{.marks} file (but see
-@code{nnml-marks-file-name}) within each @code{nnml} group's directory.
-Individual @code{nnml} groups are also possible to backup, use @kbd{G m}
-to restore the group (after restoring the backup into the nnml
-directory).
-
-If for some reason you believe your @file{.marks} files are screwed
-up, you can just delete them all.  Gnus will then correctly regenerate
-them next time it starts.
-
 Virtual server settings:
 
 @table @code
@@ -16225,15 +16154,6 @@ The name of the @acronym{NOV} files.  The default is @file{.overview}.
 @item nnml-prepare-save-mail-hook
 @vindex nnml-prepare-save-mail-hook
 Hook run narrowed to an article before saving.
-
-@item nnml-marks-is-evil
-@vindex nnml-marks-is-evil
-If non-@code{nil}, this back end will ignore any @sc{marks} files.  The
-default is @code{nil}.
-
-@item nnml-marks-file-name
-@vindex nnml-marks-file-name
-The name of the @dfn{marks} files.  The default is @file{.marks}.
 
 @item nnml-use-compressed-files
 @vindex nnml-use-compressed-files
@@ -16575,19 +16495,6 @@ separate file.  Each file is in the standard Un*x mbox format.
 @code{nnfolder} will add extra headers to keep track of article
 numbers and arrival dates.
 
-@cindex self contained nnfolder servers
-@cindex marks
-When the marks file is used (which it is by default), @code{nnfolder}
-servers have the property that you may backup them using @code{tar} or
-similar, and later be able to restore them into Gnus (by adding the
-proper @code{nnfolder} server) and have all your marks be preserved.
-Marks for a group are usually stored in a file named as the mbox file
-with @code{.mrk} concatenated to it (but see
-@code{nnfolder-marks-file-suffix}) within the @code{nnfolder}
-directory.  Individual @code{nnfolder} groups are also possible to
-backup, use @kbd{G m} to restore the group (after restoring the backup
-into the @code{nnfolder} directory).
-
 Virtual server settings:
 
 @table @code
@@ -16644,20 +16551,6 @@ The extension for @acronym{NOV} files.  The default is @file{.nov}.
 @item nnfolder-nov-directory
 @vindex nnfolder-nov-directory
 The directory where the @acronym{NOV} files should be stored.  If
-@code{nil}, @code{nnfolder-directory} is used.
-
-@item nnfolder-marks-is-evil
-@vindex nnfolder-marks-is-evil
-If non-@code{nil}, this back end will ignore any @sc{marks} files.  The
-default is @code{nil}.
-
-@item nnfolder-marks-file-suffix
-@vindex nnfolder-marks-file-suffix
-The extension for @sc{marks} files.  The default is @file{.mrk}.
-
-@item nnfolder-marks-directory
-@vindex nnfolder-marks-directory
-The directory where the @sc{marks} files should be stored.  If
 @code{nil}, @code{nnfolder-directory} is used.
 
 @end table
@@ -16820,9 +16713,7 @@ undergo treatment such as duplicate checking.
 @code{nnmaildir} stores article marks for a given group in the
 corresponding maildir, in a way designed so that it's easy to manipulate
 them from outside Gnus.  You can tar up a maildir, unpack it somewhere
-else, and still have your marks.  @code{nnml} also stores marks, but
-it's not as easy to work with them from outside Gnus as with
-@code{nnmaildir}.
+else, and still have your marks.
 
 @code{nnmaildir} uses a significant amount of memory to speed things up.
 (It keeps in memory some of the things that @code{nnml} stores in files
@@ -16913,16 +16804,6 @@ adding a server definition pointing to that directory in Gnus.  The
 @ref{Article Backlog}, @ref{Asynchronous Fetching} and other things
 might interfere with overwriting data, so you may want to shut down Gnus
 before you restore the data.
-
-It is also possible to archive individual @code{nnml},
-@code{nnfolder}, or @code{nnmaildir} groups, while preserving marks.
-For @code{nnml} or @code{nnmaildir}, you copy all files in the group's
-directory.  For @code{nnfolder} you need to copy both the base folder
-file itself (@file{FOO}, say), and the marks file (@file{FOO.mrk} in
-this example).  Restoring the group is done with @kbd{G m} from the Group
-buffer.  The last step makes Gnus notice the new directory.
-@code{nnmaildir} notices the new directory automatically, so @kbd{G m}
-is unnecessary in that case.
 
 @node Web Searches
 @subsection Web Searches

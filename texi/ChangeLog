@@ -1,3 +1,8 @@
+2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi: Remove mentions of nnml/nnfolder/nntp backend marks, which
+	no longer exist.
+
 2012-02-08  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (Archived Messages): Document gnus-gcc-self-resent-messages.
