@@ -1,5 +1,9 @@
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
+	* nntp.el (nntp-coding-system-for-read): Remove.
+	(nntp-coding-system-for-write): Ditto.
+	(nntp-open-connection): Just use `binary' directly.
+
 	* gnus-start.el (gnus-clean-old-newsrc): Delete `unexist' from pre-Ma
 	Gnus 0.3.
 

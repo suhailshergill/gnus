@@ -222,12 +222,6 @@ then use this hook to rsh to the remote machine and start a proxy NNTP
 server there that you can connect to.  See also
 `nntp-open-connection-function'")
 
-(defvoo nntp-coding-system-for-read 'binary
-  "*Coding system to read from NNTP.")
-
-(defvoo nntp-coding-system-for-write 'binary
-  "*Coding system to write to NNTP.")
-
 (defcustom nntp-authinfo-file "~/.authinfo"
   ".netrc-like file that holds nntp authinfo passwords."
   :group 'nntp
@@ -1302,8 +1296,8 @@ password contained in '~/.nntp-authinfo'."
 		   (nntp-kill-buffer ,pbuffer)))))
 	 (process
 	  (condition-case err
-	      (let ((coding-system-for-read nntp-coding-system-for-read)
-		    (coding-system-for-write nntp-coding-system-for-write)
+	      (let ((coding-system-for-read 'binary)
+		    (coding-system-for-write 'binary)
 		    (map '((nntp-open-network-stream network)
 			   (network-only plain) ; compat
 			   (nntp-open-plain-stream plain)
