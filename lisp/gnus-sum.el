@@ -1580,6 +1580,7 @@ This list will always be a subset of gnus-newsgroup-undownloaded.")
     gnus-newsgroup-killed
     gnus-newsgroup-unseen
     gnus-newsgroup-seen
+    gnus-newsgroup-unexist
     gnus-newsgroup-cached
     gnus-newsgroup-downloadable
     gnus-newsgroup-undownloaded
@@ -5972,7 +5973,6 @@ If SELECT-ARTICLES, only select those articles from GROUP."
       (setq mark (car marks)
 	    mark-type (gnus-article-mark-to-type mark)
 	    var (intern (format "gnus-newsgroup-%s" (car (rassq mark types)))))
-
       ;; We set the variable according to the type of the marks list,
       ;; and then adjust the marks to a subset of the active articles.
       (cond
