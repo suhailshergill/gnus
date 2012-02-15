@@ -2309,7 +2309,7 @@ If FORCE is non-nil, the .newsrc file is read."
 (defun gnus-clean-old-newsrc ()
   (when gnus-newsrc-file-version
     (when (< (gnus-continuum-version gnus-newsrc-file-version)
-	     (gnus-continuum-version "Ma Gnus v0.02"))
+	     (gnus-continuum-version "Ma Gnus v0.03"))
       ;; Remove old `exist' marks from old nnimap groups.
       (dolist (info (cdr gnus-newsrc-alist))
 	(let ((exist (assoc 'unexist (gnus-info-marks info))))

@@ -1,3 +1,8 @@
+2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-clean-old-newsrc): Delete `unexist' from pre-Ma
+	Gnus 0.3.
+
 2012-02-15  Lars Magne Ingebrigtsen  <lars@ingebrigtsen.no>
 
 	* gnus.el: Ma Gnus v0.3 is released.
