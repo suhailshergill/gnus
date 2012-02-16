@@ -659,6 +659,15 @@ Postpone undisplaying of viewers for types in
 	    (if (equal "text/plain" (car ctl))
 		(assoc 'format ctl)
 	      t))
+    ;; Guess what the type of application/octet-stream parts should
+    ;; really be.
+    (let ((filename (cdr (assq 'filename (cdr cdl)))))
+      (when (and (equal (car ctl) "application/octet-stream")
+		 filename
+		 (string-match "\\.\\([^.]+\\)$" filename))
+	(let ((new-type (mailcap-extension-to-mime (match-string 1 filename))))
+	  (when new-type
+	    (setcar ctl new-type)))))
     (let ((handle
 	   (mm-make-handle
 	    (mm-copy-to-buffer) ctl cte nil cdl description nil id))
