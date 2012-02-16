@@ -67,8 +67,7 @@
 	(nntp-save-marks, nntp-open-marks, nntp-possibly-create-directory)
 	(nntp-server-to-method-cache): Remove.
 
-	* shr.el (shr-rescale-image): Allow viewing large images.
-	(shr-rescale-image): Fix wrong merge.
+	* shr.el (shr-rescale-image): Fix wrong merge.
 
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
@@ -212,10 +211,6 @@
 	lines that are narrower than the window width.  Otherwise background
 	"blocks" will look less readable.
 
-2012-02-07  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* gnus-sum.el (gnus-summary-show-thread): Revert last two changes.
-
 2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-transform-headers): Remove unused variable.
@@ -236,11 +231,6 @@
 
 	* gnus-sum.el (gnus-summary-exit-no-update): Really deaden the summary
 	buffer if `gnus-kill-summary-on-exit' is nil.
-
-2012-02-06  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* gnus-sum.el (gnus-summary-show-thread):
-	next-single-char-property-change may return nil in XEmacs.
 
 2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
@@ -383,7 +373,7 @@
 2012-01-31  Jim Meyering  <jim@meyering.net>
 
 	* gnus-agent.el (gnus-agent-expire-unagentized-dirs):
-        Correct a comment (insert "not") and hide nominally-doubled "to".
+	Correct a comment (insert "not") and hide nominally-doubled "to".
 
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
