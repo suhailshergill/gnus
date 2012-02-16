@@ -28,6 +28,11 @@ For older news, see Gnus info node "New Features".
 ** Gnus keeps track of non-existent articles for nnimap groups, so
    that sparse IMAP folders now list a correct number of messages in
    them.
+
+** Gnus will guess the real type of MIME parts of type
+   application/octet-stream based on the file suffix.  So an
+   application/octet-stream with a name of "rms.jpg" will be displayed
+   as an image/jpeg type by default, for instance.
    
 * For older news, see Gnus info node "New Features".
 
