@@ -1,3 +1,8 @@
+2012-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Various Summary Stuff): Remove mention of
+	`gnus-propagate-marks'.
+
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi: Remove mentions of nnml/nnfolder/nntp backend marks, which

@@ -10810,11 +10810,6 @@ buffers.  For example:
 
 Also @pxref{Group Parameters}.
 
-@vindex gnus-propagate-marks
-@item gnus-propagate-marks
-If non-@code{nil}, propagate marks to the backends for possible
-storing.
-
 @end table
 
 

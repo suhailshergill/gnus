@@ -1243,13 +1243,6 @@ For example: ((1 . cn-gb-2312) (2 . big5))."
   :type 'boolean
   :group 'gnus-summary-marks)
 
-(defcustom gnus-propagate-marks nil
-  "If non-nil, Gnus will store and retrieve marks from the backends.
-This means that marks will be stored both in .newsrc.eld and in
-the backend, and will slow operation down somewhat."
-  :type 'boolean
-  :group 'gnus-summary-marks)
-
 (defcustom gnus-alter-articles-to-read-function nil
   "Function to be called to alter the list of articles to be selected."
   :type '(choice (const nil) function)
@@ -6294,10 +6287,9 @@ The resulting hash table is returned, or nil if no Xrefs were found."
 	 (info (nth 2 entry))
 	 (active (gnus-active group))
 	 (set-marks
-	  (or gnus-propagate-marks
-	      (gnus-method-option-p
-	       (gnus-find-method-for-group group)
-	       'server-marks)))
+	  (gnus-method-option-p
+	   (gnus-find-method-for-group group)
+	   'server-marks))
 	 range)
     (if (not entry)
 	;; Group that Gnus doesn't know exists, but still allow the
@@ -10096,10 +10088,9 @@ ACTION can be either `move' (the default), `crosspost' or `copy'."
 		   to-group 'expire (list to-article) info))
 
 		(when (and to-marks
-			   (or gnus-propagate-marks
-			       (gnus-method-option-p
-				(gnus-find-method-for-group to-group)
-				'server-marks)))
+			   (gnus-method-option-p
+			    (gnus-find-method-for-group to-group)
+			    'server-marks))
 		  (gnus-request-set-mark
 		   to-group (list (list (list to-article) 'add to-marks)))))
 
@@ -12581,10 +12572,9 @@ UNREAD is a sorted list."
 	(save-excursion
 	  (let (setmarkundo)
 	    ;; Propagate the read marks to the backend.
-	    (when (and (or gnus-propagate-marks
-			   (gnus-method-option-p
-			    (gnus-find-method-for-group group)
-			    'server-marks))
+	    (when (and (gnus-method-option-p
+			(gnus-find-method-for-group group)
+			'server-marks)
 		       (gnus-check-backend-function 'request-set-mark group))
 	      (let ((del (gnus-remove-from-range (gnus-info-read info) read))
 		    (add (gnus-remove-from-range read (gnus-info-read info))))

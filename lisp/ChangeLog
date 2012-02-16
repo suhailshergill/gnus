@@ -1,3 +1,7 @@
+2012-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-propagate-marks): Remove.
+
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* imap.el: Remove.

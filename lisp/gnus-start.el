@@ -1504,8 +1504,6 @@ backend check whether the group actually exists."
 	     ;; Return the new active info.
 	     active)))))
 
-(defvar gnus-propagate-marks)		; gnus-sum
-
 (defun gnus-get-unread-articles-in-group (info active &optional update)
   (when (and info active)
     ;; Allow the backend to update the info in the group.
@@ -1514,13 +1512,6 @@ backend check whether the group actually exists."
 		info (inline (gnus-find-method-for-group
 			      (gnus-info-group info)))))
       (gnus-activate-group (gnus-info-group info) nil t))
-
-    ;; Allow backends to update marks,
-    (when gnus-propagate-marks
-      (let ((method (inline (gnus-find-method-for-group
-			     (gnus-info-group info)))))
-	(when (gnus-check-backend-function 'request-marks (car method))
-	  (gnus-request-marks info method))))
 
     (let* ((range (gnus-info-read info))
 	   (num 0))
