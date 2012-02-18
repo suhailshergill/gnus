@@ -559,26 +559,27 @@ size, and full-buffer size."
 				      directory)))))
 
 (defun shr-image-fetched (status buffer start end &optional flags)
-  (when (and (buffer-name buffer)
-	     (not (plist-get status :error)))
-    (url-store-in-cache (current-buffer))
-    (when (or (search-forward "\n\n" nil t)
-	      (search-forward "\r\n\r\n" nil t))
-      (let ((data (buffer-substring (point) (point-max))))
-        (with-current-buffer buffer
-	  (save-excursion
-	    (let ((alt (buffer-substring start end))
-		  (properties (text-properties-at start))
-		  (inhibit-read-only t))
-	      (delete-region start end)
-	      (goto-char start)
-	      (funcall shr-put-image-function data alt flags)
-	      (while properties
-		(let ((type (pop properties))
-		      (value (pop properties)))
-		  (unless (memq type '(display image-size))
-		    (put-text-property start (point) type value))))))))))
-  (kill-buffer (current-buffer)))
+  (let ((image-buffer (current-buffer)))
+    (when (and (buffer-name buffer)
+	       (not (plist-get status :error)))
+      (url-store-in-cache image-buffer)
+      (when (or (search-forward "\n\n" nil t)
+		(search-forward "\r\n\r\n" nil t))
+	(let ((data (buffer-substring (point) (point-max))))
+	  (with-current-buffer buffer
+	    (save-excursion
+	      (let ((alt (buffer-substring start end))
+		    (properties (text-properties-at start))
+		    (inhibit-read-only t))
+		(delete-region start end)
+		(goto-char start)
+		(funcall shr-put-image-function data alt flags)
+		(while properties
+		  (let ((type (pop properties))
+			(value (pop properties)))
+		    (unless (memq type '(display image-size))
+		      (put-text-property start (point) type value))))))))))
+    (kill-buffer image-buffer)))
 
 (defun shr-put-image (data alt &optional flags)
   "Put image DATA with a string ALT.  Return image."
@@ -612,9 +613,13 @@ size, and full-buffer size."
 	image)
     (insert alt)))
 
+<<<<<<< HEAD
 (defun shr-rescale-image (data &optional force)
   "Rescale DATA, if too big, to fit the current buffer.
 If FORCE, rescale the image anyway."
+=======
+(defun shr-rescale-image (data)
+>>>>>>> origin/no-gnus
   (let ((image (create-image data nil t :ascent 100)))
     (if (or (not (fboundp 'imagemagick-types))
 	    (not (get-buffer-window (current-buffer))))

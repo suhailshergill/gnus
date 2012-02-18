@@ -1,3 +1,8 @@
+2012-02-18  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-image-fetched): Make sure we really kill the right
+	buffer.
+
 2012-02-16  Leo Liu  <sdl.web@gmail.com>
 
 	* gnus-start.el (gnus-1): Avoid duplicate entries.
@@ -80,10 +85,24 @@
 
 	* shr.el (shr-rescale-image): Fix wrong merge.
 
+2012-02-18  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-image-fetched): Make sure we really kill the right
+	buffer.
+
+2012-02-16  Leo Liu  <sdl.web@gmail.com>
+
+	* gnus-start.el (gnus-1): Avoid duplicate entries.
+
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-remove-trailing-whitespace): Really delete the padding on
 	too-wide lines.
+
+2012-02-15  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* shr.el (shr-rescale-image): Undo previous change; see
+	<http://lists.gnu.org/archive/html/emacs-devel/2012-02/msg00540.html>.
 
 2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
 
