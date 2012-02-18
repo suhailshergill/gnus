@@ -12,9 +12,19 @@
 	* gnus.texi: Remove mentions of nnml/nnfolder/nntp backend marks, which
 	no longer exist.
 
+2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Customizing the IMAP Connection): Mention
+	nnimap-record-commands.
+
 2012-02-08  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus.texi (Archived Messages): Document gnus-gcc-self-resent-messages.
+
+2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Mail Source Specifiers): Add a pop3 via an SSH tunnel
+	example (modified from an example by Michael Albinus).
 
 2012-02-06  Lars Ingebrigtsen  <larsi@gnus.org>
 
@@ -30,20 +40,6 @@
 2012-01-31  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Key Index): Change encoding to utf-8.
-
-2012-02-17  Glenn Morris  <rgm@gnu.org>
-
-	* gnus.texi (Posting Styles): Fix cross-refs to other manual.
-
-2012-02-13  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* gnus.texi (Customizing the IMAP Connection): Mention
-	nnimap-record-commands.
-
-2012-02-07  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* gnus.texi (Mail Source Specifiers): Add a pop3 via an SSH tunnel
-	example (modified from an example by Michael Albinus).
 
 2012-01-30  Philipp Haselwarter  <philipp.haselwarter@gmx.de>  (tiny change)
 
