@@ -613,13 +613,9 @@ size, and full-buffer size."
 	image)
     (insert alt)))
 
-<<<<<<< HEAD
 (defun shr-rescale-image (data &optional force)
   "Rescale DATA, if too big, to fit the current buffer.
 If FORCE, rescale the image anyway."
-=======
-(defun shr-rescale-image (data)
->>>>>>> origin/no-gnus
   (let ((image (create-image data nil t :ascent 100)))
     (if (or (not (fboundp 'imagemagick-types))
 	    (not (get-buffer-window (current-buffer))))
