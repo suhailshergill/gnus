@@ -1730,7 +1730,8 @@ textual parts.")
   (when nnimap-record-commands
     (with-current-buffer (get-buffer-create "*imap log*")
       (goto-char (point-max))
-      (insert (format-time-string "%H:%M:%S") " "
+      (insert (format-time-string "%H:%M:%S")
+	      " [" nnimap-address "] "
 	      (if nnimap-inhibit-logging
 		  "(inhibited)\n"
 		command))))
