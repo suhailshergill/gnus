@@ -1774,7 +1774,7 @@ If RECURSIVE, search recursively."
 	     (replace-match (char-to-string char))))
 	 ;; Remove "soft hyphens".
 	 (goto-char (point-min))
-	 (while (search-forward "-" nil t)
+	 (while (search-forward "­" nil t)
 	   (replace-match "" t t))
 	 (libxml-parse-html-region (point-min) (point-max))))
       (unless (bobp)
