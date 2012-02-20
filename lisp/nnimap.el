@@ -868,6 +868,7 @@ textual parts.")
 	  ;; Move the article to a different method.
 	  (let ((result (eval accept-form)))
 	    (when result
+	      (nnimap-possibly-change-group group server)
 	      (nnimap-delete-article article)
 	      result)))))))
 
