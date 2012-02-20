@@ -2,11 +2,6 @@
 
 	* gnus-start.el (gnus-clean-old-newsrc): Allow a FORCE parameter.
 
-2012-02-19  Vida Gábor  <vidagabor@gmail.com>  (tiny change)
-
-	* gnus-demon.el (gnus-demon-init): Don't multiply time twice.
-	Reported by Peter Münster.
-
 2012-02-20  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-log-command): Add the IMAP address to the log
