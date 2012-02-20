@@ -1,3 +1,7 @@
+2012-02-20  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-clean-old-newsrc): Allow a FORCE parameter.
+
 2012-02-19  Vida Gábor  <vidagabor@gmail.com>  (tiny change)
 
 	* gnus-demon.el (gnus-demon-init): Don't multiply time twice.
