@@ -2,6 +2,10 @@
 
 	* shr.el (shr-column-specs): Protect against TDs with "width: 0%".
 
+2012-02-25  Andreas Schwab  <schwab@linux-m68k.org>
+
+	* parse-time.el (parse-time-string): Allow extractor to return nil.
+
 2012-02-23  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* nntp.el (nntp-send-authinfo): Work for secure nntp entry in authinfo.
