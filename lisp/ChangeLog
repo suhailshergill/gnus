@@ -1,3 +1,7 @@
+2012-02-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-column-specs): Protect against TDs with "width: 0%".
+
 2012-02-20  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-start.el (gnus-clean-old-newsrc): Allow a FORCE parameter.
