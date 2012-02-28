@@ -1,7 +1,7 @@
 2012-02-28  Glenn Morris  <rgm@gnu.org>
 
-	* gmm-utils.el, gnus-agent.el, gnus-score.el, mm-decode.el:
-	Standardize possessive apostrophe usage.
+	* gmm-utils.el, gnus-agent.el, gnus-score.el, messagexmas.el,
+	mm-decode.el: Standardize possessive apostrophe usage.
 
 2012-02-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
