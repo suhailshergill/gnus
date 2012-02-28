@@ -135,7 +135,7 @@ the width is used for the toolbar displayed on the right or the left.")
 	(set-specifier left-toolbar-visible-p nil cur)))))
 
 (defun message-xmas-exchange-point-and-mark ()
-  "Exchange point and mark, but allow for XEmacs' optional argument."
+  "Exchange point and mark, but allow for XEmacs's optional argument."
   (exchange-point-and-mark message-xmas-dont-activate-region))
 
 (defun message-xmas-maybe-fontify ()
