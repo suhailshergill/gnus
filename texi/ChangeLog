@@ -1,3 +1,8 @@
+2012-02-28  Glenn Morris  <rgm@gnu.org>
+
+	* gnus-faq.texi, gnus-news.texi, gnus.texi:
+	Standardize possessive apostrophe usage.
+
 2012-02-17  Glenn Morris  <rgm@gnu.org>
 
 	* gnus.texi (Posting Styles): Fix cross-refs to other manual.
