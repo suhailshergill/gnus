@@ -1,3 +1,8 @@
+2012-02-28  Glenn Morris  <rgm@gnu.org>
+
+	* gmm-utils.el, gnus-agent.el, gnus-score.el, mm-decode.el:
+	Standardize possessive apostrophe usage.
+
 2012-02-25  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-column-specs): Protect against TDs with "width: 0%".
