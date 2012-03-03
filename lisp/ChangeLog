@@ -1,3 +1,9 @@
+2012-03-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* tls.el (open-tls-stream): Don't set the dont-query-on-exit flag.
+	This is inconsistent with all the other stream functions, which leave
+	the setting up to the higher levels (if so wanted) (bug#10931).
+
 2012-02-28  Glenn Morris  <rgm@gnu.org>
 
 	* gmm-utils.el, gnus-agent.el, gnus-score.el, messagexmas.el,
