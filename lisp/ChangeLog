@@ -1,3 +1,8 @@
+2012-03-04  Thierry Volpiatto  <thierry.volpiatto@gmail.com>
+
+	* gnus-msg.el (gnus-msg-mail): Call `message-mail' correctly when Gnus
+	isn't running (bug#10897).
+
 2012-03-03  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* tls.el (open-tls-stream): Don't set the dont-query-on-exit flag.
@@ -58,13 +63,6 @@
 
 	* gnus-start.el (gnus-1): Avoid duplicate entries.
 
-2012-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* mm-decode.el (mm-dissect-singlepart): Guess what the type of
-	application/octet-stream parts really is.
-
-	* gnus-sum.el (gnus-propagate-marks): Remove.
-
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* imap.el: Remove.
@@ -75,6 +73,13 @@
 
 	* gnus-start.el (gnus-clean-old-newsrc): Delete `unexist' from pre-Ma
 	Gnus 0.3.
+
+2012-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* mm-decode.el (mm-dissect-singlepart): Guess what the type of
+	application/octet-stream parts really is.
+
+	* gnus-sum.el (gnus-propagate-marks): Remove.
 
 2012-02-15  Paul Eggert  <eggert@cs.ucla.edu>
 
