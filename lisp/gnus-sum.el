@@ -10304,16 +10304,19 @@ This will be the case if the article has both been mailed and posted."
 	      'request-expire-articles gnus-newsgroup-name))
     ;; This backend supports expiry.
     (let* ((total (gnus-group-total-expirable-p gnus-newsgroup-name))
-	   (expirable (if total
-			  (progn
-			    ;; We need to update the info for
-			    ;; this group for `gnus-list-of-read-articles'
-			    ;; to give us the right answer.
-			    (gnus-run-hooks 'gnus-exit-group-hook)
-			    (gnus-summary-update-info)
-			    (gnus-list-of-read-articles gnus-newsgroup-name))
-			(setq gnus-newsgroup-expirable
-			      (sort gnus-newsgroup-expirable '<))))
+	   (expirable
+	    (gnus-list-range-difference
+	     (if total
+		 (progn
+		   ;; We need to update the info for
+		   ;; this group for `gnus-list-of-read-articles'
+		   ;; to give us the right answer.
+		   (gnus-run-hooks 'gnus-exit-group-hook)
+		   (gnus-summary-update-info)
+		   (gnus-list-of-read-articles gnus-newsgroup-name))
+	       (setq gnus-newsgroup-expirable
+		     (sort gnus-newsgroup-expirable '<)))
+	     gnus-newsgroup-unexist))
 	   (expiry-wait (if now 'immediate
 			  (gnus-group-find-parameter
 			   gnus-newsgroup-name 'expiry-wait)))
