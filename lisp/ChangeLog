@@ -1,3 +1,8 @@
+2012-03-10  David Edmondson  <dme@dme.org>
+
+	* mm-uu.el (mm-uu-forward-extract): Allow for blank lines between the
+	'Forwarded Message' header and the start of the message.
+
 2012-03-04  Thierry Volpiatto  <thierry.volpiatto@gmail.com>
 
 	* gnus-msg.el (gnus-msg-mail): Call `message-mail' correctly when Gnus
@@ -7669,7 +7674,7 @@
 	accept.  Reported by Dan Christensen.
 	(nnimap-command): Make sure that the error message doesn't error out.
 
-2010-09-20  David Edmondson  <dme@dme.org>  (tiny change)
+2010-09-20  David Edmondson  <dme@dme.org>
 
 	* nnimap.el (nnimap-request-set-mark): Don't wait for a response when
 	we haven't requested anything.
