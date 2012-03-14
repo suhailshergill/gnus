@@ -1,5 +1,8 @@
 2012-03-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-update-marks): Don't propagate marks unless
+	requested (bug#10961).
+
 	* shr.el (shr-table-widths): Divide the extra width more fairly over
 	the TDs (bug#10973).
 	(shr-render-td): Don't delete too much padding.
