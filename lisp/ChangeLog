@@ -1,5 +1,9 @@
 2012-03-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* shr.el (shr-table-widths): Divide the extra width more fairly over
+	the TDs (bug#10973).
+	(shr-render-td): Don't delete too much padding.
+
 	* gnus-msg.el (gnus-bug): Don't delete the other windows.  We may be
 	using a `gnus-use-full-window' setup (bug#11013).
 
