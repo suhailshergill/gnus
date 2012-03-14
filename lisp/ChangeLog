@@ -7,6 +7,9 @@
 	(shr-insert): Allow the natural width to be computed for tables again.
 	(shr-tag-table-1): Rework how the natural widths are computed by
 	rendering the table a third time.
+	(shr-natural-width): Removed.
+	(shr-buffer-width): New function.
+	(shr-expand-newlines): Use it.
 
 	* gnus-msg.el (gnus-bug): Don't delete the other windows.  We may be
 	using a `gnus-use-full-window' setup (bug#11013).
