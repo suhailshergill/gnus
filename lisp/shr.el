@@ -375,7 +375,6 @@ size, and full-buffer size."
 	  (when (eq (preceding-char) ? )
 	    (delete-char -1))
 	  (insert "\n")
-	  (put-text-property (1- (point)) (point) 'shr-break t)
 	  (unless found
 	    ;; No space is needed at the beginning of a line.
 	    (when (eq (following-char) ? )
@@ -770,7 +769,7 @@ ones, in case fg and bg are nil."
     (forward-line 1)
     (setq end (point))
     (narrow-to-region start end)
-    (let ((width (shr-natural-width))
+    (let ((width (shr-buffer-width))
 	  column)
       (goto-char (point-min))
       (while (not (eobp))
@@ -1373,17 +1372,12 @@ ones, in case fg and bg are nil."
 		  (car actual-colors))
 	  max)))))
 
-(defun shr-natural-width ()
+(defun shr-buffer-width ()
   (goto-char (point-min))
-  (let ((current 0)
-	(max 0))
+  (let ((max 0))
     (while (not (eobp))
       (end-of-line)
-      (setq current (+ current (current-column)))
-      (if (get-text-property (point) 'shr-break)
-	  (incf current)
-	(setq max (max max current)
-	      current 0))
+      (setq max (max max (current-column)))
       (forward-line 1))
     max))
 
