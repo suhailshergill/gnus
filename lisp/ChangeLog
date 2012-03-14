@@ -5,6 +5,8 @@
 	(shr-render-td): Don't delete too much padding.
 	(shr-natural-width): Compute the natural width more correctly.
 	(shr-insert): Allow the natural width to be computed for tables again.
+	(shr-tag-table-1): Rework how the natural widths are computed by
+	rendering the table a third time.
 
 	* gnus-msg.el (gnus-bug): Don't delete the other windows.  We may be
 	using a `gnus-use-full-window' setup (bug#11013).
