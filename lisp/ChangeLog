@@ -1,3 +1,8 @@
+2012-03-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-msg.el (gnus-bug): Don't delete the other windows.  We may be
+	using a `gnus-use-full-window' setup (bug#11013).
+
 2012-03-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-int.el (gnus-backend-trace): Flip default to nil before Emacs
