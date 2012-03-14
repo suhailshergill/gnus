@@ -340,8 +340,8 @@ the URL of the image to the kill buffer instead."
 	  (when (eq (preceding-char) ? )
 	    (delete-char -1))
 	  (insert "\n")
+	  (put-text-property (1- (point)) (point) 'shr-break t)
 	  (unless found
-	    (put-text-property (1- (point)) (point) 'shr-break t)
 	    ;; No space is needed at the beginning of a line.
 	    (when (eq (following-char) ? )
 	      (delete-char 1)))
@@ -1320,7 +1320,8 @@ ones, in case fg and bg are nil."
     (while (not (eobp))
       (end-of-line)
       (setq current (+ current (current-column)))
-      (unless (get-text-property (point) 'shr-break)
+      (if (get-text-property (point) 'shr-break)
+	  (incf current)
 	(setq max (max max current)
 	      current 0))
       (forward-line 1))

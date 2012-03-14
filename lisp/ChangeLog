@@ -3,6 +3,8 @@
 	* shr.el (shr-table-widths): Divide the extra width more fairly over
 	the TDs (bug#10973).
 	(shr-render-td): Don't delete too much padding.
+	(shr-natural-width): Compute the natural width more correctly.
+	(shr-insert): Allow the natural width to be computed for tables again.
 
 	* gnus-msg.el (gnus-bug): Don't delete the other windows.  We may be
 	using a `gnus-use-full-window' setup (bug#11013).
