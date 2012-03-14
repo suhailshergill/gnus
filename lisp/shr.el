@@ -1257,21 +1257,26 @@ ones, in case fg and bg are nil."
 	  (aset natural-widths i (max (aref natural-widths i)
 				      (cadr column)))
 	  (setq i (1+ i)))))
-    (let ((extra (- (apply '+ (append suggested-widths nil))
-		    (apply '+ (append widths nil))))
-	  (expanded-columns 0))
+    (let* ((total-suggested (apply '+ (append suggested-widths nil)))
+	   (total-actual (apply '+ (append widths nil)))
+	   (extra (- total-suggested
+		     total-actual
+		     ;; TD separators.
+		     (length widths)
+		     ;; Table separators + fence.
+		     3
+		     (* 2 shr-table-depth)))
+	   (expanded-columns 0))
+      ;; We have extra, unused space, so divide this space amongst the
+      ;; columns.
       (when (> extra 0)
+	;; If the natural width is wider than the rendered width, we
+	;; want to allow the column to expand.
 	(dotimes (i length)
-	  ;; If the natural width is wider than the rendered width, we
-	  ;; want to allow the column to expand.
-	  (when (> (aref natural-widths i) (aref widths i))
-	    (setq expanded-columns (1+ expanded-columns))))
-	(dotimes (i length)
-	  (when (> (aref natural-widths i) (aref widths i))
-	    (aset widths i (min
-			    (1+ (aref natural-widths i))
-			    (+ (/ extra expanded-columns)
-			       (aref widths i))))))))
+	  (when (> (aref natural-widths i) 0)
+	    (aset widths i (+ (truncate (* (/ extra (* 1.0 total-actual))
+					   (aref widths i)))
+			      (aref widths i)))))))
     widths))
 
 (defun shr-make-table (cont widths &optional fill)
@@ -1324,10 +1329,13 @@ ones, in case fg and bg are nil."
 	  (let ((shr-width width)
 		(shr-indentation 0))
 	    (shr-descend (cons 'td cont)))
+	  ;; Delete padding at the bottom of the TDs.
 	  (delete-region
 	   (point)
-	   (+ (point)
-	      (skip-chars-backward " \t\n")))
+	   (progn
+	     (skip-chars-backward " \t\n")
+	     (end-of-line)
+	     (point)))
 	  (push (list (cons width cont) (buffer-string)
 		      (shr-overlays-in-region (point-min) (point-max)))
 		shr-content-cache)))
