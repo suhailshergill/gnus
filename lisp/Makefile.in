@@ -46,36 +46,36 @@ test-nntp:
 
 # This entry will never install .el files if there are no .elc files.
 install-el: gnus-load.el
-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(lispdir)"
-	$(INSTALL_DATA) gnus-load.el "$(lispdir)/gnus-load.el"
+	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(lispdir)"
+	$(INSTALL_DATA) gnus-load.el "$(DESTDIR)$(lispdir)/gnus-load.el"
 	@for p in *.elc; do \
 	  p=`basename $$p c`; \
 	  if [ -f "$(srcdir)/$$p" ]; then \
-	    echo "$(INSTALL_DATA) $$p \"$(lispdir)/$$p\""; \
-	    $(INSTALL_DATA) $(srcdir)/$$p "$(lispdir)/$$p"; \
+	    echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(lispdir)/$$p\""; \
+	    $(INSTALL_DATA) $(srcdir)/$$p "$(DESTDIR)$(lispdir)/$$p"; \
 	  fi; \
 	done
 
 install-elc: clever
 	rm -f dgnushack.elc
-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(lispdir)"
+	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(lispdir)"
 	@for p in *.elc; do \
-	  echo "$(INSTALL_DATA) $$p \"$(lispdir)/$$p\""; \
-	  $(INSTALL_DATA) $$p "$(lispdir)/$$p"; \
+	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(lispdir)/$$p\""; \
+	  $(INSTALL_DATA) $$p "$(DESTDIR)$(lispdir)/$$p"; \
 	done
 
 install-el-elc: clever
 	rm -f dgnushack.elc
-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(lispdir)"
-	$(INSTALL_DATA) gnus-load.el "$(lispdir)/gnus-load.el"
+	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(lispdir)"
+	$(INSTALL_DATA) gnus-load.el "$(DESTDIR)$(lispdir)/gnus-load.el"
 	@for p in *.elc; do \
 	  q=`basename $$p c`; \
 	  if [ -f "$(srcdir)/$$q" ]; then \
-	    echo "$(INSTALL_DATA) $$q \"$(lispdir)/$$q\""; \
-	    $(INSTALL_DATA) $(srcdir)/$$q "$(lispdir)/$$q"; \
+	    echo "$(INSTALL_DATA) $$q \"$(DESTDIR)$(lispdir)/$$q\""; \
+	    $(INSTALL_DATA) $(srcdir)/$$q "$(DESTDIR)$(lispdir)/$$q"; \
 	  fi; \
-	  echo "$(INSTALL_DATA) $$p \"$(lispdir)/$$p\""; \
-	  $(INSTALL_DATA) $$p "$(lispdir)/$$p"; \
+	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(lispdir)/$$p\""; \
+	  $(INSTALL_DATA) $$p "$(DESTDIR)$(lispdir)/$$p"; \
 	done
 
 list-installed-shadows:
@@ -86,11 +86,11 @@ remove-installed-shadows:
 
 uninstall:
 	for p in *.elc; do \
-	  rm -f "$(lispdir)/$$p"; \
+	  rm -f "$(DESTDIR)$(lispdir)/$$p"; \
 	done
 	cd $(srcdir); \
 	for p in *.el; do \
-	  rm -f "$(lispdir)/$$p"; \
+	  rm -f "$(DESTDIR)$(lispdir)/$$p"; \
 	done
 
 tags:

@@ -1,3 +1,7 @@
+2012-03-15  Elias Pipping  <pipping@lavabit.com>
+
+	* Makefile.in: Respect DESTDIR.
+
 2012-03-14  Christopher Schmidt  <christopher@ch.ristopher.com>
 
         * gnus-msg.el (gnus-inews-do-gcc): Add gnus-gcc-pre-body-encode-hook

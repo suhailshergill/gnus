@@ -15,13 +15,13 @@ INSTALL_DATA = @INSTALL_DATA@
 SHELL = /bin/sh
 
 install:
-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)"
+	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(etcdir)"
 	@cd $(srcdir) \
 	&& for p in gnus-tut.txt; do \
-	  echo "$(INSTALL_DATA) \"$$p $(etcdir)/$$p\""; \
-	  $(INSTALL_DATA) $$p "$(etcdir)/$$p"; \
+	  echo "$(INSTALL_DATA) \"$$p $(DESTDIR)$(etcdir)/$$p\""; \
+	  $(INSTALL_DATA) $$p "$(DESTDIR)$(etcdir)/$$p"; \
 	done
-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)/images/gnus" "$(etcdir)/images/mail"
+	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(etcdir)/images/gnus" "$(DESTDIR)$(etcdir)/images/mail"
 	@cd $(srcdir) \
 	&& for p in images/gnus/*.pbm images/gnus/*.png images/gnus/*.svg \
 		    images/gnus/*.xbm images/gnus/*.xpm \
@@ -30,12 +30,12 @@ install:
 		    images/*.pbm images/*.png images/*.svg images/*.xbm \
 		    images/*.xpm; do \
 	  if test -f $$p; then \
-	    echo "$(INSTALL_DATA) $$p \"$(etcdir)/$$p\""; \
-	    $(INSTALL_DATA) $$p "$(etcdir)/$$p"; \
+	    echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(etcdir)/$$p\""; \
+	    $(INSTALL_DATA) $$p "$(DESTDIR)$(etcdir)/$$p"; \
 	  fi; \
 	done
-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)/images/smilies" \
-	  "$(etcdir)/images/smilies/grayscale" "$(etcdir)/images/smilies/medium"
+	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(etcdir)/images/smilies" \
+	  "$(DESTDIR)$(etcdir)/images/smilies/grayscale" "$(DESTDIR)$(etcdir)/images/smilies/medium"
 	@cd $(srcdir) \
 	&& for p in images/smilies/*.pbm images/smilies/*.png \
 		    images/smilies/*.svg images/smilies/*.xbm \
@@ -49,8 +49,8 @@ install:
 		    images/smilies/medium/*.svg images/smilies/medium/*.xbm \
 		    images/smilies/medium/*.xpm; do \
 	  if test -f $$p; then \
-	    echo "$(INSTALL_DATA) $$p \"$(etcdir)/$$p\""; \
-	    $(INSTALL_DATA) $$p "$(etcdir)/$$p"; \
+	    echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(etcdir)/$$p\""; \
+	    $(INSTALL_DATA) $$p "$(DESTDIR)$(etcdir)/$$p"; \
 	  fi; \
 	done
 
