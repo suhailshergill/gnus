@@ -12675,6 +12675,19 @@ this is @code{no-gcc-self}, that is the default, resent messages will be
 @code{Gcc} copied to groups that existing @code{Gcc} header specifies,
 except for the current group.
 
+@item gnus-gcc-pre-body-encode-hook
+@vindex gnus-gcc-pre-body-encode-hook
+@itemx gnus-gcc-post-body-encode-hook
+@vindex gnus-gcc-post-body-encode-hook
+
+These hooks are run before/after encoding the message body of the Gcc
+copy of a sent message.  The current buffer (when the hook is run)
+contains the message including the message header.  Changes made to
+the message will only affect the Gcc copy, but not the original
+message.  You can use these hooks to edit the copy (and influence
+subsequent transformations), e.g. remove MML secure tags
+(@pxref{Signing and encrypting}).
+
 @end table
 
 
@@ -28328,6 +28341,25 @@ New features in No Gnus:
 
 I'm sure there will be lots of text here.  It's really spelled 真
 Gnus.
+
+New features in Ma Gnus:
+
+@itemize @bullet
+
+@item Changes in Message mode and related Gnus features
+@c ****************************************************
+
+@itemize @bullet
+
+@item
+The new hooks @code{gnus-gcc-pre-body-encode-hook} and
+@code{gnus-gcc-post-body-encode-hook} are run before/after encoding
+the message body of the Gcc copy of a sent message.  See
+@xref{Archived Messages}.
+
+@end itemize
+
+@end itemize
 
 @iftex
 

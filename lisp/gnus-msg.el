@@ -313,6 +313,22 @@ If nil, the address field will always be empty after invoking
   :group 'gnus-message
   :type 'boolean)
 
+(defcustom gnus-gcc-pre-body-encode-hook nil
+  "A hook called before encoding the body of the Gcc copy of a message.
+The current buffer (when the hook is run) contains the message
+including the message header.  Changes made to the message will
+only affect the Gcc copy, but not the original message."
+  :group 'gnus-message
+  :type 'hook)
+
+(defcustom gnus-gcc-post-body-encode-hook nil
+    "A hook called after encoding the body of the Gcc copy of a message.
+The current buffer (when the hook is run) contains the message
+including the message header.  Changes made to the message will
+only affect the Gcc copy, but not the original message."
+  :group 'gnus-message
+  :type 'hook)
+
 (autoload 'gnus-message-citation-mode "gnus-cite" nil t)
 
 ;;; Internal variables.
@@ -1642,7 +1658,9 @@ this is a reply."
 	      (nnheader-set-temp-buffer " *acc*")
 	      (setq message-options (with-current-buffer cur message-options))
 	      (insert-buffer-substring cur)
+	      (run-hooks 'gnus-gcc-pre-body-encode-hook)
 	      (message-encode-message-body)
+	      (run-hooks 'gnus-gcc-post-body-encode-hook)
 	      (save-restriction
 		(message-narrow-to-headers)
 		(let* ((mail-parse-charset message-default-charset)

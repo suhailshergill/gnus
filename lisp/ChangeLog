@@ -1,3 +1,8 @@
+2012-03-14  Christopher Schmidt  <christopher@ch.ristopher.com>
+
+        * gnus-msg.el (gnus-inews-do-gcc): Add gnus-gcc-pre-body-encode-hook
+        and gnus-gcc-post-body-encode-hook.
+
 2012-03-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-group.el (gnus-group-expire-articles-1): Don't try to expire
