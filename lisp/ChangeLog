@@ -4,6 +4,7 @@
 	space.  This seems to produce more pleasing results.
 	(shr-tag-br): Make <br> only ensure a line break instead of always
 	creating a blank line.  This looks more readable in my test corpus.
+	(shr-insert): Only insert a blank line if we're starting from an image.
 
 2012-03-15  Elias Pipping  <pipping@lavabit.com>
 

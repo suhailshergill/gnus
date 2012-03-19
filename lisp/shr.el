@@ -333,6 +333,7 @@ size, and full-buffer size."
 
 (defun shr-insert (text)
   (when (and (eq shr-state 'image)
+	     (not (bolp))
 	     (not (string-match "\\`[ \t\n]+\\'" text)))
     (insert "\n")
     (setq shr-state nil))
