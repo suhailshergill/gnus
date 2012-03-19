@@ -1,3 +1,8 @@
+2012-03-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el (shr-insert): Treat non-breaking space just like normal
+	space.  This seems to produce more pleasing results.
+
 2012-03-15  Elias Pipping  <pipping@lavabit.com>
 
 	* Makefile.in: Respect DESTDIR.

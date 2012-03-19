@@ -344,7 +344,7 @@ size, and full-buffer size."
 	       (not (bolp))
 	       (not (eq (char-after (1- (point))) ? )))
       (insert " "))
-    (dolist (elem (split-string text))
+    (dolist (elem (split-string text "[ \f\t\n\r\v ]+" t))
       (when (and (bolp)
 		 (> shr-indentation 0))
 	(shr-indent))
