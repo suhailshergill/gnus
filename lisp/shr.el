@@ -368,6 +368,7 @@ size, and full-buffer size."
       (unless shr-start
 	(setq shr-start (point)))
       (insert elem)
+      (setq shr-state nil)
       (let (found)
 	(while (and (> (current-column) shr-width)
 		    (progn
