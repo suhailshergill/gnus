@@ -501,7 +501,7 @@ size, and full-buffer size."
       (if (save-excursion
 	    (beginning-of-line)
 	    (looking-at " *$"))
-	  (insert "\n")
+	  (delete-region (match-beginning 0) (match-end 0))
 	(insert "\n\n")))))
 
 (defun shr-indent ()
@@ -1044,7 +1044,12 @@ ones, in case fg and bg are nil."
     (shr-generic cont)))
 
 (defun shr-tag-br (cont)
-  (unless (bobp)
+  (when (and (not (bobp))
+	     ;; Only add a newline if we break the current line, or
+	     ;; the previous line isn't a blank line.
+	     (or (not (bolp))
+		 (and (> (- (point) 2) (point-min))
+		      (not (= (char-after (- (point) 2)) ?\n)))))
     (insert "\n")
     (shr-indent))
   (shr-generic cont))
