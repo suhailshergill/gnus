@@ -340,7 +340,7 @@ size, and full-buffer size."
    ((eq shr-folding-mode 'none)
     (insert text))
    (t
-    (when (and (string-match "\\`[ \t\n]" text)
+    (when (and (string-match "\\`[ \t\n ]" text)
 	       (not (bolp))
 	       (not (eq (char-after (1- (point))) ? )))
       (insert " "))
@@ -383,7 +383,7 @@ size, and full-buffer size."
 	    (shr-indent))
 	  (end-of-line))
 	(insert " ")))
-    (unless (string-match "[ \t\n]\\'" text)
+    (unless (string-match "[ \t\n ]\\'" text)
       (delete-char -1)))))
 
 (defun shr-find-fill-point ()
