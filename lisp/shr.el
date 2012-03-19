@@ -1042,7 +1042,7 @@ ones, in case fg and bg are nil."
     (shr-generic cont)))
 
 (defun shr-tag-br (cont)
-  (unless (bobp)
+  (unless (bolp)
     (insert "\n")
     (shr-indent))
   (shr-generic cont))
