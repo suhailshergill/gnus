@@ -3,6 +3,11 @@
 	* gnus.texi (Archived Messages): Mention gnus-gcc-pre-body-encode-hook
 	and gnus-gcc-post-body-encode-hook. 
 
+2012-03-22  Peder O. Klingenberg  <peder@klingenberg.no>  (tiny change)
+
+	* gnus.texi (Archived Messages): Update `gnus-message-archive-group' to
+	reflect the new default.
+
 2012-02-28  Glenn Morris  <rgm@gnu.org>
 
 	* gnus-faq.texi, gnus-news.texi, gnus.texi:
