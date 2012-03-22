@@ -1,3 +1,7 @@
+2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-compat.el: Define `bound-and-true-p' for XEmacs.
+
 2012-03-12  Peter Münster  <pmrb@free.fr>
 
 	* gnus-demon.el (gnus-demon-timers): Now a plist (function -> timer).

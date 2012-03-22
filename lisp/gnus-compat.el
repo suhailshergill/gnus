@@ -97,6 +97,13 @@ TRASH is ignored."
 			   (lambda (process status)
 			     (apply function process status args))))))
 
+;; XEmacs 21.4
+(unless (fboundp 'bound-and-true-p)
+  (defmacro bound-and-true-p (var)
+    "Return the value of symbol VAR if it is bound, else nil."
+    (and (boundp var)
+	 (symbol-value var))))
+
 (provide 'gnus-compat)
 
 ;; gnus-compat.el ends here
