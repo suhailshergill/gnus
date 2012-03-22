@@ -1,3 +1,8 @@
+2012-03-22  Sergio Martínez  <samf0xb58@gmail.com>  (tiny change)
+
+	* nnimap.el (nnimap-request-scan): Allow `nnimap-inbox' to be a list of
+	inboxes.
+
 2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* nnimap.el (nnimap-fetch-partial-articles): Minor doc string fixup.

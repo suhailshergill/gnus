@@ -82,7 +82,8 @@ back on `network'.")
 
 (defvoo nnimap-inbox nil
   "The mail box where incoming mail arrives and should be split out of.
-For example, \"INBOX\".")
+This can be a string or a list of strings
+For example, \"INBOX\" or (\"INBOX\" \"SENT\").")
 
 (defvoo nnimap-split-methods nil
   "How mail is split.
@@ -1007,7 +1008,10 @@ textual parts.")
 	     nnimap-inbox
 	     nnimap-split-methods)
     (nnheader-message 7 "nnimap %s splitting mail..." server)
-    (nnimap-split-incoming-mail)
+    (if (listp nnimap-inbox)
+       (dolist (nnimap-inbox nnimap-inbox)
+         (nnimap-split-incoming-mail))
+      (nnimap-split-incoming-mail))
     (nnheader-message 7 "nnimap %s splitting mail...done" server)))
 
 (defun nnimap-marks-to-flags (marks)
