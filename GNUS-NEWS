@@ -33,6 +33,8 @@ For older news, see Gnus info node "New Features".
    application/octet-stream based on the file suffix.  So an
    application/octet-stream with a name of "rms.jpg" will be displayed
    as an image/jpeg type by default, for instance.
+
+** `nnimap-inbox' can now be a list of mail box names.
    
 * For older news, see Gnus info node "New Features".
 

@@ -1,7 +1,12 @@
+2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (Client-Side IMAP Splitting): Note that `nnimap-inbox' now
+	can be a list.
+
 2012-03-14  Christopher Schmidt  <christopher@ch.ristopher.com>
 
 	* gnus.texi (Archived Messages): Mention gnus-gcc-pre-body-encode-hook
-	and gnus-gcc-post-body-encode-hook. 
+	and gnus-gcc-post-body-encode-hook.
 
 2012-03-22  Peder O. Klingenberg  <peder@klingenberg.no>  (tiny change)
 
