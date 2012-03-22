@@ -2231,7 +2231,8 @@ unfolded."
 		 (unfoldable
 		  (or (equal gnus-article-unfold-long-headers t)
 		      (and (stringp gnus-article-unfold-long-headers)
-			   (string-match gnus-article-unfold-long-headers header)))))
+			   (string-match gnus-article-unfold-long-headers
+					 header)))))
 	    (with-temp-buffer
 	      (insert header)
 	      (goto-char (point-min))
