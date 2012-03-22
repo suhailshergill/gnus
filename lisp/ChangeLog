@@ -1,3 +1,12 @@
+2012-03-12  Peter Münster  <pmrb@free.fr>
+
+	* gnus-demon.el (gnus-demon-timers): Now a plist (function -> timer).
+	(gnus-demon-cancel): Ditto.
+	(gnus-demon-run-callback): When function cannot be called due to low
+	idleness, call it when idleness reaches the expected value, instead of
+	waiting another timer period.
+	(gnus-demon-init): Add `time' to arguments of call-back.
+
 2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* dgnushack.el: Bind `gnus-registry-enabled' for XEmacs.
