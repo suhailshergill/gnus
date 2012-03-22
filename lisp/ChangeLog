@@ -1,3 +1,8 @@
+2012-03-22  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-msg.el (gnus-summary-resend-message): Don't encode encoded words
+	in header when Gcc'ing resent mesage.
+
 2012-03-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* shr.el (shr-insert): Treat non-breaking space just like normal
@@ -12,8 +17,8 @@
 
 2012-03-14  Christopher Schmidt  <christopher@ch.ristopher.com>
 
-        * gnus-msg.el (gnus-inews-do-gcc): Add gnus-gcc-pre-body-encode-hook
-        and gnus-gcc-post-body-encode-hook.
+	* gnus-msg.el (gnus-inews-do-gcc): Add gnus-gcc-pre-body-encode-hook
+	and gnus-gcc-post-body-encode-hook.
 
 2012-03-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 

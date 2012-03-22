@@ -1357,9 +1357,12 @@ For the \"inline\" alternatives, also see the variable
     ;; `gnus-summary-resend-message-insert-gcc' must run last.
     (add-hook 'message-header-setup-hook
 	      'gnus-summary-resend-message-insert-gcc t)
-    (add-hook 'message-sent-hook (if gnus-agent
-				     'gnus-agent-possibly-do-gcc
-				   'gnus-inews-do-gcc))
+    (add-hook 'message-sent-hook
+	      `(lambda ()
+		 (let ((rfc2047-encode-encoded-words nil))
+		   ,(if gnus-agent
+			'(gnus-agent-possibly-do-gcc)
+		      '(gnus-inews-do-gcc)))))
     (dolist (article (gnus-summary-work-articles n))
       (gnus-summary-select-article nil nil nil article)
       (with-current-buffer gnus-original-article-buffer
