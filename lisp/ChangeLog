@@ -1,3 +1,7 @@
+2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* nnimap.el (nnimap-fetch-partial-articles): Minor doc string fixup.
+
 2012-03-22  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-msg.el (gnus-summary-resend-message-insert-gcc): Assume that
