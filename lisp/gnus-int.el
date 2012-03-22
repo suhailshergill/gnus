@@ -583,49 +583,6 @@ This is the string that Gnus uses to identify the group."
    (gnus-group-real-name group)
    (gnus-group-method group)))
 
-;; largely based on nnir-warp-to-article
-(defun gnus-try-warping-via-registry ()
-  "Attempt to warp to the current article's source group based on
-data stored in the registry."
-  (interactive)
-  (when (gnus-summary-article-header)
-    (let* ((message-id (mail-header-id (gnus-summary-article-header)))
-           ;; Retrieve the message's group(s) from the registry
-           (groups (gnus-registry-get-id-key message-id 'group))
-           ;; If starting from an ephemeral group, this describes
-           ;; how to restore the window configuration
-           (quit-config
-            (gnus-ephemeral-group-p gnus-newsgroup-name))
-           (seen-groups (list (gnus-group-group-name))))
-
-      (catch 'found
-        (dolist (group (mapcar 'gnus-simplify-group-name groups))
-
-          ;; skip over any groups we really don't want to warp to.
-          (unless (or (member group seen-groups)
-                      (gnus-ephemeral-group-p group)          ;; any ephemeral group
-                      (memq (car (gnus-find-method-for-group group))
-                            '(nnir))) ;; Specific methods; this list may need to expand.
-
-            ;; remember that we've seen this group already
-            (push group seen-groups)
-
-            ;; first exit from any ephemeral summary buffer.
-            (when quit-config
-              (gnus-summary-exit)
-              ;; and if the ephemeral summary buffer in turn came from another
-              ;; summary buffer we have to clean that summary up too.
-              (when (eq (cdr quit-config) 'summary)
-                (gnus-summary-exit))
-              ;; remember that we've already done this part
-              (setq quit-config nil))
-
-            ;; Try to activate the group.  If that fails, just move
-            ;; along.  We may have more groups to work with
-            (ignore-errors
-                (gnus-select-group-with-message-id group message-id))
-            (throw 'found t)))))))
-
 (defun gnus-warp-to-article ()
   "Warps from an article in a virtual group to the article in its
 real group. Does nothing on a real group."
@@ -636,7 +593,8 @@ real group. Does nothing on a real group."
      (when (gnus-check-backend-function
             'warp-to-article (car gnus-command-method))
        (funcall (gnus-get-function gnus-command-method 'warp-to-article)))
-     (gnus-try-warping-via-registry))))
+     (and (bound-and-true-p gnus-registry-enabled)
+	  (gnus-try-warping-via-registry)))))
 
 (defun gnus-request-head (article group)
   "Request the head of ARTICLE in GROUP."

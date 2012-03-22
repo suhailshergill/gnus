@@ -1,3 +1,13 @@
+2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.el: Register gnus-registry functions.
+
+	* gnus-registry.el (gnus-try-warping-via-registry): Moved here and
+	indent.
+
+	* gnus-int.el (gnus-warp-to-article): Check whether the registry is
+	enabled before warping.
+
 2012-03-22  Dave Abrahams  <dave@boostpro.com>
 
 	* gnus-sum.el (gnus-summary-insert-subject): Record information in the

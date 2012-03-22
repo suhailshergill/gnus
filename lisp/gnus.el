@@ -2800,6 +2800,8 @@ gnus-registry.el will populate this if it's loaded.")
      ("gnus-kill" gnus-kill gnus-apply-kill-file-internal
       gnus-kill-file-edit-file gnus-kill-file-raise-followups-to-author
       gnus-execute gnus-expunge gnus-batch-kill gnus-batch-score)
+     ("gnus-registry" gnus-try-warping-via-registry
+      gnus-registry-handle-action)
      ("gnus-cache" gnus-cache-possibly-enter-article gnus-cache-save-buffers
       gnus-cache-possibly-remove-articles gnus-cache-request-article
       gnus-cache-retrieve-headers gnus-cache-possibly-alter-active
