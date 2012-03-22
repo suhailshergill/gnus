@@ -1313,26 +1313,27 @@ For the \"inline\" alternatives, also see the variable
 					  group)))
 	      (message-unquote-tokens
 	       (message-tokenize-header (mail-fetch-field "gcc" nil t)
-					" ,")))))
+					" ,"))))
+	(self (with-current-buffer gnus-summary-buffer
+		gnus-gcc-self-resent-messages)))
     (message-remove-header "gcc")
     (when gcc
       (goto-char (point-max))
-      (cond ((eq gnus-gcc-self-resent-messages 'none))
-	    ((eq gnus-gcc-self-resent-messages t)
+      (cond ((eq self 'none))
+	    ((eq self t)
 	     (insert "Gcc: \"" gnus-newsgroup-name "\"\n"))
-	    ((stringp gnus-gcc-self-resent-messages)
+	    ((stringp self)
 	     (insert "Gcc: "
 		     (mm-encode-coding-string
-		      (if (string-match " " gnus-gcc-self-resent-messages)
-			  (concat "\"" gnus-gcc-self-resent-messages "\"")
-			gnus-gcc-self-resent-messages)
-		      (gnus-group-name-charset
-		       (gnus-inews-group-method gnus-gcc-self-resent-messages)
-		       gnus-gcc-self-resent-messages))
+		      (if (string-match " " self)
+			  (concat "\"" self "\"")
+			self)
+		      (gnus-group-name-charset (gnus-inews-group-method self)
+					       self))
 		     "\n"))
-	    ((null gnus-gcc-self-resent-messages)
+	    ((null self)
 	     (insert "Gcc: " (mapconcat 'identity gcc ", ") "\n"))
-	    ((eq gnus-gcc-self-resent-messages 'no-gcc-self)
+	    ((eq self 'no-gcc-self)
 	     (when (setq gcc (delete
 			      gnus-newsgroup-name
 			      (delete (concat "\"" gnus-newsgroup-name "\"")

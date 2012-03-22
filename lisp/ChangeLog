@@ -1,7 +1,9 @@
 2012-03-22  Katsumi Yamaoka  <yamaoka@jpl.org>
 
-	* gnus-msg.el (gnus-summary-resend-message): Don't encode encoded words
-	in header when Gcc'ing resent message.
+	* gnus-msg.el (gnus-summary-resend-message-insert-gcc): Assume that
+	gnus-gcc-self-resent-messages may be a group parameter.
+	(gnus-summary-resend-message): Don't encode encoded words in header
+	when Gcc'ing resent message.
 
 2012-03-19  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
