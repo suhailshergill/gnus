@@ -6626,9 +6626,9 @@ too, instead of trying to fetch new headers."
       ;; article if ID is a number -- so that the next `P' or `N'
       ;; command will fetch the previous (or next) article even
       ;; if the one we tried to fetch this time has been canceled.
-      (when (> number gnus-newsgroup-end)
+      (unless (and gnus-newsgroup-end (< number gnus-newsgroup-end))
 	(setq gnus-newsgroup-end number))
-      (when (< number gnus-newsgroup-begin)
+      (unless (and gnus-newsgroup-begin (> number gnus-newsgroup-begin))
 	(setq gnus-newsgroup-begin number))
       (setq gnus-newsgroup-unselected
 	    (delq number gnus-newsgroup-unselected)))
@@ -12428,6 +12428,13 @@ If REVERSE, save parts that do not match TYPE."
 		(not (setq header (car (gnus-get-newsgroup-headers nil t)))))
 	    ()				; Malformed head.
 	  (unless (gnus-summary-article-sparse-p (mail-header-number header))
+            (when (and (bound-and-true-p gnus-registry-enabled)
+                       (not (gnus-ephemeral-group-p (car where))))
+              (gnus-registry-handle-action
+               (mail-header-id header) nil
+               (gnus-group-prefixed-name (car where) gnus-override-method)
+               (mail-header-subject header)
+               (mail-header-from header)))
 	    (when (and (stringp id)
 		       (or
 			(not (string= (gnus-group-real-name group)
