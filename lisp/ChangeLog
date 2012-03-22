@@ -1,5 +1,7 @@
 2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* dgnushack.el: Bind `gnus-registry-enabled' for XEmacs.
+
 	* gnus.el: Register gnus-registry functions.
 
 	* gnus-registry.el (gnus-try-warping-via-registry): Moved here and

@@ -147,6 +147,8 @@
       (autoload 'defadvice "advice" nil nil 'macro))
     (unless (boundp 'help-echo-owns-message)
       (defvar help-echo-owns-message))
+    (unless (boundp 'gnus-registry-enabled)
+      (defvar gnus-registry-enabled nil))
     (unless (fboundp 'url-retrieve-synchronously)
       (defalias 'url-retrieve-synchronously 'url-retrieve))
     (unless (fboundp 'url-queue-retrieve)
