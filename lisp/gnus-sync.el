@@ -100,6 +100,12 @@
 (require 'gnus-start)
 (require 'gnus-util)
 
+(defvar gnus-topic-alist) ;; gnus-group.el
+(eval-when-compile
+  (autoload 'gnus-group-topic "gnus-topic")
+  (autoload 'gnus-topic-create-topic "gnus-topic" nil t)
+  (autoload 'gnus-topic-enter-dribble "gnus-topic"))
+
 (defgroup gnus-sync nil
   "The Gnus synchronization facility."
   :version "24.1"
@@ -810,24 +816,24 @@ With a prefix, SUBSCRIBE-ALL is set and unknown groups will be subscribed."
            (stringp (nth 1 gnus-sync-backend)))
       (let ((errored nil)
             name ftime)
-        (mapcar (lambda (entry)
-                  (setq name (cdr (assq 'id entry)))
-                  ;; set ftime the FIRST time through this loop, that
-                  ;; way it reflects the time we FINISHED reading
-                  (unless ftime (setq ftime (float-time)))
+        (mapc (lambda (entry)
+		(setq name (cdr (assq 'id entry)))
+		;; set ftime the FIRST time through this loop, that
+		;; way it reflects the time we FINISHED reading
+		(unless ftime (setq ftime (float-time)))
 
-                  (unless errored
-                    (setq errored
-                          (when (equal name
-                                       (gnus-sync-lesync-read-group-entry
-                                        (nth 1 gnus-sync-backend)
-                                        name
-                                        (cdr (assq 'value entry))
-                                        `(read-time ,ftime)
-                                        `(subscribe-all ,subscribe-all)))
-                            (gnus-sync-lesync-install-group-entry
-                             (cdr (assq 'id entry)))))))
-                (gnus-sync-lesync-groups-builder (nth 1 gnus-sync-backend)))))
+		(unless errored
+		  (setq errored
+			(when (equal name
+				     (gnus-sync-lesync-read-group-entry
+				      (nth 1 gnus-sync-backend)
+				      name
+				      (cdr (assq 'value entry))
+				      `(read-time ,ftime)
+				      `(subscribe-all ,subscribe-all)))
+			  (gnus-sync-lesync-install-group-entry
+			   (cdr (assq 'id entry)))))))
+	      (gnus-sync-lesync-groups-builder (nth 1 gnus-sync-backend)))))
 
      ((stringp gnus-sync-backend)
       ;; read data here...

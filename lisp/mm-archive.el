@@ -22,11 +22,18 @@
 
 ;;; Code:
 
+(require 'mm-decode)
+(eval-when-compile
+  (autoload 'gnus-recursive-directory-files "gnus-util")
+  (autoload 'mailcap-extension-to-mime "mailcap"))
+
 (defvar mm-archive-decoders
   '(("application/ms-tnef" t "tnef" "-f" "-" "-C")
     ("application/zip" nil "unzip" "-j" "-x" "%f" "-d")
     ("application/x-gtar-compressed" nil "tar" "xzf" "-" "-C")
     ("application/x-tar" nil "tar" "xf" "-" "-C")))
+
+(defun mm-archive-decoders () mm-archive-decoders)
 
 (defun mm-dissect-archive (handle)
   (let ((decoder (cddr (assoc (car (mm-handle-type handle))

@@ -1,3 +1,22 @@
+2012-03-27  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-sync.el (gnus-topic-alist, gnus-group-topic)
+	(gnus-topic-create-topic, gnus-topic-enter-dribble): Silence compiler.
+	(gnus-sync-read): Use mapc instead of mapcar.
+
+	* mm-archive.el: Require mm-decode for some macros.
+	(gnus-recursive-directory-files, mailcap-extension-to-mime): Silence
+	the byte compiler.
+	(mm-archive-decoders): New function that returns the value of
+	the mm-archive-decoders variable.
+
+	* mm-decode.el: Don't require mm-archive; autoload mm-archive functions
+	instead.
+	(mm-dissect-singlepart): Use the function mm-archive-decoders.
+
+	* nnimap.el (gnus-refer-thread-use-nnir):
+	* nnmail.el (mail-send-and-exit): Silence the byte compiler.
+
 2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-compat.el: Define `bound-and-true-p' for XEmacs.

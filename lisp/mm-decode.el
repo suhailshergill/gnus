@@ -29,7 +29,6 @@
 
 (require 'mail-parse)
 (require 'mm-bodies)
-(require 'mm-archive)
 (eval-when-compile (require 'cl)
 		   (require 'term))
 
@@ -41,6 +40,10 @@
 (autoload 'mm-inline-external-body "mm-extern")
 (autoload 'mm-extern-cache-contents "mm-extern")
 (autoload 'mm-insert-inline "mm-view")
+
+(autoload 'mm-archive-decoders "mm-archive")
+(autoload 'mm-archive-dissect-and-inline "mm-archive")
+(autoload 'mm-dissect-archive "mm-archive")
 
 (defvar gnus-current-window-configuration)
 
@@ -672,7 +675,7 @@ Postpone undisplaying of viewers for types in
     (let ((handle
 	   (mm-make-handle
 	    (mm-copy-to-buffer) ctl cte nil cdl description nil id))
-	  (decoder (assoc (car ctl) mm-archive-decoders)))
+	  (decoder (assoc (car ctl) (mm-archive-decoders))))
       (if (and decoder
 	       ;; Do automatic decoding
 	       (cadr decoder)
