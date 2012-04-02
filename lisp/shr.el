@@ -461,6 +461,13 @@ size, and full-buffer size."
 	       (if (looking-at "\\(\\c<+\\)\\c<")
 		   (goto-char (match-end 1))
 		 (forward-char 1)))))
+	((shr-char-kinsoku-bol-p (following-char))
+	 ;; Find forward the point where kinsoku-bol characters end.
+	 (let ((count 4))
+	   (while (and (>= (setq count (1- count)) 0)
+		       (shr-char-kinsoku-bol-p (following-char))
+		       (shr-char-breakable-p (following-char)))
+	     (forward-char 1))))
 	(t
 	 (if (shr-char-kinsoku-bol-p (preceding-char))
 	     ;; There are consecutive kinsoku-bol characters.

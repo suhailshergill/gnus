@@ -1,3 +1,8 @@
+2012-04-02  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* shr.el (shr-find-fill-point): Don't break a line before kinsoku-bol
+	characters.
+
 2012-03-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-sync.el (gnus-topic-alist, gnus-group-topic)
