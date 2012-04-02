@@ -1,7 +1,7 @@
 2012-04-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-find-fill-point): Remove unused code; don't break a line
-	before kinsoku-bol characters and within kinsoku-eol characters.
+	before kinsoku-bol characters nor within kinsoku-eol characters.
 
 2012-03-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
