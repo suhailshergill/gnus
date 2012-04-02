@@ -444,39 +444,29 @@ size, and full-buffer size."
 			 (shr-char-kinsoku-eol-p (following-char)))))
 	   (goto-char bp)))
 	((shr-char-kinsoku-eol-p (preceding-char))
-	 (if (shr-char-kinsoku-eol-p (following-char))
-	     ;; There are consecutive kinsoku-eol characters.
-	     (setq failed t)
-	   (let ((count 4))
-	     (while
-		 (progn
-		   (backward-char 1)
-		   (and (> (setq count (1- count)) 0)
-			(not (memq (preceding-char) (list ?\C-@ ?\n ? )))
-			(or (shr-char-kinsoku-eol-p (preceding-char))
-			    (shr-char-kinsoku-bol-p (following-char)))))))
-	   (if (setq failed (= (current-column) shr-indentation))
-	       ;; There's no breakable point that doesn't violate kinsoku,
-	       ;; so we go to the second best position.
-	       (if (looking-at "\\(\\c<+\\)\\c<")
-		   (goto-char (match-end 1))
-		 (forward-char 1)))))
+	 ;; Find backward the point where kinsoku-eol characters begin.
+	 (let ((count 4))
+	   (while
+	       (progn
+		 (backward-char 1)
+		 (and (> (setq count (1- count)) 0)
+		      (not (memq (preceding-char) (list ?\C-@ ?\n ? )))
+		      (or (shr-char-kinsoku-eol-p (preceding-char))
+			  (shr-char-kinsoku-bol-p (following-char)))))))
+	 (if (setq failed (= (current-column) shr-indentation))
+	     ;; There's no breakable point that doesn't violate kinsoku,
+	     ;; so we go to the second best position.
+	     (if (looking-at "\\(\\c<+\\)\\c<")
+		 (goto-char (match-end 1))
+	       (forward-char 1))))
 	((shr-char-kinsoku-bol-p (following-char))
 	 ;; Find forward the point where kinsoku-bol characters end.
 	 (let ((count 4))
-	   (while (and (>= (setq count (1- count)) 0)
-		       (shr-char-kinsoku-bol-p (following-char))
-		       (shr-char-breakable-p (following-char)))
-	     (forward-char 1))))
-	(t
-	 (if (shr-char-kinsoku-bol-p (preceding-char))
-	     ;; There are consecutive kinsoku-bol characters.
-	     (setq failed t)
-	   (let ((count 4))
-	     (while (and (>= (setq count (1- count)) 0)
+	   (while (progn
+		    (forward-char 1)
+		    (and (>= (setq count (1- count)) 0)
 			 (shr-char-kinsoku-bol-p (following-char))
-			 (shr-char-breakable-p (following-char)))
-	       (forward-char 1))))))
+			 (shr-char-breakable-p (following-char))))))))
        (when (eq (following-char) ? )
 	 (forward-char 1))))
     (not failed)))
