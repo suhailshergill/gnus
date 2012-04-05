@@ -1,3 +1,7 @@
+2012-04-05  Bastien Guerry  <bzg@altern.org>
+
+	* color.el (color-lighten-name): Fix typo.
+
 2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* auth-source.el (auth-source-netrc-create): Quote tokens that contain
