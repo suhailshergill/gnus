@@ -113,7 +113,7 @@ The @code{user} is the user name.  It's known as @var{:user} in
 
 Spaces are always OK as far as auth-source is concerned (but other
 programs may not like them).  Just put the data in quotes, escaping
-quotes as you'd expect with @code{\}.
+quotes as you'd expect with @samp{\}.
 
 All these are optional.  You could just say (but we don't recommend
 it, we're just showing that it's possible)
@@ -125,14 +125,14 @@ password @var{mypassword}
 to use the same password everywhere.  Again, @emph{DO NOT DO THIS} or
 you will be pwned as the kids say.
 
-``Netrc'' files are usually called @code{.authinfo} or @code{.netrc};
-nowadays @code{.authinfo} seems to be more popular and the auth-source
+``Netrc'' files are usually called @file{.authinfo} or @file{.netrc};
+nowadays @file{.authinfo} seems to be more popular and the auth-source
 library encourages this confusion by accepting both, as you'll see
 later.
 
 If you have problems with the search, set @code{auth-source-debug} to
 @code{'trivia} and see what host, port, and user the library is
-checking in the @code{*Messages*} buffer.  Ditto for any other
+checking in the @samp{*Messages*} buffer.  Ditto for any other
 problems, your first step is always to see what's being checked.  The
 second step, of course, is to write a blog entry about it and wait for
 the answer in the comments.
@@ -181,11 +181,11 @@ Here's a mixed example using two sources:
 
 If you don't customize @code{auth-sources}, you'll have to live with
 the defaults: any host and any port are looked up in the netrc
-file @code{~/.authinfo.gpg}, which is a GnuPG encrypted file
+file @file{~/.authinfo.gpg}, which is a GnuPG encrypted file
 (@pxref{GnuPG and EasyPG Assistant Configuration}).
 
-If that fails, the unencrypted netrc files @code{~/.authinfo} and
-@code{~/.netrc} will be used.
+If that fails, the unencrypted netrc files @file{~/.authinfo} and
+@file{~/.netrc} will be used.
 
 The typical netrc line example is without a port.
 
@@ -227,7 +227,135 @@ necessary if you have an unusual (see earlier comment on those) setup.
 @node Secret Service API
 @chapter Secret Service API
 
-TODO: how does it work generally, how does secrets.el work, some examples.
+The @dfn{Secret Service API} is a standard from
+@uref{http://www.freedesktop.org/wiki/Specifications/secret-storage-spec,,freedesktop.org}
+to securely store passwords and other confidential information.
+Implementations of compliant daemons are the GNOME Keyring and the KDE
+Wallet.
+
+The auth-source library uses the @file{secrets.el} library as an
+interface to this feature.  You can also use that library in other
+packages.
+
+@defvar secrets-enabled
+After loading @file{secrets.el}, a non-@code{nil} value of this
+variable indicates the existence of a daemon providing the Secret
+Service API.
+@end defvar
+
+@deffn Command secrets-show-secrets
+This command inspects all collections, items, and their attributes.
+@end deffn
+
+The atomic objects to be managed by the Secret Service API are
+@dfn{secret items}, which are something an application wishes to store
+securely.  A good example is a password that an application needs to
+save and use at a later date.
+
+Secret items are grouped in @dfn{collections}.  A collection is
+similar in concept to the terms @samp{keyring} or @samp{wallet}.  A
+common collection is called @samp{"login"}.  A collection is stored
+permanently under the user's permissions, and can be accessed in a
+user session context.
+
+A collection can have an alias name.  The use case for this is to
+set the alias @samp{"default"} for a given collection, making it
+transparent to clients as to which collection is used.  Other aliases
+are not supported (yet).  Since an alias is visible to all
+applications, this setting should be performed with care.
+
+@defun secrets-list-collections
+This function returns a list of collection names.
+@end defun
+
+@defun secrets-set-alias collection alias
+Set @var{alias} as alias of collection labeled @var{collection}.
+For the time being, only the alias @samp{"default"} is supported.
+@end defun
+
+@defun secrets-get-alias alias
+Return the collection name @var{alias} is referencing to.
+For the time being, only the alias @samp{"default"} is supported.
+@end defun
+
+Collections can be created and deleted by the functions
+@code{secrets-create-collection} and @code{secrets-delete-collection}.
+Usually, this is not applied from within Emacs.  Common collections,
+like @samp{"login"}, should never be deleted.
+
+There exists a special collection called @samp{"session"}, which has
+the lifetime of the corresponding client session (aka Emacs's
+lifetime).  It is created automatically when Emacs uses the Secret
+Service interface, and it is deleted when Emacs is killed.  Therefore,
+it can be used to store and retrieve secret items temporarily.  This
+should be preferred over creation of a persistent collection, when the
+information should not live longer than Emacs.  The session collection
+can be addressed either by the string @samp{"session"}, or by
+@code{nil}, whenever a collection parameter is needed in the following
+functions.
+
+As already said, a collection is a group of secret items.  A secret
+item has a label, the @dfn{secret} (which is a string), and a set of
+lookup attributes.  The attributes can be used to search and retrieve
+a secret item at a later date.
+
+@defun secrets-list-items collection
+Returns a list of all item labels of @var{collection}.
+@end defun
+
+@defun secrets-create-item collection item password &rest attributes
+This function creates a new item in @var{collection} with label
+@var{item} and password @var{password}.  @var{attributes} are
+key-value pairs set for the created item.  The keys are keyword
+symbols, starting with a colon.  Example:
+
+@example
+(secrets-create-item "session" "my item" "geheim"
+ :method "sudo" :user "joe" :host "remote-host")
+@end example
+@end defun
+
+@defun secrets-get-secret collection item
+Return the secret of item labeled @var{item} in @var{collection}.
+If there is no such item, return @code{nil}.
+@end defun
+
+@defun secrets-delete-item collection item
+This function deletes item @var{item} in @var{collection}.
+@end defun
+
+The lookup attributes, which are specified during creation of a
+secret item, must be a key-value pair.  Keys are keyword symbols,
+starting with a colon; values are strings.  They can be retrieved
+from a given secret item, and they can be used for searching of items.
+
+@defun secrets-get-attribute collection item attribute
+Returns the value of key @var{attribute} of item labeled @var{item} in
+@var{collection}.  If there is no such item, or the item doesn't own
+this key, the function returns @code{nil}.
+@end defun
+
+@defun secrets-get-attributes collection item
+Return the lookup attributes of item labeled @var{item} in
+@var{collection}.  If there is no such item, or the item has no
+attributes, it returns @code{nil}.  Example:
+
+@example
+(secrets-get-attributes "session" "my item")
+     @result{} ((:user . "joe") (:host ."remote-host"))
+@end example
+@end defun
+
+@defun secrets-search-items collection &rest attributes
+Search items in @var{collection} with @var{attributes}.
+@var{attributes} are key-value pairs, as used in
+@code{secrets-create-item}.  Example:
+
+@example
+(secrets-search-items "session" :user "joe")
+     @result{} ("my item" "another item")
+@end example
+@end defun
 
 @node Help for developers
 @chapter Help for developers
@@ -235,21 +363,21 @@ TODO: how does it work generally, how does secrets.el work, some examples.
 The auth-source library lets you control logging output easily.
 
 @defvar auth-source-debug
-Set this variable to 'trivia to see lots of output in *Messages*, or
-set it to a function that behaves like @code{message} to do your own
-logging.
+Set this variable to @code{'trivia} to see lots of output in
+@samp{*Messages*}, or set it to a function that behaves like
+@code{message} to do your own logging.
 @end defvar
 
 The auth-source library only has a few functions for external use.
 
-@defun auth-source-search SPEC
-
-TODO: how to include docstring?
-
+@defun auth-source-search &rest spec &key type max host user port secret require create delete &allow-other-keys
+This function searches (or modifies) authentication backends according
+to @var{spec}.  See the function's doc-string for details.
+@c TODO more details.
 @end defun
 
 Let's take a look at an example of using @code{auth-source-search}
-from Gnus' @code{nnimap.el}.
+from Gnus's @code{nnimap.el}.
 
 @example
 (defun nnimap-credentials (address ports)
@@ -304,34 +432,33 @@ the same question again, which is annoying.
 So the responsibility of the API user that specified @code{:create t}
 is to call the @code{:save-function} if it's provided.
 
-@defun auth-source-delete SPEC
-
-TODO: how to include docstring?
-
+@defun auth-source-delete &rest spec &key delete &allow-other-keys
+This function deletes entries matching @var{spec} from the
+authentication backends.  It returns the entries that were deleted.
+The backend may not actually delete the entries.
 @end defun
 
-@defun auth-source-forget SPEC
-
-TODO: how to include docstring?
-
+@defun auth-source-forget spec
+This function forgets any cached data that exactly matches @var{spec}.
+It returns @code{t} if it forget some data, and @code{nil} if no
+matching data was found.
 @end defun
 
-@defun auth-source-forget+ SPEC
-
-TODO: how to include docstring?
-
+@defun auth-source-forget+ &rest spec &allow-other-keys
+This function forgets any cached data matching @var{spec}.
+It returns the number of items forgotten.
 @end defun
 
 @node GnuPG and EasyPG Assistant Configuration
 @appendix GnuPG and EasyPG Assistant Configuration
 
 If you don't customize @code{auth-sources}, the auth-source library
-reads @code{~/.authinfo.gpg}, which is a GnuPG encrypted file.  Then
-it will check @code{~/.authinfo} but it's not recommended to use such
+reads @file{~/.authinfo.gpg}, which is a GnuPG encrypted file.  Then
+it will check @file{~/.authinfo} but it's not recommended to use such
 an unencrypted file.
 
 In Emacs 23 or later there is an option @code{auto-encryption-mode} to
-automatically decrypt @code{*.gpg} files.  It is enabled by default.
+automatically decrypt @file{*.gpg} files.  It is enabled by default.
 If you are using earlier versions of Emacs, you will need:
 
 @lisp
