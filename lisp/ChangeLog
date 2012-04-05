@@ -1,3 +1,7 @@
+2012-04-05  Bastien Guerry  <bzg@altern.org>
+
+	* color.el (color-lighten-name): Fix typo.
+
 2012-04-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* shr.el (shr-find-fill-point): Remove unused code; don't break a line
