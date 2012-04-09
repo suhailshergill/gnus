@@ -1,3 +1,8 @@
+2012-04-09  Chong Yidong  <cyd@gnu.org>
+
+	* binhex.el, hashcash.el, uudecode.el:
+	Remove * characters from the front of variable docstrings.
+
 2012-04-05  Bastien Guerry  <bzg@altern.org>
 
 	* color.el (color-lighten-name): Fix typo.
