@@ -841,9 +841,21 @@ post using the current select method."
   (interactive (gnus-interactive "P\ny"))
   (let ((message-post-method
 	 `(lambda (arg)
-	    (gnus-post-method (eq ',symp 'a) ,gnus-newsgroup-name))))
+	    (gnus-post-method (eq ',symp 'a) ,gnus-newsgroup-name)))
+	(user-mail-address user-mail-address))
     (dolist (article (gnus-summary-work-articles n))
       (when (gnus-summary-select-article t nil nil article)
+	;; Pretend that we're doing a followup so that we can see what
+	;; the From header would have ended up being.
+	(save-window-excursion
+	  (save-excursion
+	    (gnus-summary-followup nil)
+	    (let ((from (message-fetch-field "from")))
+	      (when from
+		(setq user-mail-address
+		      (car (mail-header-parse-address from)))))
+	    (kill-buffer (current-buffer))))
+	;; Now cancel the article using the From header we got.
 	(when (gnus-eval-in-buffer-window gnus-original-article-buffer
 		(message-cancel-news))
 	  (gnus-summary-mark-as-read article gnus-canceled-mark)
