@@ -2755,7 +2755,8 @@ If READ-CHARSET, ask for a coding system."
   (let ((handles nil)
 	(buffer-read-only nil))
     (when (gnus-buffer-live-p gnus-original-article-buffer)
-      (setq handles (mm-dissect-buffer t t)))
+      (with-current-buffer gnus-original-article-buffer
+	(setq handles (mm-dissect-buffer t t))))
     (article-goto-body)
     (delete-region (point) (point-max))
     (mm-enable-multibyte)
