@@ -1,5 +1,8 @@
 2012-04-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mml.el (mml-generate-mime): Allow specifying what the top-level part
+	type is.
+
 	* gnus-start.el (gnus-clean-old-newsrc): Remove totally bogus
 	`unexists' entries.
 	(gnus-clean-old-newsrc): Fix last checkin.
