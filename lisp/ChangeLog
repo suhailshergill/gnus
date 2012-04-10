@@ -1,3 +1,8 @@
+2012-04-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-start.el (gnus-read-newsrc-el-file): Protect against broken
+	.newsrc.el files.
+
 2012-04-05  Bastien Guerry  <bzg@altern.org>
 
 	* color.el (color-lighten-name): Fix typo.
