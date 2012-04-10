@@ -141,6 +141,9 @@
 
 2012-04-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-msg.el (gnus-inews-insert-gcc): Protect against when we don't
+	have a group name.
+
 	* gnus-art.el (article-wash-html): Ensure that we insert the HTML into
 	a multibyte buffer (bug#7410).
 	(article-wash-html): Parse the original article buffer to get the
@@ -254,6 +257,13 @@
 
 	* gnus-start.el (gnus-1): Avoid duplicate entries.
 
+2012-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
+
+	* mm-decode.el (mm-dissect-singlepart): Guess what the type of
+	application/octet-stream parts really is.
+
+	* gnus-sum.el (gnus-propagate-marks): Remove.
+
 2012-02-15  Lars Ingebrigtsen  <larsi@gnus.org>
 
 	* imap.el: Remove.
@@ -264,13 +274,6 @@
 
 	* gnus-start.el (gnus-clean-old-newsrc): Delete `unexist' from pre-Ma
 	Gnus 0.3.
-
-2012-02-16  Lars Ingebrigtsen  <larsi@gnus.org>
-
-	* mm-decode.el (mm-dissect-singlepart): Guess what the type of
-	application/octet-stream parts really is.
-
-	* gnus-sum.el (gnus-propagate-marks): Remove.
 
 2012-02-15  Paul Eggert  <eggert@cs.ucla.edu>
 
