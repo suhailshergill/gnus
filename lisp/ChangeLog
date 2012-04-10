@@ -1,3 +1,9 @@
+2012-04-10  Elias Oltmanns  <eo@nebensachen.de>
+
+	* gnus-cite.el (gnus-dissect-cited-text): A single line without
+	citation prefix within a block of cited text should be considered part
+	of that block *only* if it is a blank line.
+
 2012-04-09  Chong Yidong  <cyd@gnu.org>
 
 	* binhex.el, hashcash.el, uudecode.el:
