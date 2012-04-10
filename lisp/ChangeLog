@@ -1,5 +1,8 @@
 2012-04-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-art.el (article-wash-html): Ensure that we insert the HTML into
+	a multibyte buffer (bug#7410).
+
 	* gnus-start.el (gnus-read-newsrc-el-file): Protect against broken
 	.newsrc.el files.
 
