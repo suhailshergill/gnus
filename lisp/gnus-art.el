@@ -2758,6 +2758,7 @@ If READ-CHARSET, ask for a coding system."
       (setq handles (mm-dissect-buffer t t)))
     (article-goto-body)
     (delete-region (point) (point-max))
+    (mm-enable-multibyte)
     (mm-inline-text-html handles)))
 
 (defvar gnus-article-browse-html-temp-list nil
