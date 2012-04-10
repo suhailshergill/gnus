@@ -1456,15 +1456,20 @@ textual parts.")
 		      (push (cons (car type) new-marks) marks)))))
 	      ;; Keep track of non-existing articles.
 	      (let* ((old-unexists (assq 'unexist marks))
+		     (active (gnus-active group))
 		     (unexists
 		      (if completep
 			  (gnus-range-difference
-			   (gnus-active group)
+			   active
 			   (gnus-compress-sequence existing))
 			(gnus-add-to-range
 			 (cdr old-unexists)
 			 (gnus-list-range-difference
 			  existing (gnus-active group))))))
+		(when (> (car active) 1)
+		  (setq unexists (gnus-range-add
+				  (cons 1 (1- (car active)))
+				  unexists)))
 		(if old-unexists
 		    (setcdr old-unexists unexists)
 		  (push (cons 'unexist unexists) marks)))
