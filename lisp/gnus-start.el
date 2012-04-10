@@ -2301,10 +2301,11 @@ If FORCE is non-nil, the .newsrc file is read."
   (when gnus-newsrc-file-version
     ;; Remove totally bogus `unexists' entries.  The name is
     ;; `unexist'.
-    (let ((exist (assoc 'unexists (gnus-info-marks info))))
-      (when exist
-	(gnus-info-set-marks
-	 info (delete exist (gnus-info-marks info)))))
+    (dolist (info (cdr gnus-newsrc-alist))
+      (let ((exist (assoc 'unexists (gnus-info-marks info))))
+	(when exist
+	  (gnus-info-set-marks
+	   info (delete exist (gnus-info-marks info))))))
     (when (or force
 	      (< (gnus-continuum-version gnus-newsrc-file-version)
 		 (gnus-continuum-version "Ma Gnus v0.03")))
