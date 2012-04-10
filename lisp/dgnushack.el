@@ -245,6 +245,7 @@
     (defalias 'replace-highlight 'ignore)
     (defalias 'gnutls-available-p 'ignore)
     (defvar timer-list nil)
+    (defvar scroll-margin 0)
     (defalias 'w3-coding-system-for-mime-charset 'ignore)))
 
 (defun dgnushack-emacs-compile-defcustom-p ()
