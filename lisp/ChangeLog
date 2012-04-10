@@ -1,4 +1,4 @@
-2012-04-10  Elias Oltmanns  <eo@nebensachen.de>
+2012-04-10  Elias Oltmanns  <eo@nebensachen.de>  (tiny change)
 
 	* gnus-cite.el (gnus-dissect-cited-text): A single line without
 	citation prefix within a block of cited text should be considered part
