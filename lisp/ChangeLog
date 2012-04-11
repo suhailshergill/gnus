@@ -1,3 +1,12 @@
+2012-04-11  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	pgg-def.el, pgg-gpg.el, pgg-parse.el, pgg-pgp.el, pgg-pgp5.el, pgg.el:
+	Remove.
+
+	dgnushack.el (pgg-snarf-keys-region): Remove autoload.
+
+	lpath.el (pgg-parse-crc24-string, pgg-parse-crc24): Remove declaration.
+
 2012-04-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mml.el (mml-generate-mime): Allow specifying what the top-level part
