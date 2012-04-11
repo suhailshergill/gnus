@@ -195,7 +195,6 @@
     (autoload 'mail-fetch-field "mail-utils")
     (autoload 'make-annotation "annotations")
     (autoload 'make-display-table "disp-table")
-    (autoload 'pgg-snarf-keys-region "pgg" nil t)
     (autoload 'pp "pp")
     (autoload 'ps-despool "ps-print" nil t)
     (autoload 'ps-spool-buffer "ps-print" nil t)

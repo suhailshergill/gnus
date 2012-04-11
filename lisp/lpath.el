@@ -107,11 +107,10 @@
     (maybe-fbind
      '(ccl-execute-on-string
        char-charset charsetp coding-system-get find-charset-region
-       get-charset-property pgg-display-output-buffer pgg-parse-crc24-string
-       unicode-precedence-list))
+       get-charset-property pgg-display-output-buffer unicode-precedence-list))
     (maybe-bind
      '(current-language-environment
-       language-info-alist pgg-parse-crc24)))
+       language-info-alist)))
 
   (unless (featurep 'file-coding)
     (maybe-fbind

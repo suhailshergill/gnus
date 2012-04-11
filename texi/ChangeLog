@@ -1,3 +1,11 @@
+2012-04-11  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* epa.texi: New file imported from Emacs.
+
+	* pgg.texi: Remove.
+
+	* Makefile.in: Replace pgg.* with epa.*.
+
 2012-04-05  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth.texi (Secret Service API): Edit further and give examples.
