@@ -2329,7 +2329,7 @@ Return the name of the group if selection was successful."
 		 parameters)))
      gnus-newsrc-hashtb)
     (push method gnus-ephemeral-servers)
-    (when (buffer-live-p gnus-group-buffer)
+    (when (gnus-buffer-live-p gnus-group-buffer)
       (set-buffer gnus-group-buffer))
     (unless (gnus-check-server method)
       (error "Unable to contact server: %s" (gnus-status-message method)))

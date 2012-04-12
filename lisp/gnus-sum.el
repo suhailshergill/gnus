@@ -5683,7 +5683,7 @@ If SELECT-ARTICLES, only select those articles from GROUP."
       ;; Init the dependencies hash table.
       (setq gnus-newsgroup-dependencies
 	    (gnus-make-hashtable (length articles)))
-      (if (buffer-live-p gnus-group-buffer)
+      (if (gnus-buffer-live-p gnus-group-buffer)
 	  (gnus-set-global-variables)
 	(set-default 'gnus-newsgroup-name gnus-newsgroup-name))
       ;; Retrieve the headers and read them in.
@@ -7283,7 +7283,7 @@ If FORCE (the prefix), also save the .newsrc file(s)."
 	  (gnus-kill-buffer buf)))
 
       (setq gnus-current-select-method gnus-select-method)
-      (when (buffer-live-p gnus-group-buffer)
+      (when (gnus-buffer-live-p gnus-group-buffer)
 	(set-buffer gnus-group-buffer))
       (if quit-config
 	  (gnus-handle-ephemeral-exit quit-config)
@@ -7363,7 +7363,7 @@ If FORCE (the prefix), also save the .newsrc file(s)."
   "Handle movement when leaving an ephemeral group.
 The state which existed when entering the ephemeral is reset."
   (if (not (buffer-live-p (car quit-config)))
-      (when (buffer-live-p gnus-group-buffer)
+      (when (gnus-buffer-live-p gnus-group-buffer)
 	(gnus-configure-windows 'group 'force))
     (set-buffer (car quit-config))
     (unless (eq (cdr quit-config) 'group)
