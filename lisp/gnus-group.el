@@ -2290,9 +2290,9 @@ Return the name of the group if selection was successful."
     ;; (gnus-read-group "Group name: ")
     (gnus-group-completing-read)
     (gnus-read-method "From method")))
-  ;; Transform the select method into a unique server.
   (unless (gnus-alive-p)
-    (gnus-no-server))
+    (setq gnus-newsrc-hashtb (gnus-make-hashtable)))
+  ;; Transform the select method into a unique server.
   (when (stringp method)
     (setq method (gnus-server-to-method method)))
   (let ((address-slot
@@ -2323,7 +2323,8 @@ Return the name of the group if selection was successful."
 		 parameters)))
      gnus-newsrc-hashtb)
     (push method gnus-ephemeral-servers)
-    (set-buffer gnus-group-buffer)
+    (when (buffer-live-p gnus-group-buffer)
+      (set-buffer gnus-group-buffer))
     (unless (gnus-check-server method)
       (error "Unable to contact server: %s" (gnus-status-message method)))
     (when activate

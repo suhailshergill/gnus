@@ -1,3 +1,8 @@
+2012-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-sum.el (gnus-set-global-variables): Don't assume that the group
+	buffer exists, which it doesn't if we haven't started Gnus.
+
 2012-04-11  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	pgg-def.el, pgg-gpg.el, pgg-parse.el, pgg-pgp.el, pgg-pgp5.el, pgg.el:

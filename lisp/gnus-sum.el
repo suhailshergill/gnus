@@ -3558,7 +3558,7 @@ buffer that was in action when the last article was fetched."
 	    (push (eval (car locals)) vlist))
 	  (setq locals (cdr locals)))
 	(setq vlist (nreverse vlist)))
-      (with-current-buffer gnus-group-buffer
+      (with-temp-buffer
 	(setq gnus-newsgroup-name name
 	      gnus-newsgroup-marked marked
 	      gnus-newsgroup-spam-marked spam
@@ -5673,7 +5673,7 @@ If SELECT-ARTICLES, only select those articles from GROUP."
 	(setq gnus-newsgroup-unselected
 	      (gnus-sorted-difference gnus-newsgroup-unreads articles))
       (setq articles (gnus-articles-to-read group read-all)))
-    
+
     (cond
      ((null articles)
       ;;(gnus-message 3 "Couldn't select newsgroup -- no articles to display")
@@ -5683,7 +5683,9 @@ If SELECT-ARTICLES, only select those articles from GROUP."
       ;; Init the dependencies hash table.
       (setq gnus-newsgroup-dependencies
 	    (gnus-make-hashtable (length articles)))
-      (gnus-set-global-variables)
+      (if (buffer-live-p gnus-group-buffer)
+	  (gnus-set-global-variables)
+	(set-default 'gnus-newsgroup-name gnus-newsgroup-name))
       ;; Retrieve the headers and read them in.
 
       (setq gnus-newsgroup-headers (gnus-fetch-headers articles))
