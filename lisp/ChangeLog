@@ -1,5 +1,8 @@
 2012-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-handle-ephemeral-exit): Avoid creating the group
+	buffer if it doesn't exist.
+
 	* gnus-group.el (gnus-group-read-ephemeral-group): If no quit-config is
 	given, mark the group as ephemeral with the current window conf.
 
