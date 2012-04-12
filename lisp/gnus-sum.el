@@ -7257,7 +7257,8 @@ If FORCE (the prefix), also save the .newsrc file(s)."
       (gnus-summary-update-info))
     (gnus-close-group group)
     ;; Make sure where we were, and go to next newsgroup.
-    (set-buffer gnus-group-buffer)
+    (when (buffer-live-p gnus-group-buffer)
+      (set-buffer gnus-group-buffer))
     (unless quit-config
       (gnus-group-jump-to-group group))
     (gnus-run-hooks 'gnus-summary-exit-hook)
@@ -7282,7 +7283,8 @@ If FORCE (the prefix), also save the .newsrc file(s)."
 	  (gnus-kill-buffer buf)))
 
       (setq gnus-current-select-method gnus-select-method)
-      (set-buffer gnus-group-buffer)
+      (when (buffer-live-p gnus-group-buffer)
+	(set-buffer gnus-group-buffer))
       (if quit-config
 	  (gnus-handle-ephemeral-exit quit-config)
 	(goto-char group-point)

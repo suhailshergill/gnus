@@ -2,6 +2,7 @@
 
 	* gnus-sum.el (gnus-set-global-variables): Don't assume that the group
 	buffer exists, which it doesn't if we haven't started Gnus.
+	(gnus-summary-exit): Allow quitting when we don't have a group buffer.
 
 2012-04-11  Katsumi Yamaoka  <yamaoka@jpl.org>
 

@@ -2291,6 +2291,9 @@ Return the name of the group if selection was successful."
     (gnus-group-completing-read)
     (gnus-read-method "From method")))
   (unless (gnus-alive-p)
+    (nnheader-init-server-buffer)
+    ;; Necessary because of funky inlining.
+    (require 'gnus-cache)
     (setq gnus-newsrc-hashtb (gnus-make-hashtable)))
   ;; Transform the select method into a unique server.
   (when (stringp method)
