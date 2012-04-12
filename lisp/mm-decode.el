@@ -577,7 +577,9 @@ Postpone undisplaying of viewers for types in
 (autoload 'message-fetch-field "message")
 
 (defun mm-dissect-buffer (&optional no-strict-mime loose-mime from)
-  "Dissect the current buffer and return a list of MIME handles."
+  "Dissect the current buffer and return a list of MIME handles.
+If NO-STRICT-MIME, don't require the message to have a
+MIME-Version header before proceeding."
   (save-excursion
     (let (ct ctl type subtype cte cd description id result)
       (save-restriction
