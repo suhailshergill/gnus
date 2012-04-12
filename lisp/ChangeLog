@@ -1,5 +1,8 @@
 2012-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-group.el (gnus-group-read-ephemeral-group): If no quit-config is
+	given, mark the group as ephemeral with the current window conf.
+
 	* gnus-sum.el (gnus-set-global-variables): Don't assume that the group
 	buffer exists, which it doesn't if we haven't started Gnus.
 	(gnus-summary-exit): Allow quitting when we don't have a group buffer.
