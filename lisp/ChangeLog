@@ -12,15 +12,6 @@
 	buffer exists, which it doesn't if we haven't started Gnus.
 	(gnus-summary-exit): Allow quitting when we don't have a group buffer.
 
-2012-04-11  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	pgg-def.el, pgg-gpg.el, pgg-parse.el, pgg-pgp.el, pgg-pgp5.el, pgg.el:
-	Remove.
-
-	dgnushack.el (pgg-snarf-keys-region): Remove autoload.
-
-	lpath.el (pgg-parse-crc24-string, pgg-parse-crc24): Remove declaration.
-
 2012-04-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mml.el (mml-generate-mime): Allow specifying what the top-level part
@@ -57,10 +48,6 @@
 
 	* binhex.el, hashcash.el, uudecode.el:
 	Remove * characters from the front of variable docstrings.
-
-2012-04-05  Bastien Guerry  <bzg@altern.org>
-
-	* color.el (color-lighten-name): Fix typo.
 
 2012-04-02  Katsumi Yamaoka  <yamaoka@jpl.org>
 

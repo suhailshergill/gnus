@@ -31,6 +31,11 @@
 
 	* gnus-faq.texi (FAQ 8-2): Mention EasyPG.
 
+2012-03-22  Peder O. Klingenberg  <peder@klingenberg.no>  (tiny change)
+
+	* gnus.texi (Archived Messages): Update `gnus-message-archive-group' to
+	reflect the new default.
+
 2012-03-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Client-Side IMAP Splitting): Note that `nnimap-inbox' now
@@ -40,44 +45,6 @@
 
 	* gnus.texi (Archived Messages): Mention gnus-gcc-pre-body-encode-hook
 	and gnus-gcc-post-body-encode-hook.
-
-2012-04-11  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* epa.texi: New file imported from Emacs.
-
-	* pgg.texi: Remove.
-
-	* Makefile.in: Replace pgg.* with epa.*.
-
-2012-04-05  Teodor Zlatanov  <tzz@lifelogs.com>
-
-	* auth.texi (Secret Service API): Edit further and give examples.
-	(Secret Service API): Adjust @samp to @code for collection names.
-
-2012-04-04  Glenn Morris  <rgm@gnu.org>
-
-	* auth.texi (Secret Service API): Copyedits.
-	(Help for developers): Fill in some missing function doc-strings.
-	(Help for users, Help for developers)
-	(GnuPG and EasyPG Assistant Configuration): Markup fixes.
-
-2012-04-04  Michael Albinus  <michael.albinus@gmx.de>
-
-	* auth.texi (Secret Service API): Add the missing text.
-
-2012-04-04  Chong Yidong  <cyd@gnu.org>
-
-	* message.texi (Using PGP/MIME): Note that epg is now the default.
-
-	* gnus.texi: Reduce references to obsolete pgg library.
-	(Security): Note that epg is now the default.
-
-	* gnus-faq.texi (FAQ 8-2): Mention EasyPG.
-
-2012-03-22  Peder O. Klingenberg  <peder@klingenberg.no>  (tiny change)
-
-	* gnus.texi (Archived Messages): Update `gnus-message-archive-group' to
-	reflect the new default.
 
 2012-02-28  Glenn Morris  <rgm@gnu.org>
 
