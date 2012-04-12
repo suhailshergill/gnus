@@ -2,6 +2,9 @@
 
 	* mm-decode.el (mm-dissect-buffer): Doc fix.
 
+	* gnus-msg.el (gnus-inews-insert-gcc): Don't do the alist stuff when we
+	don't have a current group.
+
 	* gnus-sum.el (gnus-handle-ephemeral-exit): Avoid creating the group
 	buffer if it doesn't exist.
 
