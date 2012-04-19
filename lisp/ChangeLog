@@ -1,3 +1,7 @@
+2012-04-19  Juanma Barranquero  <lekktu@gmail.com>
+
+	* tls.el (open-tls-stream): Remove unused binding.
+
 2012-04-16  Glenn Morris  <rgm@gnu.org>
 
 	* nndraft.el (nndraft-request-list): Fix declaration.
