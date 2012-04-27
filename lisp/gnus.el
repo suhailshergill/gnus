@@ -4401,7 +4401,9 @@ prompt the user for the name of an NNTP server to use."
     (gnus-1 arg dont-connect slave)
     (gnus-final-warning)))
 
-(autoload 'debbugs-gnu "debbugs-gnu")
+(eval-and-compile
+  (unless (fboundp 'debbugs-gnu)
+    (autoload 'debbugs-gnu "debbugs-gnu" "List all outstanding Emacs bugs." t)))
 (defun gnus-list-debbugs ()
   "List all open Gnus bug reports."
   (interactive)
