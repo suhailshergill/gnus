@@ -1299,12 +1299,18 @@ This can be added to `gnus-select-article-hook' or
             (gnus-group-update-group group t)))
     nil))
 
-(defun gnus-agent-save-active (method)
+(defun gnus-agent-save-active (method &optional groups-p)
+  "Sync the agent's active file with the current buffer.
+Pass non-nil for GROUPS-P if the buffer starts out in groups format.
+Regardless, both the file and the buffer end up in active format
+if METHOD is agentized; otherwise the function is a no-op."
   (when (gnus-agent-method-p method)
     (let* ((gnus-command-method method)
 	   (new (gnus-make-hashtable (count-lines (point-min) (point-max))))
 	   (file (gnus-agent-lib-file "active")))
-      (gnus-active-to-gnus-format nil new)
+      (if groups-p
+	  (gnus-groups-to-gnus-format nil new)
+	(gnus-active-to-gnus-format nil new))
       (gnus-agent-write-active file new)
       (erase-buffer)
       (let ((nnheader-file-coding-system gnus-agent-file-coding-system))

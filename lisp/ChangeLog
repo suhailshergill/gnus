@@ -1,3 +1,14 @@
+2011-12-02  Wolfgang Jenkner  <wjenkner@inode.at>
+
+	* gnus-agent.el (gnus-agent-save-active): Deal with the "groups"
+	format.  In particular, add an optional argument and a docstring.
+
+	* gnus-start.el (gnus-groups-to-gnus-format): Use it.
+
+	* nntp.el (nntp-finish-retrieve-group-infos): Make `nntp-server-buffer'
+	current before calling `gnus-groups-to-gnus-format'.
+	Note that this was already the case for `gnus-active-to-gnus-format'.
+
 2012-05-04  Paul Eggert  <eggert@cs.ucla.edu>
 
 	Fix minor Y10k bug.

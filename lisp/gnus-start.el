@@ -2221,7 +2221,7 @@ backend check whether the group actually exists."
 	     (gnus-online method)
 	     (gnus-agent-method-p method))
 	(progn
-	  (gnus-agent-save-active method)
+	  (gnus-agent-save-active method t)
 	  (gnus-active-to-gnus-format method hashtb nil real-active))
 
       (goto-char (point-min))

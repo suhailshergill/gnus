@@ -809,7 +809,8 @@ command whose response triggered the error."
 	      (progn
 		(nntp-copy-to-buffer nntp-server-buffer
 				     (point-min) (point-max))
-		(gnus-groups-to-gnus-format method gnus-active-hashtb t))
+		(with-current-buffer nntp-server-buffer
+		  (gnus-groups-to-gnus-format method gnus-active-hashtb t)))
 	    ;; We have read active entries, so we just delete the
 	    ;; superfluous gunk.
 	    (goto-char (point-min))
