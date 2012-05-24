@@ -458,6 +458,7 @@ If not set, `default-directory' will be used."
 (defvar mm-last-shell-command "")
 (defvar mm-content-id-alist nil)
 (defvar mm-postponed-undisplay-list nil)
+(defvar mm-inhibit-auto-detect-attachment nil)
 
 ;; According to RFC2046, in particular, in a digest, the default
 ;; Content-Type value for a body part is changed from "text/plain" to
@@ -668,7 +669,8 @@ MIME-Version header before proceeding."
     ;; Guess what the type of application/octet-stream parts should
     ;; really be.
     (let ((filename (cdr (assq 'filename (cdr cdl)))))
-      (when (and (equal (car ctl) "application/octet-stream")
+      (when (and (not mm-inhibit-auto-detect-attachment)
+		 (equal (car ctl) "application/octet-stream")
 		 filename
 		 (string-match "\\.\\([^.]+\\)$" filename))
 	(let ((new-type (mailcap-extension-to-mime (match-string 1 filename))))
@@ -694,7 +696,9 @@ MIME-Version header before proceeding."
 		(goto-char (point-max))
 		(if (re-search-backward close-delimiter nil t)
 		    (match-beginning 0)
-		  (point-max)))))
+		  (point-max))))
+	 (mm-inhibit-auto-detect-attachment
+	  (equal (car ctl) "multipart/encrypted")))
     (setq boundary (concat (regexp-quote boundary) "[ \t]*$"))
     (while (and (< (point) end) (re-search-forward boundary end t))
       (goto-char (match-beginning 0))

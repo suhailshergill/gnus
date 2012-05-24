@@ -1,3 +1,12 @@
+2012-05-28  Daiki Ueno  <ueno@unixuser.org>
+
+	* mm-decode.el (mm-inhibit-auto-detect-attachment): New variable.
+	(mm-dissect-singlepart): Don't guess the MIME type of
+	application/octet-stream parts if mm-inhibit-auto-detect-attachment is
+	set.
+	(mm-dissect-multipart): Bind mm-inhibit-auto-detect-attachment if the
+	toplevel MIME type is multipart/encrypted.
+
 2012-05-27  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-msg.el (gnus-msg-mail): Ensure that gnus-newsgroup-name is
