@@ -133,7 +133,6 @@ marked with SPECIAL."
     ;; Set up the timer.
     (let* ((func (nth 0 handler))
            (time (nth 1 handler))
-           (time-type (type-of time))
            (idle (nth 2 handler))
            ;; Compute time according with timestep.
            ;; If t, replace by 1
@@ -157,11 +156,11 @@ marked with SPECIAL."
               (run-with-idle-timer idle t 'gnus-demon-run-callback func))
              ;; (func number any)
              ;; Call every `time'
-             ((eq time-type 'integer)
+             ((integerp time)
               (run-with-timer time time 'gnus-demon-run-callback
 			      func idle time))
              ;; (func string any)
-             ((eq time-type 'string)
+             ((stringp time)
               (run-with-timer time (* 24 60 60) 'gnus-demon-run-callback
 			      func idle)))))
       (when timer
