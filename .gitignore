@@ -32,6 +32,7 @@ texi/.gitattributes
 texi/Makefile
 texi/auth
 texi/emacs-mime
+texi/epa
 texi/gnus
 texi/gnus-[0-9]*
 texi/message
