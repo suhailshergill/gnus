@@ -3855,7 +3855,7 @@ prefix, and don't delete any headers."
     (save-current-buffer
       (dolist (buffer (buffer-list t))
 	(set-buffer buffer)
-	(when (and (eq major-mode 'message-mode)
+	(when (and (derived-mode-p 'message-mode)
 		   (null message-sent-message-via))
 	  (push (buffer-name buffer) buffers))))
     (nreverse buffers)))
