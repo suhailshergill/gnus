@@ -519,8 +519,10 @@ If Gnus isn't running, a plain `message-mail' setup is used
 instead."
   (interactive)
   (if (not (gnus-alive-p))
-      (message-mail to subject other-headers continue
-                    nil yank-action send-actions return-action)
+      (progn
+	(message "Gnus not running; using plain Message mode")
+	(message-mail to subject other-headers continue
+		      nil yank-action send-actions return-action))
     (let ((buf (current-buffer))
 	  (gnus-newsgroup-name (or gnus-newsgroup-name ""))
 	  mail-buf)
