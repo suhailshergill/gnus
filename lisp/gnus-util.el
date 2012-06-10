@@ -169,15 +169,6 @@ This is a compatibility function for different Emacsen."
   `(delete-region (point-at-bol)
 		  (progn (forward-line ,(or n 1)) (point))))
 
-(defun gnus-byte-code (func)
-  "Return a form that can be `eval'ed based on FUNC."
-  (let ((fval (indirect-function func)))
-    (if (byte-code-function-p fval)
-	(let ((flist (append fval nil)))
-	  (setcar flist 'byte-code)
-	  flist)
-      (cons 'progn (cddr fval)))))
-
 (defun gnus-extract-address-components (from)
   "Extract address components from a From header.
 Given an RFC-822 address FROM, extract full name and canonical address.

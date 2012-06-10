@@ -1,3 +1,8 @@
+2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi: Remove mention of compilation, as that's no longer
+	supported.
+
 2012-05-01  Teodor Zlatanov  <tzz@lifelogs.com>
 
 	* auth.texi (Help for users): Update for .gpg file being second.

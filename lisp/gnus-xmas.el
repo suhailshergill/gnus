@@ -440,13 +440,6 @@ FRONT-ADVANCE and REAR-ADVANCE are ignored."
 
   (defvar gnus-mouse-face-prop 'highlight)
 
-  (defun gnus-byte-code (func)
-    "Return a form that can be `eval'ed based on FUNC."
-    (let ((fval (indirect-function func)))
-      (if (compiled-function-p fval)
-	  (list 'funcall fval)
-	(cons 'progn (cdr (cdr fval))))))
-
   (unless (fboundp 'match-string-no-properties)
     (defalias 'match-string-no-properties 'match-string))
 

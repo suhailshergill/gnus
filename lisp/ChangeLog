@@ -1,5 +1,13 @@
 2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-spec.el: Remove all the byte-compilation stuff, since
+	benchmarking shows that it doesn't help when entering large summary
+	buffers.
+
+	* gnus-xmas.el (gnus-xmas-define): Remove.
+
+	* gnus-util.el (gnus-byte-code): Remove.
+
 	* gnus-spec.el (gnus-update-format-specifications): Remove outdated
 	grouplens stuff.
 
