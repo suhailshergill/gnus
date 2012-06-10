@@ -1,3 +1,8 @@
+2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el: Add a iso-8859-1 cookie to make stuff work under other
+	locales.
+
 2012-05-21  Katsumi Yamaoka  <yamaoka@jpl.org>
 
 	* gnus-msg.el (gnus-msg-mail): Ensure that gnus-newsgroup-name is
