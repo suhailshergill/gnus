@@ -4043,7 +4043,8 @@ otherwise all levels below ARG will be scanned too."
     (unless gnus-slave
       (gnus-master-read-slave-newsrc))
 
-    (gnus-get-unread-articles arg nil one-level)
+    (gnus-get-unread-articles (gnus-group-default-level arg t)
+			      nil one-level)
 
     ;; If the user wants it, we scan for new groups.
     (when (eq gnus-check-new-newsgroups 'always)
