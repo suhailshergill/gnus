@@ -1,5 +1,8 @@
 2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* nnfolder.el (nnfolder-save-buffer): Delete old versions silently.  It
+	makes no sense to query the user about internal files.
+
 	* gnus-spec.el: Remove all the byte-compilation stuff, since
 	benchmarking shows that it doesn't help when entering large summary
 	buffers.
