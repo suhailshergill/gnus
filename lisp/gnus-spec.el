@@ -214,15 +214,6 @@ Return a list of updated types."
 	    (not (equal emacs-version
 			(cdr (assq 'version gnus-format-specs)))))
     (setq gnus-format-specs nil))
-  ;; Flush the group format spec cache if there's the grouplens stuff
-  ;; or it doesn't support decoded group names.
-  (when (memq 'group types)
-    (let* ((spec (assq 'group gnus-format-specs))
-	   (sspec (gnus-prin1-to-string (nth 2 spec))))
-      (when (or (string-match " gnus-tmp-grouplens[ )]" sspec)
-		(not (string-match " gnus-tmp-decoded-group[ )]" sspec)))
-	(setq gnus-format-specs (delq spec gnus-format-specs)))))
-
   ;; Go through all the formats and see whether they need updating.
   (let (new-format entry type val updated)
     (while (setq type (pop types))

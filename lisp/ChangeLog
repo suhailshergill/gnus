@@ -1,3 +1,8 @@
+2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-spec.el (gnus-update-format-specifications): Remove outdated
+	grouplens stuff.
+
 2012-06-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-msg.el (gnus-msg-mail): Warn the user about Gnus not running
