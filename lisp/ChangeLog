@@ -1,5 +1,8 @@
 2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* gnus-sum.el (gnus-summary-limit-to-author): Use the current From
+	address as the default.
+
 	* nnfolder.el (nnfolder-save-buffer): Delete old versions silently.  It
 	makes no sense to query the user about internal files.
 

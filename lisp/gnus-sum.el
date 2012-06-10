@@ -8241,7 +8241,12 @@ If NOT-MATCHING, excluding articles that have authors that match a regexp."
   (interactive
    (list (read-string (if current-prefix-arg
 			  "Exclude author (regexp): "
-			"Limit to author (regexp): "))
+			"Limit to author (regexp): ")
+		      (let ((header (gnus-summary-article-header)))
+			(if (not header)
+			    ""
+			  (car (mail-header-parse-address
+				(mail-header-from header))))))
 	 current-prefix-arg))
   (gnus-summary-limit-to-subject from "from" not-matching))
 
