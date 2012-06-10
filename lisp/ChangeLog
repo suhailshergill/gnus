@@ -1,5 +1,8 @@
 2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
+	* mm-decode.el (mm-display-part): Dissect archives when hitting `RET'
+	on a handle.
+
 	* gnus-sum.el (gnus-summary-limit-to-author): Use the current From
 	address as the default.
 	(gnus-summary-insert-old-articles): Don't include unexistent messages.

@@ -769,23 +769,29 @@ external if displayed external."
 			   (mail-content-type-get
 			    (mm-handle-type handle) 'name)
 			   "<file>"))
-	     (external mm-enable-external))
-	(if (and (mm-inlinable-p ehandle)
-		 (mm-inlined-p ehandle))
-	    (progn
-	      (forward-line 1)
-	      (mm-display-inline handle)
-	      'inline)
-	  (when (or method
-		    (not no-default))
-	    (if (and (not method)
-		     (equal "text" (car (split-string type "/"))))
-		(progn
-		  (forward-line 1)
-		  (mm-insert-inline handle (mm-get-part handle))
-		  'inline)
-	      (setq external
-                    (and method ;; If nil, we always use "save".
+	     (external mm-enable-external)
+	     (decoder (assoc (car (mm-handle-type handle))
+			     (mm-archive-decoders))))
+	(cond
+	 ((and decoder
+	       (executable-find (caddr decoder)))
+	  (mm-archive-dissect-and-inline handle)
+	  'inline)
+	 ((and (mm-inlinable-p ehandle)
+	       (mm-inlined-p ehandle))
+	  (forward-line 1)
+	  (mm-display-inline handle)
+	  'inline)
+	 ((or method
+	      (not no-default))
+	  (if (and (not method)
+		   (equal "text" (car (split-string type "/"))))
+	      (progn
+		(forward-line 1)
+		(mm-insert-inline handle (mm-get-part handle))
+		'inline)
+	    (setq external
+		  (and method	      ;; If nil, we always use "save".
 		       (stringp method) ;; 'mailcap-save-binary-file
 		       (or (eq mm-enable-external t)
 			   (and (eq mm-enable-external 'ask)
@@ -798,12 +804,12 @@ external if displayed external."
 				      (concat
 				       " \"" (format method filename) "\"")
 				    "")
-                                    "? "))))))
-	      (if external
-		  (mm-display-external
-		   handle (or method 'mailcap-save-binary-file))
+				  "? "))))))
+	    (if external
 		(mm-display-external
-		 handle 'mailcap-save-binary-file)))))))))
+		 handle (or method 'mailcap-save-binary-file))
+	      (mm-display-external
+	       handle 'mailcap-save-binary-file)))))))))
 
 (declare-function gnus-configure-windows "gnus-win" (setting &optional force))
 (defvar mailcap-mime-extensions)	; mailcap-mime-info autoloads
