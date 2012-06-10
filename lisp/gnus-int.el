@@ -587,14 +587,15 @@ This is the string that Gnus uses to identify the group."
   "Warps from an article in a virtual group to the article in its
 real group. Does nothing on a real group."
   (interactive)
-  (let ((gnus-command-method
-	 (gnus-find-method-for-group gnus-newsgroup-name)))
-    (or
-     (when (gnus-check-backend-function
-            'warp-to-article (car gnus-command-method))
-       (funcall (gnus-get-function gnus-command-method 'warp-to-article)))
-     (and (bound-and-true-p gnus-registry-enabled)
-	  (gnus-try-warping-via-registry)))))
+  (when (gnus-virtual-group-p gnus-newsgroup-name)
+    (let ((gnus-command-method
+           (gnus-find-method-for-group gnus-newsgroup-name)))
+      (or
+       (when (gnus-check-backend-function
+              'warp-to-article (car gnus-command-method))
+         (funcall (gnus-get-function gnus-command-method 'warp-to-article)))
+       (and (bound-and-true-p gnus-registry-enabled)
+            (gnus-try-warping-via-registry))))))
 
 (defun gnus-request-head (article group)
   "Request the head of ARTICLE in GROUP."

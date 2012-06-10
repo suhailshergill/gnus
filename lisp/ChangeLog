@@ -1,3 +1,8 @@
+2012-06-10  Dave Abrahams  <dave@boostpro.com>
+
+	* gnus-int.el (gnus-warp-to-article): Limit registry warping to real
+	groups.
+
 2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* mm-decode.el (mm-display-part): Dissect archives when hitting `RET'
