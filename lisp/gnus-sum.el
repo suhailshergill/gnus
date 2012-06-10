@@ -12856,7 +12856,9 @@ If ALL is a number, fetch this number of articles."
 	      ;; Some nntp servers lie about their active range.  When
 	      ;; this happens, the active range can be in the millions.
 	      ;; Use a compressed range to avoid creating a huge list.
-	      (gnus-range-difference (list gnus-newsgroup-active) old))
+	      (gnus-range-difference
+	       (gnus-range-difference (list gnus-newsgroup-active) old)
+	       gnus-newsgroup-unexist))
 	(setq len (gnus-range-length older))
 	(cond
 	 ((null older) nil)
