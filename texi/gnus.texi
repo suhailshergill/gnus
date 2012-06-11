@@ -12393,32 +12393,25 @@ value suitable for your system.
 @xref{Mail Variables, ,Mail Variables,message,Message manual}, for more
 information.
 
+
 @node POP before SMTP
 @section POP before SMTP
 @cindex pop before smtp
-@findex message-smtpmail-send-it
 @findex mail-source-touch-pop
 
-Does your @acronym{ISP} require the @acronym{POP}-before-@acronym{SMTP}
-authentication?  It is whether you need to connect to the @acronym{POP}
-mail server within a certain time before sending mails.  If so, there is
-a convenient way.  To do that, put the following lines in your
-@file{~/.gnus.el} file:
+Does your @acronym{ISP} use @acronym{POP}-before-@acronym{SMTP}
+authentication?  This authentication method simply requires you to
+contact the @acronym{POP} server before sending email.  To do that,
+put the following lines in your @file{~/.gnus.el} file:
 
 @lisp
-(setq message-send-mail-function 'message-smtpmail-send-it)
 (add-hook 'message-send-mail-hook 'mail-source-touch-pop)
 @end lisp
 
 @noindent
-It means to let Gnus connect to the @acronym{POP} mail server in advance
-whenever you send a mail.  The @code{mail-source-touch-pop} function
-does only a @acronym{POP} authentication according to the value of
-@code{mail-sources} without fetching mails, just before sending a mail.
-Note that you have to use @code{message-smtpmail-send-it} which runs
-@code{message-send-mail-hook} rather than @code{smtpmail-send-it} and
-set the value of @code{mail-sources} for a @acronym{POP} connection
-correctly.  @xref{Mail Sources}.
+The @code{mail-source-touch-pop} function does @acronym{POP}
+authentication according to the value of @code{mail-sources} without
+fetching mails, just before sending a mail.  @xref{Mail Sources}.
 
 If you have two or more @acronym{POP} mail servers set in
 @code{mail-sources}, you may want to specify one of them to
@@ -12445,6 +12438,7 @@ Otherwise, bind it dynamically only when performing the
                          :password "secret")))
               (mail-source-touch-pop))))
 @end lisp
+
 
 @node Mail and Post
 @section Mail and Post

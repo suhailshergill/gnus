@@ -1,3 +1,8 @@
+2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus.texi (POP before SMTP): POP-before-SMTP works with all sending
+	methods, so don't mention smtpmail here.
+
 2012-05-04  Wolfgang Jenkner  <wjenkner@inode.at>
 
 	* gnus.texi (Picons): Document gnus-picon-properties.
