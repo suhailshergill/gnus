@@ -23541,6 +23541,10 @@ The variable @code{gnus-picon-style} controls how picons are displayed.
 If @code{inline}, the textual representation is replaced.  If
 @code{right}, picons are added right to the textual representation.
 
+@vindex gnus-picon-properties
+The value of the variable @code{gnus-picon-properties} is a list of
+properties applied to picons.
+
 The following variables offer control over where things are located.
 
 @table @code

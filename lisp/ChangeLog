@@ -1,3 +1,8 @@
+2012-05-04  Wolfgang Jenkner  <wjenkner@inode.at>
+
+	* gnus-picon.el (gnus-picon-properties): New defcustom.
+	(gnus-picon-create-glyph): Use it.
+
 2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-group.el (gnus-group-get-new-news): Respect

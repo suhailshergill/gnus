@@ -1,3 +1,7 @@
+2012-05-04  Wolfgang Jenkner  <wjenkner@inode.at>
+
+	* gnus.texi (Picons): Document gnus-picon-properties.
+
 2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus.texi (Group Timestamp): Mention where to find documentation for
