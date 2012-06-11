@@ -1,3 +1,8 @@
+2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-article-read-summary-keys): Protect against the key
+	being bound to a lambda form.
+
 2012-04-14  Wolfgang Jenkner  <wjenkner@inode.at>
 
 	* gnus-agent.el (gnus-agent-retrieve-headers): Recalculate the range of
