@@ -1,3 +1,12 @@
+2012-06-19  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-find-article-by-message-id): Add an optional limit
+	argument to be able to limit the search.
+	(nnimap-request-move-article): Use `nnimap-request-move-articles-find-limit'.
+	(nnimap-request-move-articles-find-limit): Add this to limit the search
+	by Message-Id after a message move.
+	(nnimap): Add defgroup.
+
 2012-06-18  Nelson Ferreira  <nelson.ferreira@ieee.org>  (tiny change)
 
 	* gnus-win.el (gnus-configure-frame): Pass an arg to window-dedicated-p.

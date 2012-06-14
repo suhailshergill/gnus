@@ -123,6 +123,16 @@ will fetch all parts that have types that match that string.  A
 likely value would be \"text/\" to automatically fetch all
 textual parts.")
 
+(defgroup nnimap nil
+  "IMAP for Gnus."
+  :group 'gnus)
+
+(defcustom nnimap-request-move-articles-find-limit nil
+  "Limit the number of articles to look for after moving an article."
+  :type 'integer
+  :version "24.2"
+  :group 'nnimap)
+
 (defvar nnimap-process nil)
 
 (defvar nnimap-status-string "")
@@ -867,7 +877,8 @@ textual parts.")
 		(cons internal-move-group
 		      (or (nnimap-find-uid-response "COPYUID" (cadr result))
 			  (nnimap-find-article-by-message-id
-			   internal-move-group server message-id)))))
+			   internal-move-group server message-id
+                           nnimap-request-move-articles-find-limit)))))
 	  ;; Move the article to a different method.
 	  (let ((result (eval accept-form)))
 	    (when result
@@ -969,21 +980,31 @@ textual parts.")
 			       (cdr (assoc "SEARCH" (cdr result))))))))))
 
 
-(defun nnimap-find-article-by-message-id (group server message-id)
-  "Search for message with MESSAGE-ID in GROUP from SERVER."
+(defun nnimap-find-article-by-message-id (group server message-id &optional limit)
+  "Search for message with MESSAGE-ID in GROUP from SERVER.
+If LIMIT, first try to limit the search to the N last articles."
   (with-current-buffer (nnimap-buffer)
     (erase-buffer)
-    (nnimap-change-group group server nil t)
-    (let ((sequence
-	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
-	  article result)
-      (setq result (nnimap-wait-for-response sequence))
-      (when (and result
-		 (car (setq result (nnimap-parse-response))))
-	;; Select the last instance of the message in the group.
-	(and (setq article
-		   (car (last (cdr (assoc "SEARCH" (cdr result))))))
-	     (string-to-number article))))))
+    (let* ((number-of-article
+           (catch 'found
+             (dolist (result (cdr (nnimap-change-group group server nil t)))
+               (when (equal "EXISTS" (cadr result))
+                 (throw 'found (car result))))))
+           (sequence
+            (nnimap-send-command "UID SEARCH%s HEADER Message-Id %S"
+                                 (if (and limit number-of-article)
+                                     ;; The -1 is because IMAP message
+                                     ;; numbers are one-based rather than
+                                     ;; zero-based.
+                                     (format " %s:*" (- (string-to-number number-of-article) limit -1))
+                                   "")
+                                 message-id)))
+      (when (nnimap-wait-for-response sequence)
+        (let ((article (car (last (cdr (assoc "SEARCH" (nnimap-parse-response)))))))
+          (if article
+              (string-to-number article)
+            (when (and limit number-of-article)
+              (nnimap-find-article-by-message-id group server message-id))))))))
 
 (defun nnimap-delete-article (articles)
   (with-current-buffer (nnimap-buffer)
