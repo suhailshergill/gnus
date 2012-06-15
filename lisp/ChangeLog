@@ -1,3 +1,8 @@
+2012-06-15  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-find-article-by-message-id): Use
+	`nnimap-possibly-change-group' rather than its own EXAMINE call.
+
 2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
 	* gnus-art.el (gnus-article-read-summary-keys): Protect against the key

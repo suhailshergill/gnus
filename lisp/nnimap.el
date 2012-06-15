@@ -561,7 +561,7 @@ textual parts.")
     (let ((result (nnimap-possibly-change-group group server))
 	  parts structure)
       (when (stringp article)
-	(setq article (nnimap-find-article-by-message-id group article)))
+	(setq article (nnimap-find-article-by-message-id group server article)))
       (when (and result
 		 article)
 	(erase-buffer)
@@ -593,7 +593,7 @@ textual parts.")
   (when (nnimap-possibly-change-group group server)
     (with-current-buffer (nnimap-buffer)
       (when (stringp article)
-	(setq article (nnimap-find-article-by-message-id group article)))
+	(setq article (nnimap-find-article-by-message-id group server article)))
       (if (null article)
 	  nil
 	(nnimap-get-whole-article
@@ -867,7 +867,7 @@ textual parts.")
 		(cons internal-move-group
 		      (or (nnimap-find-uid-response "COPYUID" (cadr result))
 			  (nnimap-find-article-by-message-id
-			   internal-move-group message-id)))))
+			   internal-move-group server message-id)))))
 	  ;; Move the article to a different method.
 	  (let ((result (eval accept-form)))
 	    (when result
@@ -969,13 +969,11 @@ textual parts.")
 			       (cdr (assoc "SEARCH" (cdr result))))))))))
 
 
-(defun nnimap-find-article-by-message-id (group message-id)
+(defun nnimap-find-article-by-message-id (group server message-id &optional recent)
+  "Search for message with MESSAGE-ID in GROUP from SERVER."
   (with-current-buffer (nnimap-buffer)
     (erase-buffer)
-    (unless (equal group (nnimap-group nnimap-object))
-      (setf (nnimap-group nnimap-object) nil)
-      (setf (nnimap-examined nnimap-object) group)
-      (nnimap-send-command "EXAMINE %S" (utf7-encode group t)))
+    (nnimap-possibly-change-group group server)
     (let ((sequence
 	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
 	  article result)
@@ -1093,7 +1091,7 @@ textual parts.")
 	      (cons group
 		    (or (nnimap-find-uid-response "APPENDUID" (car result))
 			(nnimap-find-article-by-message-id
-			 group message-id))))))))))
+			 group server message-id))))))))))
 
 (defun nnimap-process-quirk (greeting-match type data)
   (when (and (nnimap-greeting nnimap-object)
