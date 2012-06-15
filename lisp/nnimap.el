@@ -969,7 +969,7 @@ textual parts.")
 			       (cdr (assoc "SEARCH" (cdr result))))))))))
 
 
-(defun nnimap-find-article-by-message-id (group server message-id &optional recent)
+(defun nnimap-find-article-by-message-id (group server message-id)
   "Search for message with MESSAGE-ID in GROUP from SERVER."
   (with-current-buffer (nnimap-buffer)
     (erase-buffer)
