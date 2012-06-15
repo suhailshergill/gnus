@@ -173,7 +173,7 @@ textual parts.")
     (setq group (nnimap-decode-gnus-group group)))
   (with-current-buffer nntp-server-buffer
     (erase-buffer)
-    (when (nnimap-possibly-change-group group server)
+    (when (nnimap-change-group group server)
       (with-current-buffer (nnimap-buffer)
 	(erase-buffer)
 	(nnimap-wait-for-response
@@ -558,7 +558,7 @@ textual parts.")
   (when group
     (setq group (nnimap-decode-gnus-group group)))
   (with-current-buffer nntp-server-buffer
-    (let ((result (nnimap-possibly-change-group group server))
+    (let ((result (nnimap-change-group group server))
 	  parts structure)
       (when (stringp article)
 	(setq article (nnimap-find-article-by-message-id group server article)))
@@ -590,7 +590,7 @@ textual parts.")
 (deffoo nnimap-request-head (article &optional group server to-buffer)
   (when group
     (setq group (nnimap-decode-gnus-group group)))
-  (when (nnimap-possibly-change-group group server)
+  (when (nnimap-change-group group server)
     (with-current-buffer (nnimap-buffer)
       (when (stringp article)
 	(setq article (nnimap-find-article-by-message-id group server article)))
@@ -742,7 +742,7 @@ textual parts.")
 
 (deffoo nnimap-request-group (group &optional server dont-check info)
   (setq group (nnimap-decode-gnus-group group))
-  (let ((result (nnimap-possibly-change-group
+  (let ((result (nnimap-change-group
 		 ;; Don't SELECT the group if we're going to select it
 		 ;; later, anyway.
 		 (if (and (not dont-check)
@@ -792,19 +792,19 @@ textual parts.")
 
 (deffoo nnimap-request-create-group (group &optional server args)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (with-current-buffer (nnimap-buffer)
       (car (nnimap-command "CREATE %S" (utf7-encode group t))))))
 
 (deffoo nnimap-request-delete-group (group &optional force server)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (with-current-buffer (nnimap-buffer)
       (car (nnimap-command "DELETE %S" (utf7-encode group t))))))
 
 (deffoo nnimap-request-rename-group (group new-name &optional server)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (with-current-buffer (nnimap-buffer)
       (nnimap-unselect-group)
       (car (nnimap-command "RENAME %S %S"
@@ -819,7 +819,7 @@ textual parts.")
 
 (deffoo nnimap-request-expunge-group (group &optional server)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group group server)
+  (when (nnimap-change-group group server)
     (with-current-buffer (nnimap-buffer)
       (car (nnimap-command "EXPUNGE")))))
 
@@ -871,7 +871,7 @@ textual parts.")
 	  ;; Move the article to a different method.
 	  (let ((result (eval accept-form)))
 	    (when result
-	      (nnimap-possibly-change-group group server)
+	      (nnimap-change-group group server)
 	      (nnimap-delete-article article)
 	      result)))))))
 
@@ -880,7 +880,7 @@ textual parts.")
   (cond
    ((null articles)
     nil)
-   ((not (nnimap-possibly-change-group group server))
+   ((not (nnimap-change-group group server))
     articles)
    ((and force
 	 (eq nnmail-expiry-target 'delete))
@@ -917,7 +917,7 @@ textual parts.")
 	   (gnus-server-equal (gnus-group-method nnmail-expiry-target)
 			      (gnus-server-to-method
 			       (format "nnimap:%s" server))))
-      (and (nnimap-possibly-change-group group server)
+      (and (nnimap-change-group group server)
 	   (with-current-buffer (nnimap-buffer)
 	     (nnheader-message 7 "Expiring articles from %s: %s" group articles)
 	     (nnimap-command
@@ -947,7 +947,7 @@ textual parts.")
 	      (when target
 		(push article deleted-articles))))))))
     ;; Change back to the current group again.
-    (nnimap-possibly-change-group group server)
+    (nnimap-change-group group server)
     (setq deleted-articles (nreverse deleted-articles))
     (nnimap-delete-article (gnus-compress-sequence deleted-articles))
     deleted-articles))
@@ -973,7 +973,7 @@ textual parts.")
   "Search for message with MESSAGE-ID in GROUP from SERVER."
   (with-current-buffer (nnimap-buffer)
     (erase-buffer)
-    (nnimap-possibly-change-group group server nil t)
+    (nnimap-change-group group server nil t)
     (let ((sequence
 	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
 	  article result)
@@ -1004,7 +1004,7 @@ textual parts.")
 (deffoo nnimap-request-scan (&optional group server)
   (when group
     (setq group (nnimap-decode-gnus-group group)))
-  (when (and (nnimap-possibly-change-group nil server)
+  (when (and (nnimap-change-group nil server)
 	     nnimap-inbox
 	     nnimap-split-methods)
     (nnheader-message 7 "nnimap %s splitting mail..." server)
@@ -1023,7 +1023,7 @@ textual parts.")
 
 (deffoo nnimap-request-update-group-status (group status &optional server)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (let ((command (assoc
 		    status
 		    '((subscribe "SUBSCRIBE")
@@ -1034,7 +1034,7 @@ textual parts.")
 
 (deffoo nnimap-request-set-mark (group actions &optional server)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group group server)
+  (when (nnimap-change-group group server)
     (let (sequence)
       (with-current-buffer (nnimap-buffer)
 	(erase-buffer)
@@ -1059,7 +1059,7 @@ textual parts.")
 
 (deffoo nnimap-request-accept-article (group &optional server last)
   (setq group (nnimap-decode-gnus-group group))
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (nnmail-check-syntax)
     (let ((message-id (message-field-value "message-id"))
 	  sequence message)
@@ -1137,7 +1137,7 @@ textual parts.")
 (deffoo nnimap-request-replace-article (article group buffer)
   (setq group (nnimap-decode-gnus-group group))
   (let (group-art)
-    (when (and (nnimap-possibly-change-group group nil)
+    (when (and (nnimap-change-group group)
 	       ;; Put the article into the group.
 	       (with-current-buffer buffer
 		 (setq group-art
@@ -1173,7 +1173,7 @@ textual parts.")
     (nreverse groups)))
 
 (deffoo nnimap-request-list (&optional server)
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (with-current-buffer nntp-server-buffer
       (erase-buffer)
       (dolist (response
@@ -1181,7 +1181,7 @@ textual parts.")
                  ;; Build a list of (group result-of-EXAMINE) for each group
                  (mapcar
                   (lambda (group)
-                    (list group (cdr (nnimap-possibly-change-group group server nil t))))
+                    (list group (cdr (nnimap-change-group group server nil t))))
                   (nnimap-get-groups))))
         (let ((group (encode-coding-string (car response) 'utf-8))
               (response (cadr response)))
@@ -1207,7 +1207,7 @@ textual parts.")
       t)))
 
 (deffoo nnimap-request-newgroups (date &optional server)
-  (when (nnimap-possibly-change-group nil server)
+  (when (nnimap-change-group nil server)
     (with-current-buffer nntp-server-buffer
       (erase-buffer)
       (dolist (group (with-current-buffer (nnimap-buffer)
@@ -1218,7 +1218,7 @@ textual parts.")
       t)))
 
 (deffoo nnimap-retrieve-group-data-early (server infos)
-  (when (and (nnimap-possibly-change-group nil server)
+  (when (and (nnimap-change-group nil server)
 	     infos)
     (with-current-buffer (nnimap-buffer)
       (erase-buffer)
@@ -1284,7 +1284,7 @@ textual parts.")
 
 (deffoo nnimap-finish-retrieve-group-infos (server infos sequences)
   (when (and sequences
-	     (nnimap-possibly-change-group nil server t)
+	     (nnimap-change-group nil server t)
 	     ;; Check that the process is still alive.
 	     (get-buffer-process (nnimap-buffer))
 	     (memq (process-status (get-buffer-process (nnimap-buffer)))
@@ -1659,7 +1659,7 @@ textual parts.")
     (setq group (nnimap-decode-gnus-group group)))
   (if gnus-refer-thread-use-nnir
       (nnir-search-thread header)
-    (when (nnimap-possibly-change-group group server)
+    (when (nnimap-change-group group server)
       (let* ((cmd (nnimap-make-thread-query header))
              (result (with-current-buffer (nnimap-buffer)
                        (nnimap-command  "UID SEARCH %s" cmd))))
@@ -1670,8 +1670,8 @@ textual parts.")
 				  (cdr (assoc "SEARCH" (cdr result))))))
            nil t))))))
 
-(defun nnimap-possibly-change-group (group server &optional no-reconnect read-only)
-  "Possibly change group to GROUP.
+(defun nnimap-change-group (group server &optional no-reconnect read-only)
+  "Change group to GROUP.
 If SERVER is set, check that server is connected, otherwise retry
 to reconnect, unless NO-RECONNECT is set to t.
 if READ-ONLY is set, send EXAMINE rather than SELECT to the server."
@@ -1686,17 +1686,15 @@ if READ-ONLY is set, send EXAMINE rather than SELECT to the server."
       t)
      (t
       (with-current-buffer (nnimap-buffer)
-	(if (equal group (nnimap-group nnimap-object))
-	    t
-	  (let ((result (nnimap-command "%s %S"
-                                        (if read-only
-                                            "EXAMINE"
-                                          "SELECT")
-                                        (utf7-encode group t))))
-	    (when (car result)
-	      (setf (nnimap-group nnimap-object) group
-		    (nnimap-select-result nnimap-object) result)
-	      result))))))))
+        (let ((result (nnimap-command "%s %S"
+                                      (if read-only
+                                          "EXAMINE"
+                                        "SELECT")
+                                      (utf7-encode group t))))
+          (when (car result)
+            (setf (nnimap-group nnimap-object) group
+                  (nnimap-select-result nnimap-object) result)
+            result)))))))
 
 (defun nnimap-find-connection (buffer)
   "Find the connection delivering to BUFFER."

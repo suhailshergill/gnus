@@ -7,6 +7,9 @@
 	issuing EXAMINE manually.
 	(nnimap-find-article-by-message-id): Use `nnimap-possibly-change-group'
 	with read-only argument.
+	(nnimap-change-group): Rename from `nnimap-possibly-change-group'. We
+	cannot possibly change because we need to be sure that it's either
+	read-write or read-only.
 
 2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
