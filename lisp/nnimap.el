@@ -973,7 +973,7 @@ textual parts.")
   "Search for message with MESSAGE-ID in GROUP from SERVER."
   (with-current-buffer (nnimap-buffer)
     (erase-buffer)
-    (nnimap-possibly-change-group group server)
+    (nnimap-possibly-change-group group server nil t)
     (let ((sequence
 	   (nnimap-send-command "UID SEARCH HEADER Message-Id %S" message-id))
 	  article result)
@@ -1176,48 +1176,35 @@ textual parts.")
   (when (nnimap-possibly-change-group nil server)
     (with-current-buffer nntp-server-buffer
       (erase-buffer)
-      (let ((groups
-	     (with-current-buffer (nnimap-buffer)
-	       (nnimap-get-groups)))
-	    sequences responses)
-	(when groups
-	  (with-current-buffer (nnimap-buffer)
-	    (setf (nnimap-group nnimap-object) nil)
-	    (dolist (group groups)
-	      (setf (nnimap-examined nnimap-object) group)
-	      (push (list (nnimap-send-command "EXAMINE %S"
-					       (utf7-encode group t))
-			  group)
-		    sequences))
-	    (nnimap-wait-for-response (caar sequences))
-	    (setq responses
-		  (nnimap-get-responses (mapcar #'car sequences))))
-	  (dolist (response responses)
-	    (let* ((sequence (car response))
-		   (response (cadr response))
-		   (group (cadr (assoc sequence sequences)))
-		   (egroup (encode-coding-string group 'utf-8)))
-	      (when (and group
-			 (equal (caar response) "OK"))
-		(let ((uidnext (nnimap-find-parameter "UIDNEXT" response))
-		      highest exists)
-		  (dolist (elem response)
-		    (when (equal (cadr elem) "EXISTS")
-		      (setq exists (string-to-number (car elem)))))
-		  (when uidnext
-		    (setq highest (1- (string-to-number (car uidnext)))))
-		  (cond
-		   ((null highest)
-		    (insert (format "%S 0 1 y\n" egroup)))
-		   ((zerop exists)
-		    ;; Empty group.
-		    (insert (format "%S %d %d y\n" egroup
-				    highest (1+ highest))))
-		   (t
-		    ;; Return the widest possible range.
-		    (insert (format "%S %d 1 y\n" egroup
-				    (or highest exists)))))))))
-	  t)))))
+      (dolist (response
+               (with-current-buffer (nnimap-buffer)
+                 ;; Build a list of (group result-of-EXAMINE) for each group
+                 (mapcar
+                  (lambda (group)
+                    (list group (cdr (nnimap-possibly-change-group group server nil t))))
+                  (nnimap-get-groups))))
+        (let ((group (encode-coding-string (car response) 'utf-8))
+              (response (cadr response)))
+          (when (equal (caar response) "OK")
+            (let ((uidnext (nnimap-find-parameter "UIDNEXT" response))
+                highest exists)
+              (dolist (elem response)
+                (when (equal (cadr elem) "EXISTS")
+                  (setq exists (string-to-number (car elem)))))
+              (when uidnext
+                (setq highest (1- (string-to-number (car uidnext)))))
+              (cond
+               ((null highest)
+                (insert (format "%S 0 1 y\n" group)))
+               ((zerop exists)
+                ;; Empty group.
+                (insert (format "%S %d %d y\n" group
+                                highest (1+ highest))))
+               (t
+                ;; Return the widest possible range.
+                (insert (format "%S %d 1 y\n" group
+                                (or highest exists)))))))))
+      t)))
 
 (deffoo nnimap-request-newgroups (date &optional server)
   (when (nnimap-possibly-change-group nil server)
@@ -1683,7 +1670,11 @@ textual parts.")
 				  (cdr (assoc "SEARCH" (cdr result))))))
            nil t))))))
 
-(defun nnimap-possibly-change-group (group server &optional no-reconnect)
+(defun nnimap-possibly-change-group (group server &optional no-reconnect read-only)
+  "Possibly change group to GROUP.
+If SERVER is set, check that server is connected, otherwise retry
+to reconnect, unless NO-RECONNECT is set to t.
+if READ-ONLY is set, send EXAMINE rather than SELECT to the server."
   (let ((open-result t))
     (when (and server
 	       (not (nnimap-server-opened server)))
@@ -1697,7 +1688,11 @@ textual parts.")
       (with-current-buffer (nnimap-buffer)
 	(if (equal group (nnimap-group nnimap-object))
 	    t
-	  (let ((result (nnimap-command "SELECT %S" (utf7-encode group t))))
+	  (let ((result (nnimap-command "%s %S"
+                                        (if read-only
+                                            "EXAMINE"
+                                          "SELECT")
+                                        (utf7-encode group t))))
 	    (when (car result)
 	      (setf (nnimap-group nnimap-object) group
 		    (nnimap-select-result nnimap-object) result)

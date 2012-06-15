@@ -2,6 +2,11 @@
 
 	* nnimap.el (nnimap-find-article-by-message-id): Use
 	`nnimap-possibly-change-group' rather than its own EXAMINE call.
+	(nnimap-possibly-change-group): Add read-only argument.
+	(nnimap-request-list): Use nnimap-possibly-change-group rather than
+	issuing EXAMINE manually.
+	(nnimap-find-article-by-message-id): Use `nnimap-possibly-change-group'
+	with read-only argument.
 
 2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
