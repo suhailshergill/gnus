@@ -1670,7 +1670,7 @@ textual parts.")
 				  (cdr (assoc "SEARCH" (cdr result))))))
            nil t))))))
 
-(defun nnimap-change-group (group server &optional no-reconnect read-only)
+(defun nnimap-change-group (group &optional server no-reconnect read-only)
   "Change group to GROUP.
 If SERVER is set, check that server is connected, otherwise retry
 to reconnect, unless NO-RECONNECT is set to t.
