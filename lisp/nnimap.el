@@ -1751,15 +1751,23 @@ if READ-ONLY is set, send EXAMINE rather than SELECT to the server."
 (defvar nnimap-record-commands nil
   "If non-nil, log commands to the \"*imap log*\" buffer.")
 
+(defun nnimap-log-buffer ()
+  (let ((name "*imap log*"))
+    (or (get-buffer name)
+        (with-current-buffer (get-buffer-create name)
+          (make-local-variable 'window-point-insertion-type)
+          (setq window-point-insertion-type t)
+          (current-buffer)))))
+
 (defun nnimap-log-command (command)
   (when nnimap-record-commands
-    (with-current-buffer (get-buffer-create "*imap log*")
+    (with-current-buffer (nnimap-log-buffer)
       (goto-char (point-max))
       (insert (format-time-string "%H:%M:%S")
-	      " [" nnimap-address "] "
-	      (if nnimap-inhibit-logging
-		  "(inhibited)\n"
-		command))))
+              " [" nnimap-address "] "
+              (if nnimap-inhibit-logging
+                  "(inhibited)\n"
+                command))))
   command)
 
 (defun nnimap-command (&rest args)

@@ -1,3 +1,9 @@
+2012-06-19  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)
+
+	* nnimap.el (nnimap-log-buffer): Add this, setting
+	`window-point-insertion-type' in the buffer to t.
+	(nnimap-log-command): Use nnimap-log-buffer.
+
 2012-06-19  Julien Danjou  <julien@danjou.info>
 
 	* nnimap.el (nnimap-find-article-by-message-id): Add an optional limit
