@@ -1,5 +1,7 @@
 2012-06-19  Julien Danjou  <julien@danjou.info>
 
+	* nnir.el (nnir-run-imap): Fix, use `nnimap-change-group'.
+
 	* nnimap.el (nnimap-log-buffer): Check that
 	`window-point-insertion-type' is boundp, since it's not available in
 	XEmacs.
