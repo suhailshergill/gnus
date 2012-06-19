@@ -1755,8 +1755,9 @@ if READ-ONLY is set, send EXAMINE rather than SELECT to the server."
   (let ((name "*imap log*"))
     (or (get-buffer name)
         (with-current-buffer (get-buffer-create name)
-          (make-local-variable 'window-point-insertion-type)
-          (setq window-point-insertion-type t)
+          (when (boundp 'window-point-insertion-type)
+            (make-local-variable 'window-point-insertion-type)
+            (setq window-point-insertion-type t))
           (current-buffer)))))
 
 (defun nnimap-log-command (command)

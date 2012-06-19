@@ -1,3 +1,9 @@
+2012-06-19  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-log-buffer): Check that
+	`window-point-insertion-type' is boundp, since it's not available in
+	XEmacs.
+
 2012-06-19  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)
 
 	* nnimap.el (nnimap-log-buffer): Add this, setting
