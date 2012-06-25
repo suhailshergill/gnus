@@ -1,3 +1,11 @@
+2012-06-25  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-request-articles-find-limit): Rename from
+	`nnimap-request-move-articles-find-limit' since we do not use it only
+	for move operations.
+	(nnimap-request-accept-article): Use
+	`nnimap-request-articles-find-limit' to limit search by message-id.
+
 2012-06-22  Paul Eggert  <eggert@cs.ucla.edu>
 
 	Support higher-resolution time stamps (Bug#9000).

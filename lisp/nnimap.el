@@ -127,7 +127,7 @@ textual parts.")
   "IMAP for Gnus."
   :group 'gnus)
 
-(defcustom nnimap-request-move-articles-find-limit nil
+(defcustom nnimap-request-articles-find-limit nil
   "Limit the number of articles to look for after moving an article."
   :type 'integer
   :version "24.2"
@@ -878,7 +878,7 @@ textual parts.")
 		      (or (nnimap-find-uid-response "COPYUID" (cadr result))
 			  (nnimap-find-article-by-message-id
 			   internal-move-group server message-id
-                           nnimap-request-move-articles-find-limit)))))
+                           nnimap-request-articles-find-limit)))))
 	  ;; Move the article to a different method.
 	  (let ((result (eval accept-form)))
 	    (when result
@@ -1112,7 +1112,8 @@ If LIMIT, first try to limit the search to the N last articles."
 	      (cons group
 		    (or (nnimap-find-uid-response "APPENDUID" (car result))
 			(nnimap-find-article-by-message-id
-			 group server message-id))))))))))
+			 group server message-id
+                         nnimap-request-articles-find-limit))))))))))
 
 (defun nnimap-process-quirk (greeting-match type data)
   (when (and (nnimap-greeting nnimap-object)
