@@ -1811,4 +1811,8 @@ If RECURSIVE, search recursively."
 
 (provide 'mm-decode)
 
+;; Local Variables:
+;; coding: iso-8859-1
+;; End:
+
 ;;; mm-decode.el ends here
