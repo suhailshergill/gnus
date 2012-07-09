@@ -8239,14 +8239,17 @@ If NOT-MATCHING, excluding articles that have subjects that match a regexp."
   "Limit the summary buffer to articles that have authors that match a regexp.
 If NOT-MATCHING, excluding articles that have authors that match a regexp."
   (interactive
-   (list (read-string (if current-prefix-arg
-			  "Exclude author (regexp): "
-			"Limit to author (regexp): ")
-		      (let ((header (gnus-summary-article-header)))
-			(if (not header)
-			    ""
-			  (car (mail-header-parse-address
-				(mail-header-from header))))))
+   (list (let* ((header (gnus-summary-article-header))
+		(default (and header (car (mail-header-parse-address
+					   (mail-header-from header))))))
+	   (read-string (concat (if current-prefix-arg
+				    "Exclude author (regexp"
+				  "Limit to author (regexp")
+				(if default
+				    (concat ", default \"" default "\"): ")
+				  "): "))
+			nil nil
+			default))
 	 current-prefix-arg))
   (gnus-summary-limit-to-subject from "from" not-matching))
 
