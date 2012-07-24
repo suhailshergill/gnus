@@ -104,16 +104,6 @@ Possibly the `etc' directory has not been installed.")))
 (defvar gnus-agent-summary-mode)
 (defvar gnus-draft-mode)
 
-(defun gnus-xmas-highlight-selected-summary ()
-  ;; Highlight selected article in summary buffer
-  (when gnus-summary-selected-face
-    (when gnus-newsgroup-selected-overlay
-      (delete-extent gnus-newsgroup-selected-overlay))
-    (setq gnus-newsgroup-selected-overlay
-	  (make-extent (point-at-bol) (point-at-eol)))
-    (set-extent-face gnus-newsgroup-selected-overlay
-		     gnus-summary-selected-face)))
-
 (defcustom gnus-xmas-force-redisplay nil
   "*If non-nil, force a redisplay before recentering the summary buffer.
 This is ugly, but it works around a bug in `window-displayed-height'."
@@ -750,11 +740,6 @@ XEmacs compatibility workaround."
   (if (null address)
       nil
     (mail-strip-quoted-names address)))
-
-(defun gnus-xmas-call-region (command &rest args)
-  (apply
-   'call-process-region (point-min) (point-max) command t '(t nil) nil
-   args))
 
 (defvar gnus-xmas-modeline-left-extent
   (let ((ext (copy-extent modeline-buffer-id-left-extent)))
