@@ -290,7 +290,7 @@ can get pretty complex."
                                         :value :macos-keychain-internet)
                                  (choice :tag "Collection to use"
                                          (string :tag "internet Keychain path")
-                                         (const :tag "default" 'default))))
+                                         (const :tag "default" 'default)))
                                 (list
                                  :tag "Mac OS generic Keychain"
                                  (const :format ""
@@ -1767,7 +1767,7 @@ entries for git.gnus.org:
       (and (plist-get ret :secret) (list ret))))
 
 (defun auth-source-macos-keychain-result-append (result generic k v)
-  (push v ret)
+  (push v result)
   (setq k (cond
            ((equal k "acct") "user")
            ;; for generic keychains, creator is host, service is port
@@ -1778,7 +1778,7 @@ entries for git.gnus.org:
            ((and (not generic) (equal k "srvr")) "host")
            (t k)))
 
-  (push (intern (format ":%s" k)) ret))
+  (push (intern (format ":%s" k)) result))
 
 (defun* auth-source-macos-keychain-create (&rest
                                            spec
