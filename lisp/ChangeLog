@@ -7,6 +7,7 @@
 	(auth-source-macos-keychain-create): Support Mac OS X Keychains in
 	auth-source.el through the /usr/bin/security utility.
 	(auth-sources): Fix syntax error.
+	(auth-source-macos-keychain-result-append): Fix variable name.
 
 2012-07-27  Julien Danjou  <jd@dex.adm.naquadah.org>
 
