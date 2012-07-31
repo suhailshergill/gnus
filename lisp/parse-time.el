@@ -112,11 +112,11 @@
 	(index 0)
 	(c nil))
     (while (< index end)
-      (while (and (< index end)		;skip invalid characters
+      (while (and (< index end)		;Skip invalid characters.
 		  (not (setq c (parse-time-string-chars (aref string index)))))
 	(incf index))
       (setq start index all-digits (eq c ?0))
-      (while (and (< (incf index) end)	;scan valid characters
+      (while (and (< (incf index) end)	;Scan valid characters.
 		  (setq c (parse-time-string-chars (aref string index))))
 	(setq all-digits (and all-digits (eq c ?0))))
       (if (<= index end)

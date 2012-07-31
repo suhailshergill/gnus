@@ -1,3 +1,300 @@
+2012-07-31  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus.el (gnus-valid-select-methods): Fix custom type.
+
+2012-07-29  Teodor Zlatanov  <tzz@lifelogs.com>
+
+	* auth-source.el (auth-sources, auth-source-backend-parse)
+	(auth-source-macos-keychain-search)
+	(auth-source-macos-keychain-search-items)
+	(auth-source-macos-keychain-result-append)
+	(auth-source-macos-keychain-create): Support Mac OS X Keychains in
+	auth-source.el through the /usr/bin/security utility.
+	(auth-sources): Fix syntax error.
+	(auth-source-macos-keychain-result-append): Fix variable name.
+	(auth-sources, auth-source-macos-keychain-result-append): More fixes.
+
+2012-07-27  Julien Danjou  <julien@danjou.info>
+
+	* message.el (fboundp): Add a defalias on `mail-dont-reply-to' for
+	Emacs < 24.1
+
+2012-07-27  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* message.el (message-kill-address): Don't kill last newline.
+	(message-skip-to-next-address): Don't move to the next header.
+	(message-fill-field-address): Work properly.
+
+2012-07-25  Julien Danjou  <julien@danjou.info>
+
+	* gnus-art.el (gnus-kill-sticky-article-buffers): Reintroduce.
+
+2012-07-24  Julien Danjou  <julien@danjou.info>
+
+	* mail-source.el (mail-source-movemail-and-remove): Remove, unused.
+
+	* nntp.el (nntp-send-nosy-authinfo, nntp-send-authinfo-from-file)
+	(nntp-async-timer-handler): Remove, unused.
+
+	* nnimap.el (nnimap-get-responses): Remove, unused.
+
+	* nnheader.el (mail-header-set-extra): Remove, unused.
+
+	* netrc.el (netrc-find-service-number, netrc-store-data): Remove,
+	unused.
+
+	* mm-view.el (mm-view-sound-file): Remove, unused.
+
+	* mm-url.el (mm-url-fetch-simple, mm-url-fetch-form)
+	(mm-url-encode-multipart-form-data): Remove, unused.
+
+	* message.el (message-remove-signature, message-make-host-name)
+	(message-fill-address): Remove, unused.
+
+	* gnus.el (gnus-writable-groups, gnus-group-guess-prefixed-name)
+	(gnus-group-guess-full-name, gnus-group-guess-prefixed-name): Remove,
+	unused.
+
+	* gnus-xmas.el (gnus-xmas-highlight-selected-summary)
+	(gnus-xmas-call-region): Remove, unused.
+
+	* gnus-uu.el (gnus-uu-find-name-in-shar): Remove, unused.
+
+	* gnus-util.el (gnus-extract-address-component-name)
+	(gnus-extract-address-component-email, gnus-sortable-date)
+	(gnus-alist-to-hashtable, gnus-hashtable-to-alist)
+	(gnus-process-live-p): Remove, unused.
+
+	* gnus-topic.el (gnus-group-parent-topic): Remove, unused.
+
+	* gnus-sum.el (gnus-score-set-default, gnus-article-parent-p)
+	(gnus-article-read-p, gnus-uncompress-marks): Remove, unused.
+	(gnus-summary-set-current-mark): Remove obsolete, empty and unused
+	function.
+
+	* gnus-start.el (gnus-kill-newsgroup): Remove unused obsolete function.
+
+	* gnus-score.el (gnus-summary-score-crossposting)
+	(gnus-score-regexp-bad-p): Remove, unused.
+
+	* gnus-salt.el (gnus-tree-goto-article): Remove, unused.
+
+	* gnus-range.el (gnus-sublist-p): Remove, unused.
+
+	* gnus-msg.el (gnus-mail-parse-comma-list, gnus-put-message): Remove,
+	unused.
+
+	* gnus-kill.el (gnus-Newsgroup-kill-file): Remove, unused.
+
+	* gnus-int.el (gnus-list-active-group, gnus-request-group-articles)
+	(gnus-request-associate-buffer): Remove, unused.
+
+	* gnus-group.el (gnus-group-set-method-info)
+	(gnus-group-set-params-info): Remove, unused.
+
+	* gnus-fun.el (gnus-shell-command-to-string)
+	(gnus-shell-command-on-region): Remove, unused.
+
+	* gnus-cite.el (gnus-cited-line-p): Remove, unused.
+
+	* gnus-art.el (gnus-article-text-type-exists-p)
+	(article-translate-characters, gnus-article-hide-text-of-type)
+	(gnus-kill-sticky-article-buffers, gnus-article-maybe-highlight):
+	Remove, unused.
+
+2012-07-22  Andrew Cohen  <cohen@bu.edu>
+
+	* nnir.el ("nnir"): Add 'virtual ability to nnir backend.
+
+2012-07-21  Julien Danjou  <julien@danjou.info>
+
+	* message.el (message-dont-reply-to-names): Replace deprecated
+	`rmail-dont-reply-to-names' with `mail-dont-reply-to-names'.
+	(message-get-reply-headers): Ditto.
+
+2012-07-18  Julien Danjou  <julien@danjou.info>
+
+	* sieve-mode.el (sieve-mode-map): Bind C-c C-c to
+	`sieve-upload-and-kill'.
+
+	* sieve.el (sieve-bury-buffer): Remove function.
+	(sieve-manage-mode-map): Map "q" to `kill-buffer'.
+	(sieve-upload-and-kill): New function, mapped to C-c C-c.
+
+2012-07-17  Andreas Schwab  <schwab@linux-m68k.org>
+
+	* shr.el (shr-expand-url): Handle URL starting with `//'.
+
+2012-07-13  Chong Yidong  <cyd@gnu.org>
+
+	* smime.el (smime-certificate-info): Set buffer-read-only directly,
+	instead of calling toggle-read-only with a (bogus) argument.
+
+2012-07-09  Tassilo Horn  <tassilo@member.fsf.org>
+
+	* gnus-sum.el (gnus-summary-limit-to-author): Use default value instead
+	of initial input when reading the author to restrict the summary to.
+
+2012-07-09  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* mm-decode.el (mm-shr):
+	Allow overriding charset by mm-charset-override-alist.
+
+2012-07-03  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-art.el (gnus-article-view-part):
+	Toggle subparts of multipart/alternative part.
+
+2012-06-27  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* shr.el (shr-render-buffer): New command.
+	(shr-visit-file): Use it.
+
+2012-06-27  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* tests/gnustest-nntp.el, tests/gnustest-registry.el:
+	Set no-byte-compile and no-update-autoloads.
+
+2012-06-26  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* mm-decode.el: Add coding cookie for a soft hyphen that mm-shr uses.
+
+2012-06-25  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-request-articles-find-limit): Rename from
+	`nnimap-request-move-articles-find-limit' since we do not use it only
+	for move operations.
+	(nnimap-request-accept-article): Use
+	`nnimap-request-articles-find-limit' to limit search by message-id.
+
+2012-06-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Support higher-resolution time stamps (Bug#9000).
+
+	* time-date.el (with-decoded-time-value): New arg PICO-SYMBOL in
+	VARLIST.  It's optional, for backward compatibility.
+	(encode-time-value): New optional arg PICO.  New type 3.
+	(time-to-seconds) [!float-time]: Support the new picoseconds
+	component if it's used.
+	(seconds-to-time, time-subtract, time-add):
+	Support ps-resolution time stamps as well.
+
+2012-06-19  Julien Danjou  <julien@danjou.info>
+
+	* nnir.el (nnir-run-imap): Fix, use `nnimap-change-group'.
+
+	* nnimap.el (nnimap-log-buffer): Check that
+	`window-point-insertion-type' is boundp, since it's not available in
+	XEmacs.
+
+2012-06-19  Michael Welsh Duggan  <md5i@md5i.com>  (tiny change)
+
+	* nnimap.el (nnimap-log-buffer): Add this, setting
+	`window-point-insertion-type' in the buffer to t.
+	(nnimap-log-command): Use nnimap-log-buffer.
+
+2012-06-19  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-find-article-by-message-id): Add an optional limit
+	argument to be able to limit the search.
+	(nnimap-request-move-article): Use `nnimap-request-move-articles-find-limit'.
+	(nnimap-request-move-articles-find-limit): Add this to limit the search
+	by Message-Id after a message move.
+	(nnimap): Add defgroup.
+
+2012-06-18  Nelson Ferreira  <nelson.ferreira@ieee.org>  (tiny change)
+
+	* gnus-win.el (gnus-configure-frame): Pass an arg to window-dedicated-p.
+
+2012-06-15  Julien Danjou  <julien@danjou.info>
+
+	* nnimap.el (nnimap-find-article-by-message-id): Use
+	`nnimap-possibly-change-group' rather than its own EXAMINE call.
+	(nnimap-possibly-change-group): Add read-only argument.
+	(nnimap-request-list): Use nnimap-possibly-change-group rather than
+	issuing EXAMINE manually.
+	(nnimap-find-article-by-message-id): Use `nnimap-possibly-change-group'
+	with read-only argument.
+	(nnimap-change-group): Rename from `nnimap-possibly-change-group'. We
+	cannot possibly change because we need to be sure that it's either
+	read-write or read-only.
+
+2012-06-11  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-art.el (gnus-article-read-summary-keys): Protect against the key
+	being bound to a lambda form.
+
+2012-04-14  Wolfgang Jenkner  <wjenkner@inode.at>
+
+	* gnus-agent.el (gnus-agent-retrieve-headers): Recalculate the range of
+	articles when fetch-old is non-nil (bug#11370).
+
+2012-05-04  Wolfgang Jenkner  <wjenkner@inode.at>
+
+	* gnus-picon.el (gnus-picon-properties): New defcustom.
+	(gnus-picon-create-glyph): Use it.
+
+2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-group.el (gnus-group-get-new-news): Respect
+	`gnus-group-use-permanent-levels', as documented (bug#11638).
+
+2012-06-10  Dave Abrahams  <dave@boostpro.com>
+
+	* gnus-int.el (gnus-warp-to-article): Limit registry warping to real
+	groups (bug#11641).
+
+2012-06-10  Toke Høiland-Jørgensen  <toke@toke.dk>  (tiny change)
+
+	* nnmaildir.el (nnmaildir-request-expire-articles): Ensure that `time'
+	is an integer to avoid later problems.
+
+2012-06-10  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* shr.el: Add a iso-8859-1 cookie to make stuff work under other
+	locales.
+
+	* mm-decode.el (mm-display-part): Dissect archives when hitting `RET'
+	on a handle.
+
+	* gnus-sum.el (gnus-summary-limit-to-author): Use the current From
+	address as the default.
+	(gnus-summary-insert-old-articles): Don't include unexistent messages.
+
+	* nnfolder.el (nnfolder-save-buffer): Delete old versions silently.  It
+	makes no sense to query the user about internal files.
+
+	* gnus-spec.el: Remove all the byte-compilation stuff, since
+	benchmarking shows that it doesn't help when entering large summary
+	buffers.
+
+	* gnus-xmas.el (gnus-xmas-define): Remove.
+
+	* gnus-util.el (gnus-byte-code): Remove.
+
+	* gnus-spec.el (gnus-update-format-specifications): Remove outdated
+	grouplens stuff.
+
+2012-06-07  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+
+	* gnus-msg.el (gnus-msg-mail): Warn the user about Gnus not running
+	(bug#11514).
+
+2012-06-07  Stephen Eglen  <S.J.Eglen@damtp.cam.ac.uk>
+
+	* message.el (message-buffers): Return all buffers derived from Message
+	to make `gnus-dired-attach' work with mu4e.
+
+2012-06-01  Stefan Monnier  <monnier@iro.umontreal.ca>
+
+	* nntp.el: Stop the `letf' madness.
+	(nntp--report-1): New var.
+	(nntp-report): Merge nntp-report-1 into it.
+	(nntp-with-open-group-function): Set nntp--report-1 instead of modifying
+	the nntp-report function.
+
+	* auth-source.el: Fix comment-style to follow the convention.
+
 2012-05-28  Daiki Ueno  <ueno@unixuser.org>
 
 	* mm-decode.el (mm-inhibit-auto-detect-attachment): New variable.
@@ -256,7 +553,14 @@
 
 	* gnus-sum.el (gnus-summary-expire-articles): Ditto.
 
-2012-03-14  Lars Magne Ingebrigtsen  <larsi@gnus.org>
+2012-05-21  Katsumi Yamaoka  <yamaoka@jpl.org>
+
+	* gnus-msg.el (gnus-msg-mail): Ensure that gnus-newsgroup-name is
+	a string so that Gcc works (bug#11514).
+
+2012-04-21  Andreas Schwab  <schwab@linux-m68k.org>
+
+	* gnus.el (debbugs-gnu): Don't override existing autoload definition.
 
 2012-04-12  Lars Magne Ingebrigtsen  <larsi@gnus.org>
 
@@ -5112,7 +5416,7 @@
 2010-11-29  Binjo  <binjo.cn@gmail.com>  (tiny change)
 
 	* nnimap.el (nnimap-open-connection-1): w32 open-network-stream doesn't
-	seem to accept strings-with-numbers as port numbers,
+	seem to accept strings-with-numbers as port numbers.
 
 2010-11-29  Andrew Cohen  <cohen@andy.bu.edu>
 
@@ -5311,7 +5615,7 @@
 
 2010-11-25  Julien Danjou  <julien@danjou.info>
 
-	* shr-color.el (shr-color->hexadecimal): Use color-rgb->hex
+	* shr-color.el (shr-color->hexadecimal): Use color-rgb->hex.
 
 	* color.el: Rename from color-lab.el
 	(color-rgb->hex): Add.
@@ -22402,7 +22706,7 @@
 
 2004-05-20  Danny Siu  <dsiu@adobe.com>
 
-	* gnus-sum.el (gnus-summary-recenter): Summery buffer was not auto
+	* gnus-sum.el (gnus-summary-recenter): Summary buffer was not auto
 	centered even when gnus-auto-center-summary is t.
 
 2004-05-22  Lars Magne Ingebrigtsen  <larsi@gnus.org>
@@ -23658,7 +23962,7 @@
 
 	* gnus.el (gnus-method-to-server): Move defsubst before first use.
 
-	* gnus-diary.el (gnus-diary-header-schedule): caddr -> car (cddr
+	* gnus-diary.el (gnus-diary-header-schedule): caddr -> car (cddr.
 
 	* gnus-art.el (gnus-article-edit-mode): Define before first
 	reference.

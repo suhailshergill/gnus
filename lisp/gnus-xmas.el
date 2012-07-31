@@ -18,9 +18,7 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -105,16 +103,6 @@ Possibly the `etc' directory has not been installed.")))
 ;;`gnus-agent-mode' in gnus-agent.el will define it.
 (defvar gnus-agent-summary-mode)
 (defvar gnus-draft-mode)
-
-(defun gnus-xmas-highlight-selected-summary ()
-  ;; Highlight selected article in summary buffer
-  (when gnus-summary-selected-face
-    (when gnus-newsgroup-selected-overlay
-      (delete-extent gnus-newsgroup-selected-overlay))
-    (setq gnus-newsgroup-selected-overlay
-	  (make-extent (point-at-bol) (point-at-eol)))
-    (set-extent-face gnus-newsgroup-selected-overlay
-		     gnus-summary-selected-face)))
 
 (defcustom gnus-xmas-force-redisplay nil
   "*If non-nil, force a redisplay before recentering the summary buffer.
@@ -440,13 +428,6 @@ FRONT-ADVANCE and REAR-ADVANCE are ignored."
 
   (defvar gnus-mouse-face-prop 'highlight)
 
-  (defun gnus-byte-code (func)
-    "Return a form that can be `eval'ed based on FUNC."
-    (let ((fval (indirect-function func)))
-      (if (compiled-function-p fval)
-	  (list 'funcall fval)
-	(cons 'progn (cdr (cdr fval))))))
-
   (unless (fboundp 'match-string-no-properties)
     (defalias 'match-string-no-properties 'match-string))
 
@@ -759,11 +740,6 @@ XEmacs compatibility workaround."
   (if (null address)
       nil
     (mail-strip-quoted-names address)))
-
-(defun gnus-xmas-call-region (command &rest args)
-  (apply
-   'call-process-region (point-min) (point-max) command t '(t nil) nil
-   args))
 
 (defvar gnus-xmas-modeline-left-extent
   (let ((ext (copy-extent modeline-buffer-id-left-extent)))

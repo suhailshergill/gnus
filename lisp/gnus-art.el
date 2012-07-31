@@ -1794,14 +1794,6 @@ Initialized from `text-mode-syntax-table.")
     (put-text-property (max (1- b) (point-min))
 		       b 'intangible nil)))
 
-(defun gnus-article-hide-text-of-type (type)
-  "Hide text of TYPE in the current buffer."
-  (save-excursion
-    (let ((b (point-min))
-	  (e (point-max)))
-      (while (setq b (text-property-any b e 'article-type type))
-	(add-text-properties b (incf b) gnus-hidden-properties)))))
-
 (defun gnus-article-delete-text-of-type (type)
   "Delete text of TYPE in the current buffer."
   (save-excursion
@@ -1833,10 +1825,6 @@ Initialized from `text-mode-syntax-table.")
 	(delete-region
 	 b (or (text-property-not-all b (point-max) 'invisible t)
 	       (point-max)))))))
-
-(defun gnus-article-text-type-exists-p (type)
-  "Say whether any text of type TYPE exists in the buffer."
-  (text-property-any (point-min) (point-max) 'article-type type))
 
 (defsubst gnus-article-header-rank ()
   "Give the rank of the string HEADER as given by `gnus-sorted-header-list'."
@@ -2145,23 +2133,6 @@ try this wash."
 		  (add-text-properties (point) (progn (insert replace) (point))
 				       props)
 		(insert replace)))))))))
-
-(defun article-translate-characters (from to)
-  "Translate all characters in the body of the article according to FROM and TO.
-FROM is a string of characters to translate from; to is a string of
-characters to translate to."
-  (save-excursion
-    (when (article-goto-body)
-      (let ((inhibit-read-only t)
-	    (x (make-string 225 ?x))
-	    (i -1))
-	(while (< (incf i) (length x))
-	  (aset x i i))
-	(setq i 0)
-	(while (< i (length from))
-	  (aset x (aref from i) (aref to i))
-	  (incf i))
-	(translate-region (point) (point-max) x)))))
 
 (defun article-translate-strings (map)
   "Translate all string in the body of the article according to MAP.
@@ -4811,10 +4782,10 @@ If a prefix ARG is given, ask for confirmation."
   (dolist (buf (gnus-buffers))
     (with-current-buffer buf
       (when (eq major-mode 'gnus-sticky-article-mode)
-	(if (not arg)
-	    (gnus-kill-buffer buf)
-	  (when (yes-or-no-p (concat "Kill buffer " (buffer-name buf) "? "))
-	    (gnus-kill-buffer buf)))))))
+       (if (not arg)
+           (gnus-kill-buffer buf)
+         (when (yes-or-no-p (concat "Kill buffer " (buffer-name buf) "? "))
+           (gnus-kill-buffer buf)))))))
 
 ;;;
 ;;; Gnus MIME viewing functions
@@ -5621,7 +5592,9 @@ all parts."
     (let ((handle (cdr (assq n gnus-article-mime-handle-alist))))
       (when (gnus-article-goto-part n)
 	(if (equal (car handle) "multipart/alternative")
-	    (gnus-article-press-button)
+	    (progn
+	      (beginning-of-line) ;; Make it toggle subparts
+	      (gnus-article-press-button))
 	  (when (eq (gnus-mm-display-part handle) 'internal)
 	    (gnus-set-window-start)))))))
 
@@ -6525,7 +6498,8 @@ not have a face in `gnus-article-boring-faces'."
 	    (ding)
 	  (unless (member keys nosave-in-article)
 	    (set-buffer gnus-article-current-summary))
-	  (when (get func 'disabled)
+	  (when (and (symbolp func)
+		     (get func 'disabled))
 	    (error "Function %s disabled" func))
 	  (call-interactively func)
 	  (setq new-sum-point (point)))
@@ -6766,11 +6740,6 @@ If given a prefix, show the hidden text instead."
   (gnus-article-hide-list-identifiers arg)
   (gnus-article-hide-citation-maybe arg force)
   (gnus-article-hide-signature arg))
-
-(defun gnus-article-maybe-highlight ()
-  "Do some article highlighting if article highlighting is requested."
-  (when (gnus-visual-p 'article-highlight 'highlight)
-    (gnus-article-highlight-some)))
 
 (defun gnus-check-group-server ()
   ;; Make sure the connection to the server is alive.

@@ -416,26 +416,10 @@ If it is down, start it up (again)."
 	     dont-check
 	     info)))
 
-(defun gnus-list-active-group (group)
-  "Request active information on GROUP."
-  (let ((gnus-command-method (gnus-find-method-for-group group))
-	(func 'list-active-group))
-    (when (gnus-check-backend-function func group)
-      (funcall (gnus-get-function gnus-command-method func)
-	       (gnus-group-real-name group) (nth 1 gnus-command-method)))))
-
 (defun gnus-request-group-description (group)
   "Request a description of GROUP."
   (let ((gnus-command-method (gnus-find-method-for-group group))
 	(func 'request-group-description))
-    (when (gnus-check-backend-function func group)
-      (funcall (gnus-get-function gnus-command-method func)
-	       (gnus-group-real-name group) (nth 1 gnus-command-method)))))
-
-(defun gnus-request-group-articles (group)
-  "Request a list of existing articles in GROUP."
-  (let ((gnus-command-method (gnus-find-method-for-group group))
-	(func 'request-group-articles))
     (when (gnus-check-backend-function func group)
       (funcall (gnus-get-function gnus-command-method func)
 	       (gnus-group-real-name group) (nth 1 gnus-command-method)))))
@@ -587,14 +571,15 @@ This is the string that Gnus uses to identify the group."
   "Warps from an article in a virtual group to the article in its
 real group. Does nothing on a real group."
   (interactive)
-  (let ((gnus-command-method
-	 (gnus-find-method-for-group gnus-newsgroup-name)))
-    (or
-     (when (gnus-check-backend-function
-            'warp-to-article (car gnus-command-method))
-       (funcall (gnus-get-function gnus-command-method 'warp-to-article)))
-     (and (bound-and-true-p gnus-registry-enabled)
-	  (gnus-try-warping-via-registry)))))
+  (when (gnus-virtual-group-p gnus-newsgroup-name)
+    (let ((gnus-command-method
+           (gnus-find-method-for-group gnus-newsgroup-name)))
+      (or
+       (when (gnus-check-backend-function
+              'warp-to-article (car gnus-command-method))
+         (funcall (gnus-get-function gnus-command-method 'warp-to-article)))
+       (and (bound-and-true-p gnus-registry-enabled)
+            (gnus-try-warping-via-registry))))))
 
 (defun gnus-request-head (article group)
   "Request the head of ARTICLE in GROUP."
@@ -796,11 +781,6 @@ If GROUP is nil, all groups on GNUS-COMMAND-METHOD are scanned."
     (when (and gnus-agent (gnus-agent-method-p gnus-command-method))
       (gnus-agent-regenerate-group group (list article)))
     result))
-
-(defun gnus-request-associate-buffer (group)
-  (let ((gnus-command-method (gnus-find-method-for-group group)))
-    (funcall (gnus-get-function gnus-command-method 'request-associate-buffer)
-	     (gnus-group-real-name group))))
 
 (defun gnus-request-restore-buffer (article group)
   "Request a new buffer restored to the state of ARTICLE."

@@ -1059,16 +1059,17 @@ This command does not work if you use short group names."
 
 (defun nnfolder-save-buffer ()
   "Save the buffer."
-  (when (buffer-modified-p)
-    (run-hooks 'nnfolder-save-buffer-hook)
-    (gnus-make-directory (file-name-directory (buffer-file-name)))
-    (let ((coding-system-for-write
-	   (or nnfolder-file-coding-system-for-write
-	       nnfolder-file-coding-system)))
-      (set (make-local-variable 'copyright-update) nil)
-      (save-buffer)))
-  (unless (or gnus-nov-is-evil nnfolder-nov-is-evil)
-    (nnfolder-save-nov)))
+  (let ((delete-old-versions t))
+    (when (buffer-modified-p)
+      (run-hooks 'nnfolder-save-buffer-hook)
+      (gnus-make-directory (file-name-directory (buffer-file-name)))
+      (let ((coding-system-for-write
+	     (or nnfolder-file-coding-system-for-write
+		 nnfolder-file-coding-system)))
+	(set (make-local-variable 'copyright-update) nil)
+	(save-buffer)))
+    (unless (or gnus-nov-is-evil nnfolder-nov-is-evil)
+      (nnfolder-save-nov))))
 
 (defun nnfolder-save-active (group-alist active-file)
   (let ((nnmail-active-file-coding-system

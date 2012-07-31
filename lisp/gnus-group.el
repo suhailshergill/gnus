@@ -4043,7 +4043,8 @@ otherwise all levels below ARG will be scanned too."
     (unless gnus-slave
       (gnus-master-read-slave-newsrc))
 
-    (gnus-get-unread-articles arg nil one-level)
+    (gnus-get-unread-articles (gnus-group-default-level arg t)
+			      nil one-level)
 
     ;; If the user wants it, we scan for new groups.
     (when (eq gnus-check-new-newsgroups 'always)
@@ -4450,12 +4451,6 @@ and the second element is the address."
 	      (setcar entry (length
 			     (gnus-list-of-unread-articles (car info))))))
 	(error "No such group: %s" (gnus-info-group info))))))
-
-(defun gnus-group-set-method-info (group select-method)
-  (gnus-group-set-info select-method group 'method))
-
-(defun gnus-group-set-params-info (group params)
-  (gnus-group-set-info params group 'params))
 
 ;; Ad-hoc function for inserting data from a different newsrc.eld
 ;; file.  Use with caution, if at all.
